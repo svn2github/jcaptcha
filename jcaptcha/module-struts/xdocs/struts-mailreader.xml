@@ -309,6 +309,7 @@ The final configuration will look as follow :
                     <p>
                         As you may have noticed :
                         <ul>
+                            <li>We added a statistics page and links to demonstrate the manageable service features</li>
                             <li>The captcha test is hackable by directly using the real action : Choose a wird action name in order to avoid direct call</li>
                             <li>Chaining action as we just do in this tutorial is not recommended : Write your own action, use the sources of the VerifyCaptchaChallengeAction</li>
                             <li>As you can see, the update profil page flow is also captch-ized : Be carrefull when you choose your page flow to captcha-ize, you may split a page flow to captch-ize just a part of it</li>
