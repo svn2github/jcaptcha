@@ -152,8 +152,8 @@ public class CaptchaFilter implements Filter, CaptchaFilterMBean
      * challengeResponse is uncorrect
      * (filter parameter to define in web.xml)
      */
-    private static final String CAPTCHA_FORWARD_ERROR_URLS_PARAMETER =
-        "CaptchaForwardErrorURLs";
+    private static final String CAPTCHA_ERROR_URLS_PARAMETER =
+        "CaptchaErrorURLs";
 
     /**
      * A hashmap that contains information about forwardError URL for a
@@ -302,6 +302,8 @@ public class CaptchaFilter implements Filter, CaptchaFilterMBean
 
     /**
      * @see javax.servlet.Filter#init(javax.servlet.FilterConfig)
+     * @TODO : verify that URL begins with a "\" (or add it and trace
+     * a warning) ?
      */
     public void init(final FilterConfig theFilterConfig) throws ServletException
     {
@@ -323,7 +325,7 @@ public class CaptchaFilter implements Filter, CaptchaFilterMBean
         String captchaForwardErrorURLs =
             FilterConfigUtils.getStringInitParameter(
                 theFilterConfig,
-                CAPTCHA_FORWARD_ERROR_URLS_PARAMETER,
+                CAPTCHA_ERROR_URLS_PARAMETER,
                 true);
 
         // initialize the verificationForwards hashtable
@@ -338,7 +340,7 @@ public class CaptchaFilter implements Filter, CaptchaFilterMBean
             throw new ServletException(
                 CAPTCHA_VERIFICATION_URLS_PARAMETER
                     + " and "
-                    + CAPTCHA_FORWARD_ERROR_URLS_PARAMETER
+                    + CAPTCHA_ERROR_URLS_PARAMETER
                     + " values are not consistant in web.xml : there should be"
                     + " exactly one forward success and one forward error for"
                     + " each verification URL !");
@@ -693,7 +695,7 @@ public class CaptchaFilter implements Filter, CaptchaFilterMBean
         if (challengeResponse == null)
         {
             // If the challenge response is not specified, forward error
-            this.forwardError(theVerificationURL, theRequest, theResponse);
+            this.redirectError(theVerificationURL, theRequest, theResponse);
             return;
         }
 
@@ -706,7 +708,7 @@ public class CaptchaFilter implements Filter, CaptchaFilterMBean
         // -> forward error
         if (captcha == null)
         {
-            this.forwardError(theVerificationURL, theRequest, theResponse);
+            this.redirectError(theVerificationURL, theRequest, theResponse);
             return;
         }
 
@@ -724,15 +726,14 @@ public class CaptchaFilter implements Filter, CaptchaFilterMBean
             // update the total number of captcha badly answered
             totalNumberOfCaptchaBadlyAnswered += 1;
             // forward
-            this.forwardError(theVerificationURL, theRequest, theResponse);
+            this.redirectError(theVerificationURL, theRequest, theResponse);
         }
     }
 
     /**
-     * Forward request to the Error URL using the associated servlet request
-     * dispatcher
-     * @param theVerificationURL the verification URL for which there is a
-     * forward
+     * Redirect request to the Error URL
+     * @param theVerificationURL the verification URL for which there is an
+     * error redirect
      * @param theRequest the request
      * @param theResponse the response
      * @throws ServletException @TODO : DOCUMENT ME !
@@ -740,7 +741,7 @@ public class CaptchaFilter implements Filter, CaptchaFilterMBean
      *                                  javax.servlet.http.HttpServletResponse)
      *      for details on params
      */
-    private void forwardError(
+    private void redirectError(
         String theVerificationURL,
         HttpServletRequest theRequest,
         HttpServletResponse theResponse)
@@ -749,11 +750,17 @@ public class CaptchaFilter implements Filter, CaptchaFilterMBean
         this.removeParametersFromRequest(theRequest);
         try
         {
+            // Redirect to the error URL
             String forwardErrorURL =
-                (String) this.verificationForwards.get(theVerificationURL);
+                theRequest.getContextPath() 
+                + (String) this.verificationForwards.get(theVerificationURL);
+            
+            theResponse.sendRedirect(forwardErrorURL);
+/*
             this.servletContext.getRequestDispatcher(forwardErrorURL).forward(
                 theRequest,
                 theResponse);
+*/
         }
         catch (IOException e)
         {
