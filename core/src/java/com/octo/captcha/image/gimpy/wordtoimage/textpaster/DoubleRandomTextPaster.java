@@ -50,15 +50,14 @@
 
 package com.octo.captcha.image.gimpy.wordtoimage.textpaster;
 
-import com.octo.captcha.CaptchaException;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
-import java.awt.font.FontRenderContext;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.text.AttributedString;
+
+import com.octo.captcha.CaptchaException;
 
 /**
  * <p>Randomly pastes two times the attributed string with a random(5) decalage</p>

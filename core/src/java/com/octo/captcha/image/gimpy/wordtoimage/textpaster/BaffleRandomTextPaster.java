@@ -50,17 +50,15 @@
 
 package com.octo.captcha.image.gimpy.wordtoimage.textpaster;
 
-import com.octo.captcha.CaptchaException;
-
-import java.awt.image.BufferedImage;
-import java.awt.Graphics2D;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Composite;
-import java.awt.AlphaComposite;
-import java.awt.geom.Rectangle2D;
+import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 import java.text.AttributedString;
+
+import com.octo.captcha.CaptchaException;
 
 /**
  * <p>text paster that paint white holes on the string (erase some parts)</p>

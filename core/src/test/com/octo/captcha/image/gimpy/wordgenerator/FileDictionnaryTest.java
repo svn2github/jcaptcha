@@ -54,7 +54,6 @@ package com.octo.captcha.image.gimpy.wordgenerator;
 import java.util.Locale;
 
 import junit.framework.TestCase;
-import com.octo.captcha.CaptchaException;
 
 /**
  * <p>Description: </p>

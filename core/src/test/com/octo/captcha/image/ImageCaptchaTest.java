@@ -49,25 +49,15 @@
  */
 package com.octo.captcha.image;
 
-import com.octo.captcha.image.gimpy.GimpyFactory;
-import com.octo.captcha.image.gimpy.WordGenerator;
-import com.octo.captcha.image.gimpy.WordToImage;
-import com.octo.captcha.image.gimpy.wordgenerator.DictionaryWordGenerator;
-import com.octo.captcha.image.gimpy.wordgenerator.FileDictionnary;
-import com.octo.captcha.image.gimpy.wordgenerator.DummyWordGenerator;
-import com.octo.captcha.image.gimpy.wordtoimage.ComposedWordToImage;
-import com.octo.captcha.image.gimpy.wordtoimage.BackgroundGenerator;
-import com.octo.captcha.image.gimpy.wordtoimage.TextPaster;
-import com.octo.captcha.image.gimpy.wordtoimage.backgroundgenerator.FunkyBackgroundGenerator;
-import com.octo.captcha.image.gimpy.wordtoimage.fontgenerator.TwistedRandomFontGenerator;
-import com.octo.captcha.image.gimpy.wordtoimage.FontGenerator;
-import com.octo.captcha.image.gimpy.wordtoimage.SimpleWordToImage;
-import com.octo.captcha.image.gimpy.wordtoimage.textpaster.DoubleTextPaster;
+import java.awt.image.BufferedImage;
 
 import junit.framework.TestCase;
 
-import java.awt.Color;
-import java.awt.image.BufferedImage;
+import com.octo.captcha.image.gimpy.GimpyFactory;
+import com.octo.captcha.image.gimpy.WordGenerator;
+import com.octo.captcha.image.gimpy.WordToImage;
+import com.octo.captcha.image.gimpy.wordgenerator.DummyWordGenerator;
+import com.octo.captcha.image.gimpy.wordtoimage.SimpleWordToImage;
 
 /**
  * <p>Description: </p>

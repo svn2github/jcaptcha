@@ -50,10 +50,9 @@
 
 package com.octo.captcha.image.gimpy.wordtoimage.backgroundgenerator;
 
-import java.awt.image.BufferedImage;
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 /**
  * <p>Contructs uniform painted background, with default wolor White.</p>

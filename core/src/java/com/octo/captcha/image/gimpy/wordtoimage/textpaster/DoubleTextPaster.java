@@ -50,8 +50,6 @@
 
 package com.octo.captcha.image.gimpy.wordtoimage.textpaster;
 
-import com.octo.captcha.CaptchaException;
-
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;

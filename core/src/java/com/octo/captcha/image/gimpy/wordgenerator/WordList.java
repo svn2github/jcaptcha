@@ -53,7 +53,6 @@ package com.octo.captcha.image.gimpy.wordgenerator;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Random;
-import java.util.TreeSet;
 import java.util.TreeMap;
 
 /**
