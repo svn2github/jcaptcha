@@ -131,17 +131,40 @@
             <artifactId>jcaptcha-core</artifactId>
             <version>1.0</version>
             <url>http://jcaptcha.sourceforge.net</url>
+           <properties>
+                   <war.bundle>true</war.bundle>
+            </properties>
+
     	</dependency>
     	<dependency>
     	    <groupId>jcaptcha</groupId>
             <artifactId>jcaptcha-samples</artifactId>
             <version>1.0</version>
             <url>http://jcaptcha.sourceforge.net</url>
+               <properties>
+                   <war.bundle>true</war.bundle>
+            </properties>
+
     	</dependency>
+    	<dependency>
+    	    <groupId>jcaptcha</groupId>
+            <artifactId>jcaptcha-j2ee</artifactId>
+            <version>1.0</version>
+            <url>http://jcaptcha.sourceforge.net</url>
+               <properties>
+                   <war.bundle>true</war.bundle>
+            </properties>
+
+    	</dependency>
+    	
     	<dependency>
     	    <groupId>jhlabs</groupId>
     	    <artifactId>jhlabs</artifactId>
             <jar>imageeditor.jar</jar>
+            <properties>
+                   <war.bundle>true</war.bundle>
+            </properties>
+
     	</dependency>
     	
   </dependencies>
