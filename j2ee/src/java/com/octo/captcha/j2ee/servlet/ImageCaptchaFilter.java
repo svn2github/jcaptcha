@@ -572,6 +572,19 @@ public class ImageCaptchaFilter implements Filter
                     captchaID,
                     challengeResponse);
         }
+        catch (IllegalArgumentException e)
+        {
+            // log a security warning and return a 404...
+            if (log.isWarnEnabled())
+            {
+                log.warn(
+                    "There was a try from "
+                        + theRequest.getRemoteAddr()
+                        + " to render an URL without ID");
+                theResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
+                return;
+            }
+        }
         catch (ImageCaptchaServiceException e)
         {
             // nothing to do : isResponseCorrect is false
