@@ -45,6 +45,15 @@
     <orderEntry type="library" name="ehcache-1.0" level="project" />
     <orderEntry type="library" name="concurrent-1.3.2" level="project" />
     <orderEntry type="library" name="clover" level="application" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://C:/Documents and Settings/twinfrey/.maven/repository/jhlabs/jars/imaging-01012005.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
     <orderEntryProperties />
   </component>
 </module>

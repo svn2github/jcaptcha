@@ -469,7 +469,7 @@ import com.sun.image.codec.jpeg.ImageFormatException;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageDecoder;
 
-import java.awt.*;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -477,7 +477,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Enumeration;
 import java.util.StringTokenizer;
 
 /**
@@ -532,7 +531,12 @@ public class FileReaderRandomBackgroundGenerator extends
         }
     }
 
+    protected static File cachedDirectory = null;
+
     protected  File findDirectory(String rootPath) {
+//        if ( cachedDirectory != null ) {
+//            return cachedDirectory;
+//        }
 
         //try direct path
         File dir = new File(rootPath);
@@ -567,15 +571,18 @@ public class FileReaderRandomBackgroundGenerator extends
                 }
             }
         }
-        //trying from system classpath
-        StringTokenizer token = getClasspathFromSystemProperty();
-        while(token.hasMoreElements()){
-            String path=token.nextToken();
-            if(!path.endsWith(".jar")){
-                dir = new File(path, rootPath);
-                appendFilePath(triedPath,dir);
-                if(dir.canRead()&&dir.isDirectory()){
-                    break;
+        // FIXME - avoid double-checking
+        if (!dir.canRead() || !dir.isDirectory()) {
+            // dir is still no good -- let's try directories in the system classpath
+            StringTokenizer token = getClasspathFromSystemProperty();
+            while (token.hasMoreElements()) {
+                String path = token.nextToken();
+                if (!path.endsWith(".jar")) {
+                    dir = new File(path, rootPath);
+                    appendFilePath(triedPath, dir);
+                    if (dir.canRead() && dir.isDirectory()) {
+                        break;
+                    }
                 }
             }
         }
@@ -587,14 +594,12 @@ public class FileReaderRandomBackgroundGenerator extends
         }
 
 
-        return dir;
+        return cachedDirectory = dir;
     }
 
     private StringTokenizer getClasspathFromSystemProperty()
 	{
 		String classpath ;
-		String[] elements ;
-		String suffix ;
 
 		classpath = System.getProperty( "java.class.path") ;
 		StringTokenizer token = new StringTokenizer(classpath,File.pathSeparator );

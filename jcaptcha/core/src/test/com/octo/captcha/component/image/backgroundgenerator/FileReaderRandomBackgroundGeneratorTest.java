@@ -927,8 +927,7 @@ package com.octo.captcha.component.image.backgroundgenerator;
                        END OF TERMS AND CONDITIONS
 */
 
-import junit.framework.*;
-import com.octo.captcha.component.image.backgroundgenerator.FileReaderRandomBackgroundGenerator;
+import junit.framework.TestCase;
 
 import java.io.File;
 

@@ -464,9 +464,9 @@
 
 package com.octo.captcha.component.sound.wordtosound;
 
-import javax.sound.sampled.AudioInputStream;
-
 import com.octo.captcha.CaptchaException;
+
+import javax.sound.sampled.AudioInputStream;
 
 /**
  * <p>

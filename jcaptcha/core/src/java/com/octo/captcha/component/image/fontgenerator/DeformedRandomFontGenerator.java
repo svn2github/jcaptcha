@@ -477,8 +477,7 @@ import java.util.Random;
 public class DeformedRandomFontGenerator extends RandomFontGenerator
 {
 
-    private Random seed = new Random();
-    private float angle;
+    private Random rng = new Random();
 
     public DeformedRandomFontGenerator(Integer minFontSize,
                                        Integer maxFontSize)
@@ -488,11 +487,18 @@ public class DeformedRandomFontGenerator extends RandomFontGenerator
 
     public Font getFont()
     {
-        angle = seed.nextFloat() / 5;
+          // obtain a font, pick a random size & font
+        Font font = super.getFont();
+
+        // rotate each letter by -0.33, +0.33 or about 20 degrees
+        float theta = (rng.nextBoolean() ? 1 : -1) * rng.nextFloat() / 3;
+
+        // private DecimalFormat debug_fmt = new DecimalFormat();
+        // System.out.println("Creating " + font + " rotated angle = " + debug_fmt.format(theta * 57.2957));
+
+        // rotate each letter by this angle
         AffineTransform at = new AffineTransform();
-        at.rotate(angle, seed.nextDouble(), seed.nextDouble());
-        Font font = super.getFont().deriveFont(seed.nextInt(),
-                seed.nextInt(10) + 15);
+        at.rotate(theta, rng.nextDouble()/*x*/, rng.nextDouble()/*y*/);
         font = font.deriveFont(at);
         return font;
     }

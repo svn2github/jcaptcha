@@ -466,9 +466,10 @@ package com.octo.captcha.component.image.textpaster;
 
 import com.octo.captcha.CaptchaException;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.geom.Ellipse2D;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.text.AttributedString;
 
@@ -514,42 +515,51 @@ public class BaffleRandomTextPaster extends RandomTextPaster
             throws CaptchaException
     {
         BufferedImage out = copyBackground(background);
-        Graphics2D pie = pasteBackgroundAndSetTextColor(out, background);
-        //set font to max in order to retrieve the correct boundaries
-        Font maxFont = getMaxFont(attributedWord.getIterator());
-        Rectangle2D bounds = getTextBoundaries(pie, maxFont, attributedWord);
-        int[] randomDeviation = getRandomDeviation(background, bounds, maxFont);
-        //draw the string
-        pie.drawString(attributedWord.getIterator(), randomDeviation[0],
-                randomDeviation[1]);
+        Graphics2D g2 = pasteBackgroundAndSetTextColor(out, background);
+        g2.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS,
+                RenderingHints.VALUE_FRACTIONALMETRICS_ON);
+        g2.setRenderingHint(RenderingHints.KEY_RENDERING,
+                RenderingHints.VALUE_RENDER_QUALITY);
+        g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
+                RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        // this attribute doesn't do anything in JDK 1.4, but maybe it will in JDK 1.5
+        // attributedString.addAttribute(TextAttribute.WIDTH, TextAttribute.WIDTH_EXTENDED);
+
+        // convert string into a series of glyphs we can work with
+        ChangeableAttributedString newAttrString = new ChangeableAttributedString(g2, attributedWord);
+
+        // space out the glyphs with a little kerning
+        newAttrString.useMinimumSpacing(kerning);
+        // shift string to a random spot in the output imge
+        newAttrString.moveToRandomSpot(background);
+        // now draw each glyph at the appropriate spot on th eimage.
+        newAttrString.drawString(g2);
+
+        g2.dispose();
 
         //draw the holes
         //Composite c = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, .7f);
         //pie.setComposite(c);
-        //Color circleColor = ((Graphics2D)background.getGraphics()).getColor();
-        //pie.getColor();
-        pie.setColor(holesColor);
+
+        g2.setColor(holesColor);
         int numberOfHoles = numberOfHolesPerGlyph.intValue()
                 * attributedWord.getIterator().getEndIndex();
-        int circleMaxSize = maxFont.getSize() / 3;
+        int circleMaxSize = ((int) newAttrString.getMaxHeight()) / 3;
         if (circleMaxSize == 0)
         {
             throw new CaptchaException("The font is too small");
         }
         for (int i = 0 ; i < numberOfHoles ; i++)
         {
-            int circleSize = myRandom.nextInt(circleMaxSize) / 2
-                    + circleMaxSize / 2;
-            double circlex = bounds.getMaxX() * myRandom.nextGaussian();
-            double circley = bounds.getMaxY() * myRandom.nextGaussian();
+            int circleSize = myRandom.nextInt(circleMaxSize) / 2 + circleMaxSize / 2;
+            double circlex = newAttrString.getMaxX() * (1 + myRandom.nextGaussian());
+            double circley = newAttrString.getMaxY() * ( 1 + myRandom.nextGaussian());
             Ellipse2D circle =
-                    new Ellipse2D.Double(randomDeviation[0] + circlex,
-                            randomDeviation[1] - maxFont.getSize() / 2
-                    + circley, circleSize, circleSize);
-            pie.fill(circle);
+                    new Ellipse2D.Double(circlex, circley, circleSize, circleSize);
+            g2.fill(circle);
 
         }
-        pie.dispose();
+        g2.dispose();
         return out;
     }
 }

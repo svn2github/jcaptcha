@@ -464,7 +464,12 @@
 
 package com.octo.captcha.component.image.fontgenerator;
 
-import java.awt.*;
+import java.awt.Font;
+import java.awt.GraphicsEnvironment;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -473,13 +478,36 @@ import java.util.Random;
  * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class RandomFontGenerator extends AbstractFontGenerator
-{
+public class RandomFontGenerator extends AbstractFontGenerator {
+    /**
+     * list of valid fonts.
+     */
+    protected static java.util.List fonts;
 
-    Random myRandom = new Random();
+    /**
+     * These are the valid font styles.
+     */
+    protected int[] STYLES = {Font.PLAIN, Font.ITALIC, Font.BOLD, Font.ITALIC | Font.BOLD};
 
-    public RandomFontGenerator(Integer minFontSize, Integer maxFontSize)
-    {
+
+    /**
+     * Any font that this class uses must be able to generate all of the characters in this list.
+     */
+    protected static String requiredCharacters = "abcdefghijklmnopqrstuvwxyz0123456789";
+
+    /**
+     * Prefixes of font names that should be avoided.  The default values list fonts that
+     * are totally fine in terms of representing characters, of course, but they're
+     * too commonly available in OCR programs.
+     */
+    protected String[] badFontNamePrefixes = {
+        "Courier",
+        "Times Roman",
+    };
+
+    protected Random myRandom = new Random();
+
+    public RandomFontGenerator(Integer minFontSize, Integer maxFontSize) {
         super(minFontSize, maxFontSize);
     }
 
@@ -489,21 +517,103 @@ public class RandomFontGenerator extends AbstractFontGenerator
      *
      * @return a Font
      */
-    public Font getFont()
-    {
-        Font[] fonts;
-        fonts =
-                GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts();
-        int numero = myRandom.nextInt(fonts.length);
-        Font font = fonts[Math.abs(numero)];
+    public Font getFont() {
+        if (fonts == null) {
+            // we cache a lot of decisions about fonts -- do this as little as possible
+            synchronized (RandomFontGenerator.class) {
+                if (fonts == null) {
+                    fonts = initializeFonts();
+                }
+            }
+        }
+
+        Font font = (Font) fonts.get(myRandom.nextInt(fonts.size()));
+
         int plus = 0;
-        if (getMaxFontSize() - getMinFontSize() != 0)
-        {
+        if (getMaxFontSize() - getMinFontSize() != 0) {
             plus = Math.abs(myRandom.nextInt(getMaxFontSize()
                     - getMinFontSize()));
         }
-        Font styled = new Font(font.toString(), Font.PLAIN,
-                getMinFontSize() + plus);
+
+        Font styled =
+                new Font(font.getFontName(),
+                        STYLES[myRandom.nextInt(STYLES.length)],
+                        getMinFontSize() + plus);
         return styled;
+
     }
+
+
+    /**
+     * Create an array of fonts that is known to properly represent all the characters in requiredCharacters.
+     *
+     * @see #requiredCharacters
+     * @return array of fonts
+     */
+    private List initializeFonts() {
+
+        // get a copy of the fonts
+        // NB: be careful with this first array! -- the graphics environment obligingly
+        // provides a pointer into its internal font array.
+        Font[] tmpFonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts();
+        List goodFonts = new ArrayList(tmpFonts.length);
+        // add copy of copy of list of fonts because of asList's special class and also because
+        // of the graphics environment's internal point
+        goodFonts.addAll(Arrays.asList(tmpFonts));
+
+        // Iterate through all fonts, remove the bad ones
+        for (Iterator iter = goodFonts.iterator(); iter.hasNext();) {
+            Font f = (Font) iter.next();
+
+            // a font is removed if it cannot display the characters we need.
+            if (f.canDisplayUpTo(requiredCharacters) != -1) {
+                iter.remove();
+                continue;
+            }
+
+            // a font is also removed if it is prefixed by a known-bad name
+            for (int i = 0; i < badFontNamePrefixes.length; i++) {
+                if (f.getFontName().startsWith(badFontNamePrefixes[i])) {
+                    iter.remove();
+                    break;
+                }
+            }
+        }
+
+        return goodFonts;
+    }
+
+    /**
+     * @return a list of characters that this class must be able to represent
+     */
+    public static String getRequiredCharacters() {
+        return requiredCharacters;
+    }
+
+    /**
+     * @param requiredCharacters a list of characters that this class must be able to represent
+     */
+    public static void setRequiredCharacters(String requiredCharacters) {
+        RandomFontGenerator.requiredCharacters = requiredCharacters;
+        // force reinitialization of this variable
+        RandomFontGenerator.fonts = null;
+    }
+
+    /**
+     * @return an array of font name prefixes that should be not used in generating captchas
+     */
+    public String[] getBadFontNamePrefixes() {
+        return badFontNamePrefixes;
+    }
+
+    /**
+     *
+     * @param badFontNamePrefixes an array of font name prefixes that should be not used in generating captchas
+     */
+    public void setBadFontNamePrefixes(String[] badFontNamePrefixes) {
+        this.badFontNamePrefixes = badFontNamePrefixes;
+        // force reinitialization of this variable
+        RandomFontGenerator.fonts = null;
+    }
+
 }

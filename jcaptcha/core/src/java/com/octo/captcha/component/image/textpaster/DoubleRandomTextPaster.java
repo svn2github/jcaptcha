@@ -466,14 +466,16 @@ package com.octo.captcha.component.image.textpaster;
 
 import com.octo.captcha.CaptchaException;
 
-import java.awt.*;
-import java.awt.geom.Rectangle2D;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.text.AttributedString;
 
 /**
- * <p>Randomly pastes two times the attributed string with a random(5)
- * decalage</p>
+ * <p>Randomly pastes the attributed string twice, with a random
+ * offset.</p>
  *
  * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
  * @version 1.0
@@ -505,37 +507,32 @@ public class DoubleRandomTextPaster extends RandomTextPaster
             throws CaptchaException
     {
         BufferedImage out = copyBackground(background);
-        Graphics2D pie = pasteBackgroundAndSetTextColor(out, background);
+        Graphics2D g2 = pasteBackgroundAndSetTextColor(out, background);
 
-        //set font to max in order to retrieve the correct boundaries
-        Font maxFont = getMaxFont(attributedWord.getIterator());
-        Rectangle2D bounds = getTextBoundaries(pie, maxFont, attributedWord);
+        g2.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS,
+                RenderingHints.VALUE_FRACTIONALMETRICS_ON);
+        g2.setRenderingHint(RenderingHints.KEY_RENDERING,
+                RenderingHints.VALUE_RENDER_QUALITY);
+        g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
+                RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        // this attribute doesn't do anything in JDK 1.4, but maybe it will in JDK 1.5
+        // attributedString.addAttribute(TextAttribute.WIDTH, TextAttribute.WIDTH_EXTENDED);
 
-        //evaluate the max deviation
-        Double maxx = new Double(background.getWidth()
-                - bounds.getWidth());
-        Double maxy = new Double(background.getHeight()
-                - bounds.getHeight() - 0.4 * maxFont.getSize());
-        if (maxx.intValue() < 0 || maxy.intValue() < 0)
-            throw new CaptchaException("word is too big, " +
-                    "try to use less letters," +
-                    "smaller font or bigger background");
+        // convert string into a series of glyphs we can work with
+        ChangeableAttributedString newAttrString = new ChangeableAttributedString(g2, attributedWord);
 
-        //evaluate the first to second deviation
-        int xdev = new Double((1 + myRandom.nextDouble())
-                * 0.25 * maxFont.getSize()).intValue();
-        int ydev = new Double((1 + myRandom.nextDouble())
-                * 0.2 * maxFont.getSize()).intValue();
+        // space out the glyphs with a little kerning
+        newAttrString.useMinimumSpacing(kerning);
+        // shift string to a random spot in the output imge
+        Point2D firstTextStartingPoint = newAttrString.moveToRandomSpot(background);
+        // now draw each glyph at the appropriate spot on the image.
+        newAttrString.drawString(g2);
 
-        //evaluate the random deviation
-        int x = myRandom.nextInt(maxx.intValue() - xdev);
-        //don't forget y goes down!
-        int y = maxFont.getSize() + myRandom.nextInt(maxy.intValue() - ydev);
-        //draw the string
-        pie.drawString(attributedWord.getIterator(), x, y);
-        // draw the second one
-        pie.drawString(attributedWord.getIterator(), x + xdev, y + ydev);
-        pie.dispose();
+        // now we do the same thing again, with a slight x,y shift
+        newAttrString.moveToRandomSpot(background, firstTextStartingPoint);
+        newAttrString.drawString(g2);
+
+        g2.dispose();
         return out;
 
     }

@@ -492,8 +492,8 @@ public class TwistedAndShearedRandomFontGenerator
     public Font getFont()
     {
         Font font = super.getFont();
-        double rx = myRandom.nextDouble() % 0.3;
-        double ry = myRandom.nextDouble() % 0.3;
+        double rx = myRandom.nextDouble() / 3;
+        double ry = myRandom.nextDouble() / 3;
         AffineTransform at = AffineTransform.getShearInstance(rx, ry);
         font = font.deriveFont(at);
         return font;
