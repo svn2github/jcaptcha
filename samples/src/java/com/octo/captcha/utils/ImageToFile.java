@@ -69,7 +69,7 @@ public class ImageToFile {
 
     public ImageToFile(){}
 
-    public void serialize(BufferedImage image, File file) throws IOException {
+    public static void serialize(BufferedImage image, File file) throws IOException {
         file.createNewFile();
         FileOutputStream fos = new FileOutputStream(file);
         encodeJPG(fos, image);
@@ -77,7 +77,7 @@ public class ImageToFile {
         fos.close();
     }
 
-    public void encodeJPG(OutputStream sos, BufferedImage image) throws IOException {
+    public static void encodeJPG(OutputStream sos, BufferedImage image) throws IOException {
         JPEGImageEncoder encoder =
           JPEGCodec.createJPEGEncoder(sos);
 
