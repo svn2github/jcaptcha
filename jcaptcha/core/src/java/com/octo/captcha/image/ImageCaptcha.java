@@ -549,12 +549,14 @@ public abstract class ImageCaptcha implements Captcha
     //use jpeg encoding
     private void writeObject(java.io.ObjectOutputStream out)
          throws IOException{
+
+        if(this.challenge!=null){
         out.defaultWriteObject();
         // a jpeg encoder
             JPEGImageEncoder jpegEncoder =
                     JPEGCodec.createJPEGEncoder(out);
         jpegEncoder.encode(this.challenge);
-
+       }
     };
 
      private void readObject(java.io.ObjectInputStream in)
