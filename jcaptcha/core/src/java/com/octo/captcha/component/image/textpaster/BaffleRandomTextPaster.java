@@ -535,12 +535,6 @@ public class BaffleRandomTextPaster extends RandomTextPaster
         // now draw each glyph at the appropriate spot on th eimage.
         newAttrString.drawString(g2);
 
-        g2.dispose();
-
-        //draw the holes
-        //Composite c = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, .7f);
-        //pie.setComposite(c);
-
         g2.setColor(holesColor);
         int numberOfHoles = numberOfHolesPerGlyph.intValue()
                 * attributedWord.getIterator().getEndIndex();
@@ -553,11 +547,10 @@ public class BaffleRandomTextPaster extends RandomTextPaster
         {
             int circleSize = myRandom.nextInt(circleMaxSize) / 2 + circleMaxSize / 2;
             double circlex = newAttrString.getMaxX() * (1 + myRandom.nextGaussian());
-            double circley = newAttrString.getMaxY() * ( 1 + myRandom.nextGaussian());
+            double circley = newAttrString.getMaxY() * (1 + myRandom.nextGaussian());
             Ellipse2D circle =
                     new Ellipse2D.Double(circlex, circley, circleSize, circleSize);
             g2.fill(circle);
-
         }
         g2.dispose();
         return out;
