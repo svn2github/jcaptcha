@@ -5,11 +5,14 @@
 
     <body>
 
-        <section name="Projects using jcaptcha">
+        <section name="Using jcaptcha">
             <p>
 				<ul>
-				   <li><a href="http://www.liferay.com/home/index.jsp">Liferay Enterprise Portal</a></li>
+				   <li><a href="http://demo.liferay.net/c/portal_public/layout?p_l_id=275.1&p_p_id=2&p_p_action=1&p_p_state=maximized&p_p_mode=view&_2_struts_action=%2Fmy_account%2Fcreate_account">Liferay Enterprise Portal</a></li>
+				   <li><a href="http://207.29.128.48/webcrim/jcaptcha">WebCrims Case Information System</a></li>
+				   <li><a href="http://www.mvnforum.com/mvnforum/registermember">mvnforum</a></li>
                </ul>
+               
             </p>
         </section>
 
