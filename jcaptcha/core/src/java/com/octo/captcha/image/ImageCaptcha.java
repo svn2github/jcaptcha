@@ -465,8 +465,12 @@
 package com.octo.captcha.image;
 
 import com.octo.captcha.Captcha;
+import com.sun.image.codec.jpeg.JPEGImageEncoder;
+import com.sun.image.codec.jpeg.JPEGCodec;
+import com.sun.image.codec.jpeg.JPEGImageDecoder;
 
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 /**
  * <p>String question about a BufferedImage challenge. Abstract.</p>
@@ -481,7 +485,7 @@ public abstract class ImageCaptcha implements Captcha
 
     protected String question;
 
-    protected BufferedImage challenge;
+    protected transient BufferedImage challenge;
 
     protected ImageCaptcha(String question, BufferedImage challenge)
     {
@@ -541,5 +545,24 @@ public abstract class ImageCaptcha implements Captcha
     {
         return hasChallengeBeenCalled;
     }
+
+    //use jpeg encoding
+    private void writeObject(java.io.ObjectOutputStream out)
+         throws IOException{
+        out.defaultWriteObject();
+        // a jpeg encoder
+            JPEGImageEncoder jpegEncoder =
+                    JPEGCodec.createJPEGEncoder(out);
+        jpegEncoder.encode(this.challenge);
+
+    };
+
+     private void readObject(java.io.ObjectInputStream in)
+         throws IOException, ClassNotFoundException{
+         in.defaultReadObject();
+         JPEGImageDecoder decoder = JPEGCodec.createJPEGDecoder(in);
+         this.challenge = decoder.decodeAsBufferedImage();
+     };
+
 
 }
