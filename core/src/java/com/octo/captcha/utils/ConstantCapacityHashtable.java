@@ -87,6 +87,12 @@ public class ConstantCapacityHashtable extends Hashtable
      */
     private Hashtable timestamps = null;
 
+    /**
+     * Number of entries garbage collected since the creation of the
+     * ConstantCapacityHashtable
+     */
+    private long numberOfGarbageCollectedEntriesSinceCreation = 0;
+    
     ////////////////////////////////
     // Constructor
     ////////////////////////////////
@@ -196,6 +202,17 @@ public class ConstantCapacityHashtable extends Hashtable
         // @TODO : modify time to live for current entries ?
         // Synchronization problem ?
     }
+    
+    /**
+     * Get the number of entries garbage collected since the creation
+     * of the ConstantCapacityHashtable
+     * @return the number of entries garbage collected since the
+     * creation of the ConstantCapacityHashtable
+     */
+    public long getNumberOfGarbageCollectedEntriesSinceCreation()
+    {
+        return this.numberOfGarbageCollectedEntriesSinceCreation;
+    }
 
     /**
      * Get the number of entries that can be garbage collected
@@ -240,6 +257,9 @@ public class ConstantCapacityHashtable extends Hashtable
                 nbOfEntriesGarbageCollected++;
             }
         }
+        // update statistics
+        this.numberOfGarbageCollectedEntriesSinceCreation += nbOfEntriesGarbageCollected;
+        
         return nbOfEntriesGarbageCollected;
     }
 
