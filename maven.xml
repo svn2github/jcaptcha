@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<project 
+  default="assemble"
+  xmlns:j="jelly:core"
+  xmlns:maven="jelly:maven"
+  xmlns:artifact="artifact"
+  xmlns:ant="jelly:ant">
+  
+  <preGoal name="multiproject:site">
+    <maven:reactor 
+        basedir="${basedir}"
+        includes="**/${pattern}/**/project.xml"
+        excludes="project.xml"
+        goals="site"
+        banner="Building"
+        ignoreFailures="false"/>
+  </preGoal>
+  
+</project>

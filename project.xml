@@ -1,24 +1,44 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 
 <project>
-  <extends>${basedir}/../project.xml</extends>
   <pomVersion>1</pomVersion>
-  <id>jcaptcha-samples</id>
-  <name>JCaptcha-samples</name>
+  <id>jcaptcha</id>
+  <name>JCaptcha</name>
   <groupId>jcaptcha</groupId>
-  <currentVersion>0.1</currentVersion>
+  <currentVersion>1.0</currentVersion>
   <organization>
     <name>octo</name>
     <url>http://www.octo.com</url>
+    <logo/>
   </organization>
   <inceptionYear>2003</inceptionYear>
   <package>com.octo.captcha</package>
 
   <description>
   <![CDATA[
-  <b>CAPTCHA</b>, for <b>C</b>ompletely <b>A</b>utomated <b>P</b>ublic <b>T</b>uring <b>T</b>est <b>C</b>omputers and <b>H</b>umans
-  <b>S</b>amples : show some possible usages of the jcaptcha library
-   ]]>
+  <b>CAPTCHA</b>, for <b>C</b>ompletely <b>A</b>utomated <b>P</b>ublic <b>T</b>est to tell <b>H</b>umans and <b>C</b>omputers 
+  <b>A</b>part, is a test based on several cognitives puzzles based on challenging problems
+  of artificial intelligence. These tests are to prevent computer programs or
+  robots to obtain information, by challenging with a problem that only human can
+  resolve.
+  <p/>
+  Several tests has been specified:
+  <p/>
+  <ul>
+  <li><b>Gimpy</b>: This test is based on distorted image and text. Gimpy randomly
+  generate a distorted and corrupted text in an image, and asks to the user to 
+  type the word displayed in the image.
+  </li>
+  <li><b>Sound</b>: This test is based on distorted sound. It randomly generate a distorted 
+  sound and asks to user to type the word which was played.
+  </li>
+  <li><b>Pix</b>: This test randomly pick 6 images which have on object in common. Then it
+  asks to user to type the object in common.
+  </li>
+  <li><b>Bongo</b>: This is a logical an memory test based on shape recognition.
+  </li>
+  </ul>
+  ]]>
   </description>
   
   <shortDescription>
@@ -50,7 +70,7 @@
     <developers>
     <developer>
       <name>Sébastien Brunot</name>
-      <id>sbr</id>
+      <id>sbrunot</id>
       <email>sbrunot@octo.com</email>
       <organization>Octo</organization>
       <roles>
@@ -59,7 +79,7 @@
     </developer>
     <developer>
       <name>Mathieu Gandin</name>
-      <id>mga</id>
+      <id>mgandin</id>
       <email>mgandin@octo.com</email>
       <organization>Octo</organization>
       <roles>
@@ -68,37 +88,7 @@
     </developer>
     <developer>
       <name>Marc-Antoine Garrigue</name>
-      <id>mag</id>
-      <email>mgarrigue@octo.com</email>
-      <organization>Octo</organization>
-      <roles>
-        <role>Java Developer</role>
-      </roles>
-    </developer>
-  </developers>
-
-    <developers>
-    <developer>
-      <name>Sébastien Brunot</name>
-      <id>sbr</id>
-      <email>sbrunot@octo.com</email>
-      <organization>Octo</organization>
-      <roles>
-        <role>Java Developer</role>
-      </roles>
-    </developer>
-    <developer>
-      <name>Mathieu Gandin</name>
-      <id>mga</id>
-      <email>mgandin@octo.com</email>
-      <organization>Octo</organization>
-      <roles>
-        <role>Java Developer</role>
-      </roles>
-    </developer>
-    <developer>
-      <name>Marc-Antoine Garrigue</name>
-      <id>mag</id>
+      <id>magarrigue</id>
       <email>mgarrigue@octo.com</email>
       <organization>Octo</organization>
       <roles>
@@ -119,29 +109,7 @@
             <version>2.2.1</version>
             <url>http://xml.apache.org/xerces2-j/</url>
     	</dependency>
-    	
-    	<dependency>
-    	    <groupId>jcaptcha</groupId>
-            <artifactId>jcaptcha-core</artifactId>
-            <version>0.1</version>
-            <url>http://jcaptcha.sourceforge.net</url>
-    	</dependency>
-    	
   </dependencies>
-
-  <build>
-    <sourceDirectory>src/java</sourceDirectory>
-    <unitTestSourceDirectory>src/test</unitTestSourceDirectory>
-    <unitTest>
-      <includes>
-        <include>**/*Test.java</include>
-      </includes>
-      <excludes>
-        <exclude>**/*Test*All.java</exclude>
-      </excludes>
-    </unitTest>
-
-  </build>
 
   <reports>
 	<report>maven-checkstyle-plugin</report>
@@ -152,7 +120,7 @@
 	<report>maven-pmd-plugin</report>
 	<report>maven-jdepend-plugin</report>
 	<report>maven-tasklist-plugin</report>
-    <!--report>maven-clover-plugin</report-->
+    <report>maven-clover-plugin</report>
   </reports>
   
 </project>
