@@ -465,9 +465,10 @@ DAMAGES.
 package com.octo.captcha.image.gimpy;
 
 import com.octo.captcha.CaptchaException;
+import com.octo.captcha.CaptchaQuestionHelper;
 import com.octo.captcha.image.ImageCaptcha;
-import com.octo.captcha.image.wordtoimage.WordToImage;
-import com.octo.captcha.wordgenerator.WordGenerator;
+import com.octo.captcha.component.image.wordtoimage.WordToImage;
+import com.octo.captcha.component.wordgenerator.WordGenerator;
 
 import java.awt.image.BufferedImage;
 import java.util.Locale;
@@ -485,8 +486,7 @@ public class GimpyFactory extends com.octo.captcha.image.ImageCaptchaFactory {
     private WordToImage wordToImage;
     private WordGenerator wordGenerator;
 
-    public static final String BUNDLE_NAME = Gimpy.class.getName();
-    public static final String BUNDLE_QUESTION_KEY = "question";
+    public static final String BUNDLE_QUESTION_KEY = Gimpy.class.getName();
 
     public GimpyFactory(WordGenerator generator, WordToImage word2image) {
         if (word2image == null) {
@@ -537,7 +537,7 @@ public class GimpyFactory extends com.octo.captcha.image.ImageCaptchaFactory {
             throw new CaptchaException(e);
         }
 
-        ImageCaptcha captcha = new Gimpy(ResourceBundle.getBundle(BUNDLE_NAME, locale).getString(BUNDLE_QUESTION_KEY),
+        ImageCaptcha captcha = new Gimpy(CaptchaQuestionHelper.getQuestion(locale,BUNDLE_QUESTION_KEY),
                 image, word);
         return captcha;
     }

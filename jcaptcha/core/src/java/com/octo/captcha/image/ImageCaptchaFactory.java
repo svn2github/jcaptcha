@@ -466,6 +466,9 @@ package com.octo.captcha.image;
 
 import com.octo.captcha.Captcha;
 import com.octo.captcha.CaptchaFactory;
+import com.octo.captcha.image.ImageCaptcha;
+import com.octo.captcha.Captcha;
+import com.octo.captcha.CaptchaFactory;
 
 import java.util.Locale;
 

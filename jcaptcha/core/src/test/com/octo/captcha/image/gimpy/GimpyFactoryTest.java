@@ -465,11 +465,12 @@ DAMAGES.
 package com.octo.captcha.image.gimpy;
 
 import junit.framework.TestCase;
-import com.octo.captcha.wordgenerator.RandomWordGenerator;
-import com.octo.captcha.image.wordtoimage.SimpleWordToImage;
+import com.octo.captcha.component.wordgenerator.RandomWordGenerator;
+import com.octo.captcha.component.image.wordtoimage.SimpleWordToImage;
 import com.octo.captcha.image.gimpy.GimpyFactory;
 import com.octo.captcha.CaptchaException;
 import com.octo.captcha.image.gimpy.GimpyFactory;
+import com.octo.captcha.CaptchaException;
 
 public class GimpyFactoryTest extends TestCase
 {
