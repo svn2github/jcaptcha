@@ -21,8 +21,22 @@ public class ToolkitFactoryTest extends TestCase {
         super(name);
     }
 
-    public void testGetToolkit() {
+    public void testGetaDefaultToolkit() {
         assertTrue(ToolkitFactory.getToolkit() instanceof Toolkit);
     }
 
+    public void testGetCustomToolkit(){
+        System.setProperty(ToolkitFactory.TOOLKIT_IMPL,MockToolkit.class.getName());
+        assertTrue(ToolkitFactory.getToolkit() instanceof MockToolkit);
+        System.setProperty(ToolkitFactory.TOOLKIT_IMPL,"toto");
+        try
+        {
+            ToolkitFactory.getToolkit();
+            fail("should throw an exception");
+        } catch (Exception e)
+        {
+            //assertTrue();
+        }
+
+    }
 }
