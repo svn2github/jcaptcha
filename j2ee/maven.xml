@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+  Define a post goal to site so that organization and project logos are copyed to the
+  target\docs\images subdirectory
+-->
+<project 
+  default="assemble"
+  xmlns:j="jelly:core"
+  xmlns:maven="jelly:maven"
+  xmlns:artifact="artifact"
+  xmlns:ant="jelly:ant">
+ 
+  <postGoal name="site">
+    <ant:copy file="${basedir}/images/organization-logo.jpg" todir="${maven.build.dir}/docs/images"/>
+    <ant:copy file="${basedir}/images/project-logo.jpg" todir="${maven.build.dir}/docs/images"/>
+  </postGoal>
+</project>
