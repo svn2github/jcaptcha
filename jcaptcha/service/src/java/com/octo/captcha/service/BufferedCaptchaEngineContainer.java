@@ -483,7 +483,7 @@ import java.util.Locale;
  * TODO : localized captcha buffering
  */
 public class BufferedCaptchaEngineContainer implements CaptchaEngine {
-    private static final String CACHE_BUFFER_NAME = "BuffuredCaptchaEngineContainerCache";
+    public static final String BUFFER_CACHE_NAME = "BuffuredCaptchaEngineContainerCache";
 
     private static final Log log = LogFactory.getLog(BufferedCaptchaEngineContainer.class);
 
@@ -537,7 +537,7 @@ public class BufferedCaptchaEngineContainer implements CaptchaEngine {
         this.diskPersistant = new Boolean(diskPersistant);
         this.deamonPeriod = new Long(deamonPeriod*1000);
         this.captchaEngine = engine;
-        this.captchaBuffer = new Cache(CACHE_BUFFER_NAME,
+        this.captchaBuffer = new Cache(BUFFER_CACHE_NAME,
                 this.maxMemorySize.intValue(),
                 maxMemorySize==bufferSize?false:true,
                 true,
@@ -590,7 +590,7 @@ public class BufferedCaptchaEngineContainer implements CaptchaEngine {
             List keys = null;
 
             try {
-                captchaCache = CacheManager.getInstance().getCache(CACHE_BUFFER_NAME);
+                captchaCache = CacheManager.getInstance().getCache(BUFFER_CACHE_NAME);
                 keys = captchaCache.getKeys();
 
 

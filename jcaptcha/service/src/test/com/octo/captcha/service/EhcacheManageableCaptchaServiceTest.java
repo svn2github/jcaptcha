@@ -470,6 +470,7 @@ import com.octo.captcha.service.EhcacheManageableCaptchaService;
 import com.octo.captcha.service.captchastore.MapCaptchaStore;
 import com.octo.captcha.service.captchastore.CaptchaStore;
 import com.octo.captcha.Captcha;
+import net.sf.ehcache.CacheManager;
 
 public class EhcacheManageableCaptchaServiceTest extends AbstractManageableCaptchaServiceTest {
     EhcacheManageableCaptchaService ehcacheManageableCaptchaService;
@@ -482,7 +483,9 @@ public class EhcacheManageableCaptchaServiceTest extends AbstractManageableCaptc
     }
 
     protected void tearDown() throws Exception {
+        super.tearDown();
         getMService().emptyCaptchaStore();
+        CacheManager.getInstance().removeCache(EhcacheManageableCaptchaService.CAPTCHA_STORE_CACHE_NAME);
     }
 
 

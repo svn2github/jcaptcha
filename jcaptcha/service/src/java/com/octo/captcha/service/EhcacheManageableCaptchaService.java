@@ -501,7 +501,7 @@ public abstract class EhcacheManageableCaptchaService
     private int numberOfGeneratedCaptchas = 0;
     private int numberOfCorrectResponse = 0;
     private int numberOfUncorrectResponse = 0;
-    private static final String CACHE_NAME = "CaptchaStoreCache";
+    public static final String CAPTCHA_STORE_CACHE_NAME = "CaptchaStoreCache";
 
 
     protected EhcacheManageableCaptchaService(com.octo.captcha.engine.CaptchaEngine captchaEngine,
@@ -516,13 +516,13 @@ public abstract class EhcacheManageableCaptchaService
             log.error(e);
         }
         // create a cache with overflow on disk,
-        Cache cache = new Cache(CACHE_NAME, maxCaptchaStoreSize, true, false, minGuarantedStorageDelayInSeconds,
+        Cache cache = new Cache(CAPTCHA_STORE_CACHE_NAME, maxCaptchaStoreSize, true, false, minGuarantedStorageDelayInSeconds,
                 minGuarantedStorageDelayInSeconds);
         //store the cache
 
         try {
-            if (cacheManager.cacheExists(CACHE_NAME)) {
-                cacheManager.removeCache(CACHE_NAME);
+            if (cacheManager.cacheExists(CAPTCHA_STORE_CACHE_NAME)) {
+                cacheManager.removeCache(CAPTCHA_STORE_CACHE_NAME);
             }
             cacheManager.addCache(cache);
         } catch (CacheException e) {
@@ -725,13 +725,13 @@ public abstract class EhcacheManageableCaptchaService
         //to garbage collect, wait 5 minutes or get : see ehcache doco
         Iterator it=null;
         try {
-            it = cacheManager.getCache(CACHE_NAME).getKeys().iterator();
+            it = cacheManager.getCache(CAPTCHA_STORE_CACHE_NAME).getKeys().iterator();
         } catch (CacheException e) {
             log.error(e);
         }
         while (it.hasNext()) {
             try {
-                cacheManager.getCache(CACHE_NAME).get(it.next().toString());
+                cacheManager.getCache(CAPTCHA_STORE_CACHE_NAME).get(it.next().toString());
             } catch (CacheException e) {
                 log.error(e);
             }
@@ -750,7 +750,7 @@ public abstract class EhcacheManageableCaptchaService
 
     private void updateCache()  {
 
-        Cache cache = new Cache(CACHE_NAME, captchaStoreMaxSize, true, false, minGuarantedStorageDelayInSeconds,
+        Cache cache = new Cache(CAPTCHA_STORE_CACHE_NAME, captchaStoreMaxSize, true, false, minGuarantedStorageDelayInSeconds,
                 minGuarantedStorageDelayInSeconds);
         Iterator it = null;
         try {
@@ -760,10 +760,10 @@ public abstract class EhcacheManageableCaptchaService
         }
 
                 try {
-                    cacheManager.removeCache(CACHE_NAME);
+                    cacheManager.removeCache(CAPTCHA_STORE_CACHE_NAME);
                     cacheManager.addCache(cache);
                     this.store = new EhcacheStore(cache);
-                    Cache myCache = cacheManager.getCache(CACHE_NAME);
+                    Cache myCache = cacheManager.getCache(CAPTCHA_STORE_CACHE_NAME);
                     long now = System.currentTimeMillis();
                     while (it.hasNext()) {
                         Element el= (Element) it.next();
@@ -779,7 +779,7 @@ public abstract class EhcacheManageableCaptchaService
 
 
     private Collection copyCacheContent() throws CacheException {
-        Cache currentcache = cacheManager.getCache(CACHE_NAME);
+        Cache currentcache = cacheManager.getCache(CAPTCHA_STORE_CACHE_NAME);
         Iterator it = currentcache.getKeys().iterator();
         Collection els = new HashSet();
         while (it.hasNext()) {
@@ -816,7 +816,9 @@ public abstract class EhcacheManageableCaptchaService
 
             }
         } catch (CacheException e) {
+
             log.error(e);
+           
         }
         Captcha captcha = this.engine.getNextCaptcha(locale);
         this.numberOfGeneratedCaptchas++;
@@ -828,7 +830,7 @@ public abstract class EhcacheManageableCaptchaService
     }
 
     private Cache getCache() {
-        return this.cacheManager.getCache(CACHE_NAME);
+        return this.cacheManager.getCache(CAPTCHA_STORE_CACHE_NAME);
     }
 
 

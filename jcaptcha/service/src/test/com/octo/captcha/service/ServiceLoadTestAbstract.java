@@ -548,7 +548,6 @@ public abstract class ServiceLoadTestAbstract extends TestCase
 
     public void testNominal_100It_0Del_1Us_2min() throws Throwable
     {
-         Thread.sleep(10000);
         int count_nominal = 100;
         int delay_nominal = 0;
         int users_nominal = 1;
@@ -564,7 +563,7 @@ public abstract class ServiceLoadTestAbstract extends TestCase
 
     public void testNominal_1It_0Del_100Us_2min() throws Throwable
     {
-             Thread.sleep(10000);
+
         int count_nominal = 1;
         int delay_nominal = 0;
         int users_nominal = 100;
@@ -580,7 +579,6 @@ public abstract class ServiceLoadTestAbstract extends TestCase
 
     public void testNominal_10It_10Del_10Us_Spam_100It_10Del_5Us_2min() throws Throwable
         {
-              Thread.sleep(10000);
             int count_nominal = 10;
             int delay_nominal = 10;
             int users_nominal = 10;
@@ -596,7 +594,6 @@ public abstract class ServiceLoadTestAbstract extends TestCase
 
     public void testNominal_10It_100Del_10Us_Spam_100It_10Del_5Us_2min() throws Throwable
         {
-              Thread.sleep(10000);
             int count_nominal = 10;
             int delay_nominal = 100;
             int users_nominal = 10;
@@ -610,11 +607,10 @@ public abstract class ServiceLoadTestAbstract extends TestCase
         }
 
 
-    public void testNominal_2It_10000Del_500Us_Spam_100It_10Del_5Us_5min() throws Throwable
+    public void testNominal_2It_1000Del_500Us_Spam_100It_10Del_5Us_5min() throws Throwable
         {
-               Thread.sleep(10000);
             int count_nominal = 2;
-            int delay_nominal = 10000;
+            int delay_nominal = 1000;
             int users_nominal = 500;
 
             int count_spam = 100;
@@ -634,7 +630,7 @@ public abstract class ServiceLoadTestAbstract extends TestCase
             tcs[i]=new ServiceUserNominalHelper( this.service, count_nominal,  delay_nominal );
             }
         for(int i=0;i<users_spam;i++){
-            tcs[i+users_nominal]=new ServiceUserNominalHelper( this.service, count_spam,  delay_spam );
+            tcs[i+users_nominal]=new ServiceUserSpamHelper(this.service, count_spam,  delay_spam );
             }
         MultiThreadedTestRunner mttr =
             new MultiThreadedTestRunner( tcs );
