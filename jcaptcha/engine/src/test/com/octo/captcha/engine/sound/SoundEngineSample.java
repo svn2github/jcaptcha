@@ -467,15 +467,18 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Locale;
 
 import javax.sound.sampled.AudioInputStream;
 
 import com.octo.captcha.component.sound.wordtosound.WordToSound;
 import com.octo.captcha.component.sound.wordtosound.WordToSoundFreeTTS;
 
+import com.octo.captcha.component.wordgenerator.DictionaryReader;
 import com.octo.captcha.component.wordgenerator.DictionaryWordGenerator;
-import com.octo.captcha.component.wordgenerator.ArrayDictionary;
+
 import com.octo.captcha.component.wordgenerator.WordGenerator;
+import com.octo.captcha.component.wordgenerator.WordList;
 import com.octo.captcha.engine.sound.utils.SoundToFile;
 import com.octo.captcha.sound.SoundCaptcha;
 import com.octo.captcha.sound.SoundCaptchaFactory;
@@ -501,7 +504,8 @@ public class SoundEngineSample
         SoundEngineSample.wordlist = new String[] { "and", "oh", "test", "test", "hello", "lame",
             "eating", "snake", "roots", "yeah"};
 
-        SoundEngineSample.words = new DictionaryWordGenerator(new ArrayDictionary(wordlist));
+        
+        SoundEngineSample.words = new DictionaryWordGenerator((new SoundEngineSample()).new ArrayDictionary(wordlist));
 
         SoundEngineSample.wordToSound = new WordToSoundFreeTTS();
         SoundEngineSample.factory = new GimpySoundFactory(words, wordToSound);
@@ -550,5 +554,34 @@ public class SoundEngineSample
             System.out.print("Failed!!!");
         }
         tCaptcha.disposeChallenge();
+    }
+    
+    private class ArrayDictionary implements DictionaryReader
+    {
+        private String[] list;
+        
+        public ArrayDictionary(String[] list)
+        {
+            this.list = list;
+        }
+
+        /* (non-Javadoc)
+         * @see com.octo.captcha.component.wordgenerator.DictionaryReader#getWordList()
+         */
+        public WordList getWordList()
+        {
+            // TODO Auto-generated method stub
+            return null;
+        }
+
+        /* (non-Javadoc)
+         * @see com.octo.captcha.component.wordgenerator.DictionaryReader#getWordList(java.util.Locale)
+         */
+        public WordList getWordList(Locale arg0)
+        {
+            // TODO Auto-generated method stub
+            return null;
+        }
+        
     }
 }
