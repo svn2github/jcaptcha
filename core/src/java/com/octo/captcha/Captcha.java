@@ -52,7 +52,7 @@ package com.octo.captcha;
 
 
 /**
- * This intrface represent a CAPTCHA.
+ * This interface represent a CAPTCHA.
  *
  * A CAPTCHA is a program that can generate and grade tests that:
  * <ul>
@@ -62,12 +62,12 @@ package com.octo.captcha;
  * see http://www.captcha.net/ for sample, articles, and definitions.
  *
  * A capchta is basically a test composed of :
-  *<ul>
-  * <li>A question about :</li>
-  * <li>a challenge (can be an image for pix captchas or a sound, or wathever)</li>
-  * <li>a validation routine a of a given response</li>
-  * </ul>
-  *
+ *<ul>
+ * <li>A question about :</li>
+ * <li>a challenge (can be an image for image captchas or a sound, or wathever)</li>
+ * <li>a validation routine a of a given response</li>
+ * </ul>
+ *
  * This is a container for the CAPTCHA challenge which is also able to validate the answer.
  * Class implementing this interface must follow the rules :
  * <ul>
@@ -76,21 +76,22 @@ package com.octo.captcha;
  * <li>It must know how to validate the answer</li>
  * <li>It must not expose the answer</li>
  * </ul>
- *
+ *;
  *
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public interface Captcha {
     /**
-     * Accessor captcha question
+     * Accessor captcha question.
      * @return the question
      */
     String getQuestion();
+    
 
     /**
      * Accerssor for the questionned challenge.
-     * @return the challenge (may be an image for pix captcha...
+     * @return the challenge (may be an image for image captcha...
      */
     Object getChallenge();
 

@@ -51,9 +51,10 @@
 package com.octo.captcha;
 
 /**
+ * Runtime exception for the captcha implemenentations.
  * @author gandin
  */
-public class CaptchaException extends Exception {
+public class CaptchaException extends RuntimeException {
 
 
     /**
@@ -72,7 +73,7 @@ public class CaptchaException extends Exception {
      * @param   message   the detail message. The detail message is saved for
      *          later retrieval by the {@link #getMessage()} method.
      */
-    public CaptchaException(String message) {
+    public CaptchaException(final String message) {
         super(message);
     }
 
@@ -90,7 +91,7 @@ public class CaptchaException extends Exception {
      *         unknown.)
      * @since  1.4
      */
-    public CaptchaException(String message, Throwable cause) {
+    public CaptchaException(final String message, final Throwable cause) {
         super(message, cause);
     }
 
@@ -108,7 +109,7 @@ public class CaptchaException extends Exception {
      *         unknown.)
      * @since  1.4
      */
-    public CaptchaException(Throwable cause) {
+    public CaptchaException(final Throwable cause) {
         super(cause);
     }
 
