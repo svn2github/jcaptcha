@@ -48,56 +48,76 @@
  *
  */
 
-package com.octo.captcha.image.gimpy.wordtoimage.backgroundgenerator;
+package com.octo.captcha.image.gimpy.wordgenerator;
 
-import java.awt.AlphaComposite;
-import java.awt.BasicStroke;
-import java.awt.Graphics2D;
-import java.awt.geom.Arc2D;
-import java.awt.image.BufferedImage;
+import com.octo.captcha.CaptchaException;
+
+import java.util.Locale;
 
 /**
- * <p>Black ellipses drawn on a white background</p>
+ * <p>This Word Generator use a Dictionnary to compose new Words from existing words.</p>
+ * It avoid dictionnary systematic submission, and may compose words of any length.
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class EllipseBackgroundGenerator extends AbstractBackgroundGenerator
+public class ComposeDictionaryWordGenerator extends DictionaryWordGenerator
 {
 
-    public EllipseBackgroundGenerator(Integer width, Integer height)
+    public ComposeDictionaryWordGenerator(DictionaryReader reader)
     {
-        super(width, height);
+        super(reader);
     }
+
 
     /**
-     * Generates a backround image on wich text will be paste.
-     * Implementations must take into account the imageHeigt and imageWidth.
-     * @return the background image
+     * Return a word of lenght between min and max lenght according to the given locale
+     * @param lenght
+     * @param locale
+     * @return a String of lenght between min and max lenght according to the given locale
      */
-    public BufferedImage getBackround()
+    public String getWord(Integer lenght, Locale locale)
     {
-        BufferedImage bimgTP = new BufferedImage(getImageWidth(), getImageHeight(), BufferedImage.TYPE_INT_RGB);
-        Graphics2D g2d = bimgTP.createGraphics();
-        // g2d.setColor(Color.white);
-        //g2d.fillRect(0, 0, getImageWidth(), getImageHeight());
-        BasicStroke bs = new BasicStroke(2.0f, BasicStroke.CAP_BUTT,
-                BasicStroke.JOIN_MITER, 2.0f, new float[]{2.0f, 2.0f}, 0.0f);
-        g2d.setStroke(bs);
-        AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.75f);
-        g2d.setComposite(ac);
-
-        g2d.translate(getImageWidth() * -1.0, 0.0);
-        double delta = 5.0;
-        double xt;
-        double ts = 0.0;
-        for (xt = 0.0 ; xt < (2.0 * getImageWidth()) ; xt += delta)
-        {
-            Arc2D arc = new Arc2D.Double(0, 0,
-                    getImageWidth(), getImageHeight(), 0.0, 360.0, Arc2D.OPEN);
-            g2d.draw(arc);
-            g2d.translate(delta, 0.0);
-            ts += delta;
+        WordList words = getWordList(locale);
+        //get the middle
+        int firstLenght = (lenght.intValue()/2);
+        //try to find a first word
+        String firstWord=null;
+        for(int i=firstLenght;i<50;i++){
+            firstWord = words.getNextWord(new Integer(firstLenght+i));
+                if(firstWord!=null){
+                    firstWord = firstWord.substring(0,firstLenght);
+                    break;
+                }
+            }
+        String secondWord=null;
+        for(int i=firstLenght;i<50;i++){
+        secondWord = words.getNextWord(new Integer(lenght.intValue()-firstLenght+i));
+        if(secondWord!=null){
+            secondWord = secondWord.substring(secondWord.length()-lenght.intValue()+firstLenght,secondWord.length());
+            break;
+          }
         }
-        return bimgTP;
+
+        //if first word is still null, try with a smaller int avoiding infinite loop by chexking size
+
+        firstWord = checkAndFindSmaller(firstWord, firstLenght, locale);
+        secondWord = checkAndFindSmaller(secondWord, lenght.intValue()-firstLenght, locale);
+        return firstWord+secondWord;
+
+      }
+
+    private String checkAndFindSmaller(String firstWord, int lenght, Locale locale)
+    {
+        //if first word is still null, try with a smaller int avoiding infinite loop by chexking size
+        if(firstWord==null){
+            if(lenght>1){
+            firstWord = getWord(new Integer(lenght),locale);
+        }else{
+             throw new CaptchaException("No word of lenght : "+lenght+ " exists in dictionnary! please " +
+        "update your dictionary or your range!");
+        }
+        }
+        return firstWord;
     }
+
 }

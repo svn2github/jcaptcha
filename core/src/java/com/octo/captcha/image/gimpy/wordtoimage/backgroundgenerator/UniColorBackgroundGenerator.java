@@ -48,81 +48,42 @@
  *
  */
 
-package com.octo.captcha.image.gimpy.wordtoimage;
+package com.octo.captcha.image.gimpy.wordtoimage.backgroundgenerator;
 
-import com.octo.captcha.CaptchaException;
-
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferedImage;
-import java.text.AttributedString;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 /**
- * <p>Simple image to word implementation. For eductation only, do not use it in production</p>
+ * <p>Contructs uniform painted background, with default wolor White.</p>
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class SimpleWordToImage extends AbstractWordToImage
+public class UniColorBackgroundGenerator extends AbstractBackgroundGenerator
 {
 
-    public SimpleWordToImage()
+
+    private BufferedImage backround;
+
+    public UniColorBackgroundGenerator(Integer width, Integer height)
     {
-        super();
+        this(width,height,Color.WHITE);
+
+
     }
 
-    /**
-     *
-     * @return the max word lenght accepted by this word2image service
-     */
-    public int getMaxAcceptedWordLenght()
+    public UniColorBackgroundGenerator(Integer width, Integer height, Color color )
     {
-        return 10;
-    }
+        super(width, height);
+        backround = new BufferedImage(getImageWidth(), getImageHeight(), BufferedImage.TYPE_INT_RGB);
+        Graphics2D  pie = (Graphics2D) backround.getGraphics();
+        pie.setColor(color!=null?color:Color.WHITE);
+        pie.setBackground(color!=null?color:Color.WHITE);
+        pie.fillRect(0,0,getImageWidth(),getImageHeight());
+        pie.dispose();
 
-    /**
-     *@return the min word lenght accepted by this word2image service
-     */
-    public int getMinAcceptedWordLenght()
-    {
-        return 1;
-    }
-
-    /**
-     * @return the generated image height
-     */
-    public int getImageHeight()
-    {
-        return 50;
-    }
-
-    /**
-     *
-     * @return the generated image width
-     */
-    public int getImageWidth()
-    {
-        return 100;
-    }
-
-    /**
-     *
-     * @return the min font size for the generated image
-     */
-    public int getMinFontSize()
-    {
-        return 10;
-    }
-
-    /**
-     * Method from imageFromWord method to apply font to String.
-     * Implementations must take into account the minFontSize and the MaxFontSize.
-     * @return a Font
-     */
-    public Font getFont()
-    {
-        return GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts()[0];
-    }
+     }
 
     /**
      * Generates a backround image on wich text will be paste.
@@ -131,30 +92,7 @@ public class SimpleWordToImage extends AbstractWordToImage
      */
     public BufferedImage getBackround()
     {
-        BufferedImage background = new BufferedImage(getImageWidth(), getImageHeight(), BufferedImage.TYPE_INT_RGB);
-        return background;
+
+        return backround ;
     }
-
-    /**
-     * Pastes the attributed string on the backround image and return the final image.
-     * Implementation must take into account the fact that the text must be readable
-     * by human and non by programs
-     * @param background
-     * @param attributedWord
-     * @return the final image
-     * @throws CaptchaException if any exception accurs during paste routine.
-     */
-    BufferedImage pasteText(BufferedImage background, AttributedString attributedWord) throws CaptchaException
-    {
-        //get graphics
-        Graphics graph = background.getGraphics();
-        // calcul text position
-
-        int x = (getImageWidth() - getMaxAcceptedWordLenght()) / 2;
-        int y = (getImageHeight() - getMinFontSize()) / 2;
-        graph.drawString(attributedWord.getIterator(), x, y);
-        graph.dispose();
-        return background;
-    }
-
 }

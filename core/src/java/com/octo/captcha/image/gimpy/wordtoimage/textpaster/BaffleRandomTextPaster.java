@@ -52,70 +52,86 @@ package com.octo.captcha.image.gimpy.wordtoimage.textpaster;
 
 import com.octo.captcha.CaptchaException;
 
+import java.awt.image.BufferedImage;
+import java.awt.Graphics2D;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.font.FontRenderContext;
+import java.awt.Composite;
+import java.awt.AlphaComposite;
 import java.awt.geom.Rectangle2D;
-import java.awt.image.BufferedImage;
+import java.awt.geom.Ellipse2D;
 import java.text.AttributedString;
 
 /**
- * <p>Randomly pastes two times the attributed string with a random(5) decalage</p>
+ * <p>text paster that paint white holes on the string (erase some parts)</p>
+ * You may specify the number of holes per glyph : 3 by default.
+ * You may specify the color of holes : TextColor by default.
+ * @see {http://www.parc.xerox.com/research/istl/projects/captcha/default.html}
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class DoubleRandomTextPaster extends RandomTextPaster
+public class BaffleRandomTextPaster extends RandomTextPaster
 {
+    private Integer numberOfHolesPerGlyph = new Integer(3) ;
+    private Color holesColor;
 
-    public DoubleRandomTextPaster(Integer minAcceptedWordLenght, Integer maxAcceptedWordLenght, Color textColor)
+//    public BaffleRandomTextPaster(Integer minAcceptedWordLenght, Integer maxAcceptedWordLenght, Color textColor)
+//    {
+//        super(minAcceptedWordLenght, maxAcceptedWordLenght, textColor);
+//    }
+//
+//    public BaffleRandomTextPaster(Integer minAcceptedWordLenght, Integer maxAcceptedWordLenght, Color textColor,
+//                                 Integer numberOfHolesPerGlyph)
+//    {
+//        super(minAcceptedWordLenght, maxAcceptedWordLenght, textColor);
+//        this.numberOfHolesPerGlyph = numberOfHolesPerGlyph!=null?numberOfHolesPerGlyph:this.numberOfHolesPerGlyph;
+//    }
+
+    public BaffleRandomTextPaster(Integer minAcceptedWordLenght, Integer maxAcceptedWordLenght, Color textColor,
+                                 Integer numberOfHolesPerGlyph, Color holesColor)
     {
         super(minAcceptedWordLenght, maxAcceptedWordLenght, textColor);
+        this.numberOfHolesPerGlyph = numberOfHolesPerGlyph!=null?numberOfHolesPerGlyph:this.numberOfHolesPerGlyph;
+        this.holesColor = holesColor!=null?holesColor:textColor;
     }
-
     /**
      * Pastes the attributed string on the backround image and return the final image.
      * Implementation must take into account the fact that the text must be readable
-     * by human and non by programs.
-     * Paste the text randomly on the background<
+     * by human and non by programs
      * @param background
      * @param attributedWord
      * @return the final image
-     * @throws com.octo.captcha.CaptchaException if any exception occurs during paste routine.
+     * @throws CaptchaException if any exception accurs during paste routine.
      */
-    public BufferedImage pasteText(final BufferedImage background, final AttributedString attributedWord)
-            throws CaptchaException
+    public BufferedImage pasteText(BufferedImage background, AttributedString attributedWord) throws CaptchaException
     {
         BufferedImage out = copyBackground(background);
         Graphics2D pie = pasteBackgroundAndSetTextColor(out, background);
-
         //set font to max in order to retrieve the correct boundaries
         Font maxFont = getMaxFont(attributedWord.getIterator());
-        Rectangle2D bounds = getTextBoundaries(pie, maxFont,attributedWord);
-
-        //evaluate the max deviation
-        Double maxx = new Double(background.getWidth() - bounds.getWidth());
-        Double maxy = new Double(background.getHeight() - bounds.getHeight() - 0.4 * maxFont.getSize());
-        if (maxx.intValue() < 0 || maxy.intValue() < 0)
-            throw new CaptchaException("word is too big, try to use less letters, smaller font or bigger background");
-
-        //evaluate the first to second deviation
-        int xdev = new Double((1 + myRandom.nextDouble()) * 0.25 * maxFont.getSize()).intValue();
-        int ydev = new Double((1 + myRandom.nextDouble()) * 0.2 * maxFont.getSize()).intValue();
-
-        //evaluate the random deviation
-        int x = myRandom.nextInt(maxx.intValue() - xdev);
-        //don't forget y goes down!
-        int y = maxFont.getSize() + myRandom.nextInt(maxy.intValue() - ydev);
+        Rectangle2D bounds = getTextBoundaries(pie, maxFont, attributedWord);
+        int[] randomDeviation = getRandomDeviation(background, bounds, maxFont);
         //draw the string
-        pie.drawString(attributedWord.getIterator(), x, y);
-        // draw the second one
-        pie.drawString(attributedWord.getIterator(), x + xdev, y + ydev);
+        pie.drawString(attributedWord.getIterator(), randomDeviation[0], randomDeviation[1]);
+
+        //draw the holes
+        //Composite c = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, .7f);
+        //pie.setComposite(c);
+        //Color circleColor = ((Graphics2D)background.getGraphics()).getColor();
+                //pie.getColor();
+        pie.setColor(holesColor);
+        int numberOfHoles = numberOfHolesPerGlyph.intValue()*attributedWord.getIterator().getEndIndex();
+        int circleMaxSize = maxFont.getSize()/3;
+        for(int i = 0; i<numberOfHoles;i++){
+            int circleSize = myRandom.nextInt(circleMaxSize)/2+circleMaxSize/2;
+            double circlex = bounds.getMaxX()*myRandom.nextGaussian();
+            double circley = bounds.getMaxY()*myRandom.nextGaussian();
+            Ellipse2D circle = new Ellipse2D.Double(randomDeviation[0]+circlex,
+                    randomDeviation[1]-maxFont.getSize()/2+circley,circleSize,circleSize);
+            pie.fill(circle);
+
+        }
         pie.dispose();
         return out;
-
     }
-
-
-
 }

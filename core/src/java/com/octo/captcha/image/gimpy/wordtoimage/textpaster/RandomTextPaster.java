@@ -92,27 +92,41 @@ public class RandomTextPaster extends AbstractTextPaster
 
         //set font to max in order to retrieve the correct boundaries
         Font maxFont = getMaxFont(attributedWord.getIterator());
-        pie.setFont(maxFont);
-        FontRenderContext frc = pie.getFontRenderContext();
-        //get boundaries for the max font
-        Rectangle2D bounds = pie.getFont().getStringBounds(attributedWord.getIterator()
-                , attributedWord.getIterator().getBeginIndex()
-                , attributedWord.getIterator().getEndIndex(), frc);
+        Rectangle2D bounds = getTextBoundaries(pie, maxFont, attributedWord);
+        int[] randomDeviation = getRandomDeviation(background, bounds, maxFont);
+        //draw the string
+        pie.drawString(attributedWord.getIterator(), randomDeviation[0], randomDeviation[1]);
+        pie.dispose();
+        return out;
+
+    }
+
+    int[] getRandomDeviation(final BufferedImage background, Rectangle2D bounds, Font maxFont)
+    {
+        int[] randomDeviation;
+        randomDeviation= new int[2];
         //evaluate the max deviation
         Double maxx = new Double(background.getWidth() - bounds.getWidth());
         Double maxy = new Double(background.getHeight() - bounds.getHeight());
         if (maxx.intValue() < 0 || maxy.intValue() < 0)
             throw new CaptchaException("word is too big, try to use less letters, smaller font or bigger background");
-
         //evaluate the random deviation
-        int x = myRandom.nextInt(maxx.intValue());
+        randomDeviation[0] = myRandom.nextInt(maxx.intValue());
         //don't forget y goes down!
-        int y = maxFont.getSize() + myRandom.nextInt(Math.max(maxy.intValue() - maxFont.getSize(), 1));
-        //draw the string
-        pie.drawString(attributedWord.getIterator(), x, y);
-        pie.dispose();
-        return out;
+        randomDeviation[1] = maxFont.getSize() + myRandom.nextInt(Math.max(maxy.intValue() - maxFont.getSize(), 1));
+        return randomDeviation;
+    }
 
+    Rectangle2D getTextBoundaries(Graphics2D pie, Font maxFont, final AttributedString attributedWord)
+    {
+        Rectangle2D bounds;
+        pie.setFont(maxFont);
+        FontRenderContext frc = pie.getFontRenderContext();
+        //get boundaries for the max font
+        bounds = pie.getFont().getStringBounds(attributedWord.getIterator()
+                , attributedWord.getIterator().getBeginIndex()
+                , attributedWord.getIterator().getEndIndex(), frc);
+        return bounds;
     }
 
     Font getMaxFont(AttributedCharacterIterator it)

@@ -85,7 +85,7 @@ public class DictionaryWordGenerator implements WordGenerator
      * @param lenght
      * @return a String of lenght between min and max lenght
      */
-    public String getWord(Integer lenght)
+    public final String getWord(Integer lenght)
     {
         return getWord(lenght, defaultLocale);
     }
@@ -99,15 +99,7 @@ public class DictionaryWordGenerator implements WordGenerator
     public String getWord(Integer lenght, Locale locale)
     {
         WordList words;
-        if (localizedwords.containsKey(locale))
-        {
-           words = (WordList)localizedwords.get(locale);
-        }else{
-
-            words = factory.getWordList(locale);
-            //add to cache
-            localizedwords.put(locale,words);
-        }
+        words = getWordList(locale);
 
         String word = words.getNextWord(lenght);
         //check if word with the specified lenght exist
@@ -117,5 +109,20 @@ public class DictionaryWordGenerator implements WordGenerator
         "update your dictionary or your range!");
         }
        return word;
+    }
+
+    final WordList getWordList(Locale locale)
+    {
+        WordList words;
+        if (localizedwords.containsKey(locale))
+        {
+           words = (WordList)localizedwords.get(locale);
+        }else{
+
+            words = factory.getWordList(locale);
+            //add to cache
+            localizedwords.put(locale,words);
+        }
+        return words;
     }
 }
