@@ -25,17 +25,6 @@
 
 
        <dependencies>
-           <dependency>
-               <id>xml-apis</id>
-               <version>1.0.b2</version>
-               <url>http://xml.apache.org/xerces2-j/</url>
-           </dependency>
-
-           <dependency>
-               <id>xerces</id>
-               <version>2.2.1</version>
-               <url>http://xml.apache.org/xerces2-j/</url>
-           </dependency>
 
            <dependency>
                <groupId>jcaptcha</groupId>
@@ -44,13 +33,6 @@
                <url>http://jcaptcha.sourceforge.net</url>
            </dependency>
 
-           <dependency>
-               <groupId>jcaptcha</groupId>
-               <artifactId>jcaptcha-engine</artifactId>
-               <version>${project.version}</version>
-               <url>http://jcaptcha.sourceforge.net</url>
-
-           </dependency>
            <dependency>
                <groupId>jcaptcha</groupId>
                <artifactId>jcaptcha-service</artifactId>
@@ -78,16 +60,6 @@
        </dependency>
 
 
-                 <dependency>
-               <groupId>struts</groupId>
-               <artifactId>struts</artifactId>
-               <version>1.1</version>
-           </dependency>
-
-           <dependency>
-               <id>commons-logging</id>
-               <version>1.0.3</version>
-           </dependency>
        </dependencies>
 
 

@@ -47,13 +47,6 @@
 
         <dependency>
             <groupId>jcaptcha</groupId>
-            <artifactId>jcaptcha-engine</artifactId>
-            <version>${project.version}</version>
-            <url>http://jcaptcha.sourceforge.net</url>
-
-        </dependency>
-        <dependency>
-            <groupId>jcaptcha</groupId>
             <artifactId>jcaptcha-service</artifactId>
             <version>${project.version}</version>
             <url>http://jcaptcha.sourceforge.net</url>

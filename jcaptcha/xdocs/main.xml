@@ -54,6 +54,16 @@
         <section name="News">
             <p>
              <ul>
+                <li>06/08/2004
+                    <ul>
+                        <li>Releasing RC-1
+                        </li>
+                        <li><b>BEWARE : this new version has a complete new architecture from beta-2! Major package renaming and refactoring!!!!</b>
+                        </li>
+                        <li>We have splited the source tree : this version is under the jcaptcha/jcaptcha source folder in CVS.
+                        </li>
+                    </ul>
+                </li>
                 <li>01/08/2004
                     <ul>
                         <li>Adding performance tests for Engines
