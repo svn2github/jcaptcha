@@ -332,6 +332,7 @@ public class ImageCaptchaService implements ImageCaptchaServiceMBean
      * @param theResponse the client response to the captcha challenge
      * @return true is the response to the challenge is correct, false
      * otherwise.
+     * @throws IllegalArgumentException if theCaptchaID is null.
      * @throws ImageCaptchaServiceException in case of error. Possible
      * error details are :
      * <ul>
@@ -344,6 +345,14 @@ public class ImageCaptchaService implements ImageCaptchaServiceMBean
         String theResponse)
         throws ImageCaptchaServiceException
     {
+        // throw an exception if theCaptchaID is null or too long
+        if (theCaptchaID == null)
+        {
+            throw new IllegalArgumentException(
+                "The generateAndRenderCaptchaAsJpeg parameter (the captcha ID)"
+                    + "can't be null.");
+        }
+
         // retrieve the captcha from the internal store
         ImageCaptcha captcha =
             (ImageCaptcha) this.internalStore.get(theCaptchaID);
@@ -352,6 +361,7 @@ public class ImageCaptchaService implements ImageCaptchaServiceMBean
             throw new ImageCaptchaServiceException(
                 ImageCaptchaServiceException.NO_CAPTCHA_WITH_THIS_ID_ERROR);
         }
+
         // remove the captcha from the internal store
         this.internalStore.remove(theCaptchaID);
 
