@@ -32,7 +32,7 @@
   <inceptionYear>2003</inceptionYear>
   
   <!-- The Java package name of the project. This value is used when generating JavaDoc. -->
-  <package>com.octo.captcha.web</package>
+  <package>com.octo.captcha.j2ee</package>
   
   <!-- The URL to the project's logo image. This can be an URL relative to the base directory of the generated web site,
       (e.g., /images/project-logo.png) or an absolute URL (e.g., http://my.corp/project-logo.png). This is used when 
@@ -45,11 +45,11 @@
   <![CDATA[
     A <B>JCaptcha</B> sub project which aims to provide components that eases integration of captchas in J2EE Applications.
     <P>
-    Version 1.0 provide the <B>CaptchaFilter</B> component, a J2EE Filter that eases the inclusion of captcha in existing
+    Version 1.0 provides the <B>PixCaptchaFilter</B> component, a J2EE Filter that eases the inclusion of pix captchas in existing
     J2EE MVC web applications.
     </P>
     <P>
-    For more informations, download the <A HREF="http://where.is.thedoc">CaptchaFilter Manual</A>.
+    For more informations, download the <A HREF="http://where.is.thedoc">PixCaptchaFilter Manual</A>.
     </P>
   ]]>
   </description>
@@ -62,7 +62,7 @@
   <url>http://jcaptcha.sourceforge.net</url>
   
   <!-- Optional. The URL to the project's issue tracking system. -->
-  <issueTrackingUrl>http://jcaptcha.sourceforge.net</issueTrackingUrl>
+  <issueTrackingUrl>http://sourceforge.net/tracker/?group_id=97877</issueTrackingUrl>
 
   <!-- Optional. The hostname of the web server that hosts the project's web site. This is used when the web site is deployed. -->
   <siteAddress>cvs.sourceforge.net</siteAddress>
