@@ -480,12 +480,16 @@ import java.io.OutputStream;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class ImageToFile {
+public class ImageToFile
+{
 
-    public ImageToFile() {
+    public ImageToFile()
+    {
     }
 
-    public static void serialize(BufferedImage image, File file) throws IOException {
+    public static void serialize(BufferedImage image, File file)
+            throws IOException
+    {
         file.createNewFile();
         FileOutputStream fos = new FileOutputStream(file);
         encodeJPG(fos, image);
@@ -493,17 +497,19 @@ public class ImageToFile {
         fos.close();
     }
 
-    public static void encodeJPG(OutputStream sos, BufferedImage image) throws IOException {
+    public static void encodeJPG(OutputStream sos, BufferedImage image)
+            throws IOException
+    {
         JPEGImageEncoder encoder =
                 JPEGCodec.createJPEGEncoder(sos);
 
         JPEGEncodeParam param = encoder.getDefaultJPEGEncodeParam(image);
-//        param.setHorizontalSubsampling(0, 1);
-//        param.setHorizontalSubsampling(1, 1);
-//        param.setHorizontalSubsampling(2, 1);
-//        param.setVerticalSubsampling(0, 1);
-//        param.setVerticalSubsampling(1, 1);
-//        param.setVerticalSubsampling(2, 1);
+        //        param.setHorizontalSubsampling(0, 1);
+        //        param.setHorizontalSubsampling(1, 1);
+        //        param.setHorizontalSubsampling(2, 1);
+        //        param.setVerticalSubsampling(0, 1);
+        //        param.setVerticalSubsampling(1, 1);
+        //        param.setVerticalSubsampling(2, 1);
         param.setQuality(1.0f, false);
         encoder.setJPEGEncodeParam(param);
         encoder.encode(image);

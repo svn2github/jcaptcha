@@ -474,7 +474,7 @@ import java.awt.*;
 public class FishEyeTest extends TestCase {
     FishEye fishEye;
     BackgroundGenerator back = new UniColorBackgroundGenerator(new Integer(300), new Integer(300),
-            Color.BLACK);
+            Color.black);
 
     public void testValidateResponse() throws Exception {
         fishEye = new FishEye("question", back.getBackround(), new Point(10, 10), new Integer(0));

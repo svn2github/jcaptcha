@@ -482,7 +482,7 @@ public class DoubleRandomTextPasterTest extends TestCase {
     protected DoubleRandomTextPaster doubleRandomTextPaster;
     protected Integer minAcceptedWordLength = new Integer(10);
     protected Integer maxAcceptedWordLength = new Integer(15);
-    protected Color textColor = Color.BLACK;
+    protected Color textColor = Color.black;
 
     /**
      * Constructor for DoubleRandomTextPasterTest.

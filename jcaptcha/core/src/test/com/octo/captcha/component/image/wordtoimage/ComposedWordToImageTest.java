@@ -503,9 +503,9 @@ public class ComposedWordToImageTest extends TestCase {
     }
 
     public void setUp() {
-        BackgroundGenerator background = new GradientBackgroundGenerator(this.imageWidth, this.imageHeight, Color.BLACK, Color.WHITE);
+        BackgroundGenerator background = new GradientBackgroundGenerator(this.imageWidth, this.imageHeight, Color.black, Color.white);
         FontGenerator fontGenerator = new RandomFontGenerator(this.minFontSize, this.maxFontSize);
-        TextPaster textPaster = new SimpleTextPaster(this.minAcceptedWordLength, this.maxAcceptedWordLength, Color.BLUE);
+        TextPaster textPaster = new SimpleTextPaster(this.minAcceptedWordLength, this.maxAcceptedWordLength, Color.blue);
         this.composedWordToImage = new ComposedWordToImage(fontGenerator, background, textPaster);
     }
 

@@ -47,6 +47,7 @@
  * ====================================================================
  *
  */
+
 package com.octo.captcha.engine.image.gimpy;
 
 import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
@@ -65,7 +66,7 @@ import com.octo.captcha.component.wordgenerator.WordGenerator;
 import com.octo.captcha.engine.image.ListImageCaptchaEngine;
 import com.octo.captcha.image.gimpy.GimpyFactory;
 
-import java.awt.*;
+import java.awt.Color;
 import java.awt.image.ImageFilter;
 
 /**
@@ -74,10 +75,11 @@ import java.awt.image.ImageFilter;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class DeformedBaffleListGimpyEngine extends ListImageCaptchaEngine {
+public class DeformedBaffleListGimpyEngine extends ListImageCaptchaEngine
+{
 
-    protected void buildInitialFactories() {
-
+    protected void buildInitialFactories()
+    {
 
         //build filters
         com.jhlabs.image.EmbossFilter emboss = new com.jhlabs.image.EmbossFilter();
@@ -106,7 +108,6 @@ public class DeformedBaffleListGimpyEngine extends ListImageCaptchaEngine {
         rippleBack.setYWavelength(10);
         rippleBack.setEdgeAction(com.jhlabs.image.TransformFilter.CLAMP);
 
-
         water.setAmplitude(1);
         water.setAntialias(true);
         water.setWavelength(20);
@@ -123,26 +124,38 @@ public class DeformedBaffleListGimpyEngine extends ListImageCaptchaEngine {
         crystal.setEdgeThickness(0.2f);
         crystal.setRandomness(0.1f);
 
-
-        ImageDeformation rippleDef = new ImageDeformationByFilters(new ImageFilter[]{ripple});
-        ImageDeformation waterDef = new ImageDeformationByFilters(new ImageFilter[]{water});
-        ImageDeformation embossDef = new ImageDeformationByFilters(new ImageFilter[]{emboss});
-        ImageDeformation rippleDefBack = new ImageDeformationByFilters(new ImageFilter[]{rippleBack});
-        ImageDeformation cristalDef = new ImageDeformationByFilters(new ImageFilter[]{crystal});
-        ImageDeformation weavesDef = new ImageDeformationByFilters(new ImageFilter[]{weaves});
+        ImageDeformation rippleDef = new ImageDeformationByFilters(
+                new ImageFilter[]{ripple});
+        ImageDeformation waterDef = new ImageDeformationByFilters(
+                new ImageFilter[]{water});
+        ImageDeformation embossDef = new ImageDeformationByFilters(
+                new ImageFilter[]{emboss});
+        ImageDeformation rippleDefBack = new ImageDeformationByFilters(
+                new ImageFilter[]{rippleBack});
+        ImageDeformation cristalDef = new ImageDeformationByFilters(
+                new ImageFilter[]{crystal});
+        ImageDeformation weavesDef = new ImageDeformationByFilters(
+                new ImageFilter[]{weaves});
 
         ImageDeformation none = new ImageDeformationByFilters(null);
         //word generator
-        WordGenerator words = new DictionaryWordGenerator(new com.octo.captcha.component.wordgenerator.FileDictionnary("toddlist"));
+        WordGenerator words = new DictionaryWordGenerator(
+                new com.octo.captcha.component.wordgenerator.FileDictionnary(
+                        "toddlist"));
         //wordtoimage components
-        TextPaster paster = new BaffleRandomTextPaster(new Integer(6), new Integer(8), Color.BLACK, new Integer(3),
-                Color.WHITE);
-        BackgroundGenerator back = new UniColorBackgroundGenerator(new Integer(200), new Integer(100), Color.WHITE);
+        TextPaster paster = new BaffleRandomTextPaster(new Integer(6), new Integer(
+                8), Color.black, new Integer(3),
+                Color.white);
+        BackgroundGenerator back = new UniColorBackgroundGenerator(
+                new Integer(200), new Integer(100), Color.white);
         //BackgroundGenerator back = new FunkyBackgroundGenerator(new Integer(200), new Integer(100));
-        FontGenerator font = new TwistedAndShearedRandomFontGenerator(new Integer(30), new Integer(40));
+        FontGenerator font = new TwistedAndShearedRandomFontGenerator(
+                new Integer(30), new Integer(40));
         //Add factories
         WordToImage word2image = new ComposedWordToImage(font, back, paster);
-        this.addFactory(new com.octo.captcha.image.gimpy.GimpyFactory(words, word2image));
+        this.addFactory(
+                new com.octo.captcha.image.gimpy.GimpyFactory(words,
+                        word2image));
         //build factories
         word2image = new DeformedComposedWordToImage(font, back, paster,
                 rippleDef,

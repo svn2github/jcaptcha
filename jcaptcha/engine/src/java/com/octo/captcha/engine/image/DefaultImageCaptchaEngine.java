@@ -472,14 +472,15 @@ import java.util.Locale;
 import java.util.Random;
 
 /**
- * <p>This is a very simple gimpy, which is constructed from an array of Factory and
- * randomly return one when the getCaptchaFactory is called</p>
+ * <p>This is a very simple gimpy, which is constructed from an array of Factory
+ * and randomly return one when the getCaptchaFactory is called</p>
  *
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  * @deprecated since beta 2 : use the ListImageCaptchaEngine instead.
  */
-public abstract class DefaultImageCaptchaEngine extends ImageCaptchaEngine {
+public abstract class DefaultImageCaptchaEngine extends ImageCaptchaEngine
+{
 
     private ImageCaptchaFactory[] factories;
     private Random myRandom = new Random();
@@ -489,9 +490,11 @@ public abstract class DefaultImageCaptchaEngine extends ImageCaptchaEngine {
      *
      * @param factories
      */
-    public DefaultImageCaptchaEngine(final ImageCaptchaFactory[] factories) {
+    public DefaultImageCaptchaEngine(final ImageCaptchaFactory[] factories)
+    {
         this.factories = factories;
-        if (factories == null || factories.length == 0) {
+        if (factories == null || factories.length == 0)
+        {
             throw new CaptchaException("DefaultImageCaptchaEngine cannot be " +
                     "constructed with a null or empty factories array");
         }
@@ -502,7 +505,8 @@ public abstract class DefaultImageCaptchaEngine extends ImageCaptchaEngine {
      *
      * @return a CaptchaFactory
      */
-    public final ImageCaptchaFactory getImageCaptchaFactory() {
+    public final ImageCaptchaFactory getImageCaptchaFactory()
+    {
         return factories[myRandom.nextInt(factories.length)];
     }
 
@@ -511,7 +515,8 @@ public abstract class DefaultImageCaptchaEngine extends ImageCaptchaEngine {
      *
      * @return a CaptchaFactory
      */
-    public final ImageCaptcha getNextImageCaptcha() {
+    public final ImageCaptcha getNextImageCaptcha()
+    {
         return getImageCaptchaFactory().getImageCaptcha();
     }
 
@@ -521,7 +526,8 @@ public abstract class DefaultImageCaptchaEngine extends ImageCaptchaEngine {
      * @param locale the desired locale
      * @return a new Captcha
      */
-    public ImageCaptcha getNextImageCaptcha(Locale locale) {
+    public ImageCaptcha getNextImageCaptcha(Locale locale)
+    {
         return getImageCaptchaFactory().getImageCaptcha(locale);
     }
 

@@ -483,16 +483,16 @@ public class VerifyCaptchaChallengeAction extends Action {
 
     private Log log = LogFactory.getLog(VerifyCaptchaChallengeAction.class);
 
-    public ActionForward execute(ActionMapping actionMapping, ActionForm actionForm, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
+    public ActionForward execute(ActionMapping actionMapping, ActionForm actionForm,
+                                 HttpServletRequest httpServletRequest, 
+                                 HttpServletResponse httpServletResponse)
+            throws Exception {
 
         log.debug("enter captcha challenge verification");
 
         CaptchaService service = CaptchaServicePlugin.getInstance().getService();
 
         String responseKey = CaptchaServicePlugin.getInstance().getResponseKey();
-
-
-        ActionErrors errors = new ActionErrors();
 
         String captchaID;
 
@@ -502,7 +502,8 @@ public class VerifyCaptchaChallengeAction extends Action {
         String challengeResponse =
                 httpServletRequest.getParameter(responseKey);
 
-        if (log.isDebugEnabled()) log.debug("response for id " + captchaID + " : " + challengeResponse);
+        if (log.isDebugEnabled()) log.debug("response for id " + captchaID 
+                + " : " + challengeResponse);
 
         //cleanning the request
         httpServletRequest.removeAttribute(responseKey);
@@ -523,7 +524,8 @@ public class VerifyCaptchaChallengeAction extends Action {
                 httpServletRequest.setAttribute(CaptchaServicePlugin.getInstance().getMessageKey(),
                         CaptchaModuleConfigHelper.getMessage(httpServletRequest));
 
-                log.debug("forward to error with message : " + CaptchaModuleConfigHelper.getMessage(httpServletRequest));
+                log.debug("forward to error with message : " 
+                + CaptchaModuleConfigHelper.getMessage(httpServletRequest));
 
                 return actionMapping.findForward("error");
             }
@@ -536,8 +538,10 @@ public class VerifyCaptchaChallengeAction extends Action {
             return actionMapping.findForward("success");
         } else {
             if (log.isDebugEnabled()) {
-                log.debug("false  : forward to failure with message : " + CaptchaModuleConfigHelper.getMessage(httpServletRequest));
-                log.debug("in request attribute key : " + CaptchaServicePlugin.getInstance().getMessageKey());
+                log.debug("false  : forward to failure with message : " 
+                + CaptchaModuleConfigHelper.getMessage(httpServletRequest));
+                log.debug("in request attribute key : " 
+                + CaptchaServicePlugin.getInstance().getMessageKey());
             }
             // If the challenge response is not specified, forward failure
             httpServletRequest.setAttribute(CaptchaServicePlugin.getInstance().getMessageKey(),

@@ -475,25 +475,32 @@ import java.io.File;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class ImageCaptchaToJPEG {
+public class ImageCaptchaToJPEG
+{
 
-    public static void main(String[] args) throws Exception {
-        System.out.println("args : image captcha engine class='" + args[0] + "', " +
+    public static void main(String[] args) throws Exception
+    {
+        System.out.println("args : image captcha engine class='" + args[0]
+                + "', " +
                 "output dir='" + args[1] + "'" +
                 ",iterations='" + args[2] + "'");
-        ImageCaptchaEngine pixCapchaEngine = (ImageCaptchaEngine) Class.forName(args[0]).newInstance();
+        ImageCaptchaEngine pixCapchaEngine = (ImageCaptchaEngine) Class.forName(
+                args[0])
+                .newInstance();
         System.out.println("engine initialized");
         int i;
 
         //ImageToFile encoder = new ImageToFile();
         System.out.println("Beginning generation");
 
-        for (i = 0; i < Integer.parseInt(args[2]); i++) {
+        for (i = 0 ; i < Integer.parseInt(args[2]) ; i++)
+        {
             ImageCaptcha captcha = pixCapchaEngine.getNextImageCaptcha();
             System.out.println("Captcha " + i + " retrieved");
-            File out = new File(args[1] + File.separator + "captcha_" + i + ".jpg");
+            File out = new File(
+                    args[1] + File.separator + "captcha_" + i + ".jpg");
             ImageToFile.serialize(captcha.getImageChallenge(), out);
-            System.out.println("File i created " + out.toURI());
+            System.out.println("File i created " + out.toURL());
         }
 
     }

@@ -465,6 +465,7 @@ DAMAGES.
 package com.octo.captcha.service;
 
 import com.octo.captcha.Captcha;
+import com.octo.captcha.engine.CaptchaEngine;
 import com.octo.captcha.service.captchastore.CaptchaStore;
 
 import java.util.Locale;
@@ -475,7 +476,8 @@ import java.util.Locale;
  * It uses  : a CaptchaStore to store captcha during the life cycle,
  * and a CaptchaEngine to build captchas.
  * All concrete implementation (that uses a specific capthcaStore and captchaEngine) should
- * provide a default non argument constructor (by subclassing this class, and calling the constructor of
+ * provide a default non argument constructor
+ * (by subclassing this class, and calling the constructor of
  * the abstract class)
  *
  * @author Marc-Antoine Garrigue mailto:mag@octo.com
@@ -487,8 +489,9 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 
 
     protected AbstractCaptchaService(CaptchaStore captchaStore,
-                                     com.octo.captcha.engine.CaptchaEngine captchaEngine) {
-        if (captchaEngine == null || captchaStore == null) throw new IllegalArgumentException("Store or gimpy can't be null");
+                                     CaptchaEngine captchaEngine) {
+        if (captchaEngine == null || captchaStore == null)
+            throw new IllegalArgumentException("Store or gimpy can't be null");
         this.engine = captchaEngine;
         this.store = captchaStore;
     };
@@ -518,7 +521,8 @@ public abstract class AbstractCaptchaService implements CaptchaService {
      * @throws com.octo.captcha.service.CaptchaServiceException
      *          if the ticket is invalid
      */
-    public Object getChallengeForID(String ID, Locale locale) throws CaptchaServiceException {
+    public Object getChallengeForID(String ID, Locale locale)
+            throws CaptchaServiceException {
         Captcha captcha;
         //check if has capthca
         if (!this.store.hasCaptcha(ID)) {
@@ -578,9 +582,11 @@ public abstract class AbstractCaptchaService implements CaptchaService {
      * @throws com.octo.captcha.service.CaptchaServiceException
      *          if the ticket is invalid
      */
-    public Boolean validateResponseForID(String ID, Object response) throws CaptchaServiceException {
+    public Boolean validateResponseForID(String ID, Object response)
+            throws CaptchaServiceException {
         if (!store.hasCaptcha(ID)) {
-            throw new CaptchaServiceException("Invalid ID, could not validate!");
+            throw new CaptchaServiceException(
+                    "Invalid ID, could not validate!");
         } else {
             Boolean valid = store.getCaptcha(ID).validateResponse(response);
             store.removeCaptcha(ID);

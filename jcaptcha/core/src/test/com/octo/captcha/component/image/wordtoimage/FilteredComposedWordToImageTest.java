@@ -483,7 +483,7 @@ import java.awt.image.ReplicateScaleFilter;
  *
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
- * @deprecated 
+ * @deprecated
  */
 public class FilteredComposedWordToImageTest extends TestCase {
 
@@ -506,9 +506,9 @@ public class FilteredComposedWordToImageTest extends TestCase {
 
     public void setUp() {
 
-        BackgroundGenerator background = new GradientBackgroundGenerator(this.imageHeight, this.imageWidth, Color.BLACK, Color.WHITE);
+        BackgroundGenerator background = new GradientBackgroundGenerator(this.imageHeight, this.imageWidth, Color.black, Color.white);
         FontGenerator fontGenerator = new RandomFontGenerator(this.minFontSize, this.maxFontSize);
-        TextPaster textPaster = new SimpleTextPaster(this.minAcceptedWordLength, this.maxAcceptedWordLength, Color.BLUE);
+        TextPaster textPaster = new SimpleTextPaster(this.minAcceptedWordLength, this.maxAcceptedWordLength, Color.blue );
 
         ImageFilter backFilter = new ReplicateScaleFilter(background.getImageWidth(),
                 background.getImageHeight());

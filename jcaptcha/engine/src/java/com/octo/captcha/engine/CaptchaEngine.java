@@ -61,16 +61,17 @@ package com.octo.captcha.engine;
 import java.util.Locale;
 
 /**
- * <p>CaptchaEngine is the main interface from an application point of view :
- * it uses CapchaFactories in order to return new captchas.</p>
- * It has thes reponsibilty of creating CatpchaFactory instances and to provide an easy way to retrieve captchas.
- * Sub classes may implement container services around capcthas as, for example, Captchas pooling, serialization,
- * and so.
+ * <p>CaptchaEngine is the main interface from an application point of view : it
+ * uses CapchaFactories in order to return new captchas.</p> It has thes
+ * reponsibilty of creating CatpchaFactory instances and to provide an easy way
+ * to retrieve captchas. Sub classes may implement container services around
+ * capcthas as, for example, Captchas pooling, serialization, and so.
  *
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public interface CaptchaEngine {
+public interface CaptchaEngine
+{
 
     /**
      * This return a new captcha. It may be used directly.
@@ -86,6 +87,5 @@ public interface CaptchaEngine {
      * @return a new Captcha
      */
     com.octo.captcha.Captcha getNextCaptcha(Locale locale);
-
 
 }

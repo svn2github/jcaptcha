@@ -30,7 +30,7 @@ public class DoubleTextPasterTest extends TestCase {
 
     public void setUp() {
         this.doubleTextPaster = new DoubleTextPaster(this.minAcceptedWordLength,
-                this.maxAcceptedWordLength, Color.BLUE);
+                this.maxAcceptedWordLength, Color.blue);
     }
 
     public void testPasteText() {

@@ -464,7 +464,6 @@ DAMAGES.
 
 package com.octo.captcha.engine.image.gimpy;
 
-
 import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
 import com.octo.captcha.component.image.backgroundgenerator.FunkyBackgroundGenerator;
 import com.octo.captcha.component.image.fontgenerator.FontGenerator;
@@ -473,7 +472,7 @@ import com.octo.captcha.component.image.textpaster.DoubleRandomTextPaster;
 import com.octo.captcha.component.image.textpaster.TextPaster;
 import com.octo.captcha.engine.image.DefaultImageCaptchaEngine;
 
-import java.awt.*;
+import java.awt.Color;
 
 /**
  * <p>Description: </p>
@@ -481,34 +480,44 @@ import java.awt.*;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class BasicGimpyEngine extends DefaultImageCaptchaEngine {
+public class BasicGimpyEngine extends DefaultImageCaptchaEngine
+{
 
     static com.octo.captcha.image.ImageCaptchaFactory[] factories;
 
-    static {
+    static
+    {
         //word generator
         //WordGenerator dictionnaryWords = new DictionaryWordGenerator(new FileDictionnary("toddlist"));
-        com.octo.captcha.component.wordgenerator.WordGenerator randomWords = new com.octo.captcha.component.wordgenerator.RandomWordGenerator("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
+        com.octo.captcha.component.wordgenerator.WordGenerator randomWords = new com.octo.captcha.component.wordgenerator.RandomWordGenerator(
+                "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
 
         //wordtoimage components
-        TextPaster randomPaster = new DoubleRandomTextPaster(new Integer(2), new Integer(3), Color.WHITE);
+        TextPaster randomPaster = new DoubleRandomTextPaster(new Integer(2),
+                new Integer(3), Color.white);
 
         //BackgroundGenerator fileBack = new FileReaderRandomBackgroundGenerator(new Integer(200), new Integer(100), "./images");
-        BackgroundGenerator funkyBack = new FunkyBackgroundGenerator(new Integer(200), new Integer(100));
+        BackgroundGenerator funkyBack = new FunkyBackgroundGenerator(
+                new Integer(200), new Integer(100));
 
-        FontGenerator shearedFont = new TwistedAndShearedRandomFontGenerator(new Integer(20), new Integer(30));
+        FontGenerator shearedFont = new TwistedAndShearedRandomFontGenerator(
+                new Integer(20), new Integer(30));
 
 
         //word2image 1
-        com.octo.captcha.component.image.wordtoimage.WordToImage word2image = new com.octo.captcha.component.image.wordtoimage.ComposedWordToImage(shearedFont, funkyBack, randomPaster);
+        com.octo.captcha.component.image.wordtoimage.WordToImage word2image = new com.octo.captcha.component.image.wordtoimage.ComposedWordToImage(
+                shearedFont, funkyBack, randomPaster);
 
         //Add to array
         factories = new com.octo.captcha.image.ImageCaptchaFactory[1];
-        factories[0] = new com.octo.captcha.image.gimpy.GimpyFactory(randomWords, word2image);
+        factories[0] =
+                new com.octo.captcha.image.gimpy.GimpyFactory(randomWords,
+                        word2image);
 
     }
 
-    public BasicGimpyEngine() {
+    public BasicGimpyEngine()
+    {
 
         super(factories);
 

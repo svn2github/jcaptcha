@@ -29,7 +29,7 @@ public class SimpleTextPasterTest extends TestCase {
     }
 
     public void setUp() {
-        this.simpleTextPaster = new SimpleTextPaster(this.minAcceptedWordLength, this.maxAcceptedWordLength, Color.BLUE);
+        this.simpleTextPaster = new SimpleTextPaster(this.minAcceptedWordLength, this.maxAcceptedWordLength, Color.blue);
     }
 
     public void testPasteText() {

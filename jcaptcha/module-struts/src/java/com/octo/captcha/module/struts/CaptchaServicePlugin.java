@@ -524,7 +524,8 @@ public class CaptchaServicePlugin implements PlugIn {
 
         // create the CaptchaService
         try {
-            service = (CaptchaService) Class.forName(captchaModuleConfig.getServiceClass()).newInstance();
+            service = (CaptchaService) 
+                Class.forName(captchaModuleConfig.getServiceClass()).newInstance();
         } catch (InstantiationException e) {
             log.error("Error during Service Class initialization", e);
 
@@ -541,9 +542,12 @@ public class CaptchaServicePlugin implements PlugIn {
 
 
         // register the CaptchaService to an MBean server if specified
-        if (captchaModuleConfig.getRegisterToMbean().booleanValue() && service instanceof AbstractManageableCaptchaServiceMBean) {
-            AbstractManageableCaptchaServiceMBean manageable = (AbstractManageableCaptchaServiceMBean) service;
-            JMXRegistrationHelper.registerToMBeanServer(manageable, CaptchaModuleConfig.JMX_REGISTERING_NAME);
+        if (captchaModuleConfig.getRegisterToMbean().booleanValue() 
+        && service instanceof AbstractManageableCaptchaServiceMBean) {
+            AbstractManageableCaptchaServiceMBean manageable = 
+            (AbstractManageableCaptchaServiceMBean) service;
+            JMXRegistrationHelper.registerToMBeanServer(manageable, 
+            CaptchaModuleConfig.JMX_REGISTERING_NAME);
         }
         if (log.isDebugEnabled()) {
             log.debug("struts-captcha plugin initialization successfull");
@@ -551,8 +555,10 @@ public class CaptchaServicePlugin implements PlugIn {
     }
 
     public void destroy() {
-        if (service instanceof AbstractManageableCaptchaServiceMBean && captchaModuleConfig.getRegisterToMbean().booleanValue()) {
-            JMXRegistrationHelper.unregisterFromMBeanServer(CaptchaModuleConfig.JMX_REGISTERING_NAME);
+        if (service instanceof AbstractManageableCaptchaServiceMBean && 
+        captchaModuleConfig.getRegisterToMbean().booleanValue()) {
+            JMXRegistrationHelper.unregisterFromMBeanServer(
+            CaptchaModuleConfig.JMX_REGISTERING_NAME);
         }
 
     }

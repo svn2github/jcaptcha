@@ -475,7 +475,8 @@ import java.util.*;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public abstract class AbstractManageableCaptchaService extends AbstractCaptchaService
+public abstract class AbstractManageableCaptchaService
+        extends AbstractCaptchaService
         implements AbstractManageableCaptchaServiceMBean {
 
 
@@ -529,13 +530,16 @@ public abstract class AbstractManageableCaptchaService extends AbstractCaptchaSe
      *                                  service CaptchaEngine, either because it can't be instanciated
      *                                  by the service or it is not a ImageCaptchaEngine concrete class.
      */
-    public void setCaptchaEngineClass(String theClassName) throws IllegalArgumentException {
+    public void setCaptchaEngineClass(String theClassName)
+            throws IllegalArgumentException {
         try {
             Object engine = Class.forName(theClassName).newInstance();
             if (engine instanceof com.octo.captcha.engine.CaptchaEngine) {
                 this.engine = (com.octo.captcha.engine.CaptchaEngine) engine;
             } else {
-                throw new IllegalArgumentException("Class is not instance of CaptchaEngine! " + theClassName);
+                throw new IllegalArgumentException(
+                        "Class is not instance of CaptchaEngine! "
+                        + theClassName);
             }
         } catch (InstantiationException e) {
             throw new IllegalArgumentException(e.getMessage());
@@ -570,7 +574,8 @@ public abstract class AbstractManageableCaptchaService extends AbstractCaptchaSe
      *         the
      *         minimum guaranted delay
      */
-    public void setMinGuarantedStorageDelayInSeconds(int theMinGuarantedStorageDelayInSeconds) {
+    public void setMinGuarantedStorageDelayInSeconds(
+            int theMinGuarantedStorageDelayInSeconds) {
         this.minGuarantedStorageDelayInSeconds = theMinGuarantedStorageDelayInSeconds;
     }
 
@@ -627,7 +632,8 @@ public abstract class AbstractManageableCaptchaService extends AbstractCaptchaSe
      *         in the captcha store
      */
     public int getNumberOfGarbageCollectableCaptchas() {
-        return getGarbageCollectableCaptchaIds(System.currentTimeMillis()).size();
+        return getGarbageCollectableCaptchaIds(
+                System.currentTimeMillis()).size();
     }
 
 
@@ -655,10 +661,15 @@ public abstract class AbstractManageableCaptchaService extends AbstractCaptchaSe
      * @param captchaStoreSizeBeforeGarbageCollection
      *
      */
-    public void setCaptchaStoreSizeBeforeGarbageCollection(int captchaStoreSizeBeforeGarbageCollection) {
-        if (this.captchaStoreMaxSize < captchaStoreSizeBeforeGarbageCollection)
-            throw new IllegalArgumentException("the max store size can't be less than garbage collection size. if you want to disable garbage" +
-                    " collection (this is not recommended) you may set them equals (max=garbage)");
+    public void setCaptchaStoreSizeBeforeGarbageCollection(
+            int captchaStoreSizeBeforeGarbageCollection) {
+        if (this.captchaStoreMaxSize <
+                captchaStoreSizeBeforeGarbageCollection)
+            throw new IllegalArgumentException(
+                    "the max store size can't be less than garbage collection "
+                    + "size. if you want to disable garbage" +
+                    " collection (this is not recommended) you may "
+                    + "set them equals (max=garbage)");
 
         this.captchaStoreSizeBeforeGarbageCollection =
                 captchaStoreSizeBeforeGarbageCollection;
@@ -672,8 +683,11 @@ public abstract class AbstractManageableCaptchaService extends AbstractCaptchaSe
      */
     public void setCaptchaStoreMaxSize(int size) {
         if (size < this.captchaStoreSizeBeforeGarbageCollection)
-            throw new IllegalArgumentException("the max store size can't be less than garbage collection size. if you want to disable garbage" +
-                    " collection (this is not recommended) you may set them equals (max=garbage)");
+            throw new IllegalArgumentException("the max store size can't "
+                    + "be less than garbage collection size. if you want "
+                    + "to disable garbage" +
+                    " collection (this is not recommended) you may "
+                    + "set them equals (max=garbage)");
         this.captchaStoreMaxSize = size;
     }
 

@@ -483,8 +483,8 @@ public class BaffleRandomTextPasterTest extends TestCase {
     protected Integer minAcceptedWordLength = new Integer(10);
     protected Integer maxAcceptedWordLength = new Integer(10);
     protected Integer numberHoles = new Integer(10);
-    protected Color textColor = Color.BLACK;
-    protected Color holesColor = Color.WHITE;
+    protected Color textColor = Color.black;
+    protected Color holesColor = Color.white;
 
     /**
      * Constructor for BaffleRandomTextPasterTest.

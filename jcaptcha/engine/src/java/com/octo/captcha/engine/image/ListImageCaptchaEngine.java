@@ -473,28 +473,30 @@ import java.util.Locale;
 import java.util.Random;
 
 /**
- * <p>This gimpy is based on a java.util.List of factories. It has a default constructor.
- * Sub class must implements the buildInitialFactories() method that should build an initial set of factories.</p>
+ * <p>This engine is based on a java.util.List of factories. It has a default
+ * constructor. Sub class must implements the buildInitialFactories() method
+ * that should build an initial set of factories.</p>
  *
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public abstract class ListImageCaptchaEngine extends com.octo.captcha.engine.image.ImageCaptchaEngine {
+public abstract class ListImageCaptchaEngine
+        extends com.octo.captcha.engine.image.ImageCaptchaEngine
+{
 
     private List factories = new ArrayList();
     private Random myRandom = new Random();
 
-    public ListImageCaptchaEngine() {
+    public ListImageCaptchaEngine()
+    {
         buildInitialFactories();
         checkFactoriesSize();
     }
 
     /**
-     * this method should be implemented as folow :
-     * <ul>
-     * <li>First construct all the factories you want to initialize the gimpy with</li>
-     * <li>then call the this.addFactoriy method for each factory</li>
-     * </ul>
+     * this method should be implemented as folow : <ul> <li>First construct all
+     * the factories you want to initialize the gimpy with</li> <li>then call
+     * the this.addFactoriy method for each factory</li> </ul>
      */
     protected abstract void buildInitialFactories();
 
@@ -504,7 +506,9 @@ public abstract class ListImageCaptchaEngine extends com.octo.captcha.engine.ima
      * @param factory
      * @return true if added false otherwise
      */
-    public boolean addFactory(com.octo.captcha.image.ImageCaptchaFactory factory) {
+    public boolean addFactory(
+            com.octo.captcha.image.ImageCaptchaFactory factory)
+    {
         return this.factories.add(factory);
     }
 
@@ -513,8 +517,11 @@ public abstract class ListImageCaptchaEngine extends com.octo.captcha.engine.ima
      *
      * @param factories
      */
-    public void addFactories(com.octo.captcha.image.ImageCaptchaFactory[] factories) {
-        for (int i = 0; i < factories.length; i++) {
+    public void addFactories(
+            com.octo.captcha.image.ImageCaptchaFactory[] factories)
+    {
+        for (int i = 0 ; i < factories.length ; i++)
+        {
             this.factories.add(factories[i]);
         }
     }
@@ -525,7 +532,9 @@ public abstract class ListImageCaptchaEngine extends com.octo.captcha.engine.ima
      * @param factory
      * @return true if removed, false otherwise
      */
-    public boolean removeFactory(com.octo.captcha.image.ImageCaptchaFactory factory) {
+    public boolean removeFactory(
+            com.octo.captcha.image.ImageCaptchaFactory factory)
+    {
         return this.factories.remove(factory);
     }
 
@@ -534,9 +543,11 @@ public abstract class ListImageCaptchaEngine extends com.octo.captcha.engine.ima
      *
      * @return a CaptchaFactory
      */
-    public final com.octo.captcha.image.ImageCaptchaFactory getImageCaptchaFactory() {
+    public final com.octo.captcha.image.ImageCaptchaFactory getImageCaptchaFactory()
+    {
         checkFactoriesSize();
-        return (com.octo.captcha.image.ImageCaptchaFactory) factories.get(myRandom.nextInt(factories.size()));
+        return (com.octo.captcha.image.ImageCaptchaFactory) factories.get(
+                myRandom.nextInt(factories.size()));
     }
 
     /**
@@ -544,7 +555,8 @@ public abstract class ListImageCaptchaEngine extends com.octo.captcha.engine.ima
      *
      * @return a CaptchaFactory
      */
-    public final ImageCaptcha getNextImageCaptcha() {
+    public final ImageCaptcha getNextImageCaptcha()
+    {
         checkFactoriesSize();
         return getImageCaptchaFactory().getImageCaptcha();
     }
@@ -555,14 +567,18 @@ public abstract class ListImageCaptchaEngine extends com.octo.captcha.engine.ima
      * @param locale
      * @return a CaptchaFactory
      */
-    public final ImageCaptcha getNextImageCaptcha(Locale locale) {
+    public final ImageCaptcha getNextImageCaptcha(Locale locale)
+    {
         checkFactoriesSize();
         return getImageCaptchaFactory().getImageCaptcha(locale);
     }
 
-    private void checkFactoriesSize() {
+    private void checkFactoriesSize()
+    {
         if (factories.size() == 0)
-            throw new CaptchaException("This gimpy has no factories. Please initialize it " +
+            throw new CaptchaException(
+                    "This gimpy has no factories. Please initialize it "
+                    +
                     "properly with the buildInitialFactory() called by the constructor or the addFactory() mehtod later!");
     }
 

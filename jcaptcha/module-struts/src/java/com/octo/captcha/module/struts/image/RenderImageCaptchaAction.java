@@ -493,10 +493,12 @@ public class RenderImageCaptchaAction extends Action {
 
 
     public ActionForward execute(ActionMapping actionMapping, ActionForm actionForm,
-                                 HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
+                                 HttpServletRequest httpServletRequest, 
+                                 HttpServletResponse httpServletResponse)
             throws Exception {
 
-        ImageCaptchaService service = (ImageCaptchaService) CaptchaServicePlugin.getInstance().getService();
+        ImageCaptchaService service = (ImageCaptchaService) 
+        CaptchaServicePlugin.getInstance().getService();
         String captchaID = CaptchaModuleConfigHelper.getId(httpServletRequest);
         //(String) theRequest.getParameter(captchaIDParameterName);
 
@@ -505,7 +507,8 @@ public class RenderImageCaptchaAction extends Action {
         ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();
         try {
             BufferedImage challenge =
-                    service.getImageChallengeForID(captchaID, httpServletRequest.getLocale());
+                    service.getImageChallengeForID(captchaID, 
+                    httpServletRequest.getLocale());
             // the output stream to render the captcha image as jpeg into
 
             // a jpeg encoder

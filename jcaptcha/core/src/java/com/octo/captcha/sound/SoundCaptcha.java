@@ -54,17 +54,20 @@ import com.octo.captcha.Captcha;
 import com.octo.captcha.component.sound.utils.Sound;
 
 /**
- * <p>Description: </p>
- * <p>String question about a Line challenge, this class is abstract.
+ * <p>Description: </p> <p>String question about a Line challenge, this class is
+ * abstract.
+ *
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
  */
-public abstract class SoundCaptcha implements Captcha {
+public abstract class SoundCaptcha implements Captcha
+{
 
     protected String question;
     protected Sound challenge;
 
-    protected SoundCaptcha(String thequestion,Sound thechallenge) {
+    protected SoundCaptcha(String thequestion, Sound thechallenge)
+    {
         this.question = thequestion;
         this.challenge = thechallenge;
     }
@@ -72,34 +75,39 @@ public abstract class SoundCaptcha implements Captcha {
     /**
      * Accessor to the question.
      */
-    public final String getQuestion() {
+    public final String getQuestion()
+    {
         return this.question;
     }
 
     /**
      * Accessor to the challenge.
      */
-    public final Object getChallenge() {
+    public final Object getChallenge()
+    {
         return this.getSoundChallenge();
     }
 
     /**
      * Accessor to the sound challenge.
+     *
      * @return a Line
      */
-    public final Sound getSoundChallenge() {
+    public final Sound getSoundChallenge()
+    {
         return this.challenge;
     }
-/*
-    public Boolean validateResponse(Object response) {
-        return null;
-    }
-*/
+    /*
+        public Boolean validateResponse(Object response) {
+            return null;
+        }
+    */
     /**
      * this method is to clean the challenge.
      */
-    public void disposeChallenge() {
+    public void disposeChallenge()
+    {
         this.challenge = null;
     }
-    
+
 }

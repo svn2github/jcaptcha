@@ -470,10 +470,12 @@ package com.octo.captcha.module;
  * @version 1.0
  */
 public class CaptchaModuleException extends RuntimeException {
+
+    private Throwable cause;
+
     /**
      * Constructs a new runtime exception with <code>null</code> as its
-     * detail message.  The cause is not initialized, and may subsequently be
-     * initialized by a call to {@link #initCause}.
+     * detail message.
      */
     public CaptchaModuleException() {
         super();
@@ -481,9 +483,7 @@ public class CaptchaModuleException extends RuntimeException {
 
     /**
      * Constructs a new runtime exception with the specified detail message.
-     * The cause is not initialized, and may subsequently be initialized by a
-     * call to {@link #initCause}.
-     *
+      *
      * @param message the detail message. The detail message is saved for
      *                later retrieval by the {@link #getMessage()} method.
      */
@@ -505,7 +505,8 @@ public class CaptchaModuleException extends RuntimeException {
      * @since 1.4
      */
     public CaptchaModuleException(Throwable cause) {
-        super(cause);
+        super(cause.getMessage());
+        this.cause = cause;
     }
 
     /**
@@ -523,6 +524,15 @@ public class CaptchaModuleException extends RuntimeException {
      * @since 1.4
      */
     public CaptchaModuleException(String message, Throwable cause) {
-        super(message, cause);
+        super(message);
+        this.cause = cause;
+    }
+
+    /**
+     *
+     * @return the root thowable that construct this exception, null if none
+     */
+    public Throwable getCause(){
+        return cause;
     }
 }

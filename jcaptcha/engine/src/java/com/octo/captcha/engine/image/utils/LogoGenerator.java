@@ -465,7 +465,6 @@ DAMAGES.
 package com.octo.captcha.engine.image.utils;
 
 import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
-import com.octo.captcha.component.image.backgroundgenerator.EllipseBackgroundGenerator;
 import com.octo.captcha.component.image.backgroundgenerator.FileReaderRandomBackgroundGenerator;
 import com.octo.captcha.component.image.fontgenerator.FontGenerator;
 import com.octo.captcha.component.image.fontgenerator.TwistedAndShearedRandomFontGenerator;
@@ -479,23 +478,29 @@ import com.octo.captcha.image.ImageCaptcha;
 import com.octo.captcha.image.ImageCaptchaFactory;
 import com.octo.captcha.image.gimpy.GimpyFactory;
 
-import java.awt.*;
+import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 
 /**
- * <p>Description: Generate a sample logo for the master webSite. Main method takes one arg : the file path of the generated logo</p>
+ * <p>Description: Generate a sample logo for the master webSite. Main method
+ * takes one arg : the file path of the generated logo</p>
  *
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class LogoGenerator {
+public class LogoGenerator
+{
 
-    public static void main(String[] args) throws IOException {
-        TextPaster paster = new SimpleTextPaster(new Integer(8), new Integer(8), Color.BLUE);
-        BackgroundGenerator back = new FileReaderRandomBackgroundGenerator(new Integer(100), new Integer(200),
+    public static void main(String[] args) throws IOException
+    {
+        TextPaster paster = new SimpleTextPaster(new Integer(8),
+                new Integer(8), Color.blue);
+        BackgroundGenerator back = new FileReaderRandomBackgroundGenerator(
+                new Integer(100), new Integer(200),
                 "/images/backgroundForLogo");
-        FontGenerator font = new TwistedAndShearedRandomFontGenerator(new Integer(12), null);
+        FontGenerator font = new TwistedAndShearedRandomFontGenerator(
+                new Integer(12), null);
         WordGenerator words = new DummyWordGenerator("JCAPTCHA");
         WordToImage word2image = new ComposedWordToImage(font, back, paster);
         ImageCaptchaFactory factory = new GimpyFactory(words, word2image);

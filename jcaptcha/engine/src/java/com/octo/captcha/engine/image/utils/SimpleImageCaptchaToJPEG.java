@@ -481,10 +481,12 @@ import java.io.IOException;
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
  */
-public class SimpleImageCaptchaToJPEG {
+public class SimpleImageCaptchaToJPEG
+{
 
     public static void main(String[] args)
-            throws ImageFormatException, IOException {
+            throws ImageFormatException, IOException
+    {
         com.octo.captcha.engine.image.gimpy.SimpleListImageCaptchaEngine bge =
                 new com.octo.captcha.engine.image.gimpy.SimpleListImageCaptchaEngine();
         System.out.println("got gimpy");
@@ -501,9 +503,9 @@ public class SimpleImageCaptchaToJPEG {
 
         File f = new File("foo.jpg");
 
-        JPEGImageEncoder jpegEncoder = JPEGCodec.createJPEGEncoder(new FileOutputStream(f));
+        JPEGImageEncoder jpegEncoder = JPEGCodec.createJPEGEncoder(
+                new FileOutputStream(f));
         jpegEncoder.encode(bi);
     }
-
 
 }
