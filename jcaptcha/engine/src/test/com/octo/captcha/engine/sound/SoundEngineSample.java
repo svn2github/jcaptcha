@@ -472,8 +472,9 @@ import javax.sound.sampled.AudioInputStream;
 
 import com.octo.captcha.component.sound.wordtosound.WordToSound;
 import com.octo.captcha.component.sound.wordtosound.WordToSoundFreeTTS;
-import com.octo.captcha.component.wordgenerator.ArrayDictionary;
+
 import com.octo.captcha.component.wordgenerator.DictionaryWordGenerator;
+import com.octo.captcha.component.wordgenerator.ArrayDictionary;
 import com.octo.captcha.component.wordgenerator.WordGenerator;
 import com.octo.captcha.engine.sound.utils.SoundToFile;
 import com.octo.captcha.sound.SoundCaptcha;
