@@ -85,40 +85,6 @@ public class ImageCaptchaWebServiceEndpoint implements Remote
         LogFactory.getLog(ImageCaptchaWebServiceEndpoint.class);
 
     /////////////////////////////
-    // Constructor
-    /////////////////////////////
-
-    /**
-     * @TODO : MAKE REGISTERING TO MBEAN SERVER AN OPTION !
-     */
-    public ImageCaptchaWebServiceEndpoint()
-    {
-        try
-        {
-            this.imageCaptchaService.registerToMBeanServer(
-                "com.octo.captcha.j2ee:object=ImageCaptchaService");
-        }
-        catch (ImageCaptchaServiceException e)
-        {
-            log.warn(
-                "Unable to register the internal service to an MBean server : ",
-                e);
-        }
-    }
-
-    /////////////////////////////
-    // Finalizer
-    /////////////////////////////
-
-    /**
-     * @TODO : WHAT IS THE LIFECYCLE OF THE SERVICE ? WHEN TO UNREGISTER ?
-     */
-    public void finalize()
-    {
-        this.imageCaptchaService.unregisterFromMBeanServer();
-    }
-
-    /////////////////////////////
     // Public methods
     /////////////////////////////
 
