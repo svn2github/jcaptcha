@@ -55,7 +55,7 @@
   </description>
   <!-- a short description of what the project does -->
   <shortDescription>
-     JCAPTCHA service components
+     JCAPTCHA engine components
     </shortDescription>
 
   <!-- the url to the project home page -->
@@ -153,7 +153,7 @@
       <developer>
       <name>Marc Antoine Garrigue</name>
       <id>mag</id>
-      <email>mgarrigue@octo.com</email>
+      <email>magarrigue@octo.com</email>
       <organization>Octo Technology</organization>
       <roles>
         <role>developer</role>

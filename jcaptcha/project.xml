@@ -73,7 +73,7 @@
     <developer>
       <name>Marc-Antoine Garrigue</name>
       <id>magarrigue</id>
-      <email>mgarrigue@octo.com</email>
+      <email>magarrigue@octo.com</email>
       <organization>Octo</organization>
       <roles>
         <role>Java Developer</role>
@@ -86,6 +86,7 @@
 
   <reports>
 	<report>maven-license-plugin</report>
+	 <report>maven-dashboard-plugin</report>
   </reports>
   
 </project>
