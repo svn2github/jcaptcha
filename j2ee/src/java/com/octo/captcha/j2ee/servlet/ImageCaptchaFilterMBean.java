@@ -65,7 +65,7 @@ public interface ImageCaptchaFilterMBean
      * @return the fully qualified class name of the concrete ImageCaptchaEngine
      * used by the filter
      */
-    String getPixCaptchaEngineClass();
+    String getImageCaptchaEngineClass();
 
     /**
      * Set the fully qualified class name of the concrete ImageCaptchaEngine
@@ -76,7 +76,7 @@ public interface ImageCaptchaFilterMBean
      * filter ImageCaptchaEngine, either because it can't be instanciated
      * by the engine or it is not a ImageCaptchaEngine concrete class.
      */
-    void setPixCaptchaEngineClass(String theClassName)
+    void setImageCaptchaEngineClass(String theClassName)
         throws IllegalArgumentException;
 
     /**

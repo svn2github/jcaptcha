@@ -88,7 +88,7 @@ import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 /**
- * ImageCaptchaFilter is a J2EE Filter designed to add pix captchas to the entry
+ * ImageCaptchaFilter is a J2EE Filter designed to add image captchas to the entry
  * forms of existing MVC web applications. 
  * <br>
  * Current features of ImageCaptchaFilter are:
@@ -772,9 +772,7 @@ public class ImageCaptchaFilter implements Filter, ImageCaptchaFilterMBean
      * @param theRequest the request
      * @param theResponse the response
      * @throws ServletException @TODO : DOCUMENT ME !
-     * @see javax.servlet.RequestDispatcher#forward(javax.servlet.http.HttpServletRequest,
-     *                                  javax.servlet.http.HttpServletResponse)
-     *      for details on params
+     * @see javax.servlet.RequestDispatcher#forward(javax.servlet.ServletRequest, javax.servlet.ServletResponse)
      */
     private void redirectError(
         String theVerificationURL,
@@ -804,8 +802,7 @@ public class ImageCaptchaFilter implements Filter, ImageCaptchaFilterMBean
      * @param theResponse the response
      * @throws ServletException @TODO : DOCUMENT ME !
      * @TODO : the see is uncorrect !!!
-     * @see javax.servlet.RequestDispatcher#forward(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
-     *      for details on params
+     * @see javax.servlet.RequestDispatcher#forward(javax.servlet.ServletRequest, javax.servlet.ServletResponse)
      */
     private void forwardSuccess(
         FilterChain theFilterChain,
@@ -839,17 +836,17 @@ public class ImageCaptchaFilter implements Filter, ImageCaptchaFilterMBean
     ////////////////////////////////////
 
     /**
-     * @see com.octo.captcha.j2ee.servlet.ImageCaptchaFilterMBean#getPixCaptchaEngineClass()
+     * @see com.octo.captcha.j2ee.servlet.ImageCaptchaFilterMBean#getImageCaptchaEngineClass()
      */
-    public String getPixCaptchaEngineClass()
+    public String getImageCaptchaEngineClass()
     {
         return this.engine.getClass().getName();
     }
 
     /**
-     * @see com.octo.captcha.j2ee.servlet.ImageCaptchaFilterMBean#setPixCaptchaEngineClass()
+     * @see com.octo.captcha.j2ee.servlet.ImageCaptchaFilterMBean#setImageCaptchaEngineClass
      */
-    public void setPixCaptchaEngineClass(String theClassName)
+    public void setImageCaptchaEngineClass(String theClassName)
         throws IllegalArgumentException
     {
         // try to use this concrete ImageCaptchaEngine class as the
@@ -874,7 +871,7 @@ public class ImageCaptchaFilter implements Filter, ImageCaptchaFilterMBean
     }
 
     /**
-     * @see com.octo.captcha.j2ee.servlet.ImageCaptchaFilterMBean#getTimeToLive()
+     * @see com.octo.captcha.j2ee.servlet.ImageCaptchaFilterMBean#getTimeToLiveInMilliseconds()
      */
     public int getTimeToLiveInMilliseconds()
     {
@@ -882,7 +879,7 @@ public class ImageCaptchaFilter implements Filter, ImageCaptchaFilterMBean
     }
 
     /**
-     * @see com.octo.captcha.j2ee.servlet.ImageCaptchaFilterMBean#setTimeToLive(int)
+     * @see com.octo.captcha.j2ee.servlet.ImageCaptchaFilterMBean#setTimeToLiveInMilliseconds(int)
      */
     public void setTimeToLiveInMilliseconds(int theTimeToLive)
     {
@@ -934,7 +931,7 @@ public class ImageCaptchaFilter implements Filter, ImageCaptchaFilterMBean
     }
 
     /**
-     * @see com.octo.captcha.j2ee.servlet.ImageCaptchaFilterMBean#getTotalNumberOfCaptchaGarbageCollected()
+     * @see com.octo.captcha.j2ee.servlet.ImageCaptchaFilterMBean#getTotalNumberOfGarbageCollectedCaptcha()
      */
     public long getTotalNumberOfGarbageCollectedCaptcha()
     {
