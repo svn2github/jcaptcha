@@ -10,17 +10,9 @@
   <preGoal name="multiproject:site">
     <ant:copy file="${basedir}/images/organization-logo.jpg" todir="${maven.build.dir}/docs/images"/>
     <ant:copy file="${basedir}/images/project-logo.jpg" todir="${maven.build.dir}/docs/images"/>
-    <maven:reactor
-        basedir="${basedir}"
-        includes="**/${pattern}/**/project.xml"
-        excludes="project.xml;**/target/**"
-        goals="site"
-        banner="generating documentation"
-        ignoreFailures="false"/>
   </preGoal>
 
   <preGoal name="assemble">
-    <ant:echo message="${basedir}"/>
     <ant:mkdir dir="${maven.repo.local}/jhlabs/jars"/>
     <ant:copy file="${basedir}/lib/imaging-1.0.jar" todir="${maven.repo.local}/jhlabs/jars"/>
   </preGoal>
@@ -39,42 +31,19 @@
     <maven:reactor 
         basedir="${basedir}"
         includes="**/${pattern}/**/project.xml"
-        excludes="project.xml,samples-web/project.xml"
+        excludes="project.xml"
         goals="dist"
-        banner="distribution"
-        ignoreFailures="false"/>
-    <maven:reactor 
-        basedir="${basedir}"
-        includes="samples-web/project.xml"
-        goals="assemble"
-        banner="distribution"
-        ignoreFailures="false"/>
-    <maven:reactor 
-        basedir="${basedir}"
-        includes="samples-web/project.xml"
-        goals="dist:build-src"
         banner="distribution"
         ignoreFailures="false"/>
     <ant:mkdir dir="${maven.build.dir}/distributions"/>
     <ant:mkdir dir="${maven.build.dir}/src-distributions"/>
     <ant:unzip dest="${maven.build.dir}/distributions">
-    	<ant:fileset dir="${basedir}/core/target/distributions" includes="*.zip" excludes="*src.zip"/>
-    	<ant:fileset dir="${basedir}/samples/target/distributions" includes="*.zip" excludes="*src.zip"/>
-    	<ant:fileset dir="${basedir}/j2ee/target/distributions" includes="*.zip" excludes="*src.zip"/>
+    	<ant:fileset dir="${basedir}" includes="**/target/distributions/*.zip" excludes="*src.zip"/>
     </ant:unzip>
    
-    <ant:mkdir dir="${maven.build.dir}/distributions/jcaptcha-samples-web-${pom.currentVersion}"/>
-    <ant:copy todir="${maven.build.dir}/distributions/jcaptcha-samples-web-${pom.currentVersion}">
-    	<ant:fileset dir="${basedir}/samples-web/target">
-    		<include name="jcaptcha-samples-web.war"/>
-    	</ant:fileset>
-    </ant:copy>
    
     <ant:unzip dest="${maven.build.dir}/src-distributions">
-    	<ant:fileset dir="${basedir}/core/target/distributions" includes="*src.zip"/>
-    	<ant:fileset dir="${basedir}/samples/target/distributions" includes="*src.zip"/>
-    	<ant:fileset dir="${basedir}/samples-web/target/distributions" includes="*src.zip"/>
-    	<ant:fileset dir="${basedir}/j2ee/target/distributions" includes="*src.zip"/>
+    	<ant:fileset dir="${basedir}" includes="**/target/distributions/*src.zip"/>
     </ant:unzip>
     
     <ant:copy todir="${maven.build.dir}/distributions">
@@ -84,19 +53,16 @@
     </ant:copy>
     
     <ant:copy todir="${maven.build.dir}/distributions">
-    	<ant:fileset dir="${basedir}/core">
-    		<include name="doc/**"/>
-    	</ant:fileset>
-    	<ant:fileset dir="${basedir}/j2ee">
-    		<include name="doc/**"/>
-    	</ant:fileset>
-    	<ant:fileset dir="${basedir}/samples">
-    		<include name="doc/**"/>
+    	<ant:fileset dir="${basedir}">
+    		<include name="**/doc/**"/>
     	</ant:fileset>
     </ant:copy>
     
     <ant:copy todir="${maven.build.dir}/src-distributions">
     	<ant:fileset dir="${basedir}">
+    		<include name="lib/**"/>
+    		<include name="images/**"/>
+    		<include name="xdocs/**"/>
     		<include name="*.xml"/>
     		<include name="*.txt"/>
     		<include name="*.properties"/>

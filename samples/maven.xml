@@ -17,5 +17,14 @@
 <!--  </preGoal>-->
   
   <goal name="assemble" prereqs="jar:install"/>
-	
+  
+  <preGoal name="dist:build-bin">
+  
+  <ant:copy todir="${basedir}/target/${pom.artifactId}-${pom.currentVersion}/bin/${pom.artifactId}-${pom.currentVersion}">
+  	<ant:fileset dir="${basedir}/src/scripts">
+  		<ant:include name="*"/>
+  	</ant:fileset>
+  </ant:copy>
+  
+  </preGoal>
 </project>
