@@ -85,10 +85,10 @@
 
 
 
-<dependency>
+        <dependency>
             <groupId>jcaptcha</groupId>
             <artifactId>jcaptcha-service</artifactId>
-            <version>1.0-beta3-SNAPSHOT</version>
+            <version>${project.version}</version>
             <url>http://jcaptcha.sourceforge.net</url>
             <properties>
                 <war.bundle>true</war.bundle>
@@ -115,6 +115,12 @@
       <url>http://www.bluesunrise.com/maven/jmx</url>
       <properties/>
     </dependency>
+
+        <dependency>
+                   <id>junit</id>
+                   <version>3.8.1</version>
+                 </dependency>
+        
     </dependencies>
 
 
