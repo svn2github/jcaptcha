@@ -64,7 +64,10 @@ import com.octo.captcha.pix.gimpy.wordtoimages.backgroundgenerators.FunkyBackgro
 import com.octo.captcha.pix.gimpy.wordtoimages.backgroundgenerators.MultipleShapeBackgroundGenerator;
 import com.octo.captcha.pix.gimpy.wordtoimages.backgroundgenerators.EllipseBackgroundGenerator;
 import com.octo.captcha.pix.gimpy.wordtoimages.fontgenerator.RandomFontGenerator;
+import com.octo.captcha.pix.gimpy.wordtoimages.fontgenerator.TwistedRandomFontGenerator;
+import com.octo.captcha.pix.gimpy.wordtoimages.fontgenerator.TwistedAndShearedRandomFontGenerator;
 import com.octo.captcha.pix.gimpy.wordtoimages.textpasters.DoubleTextPaster;
+import com.octo.captcha.pix.gimpy.wordtoimages.textpasters.SimpleTextPaster;
 import com.jhlabs.image.RippleFilter;
 import com.jhlabs.image.MarbleFilter;
 import com.jhlabs.image.WaterFilter;
@@ -123,9 +126,9 @@ public class FilteredPixCaptchaEngine extends PixCaptchaEngine {
 
 
 
-        AbstractTextPaster paster = new DoubleTextPaster(new Integer(8),new Integer(8));
+        AbstractTextPaster paster = new SimpleTextPaster(new Integer(8),new Integer(8));
         AbstractBackgroundGenerator back = new MultipleShapeBackgroundGenerator(new Integer(100),new Integer(200));
-        AbstractFontGenerator font = new RandomFontGenerator(new Integer(18));
+        AbstractFontGenerator font = new TwistedAndShearedRandomFontGenerator(new Integer(20));
         WordGenerator words = new DictionaryWordGenerator(new FileDictionnary("toddlist"));
         WordToImage word2image = new FilteredComposedWordToImage(font, back, paster,backgroundFilters,
                 textFilters, finalFilters);

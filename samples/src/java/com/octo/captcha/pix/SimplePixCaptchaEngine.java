@@ -19,7 +19,7 @@ import com.octo.captcha.pix.gimpy.wordtoimages.textpasters.DoubleTextPaster;
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
  */
-public class SimplePixCaptchaEngine extends FactoryInitializer {
+public class SimplePixCaptchaEngine extends PixCaptchaEngine {
 
     PixCaptchaFactory factory;
 
