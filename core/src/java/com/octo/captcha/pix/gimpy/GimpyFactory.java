@@ -70,10 +70,10 @@ public class GimpyFactory extends PixCaptchaFactory {
 
     /**
      * gimpies are PixCaptcha
-     * @return
+     * @return the pix captcha with default locale
      */
     public PixCaptcha getPixCaptcha() {
-        return getPixCaptcha(Locale.US);
+        return getPixCaptcha(Locale.getDefault());
     }
 
     public WordToImage getWordToImage() {
