@@ -716,19 +716,19 @@ public class ImageCaptchaService implements ImageCaptchaServiceMBean
         {
             throw new RuntimeException(
                 "Initialization error : can't find class "
-                    + ENGINE_CLASS_INIT_PARAMETER_PROP);
+                    + engineClassName);
         }
         catch (InstantiationException e)
         {
             throw new RuntimeException(
                 "Initialization error : can't instanciate class "
-                    + ENGINE_CLASS_INIT_PARAMETER_PROP);
+                    + engineClassName);
         }
         catch (IllegalAccessException e)
         {
             throw new RuntimeException(
                 "Initialization error : can't instanciate class "
-                    + ENGINE_CLASS_INIT_PARAMETER_PROP);
+                    + engineClassName);
         }
     }
 

@@ -50,7 +50,12 @@
  */
 package com.octo.captcha.j2ee;
 
+import java.util.Locale;
 import java.util.Properties;
+
+import com.octo.captcha.image.ImageCaptcha;
+import com.octo.captcha.image.ImageCaptchaEngine;
+import com.octo.captcha.image.ImageCaptchaFactory;
 
 import junit.framework.TestCase;
 
@@ -63,6 +68,69 @@ import junit.framework.TestCase;
  */
 public class ImageCaptchaServiceTest extends TestCase
 {
+    ////////////////////////////
+    // Fixtures
+    ////////////////////////////
+
+    /**
+     * A nested ImageCaptchaEngine class without
+     * a default constructor
+     */
+    public class DoomyImageCaptchaEngine extends ImageCaptchaEngine
+    {
+
+        /**
+         * @see com.octo.captcha.image.ImageCaptchaEngine#getImageCaptchaFactory()
+         */
+        public ImageCaptchaFactory getImageCaptchaFactory()
+        {
+            return null;
+        }
+
+        /**
+         * @see com.octo.captcha.image.ImageCaptchaEngine#getNextImageCaptcha()
+         */
+        public ImageCaptcha getNextImageCaptcha()
+        {
+            return null;
+        }
+
+        /**
+         * @see com.octo.captcha.image.ImageCaptchaEngine#getNextImageCaptcha(java.util.Locale)
+         */
+        public ImageCaptcha getNextImageCaptcha(Locale theLocale)
+        {
+            return null;
+        }
+
+    }
+
+    /**
+     * Default initialization values
+     */
+    private Properties initializationValues;
+
+    /**
+     * Default value for ENGINE_CLASS_INIT_PARAMETER_PROP
+     */
+    private static final String ENGINE_CLASS_INIT_PARAMETER_PROP =
+        "com.octo.captcha.image.gimpy.SimpleGimpyEngine";
+
+    /**
+     * Default value for MAX_NUMBER_OF_SIMULTANEOUS_CAPTCHAS_PROP
+     */
+    private static final String MAX_NUMBER_OF_SIMULTANEOUS_CAPTCHAS_PROP =
+        "1234";
+
+    /**
+     * Default value for MIN_GUARANTED_STORAGE_DELAY_IN_SECONDS_PROP
+     */
+    private static final String MIN_GUARANTED_STORAGE_DELAY_IN_SECONDS_PROP =
+        "120";
+
+    ////////////////////////////
+    // Constructors
+    ////////////////////////////
 
     /**
      * Constructor for ImageCaptchaServiceTest.
@@ -71,7 +139,21 @@ public class ImageCaptchaServiceTest extends TestCase
     public ImageCaptchaServiceTest(String theName)
     {
         super(theName);
+        this.initializationValues = new Properties();
+        this.initializationValues.put(
+            ImageCaptchaService.MAX_NUMBER_OF_SIMULTANEOUS_CAPTCHAS_PROP,
+            MAX_NUMBER_OF_SIMULTANEOUS_CAPTCHAS_PROP);
+        this.initializationValues.put(
+            ImageCaptchaService.MIN_GUARANTED_STORAGE_DELAY_IN_SECONDS_PROP,
+            MIN_GUARANTED_STORAGE_DELAY_IN_SECONDS_PROP);
+        this.initializationValues.put(
+            ImageCaptchaService.ENGINE_CLASS_INIT_PARAMETER_PROP,
+            ENGINE_CLASS_INIT_PARAMETER_PROP);
     }
+
+    /////////////////////////////
+    // setUp / tearDown
+    /////////////////////////////
 
     /**
      * @see TestCase#setUp()
@@ -88,6 +170,10 @@ public class ImageCaptchaServiceTest extends TestCase
     {
         super.tearDown();
     }
+
+    /////////////////////////////
+    // Unit tests
+    /////////////////////////////
 
     /**
      * Test for null ImageCaptchaService(Properties)
@@ -115,6 +201,180 @@ public class ImageCaptchaServiceTest extends TestCase
             Properties emptyProperties = new Properties();
             ImageCaptchaService testedService =
                 new ImageCaptchaService(emptyProperties);
+            fail("A runtime exception should have been thrown !");
+        }
+        catch (RuntimeException e)
+        {
+            assertTrue(true);
+        }
+    }
+
+    /**
+     * Test for initialization value MAX_NUMBER_OF_SIMULTANEOUS_CAPTCHAS_PROP
+     * missing in the property parameter of ImageCaptchaService(Properties)
+     */
+    public void testImageCaptchaServicePropertiesMaxNbOfSimCaptchasMissing()
+    {
+        try
+        {
+            this.initializationValues.remove(
+                ImageCaptchaService.MAX_NUMBER_OF_SIMULTANEOUS_CAPTCHAS_PROP);
+            ImageCaptchaService testedService =
+                new ImageCaptchaService(this.initializationValues);
+            fail("A runtime exception should have been thrown !");
+        }
+        catch (RuntimeException e)
+        {
+            assertTrue(true);
+        }
+    }
+
+    /**
+     * Test for initialization value MIN_GUARANTED_STORAGE_DELAY_IN_SECONDS_PROP
+     * missing in the property parameter of ImageCaptchaService(Properties)
+     */
+    public void testImageCaptchaServicePropertiesMinStorageDelayMissing()
+    {
+        try
+        {
+            this.initializationValues.remove(
+                ImageCaptchaService
+                    .MIN_GUARANTED_STORAGE_DELAY_IN_SECONDS_PROP);
+            ImageCaptchaService testedService =
+                new ImageCaptchaService(this.initializationValues);
+            fail("A runtime exception should have been thrown !");
+        }
+        catch (RuntimeException e)
+        {
+            assertTrue(true);
+        }
+    }
+
+    /**
+     * Test for initialization value ENGINE_CLASS_INIT_PARAMETER_PROP
+     * missing in the property parameter of ImageCaptchaService(Properties)
+     */
+    public void testImageCaptchaServicePropertiesEngineClassMissing()
+    {
+        try
+        {
+            this.initializationValues.remove(
+                ImageCaptchaService.ENGINE_CLASS_INIT_PARAMETER_PROP);
+            ImageCaptchaService testedService =
+                new ImageCaptchaService(this.initializationValues);
+            fail("A runtime exception should have been thrown !");
+        }
+        catch (RuntimeException e)
+        {
+            assertTrue(true);
+        }
+    }
+
+    /**
+     * Test for initialization value MAX_NUMBER_OF_SIMULTANEOUS_CAPTCHAS_PROP
+     * beeing not an integer in the property parameter of 
+     * ImageCaptchaService(Properties)
+     */
+    public void testImageCaptchaServicePropertiesMaxNbOfSimCaptchasNotInteger()
+    {
+        try
+        {
+            this.initializationValues.put(
+                ImageCaptchaService.MAX_NUMBER_OF_SIMULTANEOUS_CAPTCHAS_PROP,
+                "foo");
+            ImageCaptchaService testedService =
+                new ImageCaptchaService(this.initializationValues);
+            fail("A runtime exception should have been thrown !");
+        }
+        catch (RuntimeException e)
+        {
+            assertTrue(true);
+        }
+    }
+
+    /**
+     * Test for initialization value MIN_GUARANTED_STORAGE_DELAY_IN_SECONDS_PROP
+     * not beeing an integer in the property parameter of
+     * ImageCaptchaService(Properties)
+     */
+    public void testImageCaptchaServicePropertiesMinStorageDelayNotInteger()
+    {
+        try
+        {
+            this.initializationValues.put(
+                ImageCaptchaService.MIN_GUARANTED_STORAGE_DELAY_IN_SECONDS_PROP,
+                "foo");
+            ImageCaptchaService testedService =
+                new ImageCaptchaService(this.initializationValues);
+            fail("A runtime exception should have been thrown !");
+        }
+        catch (RuntimeException e)
+        {
+            assertTrue(true);
+        }
+    }
+
+    /**
+     * Test for initialization value MIN_GUARANTED_STORAGE_DELAY_IN_SECONDS_PROP
+     * beeing the maximum integer in the property parameter of
+     * ImageCaptchaService(Properties)
+     */
+    public void testImageCaptchaServicePropertiesMinStorageDelayMaxInteger()
+    {
+        this.initializationValues.put(
+            ImageCaptchaService.MIN_GUARANTED_STORAGE_DELAY_IN_SECONDS_PROP,
+            "" + Integer.MAX_VALUE);
+        ImageCaptchaService testedService =
+            new ImageCaptchaService(this.initializationValues);
+        assertEquals(
+            "MinGuarantedStorageDelayInSeconds is uncorrect !",
+            testedService.getMinGuarantedStorageDelayInSeconds(),
+            Integer.MAX_VALUE);
+        assertEquals(
+            "MaxNumberOfSimultaneousCaptchas is uncorrect !",
+            testedService.getMaxNumberOfSimultaneousCaptchas(),
+            new Integer(MAX_NUMBER_OF_SIMULTANEOUS_CAPTCHAS_PROP).intValue());
+        assertEquals(
+            "ImageCaptchaEngineClass is uncorrect !",
+            testedService.getImageCaptchaEngineClass(),
+            ENGINE_CLASS_INIT_PARAMETER_PROP);
+    }
+
+    /**
+     * Test for initialization value ENGINE_CLASS_INIT_PARAMETER_PROP
+     * unknown in the property parameter of ImageCaptchaService(Properties)
+     */
+    public void testImageCaptchaServicePropertiesEngineClassUnknown()
+    {
+        try
+        {
+            this.initializationValues.put(
+                ImageCaptchaService.ENGINE_CLASS_INIT_PARAMETER_PROP,
+                "foo");
+            ImageCaptchaService testedService =
+                new ImageCaptchaService(this.initializationValues);
+            fail("A runtime exception should have been thrown !");
+        }
+        catch (RuntimeException e)
+        {
+            assertTrue(true);
+        }
+    }
+
+    /**
+     * Test for initialization value ENGINE_CLASS_INIT_PARAMETER_PROP
+     * which is a class without no arg constructor
+     * in the property parameter of ImageCaptchaService(Properties)
+     */
+    public void testImageCaptchaServicePropertiesEngineClassWithoutNoArgConstructor()
+    {
+        try
+        {
+            this.initializationValues.put(
+                ImageCaptchaService.ENGINE_CLASS_INIT_PARAMETER_PROP,
+                DoomyImageCaptchaEngine.class.getName());
+            ImageCaptchaService testedService =
+                new ImageCaptchaService(this.initializationValues);
             fail("A runtime exception should have been thrown !");
         }
         catch (RuntimeException e)
