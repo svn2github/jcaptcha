@@ -3,7 +3,7 @@
 <project>
   <extends>${basedir}/../project.xml</extends>
   <pomVersion>1</pomVersion>
-  <currentVersion>1.0</currentVersion>
+  <currentVersion>1.0-snapshot</currentVersion>
   <id>jcaptcha-core</id> 
   <name>JCaptcha-core</name>
   <groupId>jcaptcha</groupId>

@@ -6,7 +6,7 @@
   <id>jcaptcha-samples</id>
   <name>JCaptcha-samples</name>
   <groupId>jcaptcha</groupId>
-  <currentVersion>1.0</currentVersion>
+  <currentVersion>1.0-snapshot</currentVersion>
   <organization>
     <!-- The full name of the organization. -->
     <name>JCaptcha corp.</name>
@@ -129,7 +129,7 @@
     	<dependency>
     	    <groupId>jcaptcha</groupId>
             <artifactId>jcaptcha-core</artifactId>
-            <version>1.0</version>
+            <version>1.0-snapshot</version>
             <url>http://jcaptcha.sourceforge.net</url>
     	</dependency>
     	

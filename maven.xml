@@ -43,7 +43,7 @@
     <maven:reactor 
         basedir="${basedir}"
         includes="**/${pattern}/**/project.xml"
-        excludes="project.xml"
+        excludes="project.xml,samples-web/project.xml"
         goals="dist:build-bin"
         banner="distribution"
         ignoreFailures="false"/>
@@ -53,6 +53,9 @@
     </ant:unzip>
     <ant:unzip dest="${maven.build.dir}/distributions">
     	<ant:fileset dir="${basedir}/samples/target/distributions" includes="*.zip"/>
+    </ant:unzip>
+    <ant:unzip dest="${maven.build.dir}/distributions">
+    	<ant:fileset dir="${basedir}/samples-web/target/distributions" includes="*.zip"/>
     </ant:unzip>
     <ant:unzip dest="${maven.build.dir}/distributions">
     	<ant:fileset dir="${basedir}/j2ee/target/distributions" includes="*.zip"/>
@@ -70,6 +73,9 @@
     		<include name="doc/**"/>
     	</ant:fileset>
     	<ant:fileset dir="${basedir}/samples">
+    		<include name="doc/**"/>
+    	</ant:fileset>
+    	<ant:fileset dir="${basedir}/samples-web">
     		<include name="doc/**"/>
     	</ant:fileset>
     </ant:copy>
