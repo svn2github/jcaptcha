@@ -5,7 +5,7 @@
   <id>jcaptcha</id>
   <name>JCaptcha</name>
   <groupId>jcaptcha</groupId>
-  <currentVersion>1.0-snapshot</currentVersion>
+  <currentVersion>1.0-beta1</currentVersion>
   <organization>
     <!-- The full name of the organization. -->
     <name>JCaptcha corp.</name>

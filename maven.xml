@@ -20,18 +20,6 @@
   </preGoal>
 
   <goal name="assemble">
-      <ant:mkdir dir="${maven.repo.local}/jhlabs/jars"/>
-      <ant:mkdir dir="${maven.repo.local}/jhlabs/zips"/>
-      <ant:get src="http://www.jhlabs.com/ip/imageeditor.zip"
-    	dest="${maven.repo.local}/jhlabs/zips/imageeditor.zip" usetimestamp="true"/>
-      <ant:unzip src="${maven.repo.local}/jhlabs/zips/imageeditor.zip" dest="${maven.repo.local}/jhlabs/zips/">
-          <patternset>
-                  <include name="**/imageeditor.jar"/>
-              </patternset>
-
-      </ant:unzip>
-      <ant:copy file="${maven.repo.local}/jhlabs/zips/imageeditor/imageeditor.jar" todir="${maven.repo.local}/jhlabs/jars/"/>
-      <delete dir="${maven.repo.local}/jhlabs/zips/imageeditor"/>
     <maven:reactor
         basedir="${basedir}"
         includes="**/${pattern}/**/project.xml"
@@ -55,32 +43,40 @@
         goals="assemble"
         banner="distribution"
         ignoreFailures="false"/>
+    <maven:reactor 
+        basedir="${basedir}"
+        includes="samples-web/project.xml"
+        goals="dist:build-src"
+        banner="distribution"
+        ignoreFailures="false"/>
     <ant:mkdir dir="${maven.build.dir}/distributions"/>
+    <ant:mkdir dir="${maven.build.dir}/src-distributions"/>
     <ant:unzip dest="${maven.build.dir}/distributions">
-    	<ant:fileset dir="${basedir}/core/target/distributions" includes="*.zip"/>
+    	<ant:fileset dir="${basedir}/core/target/distributions" includes="*.zip" excludes="*src.zip"/>
+    	<ant:fileset dir="${basedir}/samples/target/distributions" includes="*.zip" excludes="*src.zip"/>
+    	<ant:fileset dir="${basedir}/j2ee/target/distributions" includes="*.zip" excludes="*src.zip"/>
     </ant:unzip>
-    <ant:unzip dest="${maven.build.dir}/distributions">
-    	<ant:fileset dir="${basedir}/samples/target/distributions" includes="*.zip"/>
-    </ant:unzip>
-    <ant:unzip dest="${maven.build.dir}/distributions">
-    	<ant:fileset dir="${basedir}/j2ee/target/distributions" includes="*.zip"/>
-    </ant:unzip>
+   
     <ant:mkdir dir="${maven.build.dir}/distributions/jcaptcha-samples-web-${pom.currentVersion}"/>
     <ant:copy todir="${maven.build.dir}/distributions/jcaptcha-samples-web-${pom.currentVersion}">
     	<ant:fileset dir="${basedir}/samples-web/target">
     		<include name="jcaptcha-samples-web.war"/>
     	</ant:fileset>
     </ant:copy>
+   
+    <ant:unzip dest="${maven.build.dir}/src-distributions">
+    	<ant:fileset dir="${basedir}/core/target/distributions" includes="*src.zip"/>
+    	<ant:fileset dir="${basedir}/samples/target/distributions" includes="*src.zip"/>
+    	<ant:fileset dir="${basedir}/samples-web/target/distributions" includes="*src.zip"/>
+    	<ant:fileset dir="${basedir}/j2ee/target/distributions" includes="*src.zip"/>
+    </ant:unzip>
+    
     <ant:copy todir="${maven.build.dir}/distributions">
     	<ant:fileset dir="${basedir}">
     		<include name="LICENSE.txt"/>
     	</ant:fileset>
     </ant:copy>
-    <ant:copy todir="${maven.build.dir}/distributions">
-    	<ant:fileset dir="${basedir}">
-    		<include name="LICENSE.txt"/>
-    	</ant:fileset>
-    </ant:copy>
+    
     <ant:copy todir="${maven.build.dir}/distributions">
     	<ant:fileset dir="${basedir}/core">
     		<include name="doc/**"/>
@@ -92,8 +88,19 @@
     		<include name="doc/**"/>
     	</ant:fileset>
     </ant:copy>
+    
+    <ant:copy todir="${maven.build.dir}/src-distributions">
+    	<ant:fileset dir="${basedir}">
+    		<include name="*.xml"/>
+    		<include name="*.txt"/>
+    		<include name="*.properties"/>
+    	</ant:fileset>
+    </ant:copy>
+    
     <ant:zip zipfile="${maven.build.dir}/${pom.artifactId}-${pom.currentVersion}.zip"
     	basedir="${maven.build.dir}/distributions"/>
+    <ant:zip zipfile="${maven.build.dir}/${pom.artifactId}-${pom.currentVersion}-src.zip"
+    	basedir="${maven.build.dir}/src-distributions"/>
   </goal>
   
   <preGoal name="clean">

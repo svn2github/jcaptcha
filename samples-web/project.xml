@@ -6,7 +6,7 @@
   <id>jcaptcha-samples-web</id>
   <name>JCaptcha-samples-web</name>
   <groupId>jcaptcha</groupId>
-  <currentVersion>1.0-snapshot</currentVersion>
+  <currentVersion>1.0-beta1</currentVersion>
   <organization>
     <!-- The full name of the organization. -->
     <name>JCaptcha corp.</name>
@@ -129,7 +129,7 @@
     	<dependency>
     	    <groupId>jcaptcha</groupId>
             <artifactId>jcaptcha-core</artifactId>
-            <version>1.0-snapshot</version>
+            <version>1.0-beta1</version>
             <url>http://jcaptcha.sourceforge.net</url>
            <properties>
                    <war.bundle>true</war.bundle>
@@ -139,7 +139,7 @@
     	<dependency>
     	    <groupId>jcaptcha</groupId>
             <artifactId>jcaptcha-samples</artifactId>
-            <version>1.0-snapshot</version>
+            <version>1.0-beta1</version>
             <url>http://jcaptcha.sourceforge.net</url>
                <properties>
                    <war.bundle>true</war.bundle>
@@ -149,7 +149,7 @@
     	<dependency>
     	    <groupId>jcaptcha</groupId>
             <artifactId>jcaptcha-j2ee</artifactId>
-            <version>1.0-snapshot</version>
+            <version>1.0-beta1</version>
             <url>http://jcaptcha.sourceforge.net</url>
                <properties>
                    <war.bundle>true</war.bundle>
