@@ -24,15 +24,6 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library name="GroboUtils">
-        <CLASSES>
-          <root url="jar://C:/Documents and Settings/Administrator/.maven/repository/GroboUtils/jars/GroboUtils-4-core.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
       <library>
         <CLASSES>
           <root url="jar://C:/Documents and Settings/Administrator/.maven/repository/commons-logging/jars/commons-logging-1.0.4.jar!/" />
@@ -70,6 +61,15 @@
     </orderEntry>
     <orderEntry type="library" name="concurrent-1.3.2" level="project" />
     <orderEntry type="library" name="ehcache-1.0" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://C:/Documents and Settings/Administrator/.maven/repository/GroboUtils/jars/GroboUtils-5-core.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
     <orderEntryProperties />
   </component>
 </module>
