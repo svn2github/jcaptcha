@@ -55,7 +55,9 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
- * @author gandin
+ * <p>Description: </p>
+ * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
+ * @version 1.1
  */
 public class FileDictionnary implements DictionaryReader {
 
@@ -67,26 +69,25 @@ public class FileDictionnary implements DictionaryReader {
 
     public WordList getWordList() {
         ResourceBundle bundle = ResourceBundle.getBundle(myBundle);
-        Enumeration words = bundle.getKeys();
-        WordList list = new WordList(Locale.US);
-
-        while (words.hasMoreElements()) {
-            list.addWord((String) words.nextElement());
-        }
+        WordList list = generateWordList(Locale.US,bundle);
         return list;
     }
 
     public WordList getWordList(Locale locale) {
         ResourceBundle bundle = ResourceBundle.getBundle(myBundle, locale);
-        Enumeration words = bundle.getKeys();
-        WordList list = new WordList(locale);
-
-        while (words.hasMoreElements()) {
-            list.addWord((String) words.nextElement());
-        }
-
+        WordList list = generateWordList(locale,bundle);
         return list;
     }
 
+    protected WordList generateWordList(Locale locale, ResourceBundle bundle) {
+        Enumeration words = bundle.getKeys();
+        WordList list = new WordList(locale);
+        
+        while (words.hasMoreElements()) {
+            list.addWord((String) words.nextElement());
+        }
+        
+        return list;
+    }
 
 }
