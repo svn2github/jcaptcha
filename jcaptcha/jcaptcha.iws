@@ -327,10 +327,10 @@
     <option name="HIDE_WARNINGS" value="false" />
   </component>
   <component name="FileEditorManager" split-orientation="vertical" split-proportion="0.5">
-    <first-group selected-file="file://$PROJECT_DIR$/module-struts/src/java/com/octo/captcha/module/struts/CaptchaServicePlugin.java">
+    <first-group selected-file="file://$PROJECT_DIR$/xdocs/links.inc">
       <entry file="file://$PROJECT_DIR$/core/src/java/com/octo/captcha/image/ImageCaptcha.java" pinned="false">
         <provider selected="true" editor-type-id="text-editor">
-          <state line="560" column="0" selection-start="27771" selection-end="27771" vertical-scroll-proportion="0.6933498">
+          <state line="560" column="0" selection-start="27771" selection-end="27771" vertical-scroll-proportion="0.6742515">
             <folding />
           </state>
         </provider>
@@ -344,7 +344,7 @@
       </entry>
       <entry file="file://$PROJECT_DIR$/maven.xml" pinned="false">
         <provider selected="true" editor-type-id="text-editor">
-          <state line="81" column="41" selection-start="2801" selection-end="2801" vertical-scroll-proportion="0.5119197">
+          <state line="81" column="41" selection-start="2801" selection-end="2801" vertical-scroll-proportion="0.49756098">
             <folding />
           </state>
         </provider>
@@ -365,35 +365,35 @@
       </entry>
       <entry file="file://$PROJECT_DIR$/module-struts/src/java/com/octo/captcha/module/struts/CaptchaServicePlugin.java" pinned="false">
         <provider selected="true" editor-type-id="text-editor">
-          <state line="949" column="13" selection-start="50537" selection-end="50537" vertical-scroll-proportion="0.33251232">
+          <state line="978" column="38" selection-start="51311" selection-end="51311" vertical-scroll-proportion="0.91377246">
             <folding />
           </state>
         </provider>
       </entry>
-      <entry file="file://$PROJECT_DIR$/core/src/java/com/octo/captcha/sound/SoundCaptcha.java" pinned="false">
+      <entry file="file://$PROJECT_DIR$/xdocs/status.xml" pinned="false">
         <provider selected="true" editor-type-id="text-editor">
-          <state line="62" column="22" selection-start="2731" selection-end="2731" vertical-scroll-proportion="-0.14408867">
+          <state line="10" column="87" selection-start="318" selection-end="318" vertical-scroll-proportion="0.20731707">
             <folding />
           </state>
         </provider>
       </entry>
-      <entry file="file://$PROJECT_DIR$/core/src/java/com/octo/captcha/sound/SoundCaptchaFactory.java" pinned="false">
+      <entry file="file://$PROJECT_DIR$/xdocs/links.inc" pinned="false">
         <provider selected="true" editor-type-id="text-editor">
-          <state line="64" column="22" selection-start="2745" selection-end="2745" vertical-scroll-proportion="0.0862069">
+          <state line="8" column="0" selection-start="542" selection-end="542" vertical-scroll-proportion="0.16287425">
+            <folding />
+          </state>
+        </provider>
+      </entry>
+      <entry file="file://$PROJECT_DIR$/xdocs/thanks.xml" pinned="false">
+        <provider selected="true" editor-type-id="text-editor">
+          <state line="19" column="40" selection-start="950" selection-end="950" vertical-scroll-proportion="0.39390245">
             <folding />
           </state>
         </provider>
       </entry>
       <entry file="file://$PROJECT_DIR$/core/src/java/com/octo/captcha/sound/gimpy/GimpySound.java" pinned="false">
         <provider selected="true" editor-type-id="text-editor">
-          <state line="475" column="13" selection-start="25522" selection-end="25522" vertical-scroll-proportion="0.023399014">
-            <folding />
-          </state>
-        </provider>
-      </entry>
-      <entry file="file://$PROJECT_DIR$/core/src/java/com/octo/captcha/sound/gimpy/GimpySoundFactory.java" pinned="false">
-        <provider selected="true" editor-type-id="text-editor">
-          <state line="481" column="13" selection-start="25780" selection-end="25780" vertical-scroll-proportion="-0.73275864">
+          <state line="475" column="13" selection-start="25522" selection-end="25522" vertical-scroll-proportion="0.02275449">
             <folding />
           </state>
         </provider>
@@ -936,27 +936,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/module-struts/xdocs/struts-mailreader/struts-mailreader/jcaptcha_stats.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="37" selection-start="479" selection-end="479" vertical-scroll-proportion="-0.02093596">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module-struts/xdocs/struts-mailreader.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="311" column="120" selection-start="12108" selection-end="12108" vertical-scroll-proportion="0.68757844">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/java/com/octo/captcha/image/ImageCaptchaFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="477" column="22" selection-start="25559" selection-end="25559" vertical-scroll-proportion="0.25123152">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/src/java/com/octo/captcha/image/gimpy/Gimpy.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="480" column="13" selection-start="25791" selection-end="25791" vertical-scroll-proportion="0.036945812">
@@ -994,7 +973,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/java/com/octo/captcha/sound/gimpy/GimpySound.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="475" column="13" selection-start="25522" selection-end="25522" vertical-scroll-proportion="0.023399014">
+        <state line="475" column="13" selection-start="25522" selection-end="25522" vertical-scroll-proportion="0.02275449">
           <folding />
         </state>
       </provider>
@@ -1008,7 +987,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/java/com/octo/captcha/image/ImageCaptcha.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="560" column="0" selection-start="27771" selection-end="27771" vertical-scroll-proportion="0.6933498">
+        <state line="560" column="0" selection-start="27771" selection-end="27771" vertical-scroll-proportion="0.6742515">
           <folding />
         </state>
       </provider>
@@ -1022,7 +1001,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/maven.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="81" column="41" selection-start="2801" selection-end="2801" vertical-scroll-proportion="0.5119197">
+        <state line="81" column="41" selection-start="2801" selection-end="2801" vertical-scroll-proportion="0.49756098">
           <folding />
         </state>
       </provider>
@@ -1036,7 +1015,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/module-struts/src/java/com/octo/captcha/module/struts/CaptchaServicePlugin.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="949" column="13" selection-start="50537" selection-end="50537" vertical-scroll-proportion="0.33251232">
+        <state line="978" column="38" selection-start="51311" selection-end="51311" vertical-scroll-proportion="0.91377246">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xdocs/status.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="87" selection-start="318" selection-end="318" vertical-scroll-proportion="0.20731707">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xdocs/links.inc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="0" selection-start="542" selection-end="542" vertical-scroll-proportion="0.16287425">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xdocs/thanks.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="40" selection-start="950" selection-end="950" vertical-scroll-proportion="0.39390245">
           <folding />
         </state>
       </provider>

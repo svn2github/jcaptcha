@@ -8,7 +8,7 @@
             <p>
                 <b>Site improvements</b>
                 <ul>
-                   <li>Some parts of the site are now hosted using the <a href="www.octo.com">OCTO Technology web access</a> on the <a href="http://luminal.gotdns.com/sushiwiki/">SushiWiki server</a>. Thanks to Eric Groise.</li>
+                   <li>Some parts of the site are now hosted using the <a href="http://www.octo.com">OCTO Technology web access</a> on the <a href="http://luminal.gotdns.com/sushiwiki/">SushiWiki server</a>. Thanks to Eric Groise.</li>
                    <li>Moved from moniwiki to confluence for collaboration</li>
                    <li>Moved from sourceforge to jira for issue tracking</li>
                    <li>Thanks to <a href="http://www.atlassian.com/">Atlassian software</a> </li>
