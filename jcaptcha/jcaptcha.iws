@@ -327,7 +327,7 @@
     <option name="HIDE_WARNINGS" value="false" />
   </component>
   <component name="FileEditorManager" split-orientation="vertical" split-proportion="0.5">
-    <first-group selected-file="file://$PROJECT_DIR$/module-struts/xdocs/struts-mailreader.xml">
+    <first-group selected-file="file://$PROJECT_DIR$/engine/xdocs/main.xml">
       <entry file="file://$PROJECT_DIR$/maven.xml" pinned="false">
         <provider selected="true" editor-type-id="text-editor">
           <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -372,7 +372,7 @@
       </entry>
       <entry file="file://$PROJECT_DIR$/engine/xdocs/main.xml" pinned="false">
         <provider selected="true" editor-type-id="text-editor">
-          <state line="28" column="10" selection-start="814" selection-end="814" vertical-scroll-proportion="0.5700599">
+          <state line="21" column="22" selection-start="586" selection-end="586" vertical-scroll-proportion="0.42754492">
             <folding />
           </state>
         </provider>
@@ -386,7 +386,7 @@
       </entry>
       <entry file="file://$PROJECT_DIR$/module-struts/xdocs/struts-mailreader.xml" pinned="false">
         <provider selected="true" editor-type-id="text-editor">
-          <state line="50" column="27" selection-start="2129" selection-end="2129" vertical-scroll-proportion="1.0365853">
+          <state line="39" column="119" selection-start="1555" selection-end="1555" vertical-scroll-proportion="0.68414634">
             <folding />
           </state>
         </provider>
@@ -465,12 +465,12 @@
     <expanded_node url="com.octo.captcha.engine.image" type="package" />
   </component>
   <component name="ProjectPane">
-    <expanded_node url="file://$PROJECT_DIR$/engine" module="jcaptcha-engine" type="directory" />
     <expanded_node url="" module="jcaptcha-module-struts" type="module" />
     <expanded_node url="" module="jcaptcha-engine" type="module" />
+    <expanded_node url="file://$PROJECT_DIR$/engine/xdocs" module="jcaptcha-engine" type="directory" />
     <expanded_node url="file://$PROJECT_DIR$/module-struts/xdocs" module="jcaptcha-module-struts" type="directory" />
     <expanded_node url="file://$PROJECT_DIR$/module-struts" module="jcaptcha-module-struts" type="directory" />
-    <expanded_node url="file://$PROJECT_DIR$/engine/xdocs" module="jcaptcha-engine" type="directory" />
+    <expanded_node url="file://$PROJECT_DIR$/engine" module="jcaptcha-engine" type="directory" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" splitterProportion="0.4953846">
@@ -1016,7 +1016,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/engine/xdocs/main.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="10" selection-start="814" selection-end="814" vertical-scroll-proportion="0.5700599">
+        <state line="21" column="22" selection-start="586" selection-end="586" vertical-scroll-proportion="0.42754492">
           <folding />
         </state>
       </provider>
@@ -1030,7 +1030,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/module-struts/xdocs/struts-mailreader.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="27" selection-start="2129" selection-end="2129" vertical-scroll-proportion="1.0365853">
+        <state line="39" column="119" selection-start="1555" selection-end="1555" vertical-scroll-proportion="0.68414634">
           <folding />
         </state>
       </provider>

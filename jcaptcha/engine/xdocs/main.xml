@@ -19,11 +19,11 @@ Implementations are typed (image or sound) and use CaptchaFactory to build captc
         <section name="...and sample engines">
         <p>
         This module provides lots of ready to use engines :
-            <a href="multiproject/jcaptcha-engine/xref/index.html">see source.</a>
+            <a href="/multiproject/jcaptcha-engine/xref/index.html">see source.</a>
             </p>
             <p>
-            See also home page to bond samples :
-          <a href="www.jcaptcha.net">home</a>
+            See also home page samples :
+          <a href="http://www.jcaptcha.net">home</a>
           </p>
           <p>
             See the test report section for performance tests results.
