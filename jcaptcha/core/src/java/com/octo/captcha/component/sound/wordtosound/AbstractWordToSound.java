@@ -467,8 +467,6 @@ package com.octo.captcha.component.sound.wordtosound;
 import javax.sound.sampled.AudioInputStream;
 
 import com.octo.captcha.CaptchaException;
-import com.octo.captcha.component.sound.utils.SoundManager;
-import com.octo.captcha.component.sound.utils.SoundManagerFactory;
 
 /**
  * <p>
@@ -489,15 +487,9 @@ import com.octo.captcha.component.sound.utils.SoundManagerFactory;
 public abstract class AbstractWordToSound implements WordToSound
 {
 
-    protected SoundManager soundManager;
-
     public AudioInputStream getSound(String word) throws CaptchaException
     {
-        if (soundManager == null)
-        {
-            soundManager = SoundManagerFactory.getSoundManager();
-        }
-        return modifiedSound(soundManager.stringToSound(word));
+        return modifiedSound(word);
     }
 
     /**
@@ -511,32 +503,8 @@ public abstract class AbstractWordToSound implements WordToSound
     public abstract int getMinAcceptedWordLenght();
 
     /**
-     * @return the voice name use to create the sound.
-     */
-    public String getVoiceName()
-    {
-        return soundManager.getVoiceName();
-    }
-    
-    /**
-     * @see com.octo.captcha.component.sound.wordtosound.WordToSound#getSoundPitch()
-     */
-    public float getSoundPitch()
-    {
-        return soundManager.getPitch();
-    }
-
-    /**
-     * @see com.octo.captcha.component.sound.wordtosound.WordToSound#getSoundSpeakingRate()
-     */
-    public float getSoundSpeakingRate()
-    {
-        return soundManager.getSpeakingRate();
-    }
-
-    /**
      * @return Do operations on the original sound.
      */
-    abstract AudioInputStream modifiedSound(AudioInputStream audioInputStream);
+    abstract AudioInputStream modifiedSound(String word);
 
 }

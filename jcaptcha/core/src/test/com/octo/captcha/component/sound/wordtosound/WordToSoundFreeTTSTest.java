@@ -464,57 +464,43 @@
 
 package com.octo.captcha.component.sound.wordtosound;
 
-import javax.sound.sampled.AudioInputStream;
-
-import com.octo.captcha.CaptchaException;
+import junit.framework.TestCase;
 
 /**
  * <p>
- * Provides methods to tranform a word to a sound
- * </p>.
+ * Description:
+ * </p>
  * 
- * @author Gandin Mathieu
- * @author Doumas Benoit
- * @version 1.1
+ * @author Benoit Doumas
+ * @version 1.0
  */
-public interface WordToSound
+public class WordToSoundFreeTTSTest extends TestCase
 {
-    /**
-     * @return the sound pitch, from 50 (deep) to 200 (high)
-     */
-    float getSoundPitch();
+
+    private WordToSoundFreeTTS wordToSoundFreeTTS;
 
     /**
-     * @return the sound speaking rate, per minute
-     */
-    float getSoundSpeakingRate();
-
-    /**
-     * @return the sound name used to create the sound
-     */
-    public String getSoundName();
-
-    /**
-     * @return the sound volume
-     */
-    public float getSoundVolume();
-
-    /**
-     * @return the max word lenght accepted by this wordTosound service
-     */
-    int getMaxAcceptedWordLenght();
-
-    /**
-     * @return the min word lenght accepted by this wordTosound service
-     */
-    int getMinAcceptedWordLenght();
-
-    /**
-     * Main method for this service Return an image with the specified
+     * Constructor for SimpleWordToImageTest.
      * 
-     * @return the generated sound
-     * @throws com.octo.captcha.CaptchaException
-     *             if word is invalid or an exception occurs during the sound generation
+     * @param name
      */
-    AudioInputStream getSound(String word) throws CaptchaException;
+    public WordToSoundFreeTTSTest(String name)
+    {
+        super(name);
+    }
+
+    public void setUp()
+    {
+        this.wordToSoundFreeTTS = new WordToSoundFreeTTS("toto", 3, 6);
+    }
+
+    public void testGetMaxAcceptedWordLenght()
+    {
+        assertEquals(this.wordToSoundFreeTTS.getMaxAcceptedWordLenght(), 6);
+    }
+
+    public void testGetMinAcceptedWordLenght()
+    {
+        assertEquals(this.wordToSoundFreeTTS.getMinAcceptedWordLenght(), 3);
+    }
 }
