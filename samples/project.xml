@@ -15,22 +15,25 @@
     <!-- The URL to the organization's logo image. This can be an URL relative to the base directory of the generated
          web site, (e.g., /images/org-logo.png) or an absolute URL (e.g., http://my.corp/logo.png). This value is used
          when generating the project documentation. -->
-        <logo>../images/organization-logo.jpg</logo>
+        <logo>http://jcaptcha.sourceforge.net/images/organization-logo.jpg</logo>
   </organization>
   <inceptionYear>2003</inceptionYear>
   <package>com.octo.captcha</package>
 
   <description>
-  <![CDATA[
-  <b>CAPTCHA</b>, for <b>C</b>ompletely <b>A</b>utomated <b>P</b>ublic <b>T</b>uring <b>T</b>est <b>C</b>omputers and <b>H</b>umans
-  <b>S</b>amples : show some possible usages of the jcaptcha library
+   <![CDATA[
+  <b>JCAPTCHA</b>, for <b>J</b>ava <b>C</b>ompletely <b>A</b>utomated <b>P</b>ublic <b>T</b>est to tell <b>C</b>omputers and <b>H</b>umans <b>A</b>part
+
+  <br/>See : <a href="http://jcaptcha.sourceforge.net/moniwiki/wiki.php/JcapTcha">Project description</a>
+
+  <br/><b>JCAPTCHAS</b>amples : Kick start project for your own JCAPTCHA implementation.
+
    ]]>
   </description>
   
   <shortDescription>
-  CAPTCHA is a test based on several cognitives puzzles based on challenging problems
-  of artificial intelligence.
-  </shortDescription>
+     Sample 'do your own jcaptcha' project and developers' utilities
+     </shortDescription>
 
   <url/>
   <repository>

@@ -15,22 +15,24 @@
         <!-- The URL to the organization's logo image. This can be an URL relative to the base directory of the generated
              web site, (e.g., /images/org-logo.png) or an absolute URL (e.g., http://my.corp/logo.png). This value is used
              when generating the project documentation. -->
-        <logo>/images/organization-logo.jpg</logo>
+        <logo>http://jcaptcha.sourceforge.net/images/organization-logo.jpg</logo>
     </organization>
     <inceptionYear>2003</inceptionYear>
     <package>com.octo.captcha</package>
 
     <description>
         <![CDATA[
-    <b>CAPTCHA</b>, for <b>C</b>ompletely <b>A</b>utomated <b>P</b>ublic <b>T</b>uring <b>T</b>est <b>C</b>omputers and <b>H</b>umans
-    <b>S</b>amples : show some possible usages of the jcaptcha library
-     ]]>
-    </description>
+        <b>JCAPTCHA</b>, for <b>J</b>ava <b>C</b>ompletely <b>A</b>utomated <b>P</b>ublic <b>T</b>est to tell <b>C</b>omputers and <b>H</b>umans <b>A</b>part
+
+        <br/>See : <a href="http://jcaptcha.sourceforge.net/moniwiki/wiki.php/JcapTcha">Project description</a>
+
+        <br/><b>JCAPTCHAS</b>amplesWeb  : A ready to deploy Jcaptcha-ized War.
+         ]]>
+     </description>
 
     <shortDescription>
-        CAPTCHA is a test based on several cognitives puzzles based on challenging problems
-        of artificial intelligence.
-    </shortDescription>
+      Ready to deploy jcaptcha-ized war.
+      </shortDescription>
 
     <url/>
     <repository>
@@ -52,36 +54,6 @@
             <archive>http://sourceforge.net/mailarchive/forum.php?forum=jcaptcha-devs</archive>
         </mailingList>
     </mailingLists>
-
-    <developers>
-        <developer>
-            <name>Sébastien Brunot</name>
-            <id>sbr</id>
-            <email>sbrunot@octo.com</email>
-            <organization>Octo</organization>
-            <roles>
-                <role>Java Developer</role>
-            </roles>
-        </developer>
-        <developer>
-            <name>Mathieu Gandin</name>
-            <id>mga</id>
-            <email>mgandin@octo.com</email>
-            <organization>Octo</organization>
-            <roles>
-                <role>Java Developer</role>
-            </roles>
-        </developer>
-        <developer>
-            <name>Marc-Antoine Garrigue</name>
-            <id>mag</id>
-            <email>mgarrigue@octo.com</email>
-            <organization>Octo</organization>
-            <roles>
-                <role>Java Developer</role>
-            </roles>
-        </developer>
-    </developers>
 
     <developers>
         <developer>

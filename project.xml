@@ -14,52 +14,21 @@
     <!-- The URL to the organization's logo image. This can be an URL relative to the base directory of the generated
          web site, (e.g., /images/org-logo.png) or an absolute URL (e.g., http://my.corp/logo.png). This value is used
          when generating the project documentation. -->
-    <logo>images/organization-logo.jpg</logo>
+    <logo>http://jcaptcha.sourceforge.net/images/organization-logo.jpg</logo>
   </organization>
   <inceptionYear>2003</inceptionYear>
   <package>com.octo.captcha</package>
 
   <description>
-  <![CDATA[
-<div>
-<h1><i>JCaptcha is an open source JAVA framework to help to create captchas</i>.</h1>
-
-<div class='indent'>
-captchas, for Completely Automated Public Test to tell Humans and Computers Apart, are tests based on several cognitives puzzles based on challenging problems of artificial intelligence.
-<br />
-</div>
-These tests are to prevent computer programs or robots to obtain information, by challenging with a problem that only human can resolve.
-</div>
-<br />
-<div>
-<b>Jcaptcha</b> is divided into three main features:
-<ul>
-<li>The <b>JcaTchaCore</b> Framework, which help to create captchas,
-</li>
-<li>The <b>JcaTchaJ2ee</b> Integration, which provides two components, the <b>ImagecaptchaFilter</b> and the <b>Imagecaptchaservlet</b> designed to integrate <b>Jcaptcha</b> to your Java Web Application,
-</li>
-<li>Some <b>JcaTchaSamples</b> to help developers to create captchas in command line programs or in web applications.
-<br />
-</li>
-</ul>
-This picture show you an overview of Jcaptcha:
-</div>
-<br />
-<div>
-<img alt='BIG PICTURE' src='images/big_picture2.jpg' />
-</div>
-<br />
-<br />
-<div>
-Jcaptcha is free and released under open-source <b>Apache License</b>.
-</div>
-  ]]>
+     <![CDATA[
+  <b>JCAPTCHA</b>, for <b>J</b>ava <b>C</b>ompletely <b>A</b>utomated <b>P</b>ublic <b>T</b>est to tell <b>C</b>omputers and <b>H</b>umans <b>A</b>part
+  <br/>See : <a href="http://jcaptcha.sourceforge.net/moniwiki/wiki.php/JcapTcha">Project description</a>
+   ]]>
   </description>
   
   <shortDescription>
-  CAPTCHA is a test based on several cognitives puzzles based on challenging problems
-  of artificial intelligence.
-  </shortDescription>
+      Framework
+    </shortDescription>
 
   <url/>
   <repository>
