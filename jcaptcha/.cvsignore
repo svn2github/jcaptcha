@@ -1,3 +1,4 @@
 target
 jcaptcha.ipr
 jcaptcha.iws
+*.log

@@ -1,2 +1,4 @@
 target
 jcaptcha-engine.iml
+*.properties
+*.log
