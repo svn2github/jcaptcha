@@ -63,7 +63,7 @@ import javax.servlet.ServletException;
 public class FilterConfigUtils
 {
     /**
-     * Get a String init parameter from web.xml
+     * Get a String init parameter from a FilterConfig
      * @param theFilterConfig the FilterConfig from wich the parameter should be
      * extracted
      * @param theInitParameterName the name of the init parameter
@@ -94,7 +94,7 @@ public class FilterConfigUtils
     }
 
     /**
-     * Get an Integer init parameter from web.xml
+     * Get an Integer init parameter from a FilterConfig
      * @param theFilterConfig the FilterConfig from wich the parameter should be
      * extracted
      * @param theInitParameterName the name of the init parameter
@@ -159,7 +159,7 @@ public class FilterConfigUtils
     }
 
     /**
-     * Get a boolean init parameter from web.xml
+     * Get a boolean init parameter from a FilterConfig
      * @param theFilterConfig the FilterConfig from wich the parameter should be
      * extracted
      * @param theInitParameterName the name of the init parameter

@@ -347,12 +347,12 @@
         <!-- Describe the includes files to the project -->
         <includes>
           <!-- This element specifies an Ant pattern of files to include in a list. -->
-          <include>**/*.*</include>
+          <include/>
         </includes>
         <!-- Describe the excludes files to the project -->
         <excludes>
           <!-- This element specifies an Ant pattern of files to exclude in a list. -->
-          <exclude/>
+          <exclude>ImageCaptchaService.wsdd imageCaptchaService.properties</exclude>
         </excludes>
         <!-- Boolean. Describe if resources are filtered or not. -->
         <filtering/>
