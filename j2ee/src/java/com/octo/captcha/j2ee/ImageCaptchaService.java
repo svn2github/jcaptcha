@@ -556,8 +556,9 @@ public class ImageCaptchaService implements ImageCaptchaServiceMBean
      */
     public long getNumberOfGarbageCollectedCaptcha()
     {
-        //return this.internalStore.getNumberOfGarbageCollectedEntriesSinceCreation();
-        return 0;
+        return this
+            .internalStore
+            .getNumberOfGarbageCollectedEntriesSinceCreation();
     }
 
     /**
@@ -714,8 +715,7 @@ public class ImageCaptchaService implements ImageCaptchaServiceMBean
         catch (ClassNotFoundException e)
         {
             throw new RuntimeException(
-                "Initialization error : can't find class "
-                    + engineClassName);
+                "Initialization error : can't find class " + engineClassName);
         }
         catch (InstantiationException e)
         {
