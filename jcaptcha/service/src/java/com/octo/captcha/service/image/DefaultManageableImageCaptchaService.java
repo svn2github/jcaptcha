@@ -466,30 +466,31 @@ package com.octo.captcha.service.image;
 
 import com.octo.captcha.service.captchastore.CaptchaStore;
 import com.octo.captcha.service.captchastore.MapCaptchaStore;
+import com.octo.captcha.service.EhcacheManageableCaptchaService;
 import com.octo.captcha.engine.CaptchaEngine;
 import com.octo.captcha.engine.image.gimpy.BaffleListGimpyEngine;
 import com.octo.captcha.engine.image.gimpy.DefaultGimpyEngine;
 
 /**
- * <p>Default service implementation : use a MapCaptchaStore, and a DefaultGimpyEngine </p>
+ * <p>Default service implementation : use a ehCache as captcha store, and a DefaultGimpyEngine </p>
  * It is initialized with thoses default values :
  * <ul>
- * <li>min guaranted delay : 60s
+ * <li>min guaranted delay : 180s
  * </li>
- * <li>max store size : 10000 captchas
+ * <li>max store size : 100000 captchas
  * </li>
- * <li>max store size before garbage collection : 7000 captchas
+ * <li>max store size before garbage collection : non applicable
  * </li>
  * </ul>
+ *
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class DefaultManageableImageCaptchaService extends AbstractManageableImageCaptchaService
-{
+public class DefaultManageableImageCaptchaService extends EhcacheManageableImageCaptchaService 
+        implements ImageCaptchaService{
 
-    public DefaultManageableImageCaptchaService()
-    {
-        super(new MapCaptchaStore(), new DefaultGimpyEngine(), 60,
-                10000, 7000);
+    public DefaultManageableImageCaptchaService() {
+        super(new DefaultGimpyEngine(),180 ,
+                100000);
     }
 }

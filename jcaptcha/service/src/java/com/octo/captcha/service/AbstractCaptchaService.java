@@ -585,8 +585,7 @@ public abstract class AbstractCaptchaService implements CaptchaService {
     public Boolean validateResponseForID(String ID, Object response)
             throws CaptchaServiceException {
         if (!store.hasCaptcha(ID)) {
-            throw new CaptchaServiceException(
-                    "Invalid ID, could not validate!");
+            throw new CaptchaServiceException("Invalid ID, could not validate!");
         } else {
             Boolean valid = store.getCaptcha(ID).validateResponse(response);
             store.removeCaptcha(ID);

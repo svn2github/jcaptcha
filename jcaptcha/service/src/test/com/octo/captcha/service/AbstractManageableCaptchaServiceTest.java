@@ -471,9 +471,9 @@ import com.octo.captcha.service.captchastore.MapCaptchaStore;
 import java.util.Locale;
 
 public class AbstractManageableCaptchaServiceTest extends AbstractCaptchaServiceTest {
-    public static final int MIN_GUARANTED_STORAGE_DELAY_IN_SECONDS = 1;
-    public static final int CAPTCHA_STORE_LOAD_BEFORE_GARBAGE_COLLECTION = 2 * SIZE;
-    public static final int MAX_CAPTCHA_STORE_SIZE = 3 * SIZE;
+    public static int MIN_GUARANTED_STORAGE_DELAY_IN_SECONDS = 2;
+    public static  int CAPTCHA_STORE_LOAD_BEFORE_GARBAGE_COLLECTION = 2 * SIZE;
+    public static int MAX_CAPTCHA_STORE_SIZE = 3 * SIZE;
 
 
     protected void setUp() throws Exception {
@@ -485,8 +485,8 @@ public class AbstractManageableCaptchaServiceTest extends AbstractCaptchaService
     }
 
     //down casts
-    private AbstractManageableCaptchaService getMService() {
-        return (AbstractManageableCaptchaService) service;
+    protected ManageableCaptchaService getMService() {
+        return (ManageableCaptchaService) service;
     }
 
 
@@ -559,7 +559,7 @@ public class AbstractManageableCaptchaServiceTest extends AbstractCaptchaService
         assertTrue("store size should be the same(this test may fail if time to load the store is > min guaranted...)",
                 getMService().getCaptchaStoreSize() == CAPTCHA_STORE_LOAD_BEFORE_GARBAGE_COLLECTION);
         //wait,  and collect
-        Thread.sleep(MIN_GUARANTED_STORAGE_DELAY_IN_SECONDS * 1000);
+        Thread.sleep(MIN_GUARANTED_STORAGE_DELAY_IN_SECONDS * 1000+100);
         getMService().garbageCollectCaptchaStore();
         assertTrue("store should be empty",
                 getMService().getCaptchaStoreSize() == 0);
@@ -651,7 +651,7 @@ public class AbstractManageableCaptchaServiceTest extends AbstractCaptchaService
         assertEquals("all but one should be collectable",
                 CAPTCHA_STORE_LOAD_BEFORE_GARBAGE_COLLECTION - 1,
                 getMService().getNumberOfGarbageCollectableCaptchas());
-        Thread.sleep(MIN_GUARANTED_STORAGE_DELAY_IN_SECONDS * 1000);
+        Thread.sleep(MIN_GUARANTED_STORAGE_DELAY_IN_SECONDS * 1000 + 100);
         assertEquals("all should be collectable",
                 CAPTCHA_STORE_LOAD_BEFORE_GARBAGE_COLLECTION,
                 getMService().getNumberOfGarbageCollectableCaptchas());
@@ -828,7 +828,7 @@ public class AbstractManageableCaptchaServiceTest extends AbstractCaptchaService
         assertEquals("store size should be full",
                 MAX_CAPTCHA_STORE_SIZE,
                 getMService().getCaptchaStoreSize());
-        Thread.sleep(5 * 1000 + 10);
+        Thread.sleep(5 * 1000 + 100);
         assertEquals("all should be collectable",
                 MAX_CAPTCHA_STORE_SIZE,
                 getMService().getNumberOfGarbageCollectableCaptchas());
@@ -849,7 +849,7 @@ public class AbstractManageableCaptchaServiceTest extends AbstractCaptchaService
             }
         }
         getMService().setMinGuarantedStorageDelayInSeconds(1);
-        Thread.sleep(1 * 1000 + 10);
+        Thread.sleep(1 * 1000 + 100);
         fullLoad();
 
     }
@@ -866,7 +866,7 @@ public class AbstractManageableCaptchaServiceTest extends AbstractCaptchaService
             String id = String.valueOf(i);
             service.generateAndStoreCaptcha(Locale.getDefault(), id);
         }
-        Thread.sleep(MIN_GUARANTED_STORAGE_DELAY_IN_SECONDS * 1000 + 1);
+        Thread.sleep(MIN_GUARANTED_STORAGE_DELAY_IN_SECONDS * 1000 + 100);
     }
 
 

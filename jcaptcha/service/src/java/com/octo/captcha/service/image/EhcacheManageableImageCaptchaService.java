@@ -461,184 +461,72 @@
 
                        END OF TERMS AND CONDITIONS
 */
+package com.octo.captcha.service.image;
 
-package com.octo.captcha.service;
+import com.octo.captcha.service.CaptchaServiceException;
+import com.octo.captcha.service.EhcacheManageableCaptchaService;
+import com.octo.captcha.Captcha;
+import com.octo.captcha.engine.CaptchaEngine;
 
-import net.sourceforge.groboutils.junit.v1.MultiThreadedTestRunner;
-import net.sourceforge.groboutils.junit.v1.TestRunnable;
-import junit.framework.TestCase;
+import java.awt.image.BufferedImage;
+import java.util.Locale;
 
 /**
- * Base Load test for service implementation
- *
- * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
- * @version 1.0
+  * Base implementation of the EhcacheManageableImageCaptchaService.
  */
-public abstract class ServiceLoadTestAbstract extends TestCase
-{
+public abstract class EhcacheManageableImageCaptchaService extends EhcacheManageableCaptchaService  implements ImageCaptchaService {
 
-    protected abstract void setUp() throws Exception;
-
-    protected CaptchaService service;
-
-    static class ServiceUserNominalHelper extends TestRunnable
-   {
-
-           private CaptchaService service;
-           private int count;
-           private int sleepTime;
-
-
-           public ServiceUserNominalHelper( CaptchaService service, int count,
-               int delay )
-           {
-               this.service= service;
-               this.count = count;
-               this.sleepTime = delay;
-           }
-
-           public void runTest() throws Throwable
-           {
-               for (int i = 0; i < this.count; ++i)
-               {
-
-                   String question = service.getQuestionForID(this.toString());
-                   Thread.sleep( this.sleepTime );
-                   assertNotNull(question);
-                   assertTrue("should not be empty",!"".equals(question));
-                   Object challenge = service.getChallengeForID(this.toString());
-                   Thread.sleep( this.sleepTime );
-                   assertNotNull(challenge);
-                   Boolean valid = service.validateResponseForID(this.toString(),"");
-                   Thread.sleep( this.sleepTime );
-                   assertNotNull(valid);
-                   Thread.sleep( this.sleepTime );
-               }
-           }
-       }
-
-
- static class ServiceUserSpamHelper extends TestRunnable
-{
-
-        private CaptchaService service;
-        private int count;
-        private int sleepTime;
-
-
-        public ServiceUserSpamHelper( CaptchaService service, int count,
-            int delay )
-        {
-            this.service= service;
-            this.count = count;
-            this.sleepTime = delay;
-        }
-
-        public void runTest() throws Throwable
-        {
-            for (int i = 0; i < this.count; ++i)
-            {
-                Object challenge = service.getChallengeForID(this.toString());
-                assertNotNull(challenge);
-                Boolean valid = service.validateResponseForID(this.toString(),"");
-                Thread.sleep( this.sleepTime );
-            }
-        }
+    protected EhcacheManageableImageCaptchaService(CaptchaEngine captchaEngine, int minGuarantedStorageDelayInSeconds, int maxCaptchaStoreSize) {
+        super(captchaEngine, minGuarantedStorageDelayInSeconds, maxCaptchaStoreSize);    
     }
 
-    public void testNominal_100It_0Del_1Us_2min() throws Throwable
-    {
-
-        int count_nominal = 100;
-        int delay_nominal = 0;
-        int users_nominal = 1;
-
-        int count_spam = 0;
-        int delay_spam = 0;
-        int users_spam = 0;
-        int max_time = 2 * 60 * 1000;
-        load(users_nominal, count_nominal, delay_nominal, users_spam, count_spam, delay_spam, max_time);
-
-
-    }
-
-    public void testNominal_1It_0Del_100Us_2min() throws Throwable
-    {
-
-        int count_nominal = 1;
-        int delay_nominal = 0;
-        int users_nominal = 100;
-
-        int count_spam = 0;
-        int delay_spam = 0;
-        int users_spam = 0;
-        int max_time = 2 * 60 * 1000;
-        load(users_nominal, count_nominal, delay_nominal, users_spam, count_spam, delay_spam, max_time);
-
+    /**
+     * Method to retrive the image challenge corresponding to the given ticket.
+     *
+     * @param ID the ticket
+     * @return the challenge
+     * @throws com.octo.captcha.service.CaptchaServiceException
+     *          if the ticket is invalid
+     */
+    public BufferedImage getImageChallengeForID(String ID) throws CaptchaServiceException {
+        return (BufferedImage) this.getChallengeForID(ID);
     }
 
 
-    public void testNominal_10It_10Del_10Us_Spam_100It_10Del_5Us_2min() throws Throwable
-        {
+    /**
+     * Method to retrive the image challenge corresponding to the given ticket.
+     *
+     * @param ID the ticket
+     * @return the challenge
+     * @throws com.octo.captcha.service.CaptchaServiceException
+     *          if the ticket is invalid
+     */
+    public BufferedImage getImageChallengeForID(String ID, Locale locale) throws CaptchaServiceException {
+        return (BufferedImage) this.getChallengeForID(ID, locale);
+    }
 
-            int count_nominal = 10;
-            int delay_nominal = 10;
-            int users_nominal = 10;
+    /**
+     * This method must be implemented by sublcasses and :
+     * Retrieve the challenge from the captcha
+     * Make and return a clone of the challenge
+     * Return the clone
+     * It has be design in order to let the service dipose
+     * the challenge of the captcha after rendering.
+     * It should be implemented for all captcha type (@see ImageCaptchaService implementations
+     * for exemple)
+     *
+     * @param captcha
+     * @return a Challenge Clone
+     */
+    protected Object getChallengeClone(Captcha captcha) {
+        BufferedImage challenge = (BufferedImage) captcha.getChallenge();
+        BufferedImage clone = new BufferedImage(challenge.getWidth(), challenge.getHeight(), challenge.getType());
 
-            int count_spam = 100;
-            int delay_spam = 10;
-            int users_spam = 5;
-            int max_time = 2 * 60 * 1000;
-            load(users_nominal, count_nominal, delay_nominal, users_spam, count_spam, delay_spam, max_time);
-
-        }
-
-
-    public void testNominal_10It_100Del_10Us_Spam_100It_10Del_5Us_2min() throws Throwable
-        {
-
-            int count_nominal = 10;
-            int delay_nominal = 100;
-            int users_nominal = 10;
-
-            int count_spam = 100;
-            int delay_spam = 10;
-            int users_spam = 5;
-            int max_time = 2 * 60 * 1000;
-            load(users_nominal, count_nominal, delay_nominal, users_spam, count_spam, delay_spam, max_time);
-
-        }
-
-
-    public void testNominal_2It_10000Del_500Us_Spam_100It_10Del_5Us_5min() throws Throwable
-        {
-
-            int count_nominal = 2;
-            int delay_nominal = 10000;
-            int users_nominal = 500;
-
-            int count_spam = 100;
-            int delay_spam = 10;
-            int users_spam = 5;
-            int max_time = 5 * 60 * 1000;
-            load(users_nominal, count_nominal, delay_nominal, users_spam, count_spam, delay_spam, max_time);
-
-        }
+        clone.getGraphics().drawImage(challenge, 0, 0, clone.getWidth(), clone.getHeight(), null);
+        clone.getGraphics().dispose();
 
 
-    private void load(int users_nominal, int count_nominal, int delay_nominal, int users_spam, int count_spam, int delay_spam,int max_time)
-            throws Throwable
-    {
-        TestRunnable[] tcs = new TestRunnable[users_nominal+users_spam];
-        for(int i=0;i<users_nominal;i++){
-            tcs[i]=new ServiceUserNominalHelper( this.service, count_nominal,  delay_nominal );
-            }
-        for(int i=0;i<users_spam;i++){
-            tcs[i+users_nominal]=new ServiceUserNominalHelper( this.service, count_spam,  delay_spam );
-            }
-        MultiThreadedTestRunner mttr =
-            new MultiThreadedTestRunner( tcs );
-        mttr.runTestRunnables( max_time );
+        return clone;
     }
 
 }

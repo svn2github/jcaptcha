@@ -537,8 +537,7 @@ public abstract class AbstractManageableCaptchaService
             if (engine instanceof com.octo.captcha.engine.CaptchaEngine) {
                 this.engine = (com.octo.captcha.engine.CaptchaEngine) engine;
             } else {
-                throw new IllegalArgumentException(
-                        "Class is not instance of CaptchaEngine! "
+                throw new IllegalArgumentException("Class is not instance of CaptchaEngine! "
                         + theClassName);
             }
         } catch (InstantiationException e) {
@@ -574,8 +573,7 @@ public abstract class AbstractManageableCaptchaService
      *         the
      *         minimum guaranted delay
      */
-    public void setMinGuarantedStorageDelayInSeconds(
-            int theMinGuarantedStorageDelayInSeconds) {
+    public void setMinGuarantedStorageDelayInSeconds(int theMinGuarantedStorageDelayInSeconds) {
         this.minGuarantedStorageDelayInSeconds = theMinGuarantedStorageDelayInSeconds;
     }
 
@@ -632,8 +630,7 @@ public abstract class AbstractManageableCaptchaService
      *         in the captcha store
      */
     public int getNumberOfGarbageCollectableCaptchas() {
-        return getGarbageCollectableCaptchaIds(
-                System.currentTimeMillis()).size();
+        return getGarbageCollectableCaptchaIds(System.currentTimeMillis()).size();
     }
 
 
@@ -661,12 +658,10 @@ public abstract class AbstractManageableCaptchaService
      * @param captchaStoreSizeBeforeGarbageCollection
      *
      */
-    public void setCaptchaStoreSizeBeforeGarbageCollection(
-            int captchaStoreSizeBeforeGarbageCollection) {
+    public void setCaptchaStoreSizeBeforeGarbageCollection(int captchaStoreSizeBeforeGarbageCollection) {
         if (this.captchaStoreMaxSize <
                 captchaStoreSizeBeforeGarbageCollection)
-            throw new IllegalArgumentException(
-                    "the max store size can't be less than garbage collection "
+            throw new IllegalArgumentException("the max store size can't be less than garbage collection "
                     + "size. if you want to disable garbage" +
                     " collection (this is not recommended) you may "
                     + "set them equals (max=garbage)");

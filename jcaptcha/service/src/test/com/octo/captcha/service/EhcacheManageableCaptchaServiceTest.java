@@ -461,184 +461,87 @@
 
                        END OF TERMS AND CONDITIONS
 */
-
 package com.octo.captcha.service;
 
-import net.sourceforge.groboutils.junit.v1.MultiThreadedTestRunner;
-import net.sourceforge.groboutils.junit.v1.TestRunnable;
-import junit.framework.TestCase;
-
-/**
- * Base Load test for service implementation
- *
- * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
- * @version 1.0
- */
-public abstract class ServiceLoadTestAbstract extends TestCase
-{
-
-    protected abstract void setUp() throws Exception;
-
-    protected CaptchaService service;
-
-    static class ServiceUserNominalHelper extends TestRunnable
-   {
-
-           private CaptchaService service;
-           private int count;
-           private int sleepTime;
 
 
-           public ServiceUserNominalHelper( CaptchaService service, int count,
-               int delay )
-           {
-               this.service= service;
-               this.count = count;
-               this.sleepTime = delay;
-           }
+import junit.framework.*;
+import com.octo.captcha.service.EhcacheManageableCaptchaService;
+import com.octo.captcha.service.captchastore.MapCaptchaStore;
+import com.octo.captcha.service.captchastore.CaptchaStore;
+import com.octo.captcha.Captcha;
 
-           public void runTest() throws Throwable
-           {
-               for (int i = 0; i < this.count; ++i)
-               {
+public class EhcacheManageableCaptchaServiceTest extends AbstractManageableCaptchaServiceTest {
+    EhcacheManageableCaptchaService ehcacheManageableCaptchaService;
 
-                   String question = service.getQuestionForID(this.toString());
-                   Thread.sleep( this.sleepTime );
-                   assertNotNull(question);
-                   assertTrue("should not be empty",!"".equals(question));
-                   Object challenge = service.getChallengeForID(this.toString());
-                   Thread.sleep( this.sleepTime );
-                   assertNotNull(challenge);
-                   Boolean valid = service.validateResponseForID(this.toString(),"");
-                   Thread.sleep( this.sleepTime );
-                   assertNotNull(valid);
-                   Thread.sleep( this.sleepTime );
-               }
-           }
-       }
-
-
- static class ServiceUserSpamHelper extends TestRunnable
-{
-
-        private CaptchaService service;
-        private int count;
-        private int sleepTime;
-
-
-        public ServiceUserSpamHelper( CaptchaService service, int count,
-            int delay )
-        {
-            this.service= service;
-            this.count = count;
-            this.sleepTime = delay;
-        }
-
-        public void runTest() throws Throwable
-        {
-            for (int i = 0; i < this.count; ++i)
-            {
-                Object challenge = service.getChallengeForID(this.toString());
-                assertNotNull(challenge);
-                Boolean valid = service.validateResponseForID(this.toString(),"");
-                Thread.sleep( this.sleepTime );
-            }
-        }
+    protected void setUp() throws Exception {
+         this.service = new MockedEhCacheManageableCaptchaService(new MockCaptchaEngine(),
+                 MIN_GUARANTED_STORAGE_DELAY_IN_SECONDS,MAX_CAPTCHA_STORE_SIZE
+                );
+        AbstractManageableCaptchaServiceTest.CAPTCHA_STORE_LOAD_BEFORE_GARBAGE_COLLECTION = 0;
     }
 
-    public void testNominal_100It_0Del_1Us_2min() throws Throwable
-    {
-
-        int count_nominal = 100;
-        int delay_nominal = 0;
-        int users_nominal = 1;
-
-        int count_spam = 0;
-        int delay_spam = 0;
-        int users_spam = 0;
-        int max_time = 2 * 60 * 1000;
-        load(users_nominal, count_nominal, delay_nominal, users_spam, count_spam, delay_spam, max_time);
-
-
-    }
-
-    public void testNominal_1It_0Del_100Us_2min() throws Throwable
-    {
-
-        int count_nominal = 1;
-        int delay_nominal = 0;
-        int users_nominal = 100;
-
-        int count_spam = 0;
-        int delay_spam = 0;
-        int users_spam = 0;
-        int max_time = 2 * 60 * 1000;
-        load(users_nominal, count_nominal, delay_nominal, users_spam, count_spam, delay_spam, max_time);
-
+    protected void tearDown() throws Exception {
+        getMService().emptyCaptchaStore();
     }
 
 
-    public void testNominal_10It_10Del_10Us_Spam_100It_10Del_5Us_2min() throws Throwable
-        {
 
-            int count_nominal = 10;
-            int delay_nominal = 10;
-            int users_nominal = 10;
+    /*
+    OVERRIDE TO SKIP or replace
+    */
 
-            int count_spam = 100;
-            int delay_spam = 10;
-            int users_spam = 5;
-            int max_time = 2 * 60 * 1000;
-            load(users_nominal, count_nominal, delay_nominal, users_spam, count_spam, delay_spam, max_time);
-
-        }
-
-
-    public void testNominal_10It_100Del_10Us_Spam_100It_10Del_5Us_2min() throws Throwable
-        {
-
-            int count_nominal = 10;
-            int delay_nominal = 100;
-            int users_nominal = 10;
-
-            int count_spam = 100;
-            int delay_spam = 10;
-            int users_spam = 5;
-            int max_time = 2 * 60 * 1000;
-            load(users_nominal, count_nominal, delay_nominal, users_spam, count_spam, delay_spam, max_time);
-
-        }
-
-
-    public void testNominal_2It_10000Del_500Us_Spam_100It_10Del_5Us_5min() throws Throwable
-        {
-
-            int count_nominal = 2;
-            int delay_nominal = 10000;
-            int users_nominal = 500;
-
-            int count_spam = 100;
-            int delay_spam = 10;
-            int users_spam = 5;
-            int max_time = 5 * 60 * 1000;
-            load(users_nominal, count_nominal, delay_nominal, users_spam, count_spam, delay_spam, max_time);
-
-        }
-
-
-    private void load(int users_nominal, int count_nominal, int delay_nominal, int users_spam, int count_spam, int delay_spam,int max_time)
-            throws Throwable
-    {
-        TestRunnable[] tcs = new TestRunnable[users_nominal+users_spam];
-        for(int i=0;i<users_nominal;i++){
-            tcs[i]=new ServiceUserNominalHelper( this.service, count_nominal,  delay_nominal );
-            }
-        for(int i=0;i<users_spam;i++){
-            tcs[i+users_nominal]=new ServiceUserNominalHelper( this.service, count_spam,  delay_spam );
-            }
-        MultiThreadedTestRunner mttr =
-            new MultiThreadedTestRunner( tcs );
-        mttr.runTestRunnables( max_time );
+    public void testSetCaptchaStoreMaxSize() throws Exception {
+            super.getMService().setCaptchaStoreMaxSize(CAPTCHA_STORE_LOAD_BEFORE_GARBAGE_COLLECTION);
+        assertEquals("modified size",
+                CAPTCHA_STORE_LOAD_BEFORE_GARBAGE_COLLECTION, getMService().getCaptchaStoreMaxSize());
     }
 
+    public void testSetCaptchaStoreSizeBeforeGarbageCollection() throws Exception {
+
+    }
+
+    public void testGetNumberOfGarbageCollectedCaptcha() throws Exception {
+
+    }
+
+    public void testGetCaptchaStoreSizeBeforeGarbageCollection() throws Exception {
+
+    }
+
+    public void testAutomaticGarbaging() throws Exception {
+       
+    }
+
+    public void testGetNumberOfGarbageCollectableCaptchas() throws Exception {
+        
+    }
+
+     protected class MockedEhCacheManageableCaptchaService extends EhcacheManageableCaptchaService {
+
+        protected MockedEhCacheManageableCaptchaService (com.octo.captcha.engine.CaptchaEngine captchaEngine,
+
+                                                         int minGuarantedStorageDelayInSeconds, int maxCaptchaStoreSize
+                                                 ) {
+            super(captchaEngine,  minGuarantedStorageDelayInSeconds,maxCaptchaStoreSize);
+        }
+
+        /**
+         * This method must be implemented by sublcasses and :
+         * Retrieve the challenge from the captcha
+         * Make and return a clone of the challenge
+         * Return the clone
+         * It has be design in order to let the service dipose
+         * the challenge of the captcha after rendering.
+         * It should be implemented for all captcha type (@see ImageCaptchaService implementations
+         * for exemple)
+         *
+         * @param captcha
+         * @return a Challenge Clone
+         */
+        protected Object getChallengeClone(Captcha captcha) {
+            return new String(captcha.getChallenge().toString()) + MockedCaptchaService.CLONE_CHALLENGE;
+        }
+
+    }
 }
