@@ -52,37 +52,39 @@ package com.octo.captcha.image.utils;
 
 import com.octo.captcha.image.ImageCaptcha;
 import com.octo.captcha.image.ImageCaptchaFactory;
-import com.octo.captcha.image.utils.ImageToFile;
 import com.octo.captcha.image.gimpy.GimpyFactory;
 import com.octo.captcha.image.gimpy.WordGenerator;
 import com.octo.captcha.image.gimpy.WordToImage;
 import com.octo.captcha.image.gimpy.wordgenerator.DummyWordGenerator;
-import com.octo.captcha.image.gimpy.wordtoimage.ComposedWordToImage;
 import com.octo.captcha.image.gimpy.wordtoimage.BackgroundGenerator;
+import com.octo.captcha.image.gimpy.wordtoimage.ComposedWordToImage;
+import com.octo.captcha.image.gimpy.wordtoimage.FontGenerator;
 import com.octo.captcha.image.gimpy.wordtoimage.TextPaster;
 import com.octo.captcha.image.gimpy.wordtoimage.backgroundgenerator.EllipseBackgroundGenerator;
 import com.octo.captcha.image.gimpy.wordtoimage.fontgenerator.TwistedAndShearedRandomFontGenerator;
-import com.octo.captcha.image.gimpy.wordtoimage.FontGenerator;
 import com.octo.captcha.image.gimpy.wordtoimage.textpaster.SimpleTextPaster;
 
+import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
-import java.awt.Color;
 
 /**
  * <p>Description: Generate a sample logo for the master webSite. Main method takes one arg : the file path of the generated logo</p>
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class LogoGenerator {
-    public static void main(String[] args) throws IOException {
-        TextPaster paster = new SimpleTextPaster(new Integer(8),new Integer(8), Color.BLUE);
-        BackgroundGenerator back = new EllipseBackgroundGenerator(new Integer(50),new Integer(100));
-        FontGenerator font = new TwistedAndShearedRandomFontGenerator(new Integer(12),null);
+public class LogoGenerator
+{
+
+    public static void main(String[] args) throws IOException
+    {
+        TextPaster paster = new SimpleTextPaster(new Integer(8), new Integer(8), Color.BLUE);
+        BackgroundGenerator back = new EllipseBackgroundGenerator(new Integer(50), new Integer(100));
+        FontGenerator font = new TwistedAndShearedRandomFontGenerator(new Integer(12), null);
         WordGenerator words = new DummyWordGenerator("JCAPTCHA");
         WordToImage word2image = new ComposedWordToImage(font, back, paster);
         ImageCaptchaFactory factory = new GimpyFactory(words, word2image);
         ImageCaptcha pix = factory.getImageCaptcha();
-        ImageToFile.serialize(pix.getImageChallenge(),new File(args[0]));
+        ImageToFile.serialize(pix.getImageChallenge(), new File(args[0]));
     }
 }

@@ -1,31 +1,22 @@
 
 package com.octo.captcha.image.gimpy;
 
-import com.octo.captcha.image.ImageCaptchaEngine;
 import com.octo.captcha.image.DefaultImageCaptchaEngine;
 import com.octo.captcha.image.ImageCaptchaFactory;
-import com.octo.captcha.image.gimpy.GimpyFactory;
-import com.octo.captcha.image.gimpy.WordGenerator;
-import com.octo.captcha.image.gimpy.WordToImage;
 import com.octo.captcha.image.gimpy.wordgenerator.DictionaryWordGenerator;
 import com.octo.captcha.image.gimpy.wordgenerator.FileDictionnary;
-import com.octo.captcha.image.gimpy.wordtoimage.ComposedWordToImage;
 import com.octo.captcha.image.gimpy.wordtoimage.BackgroundGenerator;
+import com.octo.captcha.image.gimpy.wordtoimage.ComposedWordToImage;
+import com.octo.captcha.image.gimpy.wordtoimage.FontGenerator;
 import com.octo.captcha.image.gimpy.wordtoimage.TextPaster;
-import com.octo.captcha.image.gimpy.wordtoimage.backgroundgenerator.FunkyBackgroundGenerator;
-import com.octo.captcha.image.gimpy.wordtoimage.backgroundgenerator.MultipleShapeBackgroundGenerator;
 import com.octo.captcha.image.gimpy.wordtoimage.backgroundgenerator.FileReaderRandomBackgroundGenerator;
-import com.octo.captcha.image.gimpy.wordtoimage.fontgenerator.RandomFontGenerator;
+import com.octo.captcha.image.gimpy.wordtoimage.backgroundgenerator.FunkyBackgroundGenerator;
 import com.octo.captcha.image.gimpy.wordtoimage.fontgenerator.TwistedAndShearedRandomFontGenerator;
 import com.octo.captcha.image.gimpy.wordtoimage.fontgenerator.TwistedRandomFontGenerator;
-import com.octo.captcha.image.gimpy.wordtoimage.FontGenerator;
-import com.octo.captcha.image.gimpy.wordtoimage.FilteredComposedWordToImage;
-import com.octo.captcha.image.gimpy.wordtoimage.textpaster.DoubleTextPaster;
 import com.octo.captcha.image.gimpy.wordtoimage.textpaster.DoubleRandomTextPaster;
 import com.octo.captcha.image.gimpy.wordtoimage.textpaster.RandomTextPaster;
 
 import java.awt.Color;
-import java.awt.image.ImageFilter;
 
 /**
  * <p>Description: very simple engine</p>
@@ -39,13 +30,12 @@ public class MultipleGimpyEngine extends DefaultImageCaptchaEngine
 
     static
     {
-       //word generator
-       WordGenerator dictionnaryWords = new DictionaryWordGenerator(new FileDictionnary("toddlist"));
+        //word generator
+        WordGenerator dictionnaryWords = new DictionaryWordGenerator(new FileDictionnary("toddlist"));
 
-       //wordtoimage components
+        //wordtoimage components
         TextPaster randomPaster = new RandomTextPaster(new Integer(6), new Integer(8), Color.WHITE);
         TextPaster doublePaster = new DoubleRandomTextPaster(new Integer(6), new Integer(8), Color.WHITE);
-
 
         BackgroundGenerator fileBack = new FileReaderRandomBackgroundGenerator(new Integer(200), new Integer(100), "./images");
         BackgroundGenerator funkyBack = new FunkyBackgroundGenerator(new Integer(200), new Integer(100));

@@ -6,7 +6,7 @@
   <id>jcaptcha-samples</id>
   <name>JCaptcha-samples</name>
   <groupId>jcaptcha</groupId>
-  <currentVersion>1.0-beta1</currentVersion>
+  <currentVersion>1.0-beta2-SNAPSHOT</currentVersion>
   <organization>
     <!-- The full name of the organization. -->
     <name>JCaptcha corp.</name>
@@ -15,7 +15,7 @@
     <!-- The URL to the organization's logo image. This can be an URL relative to the base directory of the generated
          web site, (e.g., /images/org-logo.png) or an absolute URL (e.g., http://my.corp/logo.png). This value is used
          when generating the project documentation. -->
-    <logo>/images/organization-logo.jpg</logo>
+        <logo>../images/organization-logo.jpg</logo>
   </organization>
   <inceptionYear>2003</inceptionYear>
   <package>com.octo.captcha</package>
@@ -129,14 +129,14 @@
     	<dependency>
     	    <groupId>jcaptcha</groupId>
             <artifactId>jcaptcha-core</artifactId>
-            <version>1.0-beta1</version>
+            <version>1.0-beta2-SNAPSHOT</version>
             <url>http://jcaptcha.sourceforge.net</url>
     	</dependency>
     	
     	<dependency>
     	    <groupId>jhlabs</groupId>
-    	    <artifactId>jhlabs</artifactId>
-            <jar>imageeditor.jar</jar>
+    	    <artifactId>imaging</artifactId>
+            <version>1.0</version>
     	</dependency>
     	
   </dependencies>

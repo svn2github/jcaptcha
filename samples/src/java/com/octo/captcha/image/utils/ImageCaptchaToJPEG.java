@@ -66,7 +66,7 @@ public class ImageCaptchaToJPEG
 
     public static void main(String[] args) throws Exception
     {
-        System.out.println("args : " + args);
+        System.out.println("args : engine class='" + args[0] + "', output dir='" + args[1] + "',iterations='" + args[2] + "'");
         ImageCaptchaEngine pixCapchaEngine = (ImageCaptchaEngine) Class.forName(args[0]).newInstance();
         System.out.println("engine initialized");
         ImageCaptchaFactory pixCaptchaFactory = pixCapchaEngine.getImageCaptchaFactory();

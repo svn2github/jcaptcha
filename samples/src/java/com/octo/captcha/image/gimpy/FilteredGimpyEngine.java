@@ -50,35 +50,29 @@
 
 package com.octo.captcha.image.gimpy;
 
-import com.octo.captcha.image.gimpy.GimpyFactory;
-import com.octo.captcha.image.gimpy.WordGenerator;
-import com.octo.captcha.image.gimpy.WordToImage;
-import com.octo.captcha.image.gimpy.wordgenerator.DictionaryWordGenerator;
-import com.octo.captcha.image.gimpy.wordgenerator.FileDictionnary;
-import com.octo.captcha.image.gimpy.wordtoimage.ComposedWordToImage;
-import com.octo.captcha.image.gimpy.wordtoimage.FilteredComposedWordToImage;
-import com.octo.captcha.image.gimpy.wordtoimage.BackgroundGenerator;
-import com.octo.captcha.image.gimpy.wordtoimage.TextPaster;
-import com.octo.captcha.image.gimpy.wordtoimage.backgroundgenerator.FunkyBackgroundGenerator;
-import com.octo.captcha.image.gimpy.wordtoimage.backgroundgenerator.MultipleShapeBackgroundGenerator;
-import com.octo.captcha.image.gimpy.wordtoimage.backgroundgenerator.EllipseBackgroundGenerator;
-import com.octo.captcha.image.gimpy.wordtoimage.backgroundgenerator.FileReaderRandomBackgroundGenerator;
-import com.octo.captcha.image.gimpy.wordtoimage.fontgenerator.RandomFontGenerator;
-import com.octo.captcha.image.gimpy.wordtoimage.fontgenerator.TwistedRandomFontGenerator;
-import com.octo.captcha.image.gimpy.wordtoimage.fontgenerator.TwistedAndShearedRandomFontGenerator;
-import com.octo.captcha.image.gimpy.wordtoimage.FontGenerator;
-import com.octo.captcha.image.gimpy.wordtoimage.textpaster.DoubleTextPaster;
-import com.octo.captcha.image.gimpy.wordtoimage.textpaster.SimpleTextPaster;
-import com.octo.captcha.image.gimpy.wordtoimage.textpaster.DoubleRandomTextPaster;
-import com.octo.captcha.image.gimpy.wordtoimage.textpaster.RandomTextPaster;
+import com.jhlabs.image.CrystalizeFilter;
+import com.jhlabs.image.EmbossFilter;
+import com.jhlabs.image.MarbleFilter;
+import com.jhlabs.image.RippleFilter;
+import com.jhlabs.image.SphereFilter;
+import com.jhlabs.image.TransformFilter;
+import com.jhlabs.image.TwirlFilter;
+import com.jhlabs.image.WaterFilter;
+import com.jhlabs.image.WeaveFilter;
 import com.octo.captcha.image.DefaultImageCaptchaEngine;
 import com.octo.captcha.image.ImageCaptchaFactory;
-import com.octo.captcha.Captcha;
-import com.jhlabs.image.*;
+import com.octo.captcha.image.gimpy.wordgenerator.DictionaryWordGenerator;
+import com.octo.captcha.image.gimpy.wordgenerator.FileDictionnary;
+import com.octo.captcha.image.gimpy.wordtoimage.BackgroundGenerator;
+import com.octo.captcha.image.gimpy.wordtoimage.FilteredComposedWordToImage;
+import com.octo.captcha.image.gimpy.wordtoimage.FontGenerator;
+import com.octo.captcha.image.gimpy.wordtoimage.TextPaster;
+import com.octo.captcha.image.gimpy.wordtoimage.backgroundgenerator.FunkyBackgroundGenerator;
+import com.octo.captcha.image.gimpy.wordtoimage.fontgenerator.RandomFontGenerator;
+import com.octo.captcha.image.gimpy.wordtoimage.textpaster.RandomTextPaster;
 
-import java.awt.image.ImageFilter;
 import java.awt.Color;
-import java.util.Random;
+import java.awt.image.ImageFilter;
 
 /**
  * <p>Static factory initializer, instanciates a ImageCaptchaFactory.
@@ -104,7 +98,6 @@ public class FilteredGimpyEngine extends DefaultImageCaptchaEngine
         WeaveFilter weaves = new WeaveFilter();
         CrystalizeFilter crystal = new CrystalizeFilter();
 
-
         emboss.setBumpHeight(2.0f);
 
         ripple.setWaveType(RippleFilter.NOISE);
@@ -125,7 +118,7 @@ public class FilteredGimpyEngine extends DefaultImageCaptchaEngine
         water.setAntialias(true);
         water.setWavelength(10);
 
-        twirl.setAngle(3/ 360);
+        twirl.setAngle(3 / 360);
 
         sphere.setRefractionIndex(1);
 
@@ -137,10 +130,6 @@ public class FilteredGimpyEngine extends DefaultImageCaptchaEngine
         crystal.setEdgeThickness(0.2f);
         crystal.setRandomness(0.1f);
 
-
-
-
-
         TextPaster paster = new RandomTextPaster(new Integer(8), new Integer(10), Color.gray);
         BackgroundGenerator back = new FunkyBackgroundGenerator(new Integer(200), new Integer(100));
         FontGenerator font = new RandomFontGenerator(new Integer(25), new Integer(35));
@@ -149,15 +138,14 @@ public class FilteredGimpyEngine extends DefaultImageCaptchaEngine
 
         //build factories
         factories = new ImageCaptchaFactory[3];
-        WordToImage word2image = new FilteredComposedWordToImage(font, back, paster, new ImageFilter[]{water} ,new ImageFilter[]{emboss},new ImageFilter[]{ripple});
+        WordToImage word2image = new FilteredComposedWordToImage(font, back, paster, new ImageFilter[]{water}, new ImageFilter[]{emboss}, new ImageFilter[]{ripple});
         factories[0] = new GimpyFactory(words, word2image);
         //select filters for 2
-        word2image = new FilteredComposedWordToImage(font, back, paster, new ImageFilter[]{ripple}, new ImageFilter[]{crystal},new ImageFilter[]{});
+        word2image = new FilteredComposedWordToImage(font, back, paster, new ImageFilter[]{rippleBack}, new ImageFilter[]{crystal}, new ImageFilter[]{ripple});
         factories[1] = new GimpyFactory(words, word2image);
         //select filters for 3
-        word2image = new FilteredComposedWordToImage(font, back, paster, new ImageFilter[]{rippleBack}, new ImageFilter[]{},new ImageFilter[]{weaves});
+        word2image = new FilteredComposedWordToImage(font, back, paster, new ImageFilter[]{rippleBack}, new ImageFilter[]{}, new ImageFilter[]{weaves});
         factories[2] = new GimpyFactory(words, word2image);
-
 
     }
 

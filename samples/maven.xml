@@ -10,10 +10,11 @@
     <ant:copy file="${basedir}/images/project-logo.jpg" todir="${maven.build.dir}/docs/images"/>
   </postGoal-->
   
-  <postGoal name="assemble">
-    <ant:mkdir dir="${maven.repo.local}/jhlabs/jars"/>
-    <ant:copy file="${basedir}/lib/imaging.jar" todir="${maven.repo.local}/jhlabs/jar"/>
-  </postGoal>
+<!--  <preGoal name="assemble">-->
+<!--    <ant:echo message="${basedir}"/>-->
+<!--    <ant:mkdir dir="${maven.repo.local}/jhlabs/jars"/>-->
+<!--    <ant:copy file="${basedir}/lib/imaging-1.0.jar" todir="${maven.repo.local}/jhlabs/jars"/>-->
+<!--  </preGoal>-->
   
   <goal name="assemble" prereqs="jar:install"/>
 	

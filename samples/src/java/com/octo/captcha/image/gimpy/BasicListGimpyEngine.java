@@ -48,56 +48,40 @@
  *
  */
 
-package com.octo.captcha.image.utils;
+package com.octo.captcha.image.gimpy;
 
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGEncodeParam;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
+import com.octo.captcha.image.ListImageCaptchaEngine;
+import com.octo.captcha.image.gimpy.wordgenerator.DictionaryWordGenerator;
+import com.octo.captcha.image.gimpy.wordgenerator.FileDictionnary;
+import com.octo.captcha.image.gimpy.wordtoimage.BackgroundGenerator;
+import com.octo.captcha.image.gimpy.wordtoimage.ComposedWordToImage;
+import com.octo.captcha.image.gimpy.wordtoimage.FontGenerator;
+import com.octo.captcha.image.gimpy.wordtoimage.TextPaster;
+import com.octo.captcha.image.gimpy.wordtoimage.backgroundgenerator.FileReaderRandomBackgroundGenerator;
+import com.octo.captcha.image.gimpy.wordtoimage.fontgenerator.TwistedAndShearedRandomFontGenerator;
+import com.octo.captcha.image.gimpy.wordtoimage.textpaster.DoubleRandomTextPaster;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.awt.Color;
 
 /**
  * <p>Description: </p>
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class ImageToFile
+public class BasicListGimpyEngine extends ListImageCaptchaEngine
 {
 
-    public ImageToFile()
+    protected void buildInitialFactories()
     {
+        //word generator
+        WordGenerator dictionnaryWords = new DictionaryWordGenerator(new FileDictionnary("toddlist"));
+        //wordtoimage components
+        TextPaster randomPaster = new DoubleRandomTextPaster(new Integer(6), new Integer(8), Color.WHITE);
+        BackgroundGenerator fileBack = new FileReaderRandomBackgroundGenerator(new Integer(200), new Integer(100), "./images");
+        //BackgroundGenerator funkyBack = new FunkyBackgroundGenerator(new Integer(200), new Integer(100));
+        FontGenerator shearedFont = new TwistedAndShearedRandomFontGenerator(new Integer(30), new Integer(45));
+        //word2image 1
+        WordToImage word2image = new ComposedWordToImage(shearedFont, fileBack, randomPaster);
+        this.addFactory(new GimpyFactory(dictionnaryWords, word2image));
     }
-
-    public static void serialize(BufferedImage image, File file) throws IOException
-    {
-        file.createNewFile();
-        FileOutputStream fos = new FileOutputStream(file);
-        encodeJPG(fos, image);
-        fos.flush();
-        fos.close();
-    }
-
-    public static void encodeJPG(OutputStream sos, BufferedImage image) throws IOException
-    {
-        JPEGImageEncoder encoder =
-                JPEGCodec.createJPEGEncoder(sos);
-
-        JPEGEncodeParam param = encoder.getDefaultJPEGEncodeParam(image);
-//        param.setHorizontalSubsampling(0, 1);
-//        param.setHorizontalSubsampling(1, 1);
-//        param.setHorizontalSubsampling(2, 1);
-//        param.setVerticalSubsampling(0, 1);
-//        param.setVerticalSubsampling(1, 1);
-//        param.setVerticalSubsampling(2, 1);
-        param.setQuality(1.0f, false);
-        encoder.setJPEGEncodeParam(param);
-        encoder.encode(image);
-        encoder.getOutputStream().close();
-    }
-
 }
-

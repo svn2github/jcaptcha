@@ -50,19 +50,15 @@
 
 package com.octo.captcha.image.gimpy;
 
-import com.octo.captcha.image.ImageCaptchaFactory;
 import com.octo.captcha.image.DefaultImageCaptchaEngine;
-import com.octo.captcha.image.gimpy.wordgenerator.DictionaryWordGenerator;
-import com.octo.captcha.image.gimpy.wordgenerator.FileDictionnary;
-import com.octo.captcha.image.gimpy.wordtoimage.TextPaster;
+import com.octo.captcha.image.ImageCaptchaFactory;
+import com.octo.captcha.image.gimpy.wordgenerator.RandomWordGenerator;
 import com.octo.captcha.image.gimpy.wordtoimage.BackgroundGenerator;
-import com.octo.captcha.image.gimpy.wordtoimage.FontGenerator;
 import com.octo.captcha.image.gimpy.wordtoimage.ComposedWordToImage;
-import com.octo.captcha.image.gimpy.wordtoimage.fontgenerator.TwistedRandomFontGenerator;
-import com.octo.captcha.image.gimpy.wordtoimage.fontgenerator.TwistedAndShearedRandomFontGenerator;
-import com.octo.captcha.image.gimpy.wordtoimage.backgroundgenerator.FileReaderRandomBackgroundGenerator;
+import com.octo.captcha.image.gimpy.wordtoimage.FontGenerator;
+import com.octo.captcha.image.gimpy.wordtoimage.TextPaster;
 import com.octo.captcha.image.gimpy.wordtoimage.backgroundgenerator.FunkyBackgroundGenerator;
-import com.octo.captcha.image.gimpy.wordtoimage.textpaster.RandomTextPaster;
+import com.octo.captcha.image.gimpy.wordtoimage.fontgenerator.TwistedAndShearedRandomFontGenerator;
 import com.octo.captcha.image.gimpy.wordtoimage.textpaster.DoubleRandomTextPaster;
 
 import java.awt.Color;
@@ -74,15 +70,17 @@ import java.awt.Color;
  */
 public class BasicGimpyEngine extends DefaultImageCaptchaEngine
 {
+
     static ImageCaptchaFactory[] factories;
 
     static
     {
-       //word generator
-       WordGenerator dictionnaryWords = new DictionaryWordGenerator(new FileDictionnary("toddlist"));
+        //word generator
+        //WordGenerator dictionnaryWords = new DictionaryWordGenerator(new FileDictionnary("toddlist"));
+        WordGenerator randomWords = new RandomWordGenerator("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
 
-       //wordtoimage components
-        TextPaster randomPaster = new RandomTextPaster(new Integer(6), new Integer(8), Color.WHITE);
+        //wordtoimage components
+        TextPaster randomPaster = new DoubleRandomTextPaster(new Integer(6), new Integer(8), Color.WHITE);
 
         //BackgroundGenerator fileBack = new FileReaderRandomBackgroundGenerator(new Integer(200), new Integer(100), "./images");
         BackgroundGenerator funkyBack = new FunkyBackgroundGenerator(new Integer(200), new Integer(100));
@@ -95,7 +93,7 @@ public class BasicGimpyEngine extends DefaultImageCaptchaEngine
 
         //Add to array
         factories = new ImageCaptchaFactory[1];
-        factories[0] = new GimpyFactory(dictionnaryWords, word2image);
+        factories[0] = new GimpyFactory(randomWords, word2image);
 
     }
 
