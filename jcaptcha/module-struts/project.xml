@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<project>
+    <extends>${basedir}/../project.xml</extends>
+    <pomVersion>1</pomVersion>
+    <id>jcaptcha-module-struts</id>
+    <name>jcaptcha-module-struts</name>
+    <groupId>jcaptcha</groupId>
+    <currentVersion>${project.version}</currentVersion>
+    <organization>
+        <!-- The full name of the organization. -->
+        <name>JCaptcha corp.</name>
+        <!-- The URL to the organization's home page. -->
+        <url>http://jcaptcha.sourceforge.net/</url>
+        <!-- The URL to the organization's logo image. This can be an URL relative to the base directory of the generated
+             web site, (e.g., /images/org-logo.png) or an absolute URL (e.g., http://my.corp/logo.png). This value is used
+             when generating the project documentation. -->
+        <logo>http://jcaptcha.sourceforge.net/images/organization-logo.jpg</logo>
+    </organization>
+    <inceptionYear>2003</inceptionYear>
+    <package>com.octo.captcha.module.struts</package>
+
+    <description>
+  <![CDATA[
+      <b>JCAPTCHA</b>, for <b>J</b>ava <b>C</b>ompletely <b>A</b>utomated <b>P</b>ublic <b>T</b>est to tell <b>C</b>omputers and <b>H</b>umans <b>A</b>part
+
+      <br/>See : <a href="http://jcaptcha.sourceforge.net/moniwiki/wiki.php/JcapTcha">Project description</a>
+ <br/>
+ A captcha struts module is a struts plugin to configure and integrate a captcha service with your struts application.<BR/>
+ This jar aims to provide a struts plugin and Action classes to easily integrate a captcha service in your application.<BR/>
+ It uses the jcaptcha-core, jcaptcha-service, jcaptcha-module-base.
+ ]]>
+     </description>
+
+    <shortDescription>
+      JCAPTCHA module is a Strutd plugin that enable Struts web application to be Captcha-ized
+      </shortDescription>
+
+    <url/>
+    <repository>
+        <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/jcaptcha:jcatpcha/module-struts</connection>
+        <url>http://cvs.sourceforge.net/viewcvs.py/jcaptcha/</url>
+
+    </repository>
+    <mailingLists>
+        <mailingList>
+            <name>JCaptcha User List</name>
+            <subscribe>jcaptcha-users@lists.sourceforge.net</subscribe>
+            <unsubscribe>jcaptcha-users-unsubscribe@lists.sourceforge.net</unsubscribe>
+            <archive>http://sourceforge.net/mailarchive/forum.php?forum=jcaptcha-users</archive>
+        </mailingList>
+        <mailingList>
+            <name>JCaptcha Developer List</name>
+            <subscribe>jcaptcha-devs@lists.sourceforge.net</subscribe>
+            <unsubscribe>jcaptcha-devs-unsubscribe@lists.sourceforge.net</unsubscribe>
+            <archive>http://sourceforge.net/mailarchive/forum.php?forum=jcaptcha-devs</archive>
+        </mailingList>
+    </mailingLists>
+
+    <developers>
+
+        <developer>
+            <name>Marc-Antoine Garrigue</name>
+            <id>mag</id>
+            <email>mgarrigue@octo.com</email>
+            <organization>Octo</organization>
+            <roles>
+                <role>Java Developer</role>
+            </roles>
+        </developer>
+
+    </developers>
+
+    <dependencies>
+        <dependency>
+            <id>xml-apis</id>
+            <version>1.0.b2</version>
+            <url>http://xml.apache.org/xerces2-j/</url>
+        </dependency>
+
+        <dependency>
+            <id>xerces</id>
+            <version>2.2.1</version>
+            <url>http://xml.apache.org/xerces2-j/</url>
+        </dependency>
+
+        <dependency>
+            <groupId>jcaptcha</groupId>
+            <artifactId>jcaptcha-core</artifactId>
+            <version>${project.version}</version>
+            <url>http://jcaptcha.sourceforge.net</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+
+        <dependency>
+            <groupId>jcaptcha</groupId>
+            <artifactId>jcaptcha-engine</artifactId>
+            <version>${project.version}</version>
+            <url>http://jcaptcha.sourceforge.net</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+
+        </dependency>
+        <dependency>
+            <groupId>jcaptcha</groupId>
+            <artifactId>jcaptcha-service</artifactId>
+            <version>${project.version}</version>
+            <url>http://jcaptcha.sourceforge.net</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+
+        </dependency>
+
+        <dependency>
+            <groupId>jcaptcha</groupId>
+            <artifactId>jcaptcha-module-base</artifactId>
+            <version>${project.version}</version>
+            <url>http://jcaptcha.sourceforge.net</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+
+        </dependency>
+
+      <dependency>
+      <groupId>servletapi</groupId>
+      <artifactId>servletapi</artifactId>
+      <version>2.3</version>
+      <jar/>
+      <type/>
+      <url>http://java.sun.com</url>
+      <properties/>
+    </dependency>
+
+              <dependency>
+            <groupId>struts</groupId>
+            <artifactId>struts</artifactId>
+            <version>1.1</version>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+
+        <dependency>
+            <id>commons-logging</id>
+            <version>1.0.3</version>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+    </dependencies>
+
+
+    <build>
+        <sourceDirectory>src/java</sourceDirectory>
+        <unitTestSourceDirectory>src/test</unitTestSourceDirectory>
+        <unitTest>
+            <includes>
+                <include>**/*Test.java</include>
+            </includes>
+            <excludes>
+                <exclude>**/*Test*All.java</exclude>
+            </excludes>
+        </unitTest>
+
+    </build>
+
+    <reports>
+        <report>maven-license-plugin</report>
+    </reports>
+
+</project>
