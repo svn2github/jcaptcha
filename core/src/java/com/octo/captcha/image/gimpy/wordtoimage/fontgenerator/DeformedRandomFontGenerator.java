@@ -6,7 +6,7 @@ import java.awt.geom.AffineTransform;
 import java.util.Random;
 
 /**
- * <p>Description: </p>
+ * <p>Takes a random font and apply a rotation to it. </p>
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
  */

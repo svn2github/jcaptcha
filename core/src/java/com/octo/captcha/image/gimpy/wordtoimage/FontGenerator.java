@@ -61,7 +61,7 @@ package com.octo.captcha.image.gimpy.wordtoimage;
 import java.awt.Font;
 
 /**
- * <p>Used by ComposedWordToImage</p>
+ * <p>Used by ComposedWordToImage to retrieve a Font to apply to the word that will be distorded</p>
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */

@@ -53,7 +53,7 @@ package com.octo.captcha.image.gimpy.wordgenerator;
 import java.util.Locale;
 
 /**
- * <p>Description: </p>
+ * <p>Base interface used by the DictionaryWordGenerator to retrieve words.</p>
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */

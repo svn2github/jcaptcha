@@ -62,7 +62,12 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 /**
- * <p>Description: </p>
+ * <p>A Gimpy is a ImagCaptcha. It is also the most common captcha.</p>
+ * <ul>
+ * <li>Challenge type : image</li>
+ * <li>Response type : String</li>
+ * <li>Description : An image of a distorded word is shown. User have to recognize the word and to submit it.</li>
+ * </ul>
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */

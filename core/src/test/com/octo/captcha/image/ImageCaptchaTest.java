@@ -67,6 +67,7 @@ import com.octo.captcha.image.gimpy.wordtoimage.textpaster.DoubleTextPaster;
 import junit.framework.TestCase;
 
 import java.awt.Color;
+import java.awt.image.BufferedImage;
 
 /**
  * <p>Description: </p>
@@ -111,6 +112,7 @@ public class ImageCaptchaTest extends TestCase {
      */
     public void testGetChallenge() {
         assertNotNull(pixCaptcha.getChallenge());
+        assertTrue("Captcha challenge is not a BufferedImage",pixCaptcha.getImageChallenge() instanceof BufferedImage);
     }
 
     /**
@@ -121,12 +123,11 @@ public class ImageCaptchaTest extends TestCase {
 //        assertTrue(pixCaptcha.validateResponse(pixCaptcha.getResponse()).booleanValue());
 //    }
 
-    /**
-     * This test is for verifying if the challenge of the captcha
-     * is correctly instantiated.
-     */
-    public void testGetPixChallenge() {
-        assertNotNull(pixCaptcha.getChallenge());
+
+
+    public void testGetImageChallenge() throws Exception
+    {
+        assertEquals(pixCaptcha.getImageChallenge(),pixCaptcha.getChallenge());
     }
     
     /**

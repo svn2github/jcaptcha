@@ -73,7 +73,7 @@ import java.util.Locale;
  *
  * Developpers should implement this interface using the following rules :
  * <br/>
- * Construct a UNIQUE ticket, and a captcha using an engine when a user call a getUID method, and use the ticket
+ * Construct a UNIQUE ticket, and a captcha using an engine when a user call a getCaptchaID method, and use the ticket
  * to sign the captcha.
  * <br/>
  * Throw a CaptchaServiceException if the ticket is invalid.
@@ -93,14 +93,14 @@ public interface CaptchaService
      * User can also use the localized method.
      * @return a unique id
      */
-    String buildCaptchaAndGetID();
+    String getCaptchaID();
 
     /**
      * Method to retrive a unique ticket, and building a corresponding localized captcha.
      * @param locale
      * @return
      */
-    String buildCaptchaAndGetID(Locale locale);
+    String getCaptchaID(Locale locale);
 
     /**
      * Method to retrive the challenge corresponding to the given ticket.

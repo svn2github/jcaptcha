@@ -65,7 +65,7 @@ import java.awt.image.BufferedImage;
 import java.text.AttributedString;
 
 /**
- * <p>Used by ComposedWordToImage</p>
+ * <p>Used by ComposedWordToImage to paste the word to be distorded on the image background</p>
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */

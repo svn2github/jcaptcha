@@ -61,7 +61,7 @@ package com.octo.captcha.image.gimpy.wordtoimage;
 import java.awt.image.BufferedImage;
 
 /**
- * <p>Used by ComposedWordToImage</p>
+ * <p>Used by ComposedWordToImage to build a background image</p>
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */

@@ -50,6 +50,8 @@
 
 package com.octo.captcha.image;
 
+import com.octo.captcha.CaptchaException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -70,6 +72,7 @@ public abstract class ListImageCaptchaEngine extends ImageCaptchaEngine
     public ListImageCaptchaEngine()
     {
         buildInitialFactories();
+        checkFactoriesSize();
     }
 
     /**
@@ -105,8 +108,9 @@ public abstract class ListImageCaptchaEngine extends ImageCaptchaEngine
      * This method build a ImageCaptchaFactory.
      * @return a CaptchaFactory
      */
-    public ImageCaptchaFactory getImageCaptchaFactory()
+    public final ImageCaptchaFactory getImageCaptchaFactory()
     {
+        checkFactoriesSize();
         return (ImageCaptchaFactory) factories.get(myRandom.nextInt(factories.size()));
     }
 
@@ -114,8 +118,9 @@ public abstract class ListImageCaptchaEngine extends ImageCaptchaEngine
      * This method build a ImageCaptchaFactory.
      * @return a CaptchaFactory
      */
-    public ImageCaptcha getNextImageCaptcha()
+    public final ImageCaptcha getNextImageCaptcha()
     {
+        checkFactoriesSize();
         return getImageCaptchaFactory().getImageCaptcha();
     }
 
@@ -124,9 +129,17 @@ public abstract class ListImageCaptchaEngine extends ImageCaptchaEngine
      * @param locale
      * @return a CaptchaFactory
      */
-    public ImageCaptcha getNextImageCaptcha(Locale locale)
+    public final ImageCaptcha getNextImageCaptcha(Locale locale)
     {
+        checkFactoriesSize();
         return getImageCaptchaFactory().getImageCaptcha(locale);
+    }
+
+    private void checkFactoriesSize()
+    {
+        if (factories.size() == 0)
+            throw new CaptchaException("This engine has no factories. Please initialize it " +
+                    "properly with the buildInitialFactory() called by the constructor or the addFactory() mehtod later!");
     }
 
 }

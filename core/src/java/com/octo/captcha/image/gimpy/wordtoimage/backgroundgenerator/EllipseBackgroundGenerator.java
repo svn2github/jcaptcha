@@ -57,7 +57,7 @@ import java.awt.geom.Arc2D;
 import java.awt.image.BufferedImage;
 
 /**
- * <p>Description: </p>
+ * <p>Black ellipses drawn on a white background</p>
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */

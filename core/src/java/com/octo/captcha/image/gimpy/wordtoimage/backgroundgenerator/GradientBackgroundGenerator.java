@@ -57,15 +57,15 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 
 /**
- * <p>Description: </p>
+ * <p>Gradient background. Use the constructor to specify colors. Default color are Black and Gray</p>
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public class GradientBackgroundGenerator extends AbstractBackgroundGenerator
 {
 
-    Color firstColor = new Color(210, 210, 210);
-    Color secondColor = new Color(0, 0, 0);
+    Color firstColor = Color.BLACK;
+    Color secondColor = Color.GRAY;
 
     public GradientBackgroundGenerator(Integer width, Integer height, Color firstColor, Color secondColor)
     {

@@ -67,7 +67,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
 /**
- * <p>Description: </p>
+ * <p>Draw mutliple different shape with different colors. see attributes to construct it in a proper way.</p>
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
  */
