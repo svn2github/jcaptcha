@@ -81,7 +81,7 @@
   <dependency>
       <groupId>roller</groupId>
       <artifactId>rollerweb</artifactId>
-      <version>0.9.9.5</version>
+      <version>1.0-RC2</version>
       <jar/>
       <type/>
       <url>http://java.sun.com</url>
@@ -91,7 +91,7 @@
   <dependency>
       <groupId>roller</groupId>
       <artifactId>rollerbeans</artifactId>
-      <version>0.9.9.5</version>
+      <version>1.0-RC2</version>
       <jar/>
       <type/>
       <url>http://java.sun.com</url>

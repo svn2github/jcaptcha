@@ -5,6 +5,7 @@
     <output url="file://$MODULE_DIR$" />
     <exclude-exploded />
     <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/.clover" />
       <excludeFolder url="file://$MODULE_DIR$/core" />
       <excludeFolder url="file://$MODULE_DIR$/engine" />
       <excludeFolder url="file://$MODULE_DIR$/images" />
@@ -19,6 +20,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="clover" level="application" />
     <orderEntryProperties />
   </component>
 </module>

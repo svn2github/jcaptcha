@@ -87,14 +87,6 @@
 
 
  <dependencies>
- <dependency>
-            <id>junit</id>
-            <version>3.8.1</version>
-      	</dependency>
- <dependency>
-            <id>GroboUtils</id>
-            <version>4-core</version>
-      	</dependency>
   </dependencies>
 
   <build>
@@ -108,4 +100,4 @@
 	<report>maven-multiproject-plugin</report>
   </reports>
 
-</project>
+s</project>

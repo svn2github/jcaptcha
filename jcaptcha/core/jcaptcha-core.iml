@@ -7,14 +7,13 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/test" isTestSource="true" />
-      <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="java version &quot;1.3.1_15&quot;" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
       <library name="junit">
         <CLASSES>
-          <root url="jar://C:/Documents and Settings/Administrator/.maven/repository/junit/jars/junit-3.8.1.jar!/" />
+          <root url="jar://C:/Documents and Settings/mag/.maven/repository/junit/jars/junit-3.8.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -23,12 +22,22 @@
     <orderEntry type="module-library">
       <library name="GroboUtils">
         <CLASSES>
-          <root url="jar://C:/Documents and Settings/Administrator/.maven/repository/GroboUtils/jars/GroboUtils-4-core.jar!/" />
+          <root url="jar://C:/Documents and Settings/mag/.maven/repository/GroboUtils/jars/GroboUtils-5-core.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="struts" level="project" />
+    <orderEntry type="library" name="commons" level="project" />
+    <orderEntry type="library" name="concurrent-1.3.2" level="project" />
+    <orderEntry type="library" name="ehcache-1.0" level="project" />
+    <orderEntry type="library" name="grobo" level="project" />
+    <orderEntry type="library" name="junit" level="project" />
+    <orderEntry type="library" name="serveur" level="project" />
+    <orderEntry type="library" name="xml" level="project" />
+    <orderEntry type="library" name="velocity" level="project" />
+    <orderEntry type="library" name="clover" level="application" />
     <orderEntryProperties />
   </component>
 </module>

@@ -10,10 +10,8 @@
             <p>
 
                 <ul>
-                    <li>This module provides commomns utilities to help developers to build their own</li>
-                    <li>It provides a config class that contains the </li>
-                    <li>An engine initialize a CaptchaStore to store Captcha between Challenge generation, and response validation, associed with an unique id.</li>
-
+                    <li>This module provides commomns utilities to help developers to build their own modules</li>
+                    <li>It provides a config class that contains main attributes used by all sub modules</li>
                 </ul>
             </p>
 

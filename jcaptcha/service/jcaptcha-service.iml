@@ -14,62 +14,14 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="jcaptcha-core" />
     <orderEntry type="module" module-name="jcaptcha-engine" />
-    <orderEntry type="module-library">
-      <library name="junit">
-        <CLASSES>
-          <root url="jar://C:/Documents and Settings/Administrator/.maven/repository/junit/jars/junit-3.8.1.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://C:/Documents and Settings/Administrator/.maven/repository/commons-logging/jars/commons-logging-1.0.4.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://C:/Documents and Settings/Administrator/.maven/repository/commons-collections/jars/commons-collections-2.1.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://C:/Documents and Settings/Administrator/.maven/repository/xerces/jars/xercesImpl-2.5.0.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://C:/Documents and Settings/Administrator/.maven/repository/xerces/jars/xmlParserAPIs-2.2.1.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
     <orderEntry type="library" name="concurrent-1.3.2" level="project" />
     <orderEntry type="library" name="ehcache-1.0" level="project" />
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://C:/Documents and Settings/Administrator/.maven/repository/GroboUtils/jars/GroboUtils-5-core.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
+    <orderEntry type="library" name="commons" level="project" />
+    <orderEntry type="library" name="serveur" level="project" />
+    <orderEntry type="library" name="xml" level="project" />
+    <orderEntry type="library" name="junit" level="project" />
+    <orderEntry type="library" name="grobo" level="project" />
+    <orderEntry type="library" name="clover" level="application" />
     <orderEntryProperties />
   </component>
 </module>

@@ -76,6 +76,15 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="commons" level="project" />
+    <orderEntry type="library" name="concurrent-1.3.2" level="project" />
+    <orderEntry type="library" name="ehcache-1.0" level="project" />
+    <orderEntry type="library" name="grobo" level="project" />
+    <orderEntry type="library" name="junit" level="project" />
+    <orderEntry type="library" name="serveur" level="project" />
+    <orderEntry type="library" name="xml" level="project" />
+    <orderEntry type="library" name="struts" level="project" />
+    <orderEntry type="library" name="clover" level="application" />
     <orderEntryProperties />
   </component>
 </module>

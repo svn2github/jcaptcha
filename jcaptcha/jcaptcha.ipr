@@ -227,13 +227,18 @@
       <module fileurl="file://$PROJECT_DIR$/root.iml" filepath="$PROJECT_DIR$/root.iml" />
     </modules>
   </component>
-  <component name="ProjectRootManager" version="2" assert-keyword="false" jdk-15="false" project-jdk-name="java version &quot;1.3.1_13&quot;" />
+  <component name="ProjectRootManager" version="2" assert-keyword="false" jdk-15="false" project-jdk-name="java version &quot;1.3.1_15&quot;" />
   <component name="RmicSettings">
     <option name="IS_EANABLED" value="false" />
     <option name="DEBUGGING_INFO" value="true" />
     <option name="GENERATE_NO_WARNINGS" value="false" />
     <option name="GENERATE_IIOP_STUBS" value="false" />
     <option name="ADDITIONAL_OPTIONS_STRING" value="" />
+  </component>
+  <component name="TDDConfig">
+    <option name="idleMsBeforeTimerPause" value="300000" />
+    <option name="masterSuiteConfigurationName" />
+    <option name="rollingActivityCycleTimelineSampleSize" value="40" />
   </component>
   <component name="WebManager">
     <OPTION enabled="false" />
@@ -248,14 +253,75 @@
   <component name="libraryTable">
     <library name="concurrent-1.3.2">
       <CLASSES>
-        <root url="jar://C:/Documents and Settings/Administrator/.maven/repository/concurrent/jars/concurrent-1.3.2.jar!/" />
+        <root url="jar://C:/Documents and Settings/mag/.maven/repository/concurrent/jars/concurrent-1.3.2.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />
     </library>
     <library name="ehcache-1.0">
       <CLASSES>
-        <root url="jar://C:/Documents and Settings/Administrator/.maven/repository/ehcache/jars/ehcache-1.0.jar!/" />
+        <root url="jar://C:/Documents and Settings/mag/.maven/repository/ehcache/jars/ehcache-1.0.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="junit">
+      <CLASSES>
+        <root url="jar://C:/Documents and Settings/mag/.maven/repository/junit/jars/junit-3.8.1.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="grobo">
+      <CLASSES>
+        <root url="jar://C:/Documents and Settings/mag/.maven/repository/GroboUtils/jars/GroboUtils-5-core.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="xml">
+      <CLASSES>
+        <root url="jar://C:/Documents and Settings/mag/.maven/repository/xerces/jars/xerces-2.2.1.jar!/" />
+        <root url="jar://C:/Documents and Settings/mag/.maven/repository/xerces/jars/xmlParserAPIs-2.2.1.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="serveur">
+      <CLASSES>
+        <root url="jar://C:/Documents and Settings/mag/.maven/repository/jmx/jars/jmxri-1.2.1.jar!/" />
+        <root url="jar://C:/Documents and Settings/mag/.maven/repository/servletapi/jars/servletapi-2.3.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="commons">
+      <CLASSES>
+        <root url="jar://C:/Documents and Settings/mag/.maven/repository/commons-logging/jars/commons-logging-1.0.4.jar!/" />
+        <root url="jar://C:/Documents and Settings/mag/.maven/repository/commons-collections/jars/commons-collections-2.1.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="struts">
+      <CLASSES>
+        <root url="jar://C:/Documents and Settings/mag/.maven/repository/struts/jars/struts-1.1.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="roller">
+      <CLASSES>
+        <root url="jar://C:/Documents and Settings/mag/.maven/repository/roller/jars/rollerbeans-1.0-RC2.jar!/" />
+        <root url="jar://C:/Documents and Settings/mag/.maven/repository/roller/jars/rollerweb-1.0-RC2.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="velocity">
+      <CLASSES>
+        <root url="jar://C:/Documents and Settings/mag/.maven/repository/velocity/jars/velocity-1.3.jar!/" />
+        <root url="jar://C:/Documents and Settings/mag/.maven/repository/velocity/jars/velocity-1.4-dev.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />
