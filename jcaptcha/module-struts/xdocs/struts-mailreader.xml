@@ -44,19 +44,12 @@
 
                     <li>Copy the jcaptcha third parties jars to the WEB-INF/lib dir of the struts-mailreader web-app : ehcache-1.0.jar</li>
 
-                    <li>Add the jcaptcha taglib to the web.xml config file of the struts-mailreader webapp</li>
-                                        <source>
-                                            <taglib>
-                                                <taglib-uri>jcaptcha</taglib-uri>
-                                                <taglib-location>jcaptcha-all-${version}.jar</taglib-location>
-                                            </taglib>
-                                 </source>
-
                     <li>Add the following plugin declaration at the end of the struts config file</li>
 
-                    <code>
+                    <source>    <![CDATA[
                         <plug-in className="com.octo.captcha.module.struts.CaptchaServicePlugin"/>
-                    </code>
+                        ]]>
+                    </source>
                     (there's many settable property available, but none are required, this is detailed in the module documentation).
 
 
