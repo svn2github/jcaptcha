@@ -466,7 +466,11 @@ package com.octo.captcha.engine.image;
 
 import com.octo.captcha.CaptchaException;
 import com.octo.captcha.image.ImageCaptcha;
+import com.octo.captcha.image.ImageCaptcha;
 import com.octo.captcha.image.ImageCaptchaFactory;
+import com.octo.captcha.image.ImageCaptchaFactory;
+import com.octo.captcha.CaptchaException;
+import com.octo.captcha.CaptchaException;
 
 import java.util.Locale;
 import java.util.Random;

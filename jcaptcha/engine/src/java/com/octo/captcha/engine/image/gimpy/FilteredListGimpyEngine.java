@@ -466,12 +466,12 @@ DAMAGES.
 package com.octo.captcha.engine.image.gimpy;
 
 
-import com.octo.captcha.image.backgroundgenerator.FunkyBackgroundGenerator;
-import com.octo.captcha.image.backgroundgenerator.BackgroundGenerator;
-import com.octo.captcha.image.fontgenerator.RandomFontGenerator;
-import com.octo.captcha.image.fontgenerator.FontGenerator;
-import com.octo.captcha.image.textpaster.RandomTextPaster;
-import com.octo.captcha.image.textpaster.TextPaster;
+import com.octo.captcha.component.image.backgroundgenerator.FunkyBackgroundGenerator;
+import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
+import com.octo.captcha.component.image.fontgenerator.RandomFontGenerator;
+import com.octo.captcha.component.image.fontgenerator.FontGenerator;
+import com.octo.captcha.component.image.textpaster.RandomTextPaster;
+import com.octo.captcha.component.image.textpaster.TextPaster;
 
 import java.awt.*;
 import java.awt.image.ImageFilter;
@@ -534,13 +534,13 @@ public class FilteredListGimpyEngine extends com.octo.captcha.engine.image.ListI
             new FunkyBackgroundGenerator(new Integer(200), new Integer(100));
         FontGenerator font =
             new RandomFontGenerator(new Integer(25), new Integer(35));
-        com.octo.captcha.wordgenerator.WordGenerator words =
-            new com.octo.captcha.wordgenerator.DictionaryWordGenerator(new com.octo.captcha.wordgenerator.FileDictionnary("toddlist"));
+        com.octo.captcha.component.wordgenerator.WordGenerator words =
+            new com.octo.captcha.component.wordgenerator.DictionaryWordGenerator(new com.octo.captcha.component.wordgenerator.FileDictionnary("toddlist"));
 
         //build factories
         com.octo.captcha.image.ImageCaptchaFactory[] factories = new com.octo.captcha.image.ImageCaptchaFactory[3];
-        com.octo.captcha.image.wordtoimage.WordToImage word2image =
-            new com.octo.captcha.image.wordtoimage.FilteredComposedWordToImage(
+        com.octo.captcha.component.image.wordtoimage.WordToImage word2image =
+            new com.octo.captcha.component.image.wordtoimage.FilteredComposedWordToImage(
                 font,
                 back,
                 paster,
@@ -550,7 +550,7 @@ public class FilteredListGimpyEngine extends com.octo.captcha.engine.image.ListI
         factories[0] = new com.octo.captcha.image.gimpy.GimpyFactory(words, word2image);
         //select filters for 2
         word2image =
-            new com.octo.captcha.image.wordtoimage.FilteredComposedWordToImage(
+            new com.octo.captcha.component.image.wordtoimage.FilteredComposedWordToImage(
                 font,
                 back,
                 paster,
@@ -560,7 +560,7 @@ public class FilteredListGimpyEngine extends com.octo.captcha.engine.image.ListI
         factories[1] = new com.octo.captcha.image.gimpy.GimpyFactory(words, word2image);
         //select filters for 3
         word2image =
-            new com.octo.captcha.image.wordtoimage.FilteredComposedWordToImage(
+            new com.octo.captcha.component.image.wordtoimage.FilteredComposedWordToImage(
                 font,
                 back,
                 paster,

@@ -464,6 +464,7 @@ DAMAGES.
 package com.octo.captcha.service;
 
 import com.octo.captcha.Captcha;
+import com.octo.captcha.Captcha;
 
 /**
  * <p><ul><li></li></ul></p>

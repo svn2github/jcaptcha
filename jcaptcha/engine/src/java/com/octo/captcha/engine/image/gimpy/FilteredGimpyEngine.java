@@ -51,12 +51,12 @@
 package com.octo.captcha.engine.image.gimpy;
 
 
-import com.octo.captcha.image.backgroundgenerator.FunkyBackgroundGenerator;
-import com.octo.captcha.image.backgroundgenerator.BackgroundGenerator;
-import com.octo.captcha.image.fontgenerator.RandomFontGenerator;
-import com.octo.captcha.image.fontgenerator.FontGenerator;
-import com.octo.captcha.image.textpaster.RandomTextPaster;
-import com.octo.captcha.image.textpaster.TextPaster;
+import com.octo.captcha.component.image.backgroundgenerator.FunkyBackgroundGenerator;
+import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
+import com.octo.captcha.component.image.fontgenerator.RandomFontGenerator;
+import com.octo.captcha.component.image.fontgenerator.FontGenerator;
+import com.octo.captcha.component.image.textpaster.RandomTextPaster;
+import com.octo.captcha.component.image.textpaster.TextPaster;
 
 import java.awt.*;
 import java.awt.image.ImageFilter;
@@ -120,18 +120,18 @@ public class FilteredGimpyEngine extends com.octo.captcha.engine.image.DefaultIm
         TextPaster paster = new RandomTextPaster(new Integer(8), new Integer(10), Color.gray);
         BackgroundGenerator back = new FunkyBackgroundGenerator(new Integer(200), new Integer(100));
         FontGenerator font = new RandomFontGenerator(new Integer(25), new Integer(35));
-        com.octo.captcha.wordgenerator.WordGenerator words = new com.octo.captcha.wordgenerator.DictionaryWordGenerator(new com.octo.captcha.wordgenerator.FileDictionnary("toddlist"));
+        com.octo.captcha.component.wordgenerator.WordGenerator words = new com.octo.captcha.component.wordgenerator.DictionaryWordGenerator(new com.octo.captcha.component.wordgenerator.FileDictionnary("toddlist"));
 
 
         //build factories
         factories = new com.octo.captcha.image.ImageCaptchaFactory[3];
-        com.octo.captcha.image.wordtoimage.WordToImage word2image = new com.octo.captcha.image.wordtoimage.FilteredComposedWordToImage(font, back, paster, new ImageFilter[]{water}, new ImageFilter[]{emboss}, new ImageFilter[]{ripple});
+        com.octo.captcha.component.image.wordtoimage.WordToImage word2image = new com.octo.captcha.component.image.wordtoimage.FilteredComposedWordToImage(font, back, paster, new ImageFilter[]{water}, new ImageFilter[]{emboss}, new ImageFilter[]{ripple});
         factories[0] = new com.octo.captcha.image.gimpy.GimpyFactory(words, word2image);
         //select filters for 2
-        word2image = new com.octo.captcha.image.wordtoimage.FilteredComposedWordToImage(font, back, paster, new ImageFilter[]{rippleBack}, new ImageFilter[]{crystal}, new ImageFilter[]{ripple});
+        word2image = new com.octo.captcha.component.image.wordtoimage.FilteredComposedWordToImage(font, back, paster, new ImageFilter[]{rippleBack}, new ImageFilter[]{crystal}, new ImageFilter[]{ripple});
         factories[1] = new com.octo.captcha.image.gimpy.GimpyFactory(words, word2image);
         //select filters for 3
-        word2image = new com.octo.captcha.image.wordtoimage.FilteredComposedWordToImage(font, back, paster, new ImageFilter[]{rippleBack}, new ImageFilter[]{}, new ImageFilter[]{weaves});
+        word2image = new com.octo.captcha.component.image.wordtoimage.FilteredComposedWordToImage(font, back, paster, new ImageFilter[]{rippleBack}, new ImageFilter[]{}, new ImageFilter[]{weaves});
         factories[2] = new com.octo.captcha.image.gimpy.GimpyFactory(words, word2image);
 
     }

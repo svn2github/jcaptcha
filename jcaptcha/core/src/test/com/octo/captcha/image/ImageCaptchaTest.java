@@ -466,15 +466,16 @@ package com.octo.captcha.image;
 
 
 
-import com.octo.captcha.image.wordtoimage.WordToImage;
-import com.octo.captcha.image.wordtoimage.SimpleWordToImage;
-import com.octo.captcha.image.gimpy.Gimpy;
-import com.octo.captcha.image.gimpy.GimpyFactory;
-import com.octo.captcha.wordgenerator.DummyWordGenerator;
-import com.octo.captcha.wordgenerator.WordGenerator;
+
 import junit.framework.TestCase;
 
 import java.awt.image.BufferedImage;
+
+import com.octo.captcha.component.wordgenerator.WordGenerator;
+import com.octo.captcha.component.wordgenerator.DummyWordGenerator;
+import com.octo.captcha.component.image.wordtoimage.WordToImage;
+import com.octo.captcha.component.image.wordtoimage.SimpleWordToImage;
+import com.octo.captcha.image.gimpy.GimpyFactory;
 
 /**
  * <p>Description: </p>

@@ -507,7 +507,7 @@ public class ImageCaptchaFilter implements Filter {
         theResponse.setHeader("Cache-Control","no-store");
                 theResponse.setHeader("Pragma","no-cache");
                 theResponse.setDateHeader ("Expires", 0);
-                
+
         theResponse.setContentType("image/jpeg");
         ServletOutputStream responseOutputStream =
                 theResponse.getOutputStream();

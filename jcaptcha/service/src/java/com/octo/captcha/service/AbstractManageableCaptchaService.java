@@ -464,6 +464,7 @@ DAMAGES.
 package com.octo.captcha.service;
 
 import com.octo.captcha.Captcha;
+import com.octo.captcha.Captcha;
 import com.octo.captcha.service.captchastore.CaptchaStore;
 import com.octo.captcha.engine.CaptchaEngine;
 import com.octo.captcha.engine.CaptchaEngine;
@@ -746,7 +747,7 @@ public abstract class AbstractManageableCaptchaService extends AbstractCaptchaSe
           }
           return garbageCollectableCaptchas;
       }
- 
+
 
 
     //*******

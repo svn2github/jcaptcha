@@ -60,6 +60,8 @@ package com.octo.captcha.engine.image;
 
 import com.octo.captcha.Captcha;
 import com.octo.captcha.image.ImageCaptcha;
+import com.octo.captcha.image.ImageCaptcha;
+import com.octo.captcha.Captcha;
 
 import java.util.Locale;
 

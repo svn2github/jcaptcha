@@ -466,12 +466,13 @@ DAMAGES.
 */
 
 
-import com.octo.captcha.image.backgroundgenerator.BackgroundGenerator;
-import com.octo.captcha.image.backgroundgenerator.UniColorBackgroundGenerator;
-import com.octo.captcha.image.fontgenerator.FontGenerator;
-import com.octo.captcha.image.fontgenerator.RandomFontGenerator;
-import com.octo.captcha.image.textpaster.BaffleRandomTextPaster;
-import com.octo.captcha.image.textpaster.TextPaster;
+import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
+import com.octo.captcha.component.image.backgroundgenerator.UniColorBackgroundGenerator;
+import com.octo.captcha.component.image.fontgenerator.FontGenerator;
+import com.octo.captcha.component.image.fontgenerator.RandomFontGenerator;
+import com.octo.captcha.component.image.textpaster.BaffleRandomTextPaster;
+import com.octo.captcha.component.image.textpaster.TextPaster;
+import com.octo.captcha.engine.image.ListImageCaptchaEngine;
 
 import java.awt.*;
 
@@ -480,13 +481,13 @@ import java.awt.*;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class BaffleListGimpyEngine extends com.octo.captcha.engine.image.ListImageCaptchaEngine
+public class BaffleListGimpyEngine extends ListImageCaptchaEngine
 {
 
     protected void buildInitialFactories()
     {
         //word generator
-        com.octo.captcha.wordgenerator.WordGenerator dictionnaryWords = new com.octo.captcha.wordgenerator.ComposeDictionaryWordGenerator(new com.octo.captcha.wordgenerator.FileDictionnary("toddlist"));
+        com.octo.captcha.component.wordgenerator.WordGenerator dictionnaryWords = new com.octo.captcha.component.wordgenerator.ComposeDictionaryWordGenerator(new com.octo.captcha.component.wordgenerator.FileDictionnary("toddlist"));
         //wordtoimage components
         TextPaster randomPaster = new BaffleRandomTextPaster(new Integer(8), new Integer(15), Color.BLACK,
                 new Integer(3),Color.WHITE);
@@ -494,7 +495,7 @@ public class BaffleListGimpyEngine extends com.octo.captcha.engine.image.ListIma
         //BackgroundGenerator back = new FunkyBackgroundGenerator(new Integer(200), new Integer(100));
         FontGenerator shearedFont = new RandomFontGenerator(new Integer(20), new Integer(25));
         //word2image 1
-        com.octo.captcha.image.wordtoimage.WordToImage word2image = new com.octo.captcha.image.wordtoimage.ComposedWordToImage(shearedFont, back, randomPaster);
+        com.octo.captcha.component.image.wordtoimage.WordToImage word2image = new com.octo.captcha.component.image.wordtoimage.ComposedWordToImage(shearedFont, back, randomPaster);
 
 
         this.addFactory(new com.octo.captcha.image.gimpy.GimpyFactory(dictionnaryWords, word2image));

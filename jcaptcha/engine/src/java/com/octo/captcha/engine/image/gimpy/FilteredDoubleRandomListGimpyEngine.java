@@ -464,12 +464,12 @@ DAMAGES.
 package com.octo.captcha.engine.image.gimpy;
 
 
-import com.octo.captcha.image.backgroundgenerator.MultipleShapeBackgroundGenerator;
-import com.octo.captcha.image.backgroundgenerator.BackgroundGenerator;
-import com.octo.captcha.image.fontgenerator.DeformedRandomFontGenerator;
-import com.octo.captcha.image.fontgenerator.FontGenerator;
-import com.octo.captcha.image.textpaster.DoubleRandomTextPaster;
-import com.octo.captcha.image.textpaster.TextPaster;
+import com.octo.captcha.component.image.backgroundgenerator.MultipleShapeBackgroundGenerator;
+import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
+import com.octo.captcha.component.image.fontgenerator.DeformedRandomFontGenerator;
+import com.octo.captcha.component.image.fontgenerator.FontGenerator;
+import com.octo.captcha.component.image.textpaster.DoubleRandomTextPaster;
+import com.octo.captcha.component.image.textpaster.TextPaster;
 
 import java.awt.*;
 import java.awt.image.ImageFilter;
@@ -503,11 +503,11 @@ public class FilteredDoubleRandomListGimpyEngine
          FontGenerator font =
                 new DeformedRandomFontGenerator(
                     new Integer(25),new Integer(27));
-         com.octo.captcha.wordgenerator.WordGenerator words =
-             new com.octo.captcha.wordgenerator.DictionaryWordGenerator(new com.octo.captcha.wordgenerator.FileDictionnary("toddlist"));
+         com.octo.captcha.component.wordgenerator.WordGenerator words =
+             new com.octo.captcha.component.wordgenerator.DictionaryWordGenerator(new com.octo.captcha.component.wordgenerator.FileDictionnary("toddlist"));
 
-         com.octo.captcha.image.wordtoimage.WordToImage word2image =
-             new com.octo.captcha.image.wordtoimage.FilteredComposedWordToImage(
+         com.octo.captcha.component.image.wordtoimage.WordToImage word2image =
+             new com.octo.captcha.component.image.wordtoimage.FilteredComposedWordToImage(
                  font,
                  back,
                  paster,

@@ -466,6 +466,7 @@ package com.octo.captcha.engine.image.utils;
 
 import com.octo.captcha.engine.image.ImageCaptchaEngine;
 import com.octo.captcha.image.ImageCaptcha;
+import com.octo.captcha.image.ImageCaptcha;
 
 import java.io.File;
 
@@ -479,9 +480,11 @@ public class ImageCaptchaToJPEG
 
     public static void main(String[] args) throws Exception
     {
-        System.out.println("args : gimpy class='" + args[0] + "', output dir='" + args[1] + "',iterations='" + args[2] + "'");
+        System.out.println("args : image captcha engine class='" + args[0] + "', " +
+                "output dir='" + args[1] + "'" +
+                ",iterations='" + args[2] + "'");
         ImageCaptchaEngine pixCapchaEngine = (ImageCaptchaEngine) Class.forName(args[0]).newInstance();
-        System.out.println("gimpy initialized");
+        System.out.println("engine initialized");
         int i;
 
         //ImageToFile encoder = new ImageToFile();

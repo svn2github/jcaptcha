@@ -465,9 +465,11 @@ DAMAGES.
 */
 
 import com.octo.captcha.Captcha;
+import com.octo.captcha.Captcha;
 
 import com.octo.captcha.service.captchastore.MapCaptchaStore;
 import com.octo.captcha.service.captchastore.CaptchaStore;
+import com.octo.captcha.Captcha;
 
 import java.util.Locale;
 

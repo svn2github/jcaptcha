@@ -2,15 +2,15 @@
 package com.octo.captcha.engine.image.gimpy;
 
 
-import com.octo.captcha.image.backgroundgenerator.FileReaderRandomBackgroundGenerator;
-import com.octo.captcha.image.backgroundgenerator.FunkyBackgroundGenerator;
-import com.octo.captcha.image.backgroundgenerator.BackgroundGenerator;
-import com.octo.captcha.image.fontgenerator.TwistedAndShearedRandomFontGenerator;
-import com.octo.captcha.image.fontgenerator.TwistedRandomFontGenerator;
-import com.octo.captcha.image.fontgenerator.FontGenerator;
-import com.octo.captcha.image.textpaster.DoubleRandomTextPaster;
-import com.octo.captcha.image.textpaster.RandomTextPaster;
-import com.octo.captcha.image.textpaster.TextPaster;
+import com.octo.captcha.component.image.backgroundgenerator.FileReaderRandomBackgroundGenerator;
+import com.octo.captcha.component.image.backgroundgenerator.FunkyBackgroundGenerator;
+import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
+import com.octo.captcha.component.image.fontgenerator.TwistedAndShearedRandomFontGenerator;
+import com.octo.captcha.component.image.fontgenerator.TwistedRandomFontGenerator;
+import com.octo.captcha.component.image.fontgenerator.FontGenerator;
+import com.octo.captcha.component.image.textpaster.DoubleRandomTextPaster;
+import com.octo.captcha.component.image.textpaster.RandomTextPaster;
+import com.octo.captcha.component.image.textpaster.TextPaster;
 
 
 import java.awt.*;
@@ -28,7 +28,7 @@ public class MultipleGimpyEngine extends com.octo.captcha.engine.image.DefaultIm
     static
     {
         //word generator
-        com.octo.captcha.wordgenerator.WordGenerator dictionnaryWords = new com.octo.captcha.wordgenerator.DictionaryWordGenerator(new com.octo.captcha.wordgenerator.FileDictionnary("toddlist"));
+        com.octo.captcha.component.wordgenerator.WordGenerator dictionnaryWords = new com.octo.captcha.component.wordgenerator.DictionaryWordGenerator(new com.octo.captcha.component.wordgenerator.FileDictionnary("toddlist"));
 
         //wordtoimage components
         TextPaster randomPaster = new RandomTextPaster(new Integer(6), new Integer(8), Color.WHITE);
@@ -44,14 +44,14 @@ public class MultipleGimpyEngine extends com.octo.captcha.engine.image.DefaultIm
 
 
         //word2image 1
-        com.octo.captcha.image.wordtoimage.WordToImage word2image = new com.octo.captcha.image.wordtoimage.ComposedWordToImage(twistedFont, fileBack, randomPaster);
-        com.octo.captcha.image.wordtoimage.WordToImage word2image1 = new com.octo.captcha.image.wordtoimage.ComposedWordToImage(shearedFont, fileBack, randomPaster);
-        com.octo.captcha.image.wordtoimage.WordToImage word2image2 = new com.octo.captcha.image.wordtoimage.ComposedWordToImage(twistedFont, funkyBack, randomPaster);
-        com.octo.captcha.image.wordtoimage.WordToImage word2image3 = new com.octo.captcha.image.wordtoimage.ComposedWordToImage(shearedFont, funkyBack, randomPaster);
-        com.octo.captcha.image.wordtoimage.WordToImage word2image4 = new com.octo.captcha.image.wordtoimage.ComposedWordToImage(twistedFont, fileBack, doublePaster);
-        com.octo.captcha.image.wordtoimage.WordToImage word2image5 = new com.octo.captcha.image.wordtoimage.ComposedWordToImage(shearedFont, fileBack, doublePaster);
-        com.octo.captcha.image.wordtoimage.WordToImage word2image6 = new com.octo.captcha.image.wordtoimage.ComposedWordToImage(twistedFont, funkyBack, doublePaster);
-        com.octo.captcha.image.wordtoimage.WordToImage word2image7 = new com.octo.captcha.image.wordtoimage.ComposedWordToImage(shearedFont, funkyBack, doublePaster);
+        com.octo.captcha.component.image.wordtoimage.WordToImage word2image = new com.octo.captcha.component.image.wordtoimage.ComposedWordToImage(twistedFont, fileBack, randomPaster);
+        com.octo.captcha.component.image.wordtoimage.WordToImage word2image1 = new com.octo.captcha.component.image.wordtoimage.ComposedWordToImage(shearedFont, fileBack, randomPaster);
+        com.octo.captcha.component.image.wordtoimage.WordToImage word2image2 = new com.octo.captcha.component.image.wordtoimage.ComposedWordToImage(twistedFont, funkyBack, randomPaster);
+        com.octo.captcha.component.image.wordtoimage.WordToImage word2image3 = new com.octo.captcha.component.image.wordtoimage.ComposedWordToImage(shearedFont, funkyBack, randomPaster);
+        com.octo.captcha.component.image.wordtoimage.WordToImage word2image4 = new com.octo.captcha.component.image.wordtoimage.ComposedWordToImage(twistedFont, fileBack, doublePaster);
+        com.octo.captcha.component.image.wordtoimage.WordToImage word2image5 = new com.octo.captcha.component.image.wordtoimage.ComposedWordToImage(shearedFont, fileBack, doublePaster);
+        com.octo.captcha.component.image.wordtoimage.WordToImage word2image6 = new com.octo.captcha.component.image.wordtoimage.ComposedWordToImage(twistedFont, funkyBack, doublePaster);
+        com.octo.captcha.component.image.wordtoimage.WordToImage word2image7 = new com.octo.captcha.component.image.wordtoimage.ComposedWordToImage(shearedFont, funkyBack, doublePaster);
 
         //Add to array
         factories = new com.octo.captcha.image.ImageCaptchaFactory[8];

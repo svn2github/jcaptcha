@@ -469,6 +469,7 @@ import com.octo.captcha.service.CaptchaServiceException;
 import com.octo.captcha.service.captchastore.CaptchaStore;
 import com.octo.captcha.Captcha;
 import com.octo.captcha.engine.CaptchaEngine;
+import com.octo.captcha.Captcha;
 
 import java.awt.image.BufferedImage;
 import java.util.Locale;

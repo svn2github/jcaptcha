@@ -465,6 +465,7 @@ DAMAGES.
 */
 
 import com.octo.captcha.Captcha;
+import com.octo.captcha.Captcha;
 import com.octo.captcha.service.CaptchaServiceException;
 import com.octo.captcha.service.MockCaptcha;
 import junit.framework.TestCase;
