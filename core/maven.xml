@@ -9,4 +9,6 @@
     <ant:copy file="src/conf/toddlist.properties" todir="target/test-classes"/>
   </preGoal>
   
+  <goal name="assemble" prereqs="jar:install"/>
+  
 </project>

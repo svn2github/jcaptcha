@@ -13,8 +13,18 @@
         includes="**/${pattern}/**/project.xml"
         excludes="project.xml"
         goals="site"
-        banner="Building"
+        banner="generating documentation"
         ignoreFailures="false"/>
   </preGoal>
+    
+  <goal name="assemble">
+    <maven:reactor 
+        basedir="${basedir}"
+        includes="**/${pattern}/**/project.xml"
+        excludes="project.xml"
+        goals="assemble"
+        banner="Building"
+        ignoreFailures="false"/>
+  </goal>
   
 </project>

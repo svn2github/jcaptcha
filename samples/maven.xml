@@ -1,0 +1,9 @@
+<project 
+  default="assemble"
+  xmlns:j="jelly:core"
+  xmlns:maven="jelly:maven"
+  xmlns:artifact="artifact"
+  xmlns:ant="jelly:ant">
+  
+	<goal name="assemble" prereqs="jar:install"/>
+</project>
