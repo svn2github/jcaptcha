@@ -472,10 +472,11 @@ import com.octo.captcha.component.image.fontgenerator.FontGenerator;
 import com.octo.captcha.component.image.fontgenerator.RandomFontGenerator;
 import com.octo.captcha.component.image.textpaster.SimpleTextPaster;
 import com.octo.captcha.component.image.textpaster.TextPaster;
-import junit.framework.TestCase;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+
+import junit.framework.TestCase;
 
 /**
  * <p>Description: </p>
