@@ -480,7 +480,7 @@ import javax.servlet.http.HttpServletResponse;
 public class JCaptchaCommentAuthenticator implements CommentAuthenticator{
 
     private static final String htmlheader=
-            "<table cellspacing=\"0\" cellpadding=\"1\" border=\"0\" width=\"95%\"><tr><th>" ;
+            "<table cellspacing=\"0\" cellpadding=\"1\" border=\"0\" width=\"95%\"><tr><th width=\"116\">" ;
     
     private static final String htmlendheader=
             ":</th>";
@@ -488,13 +488,13 @@ public class JCaptchaCommentAuthenticator implements CommentAuthenticator{
                     "<td>" +
                     "<input type=\"text\" name=\"";
     private static final String htmlendinput=
-                "\" " +"size=\"50\" maxlength=\"255\" /></td></tr>";
+                "\" " +"size=\"50\" maxlength=\"255\" /></td></tr></table>";
     private static final String htmlChallenge=
-                "<tr><td><img src=\"";
+                "<table cellspacing=\"0\" cellpadding=\"1\" border=\"0\" width=\"95%\"><tr><td><img src=\"";
 
     private static final String htmlendChallenge=
                 "\"></td></tr>" +
-            "</tr></table>";
+            "</table>";
         
 
     
