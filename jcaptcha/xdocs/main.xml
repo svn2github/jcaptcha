@@ -20,32 +20,21 @@
             <p>
 
                 <ul>
-                    <li>Application developper oriented features</li>
+                    <li>End User Application oriented features</li>
                     <ul>
                         <li>Highly customizable captcha tests</li>
                         <li>Many ready to use configurations (see the engine sub project)</li>
                         <li>Gimpy and Fisheye tests</li>
-                        <li>Usage statistics collection</li>
-                        <li>Runtime test engine and service modification</li>
-                        <li>Filter integration module</li>
-                        <li>Struts integration module</li>
+                        <li>Usage statistics exposed by JMX</li>
+                        <li>Runtime modification of captcha test and/or service </li>
+                        <li>Many integration modules (struts, filter, jroller etc...)</li>
                     </ul>
+                   
                     <li>AI research oriented features</li>
                     <ul>
-                        <li>High level language for Captcha definition</li>
+                        <li>High level language for Captcha Test definition</li>
                         <li>Many ready to use components to build new Captcha tests</li>
-                        <li>Allows to easily build AI teaching routine</li>
-                    </ul>
-                    <li>Captcha developper oriented features</li>
-                    <ul>
-                        <li>Many ready to use components to build new Captcha tests</li>
-                        <li>Interface only dependencies allows to directly use your new captcha with integration features</li>
-                    </ul>
-
-                    <li>Integration developper oriented features</li>
-                    <ul>
-                        <li>High level interface for Captcha Service</li>
-                        <li>Base module provided to accelerate module configuration</li>
+                        <li>Allows automation of Neural Network learning procedures and fitness fonction definition for Genetic Algorithms</li>
                     </ul>
                 </ul>
             </p>
@@ -53,7 +42,16 @@
 
         <section name="News">
             <p>
-             <ul>
+             <ul>             
+              <li>18/11/2004
+                    <ul>
+                        <li>RC-2 available including following new features:</li>
+                        <li>JRoller integration module and documentation</li>
+                        <li>New captcha storage service based on Ehcache</li>
+                        <li>Captcha Service Optimisation by new implementation of asynchronous Captcha buffer based on Ehcache</li>
+                        <li>Sruts tutorial + sample application based on the struts mailreader sample</li>
+                    </ul>
+                </li>
               <li>23/10/2004
                     <ul>
                         <li>Near RC-2</li>

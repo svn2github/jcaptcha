@@ -501,28 +501,37 @@ public class FileReaderRandomBackgroundGenerator extends
         //this.images=images;
         if (rootPath != null)
             this.rootPath = rootPath;
-        //        if(images==null||images.length == 0){
-        //            throw new CaptchaException("Can't be initialized with a
-        // null or empty array of images");
-        //        }
+        StringBuffer tryedPath = new StringBuffer();
+
         File dir = new File(this.rootPath);
+        tryedPath.append(dir.getAbsolutePath());
+        tryedPath.append("\n");
+
         if (!dir.canRead() || !dir.isDirectory())
         {
             //trying with ressource
             URL url = this.getClass().getResource(this.rootPath);
             if(url!=null){
                 dir = new File(url.getFile());
+                tryedPath.append(dir.getAbsolutePath());
+                tryedPath.append("\n");
+
             }else{
                 url=this.getClass().getResource("/"+this.rootPath);
                 if(url!=null){
                 dir = new File(url.getFile());
+                tryedPath.append(dir.getAbsolutePath());
+                tryedPath.append("\n");
+
                 }else{
                     dir = new File(".");
+                    tryedPath.append(dir.getAbsolutePath());
+                    tryedPath.append("\n");
                 }
             }
             if (!dir.canRead() || !dir.isDirectory()){
                 if (!dir.canRead() || !dir.isDirectory()){
-                         throw new CaptchaException("Root path :'"+dir.getAbsolutePath()+"' is not" +
+                         throw new CaptchaException("None of the tryed path :'"+tryedPath.toString()+"' is not" +
                         " a directory or cannot be read");
                 }
             }

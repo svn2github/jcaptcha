@@ -309,7 +309,7 @@
     <first-group selected-file="file://$PROJECT_DIR$/core/src/java/com/octo/captcha/component/image/backgroundgenerator/FileReaderRandomBackgroundGenerator.java">
       <entry file="file://$PROJECT_DIR$/core/src/java/com/octo/captcha/image/gimpy/GimpyFactory.java" pinned="false">
         <provider selected="true" editor-type-id="text-editor">
-          <state line="549" column="0" selection-start="27578" selection-end="27578" vertical-scroll-proportion="0.9489051">
+          <state line="549" column="0" selection-start="27578" selection-end="27578" vertical-scroll-proportion="1.3630137">
             <folding />
           </state>
         </provider>
@@ -323,7 +323,7 @@
       </entry>
       <entry file="file://$PROJECT_DIR$/module-filter/xdocs/navigation.xml" pinned="false">
         <provider selected="true" editor-type-id="text-editor">
-          <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.06818182">
+          <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
             <folding />
           </state>
         </provider>
@@ -344,28 +344,28 @@
       </entry>
       <entry file="file://$PROJECT_DIR$/module-base/xdocs/main.xml" pinned="false">
         <provider selected="true" editor-type-id="text-editor">
-          <state line="11" column="48" selection-start="431" selection-end="431" vertical-scroll-proportion="0.4722222">
+          <state line="11" column="48" selection-start="431" selection-end="431" vertical-scroll-proportion="0.32864675">
             <folding />
           </state>
         </provider>
       </entry>
       <entry file="file://$PROJECT_DIR$/module-struts/src/java/com/octo/captcha/module/struts/CaptchaServicePlugin.java" pinned="false">
         <provider selected="true" editor-type-id="text-editor">
-          <state line="1008" column="44" selection-start="52337" selection-end="52337" vertical-scroll-proportion="1.2019465">
+          <state line="1008" column="44" selection-start="52337" selection-end="52337" vertical-scroll-proportion="1.3373288">
             <folding />
           </state>
         </provider>
       </entry>
       <entry file="file://$PROJECT_DIR$/module-base/src/java/com/octo/captcha/module/config/CaptchaModuleConfig.java" pinned="false">
         <provider selected="true" editor-type-id="text-editor">
-          <state line="511" column="35" selection-start="25674" selection-end="25689" vertical-scroll-proportion="0.7626263">
+          <state line="511" column="35" selection-start="25674" selection-end="25689" vertical-scroll-proportion="1.0738137">
             <folding />
           </state>
         </provider>
       </entry>
       <entry file="file://$PROJECT_DIR$/core/src/java/com/octo/captcha/component/image/backgroundgenerator/FileReaderRandomBackgroundGenerator.java" pinned="false">
         <provider selected="true" editor-type-id="text-editor">
-          <state line="499" column="0" selection-start="26323" selection-end="26323" vertical-scroll-proportion="-0.1388889">
+          <state line="546" column="8" selection-start="27959" selection-end="27959" vertical-scroll-proportion="0.8189807">
             <folding />
           </state>
         </provider>
@@ -438,15 +438,15 @@
   <component name="NamedScopeManager" />
   <component name="PackagesPane" />
   <component name="ProjectPane">
-    <expanded_node url="file://$PROJECT_DIR$/module-struts" module="jcaptcha-module-struts" type="directory" />
     <expanded_node url="file://$PROJECT_DIR$/module-struts/src/java/com/octo" module="jcaptcha-module-struts" type="directory" />
-    <expanded_node url="" module="jcaptcha-module-struts" type="module" />
-    <expanded_node url="file://$PROJECT_DIR$/module-struts/src/java/com" module="jcaptcha-module-struts" type="directory" />
-    <expanded_node url="file://$PROJECT_DIR$/module-struts/src" module="jcaptcha-module-struts" type="directory" />
-    <expanded_node url="file://$PROJECT_DIR$/module-struts/src/java/com/octo/captcha/module/struts" module="jcaptcha-module-struts" type="directory" />
+    <expanded_node url="file://$PROJECT_DIR$/module-struts" module="jcaptcha-module-struts" type="directory" />
     <expanded_node url="file://$PROJECT_DIR$/module-struts/src/java/com/octo/captcha" module="jcaptcha-module-struts" type="directory" />
+    <expanded_node url="file://$PROJECT_DIR$/module-struts/src" module="jcaptcha-module-struts" type="directory" />
     <expanded_node url="file://$PROJECT_DIR$/module-struts/src/java/com/octo/captcha/module" module="jcaptcha-module-struts" type="directory" />
+    <expanded_node url="" module="jcaptcha-module-struts" type="module" />
+    <expanded_node url="file://$PROJECT_DIR$/module-struts/src/java/com/octo/captcha/module/struts" module="jcaptcha-module-struts" type="directory" />
     <expanded_node url="file://$PROJECT_DIR$/module-struts/src/java" module="jcaptcha-module-struts" type="directory" />
+    <expanded_node url="file://$PROJECT_DIR$/module-struts/src/java/com" module="jcaptcha-module-struts" type="directory" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" splitterProportion="0.86445016">
@@ -502,6 +502,18 @@
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <module name="" />
     </configuration>
+    <configuration selected="false" default="true" type="#com.intellij.j2ee.web.jsr45.JSR45ConfigurationFactory" factoryName="Remote">
+      <option name="WORKING_DIRECTORY" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="80" />
+      <option name="LOCAL" value="false" />
+      <option name="OPEN_IN_BROWSER" value="true" />
+      <option name="OPEN_IN_BROWSER_URL" value="/" />
+      <option name="COMMON_VM_ARGUMENTS" value="" />
+      <option name="JSP_PACKAGE" value="" />
+      <option name="VM_OPTS" value="" />
+      <option name="LOCAL_PORT" value="80" />
+    </configuration>
     <configuration selected="false" default="true" type="JUnit" factoryName="JUnit">
       <module name="" />
       <option name="PACKAGE_NAME" />
@@ -516,15 +528,6 @@
         <value defaultName="wholeProject" />
       </option>
     </configuration>
-    <configuration selected="false" default="true" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local">
-      <option name="WORKING_DIRECTORY" />
-      <option name="HOST" value="localhost" />
-      <option name="PORT" value="8080" />
-      <option name="LOCAL" value="true" />
-      <option name="OPEN_IN_BROWSER" value="true" />
-      <option name="OPEN_IN_BROWSER_URL" value="/" />
-      <option name="COMMON_VM_ARGUMENTS" value="" />
-    </configuration>
     <configuration selected="false" default="true" type="Applet" factoryName="Applet">
       <module name="" />
       <option name="MAIN_CLASS_NAME" />
@@ -535,17 +538,14 @@
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <option name="VM_PARAMETERS" />
     </configuration>
-    <configuration selected="false" default="true" type="#com.intellij.j2ee.web.jsr45.JSR45ConfigurationFactory" factoryName="Remote">
+    <configuration selected="false" default="true" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local">
       <option name="WORKING_DIRECTORY" />
       <option name="HOST" value="localhost" />
-      <option name="PORT" value="80" />
-      <option name="LOCAL" value="false" />
+      <option name="PORT" value="8080" />
+      <option name="LOCAL" value="true" />
       <option name="OPEN_IN_BROWSER" value="true" />
       <option name="OPEN_IN_BROWSER_URL" value="/" />
       <option name="COMMON_VM_ARGUMENTS" value="" />
-      <option name="JSP_PACKAGE" value="" />
-      <option name="VM_OPTS" value="" />
-      <option name="LOCAL_PORT" value="80" />
     </configuration>
     <configuration selected="false" default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
@@ -567,14 +567,14 @@
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="wholeProject" />
       </option>
+      <RunnerSettings RunnerId="Run" />
       <RunnerSettings RunnerId="Debug">
         <option name="DEBUG_PORT" value="4490" />
         <option name="TRANSPORT" value="0" />
         <option name="LOCAL" value="false" />
       </RunnerSettings>
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Debug" />
       <ConfigurationWrapper RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
     </configuration>
     <configuration selected="false" default="false" name="com.octo.captcha" type="JUnit" factoryName="JUnit">
       <module name="jcaptcha-service" />
@@ -629,13 +629,13 @@
       <option name="OPEN_IN_BROWSER" value="true" />
       <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/struts-mailreader" />
       <option name="COMMON_VM_ARGUMENTS" value="" />
+      <RunnerSettings RunnerId="Run" />
       <RunnerSettings RunnerId="Debug">
         <option name="DEBUG_PORT" value="4942" />
         <option name="TRANSPORT" value="0" />
         <option name="LOCAL" value="true" />
       </RunnerSettings>
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
         <option name="USE_ENV_VARIABLES" value="true" />
         <STARTUP>
           <option name="USE_DEFAULT" value="true" />
@@ -650,7 +650,7 @@
           <option name="PROGRAM_PARAMETERS" value=" stop" />
         </SHUTDOWN>
       </ConfigurationWrapper>
-      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
         <option name="USE_ENV_VARIABLES" value="true" />
         <STARTUP>
           <option name="USE_DEFAULT" value="true" />
@@ -738,9 +738,9 @@
     <layout>
       <window_info id="CVS" active="false" anchor="bottom" auto_hide="false" internal_type="docked" type="docked" visible="false" weight="0.32983682" order="8" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="docked" type="docked" visible="false" weight="0.3135198" order="7" />
-      <window_info id="ConsoleMavenPlugin" active="false" anchor="bottom" auto_hide="false" internal_type="docked" type="docked" visible="false" weight="0.2086247" order="8" />
+      <window_info id="ConsoleMavenPlugin" active="true" anchor="bottom" auto_hide="false" internal_type="docked" type="docked" visible="true" weight="0.2086247" order="8" />
       <window_info id="Log4jMonitor" active="false" anchor="bottom" auto_hide="false" internal_type="docked" type="docked" visible="false" weight="0.488345" order="8" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="docked" type="docked" visible="true" weight="0.38523924" order="0" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="docked" type="docked" visible="true" weight="0.37064072" order="0" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="docked" type="docked" visible="false" weight="0.32983682" order="1" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="docked" type="docked" visible="false" weight="0.25" order="1" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="docked" type="docked" visible="false" weight="0.4137529" order="8" />
@@ -876,7 +876,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/java/com/octo/captcha/image/gimpy/GimpyFactory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="549" column="0" selection-start="27578" selection-end="27578" vertical-scroll-proportion="0.9489051">
+        <state line="549" column="0" selection-start="27578" selection-end="27578" vertical-scroll-proportion="1.3630137">
           <folding />
         </state>
       </provider>
@@ -890,7 +890,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/module-filter/xdocs/navigation.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.06818182">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -904,7 +904,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/module-base/xdocs/main.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="48" selection-start="431" selection-end="431" vertical-scroll-proportion="0.4722222">
+        <state line="11" column="48" selection-start="431" selection-end="431" vertical-scroll-proportion="0.32864675">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module-struts/src/java/com/octo/captcha/module/struts/CaptchaServicePlugin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1008" column="44" selection-start="52337" selection-end="52337" vertical-scroll-proportion="1.3373288">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module-base/src/java/com/octo/captcha/module/config/CaptchaModuleConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="511" column="35" selection-start="25674" selection-end="25689" vertical-scroll-proportion="1.0738137">
           <folding />
         </state>
       </provider>
@@ -916,23 +930,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/module-struts/src/java/com/octo/captcha/module/struts/CaptchaServicePlugin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1008" column="44" selection-start="52337" selection-end="52337" vertical-scroll-proportion="1.2019465">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/src/java/com/octo/captcha/component/image/backgroundgenerator/FileReaderRandomBackgroundGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="499" column="0" selection-start="26323" selection-end="26323" vertical-scroll-proportion="-0.1388889">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module-base/src/java/com/octo/captcha/module/config/CaptchaModuleConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="511" column="35" selection-start="25674" selection-end="25689" vertical-scroll-proportion="0.7626263">
+        <state line="546" column="8" selection-start="27959" selection-end="27959" vertical-scroll-proportion="0.8189807">
           <folding />
         </state>
       </provider>
