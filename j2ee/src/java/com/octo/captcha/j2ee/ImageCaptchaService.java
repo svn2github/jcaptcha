@@ -556,9 +556,8 @@ public class ImageCaptchaService implements ImageCaptchaServiceMBean
      */
     public long getNumberOfGarbageCollectedCaptcha()
     {
-        return this
-            .internalStore
-            .getNumberOfGarbageCollectedEntriesSinceCreation();
+        //return this.internalStore.getNumberOfGarbageCollectedEntriesSinceCreation();
+        return 0;
     }
 
     /**
