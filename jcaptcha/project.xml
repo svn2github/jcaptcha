@@ -34,8 +34,8 @@
 
   <url/>
   <repository>
-  <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/jcaptcha:jcaptcha/${pom.artifactId}</connection>
-    <url>http://cvs.sourceforge.net/viewcvs.py/jcaptcha/</url>
+  <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/jcaptcha:jcaptcha</connection>
+    <url>http://cvs.sourceforge.net/viewcvs.py/jcaptcha/jcaptcha</url>
 
    </repository>
    <mailingLists>
