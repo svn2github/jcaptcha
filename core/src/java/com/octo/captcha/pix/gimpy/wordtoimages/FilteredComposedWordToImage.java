@@ -51,12 +51,12 @@
 package com.octo.captcha.pix.gimpy.wordtoimages;
 
 import com.octo.captcha.CaptchaException;
+import com.octo.captcha.utils.ToolkitFactory;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageFilter;
 import java.awt.image.FilteredImageSource;
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Composite;
@@ -177,7 +177,7 @@ public class FilteredComposedWordToImage extends ComposedWordToImage {
             for (int i = 0; i < filters.length; i++) {
                 ImageFilter backgroundFilter = filters[i];
                 filtered = new FilteredImageSource(image.getSource(), backgroundFilter);
-                Image temp = Toolkit.getDefaultToolkit().createImage(filtered);
+                Image temp = ToolkitFactory.getToolkit().createImage(filtered);
                 image.getGraphics().drawImage(temp, 0, 0, Color.WHITE, null);
             }
         }
