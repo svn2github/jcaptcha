@@ -48,45 +48,76 @@
  *
  */
 
-package com.octo.captcha.pix.utils;
 
+package com.octo.captcha.image.gimpy.wordtoimage;
 
-import com.octo.captcha.pix.PixCaptcha;
-import com.octo.captcha.pix.PixCaptchaEngine;
-import com.octo.captcha.pix.PixCaptchaFactory;
-import com.octo.captcha.utils.ImageToFile;
+import java.awt.Font;
+import java.awt.GraphicsEnvironment;
+import java.awt.image.BufferedImage;
 
-import java.io.File;
-
+import junit.framework.TestCase;
 
 /**
  * <p>Description: </p>
- * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
  */
-public class PixCaptchaToJPEG {
+public class SimpleWordToImageTest extends TestCase {
 
-    public static void main(String[] args) throws Exception {
-            System.out.println("args : " +args);
-        PixCaptchaEngine pixCapchaEngine = (PixCaptchaEngine)Class.forName(args[0]).newInstance();
-              System.out.println("engine initialized");
-        PixCaptchaFactory pixCaptchaFactory = pixCapchaEngine.getPixCaptchaFactory();
-        System.out.println("Factory initialized");
+    private SimpleWordToImage simpleWordToImage;
 
-        int i;
-
-        ImageToFile encoder = new ImageToFile();
-        System.out.println("Beginning generation");
-
-        for(i=0;i<10;i++){
-            PixCaptcha captcha = pixCaptchaFactory.getPixCaptcha();
-            System.out.println("Captcha "+i+" retrived");
-            File out = new File(args[1]+File.separator+"captcha_"+i+".jpg");
-            encoder.serialize(captcha.getPixChallenge(),out);
-            System.out.println("File i created "+out.toURI());
-        }
-
+    /**
+     * Constructor for SimpleWordToImageTest.
+     * @param name
+     */
+    public SimpleWordToImageTest(String name) {
+        super(name);
+    }
+    
+    public void setUp() {
+        this.simpleWordToImage = new SimpleWordToImage();
     }
 
+    public void testGetFont() {
+        Font test = this.simpleWordToImage.getFont();
+        Font expected = GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts()[0];
+        assertNotNull(test);
+        assertEquals(expected,test);
+    }
+
+    public void testGetBackround() {
+        BufferedImage test = this.simpleWordToImage.getBackround();
+        assertNotNull(test);
+    }
+    
+    public void testGetMaxAcceptedWordLenght() {
+        int test = this.simpleWordToImage.getMaxAcceptedWordLenght();
+        int expected = 10;
+        assertEquals(expected,test);
+    }
+
+    public void testGetMinAcceptedWordLenght() {
+        int test = this.simpleWordToImage.getMinAcceptedWordLenght();
+        int expected = 1;
+        assertEquals(expected,test);
+    }
+
+    public void testGetImageHeight() {
+        int test = this.simpleWordToImage.getImageHeight();
+        int expected = 50;
+        assertEquals(expected,test);
+    }
+
+    public void testGetImageWidth() {
+        int test = this.simpleWordToImage.getImageWidth();
+        int expected = 100;
+        assertEquals(expected,test);
+    }
+
+    public void testGetMinFontSize() {
+        int test = this.simpleWordToImage.getMinFontSize();
+        int expected = 10;
+        assertEquals(expected,test);
+    }
 
 }

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<project>
+  <extends>${basedir}/../project.xml</extends>
+  <pomVersion>1</pomVersion>
+  <id>jcaptcha-samples-web</id>
+  <name>JCaptcha-samples-web</name>
+  <groupId>jcaptcha</groupId>
+  <currentVersion>1.0</currentVersion>
+  <organization>
+    <!-- The full name of the organization. -->
+    <name>JCaptcha corp.</name>
+    <!-- The URL to the organization's home page. -->
+    <url>http://jcaptcha.sourceforge.net/</url>
+    <!-- The URL to the organization's logo image. This can be an URL relative to the base directory of the generated
+         web site, (e.g., /images/org-logo.png) or an absolute URL (e.g., http://my.corp/logo.png). This value is used
+         when generating the project documentation. -->
+    <logo>/images/organization-logo.jpg</logo>
+  </organization>
+  <inceptionYear>2003</inceptionYear>
+  <package>com.octo.captcha</package>
+
+  <description>
+  <![CDATA[
+  <b>CAPTCHA</b>, for <b>C</b>ompletely <b>A</b>utomated <b>P</b>ublic <b>T</b>uring <b>T</b>est <b>C</b>omputers and <b>H</b>umans
+  <b>S</b>amples : show some possible usages of the jcaptcha library
+   ]]>
+  </description>
+  
+  <shortDescription>
+  CAPTCHA is a test based on several cognitives puzzles based on challenging problems
+  of artificial intelligence.
+  </shortDescription>
+
+  <url/>
+  <repository>
+  <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/jcaptcha:.</connection>
+    <url>http://cvs.sourceforge.net/viewcvs.py/jcaptcha/</url>
+
+   </repository>
+   <mailingLists>
+    <mailingList>
+      <name>JCaptcha User List</name>
+      <subscribe>jcaptcha-users@lists.sourceforge.net</subscribe>
+      <unsubscribe>jcaptcha-users-unsubscribe@lists.sourceforge.net</unsubscribe>
+      <archive>http://sourceforge.net/mailarchive/forum.php?forum=jcaptcha-users</archive>
+    </mailingList>
+    <mailingList>
+      <name>JCaptcha Developer List</name>
+      <subscribe>jcaptcha-devs@lists.sourceforge.net</subscribe>
+      <unsubscribe>jcaptcha-devs-unsubscribe@lists.sourceforge.net</unsubscribe>
+      <archive>http://sourceforge.net/mailarchive/forum.php?forum=jcaptcha-devs</archive>
+    </mailingList>
+   </mailingLists>
+
+    <developers>
+    <developer>
+      <name>Sébastien Brunot</name>
+      <id>sbr</id>
+      <email>sbrunot@octo.com</email>
+      <organization>Octo</organization>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <name>Mathieu Gandin</name>
+      <id>mga</id>
+      <email>mgandin@octo.com</email>
+      <organization>Octo</organization>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <name>Marc-Antoine Garrigue</name>
+      <id>mag</id>
+      <email>mgarrigue@octo.com</email>
+      <organization>Octo</organization>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+  </developers>
+
+    <developers>
+    <developer>
+      <name>Sébastien Brunot</name>
+      <id>sbr</id>
+      <email>sbrunot@octo.com</email>
+      <organization>Octo</organization>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <name>Mathieu Gandin</name>
+      <id>mga</id>
+      <email>mgandin@octo.com</email>
+      <organization>Octo</organization>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <name>Marc-Antoine Garrigue</name>
+      <id>mag</id>
+      <email>mgarrigue@octo.com</email>
+      <organization>Octo</organization>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+  </developers>
+
+  <dependencies>
+  	<dependency>
+            <id>xml-apis</id>
+            <version>1.0.b2</version>
+            <url>http://xml.apache.org/xerces2-j/</url>
+      	</dependency>
+      
+      	<dependency>
+            <id>xerces</id>
+            <version>2.2.1</version>
+            <url>http://xml.apache.org/xerces2-j/</url>
+    	</dependency>
+    	
+    	<dependency>
+    	    <groupId>jcaptcha</groupId>
+            <artifactId>jcaptcha-core</artifactId>
+            <version>1.0</version>
+            <url>http://jcaptcha.sourceforge.net</url>
+    	</dependency>
+    	<dependency>
+    	    <groupId>jcaptcha</groupId>
+            <artifactId>jcaptcha-samples</artifactId>
+            <version>1.0</version>
+            <url>http://jcaptcha.sourceforge.net</url>
+    	</dependency>
+    	<dependency>
+    	    <groupId>jhlabs</groupId>
+    	    <artifactId>jhlabs</artifactId>
+            <jar>imageeditor.jar</jar>
+    	</dependency>
+    	
+  </dependencies>
+
+  <build>
+    <sourceDirectory>src/java</sourceDirectory>
+    <unitTestSourceDirectory>src/test</unitTestSourceDirectory>
+    <unitTest>
+      <includes>
+        <include>**/*Test.java</include>
+      </includes>
+      <excludes>
+        <exclude>**/*Test*All.java</exclude>
+      </excludes>
+    </unitTest>
+
+  </build>
+
+  <reports>
+	<report>maven-checkstyle-plugin</report>
+	<report>maven-junit-report-plugin</report>
+	<report>maven-javadoc-plugin</report>
+	<report>maven-jxr-plugin</report>
+	<report>maven-license-plugin</report>
+	<report>maven-pmd-plugin</report>
+	<report>maven-jdepend-plugin</report>
+	<report>maven-tasklist-plugin</report>
+    <!--report>maven-clover-plugin</report-->
+  </reports>
+  
+</project>

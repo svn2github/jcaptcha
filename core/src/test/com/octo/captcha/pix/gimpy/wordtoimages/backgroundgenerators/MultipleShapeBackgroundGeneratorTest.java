@@ -48,53 +48,52 @@
  *
  */
 
-package com.octo.captcha.utils;
 
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGEncodeParam;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
+package com.octo.captcha.image.gimpy.wordtoimage.backgroundgenerator;
 
+import java.awt.Color;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+
+import junit.framework.TestCase;
 
 /**
  * <p>Description: </p>
- * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
  */
-public class ImageToFile {
+public class MultipleShapeBackgroundGeneratorTest extends TestCase {
 
-    public ImageToFile(){}
+    private MultipleShapeBackgroundGenerator multipleShapeBackgroundGenerator;
 
-    public static void serialize(BufferedImage image, File file) throws IOException {
-        file.createNewFile();
-        FileOutputStream fos = new FileOutputStream(file);
-        encodeJPG(fos, image);
-        fos.flush();
-        fos.close();
+    /**
+     * Constructor for MultipleShapeBackgroundGeneratorTest.
+     * @param name
+     */
+    public MultipleShapeBackgroundGeneratorTest(String name) {
+        super(name);
     }
 
-    public static void encodeJPG(OutputStream sos, BufferedImage image) throws IOException {
-        JPEGImageEncoder encoder =
-          JPEGCodec.createJPEGEncoder(sos);
-
-
-        JPEGEncodeParam param=encoder.getDefaultJPEGEncodeParam(image);
-        param.setHorizontalSubsampling(0, 1);
-        param.setHorizontalSubsampling(1, 1);
-        param.setHorizontalSubsampling(2, 1);
-        param.setVerticalSubsampling(0, 1);
-        param.setVerticalSubsampling(1, 1);
-        param.setVerticalSubsampling(2, 1);
-        param.setQuality(1.0f,false);
-        encoder.setJPEGEncodeParam(param);
-        encoder.encode(image);
-        encoder.getOutputStream().close();
+    public void setUp() {
+        this.multipleShapeBackgroundGenerator = 
+            new MultipleShapeBackgroundGenerator(new Integer(100),new Integer(100));
     }
 
+    public void testMultipleShapeBackgroundGenerator() {
+        this.multipleShapeBackgroundGenerator =
+            new MultipleShapeBackgroundGenerator(new Integer(100),new Integer(100),
+                null,null,null,null,null,null,null,null,null);
+        this.multipleShapeBackgroundGenerator =
+            new MultipleShapeBackgroundGenerator(new Integer(100),new Integer(100),
+                Color.WHITE,Color.BLACK,
+                new Integer(10),new Integer(10),
+                new Integer(10),new Integer(10),
+                Color.WHITE,Color.BLACK,
+                new Integer(10));
+    }
+
+    public void testGetBackround() {
+        BufferedImage test = this.multipleShapeBackgroundGenerator.getBackround();
+        assertNotNull(test);
+    }
 
 }
-
