@@ -2,9 +2,9 @@
 
 <project>
   <pomVersion>1</pomVersion>
-  <id>jcaptcha</id>
+  <id>captcha</id>
   <name>Captcha-core</name>
-  <groupId>jcaptcha</groupId>
+  <groupId>captcha</groupId>
   <currentVersion>0.1</currentVersion>
   <organization>
     <name>octo</name>

@@ -67,129 +67,94 @@ public class PixelsWarper {
         int				width, height;			// width & height of warp image
 
 
+    public PixelsWarper(int fromPixels[], int toPixels[], int w, int h, Point fromPoint, Point toPoint) {
+        this.fromPixels = fromPixels;
+        this.toPixels = toPixels;
+        this.fromPoint = fromPoint;
+        this.toPoint = toPoint;
+        width = w;
+        height = h;
+    }
 
         public static int[] Warp( int fromPixels[],int w, int h, Point fromPoint, Point toPoint ){
             int[] out = new int[w*h];
             PixelsWarper warper = new PixelsWarper(fromPixels, out,w, h, fromPoint, toPoint);
-            warper.WarpPixels();
+            //warper.WarpPixels();
             return warper.toPixels;
         }
 
-        public PixelsWarper( int fromPixels[], int toPixels[], int w, int h, Point fromPoint, Point toPoint )
-        {
-            this.fromPixels = fromPixels;
-            this.toPixels = toPixels;
-            this.fromPoint = fromPoint;
-            this.toPoint = toPoint;
-            width = w;
-            height = h;
-        }
+//        public PixelsWarper( int fromPixels[], int toPixels[], int w, int h, Point fromPoint, Point toPoint )
+//        {
+//            this.fromPixels = fromPixels;
+//            this.toPixels = toPixels;
+//            this.fromPoint = fromPoint;
+//            this.toPoint = toPoint;
+//            width = w;
+//            height = h;
+//        }
 
-         void WarpPixels()
-        {
-            int			dx = toPoint.x-fromPoint.x, dy = toPoint.y-fromPoint.y, dist = (int)Math.sqrt(dx*dx+dy*dy)*2;
-            Rectangle	r = new Rectangle();
-            Point		ne = new Point(0,0), nw = new Point(0,0), se = new Point(0,0), sw = new Point(0,0);
+    // warp a quadrilateral into a rectangle (double-secret magic code!)
+    void WarpRegion(Rectangle fromRect, Point nw, Point ne, Point sw, Point se) {
+        int dx = fromRect.width, dy = fromRect.height;
+        double invDX = 1.0 / dx, invDY = 1.0 / dy;
 
-                // copy fromPixels to toPixels, so the non-warped parts will be identical
-            System.arraycopy( fromPixels, 0, toPixels, 0, width*height );
-            if ( dist == 0 ) return;
+        for (int a = 0; a < dx; a++) {
+            double aa = a * invDX;
+            double x1 = ne.x + (nw.x - ne.x) * aa;
+            double y1 = ne.y + (nw.y - ne.y) * aa;
+            double x2 = se.x + (sw.x - se.x) * aa;
+            double y2 = se.y + (sw.y - se.y) * aa;
 
-                // warp northeast quadrant
-            SetRect( r, fromPoint.x - dist, fromPoint.y - dist, fromPoint.x, fromPoint.y );
-            ClipRect( r, width, height );
-            SetPt( ne, r.x, r.y );
-            SetPt( nw, r.x+r.width, r.y );
-            SetPt( se, r.x, r.y+r.height );
-            SetPt( sw, toPoint.x, toPoint.y );
-            WarpRegion( r, nw, ne, sw, se );
+            double xin = x1;
+            double yin = y1;
+            double dxin = (x2 - x1) * invDY;
+            double dyin = (y2 - y1) * invDY;
+            int toPixel = fromRect.x + a + fromRect.y * width;
 
-                // warp nortwest quadrant
-            SetRect( r, fromPoint.x, fromPoint.y - dist, fromPoint.x + dist, fromPoint.y );
-            ClipRect( r, width, height );
-            SetPt( ne, r.x, r.y );
-            SetPt( nw, r.x+r.width, r.y );
-            SetPt( se, toPoint.x, toPoint.y );
-            SetPt( sw, r.x+r.width, r.y+r.height );
-            WarpRegion( r, nw, ne, sw, se );
+            for (int b = 0; b < dy; b++) {
+                if (xin < 0) xin = 0;
+                if (xin >= width) xin = width - 1;
+                if (yin < 0) yin = 0;
+                if (yin >= height) yin = height - 1;
 
-                // warp southeast quadrant
-            SetRect( r, fromPoint.x - dist, fromPoint.y, fromPoint.x, fromPoint.y + dist );
-            ClipRect( r, width, height );
-            SetPt( ne, r.x, r.y );
-            SetPt( nw, toPoint.x, toPoint.y );
-            SetPt( se, r.x, r.y+r.height );
-            SetPt( sw, r.x+r.width, r.y+r.height );
-            WarpRegion( r, nw, ne, sw, se );
+                int pixelValue = fromPixels[(int) xin + (int) yin * width];
+                toPixels[toPixel] = pixelValue;
 
-                // warp southwest quadrant
-            SetRect( r, fromPoint.x, fromPoint.y, fromPoint.x + dist, fromPoint.y + dist );
-            ClipRect( r, width, height );
-            SetPt( ne, toPoint.x, toPoint.y );
-            SetPt( nw, r.x+r.width, r.y );
-            SetPt( se, r.x, r.y+r.height );
-            SetPt( sw, r.x+r.width, r.y+r.height );
-            WarpRegion( r, nw, ne, sw, se );
-        }
-
-            // warp a quadrilateral into a rectangle (double-secret magic code!)
-        void WarpRegion( Rectangle fromRect, Point nw, Point ne, Point sw, Point se )
-        {
-            int				dx = fromRect.width, dy = fromRect.height;
-            double			invDX = 1.0/dx, invDY = 1.0/dy;
-
-            for ( int a = 0; a < dx; a++ )
-            {
-                double 	aa = a * invDX;
-                double 	x1 = ne.x + ( nw.x - ne.x ) * aa;
-                double 	y1 = ne.y + ( nw.y - ne.y ) * aa;
-                double 	x2 = se.x + ( sw.x - se.x ) * aa;
-                double 	y2 = se.y + ( sw.y - se.y ) * aa;
-
-                double 	xin = x1;
-                double 	yin = y1;
-                double 	dxin = ( x2 - x1 ) * invDY;
-                double 	dyin = ( y2 - y1 ) * invDY;
-                int 	toPixel = fromRect.x + a + fromRect.y * width;
-
-                for ( int b = 0; b < dy; b++ )
-                {
-                    if ( xin < 0 ) 			xin = 0;
-                    if ( xin >= width )	xin = width - 1;
-                    if ( yin < 0 ) 			yin = 0;
-                    if ( yin >= height )	yin = height - 1;
-
-                    int pixelValue = fromPixels[ (int)xin + (int)yin * width ];
-                    toPixels[ toPixel ] = pixelValue;
-
-                    xin += dxin;
-                    yin += dyin;
-                    toPixel += width;
-                }
+                xin += dxin;
+                yin += dyin;
+                toPixel += width;
             }
         }
-
-        void ClipRect( Rectangle r, int w, int h )
-        {
-            if ( r.x < 0 ) 				{ r.width += r.x; r.x = 0; }
-            if ( r.y < 0 ) 				{ r.height += r.y; r.y = 0; }
-            if ( r.x+r.width >= w ) 	r.width = w - r.x - 1;
-            if ( r.y+r.height >= h ) 	r.height = h - r.y - 1;
-        }
-
-            // SetRect and SetPt are Mac OS functions. I wrote my own versions here
-            // so I didn't have to rewrite too much of the code.
-
-        void SetRect( Rectangle r, int left, int top, int right, int bottom )
-        {
-            r.x = left; r.y = top; r.width = right-left; r.height = bottom-top;
-        }
-
-        void SetPt( Point pt, int x, int y )
-        {
-            pt.x = x; pt.y = y;
-        }
-
     }
+
+    void ClipRect(Rectangle r, int w, int h) {
+        if (r.x < 0) {
+            r.width += r.x;
+            r.x = 0;
+        }
+        if (r.y < 0) {
+            r.height += r.y;
+            r.y = 0;
+        }
+        if (r.x + r.width >= w) r.width = w - r.x - 1;
+        if (r.y + r.height >= h) r.height = h - r.y - 1;
+    }
+
+    // SetRect and SetPt are Mac OS functions. I wrote my own versions here
+    // so I didn't have to rewrite too much of the code.
+
+    void SetRect(Rectangle r, int left, int top, int right, int bottom) {
+        r.x = left;
+        r.y = top;
+        r.width = right - left;
+        r.height = bottom - top;
+    }
+
+    void SetPt(Point pt, int x, int y) {
+        pt.x = x;
+        pt.y = y;
+    }
+
+}
 
 

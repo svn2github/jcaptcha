@@ -46,27 +46,19 @@
  * SUCH DAMAGE.
  * ====================================================================
  *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the Apache Software Foundation.  For more
- * information on the Apache Software Foundation, please see
- * <http://www.apache.org/>.
- *
- * Portions of this software are based upon public domain software
- * originally written at the National Center for Supercomputing Applications,
- * University of Illinois, Urbana-Champaign.
  */
 
 package com.octo.captcha.engine;
 
-import com.octo.captcha.pix.PixCaptchaFactory;
 import com.octo.captcha.pix.PixCaptcha;
-import com.octo.utils.ImageToFile;
+import com.octo.captcha.pix.PixCaptchaFactory;
+import com.octo.captcha.utils.ImageToFile;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 /**
  * <p>Description: </p>

@@ -50,26 +50,25 @@
 
 package com.octo.captcha.engine.pix;
 
-import com.octo.captcha.engine.hsql.HSQLUtils;
 import com.octo.captcha.engine.FactoryInitializer;
-import com.octo.captcha.pix.PixCaptchaFactory;
+import com.octo.captcha.engine.hsql.HSQLUtils;
 import com.octo.captcha.pix.PixCaptcha;
-import com.octo.utils.ImageToFile;
+import com.octo.captcha.pix.PixCaptchaFactory;
+import com.octo.captcha.utils.ImageToFile;
 
-import java.util.Collection;
-import java.io.OutputStream;
 import java.io.ByteArrayOutputStream;
-import java.sql.ResultSet;
+import java.util.Collection;
 
 /**
  * <p>Description: </p>
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class HSQLPixCaptchaEngine extends AbstractPixCaptchaEngine{
+public class HSQLPixCaptchaEngine {
 
     private String filename = "CAPTCHAS_DB";
     private HSQLUtils db;
+    private PixCaptchaFactory factory;
 
     private static final String TABLE_NAME="PixCaptchas";
     private static final String CREATE_TABLE="create table "+TABLE_NAME+" (question VARCHAR,response VARCHAR,pix BINARY)";
@@ -77,7 +76,7 @@ public class HSQLPixCaptchaEngine extends AbstractPixCaptchaEngine{
     public static final String INSERT="INSERT into "+TABLE_NAME +" values (?,?,?) ";
     public static final String SELECT = "SELECT * FROM "+TABLE_NAME;
     public HSQLPixCaptchaEngine(PixCaptchaFactory factory, String filename) {
-        super(factory);
+
         this.filename = filename!=null?filename:this.filename;
     }
 
@@ -87,7 +86,7 @@ public class HSQLPixCaptchaEngine extends AbstractPixCaptchaEngine{
         db.query(GET_COUNT);
        for(int i=0;i<100;i++){
            ImageToFile encoder = new ImageToFile();
-           PixCaptcha capthca =factory.getPixCaptcha();
+           PixCaptcha capthca =this.factory.getPixCaptcha();
            ByteArrayOutputStream stream = new ByteArrayOutputStream();
            encoder.encodeJPG(stream, capthca.getPixChallenge());
            db.insertPixCaptcha(INSERT,capthca.getQuestion(),capthca.getResponse(),stream.toByteArray());

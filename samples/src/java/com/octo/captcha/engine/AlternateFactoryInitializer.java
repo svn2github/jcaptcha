@@ -1,25 +1,18 @@
 package com.octo.captcha.engine;
 
-import java.awt.Color;
-
 import com.octo.captcha.pix.PixCaptchaFactory;
-import com.octo.captcha.pix.gimpy.wordtoimages.AbstractTextPaster;
-import com.octo.captcha.pix.gimpy.wordtoimages.AbstractBackgroundGenerator;
-import com.octo.captcha.pix.gimpy.wordtoimages.AbstractFontGenerator;
-import com.octo.captcha.pix.gimpy.wordtoimages.ComposedWordToImage;
-import com.octo.captcha.pix.gimpy.wordtoimages.textpasters.DoubleTextPaster;
-import com.octo.captcha.pix.gimpy.wordtoimages.textpasters.WarpedTextPaster;
-import com.octo.captcha.pix.gimpy.wordtoimages.fontgenerator.TwistedRandomFontGenerator;
-import com.octo.captcha.pix.gimpy.wordtoimages.fontgenerator.TwistedAndShearedRandomFontGenerator;
-import com.octo.captcha.pix.gimpy.wordtoimages.fontgenerator.RandomFontGenerator;
-import com.octo.captcha.pix.gimpy.wordtoimages.backgroundgenerators.GradientBackgroundGenerator;
-import com.octo.captcha.pix.gimpy.wordtoimages.backgroundgenerators.FunkyBackgroundGenerator;
-import com.octo.captcha.pix.gimpy.wordtoimages.backgroundgenerators.EllipseBackgroundGenerator;
+import com.octo.captcha.pix.gimpy.GimpyFactory;
 import com.octo.captcha.pix.gimpy.WordGenerator;
 import com.octo.captcha.pix.gimpy.WordToImage;
-import com.octo.captcha.pix.gimpy.GimpyFactory;
 import com.octo.captcha.pix.gimpy.wordgenerators.DictionaryWordGenerator;
 import com.octo.captcha.pix.gimpy.wordgenerators.FileDictionnary;
+import com.octo.captcha.pix.gimpy.wordtoimages.AbstractBackgroundGenerator;
+import com.octo.captcha.pix.gimpy.wordtoimages.AbstractFontGenerator;
+import com.octo.captcha.pix.gimpy.wordtoimages.AbstractTextPaster;
+import com.octo.captcha.pix.gimpy.wordtoimages.ComposedWordToImage;
+import com.octo.captcha.pix.gimpy.wordtoimages.backgroundgenerators.FunkyBackgroundGenerator;
+import com.octo.captcha.pix.gimpy.wordtoimages.fontgenerator.RandomFontGenerator;
+import com.octo.captcha.pix.gimpy.wordtoimages.textpasters.WarpedTextPaster;
 
 /**
  * <p>Description: </p>

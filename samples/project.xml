@@ -2,9 +2,9 @@
 
 <project>
   <pomVersion>1</pomVersion>
-  <id>jcaptcha-samples</id>
+  <id>captcha-samples</id>
   <name>Captcha-samples</name>
-  <groupId>jcaptcha</groupId>
+  <groupId>captcha</groupId>
   <currentVersion>0.1</currentVersion>
   <organization>
     <name>octo</name>
@@ -73,7 +73,7 @@
     	</dependency>
     	
     	<dependency>
-            <id>jcaptcha</id>
+            <id>captcha</id>
             <version>0.1</version>
             <url>http://jcaptcha.sourceforge.net</url>
     	</dependency>

@@ -50,7 +50,6 @@
 
 package com.octo.captcha;
 
-import java.io.Serializable;
 
 /**
  * This intrface represent a CAPTCHA.
@@ -91,5 +90,5 @@ public interface Captcha {
      */
     Boolean validateResponse(Object response);
 
-  
+
 }

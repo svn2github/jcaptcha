@@ -52,14 +52,14 @@
 package com.octo.captcha.pix;
 
 import com.octo.captcha.Captcha;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageDecoder;
+import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 import java.awt.image.BufferedImage;
-import java.io.ObjectOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 /**
@@ -137,25 +137,24 @@ public class PixCaptcha implements Captcha, Serializable {
     }
 
 
-
     public void writeObject(ObjectOutputStream out) throws IOException {
         //write serializable values
         out.writeUTF(question);
         out.writeUTF(response);
         //write image as jpeg
-	    JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
-		encoder.encode(this.getPixChallenge());
+        JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
+        encoder.encode(this.getPixChallenge());
 
 
     }
 
     public void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         //read serializable values
-    	this.question = in.readUTF();
+        this.question = in.readUTF();
         this.response = in.readUTF();
-		// read image as JPEG object
-		JPEGImageDecoder decoder = JPEGCodec.createJPEGDecoder(in);
-		this.challenge = (BufferedImage)decoder.decodeAsBufferedImage();
-	}
+        // read image as JPEG object
+        JPEGImageDecoder decoder = JPEGCodec.createJPEGDecoder(in);
+        this.challenge = (BufferedImage) decoder.decodeAsBufferedImage();
+    }
 
 }

@@ -49,7 +49,6 @@
  */
 
 
-
 package com.octo.captcha.pix.gimpy;
 
 import java.util.Locale;

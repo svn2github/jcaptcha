@@ -82,7 +82,7 @@ public class DoubleTextPaster extends AbstractTextPaster {
         int y = (background.getHeight()) / 2;
         Graphics pie = background.getGraphics();
         pie.drawString(attributedWord.getIterator(), x, y);
-        pie.drawString(attributedWord.getIterator(), x + myRandom.nextInt(5)+5, y + myRandom.nextInt(5)+5);
+        pie.drawString(attributedWord.getIterator(), x + myRandom.nextInt(5) + 5, y + myRandom.nextInt(5) + 5);
         pie.dispose();
         return background;
     }

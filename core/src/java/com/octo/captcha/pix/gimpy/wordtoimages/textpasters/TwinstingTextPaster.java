@@ -50,13 +50,12 @@
 
 package com.octo.captcha.pix.gimpy.wordtoimages.textpasters;
 
+import com.octo.captcha.CaptchaException;
 import com.octo.captcha.pix.gimpy.wordtoimages.AbstractTextPaster;
 import com.octo.captcha.pix.gimpy.wordtoimages.utils.PixelsWarper;
-import com.octo.captcha.CaptchaException;
 
-import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.awt.image.PixelGrabber;
 import java.text.AttributedString;
@@ -83,26 +82,25 @@ public class TwinstingTextPaster extends AbstractTextPaster {
      */
     public BufferedImage pasteText(BufferedImage background, AttributedString attributedWord) throws CaptchaException {
         //create a simple image from AS
-        BufferedImage buf = new BufferedImage(background.getWidth(), background.getHeight(),background.getType());
+        BufferedImage buf = new BufferedImage(background.getWidth(), background.getHeight(), background.getType());
         Graphics2D g2 = (Graphics2D) buf.getGraphics();
-        g2.drawString(attributedWord.getIterator(),5,buf.getHeight()/2);
+        g2.drawString(attributedWord.getIterator(), 5, buf.getHeight() / 2);
         g2.dispose();
         //generate a pixel grabber
-        PixelGrabber grabber = new PixelGrabber(buf,0,0,buf.getWidth(), buf.getHeight(),false );
+        PixelGrabber grabber = new PixelGrabber(buf, 0, 0, buf.getWidth(), buf.getHeight(), false);
         //sets grabers attributes
         grabber.setDimensions(buf.getWidth(), buf.getHeight());
         //grab!
         int fromPixels[] = (int[]) grabber.getPixels();
         //uses a pixel warper
-        int toPixels[] = new int[buf.getWidth()*buf.getHeight()];
-        Point fromWarp = new Point(5,buf.getHeight()/2);
-        Point toWarp = new Point(5+3,buf.getHeight()/2+3);
+        int toPixels[] = new int[buf.getWidth() * buf.getHeight()];
+        Point fromWarp = new Point(5, buf.getHeight() / 2);
+        Point toWarp = new Point(5 + 3, buf.getHeight() / 2 + 3);
 
-        PixelsWarper warper = new PixelsWarper(fromPixels,toPixels,buf.getWidth(),buf.getHeight(),toWarp, fromWarp);
+        PixelsWarper warper = new PixelsWarper(fromPixels, toPixels, buf.getWidth(), buf.getHeight(), toWarp, fromWarp);
 
         return null;
     }
-
 
 
 }

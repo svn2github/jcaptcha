@@ -45,37 +45,24 @@
  * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  * ====================================================================
- *
- * This software consists of voluntary contributions made by many
- * individuals on behalf of the Apache Software Foundation.  For more
- * information on the Apache Software Foundation, please see
- * <http://www.apache.org/>.
- *
- * Portions of this software are based upon public domain software
- * originally written at the National Center for Supercomputing Applications,
- * University of Illinois, Urbana-Champaign.
+
  */
 
 package com.octo.captcha.engine;
 
 import com.octo.captcha.pix.PixCaptchaFactory;
-import com.octo.captcha.pix.gimpy.wordtoimages.AbstractTextPaster;
-import com.octo.captcha.pix.gimpy.wordtoimages.AbstractBackgroundGenerator;
-import com.octo.captcha.pix.gimpy.wordtoimages.AbstractFontGenerator;
-import com.octo.captcha.pix.gimpy.wordtoimages.ComposedWordToImage;
-import com.octo.captcha.pix.gimpy.wordtoimages.fontgenerator.TwistedRandomFontGenerator;
-import com.octo.captcha.pix.gimpy.wordtoimages.fontgenerator.RandomFontGenerator;
-import com.octo.captcha.pix.gimpy.wordtoimages.backgroundgenerators.GradientBackgroundGenerator;
-import com.octo.captcha.pix.gimpy.wordtoimages.backgroundgenerators.FunkyBackgroundGenerator;
-import com.octo.captcha.pix.gimpy.wordtoimages.textpasters.SimpleTextPaster;
-import com.octo.captcha.pix.gimpy.wordtoimages.textpasters.DoubleTextPaster;
+import com.octo.captcha.pix.gimpy.GimpyFactory;
 import com.octo.captcha.pix.gimpy.WordGenerator;
 import com.octo.captcha.pix.gimpy.WordToImage;
-import com.octo.captcha.pix.gimpy.GimpyFactory;
 import com.octo.captcha.pix.gimpy.wordgenerators.DictionaryWordGenerator;
 import com.octo.captcha.pix.gimpy.wordgenerators.FileDictionnary;
-
-import java.awt.Color;
+import com.octo.captcha.pix.gimpy.wordtoimages.AbstractBackgroundGenerator;
+import com.octo.captcha.pix.gimpy.wordtoimages.AbstractFontGenerator;
+import com.octo.captcha.pix.gimpy.wordtoimages.AbstractTextPaster;
+import com.octo.captcha.pix.gimpy.wordtoimages.ComposedWordToImage;
+import com.octo.captcha.pix.gimpy.wordtoimages.backgroundgenerators.FunkyBackgroundGenerator;
+import com.octo.captcha.pix.gimpy.wordtoimages.fontgenerator.TwistedRandomFontGenerator;
+import com.octo.captcha.pix.gimpy.wordtoimages.textpasters.DoubleTextPaster;
 
 /**
  * <p>Static factory initializer, instanciates a PixCaptchaFactory.

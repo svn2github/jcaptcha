@@ -50,20 +50,17 @@
 
 package com.octo.captcha.pix.gimpy.wordtoimages.textpasters;
 
+import com.octo.captcha.CaptchaException;
 import com.octo.captcha.pix.gimpy.wordtoimages.AbstractTextPaster;
 import com.octo.captcha.pix.gimpy.wordtoimages.utils.PixelsWarper;
-import com.octo.captcha.CaptchaException;
 
-import java.awt.image.BufferedImage;
-import java.awt.image.WritableRaster;
-import java.awt.image.Raster;
-import java.awt.image.DataBuffer;
-import java.awt.image.DataBufferInt;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.geom.Rectangle2D;
-import java.awt.geom.Point2D;
-import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
+import java.awt.image.Raster;
+import java.awt.image.WritableRaster;
 import java.text.AttributedString;
 
 /**

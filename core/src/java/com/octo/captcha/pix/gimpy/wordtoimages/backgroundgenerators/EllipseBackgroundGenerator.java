@@ -52,13 +52,12 @@ package com.octo.captcha.pix.gimpy.wordtoimages.backgroundgenerators;
 
 import com.octo.captcha.pix.gimpy.wordtoimages.AbstractBackgroundGenerator;
 
-import java.awt.image.BufferedImage;
-import java.awt.Graphics2D;
-import java.awt.Color;
-import java.awt.BasicStroke;
 import java.awt.AlphaComposite;
+import java.awt.BasicStroke;
+import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Arc2D;
+import java.awt.image.BufferedImage;
 
 /**
  * <p>Description: </p>
