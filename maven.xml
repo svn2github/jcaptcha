@@ -7,12 +7,14 @@
   xmlns:artifact="artifact"
   xmlns:ant="jelly:ant">
 
-  <goal name="all">
+  <!--goal name="all">
   	<attainGoal name="clean"/>
   	<attainGoal name="assemble"/>
   	<attainGoal name="multiproject:site"/>
   	<attainGoal name="build"/>
-  </goal>
+  </goal-->
+
+  <goal name="all" prereqs="clean,assemble,multiproject:site,build"/>
 
   <preGoal name="multiproject:site">
     <ant:copy file="${basedir}/images/organization-logo.jpg" todir="${maven.build.dir}/docs/images"/>
@@ -59,7 +61,7 @@
     	</ant:fileset>
     </ant:copy>
     
-    <ant:copy todir="${maven.build.dir}/distributions">
+    <ant:copy todir="${maven.build.dir}/distributions/doc" flatten="true">
     	<ant:fileset dir="${basedir}">
     		<include name="**/doc/**"/>
     	</ant:fileset>
