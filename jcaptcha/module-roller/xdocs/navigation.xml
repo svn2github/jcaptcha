@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE navigation[
  <!ENTITY items_inc SYSTEM "file:xdocs/items.inc">
- <!ENTITY links_inc SYSTEM "file:xdocs/links.inc">
+ <!ENTITY links_inc SYSTEM "file:xdocs/links.inc">  <!ENTITY nav_inc SYSTEM "file:xdocs/sub_nav.inc">
  ]>
 <project name="JCaptcha" href="http://jcaptcha.sourceforge.net/">
     <title>JCaptcha</title>
@@ -12,7 +12,8 @@
             <item name="Installation" href="roller.html"/>
             <item name="RoadMap" href="roadmap.html"/>
             <item name="Api" href="apidocs/index.html"/>
-                 &items_inc;
+            &nav_inc; 
+            &items_inc;
         </menu>
     </body>
 </project>
