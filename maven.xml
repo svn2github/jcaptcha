@@ -46,7 +46,7 @@
         basedir="${basedir}"
         includes="**/${pattern}/**/project.xml"
         excludes="project.xml,samples-web/project.xml"
-        goals="dist:build-bin"
+        goals="dist"
         banner="distribution"
         ignoreFailures="false"/>
     <maven:reactor 
