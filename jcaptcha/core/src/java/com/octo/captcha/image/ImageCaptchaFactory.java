@@ -472,7 +472,7 @@ import java.util.Locale;
 /**
  * <p>Implements a ImageCaptcha Factory</p>.
  *
- * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public abstract class ImageCaptchaFactory implements CaptchaFactory

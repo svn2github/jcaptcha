@@ -72,7 +72,7 @@ import java.awt.image.ImageFilter;
 /**
  * <p><ul><li></li></ul></p>
  *
- * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public class DeformedBaffleListGimpyEngine extends ListImageCaptchaEngine
@@ -88,11 +88,11 @@ public class DeformedBaffleListGimpyEngine extends ListImageCaptchaEngine
         com.jhlabs.image.RippleFilter ripple = new com.jhlabs.image.RippleFilter();
         com.jhlabs.image.TwirlFilter twirl = new com.jhlabs.image.TwirlFilter();
         com.jhlabs.image.WaterFilter water = new com.jhlabs.image.WaterFilter();
-        com.jhlabs.image.MarbleFilter marble = new com.jhlabs.image.MarbleFilter();
+
         com.jhlabs.image.WeaveFilter weaves = new com.jhlabs.image.WeaveFilter();
         com.jhlabs.image.CrystalizeFilter crystal = new com.jhlabs.image.CrystalizeFilter();
 
-        emboss.setBumpHeight(1.5f);
+        //emboss.setBumpHeight(1.5d);
 
         ripple.setWaveType(com.jhlabs.image.RippleFilter.NOISE);
         ripple.setXAmplitude(3);

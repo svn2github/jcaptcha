@@ -466,18 +466,27 @@ package com.octo.captcha.engine.image.gimpy;
 
 import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
 import com.octo.captcha.component.image.backgroundgenerator.FileReaderRandomBackgroundGenerator;
+import com.octo.captcha.component.image.backgroundgenerator.UniColorBackgroundGenerator;
 import com.octo.captcha.component.image.fontgenerator.FontGenerator;
 import com.octo.captcha.component.image.fontgenerator.TwistedAndShearedRandomFontGenerator;
+import com.octo.captcha.component.image.fontgenerator.RandomFontGenerator;
 import com.octo.captcha.component.image.textpaster.DoubleRandomTextPaster;
 import com.octo.captcha.component.image.textpaster.TextPaster;
+import com.octo.captcha.component.image.textpaster.BaffleRandomTextPaster;
 import com.octo.captcha.component.image.wordtoimage.ComposedWordToImage;
 import com.octo.captcha.component.image.wordtoimage.WordToImage;
+import com.octo.captcha.component.image.wordtoimage.DeformedComposedWordToImage;
+import com.octo.captcha.component.image.deformation.ImageDeformation;
+import com.octo.captcha.component.image.deformation.ImageDeformationByFilters;
 import com.octo.captcha.component.wordgenerator.RandomWordGenerator;
 import com.octo.captcha.component.wordgenerator.WordGenerator;
+import com.octo.captcha.component.wordgenerator.DictionaryWordGenerator;
 import com.octo.captcha.engine.image.ListImageCaptchaEngine;
 import com.octo.captcha.image.gimpy.GimpyFactory;
+import com.jhlabs.image.LightFilter;
 
 import java.awt.*;
+import java.awt.image.ImageFilter;
 
 /**
  * <p>
@@ -486,7 +495,7 @@ import java.awt.*;
  *
  * </p>
  *
- * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public class DefaultGimpyEngine extends ListImageCaptchaEngine
@@ -499,46 +508,59 @@ public class DefaultGimpyEngine extends ListImageCaptchaEngine
      */
     protected void buildInitialFactories()
     {
-           //word generator
-//        com.octo.captcha.component.wordgenerator.WordGenerator dictionnaryWords = new com.octo.captcha.component.wordgenerator.ComposeDictionaryWordGenerator(
-//                new com.octo.captcha.component.wordgenerator.FileDictionnary(
-//                        "toddlist"));
-//        //wordtoimage components
-//        TextPaster randomPaster = new BaffleRandomTextPaster(new Integer(5), new Integer(
-//                7), Color.black,
-//                new Integer(3), Color.white);
-//        BackgroundGenerator back = new UniColorBackgroundGenerator(
-//                new Integer(200), new Integer(100), Color.white);
-//        //BackgroundGenerator back = new FunkyBackgroundGenerator(new Integer(200), new Integer(100));
-//        FontGenerator shearedFont = new TwistedAndShearedRandomFontGenerator(new Integer(30),
-//                new Integer(40));
-//        //word2image 1
-//        com.octo.captcha.component.image.wordtoimage.WordToImage word2image = new com.octo.captcha.component.image.wordtoimage.ComposedWordToImage(
-//                shearedFont, back, randomPaster);
 
-// this.addFactory(
-//new com.octo.captcha.image.gimpy.GimpyFactory(dictionnaryWords,word2image));
-               //word generator
-               WordGenerator words = new RandomWordGenerator("azertyuiopqsdfghjklmwxcvbn123456789");
-               //wordtoimage components
-               TextPaster paster = new DoubleRandomTextPaster(new Integer(5),
-                       new Integer(7), Color.white);
-//        TextPaster paster2 = new DoubleRandomTextPaster(new Integer(5),
-//                               new Integer(7), Color.pink);
-//        TextPaster paster3 = new DoubleRandomTextPaster(new Integer(5),
-//                                       new Integer(7), Color.magenta);
+        //build filters
+        com.jhlabs.image.RippleFilter ripple = new com.jhlabs.image.RippleFilter();
+        com.jhlabs.image.TextureFilter tnoise = new com.jhlabs.image.TextureFilter();
 
-        BackgroundGenerator back = new FileReaderRandomBackgroundGenerator(new Integer(200),new Integer(100),"gimpybackgrounds");
-                FontGenerator font = new TwistedAndShearedRandomFontGenerator(
-                       new Integer(30), new Integer(35));
-        //word to image
 
-        WordToImage word2Image = new ComposedWordToImage(font, back, paster);
-//         WordToImage word2Image2 = new ComposedWordToImage(font, back, paster2);
-//         WordToImage word2Image3 = new ComposedWordToImage(font, back, paster3);
+        ripple.setWaveType(com.jhlabs.image.RippleFilter.NOISE);
+        ripple.setXAmplitude(3);
+        ripple.setYAmplitude(3);
+        ripple.setXWavelength(20);
+        ripple.setYWavelength(10);
+        ripple.setEdgeAction(com.jhlabs.image.TransformFilter.CLAMP);
 
-        this.addFactory(new GimpyFactory(words, word2Image));
-//        this.addFactory(new GimpyFactory(words, word2Image2));
-//        this.addFactory(new GimpyFactory(words, word2Image3));
+
+            tnoise.setAmount(1.5d);
+            tnoise.gain = 0.4d;
+            tnoise.setScale(8d);
+
+           tnoise.setStretch(1d);
+
+        tnoise.bias =0.55f;
+
+        ImageDeformation backDef = new ImageDeformationByFilters(
+                new ImageFilter[]{tnoise});
+        ImageDeformation textDef = new ImageDeformationByFilters(
+                new ImageFilter[]{});
+        ImageDeformation postDef = new ImageDeformationByFilters(
+                new ImageFilter[]{ripple});
+
+ //word generator
+        com.octo.captcha.component.wordgenerator.WordGenerator dictionnaryWords = new com.octo.captcha.component.wordgenerator.ComposeDictionaryWordGenerator(
+                new com.octo.captcha.component.wordgenerator.FileDictionnary(
+                        "toddlist"));
+        //wordtoimage components
+        TextPaster randomPaster = new BaffleRandomTextPaster(new Integer(6), new Integer(
+                7), Color.black,
+                new Integer(3), Color.white);
+        BackgroundGenerator back = new UniColorBackgroundGenerator(
+                new Integer(200), new Integer(100), Color.white);
+
+        FontGenerator shearedFont = new RandomFontGenerator(new Integer(40),
+                new Integer(40));
+        //word2image 1
+        com.octo.captcha.component.image.wordtoimage.WordToImage word2image;
+        word2image = new DeformedComposedWordToImage(shearedFont, back, randomPaster,
+                        backDef,
+                        textDef,postDef
+                        );
+
+
+        this.addFactory(
+                new com.octo.captcha.image.gimpy.GimpyFactory(dictionnaryWords,
+                        word2image));
+
     }
 }

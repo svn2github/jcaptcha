@@ -474,7 +474,7 @@ import java.util.Locale;
  * Specialize a Captcha service that return Image Captchas
  * </p>
  *
- * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public interface ImageCaptchaService extends CaptchaService {

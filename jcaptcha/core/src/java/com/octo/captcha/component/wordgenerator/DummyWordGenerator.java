@@ -470,7 +470,7 @@ import java.util.Locale;
  * <p>Description: dummy word generator contructed with a String returning the
  * same string, with right length</p>
  *
- * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public class DummyWordGenerator implements WordGenerator

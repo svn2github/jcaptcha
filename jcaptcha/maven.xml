@@ -91,10 +91,11 @@
     		<include name="docs/**"/>
     	</ant:fileset>
     </ant:copy> 
-	<ant:zip zipfile="${maven.build.dir}/distributions/${pom.artifactId}-bin-${pom.currentVersion}.zip"
+	
+   <ant:zip zipfile="${maven.build.dir}/distributions/${pom.artifactId}-bin-${pom.currentVersion}.zip"
     	>
     	<ant:fileset dir="${maven.build.dir}/distributions/bin/tozip">
-    		<exclude name="**"/>
+    		
     	</ant:fileset>
     </ant:zip>
 
@@ -103,7 +104,7 @@
 
   <goal name="jcaptcha:deploy-jhlab" description="copy jhlabs librairy to your maven local repository">
     <ant:mkdir dir="${maven.repo.local}/jhlabs/jars"/>
-    <ant:copy file="${basedir}/lib/imaging-1.0.jar" todir="${maven.repo.local}/jhlabs/jars"/>
+    <ant:copy file="${basedir}/lib/imaging-01012005.jar" todir="${maven.repo.local}/jhlabs/jars"/>
   </goal>
 
 

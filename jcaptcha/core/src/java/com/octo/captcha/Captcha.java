@@ -486,7 +486,7 @@ import java.io.Serializable;
  * getChallenge method is called(The challenge must be showed only once and)
  * </li> </ul> ;
  *
- * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public interface Captcha extends Serializable

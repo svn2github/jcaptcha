@@ -466,7 +466,7 @@ package com.octo.captcha.service;
 /**
  * <p><ul><li></li></ul></p>
  *
- * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public class SecondMockCaptchaEngine extends MockCaptchaEngine {

@@ -487,7 +487,7 @@ import java.text.AttributedString;
  * <li>Paste the transparent image using an alpha composite</li> <li>Apply the
  * final deformations </li> <li>Return the newly created image</li> </ul>
  *
- * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public class DeformedComposedWordToImage extends ComposedWordToImage
@@ -545,8 +545,7 @@ public class DeformedComposedWordToImage extends ComposedWordToImage
         AttributedString aword = getAttributedString(word,
                 checkWordLenght(word));
         //copy background
-        BufferedImage out = background;
-               new BufferedImage(background.getWidth(), background.getHeight(),
+        BufferedImage out = new BufferedImage(background.getWidth(), background.getHeight(),
                         background.getType());
         Graphics2D g2 = (Graphics2D) out.getGraphics();
         //paste background
@@ -558,13 +557,13 @@ public class DeformedComposedWordToImage extends ComposedWordToImage
         //paste text on a transparent background
         BufferedImage transparent =
                 new BufferedImage(out.getWidth(), out.getHeight(),
-                        out.getType());
-        Graphics2D tpie = (Graphics2D) transparent.getGraphics();
+                        BufferedImage.TYPE_INT_ARGB);
+        //Graphics2D tpie = (Graphics2D) transparent.getGraphics();
 
-        tpie.setBackground(Color.white);
-        tpie.clearRect(0, 0, out.getWidth(), out.getHeight());
-        tpie.setPaint(Color.white);
-        tpie.dispose();
+        //tpie.setBackground(Color.white);
+        //tpie.clearRect(0, 0, out.getWidth(), out.getHeight());
+        //tpie.setPaint(Color.white);
+        //tpie.dispose();
         //use textpaster to paste the text
         transparent = pasteText(transparent, aword);
 
@@ -573,7 +572,7 @@ public class DeformedComposedWordToImage extends ComposedWordToImage
 
         Graphics2D g3 = (Graphics2D) out.getGraphics();
         // Set a composite with transparency.
-        Composite c = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, .7f);
+        Composite c = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f);
         g3.setComposite(c);
         g3.drawImage(transparent, 0, 0, null);
         g3.dispose();

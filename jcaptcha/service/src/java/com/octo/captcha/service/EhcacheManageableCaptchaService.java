@@ -483,7 +483,7 @@ import java.util.Locale;
  * This class provides an implementation for the ehcache enhanced management interface.
  * It uses the self managed cache ehcache as CaptchaStore
  *
- * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public abstract class EhcacheManageableCaptchaService

@@ -146,7 +146,7 @@
   </build>
 
   <reports>
-  	 <report>maven-dashboard-plugin</report>
+  	<!-- <report>maven-dashboard-plugin</report>
   	<report>maven-changelog-plugin</report>
   	<report>maven-file-activity-plugin</report>
 	<report>maven-checkstyle-plugin</report>
@@ -156,7 +156,7 @@
 	<report>maven-license-plugin</report>
 	<report>maven-pmd-plugin</report>
 	<report>maven-jdepend-plugin</report>
-	<report>maven-tasklist-plugin</report>
+	<report>maven-tasklist-plugin</report>-->
     <report>maven-clover-plugin</report>
   </reports>
 

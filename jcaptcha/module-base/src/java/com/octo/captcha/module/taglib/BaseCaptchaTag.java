@@ -472,7 +472,7 @@ import javax.servlet.jsp.tagext.Tag;
 /**
  * Defines the service for the module.
  *
- * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public abstract class BaseCaptchaTag implements Tag {

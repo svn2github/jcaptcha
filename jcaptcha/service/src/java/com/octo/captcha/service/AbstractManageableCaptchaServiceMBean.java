@@ -57,7 +57,7 @@ package com.octo.captcha.service;
  * Change Service implementations classe.
  * Manage the captchaStore
  *
- * @author <a href="mailto:mag@octo.com">Marc-Antoine GARRIGUE</a>
+ * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine GARRIGUE</a>
  * @version 1.0
  */
 public interface AbstractManageableCaptchaServiceMBean extends ManageableCaptchaService {

@@ -14,15 +14,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="jcaptcha-core" />
     <orderEntry type="module-library">
-      <library name="imaging">
-        <CLASSES>
-          <root url="jar://C:/Documents and Settings/Administrator/.maven/repository/jhlabs/jars/imaging-1.0.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
       <library name="junit">
         <CLASSES>
           <root url="jar://C:/Documents and Settings/Administrator/.maven/repository/junit/jars/junit-3.8.1.jar!/" />
@@ -38,6 +29,17 @@
         </CLASSES>
         <JAVADOC />
         <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://C:/Documents and Settings/Administrator/.maven/repository/jhlabs/jars/imaging-01012005.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://D:/captcha/jcaptcha/lib/imaging-source-01012005.jar!/" />
+        </SOURCES>
       </library>
     </orderEntry>
     <orderEntryProperties />

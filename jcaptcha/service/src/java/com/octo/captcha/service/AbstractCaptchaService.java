@@ -480,7 +480,7 @@ import java.util.Locale;
  * (by subclassing this class, and calling the constructor of
  * the abstract class)
  *
- * @author Marc-Antoine Garrigue mailto:mag@octo.com
+ * @author Marc-Antoine Garrigue mailto:marc.antoine.garrigue@gmail.com
  */
 public abstract class AbstractCaptchaService implements CaptchaService {
 

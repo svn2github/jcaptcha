@@ -474,7 +474,7 @@ import java.text.AttributedString;
  * <p>Simple image to word implementation. For eductation only, do not use it in
  * production</p>
  *
- * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public class SimpleWordToImage extends AbstractWordToImage

@@ -477,7 +477,7 @@ import java.util.StringTokenizer;
  * Gets the methods values to filter from attribute in actionMapping (may be multiple separed by a ";").
  *
  *
- * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public class VerifyCaptchaChallengeMethodAction extends VerifyCaptchaChallengeAction{

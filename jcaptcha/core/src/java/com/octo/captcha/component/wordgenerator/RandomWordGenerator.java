@@ -471,7 +471,7 @@ import java.util.Random;
  * <p>Random word generator. must be constructed with a String containing all
  * possible chars</p>
  *
- * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public class RandomWordGenerator implements WordGenerator

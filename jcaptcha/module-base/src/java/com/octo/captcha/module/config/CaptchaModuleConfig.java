@@ -470,7 +470,7 @@ import java.util.ResourceBundle;
 /**
  * Configuration base class for modules.
  *
- * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public class CaptchaModuleConfig {

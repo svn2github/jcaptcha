@@ -484,7 +484,7 @@ import java.util.List;
  * <p/>
  * TODO : add some gif, bmp,... reader facilities.
  *
- * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public class FileReaderRandomBackgroundGenerator extends
@@ -501,11 +501,11 @@ public class FileReaderRandomBackgroundGenerator extends
         //this.images=images;
         if (rootPath != null)
             this.rootPath = rootPath;
-        StringBuffer tryedPath = new StringBuffer();
+        StringBuffer triedPath = new StringBuffer();
 
         File dir = new File(this.rootPath);
-        tryedPath.append(dir.getAbsolutePath());
-        tryedPath.append("\n");
+        triedPath.append(dir.getAbsolutePath());
+        triedPath.append("\n");
 
         if (!dir.canRead() || !dir.isDirectory())
         {
@@ -513,25 +513,25 @@ public class FileReaderRandomBackgroundGenerator extends
             URL url = this.getClass().getResource(this.rootPath);
             if(url!=null){
                 dir = new File(url.getFile());
-                tryedPath.append(dir.getAbsolutePath());
-                tryedPath.append("\n");
+                triedPath.append(dir.getAbsolutePath());
+                triedPath.append("\n");
 
             }else{
                 url=this.getClass().getResource("/"+this.rootPath);
                 if(url!=null){
                 dir = new File(url.getFile());
-                tryedPath.append(dir.getAbsolutePath());
-                tryedPath.append("\n");
+                triedPath.append(dir.getAbsolutePath());
+                triedPath.append("\n");
 
                 }else{
                     dir = new File(".");
-                    tryedPath.append(dir.getAbsolutePath());
-                    tryedPath.append("\n");
+                    triedPath.append(dir.getAbsolutePath());
+                    triedPath.append("\n");
                 }
             }
             if (!dir.canRead() || !dir.isDirectory()){
                 if (!dir.canRead() || !dir.isDirectory()){
-                         throw new CaptchaException("None of the tryed path :'"+tryedPath.toString()+"' is not" +
+                         throw new CaptchaException("None of the tried path :'"+triedPath.toString()+"' is not" +
                         " a directory or cannot be read");
                 }
             }

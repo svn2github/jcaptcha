@@ -470,7 +470,7 @@ import java.awt.*;
  * <p>Used by ComposedWordToImage to retrieve a Font to apply to the word that
  * will be distorded</p>
  *
- * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public interface FontGenerator

@@ -475,7 +475,7 @@ import java.text.AttributedString;
  * <p>Randomly pastes two times the attributed string with a random(5)
  * decalage</p>
  *
- * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public class DoubleRandomTextPaster extends RandomTextPaster

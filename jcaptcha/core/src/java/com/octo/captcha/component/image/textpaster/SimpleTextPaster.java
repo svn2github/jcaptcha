@@ -473,7 +473,7 @@ import java.text.AttributedString;
 /**
  * <p>Pastes the text at width/20 and height/2 </p>
  *
- * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public class SimpleTextPaster extends AbstractTextPaster
