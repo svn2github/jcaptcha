@@ -499,8 +499,8 @@ public class JCaptchaCommentAuthenticator implements CommentAuthenticator{
 
     
     public String getHtml(org.apache.velocity.context.Context context, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-        String captchaID = CaptchaModuleConfigHelper.getId(httpServletRequest);;
-        String question=CaptchaServicePlugin.getInstance().getService().getQuestionForID(captchaID);
+        String captchaID = CaptchaModuleConfigHelper.getId(httpServletRequest);
+        String question=CaptchaServicePlugin.getInstance().getService().getQuestionForID(captchaID,httpServletRequest.getLocale());
         String  challengeUrl = context.get("ctxPath")+"/jcaptcha.do";
         String responseKey = CaptchaServicePlugin.getInstance().getResponseKey();
         StringBuffer html = new StringBuffer();

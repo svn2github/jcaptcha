@@ -54,6 +54,15 @@
         <section name="News">
             <p>
              <ul>
+              <li>23/10/2004
+                    <ul>
+                        <li>Near RC-2</li>
+                        <li>Adding a Roller module</li>
+                        <li>Adding a service implementation using ehcache as store</li>
+                        <li>Adding a service implementation that asynchronously builds a captcha buffer</li>
+                        <li>Adding a struts sample based on the struts mailreader sample app</li>
+                    </ul>
+                </li>
                 <li>06/08/2004
                     <ul>
                         <li>Releasing RC-1

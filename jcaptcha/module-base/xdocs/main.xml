@@ -9,6 +9,7 @@
 
             <p>This package contains commons utilities to help developers to build their own module.</p>
             <p>It provides a JMX MBean registration helper, a module config classe and helper, and a base taglib</p>
+            <p>See javadocs to see how to use it</p>
 
         </section>
 

@@ -4,7 +4,9 @@
     <meta name="keyword" content="captcha, java, module,struts, jcaptcha"/>
 
     <body>
-
+    <section name="download the captcha-ized sample">
+    <a href="./struts-mailreader.zip">the captcha-ized struts-mailreader application</a>
+	</section>	
         <section name="Introduction">
             <p>
  This document is a tutorial that demonstrates how to integrate
@@ -42,17 +44,17 @@
 
                     <li>Copy the jcaptcha taglib file into the WEB-INF/tlds folder of the struts-mailreader webapp</li>
 
-                    <li>Copy the jcaptcha third parties jars to the WEB-INF/lib dir of the struts-mailreader web-app : eh-cache-0.9.jar</li>
+                    <li>Copy the jcaptcha third parties jars to the WEB-INF/lib dir of the struts-mailreader web-app : ehcache-0.7.jar</li>
 
                     <li>Copy the jcaptcha backgrounds images the WEB-INF/classes dir of the struts-mailreader web-app : the gimpybackground folder</li>
 
                     <li>Add the jcaptcha taglib to the web.xml config file of the struts-mailreader webapp</li>
-                                        <code>
+                                        <source>
                                             <taglib>
                                                 <taglib-uri>jcaptcha</taglib-uri>
                                                 <taglib-location>/WEB-INF/jcaptcha.tld</taglib-location>
                                             </taglib>
-                                        </code>
+                                 </source>
 
                     <li>Add the following plugin declaration at the end of the struts config file</li>
 
@@ -73,7 +75,8 @@ We want to captcha-ize the registration page flow in order to avoid robot regist
                 <br/>
 This page flow concerns the following elements in struts-mailreader struts-config-registration.xml (using wildcard!!) file :
             </p>
-            <code>
+           <source>
+           <![CDATA[
  ...
 
  <!-- ========== Form Bean Definitions =================================== -->
@@ -113,8 +116,8 @@ This page flow concerns the following elements in struts-mailreader struts-confi
 
 
 ...
-
-            </code>
+]]>
+          </source>
 As we can see here, there is one action :
             <b>SaveRgistration.do</b> associed with one form
             <b>RegistrationForm</b> with an input path
@@ -141,7 +144,8 @@ So what we have to do next is to short cut this action (SaveRegistration.do) to 
                     </li>
                 </ul>
 The final configuration will look as follow :
-                <code>
+               <source>
+               <![CDATA[
                     <!-- Matches all edit actions (in this case, only user regstration) -->
                        <action    path="/Edit*"
                                   type="org.apache.struts.webapp.example.Edit{1}Action"
@@ -190,8 +194,8 @@ The final configuration will look as follow :
 
                     </action>
 
-
-                </code>
+]]>
+                </source>
 
             </p>
         </section>
@@ -211,9 +215,11 @@ The final configuration will look as follow :
  </ul>
             <p>
 
-                    <code>
-                <![CDATA[
+                   <source>
+        
 
+
+<![CDATA[
                         <%@ page contentType="text/html;charset=UTF-8" language="java" %>
                         <%@ taglib uri="/tags/app"    prefix="app" %>
                         <%@ taglib uri="/tags/struts-bean" prefix="bean" %>
@@ -294,8 +300,9 @@ The final configuration will look as follow :
                               </logic:equal>
                             </td>
                           </tr>
-...                 ]]>
-                    </code>
+...               
+]]>
+</source>
 
  
 

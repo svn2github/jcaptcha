@@ -19,8 +19,8 @@ Implementations are typed (image or sound).
         </section>
 
         <section name="UML">
-            <img src="uml.jpg"/>
-            And the ehcache extension
+            <img src="uml.jpg"/><br/>
+            And the ehcache extension<br/>
                <img src="uml2.jpg"/>
         </section>
     </body>

@@ -9,9 +9,6 @@
         </links>
         <menu name="Menu" collapse="true">
             <item name="Overview" href="overview.html"/>
-            <item name="Main interfaces and implementations" href="main.html"/>
-            <item name="Extending" href="extends.html"/>
-            <item name="RoadMap" href="roadmap.html"/>
             <item name="Api" href="apidocs/index.html"/>
         </menu>
         <menu name="Projects" collapse="true">

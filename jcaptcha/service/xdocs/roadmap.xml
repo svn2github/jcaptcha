@@ -10,6 +10,9 @@
             <p>
 Future directions for this module are :
                 <ul>
+                    <li>Ehcahce implementation : done</li>
+                    <li>Buffered implementation : done</li>
+                    <li>Documentation...</li>
                     <li>Let us know...</li>
                 </ul>
             </p>

@@ -15,13 +15,7 @@
       <option name="pinned" value="false" />
       <option name="constructorsExpanded" value="false" />
     </class>
-    <class name="com.octo.captcha.service.EhcacheManageableCaptchaServiceMBean" x="414" y="334">
-      <option name="fieldsExpanded" value="false" />
-      <option name="methodsExpanded" value="false" />
-      <option name="pinned" value="false" />
-      <option name="constructorsExpanded" value="false" />
-    </class>
-    <class name="com.octo.captcha.service.EhcacheManageableCaptchaService" x="485" y="451">
+    <class name="com.octo.captcha.service.BufferedEhcacheManageableCaptchaService" x="199" y="583">
       <option name="fieldsExpanded" value="false" />
       <option name="methodsExpanded" value="false" />
       <option name="pinned" value="false" />
@@ -33,7 +27,13 @@
       <option name="pinned" value="false" />
       <option name="constructorsExpanded" value="false" />
     </class>
-    <class name="com.octo.captcha.service.BufferedEhcacheManageableCaptchaService" x="199" y="583">
+    <class name="com.octo.captcha.service.EhcacheManageableCaptchaService" x="485" y="451">
+      <option name="fieldsExpanded" value="false" />
+      <option name="methodsExpanded" value="false" />
+      <option name="pinned" value="false" />
+      <option name="constructorsExpanded" value="false" />
+    </class>
+    <class name="com.octo.captcha.service.EhcacheManageableCaptchaServiceMBean" x="414" y="334">
       <option name="fieldsExpanded" value="false" />
       <option name="methodsExpanded" value="false" />
       <option name="pinned" value="false" />
@@ -45,25 +45,25 @@
       <option name="pinned" value="false" />
       <option name="constructorsExpanded" value="false" />
     </class>
-    <class name="com.octo.captcha.service.ManageableCaptchaService" x="450" y="202">
-      <option name="fieldsExpanded" value="false" />
-      <option name="methodsExpanded" value="false" />
-      <option name="pinned" value="false" />
-      <option name="constructorsExpanded" value="false" />
-    </class>
     <class name="com.octo.captcha.service.AbstractManageableCaptchaServiceMBean" x="729" y="334">
       <option name="fieldsExpanded" value="false" />
       <option name="methodsExpanded" value="false" />
       <option name="pinned" value="false" />
       <option name="constructorsExpanded" value="false" />
     </class>
-    <class name="com.octo.captcha.service.BufferedEhcacheManageableCaptchaServiceMBean" x="50" y="334">
+    <class name="com.octo.captcha.service.ManageableCaptchaService" x="450" y="202">
       <option name="fieldsExpanded" value="false" />
       <option name="methodsExpanded" value="false" />
       <option name="pinned" value="false" />
       <option name="constructorsExpanded" value="false" />
     </class>
     <class name="com.octo.captcha.service.BufferedCaptchaEngineContainer" x="582" y="815">
+      <option name="fieldsExpanded" value="false" />
+      <option name="methodsExpanded" value="false" />
+      <option name="pinned" value="false" />
+      <option name="constructorsExpanded" value="false" />
+    </class>
+    <class name="com.octo.captcha.service.BufferedEhcacheManageableCaptchaServiceMBean" x="50" y="334">
       <option name="fieldsExpanded" value="false" />
       <option name="methodsExpanded" value="false" />
       <option name="pinned" value="false" />
@@ -89,15 +89,15 @@
       <anchor constraint="1" type="2" x="452" y="269" />
       <decorator type="2" description="" />
     </connector>
-    <connector from="com.octo.captcha.service.BufferedEhcacheManageableCaptchaService" to="com.octo.captcha.service.BufferedEhcacheManageableCaptchaServiceMBean">
-      <anchor constraint="1" type="2" x="402" y="583" />
-      <anchor constraint="1" type="2" x="237" y="401" />
-      <decorator type="1" description="" />
-    </connector>
     <connector from="com.octo.captcha.service.BufferedEhcacheManageableCaptchaService" to="com.octo.captcha.service.EhcacheManageableCaptchaService">
       <anchor constraint="1" type="2" x="513" y="583" />
       <anchor constraint="1" type="2" x="602" y="533" />
       <decorator type="2" description="" />
+    </connector>
+    <connector from="com.octo.captcha.service.BufferedEhcacheManageableCaptchaService" to="com.octo.captcha.service.BufferedEhcacheManageableCaptchaServiceMBean">
+      <anchor constraint="1" type="2" x="402" y="583" />
+      <anchor constraint="1" type="2" x="237" y="401" />
+      <decorator type="1" description="" />
     </connector>
     <connector from="com.octo.captcha.service.AbstractCaptchaService" to="com.octo.captcha.service.CaptchaService">
       <anchor constraint="1" type="2" x="990" y="208" />
@@ -129,14 +129,14 @@
       <anchor constraint="1" type="2" x="540" y="269" />
       <decorator type="2" description="" />
     </connector>
-    <connector from="com.octo.captcha.service.ManageableCaptchaService" to="com.octo.captcha.service.CaptchaService">
-      <anchor constraint="1" type="2" x="618" y="202" />
-      <anchor constraint="1" type="2" x="749" y="148" />
-      <decorator type="2" description="" />
-    </connector>
     <connector from="com.octo.captcha.service.EhcacheManageableCaptchaService" to="com.octo.captcha.service.AbstractCaptchaService">
       <anchor constraint="1" type="2" x="739" y="451" />
       <anchor constraint="1" type="2" x="1004" y="284" />
+      <decorator type="2" description="" />
+    </connector>
+    <connector from="com.octo.captcha.service.ManageableCaptchaService" to="com.octo.captcha.service.CaptchaService">
+      <anchor constraint="1" type="2" x="618" y="202" />
+      <anchor constraint="1" type="2" x="749" y="148" />
       <decorator type="2" description="" />
     </connector>
   </connectors>

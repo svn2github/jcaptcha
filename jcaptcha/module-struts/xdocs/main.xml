@@ -6,7 +6,14 @@
     <body>
 
         <section name="Main interfaces...">
-TODO
+        The main components of this module are :
+        <ul>
+			<li>the Struts jcaptcha plugin implementation</li>
+			<li>An action that stream the image challenge</li>
+			<li>An action that validate the answer</li>
+			<li>A method action that validate the answer</li>
+        </ul> 
+        See the tutorial to see how to use it.
         </section>
 
 

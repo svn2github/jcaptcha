@@ -12,9 +12,10 @@
                 <ul>
                     <li>This module provides a Struts Plugin captcha ize some specific requests.</li>
                     <li>It provides a taglib and a sample web app.</li>
-                    <li>Tutorial with jroller comming soon.. (TODO)</li>
+                    <li>Tutorial with struts mail reader</li>
 
                 </ul>
+                
             </p>
 
         </section>

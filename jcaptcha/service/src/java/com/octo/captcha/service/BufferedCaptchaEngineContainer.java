@@ -513,7 +513,7 @@ public class BufferedCaptchaEngineContainer implements CaptchaEngine {
     }
 
     public final Captcha getNextCaptcha(Locale locale) {
-        return captchaEngine.getNextCaptcha(locale);
+        return captchaEngine.getNextCaptcha();
     }
 
     /**
