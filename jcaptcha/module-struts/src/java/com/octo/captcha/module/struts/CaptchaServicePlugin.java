@@ -2,9 +2,9 @@ package com.octo.captcha.module.struts;
 
 import com.octo.captcha.module.config.CaptchaModuleConfig;
 import com.octo.captcha.module.jmx.JMXRegistrationHelper;
-import com.octo.captcha.service.AbstractManageableCaptchaServiceMBean;
 import com.octo.captcha.service.CaptchaService;
 import com.octo.captcha.service.CaptchaServiceException;
+import com.octo.captcha.service.ManageableCaptchaService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionServlet;
@@ -478,7 +478,8 @@ DAMAGES.
 */
 
 /**
- * <p><ul><li></li></ul></p>
+ * Struts plugin, uses the module config.
+ * @see com.octo.captcha.module.config.CaptchaModuleConfig
  *
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
@@ -543,9 +544,9 @@ public class CaptchaServicePlugin implements PlugIn {
 
         // register the CaptchaService to an MBean server if specified
         if (captchaModuleConfig.getRegisterToMbean().booleanValue() 
-        && service instanceof AbstractManageableCaptchaServiceMBean) {
-            AbstractManageableCaptchaServiceMBean manageable = 
-            (AbstractManageableCaptchaServiceMBean) service;
+        && service instanceof ManageableCaptchaService) {
+            ManageableCaptchaService manageable =
+            (ManageableCaptchaService) service;
             JMXRegistrationHelper.registerToMBeanServer(manageable, 
             CaptchaModuleConfig.JMX_REGISTERING_NAME);
         }
@@ -555,7 +556,7 @@ public class CaptchaServicePlugin implements PlugIn {
     }
 
     public void destroy() {
-        if (service instanceof AbstractManageableCaptchaServiceMBean && 
+        if (service instanceof ManageableCaptchaService &&
         captchaModuleConfig.getRegisterToMbean().booleanValue()) {
             JMXRegistrationHelper.unregisterFromMBeanServer(
             CaptchaModuleConfig.JMX_REGISTERING_NAME);

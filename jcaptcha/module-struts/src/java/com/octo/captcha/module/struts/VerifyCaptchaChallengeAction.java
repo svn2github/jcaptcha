@@ -474,7 +474,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <p><ul><li></li></ul></p>
+ * Action that verify a captcha response using the response key to retrieve the response.
+ * Forwads to success if passed, to failure otherwise if exists or to input page adding the message to the corresponding key
+ * @see  com.octo.captcha.module.config.CaptchaModuleConfig for the key names 
  *
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
@@ -546,7 +548,8 @@ public class VerifyCaptchaChallengeAction extends Action {
             // If the challenge response is not specified, forward failure
             httpServletRequest.setAttribute(CaptchaServicePlugin.getInstance().getMessageKey(),
                     CaptchaModuleConfigHelper.getMessage(httpServletRequest));
-            return actionMapping.findForward("failure");
+            return actionMapping.findForward("failure")!=null?actionMapping.findForward("failure"):
+                    actionMapping.getInputForward();
         }
 
     }
