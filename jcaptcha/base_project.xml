@@ -92,7 +92,7 @@
       	</dependency>
  <dependency>
             <id>GroboUtils</id>
-            <version>4-core</version>
+            <version>5-core</version>
       	</dependency>
   </dependencies>
 
