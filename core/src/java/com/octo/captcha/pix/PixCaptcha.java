@@ -136,6 +136,17 @@ public class PixCaptcha implements Captcha, Serializable {
         return response;
     }
 
+    /**
+     * Dispose the challenge, once this method is call the getChallenge method will return null.<br>
+     * It has been added for technical reasons : a captcha is always used in a two step fashion<br>
+     * First submit the challenge, and then wait until the response arrives.<br>
+     * It had been asked to have a method to dispose the challenge that is no longer used after being dipslayed.
+     * So here it is!
+     *
+     */
+    public void disposeChallenge() {
+        this.challenge = null;
+    }
 
     public void writeObject(ObjectOutputStream out) throws IOException {
         //write serializable values
