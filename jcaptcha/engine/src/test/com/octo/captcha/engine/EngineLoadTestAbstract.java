@@ -465,9 +465,9 @@
 package com.octo.captcha.engine;
 
 import com.octo.captcha.Captcha;
-import junit.framework.TestCase;
 import net.sourceforge.groboutils.junit.v1.MultiThreadedTestRunner;
 import net.sourceforge.groboutils.junit.v1.TestRunnable;
+import junit.framework.TestCase;
 /**
  * Base class for CaptchaEngine load tests...
  */
@@ -509,6 +509,15 @@ public abstract class EngineLoadTestAbstract extends TestCase
         assertNotNull(captcha);
 
     }
+
+     public void testGetNextCaptchaLongRun10000() throws Exception
+    {
+        for(int i =0;i<10000;i++){
+        Captcha captcha = engine.getNextCaptcha();
+        assertNotNull(captcha.getChallenge());
+        }
+    }
+
 
     public void test_100It_0Del_1Us_2min() throws Throwable
     {

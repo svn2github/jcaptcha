@@ -531,21 +531,22 @@ public class DefaultGimpyEngine extends ListImageCaptchaEngine
                //wordtoimage components
                TextPaster paster = new DoubleRandomTextPaster(new Integer(5),
                        new Integer(7), Color.white);
-        TextPaster paster2 = new DoubleRandomTextPaster(new Integer(5),
-                               new Integer(7), Color.cyan);
-        TextPaster paster3 = new DoubleRandomTextPaster(new Integer(5),
-                                       new Integer(7), Color.red);
+//        TextPaster paster2 = new DoubleRandomTextPaster(new Integer(5),
+//                               new Integer(7), Color.pink);
+//        TextPaster paster3 = new DoubleRandomTextPaster(new Integer(5),
+//                                       new Integer(7), Color.magenta);
 
         BackgroundGenerator back = new FileReaderRandomBackgroundGenerator(new Integer(200),new Integer(100),"gimpybackgrounds");
                 FontGenerator font = new TwistedAndShearedRandomFontGenerator(
                        new Integer(30), new Integer(35));
         //word to image
+
         WordToImage word2Image = new ComposedWordToImage(font, back, paster);
-        WordToImage word2Image2 = new ComposedWordToImage(font, back, paster2);
-        WordToImage word2Image3 = new ComposedWordToImage(font, back, paster3);
+//         WordToImage word2Image2 = new ComposedWordToImage(font, back, paster2);
+//         WordToImage word2Image3 = new ComposedWordToImage(font, back, paster3);
 
         this.addFactory(new GimpyFactory(words, word2Image));
-        this.addFactory(new GimpyFactory(words, word2Image2));
-        this.addFactory(new GimpyFactory(words, word2Image3));
+//        this.addFactory(new GimpyFactory(words, word2Image2));
+//        this.addFactory(new GimpyFactory(words, word2Image3));
     }
 }
