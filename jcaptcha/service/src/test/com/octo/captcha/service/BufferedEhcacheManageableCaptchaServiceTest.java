@@ -476,7 +476,7 @@ public class BufferedEhcacheManageableCaptchaServiceTest extends AbstractManagea
 
     protected void setUp() throws Exception {
          this.service = new MockedEhCacheManageableCaptchaService(new BufferedCaptchaEngineContainer(new MockCaptchaEngine(),
-         Boolean.TRUE, new Integer(1000),new Integer(100),new Long(10000)),
+        false, 1000,100,10),
                  MIN_GUARANTED_STORAGE_DELAY_IN_SECONDS,MAX_CAPTCHA_STORE_SIZE
                 );
         AbstractManageableCaptchaServiceTest.CAPTCHA_STORE_LOAD_BEFORE_GARBAGE_COLLECTION = 0;

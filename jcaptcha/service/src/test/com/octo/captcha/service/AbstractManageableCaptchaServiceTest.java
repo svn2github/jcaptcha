@@ -651,6 +651,7 @@ public class AbstractManageableCaptchaServiceTest extends AbstractCaptchaService
         assertEquals("all but one should be collectable",
                 CAPTCHA_STORE_LOAD_BEFORE_GARBAGE_COLLECTION - 1,
                 getMService().getNumberOfGarbageCollectableCaptchas());
+
         Thread.sleep(MIN_GUARANTED_STORAGE_DELAY_IN_SECONDS * 1000 + 100);
         assertEquals("all should be collectable",
                 CAPTCHA_STORE_LOAD_BEFORE_GARBAGE_COLLECTION,
@@ -838,7 +839,7 @@ public class AbstractManageableCaptchaServiceTest extends AbstractCaptchaService
 
 
     public void testMaxStoreSizeConstraint() throws Exception {
-        getMService().setMinGuarantedStorageDelayInSeconds(10000);
+        //getMService().setMinGuarantedStorageDelayInSeconds(10000);
         fullLoad();
         for (int i = 0; i < 100; i++) {
             try {
@@ -848,16 +849,30 @@ public class AbstractManageableCaptchaServiceTest extends AbstractCaptchaService
                 assertEquals("store should be of max size", MAX_CAPTCHA_STORE_SIZE, getMService().getCaptchaStoreSize());
             }
         }
+
+        Thread.sleep(1000 );
         getMService().setMinGuarantedStorageDelayInSeconds(1);
-        Thread.sleep(1 * 1000 + 100);
-        fullLoad();
+        Thread.sleep(1000);    
+        try {
+             fullLoad();
+
+            } catch (CaptchaServiceException e) {
+                fail("should not have thrown a captcha store full exception");
+            }
 
     }
 
     private void fullLoad() {
-        for (int i = 0; i < MAX_CAPTCHA_STORE_SIZE; i++) {
-            String id = String.valueOf(i);
-            service.generateAndStoreCaptcha(Locale.getDefault(), id);
+        int i=0;
+        try {
+            for (i = 0; i < MAX_CAPTCHA_STORE_SIZE; i++) {
+                String id = String.valueOf(i);
+                service.generateAndStoreCaptcha(Locale.getDefault(), id);
+            }
+        } catch (CaptchaServiceException e) {
+            System.out.println("i = "+i);
+            e.printStackTrace();
+            throw e;
         }
     }
 

@@ -527,18 +527,22 @@ public abstract class AbstractCaptchaService implements CaptchaService {
         Object challenge;
         //check if has capthca
         if (!this.store.hasCaptcha(ID)) {
-            //if not see if it
-            captcha = this.engine.getNextCaptcha(locale);
-
+            //if not generate and store
+            captcha = generateAndStoreCaptcha(locale,ID);
         } else {
+            //else get it
             captcha = this.store.getCaptcha(ID);
+            //if dirty
             if (captcha.hasGetChalengeBeenCalled().booleanValue()) {
-                captcha = captcha = this.engine.getNextCaptcha(locale);
+                //get a new one and store it
+                captcha = generateAndStoreCaptcha(locale,ID);
+            }else{
+                //else nothing
             }
         }
         challenge= getChallengeClone(captcha);
         captcha.disposeChallenge();
-        this.store.storeCaptcha(ID,captcha);
+
         return challenge;
     }
 

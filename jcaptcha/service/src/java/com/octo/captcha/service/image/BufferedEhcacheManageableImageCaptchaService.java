@@ -461,22 +461,113 @@
 
                        END OF TERMS AND CONDITIONS
 */
-
 package com.octo.captcha.service.image;
 
-import com.octo.captcha.service.ServiceLoadTestAbstract;
-import com.octo.captcha.service.MockedCaptchaService;
+import com.octo.captcha.service.BufferedEhcacheManageableCaptchaService;
+import com.octo.captcha.service.CaptchaServiceException;
+import com.octo.captcha.Captcha;
+import com.octo.captcha.engine.CaptchaEngine;
+import com.octo.captcha.engine.image.gimpy.DefaultGimpyEngine;
+
+import java.awt.image.BufferedImage;
+import java.util.Locale;
 
 /**
- * Load test of the default Service implementation
- * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
- * @version 1.0
+ * User: Default utlimate image service
+ *  Default values
+ *
+         * engine              DefaultGimpyEngine
+         * diskPersistant      false
+         * bufferSize          10 000
+         * maxMemorySize       300
+         * deamonPeriod        180s
+         * minGuarantedStorageDelayInSeconds 600s
+         * maxCaptchaStoreSize 100 000
+ * Date: 21 oct. 2004
+ * Time: 11:11:00
  */
-public class DefaultBufferedManageableImageCaptchaServiceLoadTest extends ServiceLoadTestAbstract
-{
+public class BufferedEhcacheManageableImageCaptchaService extends BufferedEhcacheManageableCaptchaService
 
-    protected void setUp() throws Exception
-    {
-        this.service = new BufferedEhcacheManageableImageCaptchaService();
+ implements ImageCaptchaService{
+
+
+        /**
+         * contructor
+         *
+         * engine              DefaultGimpyEngine
+         * diskPersistant      false
+         * bufferSize          10 000
+         * maxMemorySize       300
+         * deamonPeriod        180s
+         * minGuarantedStorageDelayInSeconds 600s
+         * maxCaptchaStoreSize 100 000
+         */
+        public BufferedEhcacheManageableImageCaptchaService() {
+            super(new DefaultGimpyEngine(), false, 10000, 300, 180, 600, 100000);
+        }
+
+
+    /**
+     * contructor
+     *
+     * @param engine              an engine
+     * @param diskPersistant      (does the buffer is persistant on disk between shutdown (experiemental)
+     * @param bufferSize          the total buffer size
+     * @param maxMemorySize       the max in memory cahche size, set it equals to bufferSize if you want to avoid disk cache
+     * @param deamonPeriod        the wake up deamon period
+     * @param minGuarantedStorageDelayInSeconds
+     *
+     * @param maxCaptchaStoreSize
+     */
+    public BufferedEhcacheManageableImageCaptchaService(CaptchaEngine engine, boolean diskPersistant, int bufferSize, int maxMemorySize, long deamonPeriod, int minGuarantedStorageDelayInSeconds, int maxCaptchaStoreSize) {
+        super(engine, diskPersistant, bufferSize, maxMemorySize, deamonPeriod, minGuarantedStorageDelayInSeconds, maxCaptchaStoreSize);
+    }
+      /**
+     * Method to retrive the image challenge corresponding to the given ticket.
+     *
+     * @param ID the ticket
+     * @return the challenge
+     * @throws com.octo.captcha.service.CaptchaServiceException
+     *          if the ticket is invalid
+     */
+    public BufferedImage getImageChallengeForID(String ID) throws CaptchaServiceException {
+        return (BufferedImage) this.getChallengeForID(ID);
+    }
+
+
+    /**
+     * Method to retrive the image challenge corresponding to the given ticket.
+     *
+     * @param ID the ticket
+     * @return the challenge
+     * @throws com.octo.captcha.service.CaptchaServiceException
+     *          if the ticket is invalid
+     */
+    public BufferedImage getImageChallengeForID(String ID, Locale locale) throws CaptchaServiceException {
+        return (BufferedImage) this.getChallengeForID(ID, locale);
+    }
+
+     /**
+     * This method must be implemented by sublcasses and :
+     * Retrieve the challenge from the captcha
+     * Make and return a clone of the challenge
+     * Return the clone
+     * It has be design in order to let the service dipose
+     * the challenge of the captcha after rendering.
+     * It should be implemented for all captcha type (@see ImageCaptchaService implementations
+     * for exemple)
+     *
+     * @param captcha
+     * @return a Challenge Clone
+     */
+    protected Object getChallengeClone(Captcha captcha) {
+        BufferedImage challenge = (BufferedImage) captcha.getChallenge();
+        BufferedImage clone = new BufferedImage(challenge.getWidth(), challenge.getHeight(), challenge.getType());
+
+        clone.getGraphics().drawImage(challenge, 0, 0, clone.getWidth(), clone.getHeight(), null);
+        clone.getGraphics().dispose();
+
+
+        return clone;
     }
 }

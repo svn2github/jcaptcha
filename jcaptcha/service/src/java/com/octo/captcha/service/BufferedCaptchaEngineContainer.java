@@ -479,8 +479,6 @@ import java.util.Locale;
 /**
  * This class is an Engine container that asunchronously creates a buffer of captcha
  * for performance optimisation.
- * <p/>
- * <p/>
  * User: mag
  * TODO : localized captcha buffering
  */
@@ -501,7 +499,7 @@ public class BufferedCaptchaEngineContainer implements CaptchaEngine {
 
     private Integer bufferSize;
     private Integer maxMemorySize;
-    private Boolean overflowToDisk;
+    private Boolean diskPersistant;
     private Long deamonPeriod;
 
 
@@ -518,28 +516,33 @@ public class BufferedCaptchaEngineContainer implements CaptchaEngine {
         return captchaEngine.getNextCaptcha(locale);
     }
 
-
-    public BufferedCaptchaEngineContainer(CaptchaEngine engine, Boolean overflowToDisk,
-                                          Integer bufferSize, Integer maxMemorySize, Long deamonPeriod) {
+    /**
+     * Construct a new buffered engine container
+     *
+     * @param engine         the contained engine
+     * @param diskPersistant does this cache persist on disk between shut down?(in java.io.tmpdir)
+     * @param bufferSize     total buffer size
+     * @param maxMemorySize  max buffer in memory size
+     * if you want to avoid the disk buffer (which is not recommended) you may set a maxMemory = buffersize;
+     * @param deamonPeriod   the period of the buffering deamon in seconds
+     */
+    public BufferedCaptchaEngineContainer(CaptchaEngine engine, boolean diskPersistant,
+                                          int bufferSize, int maxMemorySize, long deamonPeriod) {
         log.debug("Initializing BufferDeamon with a size of " + bufferSize + " a memory max size : " + maxMemorySize +
                 " and a period of " + deamonPeriod);
         log.debug("Engine : " + engine.getClass());
-        if (overflowToDisk == null || deamonPeriod == null || engine == null || maxMemorySize == null) {
-            log.error("Trying to initialize a Buffered engine with a null value, aborting...");
-            throw new CaptchaServiceException("Trying to initialize a " +
-                    "Buffered engine with a null value, aborting...");
-        }
-        this.bufferSize = bufferSize;
-        this.maxMemorySize = maxMemorySize;
-        this.overflowToDisk = overflowToDisk;
-        this.deamonPeriod = deamonPeriod;
+
+        this.bufferSize = new Integer(bufferSize);
+        this.maxMemorySize = new Integer(maxMemorySize);
+        this.diskPersistant = new Boolean(diskPersistant);
+        this.deamonPeriod = new Long(deamonPeriod*1000);
         this.captchaEngine = engine;
         this.captchaBuffer = new Cache(CACHE_BUFFER_NAME,
                 this.maxMemorySize.intValue(),
-                this.overflowToDisk.booleanValue(),
+                maxMemorySize==bufferSize?false:true,
                 true,
                 0, 0,
-                true,
+                diskPersistant,
                 0);
 
         try {
@@ -551,15 +554,20 @@ public class BufferedCaptchaEngineContainer implements CaptchaEngine {
         log.debug("cache initialized");
         clockDaemon = new ClockDaemon();
         log.debug("demon initialized");
-        startJob(this.deamonPeriod.longValue());
+        startDaemon();
         log.debug("demon started");
 
     }
 
 
+    /**
+     * Start the backgroud deamon
+     *
+     * @param periods
+     */
     public void startJob(long periods) {
 
-        clockDaemon.executePeriodically(periods, new Job(this.captchaEngine, clockDaemon), true);
+        clockDaemon.executePeriodically(periods, new Job(this.captchaEngine, clockDaemon), false);
 
     }
 
@@ -611,11 +619,12 @@ public class BufferedCaptchaEngineContainer implements CaptchaEngine {
 
     private Captcha getNextCaptchaFromBuffer() {
         Captcha captcha = null;
-        for (int i = 0; i < bufferSize.intValue(); i++) {
+        try {
+            for (int i = 0; i < bufferSize.intValue(); i++) {
 
-            Integer I = new Integer(i);
+                Integer I = new Integer(i);
 
-            try {
+
                 if (this.captchaBuffer.getKeys().contains(I)) {
                     if (log.isDebugEnabled()) {
                         log.debug("captcha found in buffer for key : " + i);
@@ -629,13 +638,109 @@ public class BufferedCaptchaEngineContainer implements CaptchaEngine {
                     }
                 }
                 ;
-            } catch (Throwable e) {
-                log.warn(e);
-            }
 
+            }
+        } catch (Throwable e) {
+            log.warn(e);
         }
+
         return captcha;
     };
 
 
+    //MANAGEMENT METHODS
+
+    public void stopDaemon(){
+        this.clockDaemon.shutDown();
+    }
+
+
+    public void startDaemon(){
+        this.startJob(this.deamonPeriod.longValue());
+    }
+
+    public void setDaemonPeriod(Long deamonPeriod){
+        this.deamonPeriod=new Long(deamonPeriod.longValue()*1000);
+        this.stopDaemon();
+        this.startDaemon();
+
+    }
+
+    public Long getDaemonPeriod(){
+            return this.deamonPeriod;
+    }
+
+
+    public Long getTotalBufferSize() {
+        return new Long(this.captchaBuffer.getDiskStoreSize()
+                +this.captchaBuffer.getMemoryStoreSize());
+    }
+
+
+    public Long getMemoryBufferSize(){
+        return new Long(this.captchaBuffer.getMemoryStoreSize());
+    }
+
+
+    public Long getDiskBufferSize(){
+        return new Long(this.captchaBuffer.getMemoryStoreSize());
+    }
+
+
+
+
+    public Long getBufferHitCount(){
+        return new Long(this.captchaBuffer.getHitCount());
+    }
+
+     /**
+      *
+      * @return the max memory size
+      */
+    public Long getMaxMemorySize(){
+        return new Long(this.captchaBuffer.getMaxElementsInMemory());
+    }
+
+
+     /**
+     * Get the fully qualified class name of the concrete CaptchaEngine
+     * used by the container.
+     *
+     * @return the fully qualified class name of the concrete CaptchaEngine
+     *         used by the service.
+     */
+    public String getCaptchaEngineClass() {
+        return this.captchaEngine.getClass().getName();
+    }
+
+    /**
+     * Set the fully qualified class name of the concrete CaptchaEngine
+     * used by the container
+     *
+     * @param theClassName the fully qualified class name of the
+     *                     CaptchaEngine used by the service
+     * @throws IllegalArgumentException if className can't be used as the
+     *                                  service CaptchaEngine, either because it can't be instanciated
+     *                                  by the service or it is not a ImageCaptchaEngine concrete class.
+     */
+    public void setCaptchaEngineClass(String theClassName)
+            throws IllegalArgumentException {
+        try {
+            Object engine = Class.forName(theClassName).newInstance();
+            if (engine instanceof com.octo.captcha.engine.CaptchaEngine) {
+                this.captchaEngine = (com.octo.captcha.engine.CaptchaEngine) engine;
+            } else {
+                throw new IllegalArgumentException("Class is not instance of CaptchaEngine! "
+                        + theClassName);
+            }
+        } catch (InstantiationException e) {
+            throw new IllegalArgumentException(e.getMessage());
+        } catch (IllegalAccessException e) {
+            throw new IllegalArgumentException(e.getMessage());
+        } catch (ClassNotFoundException e) {
+            throw new IllegalArgumentException(e.getMessage());
+        } catch (RuntimeException e) {
+            throw new IllegalArgumentException(e.getMessage());
+        }
+    }
 }

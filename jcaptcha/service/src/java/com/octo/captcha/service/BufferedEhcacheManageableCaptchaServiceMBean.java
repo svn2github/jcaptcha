@@ -461,22 +461,52 @@
 
                        END OF TERMS AND CONDITIONS
 */
-
-package com.octo.captcha.service.image;
-
-import com.octo.captcha.service.ServiceLoadTestAbstract;
-import com.octo.captcha.service.MockedCaptchaService;
+package com.octo.captcha.service;
 
 /**
- * Load test of the default Service implementation
- * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
- * @version 1.0
+ * Add cache management stuff!
+ * User: mag
+ * Date: 21 oct. 2004
+ * Time: 10:03:47
  */
-public class DefaultBufferedManageableImageCaptchaServiceLoadTest extends ServiceLoadTestAbstract
-{
+public interface BufferedEhcacheManageableCaptchaServiceMBean extends ManageableCaptchaService {
+    void stopDaemon();
 
-    protected void setUp() throws Exception
-    {
-        this.service = new BufferedEhcacheManageableImageCaptchaService();
-    }
+    void startDaemon();
+
+    void setDaemonPeriod(Long deamonPeriod);
+
+    Long getDaemonPeriod();
+
+    Long getTotalBufferSize();
+
+    Long getMemoryBufferSize();
+
+    Long getDiskBufferSize();
+
+    Long getBufferHitCount();
+
+    Long getMaxMemorySize();
+
+    /**
+     * Get the fully qualified class name of the concrete CaptchaEngine
+     * used by the service.
+     *
+     * @return the fully qualified class name of the concrete CaptchaEngine
+     *         used by the service.
+     */
+    String getCaptchaEngineClass();
+
+    /**
+     * Set the fully qualified class name of the concrete CaptchaEngine
+     * used by the service
+     *
+     * @param theClassName the fully qualified class name of the
+     *                     CaptchaEngine used by the service
+     * @throws IllegalArgumentException if className can't be used as the
+     *                                  service CaptchaEngine, either because it can't be instanciated
+     *                                  by the service or it is not a ImageCaptchaEngine concrete class.
+     */
+    void setCaptchaEngineClass(String theClassName)
+            throws IllegalArgumentException;
 }

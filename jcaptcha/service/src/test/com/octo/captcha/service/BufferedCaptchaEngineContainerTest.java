@@ -478,8 +478,8 @@ public class BufferedCaptchaEngineContainerTest extends TestCase {
 
     public void testGetNextCaptcha() throws Exception {
         MockCaptchaEngine engine = new MockCaptchaEngine();
-        bufferedCaptchaEngineContainer = new BufferedCaptchaEngineContainer(engine,Boolean.FALSE,
-                new Integer(100), new Integer(100),new Long(1000));
+        bufferedCaptchaEngineContainer = new BufferedCaptchaEngineContainer(engine,false,
+                100, 100,10);
          for (int i = 0; i < 1000; ++i)
             {
                 Captcha captcha =this.bufferedCaptchaEngineContainer.getNextCaptcha();

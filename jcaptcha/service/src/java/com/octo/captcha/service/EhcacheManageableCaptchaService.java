@@ -489,7 +489,7 @@ import org.apache.commons.logging.Log;
  */
 public abstract class EhcacheManageableCaptchaService
         extends AbstractCaptchaService
-        implements AbstractManageableCaptchaServiceMBean {
+        implements EhcacheManageableCaptchaServiceMBean {
 
     private static Log log = LogFactory.getLog(EhcacheManageableCaptchaService.class);
     private CacheManager cacheManager;
@@ -501,7 +501,7 @@ public abstract class EhcacheManageableCaptchaService
     private int numberOfGeneratedCaptchas = 0;
     private int numberOfCorrectResponse = 0;
     private int numberOfUncorrectResponse = 0;
-    private static final String CACHE_NAME = "CaptchaCache";
+    private static final String CACHE_NAME = "CaptchaStoreCache";
 
 
     protected EhcacheManageableCaptchaService(com.octo.captcha.engine.CaptchaEngine captchaEngine,
@@ -513,7 +513,7 @@ public abstract class EhcacheManageableCaptchaService
         try {
             this.cacheManager = CacheManager.getInstance();
         } catch (CacheException e) {
-            e.printStackTrace();
+            log.error(e);
         }
         // create a cache with overflow on disk,
         Cache cache = new Cache(CACHE_NAME, maxCaptchaStoreSize, true, false, minGuarantedStorageDelayInSeconds,
@@ -526,7 +526,7 @@ public abstract class EhcacheManageableCaptchaService
             }
             cacheManager.addCache(cache);
         } catch (CacheException e) {
-            e.printStackTrace();
+            log.error(e);
         }
         //change the super store
         super.store = new EhcacheStore(cache);
@@ -749,6 +749,7 @@ public abstract class EhcacheManageableCaptchaService
 
 
     private void updateCache()  {
+
         Cache cache = new Cache(CACHE_NAME, captchaStoreMaxSize, true, false, minGuarantedStorageDelayInSeconds,
                 minGuarantedStorageDelayInSeconds);
         Iterator it = null;
@@ -757,25 +758,23 @@ public abstract class EhcacheManageableCaptchaService
         } catch (CacheException e) {
             log.error(e);
         }
-        synchronized (cacheManager) {
 
-
-            try {
-                cacheManager.removeCache(CACHE_NAME);
-                cacheManager.addCache(cache);
-                this.store = new EhcacheStore(cache);
-                Cache myCache = cacheManager.getCache(CACHE_NAME);
-                long now = System.currentTimeMillis();
-                while (it.hasNext()) {
-                    Element el= (Element) it.next();
-                    if(now-el.getCreationTime()<cache.getTimeToLiveSeconds()*1000){
-                        myCache.put(el);
+                try {
+                    cacheManager.removeCache(CACHE_NAME);
+                    cacheManager.addCache(cache);
+                    this.store = new EhcacheStore(cache);
+                    Cache myCache = cacheManager.getCache(CACHE_NAME);
+                    long now = System.currentTimeMillis();
+                    while (it.hasNext()) {
+                        Element el= (Element) it.next();
+                        if((now-el.getCreationTime())<cache.getTimeToLiveSeconds()*1000){
+                            myCache.put(el);
+                        }
                     }
+                } catch (CacheException e) {
+                   log.error(e);
                 }
-            } catch (CacheException e) {
-               log.error(e);
-            }
-        }
+
     }
 
 
@@ -807,8 +806,9 @@ public abstract class EhcacheManageableCaptchaService
     ///****
 
     protected Captcha generateAndStoreCaptcha(Locale locale, String ID) {
+       Cache cache = getCache();
         try {
-            if (this.cacheManager.getCache(CACHE_NAME).getSize() >= this.captchaStoreMaxSize) {
+            if (cache.getSize() >= this.captchaStoreMaxSize) {
                 //impossible ! has to wait
                 throw new CaptchaServiceException("Store is full," +
                         " try to increase CaptchaStore Size or " +
@@ -820,10 +820,15 @@ public abstract class EhcacheManageableCaptchaService
         }
         Captcha captcha = this.engine.getNextCaptcha(locale);
         this.numberOfGeneratedCaptchas++;
+
         Element el = new Element(ID, captcha);
-        this.cacheManager.getCache(CACHE_NAME).remove(el);
-        this.cacheManager.getCache(CACHE_NAME).put(el);
+        cache.remove(el);
+        cache.put(el);
         return captcha;
+    }
+
+    private Cache getCache() {
+        return this.cacheManager.getCache(CACHE_NAME);
     }
 
 

@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<document>
+
+    <meta name="keyword" content="captcha, java, module,struts, jcaptcha"/>
+
+    <body>
+
+        <section name="Introduction">
+            <p>
+ This document is a tutorial that demonstrates how to integrate
+ JCaptcha with a Roller.
+                <br/>It Uses
+                <a href="http://www.rollerweblogger.org/">the Roller Weblogger</a> <b>VERSION 0.9.9.5</b>.
+            </p>
+
+            <p>This tutorial is devided into 3 Steps.</p>
+            <ul>
+                <li>Step 1 : Prerequisites </li>
+                <li>Step 2 : install and configure the jcaptcha struts plugin</li>
+                <li>Step 3 : Change the Roller comment configuration</li>
+            </ul>
+        </section>
+
+
+        <section name="Prerequisites">
+            <p>
+        It is assume that you have a 0.9.9.5 roller web application instance running.
+         See
+                <a href="http://www.rollerweblogger.org/wiki/Wiki.jsp?page=InstallationGuide">Roller installation guide</a> to achieve this.
+            </p>
+        </section>
+
+
+        <section name="Install the jcaptcha Roller plugin">
+            <p>
+
+                <ul>
+
+                    <li>Copy the jcaptcha jar to the WEB-INF/lib dir of the roller web-app : jcaptcha-${version}.jar</li>
+                    <li>Copy the gimpybackgrounds folder in the WEB-INF/classes dir of the roller web-app</li>
+                    <li>Add the folowing at the end of the struts config file</li>
+                    <code>
+                        <plug-in className="com.octo.captcha.module.struts.CaptchaServicePlugin"/>
+                    </code>
+                    There's many settable property available, but none are required, this is detailed in the module documentation.
+                    <li>Add the following action declaration :</li>
+                    <code>
+                        <action
+                        path="/jcaptcha"
+                        type="com.octo.captcha.module.struts.image.RenderImageCaptchaAction"
+                        />
+                    </code>
+                </ul>
+                That's it.<br/>
+                You can now test your configuration by restarting your roller web-app and directly point your browser to the jcaptcha.do action.<br/>
+                You should see a jcaptcha image!.
+            </p>
+        </section>
+
+
+        <section name="Change the Roller comment configuration">
+            <p>
+            Roller provides a Comment Athenticator interface to plug anti spam comment implementation.
+                <br/>
+              The only thing to change in order to activate the jcaptcha plugin is  the folowing lines in the web.xml file :
+                <code>
+                 <!--
+Comment authenticator to be used.
+-->
+<context-param>
+    <param-name>org.roller.commentAuthenticatorClass</param-name>
+    <param-value>com.octo.captcha.module.roller.JCaptchaCommentAuthenticator</param-value>
+    <!--
+    <param-value>org.roller.presentation.velocity.DefaultCommentAuthenticator</param-value>
+    <param-value>org.roller.presentation.velocity.MathCommentAuthenticator</param-value>
+    -->
+</context-param>
+                </code>
+            </p>
+DONE!
+        </section>
+
+    </body>
+</document>

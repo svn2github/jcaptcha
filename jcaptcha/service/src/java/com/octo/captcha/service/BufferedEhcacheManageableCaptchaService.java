@@ -461,22 +461,87 @@
 
                        END OF TERMS AND CONDITIONS
 */
+package com.octo.captcha.service;
 
-package com.octo.captcha.service.image;
-
-import com.octo.captcha.service.ServiceLoadTestAbstract;
-import com.octo.captcha.service.MockedCaptchaService;
+import com.octo.captcha.engine.CaptchaEngine;
+import com.octo.captcha.Captcha;
 
 /**
- * Load test of the default Service implementation
- * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
- * @version 1.0
+ * The ultimate service : eh cache as store, buffered engine, manageable!
+ *
+ * User: mag
+ * Date: 21 oct. 2004
+ * Time: 10:17:17
  */
-public class DefaultBufferedManageableImageCaptchaServiceLoadTest extends ServiceLoadTestAbstract
-{
+public abstract class BufferedEhcacheManageableCaptchaService extends EhcacheManageableCaptchaService
+        implements  BufferedEhcacheManageableCaptchaServiceMBean{
 
-    protected void setUp() throws Exception
-    {
-        this.service = new BufferedEhcacheManageableImageCaptchaService();
+    private final BufferedCaptchaEngineContainer bufferedCaptchaEngineContainer;
+
+    /**
+     * contructor
+     * @param engine an engine
+     * @param diskPersistant (does the buffer is persistant on disk between shutdown (experiemental)
+     * @param bufferSize the total buffer size
+     * @param maxMemorySize the max in memory cahche size, set it equals to bufferSize if you want to avoid disk cache
+     * @param deamonPeriod the wake up deamon period
+     * @param minGuarantedStorageDelayInSeconds
+     * @param maxCaptchaStoreSize
+     */
+    protected BufferedEhcacheManageableCaptchaService(CaptchaEngine engine, boolean diskPersistant,
+                                          int bufferSize, int maxMemorySize, long deamonPeriod,
+                                          int minGuarantedStorageDelayInSeconds, int maxCaptchaStoreSize) {
+        super(new BufferedCaptchaEngineContainer(engine, diskPersistant,bufferSize, maxMemorySize,deamonPeriod), minGuarantedStorageDelayInSeconds, maxCaptchaStoreSize);
+        this.bufferedCaptchaEngineContainer = (BufferedCaptchaEngineContainer)this.engine;
     }
+
+
+
+    //overiding set and get engine class
+    public String getCaptchaEngineClass() {
+        return bufferedCaptchaEngineContainer.getCaptchaEngineClass();
+    }
+
+    public void setCaptchaEngineClass(String theClassName)
+            throws IllegalArgumentException {
+        bufferedCaptchaEngineContainer.setCaptchaEngineClass(theClassName);
+    }
+
+    //management delegation
+    public void stopDaemon() {
+        bufferedCaptchaEngineContainer.stopDaemon();
+    }
+
+    public void startDaemon() {
+        bufferedCaptchaEngineContainer.startDaemon();
+    }
+
+    public void setDaemonPeriod(Long deamonPeriod) {
+        bufferedCaptchaEngineContainer.setDaemonPeriod(deamonPeriod);
+    }
+
+    public Long getDaemonPeriod() {
+        return bufferedCaptchaEngineContainer.getDaemonPeriod();
+    }
+
+    public Long getTotalBufferSize() {
+        return bufferedCaptchaEngineContainer.getTotalBufferSize();
+    }
+
+    public Long getMemoryBufferSize() {
+        return bufferedCaptchaEngineContainer.getMemoryBufferSize();
+    }
+
+    public Long getDiskBufferSize() {
+        return bufferedCaptchaEngineContainer.getDiskBufferSize();
+    }
+
+    public Long getBufferHitCount() {
+        return bufferedCaptchaEngineContainer.getBufferHitCount();
+    }
+
+    public Long getMaxMemorySize() {
+        return bufferedCaptchaEngineContainer.getMaxMemorySize();
+    }
+
 }
