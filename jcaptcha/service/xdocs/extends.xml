@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<document>
+
+    <meta name="keyword" content="captcha, java, engine, jcaptcha"/>
+
+    <body>
+    <section name="extend">
+<p>
+ You may implement your own service by implementing the <code>com.octo.captcha.service.CaptchaService</code> or any typed subclass.
+    This implementation could be then used by any of the integration modules.
+</p>
+</section>
+
+<section name="Samples">
+
+    <p>
+  See : <a href="../index.html">Integration modules</a>
+</p>
+</section>
+    </body>
+</document>

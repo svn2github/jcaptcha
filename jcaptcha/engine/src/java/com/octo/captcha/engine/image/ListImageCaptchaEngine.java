@@ -484,7 +484,7 @@ public abstract class ListImageCaptchaEngine
         extends com.octo.captcha.engine.image.ImageCaptchaEngine
 {
 
-    private List factories = new ArrayList();
+    List factories = new ArrayList();
     private Random myRandom = new Random();
 
     public ListImageCaptchaEngine()
@@ -530,22 +530,21 @@ public abstract class ListImageCaptchaEngine
      * remove the factory from the gimpy list
      *
      * @param factory
-     * @return true if removed, false otherwise
+    * @return true if removed, false otherwise
      */
-    public boolean removeFactory(
-            com.octo.captcha.image.ImageCaptchaFactory factory)
-    {
-        return this.factories.remove(factory);
-    }
+//    public boolean removeFactory(
+//            com.octo.captcha.image.ImageCaptchaFactory factory)
+//    {
+//        return this.factories.remove(factory);
+//    }
 
     /**
      * This method build a ImageCaptchaFactory.
      *
      * @return a CaptchaFactory
      */
-    public final com.octo.captcha.image.ImageCaptchaFactory getImageCaptchaFactory()
+    public com.octo.captcha.image.ImageCaptchaFactory getImageCaptchaFactory()
     {
-        checkFactoriesSize();
         return (com.octo.captcha.image.ImageCaptchaFactory) factories.get(
                 myRandom.nextInt(factories.size()));
     }
@@ -555,9 +554,8 @@ public abstract class ListImageCaptchaEngine
      *
      * @return a CaptchaFactory
      */
-    public final ImageCaptcha getNextImageCaptcha()
+    public ImageCaptcha getNextImageCaptcha()
     {
-        checkFactoriesSize();
         return getImageCaptchaFactory().getImageCaptcha();
     }
 
@@ -567,9 +565,8 @@ public abstract class ListImageCaptchaEngine
      * @param locale
      * @return a CaptchaFactory
      */
-    public final ImageCaptcha getNextImageCaptcha(Locale locale)
+    public  ImageCaptcha getNextImageCaptcha(Locale locale)
     {
-        checkFactoriesSize();
         return getImageCaptchaFactory().getImageCaptcha(locale);
     }
 
@@ -578,8 +575,8 @@ public abstract class ListImageCaptchaEngine
         if (factories.size() == 0)
             throw new CaptchaException(
                     "This gimpy has no factories. Please initialize it "
-                    +
-                    "properly with the buildInitialFactory() called by the constructor or the addFactory() mehtod later!");
+                    +"properly with the buildInitialFactory() called by "
+                    + "the constructor or the addFactory() mehtod later!");
     }
 
 }

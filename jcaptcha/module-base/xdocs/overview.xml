@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<document>
+
+    <meta name="keyword" content="captcha, java, core, jcaptcha"/>
+
+    <body>
+
+        <section name="Purpose">
+
+            <p>
+
+                <ul>
+                    <li>This module provides commomns utilities to help developers to build their own</li>
+                    <li>It provides a config class that contains the </li>
+                    <li>An engine initialize a CaptchaStore to store Captcha between Challenge generation, and response validation, associed with an unique id.</li>
+
+                </ul>
+            </p>
+
+        </section>
+
+    </body>
+</document>

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 
 <project>
-  <pomVersion>1</pomVersion>
+  <pomVersion>3</pomVersion>
   <id>jcaptcha</id>
   <name>jcaptcha</name>
   <groupId>jcaptcha</groupId>
   <currentVersion>${project.version}</currentVersion>
+
   <organization>
     <!-- The full name of the organization. -->
     <name>JCaptcha corp.</name>
@@ -14,7 +15,7 @@
     <!-- The URL to the organization's logo image. This can be an URL relative to the base directory of the generated
          web site, (e.g., /images/org-logo.png) or an absolute URL (e.g., http://my.corp/logo.png). This value is used
          when generating the project documentation. -->
-    <logo>http://jcaptcha.sourceforge.net/images/organization-logo.jpg</logo>
+    <logo>/jcaptcha-logo.jpg</logo>
   </organization>
   <inceptionYear>2003</inceptionYear>
   <package>com.octo.captcha</package>
@@ -22,17 +23,18 @@
   <description>
      <![CDATA[
   <b>JCAPTCHA</b>, for <b>J</b>ava <b>C</b>ompletely <b>A</b>utomated <b>P</b>ublic <b>T</b>est to tell <b>C</b>omputers and <b>H</b>umans <b>A</b>part
-  <br/>See : <a href="http://jcaptcha.sourceforge.net/moniwiki/wiki.php/JcapTcha">Project description</a>
+<br/>The open source java framework for captcha definition and integration
+<br/>
    ]]>
   </description>
-  
+
   <shortDescription>
      JCAPTCHA
     </shortDescription>
 
   <url/>
   <repository>
-  <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/jcaptcha:jcaptcha</connection>
+  <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/jcaptcha:jcaptcha/${pom.artifactId}</connection>
     <url>http://cvs.sourceforge.net/viewcvs.py/jcaptcha/</url>
 
    </repository>
@@ -53,6 +55,16 @@
 
     <developers>
     <developer>
+      <name>Marc-Antoine Garrigue</name>
+      <id>magarrigue</id>
+      <email>magarrigue@octo.com</email>
+      <organization>Octo</organization>
+      <roles>
+        <role>Project Leader</role>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+    <developer>
       <name>Sébastien Brunot</name>
       <id>sbrunot</id>
       <email>sbrunot@octo.com</email>
@@ -70,23 +82,29 @@
         <role>Java Developer</role>
       </roles>
     </developer>
-    <developer>
-      <name>Marc-Antoine Garrigue</name>
-      <id>magarrigue</id>
-      <email>magarrigue@octo.com</email>
-      <organization>Octo</organization>
-      <roles>
-        <role>Java Developer</role>
-      </roles>
-    </developer>
+
   </developers>
 
-  <dependencies>
+
+ <dependencies>
+ <dependency>
+            <id>junit</id>
+            <version>3.8.1</version>
+      	</dependency>
+ <dependency>
+            <id>GroboUtils</id>
+            <version>4-core</version>
+      	</dependency>
   </dependencies>
 
+  <build>
+  </build>
+
   <reports>
-	<report>maven-license-plugin</report>
 	 <report>maven-dashboard-plugin</report>
+  	<report>maven-changelog-plugin</report>
+  	<report>maven-file-activity-plugin</report>
+	<report>maven-license-plugin</report>
   </reports>
-  
+
 </project>

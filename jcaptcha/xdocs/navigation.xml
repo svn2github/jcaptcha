@@ -7,6 +7,13 @@
             <item name="JCaptcha Wiki" href="http://jcaptcha.sourceforge.net/moniwiki/"/>
             <item name="JCaptcha@Sourceforge" href="http://sourceforge.net/projects/jcaptcha/"/>
         </links>
+       <menu name="Menu" collapse="true">
+            <item name="Main" href="main.html"/>
+            <item name="Architecture" href="architecture.html"/>
+            <item name="Why?" href="why.html"/>
+            <item name="RoadMap" href="roadmap.html"/>
+            <item name="Thanks" href="thanks.html"/>
+        </menu>
         <menu name="Projects" collapse="true">
             <item name="Overview of Projects" href="/projects-overview.html"/>
             <item name="Core" href="/multiproject/jcaptcha-core/index.html"/>
@@ -14,13 +21,19 @@
             <item name="Service" href="/multiproject/jcaptcha-service/index.html"/>
             <item name="Module base" href="/multiproject/jcaptcha-module-base/index.html"/>
             <item name="Module Struts" href="/multiproject/jcaptcha-module-struts/index.html"/>
+            <item name="Module Filter" href="../../multiproject/jcaptcha-module-filter/index.html"/>
         </menu>
         <menu name="Documentation" collapse="true">
             <item name="Wiki" href="http://jcaptcha.sourceforge.net/moniwiki/"/>
-         </menu>
-        <menu name="Download">
-            <item name="Beta-1.0beta1" href="http://sourceforge.net/project/showfiles.php?group_id=97877"/>
         </menu>
-        
+        <menu name="Download">
+            <item name="SourceForge Repository" href="http://sourceforge.net/project/showfiles.php?group_id=97877"/>
+        </menu>
+        <menu name="External links" collapse="true">
+            <item name="Captcha" href="http://www.captcha.net"/>
+            <item name="Captcha@Wikipedia" href="http://en.wikipedia.org/wiki/Captcha"/>
+            <item name="Captcha research paper" href="http://www.cs.cmu.edu/~biglou/captcha_cacm.pdf"/>
+            <item name="Captcha presentation paper" href="http://www.cs.cmu.edu/~biglou/captcha_crypt.pdf"/>
+        </menu>
      </body>
 </project>

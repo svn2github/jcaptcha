@@ -1,38 +1,24 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 
 <project>
-    <extends>${basedir}/../project.xml</extends>
-    <pomVersion>1</pomVersion>
-    <id>jcaptcha-module-base</id>
+    <extend>${basedir}/../base_project.xml</extend>
+    <artifactId>jcaptcha-module-base</artifactId>
     <name>jcaptcha-module-base</name>
-    <groupId>jcaptcha</groupId>
-    <currentVersion>${project.version}</currentVersion>
-    <organization>
-        <!-- The full name of the organization. -->
-        <name>JCaptcha corp.</name>
-        <!-- The URL to the organization's home page. -->
-        <url>http://jcaptcha.sourceforge.net/</url>
-        <!-- The URL to the organization's logo image. This can be an URL relative to the base directory of the generated
-             web site, (e.g., /images/org-logo.png) or an absolute URL (e.g., http://my.corp/logo.png). This value is used
-             when generating the project documentation. -->
-        <logo>http://jcaptcha.sourceforge.net/images/organization-logo.jpg</logo>
-    </organization>
-    <inceptionYear>2003</inceptionYear>
     <package>com.octo.captcha.module</package>
 
     <description><![CDATA[
       <b>JCAPTCHA</b>, for <b>J</b>ava <b>C</b>ompletely <b>A</b>utomated <b>P</b>ublic <b>T</b>est to tell <b>C</b>omputers and <b>H</b>umans <b>A</b>part
-
-      <br/>See : <a href="http://jcaptcha.sourceforge.net/moniwiki/wiki.php/JcapTcha">Project description</a>
+<br/>The open source java framework for captcha definition and integration
+<br/>
  <br/>
- A captcha module is able to integration technologie to add captcha to your application<BR/>
+ A captcha module contains common utilities for captcha-modules which aims to your integrate a captcha service in your application<BR/>
  jcaptcha base module aims to provide base components to build a specialized module.<br/>
  It uses the jcaptcha-sevice for the captchas life cycle and generation.
   ]]>
      </description>
 
     <shortDescription>
-      JCAPTCHA module base contains all common utilities for modules.
+      JCAPTCHA module base : base for integrating a captcha service in applications.
     </shortDescription>
 
     <url/>
@@ -41,34 +27,6 @@
         <url>http://cvs.sourceforge.net/viewcvs.py/jcaptcha/</url>
 
     </repository>
-    <mailingLists>
-        <mailingList>
-            <name>JCaptcha User List</name>
-            <subscribe>jcaptcha-users@lists.sourceforge.net</subscribe>
-            <unsubscribe>jcaptcha-users-unsubscribe@lists.sourceforge.net</unsubscribe>
-            <archive>http://sourceforge.net/mailarchive/forum.php?forum=jcaptcha-users</archive>
-        </mailingList>
-        <mailingList>
-            <name>JCaptcha Developer List</name>
-            <subscribe>jcaptcha-devs@lists.sourceforge.net</subscribe>
-            <unsubscribe>jcaptcha-devs-unsubscribe@lists.sourceforge.net</unsubscribe>
-            <archive>http://sourceforge.net/mailarchive/forum.php?forum=jcaptcha-devs</archive>
-        </mailingList>
-    </mailingLists>
-
-    <developers>
-
-        <developer>
-            <name>Marc-Antoine Garrigue</name>
-            <id>mag</id>
-            <email>magarrigue@octo.com</email>
-            <organization>Octo</organization>
-            <roles>
-                <role>Java Developer</role>
-            </roles>
-        </developer>
-
-    </developers>
 
     <dependencies>
         <dependency>
@@ -97,7 +55,7 @@
         </dependency>
 
 
-             <dependency>
+     <dependency>
       <groupId>servletapi</groupId>
       <artifactId>servletapi</artifactId>
       <version>2.3</version>
@@ -116,30 +74,9 @@
       <properties/>
     </dependency>
 
-        <dependency>
-                   <id>junit</id>
-                   <version>3.8.1</version>
-                 </dependency>
-        
+
     </dependencies>
 
 
-    <build>
-        <sourceDirectory>src/java</sourceDirectory>
-        <unitTestSourceDirectory>src/test</unitTestSourceDirectory>
-        <unitTest>
-            <includes>
-                <include>**/*Test.java</include>
-            </includes>
-            <excludes>
-                <exclude>**/*Test*All.java</exclude>
-            </excludes>
-        </unitTest>
-
-    </build>
-
-    <reports>
-        <report>maven-license-plugin</report>
-    </reports>
 
 </project>

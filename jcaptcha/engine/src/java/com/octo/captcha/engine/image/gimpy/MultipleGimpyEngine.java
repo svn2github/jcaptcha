@@ -40,7 +40,7 @@ public class MultipleGimpyEngine
                 new Integer(8), Color.white);
 
         BackgroundGenerator fileBack = new FileReaderRandomBackgroundGenerator(
-                new Integer(200), new Integer(100), "./images");
+                new Integer(200), new Integer(100), "/gimpybackgrounds");
         BackgroundGenerator funkyBack = new FunkyBackgroundGenerator(
                 new Integer(200), new Integer(100));
 

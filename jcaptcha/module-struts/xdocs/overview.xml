@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<document>
+
+    <meta name="keyword" content="captcha, java, module,struts, jcaptcha"/>
+
+    <body>
+
+        <section name="Purpose">
+
+            <p>
+
+                <ul>
+                    <li>This module provides a Struts Plugin captcha ize some specific requests.</li>
+                    <li>It provides a taglib and a sample web app.</li>
+                    <li>Tutorial with jroller comming soon.. (TODO)</li>
+
+                </ul>
+            </p>
+
+        </section>
+
+    </body>
+</document>

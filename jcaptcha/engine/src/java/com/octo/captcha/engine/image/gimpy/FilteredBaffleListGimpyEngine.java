@@ -515,9 +515,9 @@ public class FilteredBaffleListGimpyEngine
         rippleBack.setYWavelength(10);
         rippleBack.setEdgeAction(com.jhlabs.image.TransformFilter.CLAMP);
 
-        water.setAmplitude(5);
+        water.setAmplitude(1);
         water.setAntialias(true);
-        water.setWavelength(10);
+        water.setWavelength(20);
 
         twirl.setAngle(3 / 360);
 

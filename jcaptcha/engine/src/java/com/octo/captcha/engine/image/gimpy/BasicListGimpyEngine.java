@@ -479,26 +479,28 @@ import java.awt.Color;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class BasicListGimpyEngine
+public class    BasicListGimpyEngine
         extends com.octo.captcha.engine.image.ListImageCaptchaEngine
 {
 
     protected void buildInitialFactories()
     {
         //word generator
-        com.octo.captcha.component.wordgenerator.WordGenerator dictionnaryWords = new com.octo.captcha.component.wordgenerator.DictionaryWordGenerator(
+        com.octo.captcha.component.wordgenerator.WordGenerator dictionnaryWords =
+                new com.octo.captcha.component.wordgenerator.DictionaryWordGenerator(
                 new com.octo.captcha.component.wordgenerator.FileDictionnary(
                         "toddlist"));
         //wordtoimage components
         TextPaster randomPaster = new DoubleRandomTextPaster(new Integer(6),
                 new Integer(8), Color.white);
         BackgroundGenerator fileBack = new FileReaderRandomBackgroundGenerator(
-                new Integer(200), new Integer(100), "./images");
+                new Integer(200), new Integer(100), "/gimpybackgrounds");
         //BackgroundGenerator funkyBack = new FunkyBackgroundGenerator(new Integer(200), new Integer(100));
         FontGenerator shearedFont = new TwistedAndShearedRandomFontGenerator(
-                new Integer(30), new Integer(45));
+                new Integer(30), new Integer(35));
         //word2image 1
-        com.octo.captcha.component.image.wordtoimage.WordToImage word2image = new com.octo.captcha.component.image.wordtoimage.ComposedWordToImage(
+        com.octo.captcha.component.image.wordtoimage.WordToImage word2image =
+                new com.octo.captcha.component.image.wordtoimage.ComposedWordToImage(
                 shearedFont, fileBack, randomPaster);
         this.addFactory(
                 new com.octo.captcha.image.gimpy.GimpyFactory(dictionnaryWords,

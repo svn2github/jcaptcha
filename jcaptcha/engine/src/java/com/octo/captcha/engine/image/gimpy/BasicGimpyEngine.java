@@ -496,7 +496,7 @@ public class BasicGimpyEngine extends DefaultImageCaptchaEngine
         TextPaster randomPaster = new DoubleRandomTextPaster(new Integer(2),
                 new Integer(3), Color.white);
 
-        //BackgroundGenerator fileBack = new FileReaderRandomBackgroundGenerator(new Integer(200), new Integer(100), "./images");
+        //BackgroundGenerator fileBack = new FileReaderRandomBackgroundGenerator(new Integer(200), new Integer(100), "gimpybackgrounds");
         BackgroundGenerator funkyBack = new FunkyBackgroundGenerator(
                 new Integer(200), new Integer(100));
 

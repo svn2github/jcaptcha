@@ -495,12 +495,12 @@ public class LogoGenerator
     public static void main(String[] args) throws IOException
     {
         TextPaster paster = new SimpleTextPaster(new Integer(8),
-                new Integer(8), Color.blue);
+                new Integer(8), Color.white);
         BackgroundGenerator back = new FileReaderRandomBackgroundGenerator(
-                new Integer(100), new Integer(200),
-                "/images/backgroundForLogo");
+                new Integer(200), new Integer(100),
+                "/gimpybackgrounds");
         FontGenerator font = new TwistedAndShearedRandomFontGenerator(
-                new Integer(12), null);
+                new Integer(30), null);
         WordGenerator words = new DummyWordGenerator("JCAPTCHA");
         WordToImage word2image = new ComposedWordToImage(font, back, paster);
         ImageCaptchaFactory factory = new GimpyFactory(words, word2image);

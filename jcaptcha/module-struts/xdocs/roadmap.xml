@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<document>
+
+    <meta name="keyword" content="captcha, java, module,struts, jcaptcha"/>
+
+    <body>
+
+        <section name="Roadmap">
+
+            <p>
+Future directions for this module are :
+                <ul>
+                    <li>JRoller tutorial</li>
+                    <li>let us know...</li>
+                </ul>
+            </p>
+        </section>
+    </body>
+</document>

@@ -1,0 +1,159 @@
+<?xml version="1.0"?>
+<document>
+
+    <meta name="keyword" content="captcha, java,jcaptcha"/>
+
+    <body>
+
+        <section name="Presentation">
+            <p>
+                Jcaptcha is an Open Source Java framework for Captcha definition and integration.
+                <br/>
+                Jcaptcha is lisencied under LGL.
+                <br/>
+                Jcaptcha is totally free.
+
+            </p>
+        </section>
+
+        <section name="Features">
+            <p>
+
+                <ul>
+                    <li>Application developper oriented features</li>
+                    <ul>
+                        <li>Highly customizable captcha tests</li>
+                        <li>Many ready to use configurations (see the engine sub project)</li>
+                        <li>Gimpy and Fisheye tests</li>
+                        <li>Usage statistics collection</li>
+                        <li>Runtime test engine and service modification</li>
+                        <li>Filter integration module</li>
+                        <li>Struts integration module</li>
+                    </ul>
+                    <li>AI research oriented features</li>
+                    <ul>
+                        <li>High level language for Captcha definition</li>
+                        <li>Many ready to use components to build new Captcha tests</li>
+                        <li>Allows to easily build AI teaching routine</li>
+                    </ul>
+                    <li>Captcha developper oriented features</li>
+                    <ul>
+                        <li>Many ready to use components to build new Captcha tests</li>
+                        <li>Interface only dependencies allows to directly use your new captcha with integration features</li>
+                    </ul>
+
+                    <li>Integration developper oriented features</li>
+                    <ul>
+                        <li>High level interface for Captcha Service</li>
+                        <li>Base module provided to accelerate module configuration</li>
+                    </ul>
+                </ul>
+            </p>
+        </section>
+
+        <section name="News">
+            <p>
+             <ul>
+                <li>01/08/2004
+                    <ul>
+                        <li>Adding performance tests for Engines
+                        </li>
+                        <li>New logo for
+                            <a href='/moniwiki/wiki.php/JcaptchaLogo'>JcaptchaLogo</a> submitted, waiting for vote!
+                        </li>
+                        <li>End of refactoring
+                        </li>
+                        <li>Adding a default engine and service ready to use.
+                            <br/>
+                            <br/>
+                        </li>
+                    </ul>
+                </li>
+                <li>17/05/2004 moving to jdk1.3
+                    <ul>
+                        <li>Code has moved : now JDK 1.3
+                        </li>
+                        <li>will be release in the beta-5
+                            <br/>
+                        </li>
+                    </ul>
+                </li>
+                <li>20/04/04 Two new captchas :
+                    <ul>
+                        <li>
+                                FishEye : a "clic on the center of deformation" challenge.
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <img alt='http://jcaptcha.sourceforge.net/imagesWiki/fisheye_0.jpg' src='http://jcaptcha.sourceforge.net/imagesWiki/fisheye_0.jpg'/>
+            <img alt='http://jcaptcha.sourceforge.net/imagesWiki/fisheye_24.jpg' src='http://jcaptcha.sourceforge.net/imagesWiki/fisheye_24.jpg'/>
+            <ul>
+                <li>initialization of sound implementation.
+                </li>
+            </ul>
+Soon available, waiting for RC1.
+        <br/>
+        <br/>
+
+            <ul>
+                <li>06/04/04 Major refactoring work is almost done. A  new version is about to be released.
+                </li>
+            </ul>
+This new release includes :
+            <ul>
+                <li>the cleaned
+                    <a href='/moniwiki/wiki.php/CoreModule'>CoreModule</a> that provides Captchas interfaces and typed implementations.
+                </li>
+                <li>the renamed
+                    <a href='/moniwiki/wiki.php/EngineModule'>EngineModule</a> : an engine provides ready to use captchas.
+                </li>
+                <li>the new
+                    <a href='/moniwiki/wiki.php/ServiceModule'>ServiceModule</a> : a service provide a standardized interface to serve Captchas, and a managageable interface too.
+                </li>
+                <li>the new
+                    <a href='/moniwiki/wiki.php/ModuleBase'>ModuleBase</a> and
+                    ModuleStruts providing stuff to integrate a captcha service with your application.
+                </li>
+            </ul>
+Licence has been moved from Apache to LGPL.
+            <ul>
+                <li>A tutorial to captchaized your application is on its way, with two samples :
+                    <ul>
+                        <li>the captcha-ized
+                            <a href='http://www.rollerweblogger.org/page/project'>http://www.rollerweblogger.org/page/project</a> and the
+                            <a href='/moniwiki/wiki.php/J2EE'>J2EE</a> petstore.
+                            <br/>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <li>12/02/04 New architecture for the j2ee module commited : all the "business" logic has been mutualized in a JMX manageable</li>
+                <a class='nonexistent' href='/moniwiki/wiki.php/ImageCaptchaService'>?</a>ImageCaptchaService class. A Web service endpoint for axis has been created in the com.octo.captcha.j2ee.rpc package. You can find its axis deployment descriptor (.wsdd) in the src/conf directory. The web service need to be further tested, but it will be documented woth a user manual similar to the
+                <a href='/moniwiki/wiki.php/ImageCaptchaFilter'>ImageCaptchaFilter</a> one for the beta2 (or beta3 ?) release. It is also planned to unit test the
+                <a class='nonexistent' href='/moniwiki/wiki.php/ImageCaptchaService'>?</a>ImageCaptchaService
+                <img src='/moniwiki/imgs/idea.png' align='middle' alt='(!)' title='(!)'/> and to use it in a new version of the
+                <a href='/moniwiki/wiki.php/ImageCaptchaFilter'>ImageCaptchaFilter</a>.
+                <ul>
+                    <li>10/02/04 Two new components commited : composedictionarywordgenerator and baffletextpaster to enable parc like jcaptchas.
+                    </li>
+                </ul>
+                <img alt='http://jcaptcha.sourceforge.net/imagesWiki/baffle1.jpg' src='http://jcaptcha.sourceforge.net/imagesWiki/baffle1.jpg'/>
+                <img alt='http://jcaptcha.sourceforge.net/imagesWiki/parc1.jpg' src='http://jcaptcha.sourceforge.net/imagesWiki/parc1.jpg'/>
+                <ul>
+                    <li>09/02/04 The Service interfaces and base implementations are commited
+                    </li>
+                    <li>07/02/04 New site is up!
+                    </li>
+                    <li>02/02/04
+                        <a href='/moniwiki/wiki.php/JcapTcha'>JcapTcha</a> beta 1.0, the java CAPTCHA framework is available for
+                        download on sourceforge
+                        <br/>
+                    </li>
+                </ul>
+
+            </p>
+        </section>
+
+    </body>
+</document>

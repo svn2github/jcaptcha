@@ -477,7 +477,7 @@ public class AbstractCaptchaServiceTest extends TestCase {
     protected AbstractCaptchaService service = new MockedCaptchaService(new MapCaptchaStore(),
             new MockCaptchaEngine());
 
-    public static final int SIZE = 10000;
+    public static final int SIZE = 1000;
 
     public void testAbstractCaptchaService() throws Exception {
         try {

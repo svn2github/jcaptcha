@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<document>
+
+    <meta name="keyword" content="captcha, java, module,struts, jcaptcha"/>
+
+    <body>
+
+    <section name="Introduction">
+<p>
+ This document is a tutorial that demonstrates how to integrate
+ JCaptcha with a Struts based Web application using the Jcaptcha Struts module.
+    <br/>It Uses <a href="http://www.rollerweblogger.org/">the Roller Weblogger</a> as the base web application to captcha-ize.
+</p>
+
+        <p>This tutorial is devided into TODO Steps.</p>
+        <ul>
+            <li>Step 1 : Prerequisites </li>
+
+        </ul>
+</section>
+
+
+    <section name="Prerequisites">
+<p>
+To complete the installation of a JCaptcha-ized Roller Weblogger you need to make sure you have 
+</p>
+</section>
+
+    </body>
+</document>

@@ -89,7 +89,7 @@ public abstract class ImageCaptchaEngine
      * @param locale the desired locale
      * @return a new Captcha
      */
-    public Captcha getNextCaptcha(Locale locale)
+    public final Captcha getNextCaptcha(Locale locale)
     {
         return getNextImageCaptcha(locale);
     }

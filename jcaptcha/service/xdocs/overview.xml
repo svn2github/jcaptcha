@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<document>
+
+    <meta name="keyword" content="captcha, java, core, jcaptcha"/>
+
+    <body>
+
+        <section name="Purpose">
+
+            <p>
+
+                <ul>
+                    <li>This module contains service interface and implementations.</li>
+                    <li>A CaptchaService implementation provides typed Captcha using a typed CaptchaEngine</li>
+                    <li>An engine initialize a CaptchaStore to store Captcha between Challenge generation, and response validation, associed with an unique id.</li>
+
+                </ul>
+            </p>
+
+        </section>
+
+    </body>
+</document>

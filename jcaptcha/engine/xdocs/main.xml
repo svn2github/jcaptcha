@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<document>
+
+    <meta name="keyword" content="captcha, java, engine, jcaptcha"/>
+
+    <body>
+
+        <section name="Main interfaces...">
+
+            <p>
+The main interface of this package is the CaptchaEngine interface. It provides method to retrieve new Captchas.
+            </p>
+            <p>
+Implementations are typed (image or sound) and use CaptchaFactory to build captchas.
+            </p>
+
+        </section>
+
+        <section name="...and sample engines">
+            This provides lots of ready to use engines :
+            <br/>
+
+            <p>
+                <table cellpadding='3' cellspacing='2'>
+                    <tr>
+                        <td>
+                            <b>Test type</b>
+                        </td>
+                        <td>
+                            <b>Engine name</b>
+                        </td>
+                        <td>
+                            <b>Features</b>
+                        </td>
+                        <td>
+                            <b>samples generated challenges</b>
+                        </td>
+                    </tr>
+                      <tr>
+                        <td>gimpy, recommended and default engine</td>
+                        <td>com.octo.captcha.engine.image.gimpy.DefaultGimpyEngine</td>
+                        <td>Double factory, Baffle text pasting and composing, using a random word generator and a unicolor background,
+                        and a double text pasting and shearing, random word generator</td>
+                        <td>
+                            <img src="defaultgimpyengine/captcha_0.jpg"/>
+                            <img src="defaultgimpyengine/captcha_1.jpg"/>
+                            <img src="defaultgimpyengine/captcha_2.jpg"/>
+                            <img src="defaultgimpyengine/captcha_3.jpg"/>
+                            <img src="defaultgimpyengine/captcha_4.jpg"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>gimpy</td>
+                        <td>com.octo.captcha.engine.image.gimpy.BasicListGimpyEngine</td>
+                        <td>Unique factory using the toddlist dictionnary file(provided) and backgroud images that shoud be put in a gimpybackgrounds directory (that you should provide).</td>
+                        <td>
+                            <img src="basiclistgimpyengine/captcha_0.jpg"/>
+                            <img src="basiclistgimpyengine/captcha_1.jpg"/>
+                            <img src="basiclistgimpyengine/captcha_2.jpg"/>
+                            <img src="basiclistgimpyengine/captcha_3.jpg"/>
+                            <img src="basiclistgimpyengine/captcha_4.jpg"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>gimpy</td>
+                        <td>com.octo.captcha.engine.image.gimpy.BaffleListGimpyEngine</td>
+                        <td>Unique factory, Baffle text pasting and composing, using the toddlist dictionnary file(provided) and unicolor background.</td>
+                        <td>
+                            <img src="bafflelistgimpyengine/captcha_0.jpg"/>
+                            <img src="bafflelistgimpyengine/captcha_1.jpg"/>
+                            <img src="bafflelistgimpyengine/captcha_2.jpg"/>
+                            <img src="bafflelistgimpyengine/captcha_3.jpg"/>
+                            <img src="bafflelistgimpyengine/captcha_4.jpg"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>gimpy</td>
+                        <td>com.octo.captcha.engine.image.gimpy.DeformedBaffleListGimpyEngine</td>
+                        <td>Three factory, Baffle text pasting and composing, Deformation using jhlabs filters, using the toddlist dictionnary file(provided) and unicolor background.</td>
+                        <td>
+                            <img src="deformedbafflelistgimpyengine/captcha_0.jpg"/>
+                            <img src="deformedbafflelistgimpyengine/captcha_1.jpg"/>
+                            <img src="deformedbafflelistgimpyengine/captcha_2.jpg"/>
+                            <img src="deformedbafflelistgimpyengine/captcha_3.jpg"/>
+                            <img src="deformedbafflelistgimpyengine/captcha_4.jpg"/>
+                        </td>
+                    </tr>
+                    <tr>
+                                       <td>fisheye</td>
+                                       <td>com.octo.captcha.engine.image.fisheye.SimpleFishEyeEngine</td>
+                                       <td>Two facories, Deformation using jhlabs filters, and FileReader backgrounds.</td>
+                                       <td>
+                                           <img src="simplefisheyeengine/fisheye_0.jpg"/>
+                                           <img src="simplefisheyeengine/fisheye_1.jpg"/>
+                                       </td>
+                                   </tr>
+
+                </table>
+            </p>
+
+            <p>
+                See the test report section for performance tests results.
+            </p>
+
+        </section>
+    </body>
+</document>

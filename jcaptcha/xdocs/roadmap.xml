@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<document>
+
+    <meta name="keyword" content="captcha, java, core, jcaptcha"/>
+
+    <body>
+
+        <section name="Roadmap">
+
+            <p>
+                Our wishes, and yours...
+            </p>
+
+        </section>
+
+        <section name="Release 1.0">
+
+            <p>
+                <ul>
+                    <li>Web service module</li>
+                    <li>Sound test implementation</li>
+                    <li>JRoller how to</li>
+                    <li>Documentation, documentation, documentation...</li>
+                </ul>
+            </p>
+
+        </section>
+
+        <section name="After dark">
+
+            <p>
+               <ul>
+                    <li>www.joone.org sample</li>
+                    <li>Let us know...</li>
+                </ul>
+            </p>
+
+        </section>
+
+    </body>
+</document>

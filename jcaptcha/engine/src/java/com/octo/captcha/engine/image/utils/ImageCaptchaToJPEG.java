@@ -480,6 +480,10 @@ public class ImageCaptchaToJPEG
 
     public static void main(String[] args) throws Exception
     {
+        if(args.length<2){
+            System.out.println("Usage : engineClassName outputDir iterations");
+            System.exit(1);
+        }
         System.out.println("args : image captcha engine class='" + args[0]
                 + "', " +
                 "output dir='" + args[1] + "'" +
@@ -502,7 +506,7 @@ public class ImageCaptchaToJPEG
             ImageToFile.serialize(captcha.getImageChallenge(), out);
             System.out.println("File i created " + out.toURL());
         }
-
+        System.exit(0);
     }
 
 }

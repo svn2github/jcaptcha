@@ -7,6 +7,14 @@
             <item name="JCaptcha Wiki" href="http://jcaptcha.sourceforge.net/moniwiki/"/>
             <item name="JCaptcha@Sourceforge" href="http://sourceforge.net/projects/jcaptcha/"/>
         </links>
+        <menu name="Menu" collapse="true">
+            <item name="Overview" href="overview.html"/>
+            <item name="Main interfaces and implementations" href="main.html"/>
+            <item name="Extending" href="extends.html"/>
+            <item name="RoadMap" href="roadmap.html"/>
+            <item name="Wiki" href="http://jcaptcha.sourceforge.net/moniwiki/wiki.php/CoreModule"/>
+            <item name="Api" href="apidocs/index.html"/>
+        </menu>
         <menu name="Projects" collapse="true">
             <item name="Overview of Projects" href="../../projects-overview.html"/>
             <item name="Core" href="../../multiproject/jcaptcha-core/index.html"/>
@@ -15,12 +23,12 @@
             <item name="Module base" href="../../multiproject/jcaptcha-module-base/index.html"/>
             <item name="Module Struts" href="../../multiproject/jcaptcha-module-struts/index.html"/>
         </menu>
-        <menu name="Documentation" collapse="true">
-            <item name="Wiki" href="http://jcaptcha.sourceforge.net/moniwiki/"/>
-         </menu>
-        <menu name="Download">
-            <item name="Beta-1.0beta1" href="http://sourceforge.net/project/showfiles.php?group_id=97877"/>
+        <menu name="External links" collapse="true">
+            <item name="the Captcha research site" href="http://www.captcha.net"/>
         </menu>
-        
-     </body>
+        <menu name="Downloads">
+            <item name="Sourceforge repository" href="http://sourceforge.net/project/showfiles.php?group_id=97877"/>
+        </menu>
+
+    </body>
 </project>

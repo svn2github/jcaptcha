@@ -485,24 +485,27 @@ public class DoubleRandomListGimpyEngine extends ListImageCaptchaEngine
 
     protected void buildInitialFactories()
     {
-        com.octo.captcha.component.wordgenerator.WordGenerator wordGenerator = new com.octo.captcha.component.wordgenerator.DictionaryWordGenerator(
+        com.octo.captcha.component.wordgenerator.WordGenerator wordGenerator =
+                new com.octo.captcha.component.wordgenerator.DictionaryWordGenerator(
                 new com.octo.captcha.component.wordgenerator.FileDictionnary(
                         "toddlist"));
 
         TextPaster doubleRandomTextPaster = new DoubleRandomTextPaster(
-                new Integer(8), new Integer(15), Color.white);
+                new Integer(8), new Integer(10), Color.white);
 
         BackgroundGenerator back = new MultipleShapeBackgroundGenerator(
                 new Integer(200), new Integer(100));
 
         FontGenerator fontGenerator = new DeformedRandomFontGenerator(
-                new Integer(25), new Integer(27));
+                new Integer(20), new Integer(25));
 
-        com.octo.captcha.component.image.wordtoimage.WordToImage word2image = new com.octo.captcha.component.image.wordtoimage.ComposedWordToImage(
+        com.octo.captcha.component.image.wordtoimage.WordToImage word2image =
+                new com.octo.captcha.component.image.wordtoimage.ComposedWordToImage(
                 fontGenerator,
                 back, doubleRandomTextPaster);
 
-        com.octo.captcha.image.ImageCaptchaFactory imageCaptchaFactory = new com.octo.captcha.image.gimpy.GimpyFactory(
+        com.octo.captcha.image.ImageCaptchaFactory imageCaptchaFactory =
+                new com.octo.captcha.image.gimpy.GimpyFactory(
                 wordGenerator, word2image);
 
         this.addFactory(imageCaptchaFactory);

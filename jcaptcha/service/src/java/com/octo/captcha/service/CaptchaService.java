@@ -122,7 +122,6 @@ public interface CaptchaService {
      * Method to retrive the question corresponding to the given ticket.
      *
      * @param ID ticket
-     *           * @param locale the desired localized capthca
      * @return the question
      * @throws CaptchaServiceException if the ticket is invalid
      */

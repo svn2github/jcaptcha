@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<document>
+
+    <meta name="keyword" content="captcha, java, core, jcaptcha"/>
+
+    <body>
+
+        <section name="Roadmap">
+
+            <p>
+Future directions for this module are :
+                <ul>
+                    <li>Adding more image tests</li>
+                    <li>Adding some bmp, gif... and more image reding facilities (currently only jpeg, due to recent move to jdk1.3)</li>
+                    <li>Providing a base framework for sound captchas</li>
+                    <li>Providing some sound tests</li>
+                </ul>
+            </p>
+        </section>
+    </body>
+</document>

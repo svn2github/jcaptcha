@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<document>
+
+    <meta name="keyword" content="captcha, java, core, jcaptcha"/>
+
+    <body>
+
+        <section name="Purpose">
+
+            <p>
+
+                <ul>
+                    <li>This module provides a servlet filter to intecept and captcha ize some specific requests.</li>
+                    
+                </ul>
+            </p>
+
+        </section>
+
+    </body>
+</document>

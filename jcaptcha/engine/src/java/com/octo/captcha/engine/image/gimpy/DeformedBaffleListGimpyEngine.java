@@ -162,7 +162,7 @@ public class DeformedBaffleListGimpyEngine extends ListImageCaptchaEngine
                 waterDef,
                 embossDef);
         this.addFactory(new GimpyFactory(words, word2image));
-        //select filters for 2
+  //      select filters for 2
         word2image = new DeformedComposedWordToImage(font, back, paster,
                 rippleDefBack,
                 cristalDef,
