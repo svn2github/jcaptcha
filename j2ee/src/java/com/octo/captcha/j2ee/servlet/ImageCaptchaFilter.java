@@ -88,8 +88,8 @@ import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 /**
- * ImageCaptchaFilter is a J2EE Filter designed to add image captchas to the entry
- * forms of existing MVC web applications. 
+ * ImageCaptchaFilter is a J2EE Filter designed to add image captchas to the
+ * entry forms of existing MVC web applications. 
  * <br>
  * Current features of ImageCaptchaFilter are:
  * <ul>
@@ -283,7 +283,7 @@ public class ImageCaptchaFilter implements Filter, ImageCaptchaFilterMBean
      * to generate captchas
      */
     private static final String CAPTCHA_ENGINE_CLASS_PARAMETER =
-        "PixCaptchaEngineClass";
+        "ImageCaptchaEngineClass";
 
     /**
      * Was the filter successfully registered to a JMX MBean server ?
