@@ -29,4 +29,9 @@
         banner="Building"
         ignoreFailures="false"/>
   </goal>
+  
+  <postGoal name="site">
+    <ant:copy file="${basedir}/images/organization-logo.jpg" todir="${maven.build.dir}/docs/images"/>
+    <ant:copy file="${basedir}/images/project-logo.jpg" todir="${maven.build.dir}/docs/images"/>
+  </postGoal>
 </project>
