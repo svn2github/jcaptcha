@@ -5,10 +5,10 @@
   xmlns:artifact="artifact"
   xmlns:ant="jelly:ant">
 
-  <postGoal name="site">
+  <!--postGoal name="site">
     <ant:copy file="${basedir}/images/organization-logo.jpg" todir="${maven.build.dir}/docs/images"/>
     <ant:copy file="${basedir}/images/project-logo.jpg" todir="${maven.build.dir}/docs/images"/>
-  </postGoal>
+  </postGoal-->
   
   <goal name="assemble" prereqs="jar:install"/>
 	

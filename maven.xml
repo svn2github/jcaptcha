@@ -8,6 +8,8 @@
   xmlns:ant="jelly:ant">
 
   <preGoal name="multiproject:site">
+    <ant:copy file="${basedir}/images/organization-logo.jpg" todir="${maven.build.dir}/docs/images"/>
+    <ant:copy file="${basedir}/images/project-logo.jpg" todir="${maven.build.dir}/docs/images"/>
     <maven:reactor
         basedir="${basedir}"
         includes="**/${pattern}/**/project.xml"
@@ -47,6 +49,12 @@
         goals="dist:build-bin"
         banner="distribution"
         ignoreFailures="false"/>
+    <maven:reactor 
+        basedir="${basedir}"
+        includes="samples-web/project.xml"
+        goals="assemble"
+        banner="distribution"
+        ignoreFailures="false"/>
     <ant:mkdir dir="${maven.build.dir}/distributions"/>
     <ant:unzip dest="${maven.build.dir}/distributions">
     	<ant:fileset dir="${basedir}/core/target/distributions" includes="*.zip"/>
@@ -55,11 +63,19 @@
     	<ant:fileset dir="${basedir}/samples/target/distributions" includes="*.zip"/>
     </ant:unzip>
     <ant:unzip dest="${maven.build.dir}/distributions">
-    	<ant:fileset dir="${basedir}/samples-web/target/distributions" includes="*.zip"/>
-    </ant:unzip>
-    <ant:unzip dest="${maven.build.dir}/distributions">
     	<ant:fileset dir="${basedir}/j2ee/target/distributions" includes="*.zip"/>
     </ant:unzip>
+    <ant:mkdir dir="${maven.build.dir}/distributions/jcaptcha-samples-web-${pom.currentVersion}"/>
+    <ant:copy todir="${maven.build.dir}/distributions/jcaptcha-samples-web-${pom.currentVersion}">
+    	<ant:fileset dir="${basedir}/samples-web/target">
+    		<include name="jcaptcha-samples-web.war"/>
+    	</ant:fileset>
+    </ant:copy>
+    <ant:copy todir="${maven.build.dir}/distributions">
+    	<ant:fileset dir="${basedir}">
+    		<include name="LICENSE.txt"/>
+    	</ant:fileset>
+    </ant:copy>
     <ant:copy todir="${maven.build.dir}/distributions">
     	<ant:fileset dir="${basedir}">
     		<include name="LICENSE.txt"/>
@@ -73,9 +89,6 @@
     		<include name="doc/**"/>
     	</ant:fileset>
     	<ant:fileset dir="${basedir}/samples">
-    		<include name="doc/**"/>
-    	</ant:fileset>
-    	<ant:fileset dir="${basedir}/samples-web">
     		<include name="doc/**"/>
     	</ant:fileset>
     </ant:copy>
@@ -92,9 +105,4 @@
         banner="cleanning"
         ignoreFailures="false"/>
   </preGoal>
-
-  <postGoal name="site">
-    <ant:copy file="${basedir}/images/organization-logo.jpg" todir="${maven.build.dir}/docs/images"/>
-    <ant:copy file="${basedir}/images/project-logo.jpg" todir="${maven.build.dir}/docs/images"/>
-  </postGoal>
 </project>
