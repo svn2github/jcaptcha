@@ -122,6 +122,9 @@ public class BaffleRandomTextPaster extends RandomTextPaster
         pie.setColor(holesColor);
         int numberOfHoles = numberOfHolesPerGlyph.intValue()*attributedWord.getIterator().getEndIndex();
         int circleMaxSize = maxFont.getSize()/3;
+        if(circleMaxSize == 0) {
+            throw new CaptchaException("The font is too small");
+        }
         for(int i = 0; i<numberOfHoles;i++){
             int circleSize = myRandom.nextInt(circleMaxSize)/2+circleMaxSize/2;
             double circlex = bounds.getMaxX()*myRandom.nextGaussian();
