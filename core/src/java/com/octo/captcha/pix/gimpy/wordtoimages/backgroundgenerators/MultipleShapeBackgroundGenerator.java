@@ -58,6 +58,8 @@
 
 package com.octo.captcha.pix.gimpy.wordtoimages.backgroundgenerators;
 
+import com.octo.captcha.pix.gimpy.wordtoimages.AbstractBackgroundGenerator;
+
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics2D;
@@ -65,8 +67,6 @@ import java.awt.RenderingHints;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-
-import com.octo.captcha.pix.gimpy.wordtoimages.AbstractBackgroundGenerator;
 
 /**
  * <p>Description: </p>
