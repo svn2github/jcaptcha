@@ -108,4 +108,13 @@
   </goal>
 
 
+    <postGoal name="multiproject:site">
+        <copy todir="${maven.build.dir}/docs">
+                <fileset dir="images/samples">
+                    <includes name="*.jpg"/>
+
+                </fileset>
+        </copy>
+    </postGoal>
+
 </project>

@@ -25,8 +25,56 @@
   <b>JCAPTCHA</b>, for <b>J</b>ava <b>C</b>ompletely <b>A</b>utomated <b>P</b>ublic <b>T</b>est to tell <b>C</b>omputers and <b>H</b>umans <b>A</b>part
 <br/>The open source java framework for captcha definition and integration
 <br/>
-<img src="sample.jpg"/>
-<br/>
+<table>
+<tr>
+<th>Engine name</th>
+<th>Sample 1</th>
+<th>Sample 2</th>
+<th>Sample 3</th>
+</tr>
+<tr>
+<td>DefaultGimpyEngineCaptcha</td>
+<td><img src="DefaultGimpyEngineCaptcha_0.jpg"/></td>
+<td><img src="DefaultGimpyEngineCaptcha_1.jpg"/></td>
+<td><img src="DefaultGimpyEngineCaptcha_2.jpg"/></td>
+</tr>
+<tr>
+<td>BaffleListGimpyEngineCaptcha</td>
+<td><img src="BaffleListGimpyEngineCaptcha_0.jpg"/></td>
+<td><img src="BaffleListGimpyEngineCaptcha_1.jpg"/></td>
+<td><img src="BaffleListGimpyEngineCaptcha_2.jpg"/></td>
+</tr>
+<tr>
+<td>BasicListGimpyEngineCaptcha</td>
+<td><img src="BasicListGimpyEngineCaptcha_0.jpg"/></td>
+<td><img src="BasicListGimpyEngineCaptcha_1.jpg"/></td>
+<td><img src="BasicListGimpyEngineCaptcha_2.jpg"/></td>
+</tr>
+<tr>
+<td>DeformedBaffleListGimpyEngineCaptcha</td>
+<td><img src="DeformedBaffleListGimpyEngineCaptcha_0.jpg"/></td>
+<td><img src="DeformedBaffleListGimpyEngineCaptcha_1.jpg"/></td>
+<td><img src="DeformedBaffleListGimpyEngineCaptcha_2.jpg"/></td>
+</tr>
+<tr>
+<td>DoubleRandomListGimpyEngineCaptcha</td>
+<td><img src="DoubleRandomListGimpyEngineCaptcha_0.jpg"/></td>
+<td><img src="DoubleRandomListGimpyEngineCaptcha_1.jpg"/></td>
+<td><img src="DoubleRandomListGimpyEngineCaptcha_2.jpg"/></td>
+</tr>
+<tr>
+<td>SimpleListImageCaptchaEngineCaptcha</td>
+<td><img src="SimpleListImageCaptchaEngineCaptcha_0.jpg"/></td>
+<td><img src="SimpleListImageCaptchaEngineCaptcha_1.jpg"/></td>
+<td><img src="SimpleListImageCaptchaEngineCaptcha_2.jpg"/></td>
+</tr>
+<tr>
+<td>SimpleFishEyeEngineCaptcha</td>
+<td><img src="SimpleFishEyeEngineCaptcha_0.jpg"/></td>
+<td><img src="SimpleFishEyeEngineCaptcha_1.jpg"/></td>
+<td><img src="SimpleFishEyeEngineCaptcha_2.jpg"/></td>
+</tr>
+</table><br/>
    ]]>
   </description>
 

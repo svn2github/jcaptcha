@@ -11,7 +11,6 @@
         &links_inc;
        <menu name="Menu" collapse="true">
             <item name="Main" href="main.html"/>
-            <item name="Sample captcha challenges" href="thumbnails.html"/>
             <item name="Architecture" href="architecture.html"/>
             <item name="Why?" href="why.html"/>
 			<item name="Current status" href="status.html"/>
