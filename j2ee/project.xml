@@ -10,7 +10,7 @@
   <!-- a short but descriptive name for the project -->
   <name>jcaptcha-j2ee</name>
   
-  <groupId>captcha</groupId>
+  <groupId>jcaptcha</groupId>
   
   <!-- The version of the project under development, e.g.
        1.1, 1.2, 2.0-SNAPSHOT -->
@@ -227,9 +227,9 @@
     -->
     <dependency>
       <!-- The project group that produced the dependency, e.g. jboss. -->
-      <groupId>captcha</groupId>
+      <groupId>jcaptcha</groupId>
       <!-- The unique id for an artifact produced by the project group, e.g. jboss-boot -->
-      <artifactId>captcha</artifactId>
+      <artifactId>jcaptcha-core</artifactId>
       <!-- The version of the dependency., e.g. 3.2.1 -->
       <version>1.0</version>
       <!-- The name of jar file if it doesn't respect <artifactId>-<version>.jar pattern.-->
@@ -266,8 +266,8 @@
     <dependency>
       <groupId>jboss</groupId>
       <artifactId>jboss-jmx</artifactId>
-      <version>THE_ONE_BUNDLED_WITH_JBOSS_3_2_2</version>
-      <jar>jboss-jmx.jar</jar>
+      <version>3.2.1</version>
+      <jar/>
       <type/>
       <url>http://www.jboss.org</url>
       <properties/>
