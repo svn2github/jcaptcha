@@ -64,6 +64,8 @@
     <ant:copy todir="${maven.build.dir}/distributions/doc" flatten="true">
     	<ant:fileset dir="${basedir}">
     		<include name="**/doc/**"/>
+    		<exclude name="**/*.doc"/>
+    		<exclude name="**/*.tex"/>
     	</ant:fileset>
     </ant:copy>
     
