@@ -78,11 +78,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.octo.captcha.pix.PixCaptcha;
-import com.octo.captcha.pix.PixCaptchaEngine;
 import com.octo.utils.ConstantCapacityHashtable;
 import com.octo.utils.ConstantCapacityHashtableFullException;
 import com.octo.utils.FilterConfigUtils;
+import com.octo.captcha.image.ImageCaptchaEngine;
+import com.octo.captcha.image.ImageCaptcha;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
@@ -274,7 +274,7 @@ public class PixCaptchaFilter implements Filter, PixCaptchaFilterMBean
      * Engine used by the filter to generate captchas (the concrete
      * implementation class must be specified in web.xml)
      */
-    private PixCaptchaEngine engine = null;
+    private ImageCaptchaEngine engine = null;
 
     /**
      * The name of the filter parameter in web.xml for
@@ -441,7 +441,7 @@ public class PixCaptchaFilter implements Filter, PixCaptchaFilterMBean
         try
         {
             this.engine =
-                (PixCaptchaEngine) Class.forName(engineClass).newInstance();
+                (ImageCaptchaEngine) Class.forName(engineClass).newInstance();
         }
         catch (Exception e)
         {
@@ -651,9 +651,9 @@ public class PixCaptchaFilter implements Filter, PixCaptchaFilterMBean
             return;
         }
         // create a new captcha and associate it with the captcha ID
-        PixCaptcha captcha = null;
+        ImageCaptcha captcha = null;
         captcha =
-            this.engine.getPixCaptchaFactory().getPixCaptcha(
+            this.engine.getNextImageCaptcha(
                 theRequest.getLocale());
         try
         {
@@ -674,7 +674,7 @@ public class PixCaptchaFilter implements Filter, PixCaptchaFilterMBean
         theResponse.setContentType("image/jpeg");
         ServletOutputStream responseOutputStream =
             theResponse.getOutputStream();
-        BufferedImage image = captcha.getPixChallenge();
+        BufferedImage image = captcha.getImageChallenge();
         JPEGImageEncoder jpegEncoder =
             JPEGCodec.createJPEGEncoder(responseOutputStream);
         jpegEncoder.encode(image);
@@ -734,7 +734,7 @@ public class PixCaptchaFilter implements Filter, PixCaptchaFilterMBean
         }
 
         // get the captcha from internal store and remove it from there
-        PixCaptcha captcha = (PixCaptcha) this.internalStore.get(captchaID);
+        ImageCaptcha captcha = (ImageCaptcha) this.internalStore.get(captchaID);
         this.internalStore.remove(captchaID);
 
         // if captcha is null, it means that captcha ID is a fake one or that
@@ -856,7 +856,7 @@ public class PixCaptchaFilter implements Filter, PixCaptchaFilterMBean
         try
         {
             this.engine =
-                (PixCaptchaEngine) Class.forName(theClassName).newInstance();
+                (ImageCaptchaEngine) Class.forName(theClassName).newInstance();
         }
         catch (Exception e)
         {

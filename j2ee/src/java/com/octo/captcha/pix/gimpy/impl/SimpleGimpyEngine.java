@@ -50,40 +50,30 @@
  */
 package com.octo.captcha.pix.gimpy.impl;
 
-import com.octo.captcha.pix.PixCaptchaEngine;
-import com.octo.captcha.pix.PixCaptchaFactory;
-import com.octo.captcha.pix.gimpy.GimpyFactory;
-import com.octo.captcha.pix.gimpy.WordGenerator;
-import com.octo.captcha.pix.gimpy.WordToImage;
-import com.octo.captcha.pix.gimpy.wordgenerators.RandomWordGenerator;
-import com.octo.captcha.pix.gimpy.wordtoimages.ComposedWordToImage;
-import com
-    .octo
-    .captcha
-    .pix
-    .gimpy
-    .wordtoimages
-    .backgroundgenerators
-    .FunkyBackgroundGenerator;
-import com
-    .octo
-    .captcha
-    .pix
-    .gimpy
-    .wordtoimages
-    .fontgenerator
-    .RandomFontGenerator;
-import com.octo.captcha.pix.gimpy.wordtoimages.textpasters.DoubleTextPaster;
+import com.octo.captcha.image.ImageCaptchaFactory;
+import com.octo.captcha.image.ImageCaptchaEngine;
+import com.octo.captcha.image.ImageCaptcha;
+import com.octo.captcha.image.gimpy.GimpyFactory;
+import com.octo.captcha.image.gimpy.WordToImage;
+import com.octo.captcha.image.gimpy.WordGenerator;
+import com.octo.captcha.image.gimpy.wordgenerator.RandomWordGenerator;
+import com.octo.captcha.image.gimpy.wordtoimage.textpaster.DoubleTextPaster;
+import com.octo.captcha.image.gimpy.wordtoimage.backgroundgenerator.FunkyBackgroundGenerator;
+import com.octo.captcha.image.gimpy.wordtoimage.fontgenerator.RandomFontGenerator;
+import com.octo.captcha.image.gimpy.wordtoimage.ComposedWordToImage;
+
+import java.util.Locale;
+import java.awt.Color;
 
 /**
- * A PixCaptchaEngine which factory creates captcha which challenge is a random
+ * A ImageCaptchaEngine which factory creates captcha which challenge is a random
  * string composed with characters A,B,C,D and E.
  *
  * @version $Id$
  *
  * @author <a href="mailto:sbr@octo.com">Sebastien Brunot</a>
  */
-public class SimpleGimpyEngine extends PixCaptchaEngine
+public class SimpleGimpyEngine extends ImageCaptchaEngine
 {
     ////////////////////////////////////
     // Constants
@@ -114,12 +104,17 @@ public class SimpleGimpyEngine extends PixCaptchaEngine
      */
     private static final Integer WORD_MAX_LENGTH = new Integer(10);
 
+
+     /**
+     * Color of the word displayed by the captcha challenge
+     */
+    private static final Color WORD_COLOR = Color.WHITE;
     ////////////////////////////////////
     // Attributes
     ////////////////////////////////////
 
     /**
-     * The PixCaptchaFactory returned by this engine
+     * The ImageCaptchaFactory returned by this engine
      */
     private GimpyFactory factory = null;
 
@@ -135,22 +130,41 @@ public class SimpleGimpyEngine extends PixCaptchaEngine
         WordGenerator wordGenerator = new RandomWordGenerator("ABCDE");
         WordToImage word2Image =
             new ComposedWordToImage(
-                new RandomFontGenerator(MIN_FONT_SIZE),
-                new FunkyBackgroundGenerator(IMAGE_HEIGHT, IMAGE_WIDTH),
-                new DoubleTextPaster(WORD_MAX_LENGTH, WORD_MIN_LENGTH));
+                new RandomFontGenerator(MIN_FONT_SIZE,MIN_FONT_SIZE),
+                new FunkyBackgroundGenerator(IMAGE_WIDTH,IMAGE_HEIGHT),
+                new DoubleTextPaster(WORD_MIN_LENGTH, WORD_MAX_LENGTH,WORD_COLOR));
         this.factory = new GimpyFactory(wordGenerator, word2Image);
     }
 
     ////////////////////////////////////
-    // PixCaptchaFactory concrete class implementation
+    // ImageCaptchaFactory concrete class implementation
     ////////////////////////////////////
 
     /**
-     * @see com.octo.captcha.pix.PixCaptchaEngine#getPixCaptchaFactory()
+     * @see com.octo.captcha.image.ImageCaptchaEngine#getImageCaptchaFactory()
      */
-    public PixCaptchaFactory getPixCaptchaFactory()
+    public ImageCaptchaFactory getImageCaptchaFactory()
     {
         return this.factory;
     }
-    
+
+    /**
+     * This method build a ImageCaptchaFactory.
+     * @return a CaptchaFactory
+     */
+    public ImageCaptcha getNextImageCaptcha()
+    {
+        return this.factory.getImageCaptcha();
+    }
+
+    /**
+     * This method build a ImageCaptchaFactory.
+     * @param locale
+     * @return a CaptchaFactory
+     */
+    public ImageCaptcha getNextImageCaptcha(Locale locale)
+    {
+        return this.factory.getImageCaptcha(locale);
+    }
+
 }
