@@ -366,7 +366,7 @@ public class ImageCaptchaServiceTest extends TestCase
      * which is a class without no arg constructor
      * in the property parameter of ImageCaptchaService(Properties)
      */
-    public void testImageCaptchaServicePropertiesEngineClassWithoutNoArgConstructor()
+    public void testImageCaptchaServicePropertiesEngineClassWithoutNoArgConst()
     {
         try
         {
