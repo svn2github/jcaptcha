@@ -462,57 +462,68 @@
  END OF TERMS AND CONDITIONS
  */
 
-package com.octo.captcha.component.sound.wordtosound;
+package com.octo.captcha.component.soundconfigurator;
 
-import java.util.Locale;
+import com.octo.captcha.component.sound.soundconfigurator.FreeTTSSoundConfigurator;
 
-import com.octo.captcha.CaptchaException;
-
-import javax.sound.sampled.AudioInputStream;
+import junit.framework.TestCase;
 
 /**
  * <p>
- * Provides methods to tranform a word to a sound
- * </p>.
+ * Description:
+ * </p>
  * 
- * @author Gandin Mathieu
- * @author Doumas Benoit
- * @version 1.1
+ * @author Benoit Doumas
+ * @version 1.0
  */
-public interface WordToSound
+public class SpellingFreeTTSWordToSoundTest extends TestCase
 {
-    /**
-     * @return the max word lenght accepted by this wordTosound service
-     */
-    int getMaxAcceptedWordLenght();
+
+    private FreeTTSSoundConfigurator freeTTSConfigurator;
+
+    private String packageName = "package";
+    
+    private String name = "name";
+    
+    private float pitch = 50.0f;
+    
+    private float volume = 0.5f;
+    
+    private float rate = 150.0f;
 
     /**
-     * @return the min word lenght accepted by this wordTosound service
-     */
-    int getMinAcceptedWordLenght();
-
-    /**
-     * Main method for this service Return a sound with the specified word
+     * Constructor for SimpleWordToImageTest.
      * 
-     * @param word
-     *            The word to tranform into sound
-     * @return the generated sound
-     * @throws com.octo.captcha.CaptchaException
-     *             if word is invalid or an exception occurs during the sound generation
+     * @param name
      */
-    AudioInputStream getSound(String word) throws CaptchaException;
+    public SpellingFreeTTSWordToSoundTest(String name)
+    {
+        super(name);
+    }
 
-    /**
-     * Main method for this service Return a sound with the specified word and Locale, depending on
-     * the local a sound is not the same. This is a big difference with an image.
-     * 
-     * @param word
-     *            The word to tranform into sound
-     * @param locale
-     *            Locale for the sound
-     * @return the generated sound
-     * @throws com.octo.captcha.CaptchaException
-     *             if word is invalid or an exception occurs during the sound generation
-     */
-    AudioInputStream getSound(String word, Locale locale) throws CaptchaException;
+    public void setUp()
+    {
+        this.freeTTSConfigurator = new FreeTTSSoundConfigurator(
+            name, packageName, volume, pitch, rate);
+    }
+
+    public void testGetLocation()
+    {
+        assertEquals(this.freeTTSConfigurator.getLocation(), packageName);
+    }
+
+    public void testGetPitch()
+    {
+        assertEquals(this.freeTTSConfigurator.getPitch(),pitch, 1.0f);
+    }
+    
+    public void testGetVolume()
+    {
+        assertEquals(this.freeTTSConfigurator.getVolume(),volume, 1.0f);
+    }
+    
+    public void testGetName()
+    {
+        assertEquals(this.freeTTSConfigurator.getName(),name);
+    }
 }

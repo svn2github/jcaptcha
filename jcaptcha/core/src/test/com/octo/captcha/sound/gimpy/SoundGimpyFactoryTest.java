@@ -462,37 +462,54 @@ DAMAGES.
                      END OF TERMS AND CONDITIONS
 */
 
-package com.octo.captcha.engine.sound.gimpy;
+package com.octo.captcha.sound.gimpy;
 
+import com.octo.captcha.CaptchaException;
 
-import com.octo.captcha.component.sound.soundconfigurator.FreeTTSSoundConfigurator;
-import com.octo.captcha.component.sound.soundconfigurator.SoundConfigurator;
 import com.octo.captcha.component.sound.wordtosound.CleanFreeTTSWordToSound;
-import com.octo.captcha.engine.sound.ListSoundCaptchaEngine;
-import com.octo.captcha.sound.gimpy.GimpySoundFactory;
+import com.octo.captcha.component.wordgenerator.RandomWordGenerator;
+import junit.framework.TestCase;
 
+public class SoundGimpyFactoryTest extends TestCase {
 
+    GimpySoundFactory tested;
 
-/**
- * <p>Description: simple gimpy sound engine </p>
- *
- * @author Benoit Doumas
- * @version 1.0
- */
-public class SimpleListSoundCaptchaEngine
-        extends ListSoundCaptchaEngine
-{
+    public SoundGimpyFactoryTest(String s) {
+        super(s);
+    }
 
-    protected void buildInitialFactories()
-    {
-        com.octo.captcha.component.wordgenerator.WordGenerator words = new com.octo.captcha.component.wordgenerator.DictionaryWordGenerator(
-            new com.octo.captcha.component.wordgenerator.FileDictionnary("toddlist"));
+    protected void setUp() throws Exception {
+        super.setUp();
+        tested = new GimpySoundFactory(new RandomWordGenerator("a"), new CleanFreeTTSWordToSound());
+    }
 
-        SoundConfigurator configurator = new FreeTTSSoundConfigurator("kevin16",
-            "com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory", 1.0f, 100, 70);
-        CleanFreeTTSWordToSound wordToSound = new CleanFreeTTSWordToSound(configurator, 4, 10);
+    public void testGetRandomRange() throws Exception {
+    }
 
-        this.addFactory(new GimpySoundFactory(words, wordToSound));
+    public void testGetRandomLenght() throws Exception {
+
+    }
+
+    public void testGimpyFactory() throws Exception {
+        try {
+            new GimpySoundFactory(null, null);
+            fail("Test is not implemented");
+        } catch (CaptchaException e) {
+            assertNotNull(e.getMessage());
+        }
+        try {
+            new GimpySoundFactory(new RandomWordGenerator("a"), null);
+            fail("Test is not implemented");
+        } catch (CaptchaException e) {
+            assertNotNull(e.getMessage());
+        }
+
+        try {
+            new GimpySoundFactory(null, new CleanFreeTTSWordToSound());
+            fail("Test is not implemented");
+        } catch (CaptchaException e) {
+            assertNotNull(e.getMessage());
+        }
     }
 
 }

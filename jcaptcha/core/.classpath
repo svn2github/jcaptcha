@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<classpath>
+  <classpathentry excluding="" kind="src" path="src/java">
+  </classpathentry>
+  <classpathentry output="target/test-classes" kind="src" path="src/test">
+  </classpathentry>
+  <classpathentry kind="var" path="MAVEN_REPO/junit/jars/junit-3.8.1.jar">
+  </classpathentry>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+  </classpathentry>
+  <classpathentry kind="var" path="MAVEN_REPO/freeTTS/jars/freetts-1.2.jar">
+  </classpathentry>
+  <classpathentry kind="var" path="MAVEN_REPO/freeTTS/jars/en_us-1.2.jar">
+  </classpathentry>
+  <classpathentry kind="var" path="MAVEN_REPO/freeTTS/jars/cmu_us_kal-1.2.jar">
+  </classpathentry>
+  <classpathentry kind="var" path="MAVEN_REPO/freeTTS/jars/cmu_time_awb-1.2.jar">
+  </classpathentry>
+  <classpathentry kind="var" path="MAVEN_REPO/freeTTS/jars/cmutimelex-1.2.jar">
+  </classpathentry>
+  <classpathentry kind="var" path="MAVEN_REPO/freeTTS/jars/cmulex-1.2.jar">
+  </classpathentry>
+  <classpathentry kind="var" path="MAVEN_REPO/GroboUtils/jars/GroboUtils-5-core.jar">
+  </classpathentry>
+  <classpathentry kind="output" path="target/classes">
+  </classpathentry>
+</classpath>

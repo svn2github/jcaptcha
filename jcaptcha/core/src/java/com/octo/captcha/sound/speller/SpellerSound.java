@@ -462,25 +462,24 @@
                        END OF TERMS AND CONDITIONS
 */
 
-package com.octo.captcha.sound.gimpy;
+package com.octo.captcha.sound.speller;
 
 import javax.sound.sampled.AudioInputStream;
 
 import com.octo.captcha.sound.SoundCaptcha;
 
 /**
- * <p>Description: </p>
+ * <p>SoundCaptcha with spelling</p>
  *
- * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @author Benoit Doumas
  * @version 1.0
  */
-public class GimpySound extends SoundCaptcha
+public class SpellerSound extends SoundCaptcha
 {
 
     private String response;
 
-    public GimpySound(String thequestion,
+    public SpellerSound(String thequestion,
         AudioInputStream thechallenge, String theresponse)
     {
         super(thequestion, thechallenge);

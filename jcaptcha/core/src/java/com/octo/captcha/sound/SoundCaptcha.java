@@ -64,11 +64,13 @@ import com.octo.captcha.CaptchaException;
  * 
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin </a>
  * @author Benoit Doumas
- * @version 1.0
+ * @version 1.1
  */
 public abstract class SoundCaptcha implements Captcha
 {
 
+    protected Boolean hasChallengeBeenCalled = Boolean.FALSE;
+    
     protected String question;
 
     protected AudioInputStream challenge;
@@ -102,6 +104,7 @@ public abstract class SoundCaptcha implements Captcha
      */
     public final AudioInputStream getSoundChallenge()
     {
+        hasChallengeBeenCalled = Boolean.TRUE;
         return this.challenge;
     }
 
@@ -123,5 +126,11 @@ public abstract class SoundCaptcha implements Captcha
         }
         this.challenge = null;
     }
+    
+    public Boolean hasGetChalengeBeenCalled()
+    {
+        return hasChallengeBeenCalled;
+    }
+
 
 }

@@ -463,12 +463,13 @@
  */
 package com.octo.captcha.sound;
 
+
 import javax.sound.sampled.AudioInputStream;
 
 import junit.framework.TestCase;
 
+import com.octo.captcha.component.sound.wordtosound.CleanFreeTTSWordToSound;
 import com.octo.captcha.component.sound.wordtosound.WordToSound;
-import com.octo.captcha.component.sound.wordtosound.WordToSoundFreeTTS;
 import com.octo.captcha.component.wordgenerator.ArrayDictionary;
 import com.octo.captcha.component.wordgenerator.DictionaryWordGenerator;
 import com.octo.captcha.component.wordgenerator.WordGenerator;
@@ -506,7 +507,7 @@ public class SoundCaptchaTest extends TestCase
 
         WordGenerator words = new DictionaryWordGenerator(new ArrayDictionary(wordlist));
 
-        WordToSound word2sound = new WordToSoundFreeTTS();
+        WordToSound word2sound = new CleanFreeTTSWordToSound();
         SoundCaptchaFactory factory = new GimpySoundFactory(words, word2sound);
         soundCaptcha = factory.getSoundCaptcha();
     }
@@ -544,16 +545,13 @@ public class SoundCaptchaTest extends TestCase
     /**
      * This test is for verifying if the question of the captcha is correctly instantiated.
      */
-    //public void testGetResponse() {
-    //assertNotNull(pixCaptcha.getResponse());
-    //}
     public static void main(String[] args)
     {
         String[] wordlist = { "and", "oh", "test", "test", "hello", "lame", "eating", "snake"};
 
         WordGenerator words = new DictionaryWordGenerator(new ArrayDictionary(wordlist));
 
-        WordToSound wordToSound = new WordToSoundFreeTTS();
+        WordToSound wordToSound = new CleanFreeTTSWordToSound();
         SoundCaptchaFactory factory = new GimpySoundFactory(words, wordToSound);
         SoundCaptcha tCaptcha = factory.getSoundCaptcha();
 

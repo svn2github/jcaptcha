@@ -462,45 +462,122 @@
  END OF TERMS AND CONDITIONS
  */
 
-package com.octo.captcha.component.sound.wordtosound;
+package com.octo.captcha.sound.speller;
 
-import junit.framework.TestCase;
+import java.util.Locale;
+import java.util.Random;
+
+import javax.sound.sampled.AudioInputStream;
+
+import com.octo.captcha.CaptchaException;
+import com.octo.captcha.CaptchaQuestionHelper;
+import com.octo.captcha.component.sound.wordtosound.WordToSound;
+import com.octo.captcha.component.worddecorator.SpellerWordDecorator;
+import com.octo.captcha.component.worddecorator.WordDecorator;
+import com.octo.captcha.component.wordgenerator.WordGenerator;
+import com.octo.captcha.sound.SoundCaptcha;
+import com.octo.captcha.sound.SoundCaptchaFactory;
 
 /**
- * <p>
- * Description:
- * </p>
+ * Factory for SpellerSound
  * 
  * @author Benoit Doumas
  * @version 1.0
  */
-public class WordToSoundFreeTTSTest extends TestCase
+public class SpellerSoundFactory extends SoundCaptchaFactory
 {
 
-    private WordToSoundFreeTTS wordToSoundFreeTTS;
+    private WordGenerator wordGenerator;
+
+    private WordToSound word2Sound;
+
+    private WordDecorator wordDecorator;
+
+    private Random myRandom = new Random();
 
     /**
-     * Constructor for SimpleWordToImageTest.
-     * 
-     * @param name
+     * The bundle question key for CaptchaQuestionHelper
      */
-    public WordToSoundFreeTTSTest(String name)
+    public static final String BUNDLE_QUESTION_KEY = SpellerSound.class.getName();
+
+    /**
+     * Construct a GimpySoundFactory from a word generator component and a wordtosound component
+     * 
+     * @param thewordGenerator
+     *            component
+     * @param theword2Sound
+     *            component
+     */
+    public SpellerSoundFactory(WordGenerator wordGenerator, WordToSound word2Sound,
+        SpellerWordDecorator wordDecorator)
     {
-        super(name);
+        if (wordGenerator == null)
+        {
+            throw new CaptchaException("Invalid configuration for a "
+                + "SpellingSoundFactory : WordGenerator can't be null");
+        }
+        if (word2Sound == null)
+        {
+            throw new CaptchaException("Invalid configuration for a "
+                + "SpellingSoundFactory : Word2Sound can't be null");
+        }
+        if (wordDecorator == null)
+        {
+            throw new CaptchaException("Invalid configuration for a "
+                + "SpellingSoundFactory : wordDecorator can't be null");
+        }
+        this.wordGenerator = wordGenerator;
+        this.word2Sound = word2Sound;
+        this.wordDecorator = wordDecorator;
     }
 
-    public void setUp()
+    public WordToSound getWordToSound()
     {
-        this.wordToSoundFreeTTS = new WordToSoundFreeTTS("toto", 3, 6);
+        return this.word2Sound;
     }
 
-    public void testGetMaxAcceptedWordLenght()
+    public WordGenerator getWordGenerator()
     {
-        assertEquals(this.wordToSoundFreeTTS.getMaxAcceptedWordLenght(), 6);
+        return this.wordGenerator;
     }
 
-    public void testGetMinAcceptedWordLenght()
+    /**
+     * @return a Sound Captcha
+     */
+    public SoundCaptcha getSoundCaptcha()
     {
-        assertEquals(this.wordToSoundFreeTTS.getMinAcceptedWordLenght(), 3);
+        String word = this.wordGenerator.getWord(getRandomLenght(), Locale.getDefault());
+        AudioInputStream sound = this.word2Sound.getSound(wordDecorator.decorateWord(word));
+        SoundCaptcha soundCaptcha = new SpellerSound(getQuestion(Locale.getDefault()), sound, word);
+        return soundCaptcha;
     }
+
+    /**
+     * @param locale
+     *            the locale
+     * @return a localized sound captcha
+     */
+    public SoundCaptcha getSoundCaptcha(Locale locale)
+    {
+        String word = this.wordGenerator.getWord(getRandomLenght(), locale);
+        AudioInputStream sound = this.word2Sound.getSound(wordDecorator.decorateWord(word), locale);
+        SoundCaptcha soundCaptcha = new SpellerSound(getQuestion(locale), sound, word);
+        return soundCaptcha;
+    }
+
+    protected String getQuestion(Locale locale)
+    {
+        return CaptchaQuestionHelper.getQuestion(locale, BUNDLE_QUESTION_KEY);
+    }
+
+    protected Integer getRandomLenght()
+    {
+        Integer wordLenght;
+        int range = getWordToSound().getMaxAcceptedWordLenght()
+            - getWordToSound().getMinAcceptedWordLenght();
+        int randomRange = range != 0 ? myRandom.nextInt(range + 1) : 0;
+        wordLenght = new Integer(randomRange + getWordToSound().getMinAcceptedWordLenght());
+        return wordLenght;
+    }
+
 }

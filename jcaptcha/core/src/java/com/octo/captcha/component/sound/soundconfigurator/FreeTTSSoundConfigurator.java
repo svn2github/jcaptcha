@@ -461,58 +461,116 @@
 
  END OF TERMS AND CONDITIONS
  */
-
-package com.octo.captcha.component.sound.wordtosound;
-
-import java.util.Locale;
+package com.octo.captcha.component.sound.soundconfigurator;
 
 import com.octo.captcha.CaptchaException;
 
-import javax.sound.sampled.AudioInputStream;
-
 /**
- * <p>
- * Provides methods to tranform a word to a sound
- * </p>.
+ * Implmenentation for a FreeTTS configuration
  * 
- * @author Gandin Mathieu
- * @author Doumas Benoit
- * @version 1.1
+ * @author Benoit Doumas
+ * @version 1.0
  */
-public interface WordToSound
+public class FreeTTSSoundConfigurator implements SoundConfigurator
 {
-    /**
-     * @return the max word lenght accepted by this wordTosound service
-     */
-    int getMaxAcceptedWordLenght();
+    String name;
+
+    String location;
+
+    float volume;
+
+    float pitch;
+
+    float rate;
 
     /**
-     * @return the min word lenght accepted by this wordTosound service
-     */
-    int getMinAcceptedWordLenght();
-
-    /**
-     * Main method for this service Return a sound with the specified word
+     * Contructor for a FreeTTS configuration
      * 
-     * @param word
-     *            The word to tranform into sound
-     * @return the generated sound
-     * @throws com.octo.captcha.CaptchaException
-     *             if word is invalid or an exception occurs during the sound generation
+     * @param name
+     *            Name of the sound
+     * @param location
+     *            Package containing the sound defined by name
+     * @param volume
+     *            Between 0 and 1.0
+     * @param pitch
+     * 			  Level of the sound (hetz), between 50 and 250, normal 100
+     * @param rate
+     *            Words per minute, between 1 and 999, normal 150
      */
-    AudioInputStream getSound(String word) throws CaptchaException;
+    public FreeTTSSoundConfigurator(String name, String location, float volume, float pitch,
+        float rate)
+    {
+        this.name = name;
+
+        this.location = location;
+
+        if ((volume <= 1.0) && (volume >= 0))
+        {
+            this.volume = volume;
+        }
+        else
+        {
+            throw new CaptchaException("Volume is between 0 and 1.0");
+        }
+
+        if ((pitch <= 250) && (pitch >= 50))
+        {
+            this.pitch = pitch;
+        }
+        else
+        {
+            throw new CaptchaException("Pitch is between 50 and 250");
+        }
+        
+        if ((rate < 1000) && (rate > 0))
+        {
+            this.rate = rate;
+        }
+        else
+        {
+            throw new CaptchaException("Rate is between 1 and 999");
+        }
+        
+    }
 
     /**
-     * Main method for this service Return a sound with the specified word and Locale, depending on
-     * the local a sound is not the same. This is a big difference with an image.
-     * 
-     * @param word
-     *            The word to tranform into sound
-     * @param locale
-     *            Locale for the sound
-     * @return the generated sound
-     * @throws com.octo.captcha.CaptchaException
-     *             if word is invalid or an exception occurs during the sound generation
+     * @see com.octo.captcha.component.sound.soundconfigurator.SoundConfigurator#getVolume()
      */
-    AudioInputStream getSound(String word, Locale locale) throws CaptchaException;
+    public float getVolume()
+    {
+        return this.volume;
+    }
+
+    /**
+     * @see com.octo.captcha.component.sound.soundconfigurator.SoundConfigurator#getPitch()
+     */
+    public float getPitch()
+    {
+        return this.pitch;
+    }
+
+    /**
+     * @see com.octo.captcha.component.sound.soundconfigurator.SoundConfigurator#getName()
+     */
+    public String getName()
+    {
+        return this.name;
+    }
+
+    /**
+     * @see com.octo.captcha.component.sound.soundconfigurator.SoundConfigurator#getRate()
+     */
+    public float getRate()
+    {
+        return this.rate;
+    }
+
+    /**
+     * @see com.octo.captcha.component.sound.soundconfigurator.SoundConfigurator#getLocation()
+     */
+    public String getLocation()
+    {
+        return this.location;
+    }
+
 }

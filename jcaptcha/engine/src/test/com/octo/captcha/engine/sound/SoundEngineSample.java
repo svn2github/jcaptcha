@@ -471,9 +471,12 @@ import java.util.Locale;
 
 import javax.sound.sampled.AudioInputStream;
 
+import com.octo.captcha.component.sound.soundconfigurator.FreeTTSSoundConfigurator;
+import com.octo.captcha.component.sound.soundconfigurator.SoundConfigurator;
+import com.octo.captcha.component.sound.wordtosound.CleanFreeTTSWordToSound;
 import com.octo.captcha.component.sound.wordtosound.WordToSound;
-import com.octo.captcha.component.sound.wordtosound.WordToSoundFreeTTS;
 
+import com.octo.captcha.component.worddecorator.SpellerWordDecorator;
 import com.octo.captcha.component.wordgenerator.DictionaryReader;
 import com.octo.captcha.component.wordgenerator.DictionaryWordGenerator;
 
@@ -482,7 +485,7 @@ import com.octo.captcha.component.wordgenerator.WordList;
 import com.octo.captcha.engine.sound.utils.SoundToFile;
 import com.octo.captcha.sound.SoundCaptcha;
 import com.octo.captcha.sound.SoundCaptchaFactory;
-import com.octo.captcha.sound.gimpy.GimpySoundFactory;
+import com.octo.captcha.sound.speller.SpellerSoundFactory;
 
 /**
  * Test sample for a sound captcha
@@ -504,11 +507,15 @@ public class SoundEngineSample
         SoundEngineSample.wordlist = new String[] { "and", "oh", "test", "test", "hello", "lame",
             "eating", "snake", "roots", "yeah"};
 
-        
-        SoundEngineSample.words = new DictionaryWordGenerator((new SoundEngineSample()).new ArrayDictionary(wordlist));
+        SoundEngineSample.words = new DictionaryWordGenerator(
+            (new SoundEngineSample()).new ArrayDictionary(wordlist));
 
-        SoundEngineSample.wordToSound = new WordToSoundFreeTTS();
-        SoundEngineSample.factory = new GimpySoundFactory(words, wordToSound);
+        SoundConfigurator configurator = new FreeTTSSoundConfigurator("kevin16",
+            "com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory", 1.0f, 100, 70);
+        SoundEngineSample.wordToSound = new CleanFreeTTSWordToSound();
+        SpellerWordDecorator decorator = new SpellerWordDecorator(", ");
+        SoundEngineSample.factory = new SpellerSoundFactory(words, wordToSound, decorator);
+        //SoundEngineSample.factory = new GimpySoundFactory(words, wordToSound);
         for (int i = 1; i <= 10; i++)
             test();
 
@@ -516,7 +523,7 @@ public class SoundEngineSample
 
     public static void test()
     {
-        SoundCaptcha tCaptcha = factory.getSoundCaptcha();
+        SoundCaptcha tCaptcha = factory.getSoundCaptcha(Locale.FRANCE);
 
         System.out.println(tCaptcha.getQuestion());
         AudioInputStream tInputStream = tCaptcha.getSoundChallenge();
@@ -555,33 +562,44 @@ public class SoundEngineSample
         }
         tCaptcha.disposeChallenge();
     }
-    
+
     private class ArrayDictionary implements DictionaryReader
     {
         private String[] list;
-        
+
+        private WordList wordList;
+
         public ArrayDictionary(String[] list)
         {
             this.list = list;
+            wordList = new WordList(Locale.getDefault());
+            for (int i = 0; i < list.length; i++)
+            {
+                wordList.addWord(list[i]);
+            }
         }
 
-        /* (non-Javadoc)
+        /*
+         * (non-Javadoc)
+         * 
          * @see com.octo.captcha.component.wordgenerator.DictionaryReader#getWordList()
          */
         public WordList getWordList()
         {
             // TODO Auto-generated method stub
-            return null;
+            return wordList;
         }
 
-        /* (non-Javadoc)
+        /*
+         * (non-Javadoc)
+         * 
          * @see com.octo.captcha.component.wordgenerator.DictionaryReader#getWordList(java.util.Locale)
          */
         public WordList getWordList(Locale arg0)
         {
             // TODO Auto-generated method stub
-            return null;
+            return wordList;
         }
-        
+
     }
 }

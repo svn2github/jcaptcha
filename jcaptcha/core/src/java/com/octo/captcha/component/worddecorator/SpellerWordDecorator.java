@@ -461,58 +461,43 @@
 
  END OF TERMS AND CONDITIONS
  */
-
-package com.octo.captcha.component.sound.wordtosound;
-
-import java.util.Locale;
-
-import com.octo.captcha.CaptchaException;
-
-import javax.sound.sampled.AudioInputStream;
+package com.octo.captcha.component.worddecorator;
 
 /**
- * <p>
- * Provides methods to tranform a word to a sound
- * </p>.
+ * Simple decorator that provide spelling from a word
  * 
- * @author Gandin Mathieu
- * @author Doumas Benoit
- * @version 1.1
+ * @author Benoit Doumas
+ * @version 1.0
  */
-public interface WordToSound
+public class SpellerWordDecorator implements WordDecorator
 {
-    /**
-     * @return the max word lenght accepted by this wordTosound service
-     */
-    int getMaxAcceptedWordLenght();
+    private String separtor;
 
     /**
-     * @return the min word lenght accepted by this wordTosound service
-     */
-    int getMinAcceptedWordLenght();
-
-    /**
-     * Main method for this service Return a sound with the specified word
+     * Constructor for the Speller Decorator. It spell a word, with a separator
      * 
-     * @param word
-     *            The word to tranform into sound
-     * @return the generated sound
-     * @throws com.octo.captcha.CaptchaException
-     *             if word is invalid or an exception occurs during the sound generation
+     * @param seprator
+     *            use to separate each char, for instance : ' ' or ', ' or '; ' ...
      */
-    AudioInputStream getSound(String word) throws CaptchaException;
+    public SpellerWordDecorator(String seprator)
+    {
+        this.separtor = seprator;
+    }
 
     /**
-     * Main method for this service Return a sound with the specified word and Locale, depending on
-     * the local a sound is not the same. This is a big difference with an image.
-     * 
-     * @param word
-     *            The word to tranform into sound
-     * @param locale
-     *            Locale for the sound
-     * @return the generated sound
-     * @throws com.octo.captcha.CaptchaException
-     *             if word is invalid or an exception occurs during the sound generation
+     * @see com.octo.captcha.component.worddecorator.WordDecorator#decorateWord(java.lang.String)
      */
-    AudioInputStream getSound(String word, Locale locale) throws CaptchaException;
+    public String decorateWord(String original)
+    {
+        String chars = "";
+        //transform the word by separating each character
+        for (int i = 0; i < original.length(); i++)
+        {
+            chars += " " + original.charAt(i);
+            if (i < original.length() - 1)
+                chars += separtor;
+        }
+        return chars;
+    }
+
 }

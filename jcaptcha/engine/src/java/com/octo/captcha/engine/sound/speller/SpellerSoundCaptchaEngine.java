@@ -461,58 +461,44 @@
 
  END OF TERMS AND CONDITIONS
  */
+package com.octo.captcha.engine.sound.speller;
 
-package com.octo.captcha.component.sound.wordtosound;
+import com.octo.captcha.component.sound.soundconfigurator.FreeTTSSoundConfigurator;
+import com.octo.captcha.component.sound.soundconfigurator.SoundConfigurator;
+import com.octo.captcha.component.sound.wordtosound.CleanFreeTTSWordToSound;
+import com.octo.captcha.component.worddecorator.SpellerWordDecorator;
 
-import java.util.Locale;
+import com.octo.captcha.engine.sound.ListSoundCaptchaEngine;
 
-import com.octo.captcha.CaptchaException;
-
-import javax.sound.sampled.AudioInputStream;
+import com.octo.captcha.sound.speller.SpellerSoundFactory;
 
 /**
  * <p>
- * Provides methods to tranform a word to a sound
- * </p>.
+ * Engine to generate a SpellerSound captcha. This captcha provide a sound that is the spelling of a
+ * word
+ * </p>
  * 
- * @author Gandin Mathieu
- * @author Doumas Benoit
- * @version 1.1
+ * @author Benoit Doumas
+ * @version 1.0
  */
-public interface WordToSound
+public class SpellerSoundCaptchaEngine extends ListSoundCaptchaEngine
 {
-    /**
-     * @return the max word lenght accepted by this wordTosound service
-     */
-    int getMaxAcceptedWordLenght();
 
     /**
-     * @return the min word lenght accepted by this wordTosound service
+     * @see com.octo.captcha.engine.sound.ListSoundCaptchaEngine#buildInitialFactories()
      */
-    int getMinAcceptedWordLenght();
+    protected void buildInitialFactories()
+    {
+        com.octo.captcha.component.wordgenerator.WordGenerator words = new com.octo.captcha.component.wordgenerator.DictionaryWordGenerator(
+            new com.octo.captcha.component.wordgenerator.FileDictionnary("toddlist"));
 
-    /**
-     * Main method for this service Return a sound with the specified word
-     * 
-     * @param word
-     *            The word to tranform into sound
-     * @return the generated sound
-     * @throws com.octo.captcha.CaptchaException
-     *             if word is invalid or an exception occurs during the sound generation
-     */
-    AudioInputStream getSound(String word) throws CaptchaException;
+        SoundConfigurator configurator = new FreeTTSSoundConfigurator("kevin16",
+            "com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory", 1.0f, 100, 70);
+        CleanFreeTTSWordToSound wordToSound = new CleanFreeTTSWordToSound(configurator, 4, 10);
 
-    /**
-     * Main method for this service Return a sound with the specified word and Locale, depending on
-     * the local a sound is not the same. This is a big difference with an image.
-     * 
-     * @param word
-     *            The word to tranform into sound
-     * @param locale
-     *            Locale for the sound
-     * @return the generated sound
-     * @throws com.octo.captcha.CaptchaException
-     *             if word is invalid or an exception occurs during the sound generation
-     */
-    AudioInputStream getSound(String word, Locale locale) throws CaptchaException;
+        SpellerWordDecorator decorator = new SpellerWordDecorator(", ");
+        this.addFactory(new SpellerSoundFactory(words, wordToSound, decorator));
+
+    }
+
 }
