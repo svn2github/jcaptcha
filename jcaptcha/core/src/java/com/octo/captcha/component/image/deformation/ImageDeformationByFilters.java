@@ -477,13 +477,11 @@ import java.awt.image.ImageFilter;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class ImageDeformationByFilters implements ImageDeformation
-{
+public class ImageDeformationByFilters implements ImageDeformation {
 
     private ImageFilter[] filters;
 
-    public ImageDeformationByFilters(ImageFilter[] filters)
-    {
+    public ImageDeformationByFilters(ImageFilter[] filters) {
         super();
         this.filters = filters;
     }
@@ -494,23 +492,24 @@ public class ImageDeformationByFilters implements ImageDeformation
      * @param image the image to be deformed
      * @return the deformed image
      */
-    public BufferedImage deformImage(BufferedImage image)
-    {
-        BufferedImage clone = new BufferedImage(image.getWidth(),
-                image.getHeight(), image.getType());
-        clone.getGraphics().drawImage(image, 0, 0, null, null);
-        FilteredImageSource filtered;
-        if (filters != null)
-        {
-            for (int i = 0 ; i < filters.length ; i++)
-            {
+    public BufferedImage deformImage(BufferedImage image) {
+        if (filters != null) {
+            BufferedImage clone = new BufferedImage(image.getWidth(),
+                    image.getHeight(), image.getType());
+            clone.getGraphics().drawImage(image, 0, 0, null, null);
+            FilteredImageSource filtered;
+
+            for (int i = 0; i < filters.length; i++) {
                 ImageFilter filter = filters[i];
                 filtered = new FilteredImageSource(clone.getSource(), filter);
                 Image temp = ToolkitFactory.getToolkit().createImage(filtered);
                 clone.getGraphics().drawImage(temp, 0, 0, Color.white, null);
             }
+
+            clone.getGraphics().dispose();
+            return clone;
+        } else {
+            return image;
         }
-        clone.getGraphics().dispose();
-        return clone;
     }
 }

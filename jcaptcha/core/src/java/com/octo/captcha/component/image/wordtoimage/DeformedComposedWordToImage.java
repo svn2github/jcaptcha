@@ -545,13 +545,13 @@ public class DeformedComposedWordToImage extends ComposedWordToImage
         AttributedString aword = getAttributedString(word,
                 checkWordLenght(word));
         //copy background
-        BufferedImage out =
-                new BufferedImage(background.getWidth(), background.getHeight(),
+        BufferedImage out = background;
+               new BufferedImage(background.getWidth(), background.getHeight(),
                         background.getType());
         Graphics2D g2 = (Graphics2D) out.getGraphics();
         //paste background
         g2.drawImage(background, 0, 0, out.getWidth(), out.getHeight(), null);
-
+        g2.dispose();
         //apply filters to backround
         out = backgroundDeformation.deformImage(out);
 
@@ -571,12 +571,12 @@ public class DeformedComposedWordToImage extends ComposedWordToImage
         //and apply deformation
         transparent = textDeformation.deformImage(transparent);
 
-
+        Graphics2D g3 = (Graphics2D) out.getGraphics();
         // Set a composite with transparency.
         Composite c = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, .7f);
-        g2.setComposite(c);
-        g2.drawImage(transparent, 0, 0, null);
-        g2.dispose();
+        g3.setComposite(c);
+        g3.drawImage(transparent, 0, 0, null);
+        g3.dispose();
         //apply final deformation
         out = finalDeformation.deformImage(out);
         return out;

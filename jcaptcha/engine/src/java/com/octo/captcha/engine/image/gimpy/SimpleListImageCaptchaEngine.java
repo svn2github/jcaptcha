@@ -487,12 +487,12 @@ public class SimpleListImageCaptchaEngine
     {
         com.octo.captcha.component.wordgenerator.WordGenerator wordGenerator = new com.octo.captcha.component.wordgenerator.RandomWordGenerator(
                 "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
-        TextPaster textPaster = new RandomTextPaster(new Integer(6),
-                new Integer(10), Color.white);
+        TextPaster textPaster = new RandomTextPaster(new Integer(5),
+                new Integer(8), Color.white);
         BackgroundGenerator backgroundGenerator = new FunkyBackgroundGenerator(
                 new Integer(200), new Integer(100));
         FontGenerator fontGenerator = new TwistedAndShearedRandomFontGenerator(
-                new Integer(10), new Integer(20));
+                new Integer(25), new Integer(30));
         com.octo.captcha.component.image.wordtoimage.WordToImage wordToImage = new com.octo.captcha.component.image.wordtoimage.ComposedWordToImage(
                 fontGenerator, backgroundGenerator, textPaster);
         this.addFactory(

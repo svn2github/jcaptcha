@@ -108,7 +108,7 @@ public class SimpleFishEyeEngine extends ListImageCaptchaEngine
 
         //add background from files
         BackgroundGenerator generator = new FileReaderRandomBackgroundGenerator(
-                new Integer(300), new Integer(300),
+                new Integer(250), new Integer(250),
                 "./fisheyebackgrounds");
         addFactory(
                 new FishEyeFactory(generator, sphereDef, new Integer(30),

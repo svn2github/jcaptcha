@@ -4,6 +4,18 @@
     <meta name="keyword" content="captcha, java, core, jcaptcha"/>
 
     <body>
+	<section name="RC 2.0.1 improvements">
+            <p>
+				<ul>
+				   <li>This is a minor bug fix release</li>
+				   <li>Tunning some engine</li>
+				   <li>New Issue tracker system, thanks to altassian : see <a href="http://luminal.gotdns.com/jira/">jcaptcha jira</a></li>
+				   <li>Removing log configuration from jar : see bug 1078250 @ sourceforge</li>
+				   <li>Moving tld to META-INF directory : see bug 1087577 @ sourceforge</li>
+               </ul>
+            </p>
+        </section>
+
 
         <section name="RC 2 improvements">
             <p>

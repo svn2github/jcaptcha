@@ -88,6 +88,29 @@
     <option name="ADDITIONAL_OPTIONS_STRING" value="" />
   </component>
   <component name="Monitor.Log4jWindowPlugin" />
+  <component name="PEExternalization">
+    <option name="IGNORE_METHOD_NAMES" value="" />
+    <option name="IGNORE_METHOD_NAMES_ENABLED" value="false" />
+    <option name="IGNORE_CLASS_CONSTRUCTORS">
+      <value>
+        <option class="Exception" includeInheritors="true" />
+      </value>
+    </option>
+    <option name="IGNORE_CLASS_CONSTRUCTOR_NAMES_ENABLED" value="true" />
+    <option name="IGNORE_CLASS_METHODS_ENABLED" value="true" />
+    <option name="IGNORE_STRINGS_CONTAINS_ONLY_ENABLED" value="true" />
+    <option name="IGNORE_STRINGS_CONTAINS_ONLY_WHITESPACES" value="true" />
+    <option name="IGNORE_STRINGS_CONTAINS_ONLY_PUNCTUATIONS" value="true" />
+    <option name="IGNORE_STRINGS_CONTAINS_ONLY_SPECIFIED_ENABLED" value="true" />
+    <option name="IGNORE_STRINGS_CONTAINS_ONLY_SPECIFIED" value="" />
+    <option name="IGNORE_CLASS_METHODS">
+      <value>
+        <option class="Exception" includeInheritors="false" />
+        <option class="java.util.ResourceBundle" includeInheritors="true" />
+      </value>
+    </option>
+    <option name="IGNORE_CONSTANTS_DECLARATIONS" value="true" />
+  </component>
   <component name="Palette2">
     <group name="Swing">
       <item class="com.intellij.uiDesigner.HSpacer" tooltip-text="Horizontal Spacer" icon="/com/intellij/uiDesigner/icons/hspacer.png" removable="false">

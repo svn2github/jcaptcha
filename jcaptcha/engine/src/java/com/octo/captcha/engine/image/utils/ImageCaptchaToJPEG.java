@@ -465,9 +465,12 @@ DAMAGES.
 package com.octo.captcha.engine.image.utils;
 
 import com.octo.captcha.engine.image.ImageCaptchaEngine;
+import com.octo.captcha.engine.image.fisheye.SimpleFishEyeEngine;
+import com.octo.captcha.engine.image.gimpy.*;
 import com.octo.captcha.image.ImageCaptcha;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * <p>Description: </p>
@@ -484,29 +487,56 @@ public class ImageCaptchaToJPEG
             System.out.println("Usage : engineClassName outputDir iterations");
             System.exit(1);
         }
+          System.out.println("engine initialized");
+
+        int iterations = Integer.parseInt(args[2]);
+        String outfile = args[1];
         System.out.println("args : image captcha engine class='" + args[0]
                 + "', " +
                 "output dir='" + args[1] + "'" +
                 ",iterations='" + args[2] + "'");
-        ImageCaptchaEngine pixCapchaEngine = (ImageCaptchaEngine) Class.forName(
+
+        if(args[0].equals("all")){
+             generate(iterations, new BasicListGimpyEngine(), outfile);
+            generate(iterations, new BaffleListGimpyEngine(), outfile);
+            generate(iterations, new DefaultGimpyEngine(), outfile);
+            generate(iterations, new DeformedBaffleListGimpyEngine(), outfile);
+            generate(iterations, new DoubleRandomListGimpyEngine(), outfile);
+            generate(iterations, new SimpleListImageCaptchaEngine(), outfile);
+            generate(iterations, new SimpleFishEyeEngine(), outfile);
+
+        }else{
+
+        ImageCaptchaEngine  pixCapchaEngine= (ImageCaptchaEngine) Class.forName(
                 args[0])
                 .newInstance();
-        System.out.println("engine initialized");
-        int i;
+        System.out.println("Beginning generation");
+            generate(iterations, pixCapchaEngine, outfile);
+        }
 
         //ImageToFile encoder = new ImageToFile();
-        System.out.println("Beginning generation");
 
-        for (i = 0 ; i < Integer.parseInt(args[2]) ; i++)
+
+
+        System.exit(0);
+    }
+
+    private static void generate(int iterations, ImageCaptchaEngine pixCapchaEngine, String outfile) throws IOException {
+        int i;
+        for (i = 0 ; i < iterations; i++)
         {
             ImageCaptcha captcha = pixCapchaEngine.getNextImageCaptcha();
             System.out.println("Captcha " + i + " retrieved");
-            File out = new File(
-                    args[1] + File.separator + "captcha_" + i + ".jpg");
+
+            File dirout = new File(
+                    outfile) ;
+            dirout.mkdirs();
+            File out = new File(dirout, File.separator +pixCapchaEngine.getClass().getName().substring(
+                            pixCapchaEngine.getClass().getPackage().getName().length()+1
+                    )+"Captcha_" + i + ".jpg");
             ImageToFile.serialize(captcha.getImageChallenge(), out);
             System.out.println("File i created " + out.toURL());
         }
-        System.exit(0);
     }
 
 }

@@ -493,8 +493,8 @@ public class BasicGimpyEngine extends DefaultImageCaptchaEngine
                 "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
 
         //wordtoimage components
-        TextPaster randomPaster = new DoubleRandomTextPaster(new Integer(2),
-                new Integer(3), Color.white);
+        TextPaster randomPaster = new DoubleRandomTextPaster(new Integer(3),
+                new Integer(5), Color.white);
 
         //BackgroundGenerator fileBack = new FileReaderRandomBackgroundGenerator(new Integer(200), new Integer(100), "gimpybackgrounds");
         BackgroundGenerator funkyBack = new FunkyBackgroundGenerator(

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0"?>
+<?xml version="1.0"?>
 <document>
 
     <meta name="keyword" content="captcha, java, core, jcaptcha"/>
@@ -11,6 +11,7 @@
 				   <li><a href="http://demo.liferay.net/c/portal_public/">Liferay Enterprise Portal</a> (create a new account)</li>
 				   <li><a href="http://207.29.128.48/webcrim/jcaptcha">WebCrims Case Information System</a></li>
 				   <li><a href="http://www.mvnforum.com/mvnforum/registermember">mvnforum</a></li>
+				   <li><a href="http://www.rollerweblogger.org/">The roller weblogger</a></li>
                </ul>
                
             </p>

@@ -111,12 +111,12 @@
                 <directory>${basedir}/src/java</directory>
                 <includes>
                     <include>**/*.properties</include>
+                    <include>**/*.tld</include>
                 </includes>
             </resource>
             <resource>
                 <directory>${basedir}/src/test</directory>
                 <includes>
-                    <include>**/*.xml</include>
                     <include>**/*.properties</include>
                 </includes>
             </resource>
@@ -133,6 +133,7 @@
                 <directory>${basedir}/src/java</directory>
                 <includes>
                     <include>**/*.properties</include>
+                    <include>**/*.tld</include>
                 </includes>
             </resource>
             <resource>

@@ -487,6 +487,7 @@ public class SimpleImageCaptchaToJPEG
     public static void main(String[] args)
             throws ImageFormatException, IOException
     {
+
         com.octo.captcha.engine.image.gimpy.SimpleListImageCaptchaEngine bge =
                 new com.octo.captcha.engine.image.gimpy.SimpleListImageCaptchaEngine();
         System.out.println("got gimpy");

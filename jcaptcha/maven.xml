@@ -8,23 +8,39 @@
   xmlns:ant="jelly:ant">
 
   <goal name="jcaptcha:all" description="build and package a jcaptcha distribution, builds the jcaptcha-maven site">
-        <attainGoal name="clean"/>
+        <attainGoal name="jcaptcha:clean"/>
         <attainGoal name="jcaptcha:deploy-jhlab"/>
-        <attainGoal name="multiproject:install"/>
+           <attainGoal name="jcaptcha:jars"/>
         <attainGoal name="multiproject:site"/>
         <attainGoal name="jcaptcha:dist-src"/>
         <attainGoal name="jcaptcha:dist-bin"/>
   </goal>
 
-     <goal name="jcaptcha:jars" description="build and install jcaptcha jars">
+ <goal name="jcaptcha:clean" description="clean the whole project">
+    <attainGoal name="clean"/>
     <maven:reactor
+            basedir="${basedir}"
+            includes="*/project.xml"
+            excludes="project.xml"
+            goals="clean"
+            banner="jars"
+            ignoreFailures="true"/>
+       </goal>
+
+
+
+     <goal name="jcaptcha:jars" description="build and install jcaptcha jars">
+    	<maven:reactor
         basedir="${basedir}"
         includes="*/project.xml"
         excludes="project.xml"
         goals="jar:install"
         banner="jars"
         ignoreFailures="false"/>
-       </goal>
+     </goal>
+
+
+
 
   <goal name="jcaptcha:dist-src" description="build and package a jcaptcha distribution">
     <ant:mkdir dir="${maven.build.dir}/distributions"/>
@@ -39,6 +55,7 @@
 
    <goal name="jcaptcha:dist-bin" description="build and package a jcaptcha distribution">
 	<ant:mkdir dir="${maven.build.dir}/distributions/bin/tozip"/>
+	<ant:mkdir dir="${maven.build.dir}/distributions/bin/temp/unjared"/>
     <ant:copy todir="${maven.build.dir}/distributions/bin/temp" flatten="true">
     	<ant:fileset dir="${basedir}">
     		<include name="**/jcaptcha*-${pom.currentVersion}.jar"/>
