@@ -285,7 +285,7 @@ public class PixCaptchaFilter implements Filter, PixCaptchaFilterMBean
         "PixCaptchaEngineClass";
 
     /**
-     * Was the internal store successfully registered to a JMX MBean server ?
+     * Was the filter successfully registered to a JMX MBean server ?
      */
     private boolean registeredToMBeanServer = false;
 
