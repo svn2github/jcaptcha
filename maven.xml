@@ -13,10 +13,16 @@
     <maven:reactor
         basedir="${basedir}"
         includes="**/${pattern}/**/project.xml"
-        excludes="project.xml"
+        excludes="project.xml;**/target/**"
         goals="site"
         banner="generating documentation"
         ignoreFailures="false"/>
+  </preGoal>
+
+  <preGoal name="assemble">
+    <ant:echo message="${basedir}"/>
+    <ant:mkdir dir="${maven.repo.local}/jhlabs/jars"/>
+    <ant:copy file="${basedir}/lib/imaging-1.0.jar" todir="${maven.repo.local}/jhlabs/jars"/>
   </preGoal>
 
   <goal name="assemble">

@@ -5,7 +5,7 @@
   <id>jcaptcha</id>
   <name>JCaptcha</name>
   <groupId>jcaptcha</groupId>
-  <currentVersion>1.0-beta1</currentVersion>
+  <currentVersion>1.0-beta2-SNAPSHOT</currentVersion>
   <organization>
     <!-- The full name of the organization. -->
     <name>JCaptcha corp.</name>
@@ -14,35 +14,45 @@
     <!-- The URL to the organization's logo image. This can be an URL relative to the base directory of the generated
          web site, (e.g., /images/org-logo.png) or an absolute URL (e.g., http://my.corp/logo.png). This value is used
          when generating the project documentation. -->
-    <logo>/images/organization-logo.jpg</logo>
+    <logo>images/organization-logo.jpg</logo>
   </organization>
   <inceptionYear>2003</inceptionYear>
   <package>com.octo.captcha</package>
 
   <description>
   <![CDATA[
-  <b>CAPTCHA</b>, for <b>C</b>ompletely <b>A</b>utomated <b>P</b>ublic <b>T</b>est to tell <b>H</b>umans and <b>C</b>omputers 
-  <b>A</b>part, is a test based on several cognitives puzzles based on challenging problems
-  of artificial intelligence. These tests are to prevent computer programs or
-  robots to obtain information, by challenging with a problem that only human can
-  resolve.
-  <p/>
-  Several tests has been specified:
-  <p/>
-  <ul>
-  <li><b>Gimpy</b>: This test is based on distorted image and text. Gimpy randomly
-  generate a distorted and corrupted text in an image, and asks to the user to 
-  type the word displayed in the image.
-  </li>
-  <li><b>Sound</b>: This test is based on distorted sound. It randomly generate a distorted 
-  sound and asks to user to type the word which was played.
-  </li>
-  <li><b>Pix</b>: This test randomly pick 6 images which have on object in common. Then it
-  asks to user to type the object in common.
-  </li>
-  <li><b>Bongo</b>: This is a logical an memory test based on shape recognition.
-  </li>
-  </ul>
+<div>
+<h1><i>JCaptcha is an open source JAVA framework to help to create captchas</i>.</h1>
+
+<div class='indent'>
+captchas, for Completely Automated Public Test to tell Humans and Computers Apart, are tests based on several cognitives puzzles based on challenging problems of artificial intelligence.
+<br />
+</div>
+These tests are to prevent computer programs or robots to obtain information, by challenging with a problem that only human can resolve.
+</div>
+<br />
+<div>
+<b>Jcaptcha</b> is divided into three main features:
+<ul>
+<li>The <b>JcaTchaCore</b> Framework, which help to create captchas,
+</li>
+<li>The <b>JcaTchaJ2ee</b> Integration, which provides two components, the <b>ImagecaptchaFilter</b> and the <b>Imagecaptchaservlet</b> designed to integrate <b>Jcaptcha</b> to your Java Web Application,
+</li>
+<li>Some <b>JcaTchaSamples</b> to help developers to create captchas in command line programs or in web applications.
+<br />
+</li>
+</ul>
+This picture show you an overview of Jcaptcha:
+</div>
+<br />
+<div>
+<img alt='BIG PICTURE' src='images/big_picture2.jpg' />
+</div>
+<br />
+<br />
+<div>
+Jcaptcha is free and released under open-source <b>Apache License</b>.
+</div>
   ]]>
   </description>
   
@@ -117,15 +127,7 @@
   </dependencies>
 
   <reports>
-	<report>maven-checkstyle-plugin</report>
-	<report>maven-junit-report-plugin</report>
-	<report>maven-javadoc-plugin</report>
-	<report>maven-jxr-plugin</report>
 	<report>maven-license-plugin</report>
-	<report>maven-pmd-plugin</report>
-	<report>maven-jdepend-plugin</report>
-	<report>maven-tasklist-plugin</report>
-    <report>maven-clover-plugin</report>
   </reports>
   
 </project>
