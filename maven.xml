@@ -18,8 +18,6 @@
   </preGoal>
 
   <goal name="assemble">
-
-
       <ant:mkdir dir="${maven.repo.local}/jhlabs/jars"/>
       <ant:mkdir dir="${maven.repo.local}/jhlabs/zips"/>
       <ant:get src="http://www.jhlabs.com/ip/imageeditor.zip"
@@ -32,8 +30,6 @@
       </ant:unzip>
       <ant:copy file="${maven.repo.local}/jhlabs/zips/imageeditor/imageeditor.jar" todir="${maven.repo.local}/jhlabs/jars/"/>
       <delete dir="${maven.repo.local}/jhlabs/zips/imageeditor"/>
-
-
     <maven:reactor
         basedir="${basedir}"
         includes="**/${pattern}/**/project.xml"
@@ -42,6 +38,54 @@
         banner="Building"
         ignoreFailures="false"/>
   </goal>
+
+  <goal name="build">
+    <maven:reactor 
+        basedir="${basedir}"
+        includes="**/${pattern}/**/project.xml"
+        excludes="project.xml"
+        goals="dist:build-bin"
+        banner="distribution"
+        ignoreFailures="false"/>
+    <ant:mkdir dir="${maven.build.dir}/distributions"/>
+    <ant:unzip dest="${maven.build.dir}/distributions">
+    	<ant:fileset dir="${basedir}/core/target/distributions" includes="*.zip"/>
+    </ant:unzip>
+    <ant:unzip dest="${maven.build.dir}/distributions">
+    	<ant:fileset dir="${basedir}/samples/target/distributions" includes="*.zip"/>
+    </ant:unzip>
+    <ant:unzip dest="${maven.build.dir}/distributions">
+    	<ant:fileset dir="${basedir}/j2ee/target/distributions" includes="*.zip"/>
+    </ant:unzip>
+    <ant:copy todir="${maven.build.dir}/distributions">
+    	<ant:fileset dir="${basedir}">
+    		<include name="LICENSE.txt"/>
+    	</ant:fileset>
+    </ant:copy>
+    <ant:copy todir="${maven.build.dir}/distributions">
+    	<ant:fileset dir="${basedir}/core">
+    		<include name="doc/**"/>
+    	</ant:fileset>
+    	<ant:fileset dir="${basedir}/j2ee">
+    		<include name="doc/**"/>
+    	</ant:fileset>
+    	<ant:fileset dir="${basedir}/samples">
+    		<include name="doc/**"/>
+    	</ant:fileset>
+    </ant:copy>
+    <ant:zip zipfile="${maven.build.dir}/${pom.artifactId}-${pom.currentVersion}.zip"
+    	basedir="${maven.build.dir}/distributions"/>
+  </goal>
+  
+  <preGoal name="clean">
+    <maven:reactor 
+        basedir="${basedir}"
+        includes="**/${pattern}/**/project.xml"
+        excludes="project.xml"
+        goals="clean"
+        banner="cleanning"
+        ignoreFailures="false"/>
+  </preGoal>
 
   <postGoal name="site">
     <ant:copy file="${basedir}/images/organization-logo.jpg" todir="${maven.build.dir}/docs/images"/>
