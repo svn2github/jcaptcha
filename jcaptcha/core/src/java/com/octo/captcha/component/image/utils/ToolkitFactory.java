@@ -466,7 +466,7 @@ package com.octo.captcha.component.image.utils;
 
 import com.octo.captcha.CaptchaException;
 
-import java.awt.Toolkit;
+import java.awt.*;
 import java.util.Properties;
 
 /**

@@ -465,7 +465,6 @@
 package com.octo.captcha.service.image;
 
 import com.octo.captcha.service.ServiceLoadTestAbstract;
-import com.octo.captcha.service.MockedCaptchaService;
 
 /**
  * Load test of the default Service implementation

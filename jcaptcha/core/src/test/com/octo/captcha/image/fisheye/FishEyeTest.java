@@ -467,10 +467,9 @@ package com.octo.captcha.image.fisheye;
 
 import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
 import com.octo.captcha.component.image.backgroundgenerator.UniColorBackgroundGenerator;
+import junit.framework.TestCase;
 
 import java.awt.*;
-
-import junit.framework.TestCase;
 
 public class FishEyeTest extends TestCase {
     FishEye fishEye;

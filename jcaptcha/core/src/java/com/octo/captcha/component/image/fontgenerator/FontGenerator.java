@@ -464,7 +464,7 @@
 
 package com.octo.captcha.component.image.fontgenerator;
 
-import java.awt.Font;
+import java.awt.*;
 
 /**
  * <p>Used by ComposedWordToImage to retrieve a Font to apply to the word that

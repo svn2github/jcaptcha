@@ -52,10 +52,9 @@ package com.octo.captcha.image.fisheye;
 
 import com.octo.captcha.component.image.backgroundgenerator.UniColorBackgroundGenerator;
 import com.octo.captcha.component.image.deformation.ImageDeformationByFilters;
+import junit.framework.TestCase;
 
 import java.awt.*;
-
-import junit.framework.TestCase;
 
 public class FishEyeFactoryTest extends TestCase {
     FishEyeFactory fishEyeFactory;

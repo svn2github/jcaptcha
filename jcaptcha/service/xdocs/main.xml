@@ -20,6 +20,8 @@ Implementations are typed (image or sound).
 
         <section name="UML">
             <img src="uml.jpg"/>
+            And the ehcache extension
+               <img src="uml2.jpg"/>
         </section>
     </body>
 </document>

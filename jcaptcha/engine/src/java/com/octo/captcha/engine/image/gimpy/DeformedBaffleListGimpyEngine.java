@@ -66,7 +66,7 @@ import com.octo.captcha.component.wordgenerator.WordGenerator;
 import com.octo.captcha.engine.image.ListImageCaptchaEngine;
 import com.octo.captcha.image.gimpy.GimpyFactory;
 
-import java.awt.Color;
+import java.awt.*;
 import java.awt.image.ImageFilter;
 
 /**

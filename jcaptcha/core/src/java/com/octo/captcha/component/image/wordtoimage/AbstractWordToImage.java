@@ -466,7 +466,7 @@ package com.octo.captcha.component.image.wordtoimage;
 
 import com.octo.captcha.CaptchaException;
 
-import java.awt.Font;
+import java.awt.*;
 import java.awt.font.TextAttribute;
 import java.awt.image.BufferedImage;
 import java.text.AttributedString;

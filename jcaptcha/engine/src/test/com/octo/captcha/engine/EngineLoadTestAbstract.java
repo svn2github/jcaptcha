@@ -465,9 +465,9 @@
 package com.octo.captcha.engine;
 
 import com.octo.captcha.Captcha;
+import junit.framework.TestCase;
 import net.sourceforge.groboutils.junit.v1.MultiThreadedTestRunner;
 import net.sourceforge.groboutils.junit.v1.TestRunnable;
-import junit.framework.TestCase;
 /**
  * Base class for CaptchaEngine load tests...
  */

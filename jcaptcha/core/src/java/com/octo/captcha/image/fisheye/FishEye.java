@@ -466,7 +466,7 @@ package com.octo.captcha.image.fisheye;
 
 import com.octo.captcha.image.ImageCaptcha;
 
-import java.awt.Point;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.StringTokenizer;
 

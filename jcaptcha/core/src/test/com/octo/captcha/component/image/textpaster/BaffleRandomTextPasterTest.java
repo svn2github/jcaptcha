@@ -465,12 +465,11 @@ DAMAGES.
 package com.octo.captcha.component.image.textpaster;
 
 import com.octo.captcha.CaptchaException;
+import junit.framework.TestCase;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.text.AttributedString;
-
-import junit.framework.TestCase;
 
 /**
  * <p>Description: </p>

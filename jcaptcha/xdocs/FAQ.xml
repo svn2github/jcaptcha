@@ -5,6 +5,22 @@
 
     <body>
 
+        <section name="ACCESSIBILITY">
+
+                    <p>
+                        Current image captchas tests are not very accessible, and this is a major concern for us.<br/>
+                        There is currently no consensus around this issue, but some solutions are rising.
+                        See :
+                        <ul>
+                            <li><a href="http://www.bestkungfu.com/archive/date/2004/03/matt-presents-escape-from-captcha/">Matt Presents: Escape from CAPTCHA</a></li>
+                            <li><a href="http://www.w3.org/TR/turingtest/#solutions">Inaccessibility of Visually-Oriented Anti-Robot Tests</a></li>
+                       </ul>
+                       We are working on a the logic puzzle solution, and on the Sound captchas...
+                    </p>
+
+                </section>
+
+
         <section name="X11">
 		Question :<br/>
             
@@ -25,17 +41,18 @@ ToolkitFactory helper class.
 in the javadoc.
         <br/>
           here it is :
-		<code>
-          * &lt;p&gt;Description: This Factory is used in order to switch from the
-          * java.awt.Toolkit component to other implementation like &lt;a
-          * href="<A href="http://www.eteks.com/pja/en/" target="_NEW">http://www.eteks.com/pja/en/"&gt;PJA</A> Toolkit&lt;/a&gt;. By default this factory
-          * return the java.awt.Toolkit object. But if the the parameter
-          * toolkit.implementation is fixed as a parameter of the virtual machine with
-          * the value of the class name of another implementation of Toolkit, this
-          * factory return an implementation of this class. For exemple if you set to
-          * your virtual machine -Dtoolkit.implementation=com.eteks.awt.PJAToolkit, the
-          * factory returns an implementation of com.eteks.awt.PJAToolkit &lt;/p&gt;
-          </code>
+		<p>
+ * Description: This Factory is used in order to switch from the
+ * java.awt.Toolkit component to other implementation like <a href="http://www.eteks.com/pja/en/">PJA Toolkit</a>. By default this factory
+ * return the java.awt.Toolkit object.
+ <br/>But if the the parameter
+ * <code>toolkit.implementation</code> is fixed as a parameter of the virtual machine with
+ * the value of the class name of another implementation of Toolkit, this
+ * factory return an implementation of this class. For exemple if you set to
+ * your virtual machine <code>-Dtoolkit.implementation=com.eteks.awt.PJAToolkit</code>, the
+ * factory returns an implementation of com.eteks.awt.PJAToolkit </p>
+
+            <br/>
           See also these links :
           <ul><li><A href="http://www.geocities.com/marcoschmidt.geo/java-image-faq.html#x" target="_NEW">http://www.geocities.com/marcoschmidt.geo/java-image-faq.html#x</A></li>
 			<li><A href="http://www.linuxcentral.com/linux/man-pages/Xvfb.1x.html" target="_NEW">http://www.linuxcentral.com/linux/man-pages/Xvfb.1x.html</A> </li>
@@ -44,29 +61,42 @@ in the javadoc.
 		
         </section>
 
-        <section name="ADMINISTRATION">
+        <section name="Performance">
+
+                    <p>
+                        Image generation is a very heavy process : it cost a lot of CPU and RAM.
+                        <br/>
+                        A particular attention has been given to performance in the devellopement and test process of JCaptcha.<br/>
+                        In order to achieve transparency on this subject, the framework is heavily load tested, and tests results are provided in the source distribution.<br/>
+                        The tests are currently run on my own PC wich is a standard home computer.<br/>
+                        We encourage you to run the load tests on your production platform...     <br/>
+                        Load tests concerns :
+                        <ul>
+                            <li>JCaptcha engines integration load tests: to compare the CPU/RAM cost of a particular captcha test generation</li>
+                            <li>JCaptcha services mocked load tests: to compare the CPU/RAM cost of a particular life cycle management strategy</li>
+                            <li>JCaptcha services integration load tests: to compare the CPU/RAM cost of a particular life cycle management strategy with a particular engine</li>
+                        </ul>
+                    </p>
+                    Applying those tests to your implementation is very easy, see the code for more info<br/>
+                </section>
+
+
+        <section name="Management and JMX">
 
             <p>
+                The jcaptcha service provide some jmx facilities.<br/>
+                A manageable service provides :
                 <ul>
-                    <li>Web service module</li>
-                    <li>Sound test implementation</li>
-                    <li>JRoller how to</li>
-                    <li>Documentation, documentation, documentation...</li>
+                    <li>Runtime engine switch</li>
+                    <li>Usage and success statistics</li>
+                    <li>Cache and Buffer management</li>
                 </ul>
             </p>
-
+            The current implementation of the ManageableCaptchaService interface is JMX enabled.<br/>
+            All modules includes a JMX registration parameter that automatically register the Jcaptcha Service
+            to a JMX server. <br/>
+            See modules documentation and java docs for details.
         </section>
 
-        <section name="After dark">
-
-            <p>
-               <ul>
-                    <li>www.joone.org sample</li>
-                    <li>Let us know...</li>
-                </ul>
-            </p>
-
-        </section>
-
-    </body>
+      </body>
 </document>

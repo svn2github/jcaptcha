@@ -465,8 +465,6 @@ package com.octo.captcha.module.config;
 
 import com.octo.captcha.module.CaptchaModuleException;
 
-import com.octo.captcha.service.image.DefaultManageableImageCaptchaService;
-
 import java.util.ResourceBundle;
 
 /**

@@ -471,7 +471,7 @@ import com.octo.captcha.component.image.fontgenerator.TwistedAndShearedRandomFon
 import com.octo.captcha.component.image.textpaster.DoubleRandomTextPaster;
 import com.octo.captcha.component.image.textpaster.TextPaster;
 
-import java.awt.Color;
+import java.awt.*;
 
 /**
  * <p>Description: </p>

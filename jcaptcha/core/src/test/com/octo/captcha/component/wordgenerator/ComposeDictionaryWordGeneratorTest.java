@@ -465,10 +465,9 @@ DAMAGES.
 package com.octo.captcha.component.wordgenerator;
 
 import com.octo.captcha.CaptchaException;
+import junit.framework.TestCase;
 
 import java.util.Locale;
-
-import junit.framework.TestCase;
 
 /**
  * <p>Description: </p>

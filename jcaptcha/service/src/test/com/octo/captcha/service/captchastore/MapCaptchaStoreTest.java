@@ -467,10 +467,9 @@ DAMAGES.
 import com.octo.captcha.Captcha;
 import com.octo.captcha.service.CaptchaServiceException;
 import com.octo.captcha.service.MockCaptcha;
+import junit.framework.TestCase;
 
 import java.util.Collection;
-
-import junit.framework.TestCase;
 
 public class MapCaptchaStoreTest extends TestCase {
     MapCaptchaStore mapCaptchaStore;

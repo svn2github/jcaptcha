@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<document>
+
+    <meta name="keyword" content="captcha, java, core, jcaptcha"/>
+
+    <body>
+
+        <section name="RC 2 improvements">
+            <p>
+				<ul>
+					<li>Adding service implementation using ehcache as store</li>
+				   <li>Adding a buffered engine container for asynchronous buffered captcha generation using ehcache as buffer and Doug Lea concurrent api as deamon</li>
+				   <li>Adding a roller integration module</li>
+				   <li>Adding a struts-mailer sample application and tutorial</li>
+				   <li>Adding performance tests</li>
+				   <li>Adding some components</li>
+               </ul>
+            </p>
+        </section>
+
+	
+    </body>
+</document>

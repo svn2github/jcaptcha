@@ -471,8 +471,7 @@ import com.octo.captcha.component.image.deformation.ImageDeformation;
 import com.octo.captcha.image.ImageCaptcha;
 import com.octo.captcha.image.ImageCaptchaFactory;
 
-import java.awt.Color;
-import java.awt.Point;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Locale;
 import java.util.Random;

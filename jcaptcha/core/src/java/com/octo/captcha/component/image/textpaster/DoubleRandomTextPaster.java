@@ -466,9 +466,7 @@ package com.octo.captcha.component.image.textpaster;
 
 import com.octo.captcha.CaptchaException;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.text.AttributedString;

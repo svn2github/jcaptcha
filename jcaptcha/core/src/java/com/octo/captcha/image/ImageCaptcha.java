@@ -465,9 +465,9 @@
 package com.octo.captcha.image;
 
 import com.octo.captcha.Captcha;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageDecoder;
+import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;

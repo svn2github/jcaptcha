@@ -11,8 +11,10 @@
             <item name="Main" href="main.html"/>
             <item name="Architecture" href="architecture.html"/>
             <item name="Why?" href="why.html"/>
+			<item name="Current status" href="status.html"/>
             <item name="RoadMap" href="roadmap.html"/>
             <item name="Thanks" href="thanks.html"/>
+            <item name="References" href="references.html"/>
         </menu>
         <menu name="Projects" collapse="true">
             <item name="Overview of Projects" href="/projects-overview.html"/>
@@ -21,7 +23,8 @@
             <item name="Service" href="/multiproject/jcaptcha-service/index.html"/>
             <item name="Module base" href="/multiproject/jcaptcha-module-base/index.html"/>
             <item name="Module Struts" href="/multiproject/jcaptcha-module-struts/index.html"/>
-            <item name="Module Filter" href="../../multiproject/jcaptcha-module-filter/index.html"/>
+            <item name="Module Filter" href="/multiproject/jcaptcha-module-filter/index.html"/>
+            <item name="Module Roller" href="/multiproject/jcaptcha-module-roller/index.html"/>
         </menu>
         <menu name="Documentation" collapse="true">
             <item name="Wiki" href="http://jcaptcha.sourceforge.net/moniwiki/"/>
@@ -35,5 +38,6 @@
             <item name="Captcha research paper" href="http://www.cs.cmu.edu/~biglou/captcha_cacm.pdf"/>
             <item name="Captcha presentation paper" href="http://www.cs.cmu.edu/~biglou/captcha_crypt.pdf"/>
         </menu>
+
      </body>
 </project>

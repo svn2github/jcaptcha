@@ -465,18 +465,18 @@
 package com.octo.captcha.component.image.utils;
 
 import java.awt.*;
-import java.awt.im.InputMethodHighlight;
-import java.awt.dnd.peer.DragSourceContextPeer;
+import java.awt.datatransfer.Clipboard;
 import java.awt.dnd.DragGestureEvent;
 import java.awt.dnd.InvalidDnDOperationException;
-import java.awt.datatransfer.Clipboard;
+import java.awt.dnd.peer.DragSourceContextPeer;
+import java.awt.im.InputMethodHighlight;
 import java.awt.image.ColorModel;
 import java.awt.image.ImageObserver;
 import java.awt.image.ImageProducer;
 import java.awt.peer.*;
 import java.net.URL;
-import java.util.Properties;
 import java.util.Map;
+import java.util.Properties;
 
 /**
  * Mock toolkit for ToolkitFactory test

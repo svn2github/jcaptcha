@@ -472,7 +472,7 @@ import com.octo.captcha.component.image.textpaster.DoubleRandomTextPaster;
 import com.octo.captcha.component.image.textpaster.TextPaster;
 import com.octo.captcha.engine.image.DefaultImageCaptchaEngine;
 
-import java.awt.Color;
+import java.awt.*;
 
 /**
  * <p>Description: </p>

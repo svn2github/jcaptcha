@@ -465,11 +465,10 @@ DAMAGES.
 */
 
 import com.octo.captcha.service.captchastore.MapCaptchaStore;
+import junit.framework.TestCase;
 
 import java.util.Locale;
 import java.util.Random;
-
-import junit.framework.TestCase;
 
 public class AbstractCaptchaServiceTest extends TestCase {
 

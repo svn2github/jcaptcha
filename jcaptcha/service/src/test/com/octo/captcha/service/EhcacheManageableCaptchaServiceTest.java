@@ -465,11 +465,6 @@ package com.octo.captcha.service;
 
 
 
-import junit.framework.*;
-import com.octo.captcha.service.EhcacheManageableCaptchaService;
-import com.octo.captcha.service.captchastore.MapCaptchaStore;
-import com.octo.captcha.service.captchastore.CaptchaStore;
-import com.octo.captcha.Captcha;
 import net.sf.ehcache.CacheManager;
 
 public class EhcacheManageableCaptchaServiceTest extends AbstractManageableCaptchaServiceTest {

@@ -210,7 +210,10 @@ The final configuration will look as follow :
 
  </ul>
             <p>
+
                     <code>
+                <![CDATA[
+
                         <%@ page contentType="text/html;charset=UTF-8" language="java" %>
                         <%@ taglib uri="/tags/app"    prefix="app" %>
                         <%@ taglib uri="/tags/struts-bean" prefix="bean" %>
@@ -291,10 +294,10 @@ The final configuration will look as follow :
                               </logic:equal>
                             </td>
                           </tr>
-...
+...                 ]]>
                     </code>
 
-                That's it, we are done!
+ 
 
             </p>
         </section>

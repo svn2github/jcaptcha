@@ -469,9 +469,8 @@ package com.octo.captcha.service;
  * Time: 17:09:25
  */
 
-import junit.framework.*;
-import com.octo.captcha.service.BufferedCaptchaEngineContainer;
 import com.octo.captcha.Captcha;
+import junit.framework.TestCase;
 
 public class BufferedCaptchaEngineContainerTest extends TestCase {
     BufferedCaptchaEngineContainer bufferedCaptchaEngineContainer;

@@ -465,14 +465,8 @@
 package com.octo.captcha.image.gimpy;
 
 import com.octo.captcha.image.ImageCaptcha;
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGImageDecoder;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 /**
@@ -522,32 +516,5 @@ public class Gimpy extends ImageCaptcha implements Serializable
         return new Boolean(response.equals(this.response));
     };
 
-    /**
-     * @param out
-     * @throws java.io.IOException
-     */
-    public void writeObject(final ObjectOutputStream out) throws IOException
-    {
-        //write serializable values
-        out.writeUTF(this.question);
-        out.writeUTF(response);
-        //write image as jpeg
-        final JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
-        encoder.encode(this.getImageChallenge());
 
-    }
-
-    /**
-     * @param in
-     * @throws java.io.IOException
-     */
-    public void readObject(final ObjectInputStream in) throws IOException
-    {
-        //read serializable values
-        this.question = in.readUTF();
-        this.response = in.readUTF();
-        // read image as JPEG object
-        final JPEGImageDecoder decoder = JPEGCodec.createJPEGDecoder(in);
-        super.challenge = decoder.decodeAsBufferedImage();
-    }
 }

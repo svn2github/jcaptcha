@@ -464,7 +464,6 @@
 package com.octo.captcha.service;
 
 import com.octo.captcha.engine.CaptchaEngine;
-import com.octo.captcha.Captcha;
 
 /**
  * The ultimate service : eh cache as store, buffered engine, manageable!

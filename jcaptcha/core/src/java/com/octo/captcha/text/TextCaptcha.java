@@ -461,95 +461,74 @@
 
                        END OF TERMS AND CONDITIONS
 */
+package com.octo.captcha.text;
 
-package com.octo.captcha.component.image.textpaster;
-
-import com.octo.captcha.CaptchaException;
-
-import java.awt.*;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Rectangle2D;
-import java.awt.image.BufferedImage;
-import java.text.AttributedString;
+import com.octo.captcha.Captcha;
 
 /**
- * <p>text paster that paint white holes on the string (erase some parts)</p>
- * You may specify the number of holes per glyph : 3 by default. You may specify
- * the color of holes : TextColor by default.
- *
- * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
- * @version 1.0
- * @see {http://www.parc.xerox.com/research/istl/projects/captcha/default.html}
+ * A text captcha is a captcha with a Text challenge...
+ * This class is abstract.
+ * User: mag
+ * Date: 23 oct. 2004
+ * Time: 15:29:39
  */
-public class BaffleRandomTextPaster extends RandomTextPaster
-{
+public abstract class TextCaptcha implements Captcha{
 
-    private Integer numberOfHolesPerGlyph = new Integer(3);
-    private Color holesColor;
+    private Boolean hasChallengeBeenCalled = Boolean.FALSE;
+    protected String question;
+    protected String challenge;
 
-    public BaffleRandomTextPaster(Integer minAcceptedWordLenght,
-                                  Integer maxAcceptedWordLenght,
-                                  Color textColor,
-                                  Integer numberOfHolesPerGlyph,
-                                  Color holesColor)
-    {
-        super(minAcceptedWordLenght, maxAcceptedWordLenght, textColor);
-        this.numberOfHolesPerGlyph = numberOfHolesPerGlyph != null
-                ? numberOfHolesPerGlyph : this.numberOfHolesPerGlyph;
-        this.holesColor = holesColor != null ? holesColor : textColor;
+    /**
+     * Accessor captcha question.
+     *
+     * @return the question
+     */
+    public String getQuestion() {
+        return question;
     }
 
     /**
-     * Pastes the attributed string on the backround image and return the final
-     * image. Implementation must take into account the fact that the text must
-     * be readable by human and non by programs
+     * Accerssor for the questionned challenge.
      *
-     * @param background
-     * @param attributedWord
-     * @return the final image
-     * @throws CaptchaException if any exception accurs during paste routine.
+     * @return the challenge (may be an image for image captcha...
      */
-    public BufferedImage pasteText(BufferedImage background,
-                                   AttributedString attributedWord)
-            throws CaptchaException
+    public Object getChallenge() {
+        return getTextChallenge();
+    }
+
+     /**
+     * Accerssor for the questionned challenge in text format.
+     *
+     * @return the challenge
+     */
+    public String getTextChallenge() {
+        hasChallengeBeenCalled = Boolean.TRUE;
+        return challenge;
+    }
+
+
+
+    /**
+     * Dispose the challenge, once this method is call the getChallenge method
+     * will return null.<br> It has been added for technical reasons : a captcha
+     * is always used in a two step fashion<br> First submit the challenge, and
+     * then wait until the response arrives.<br> It had been asked to have a
+     * method to dispose the challenge that is no longer used after being
+     * dipslayed. So here it is!
+     */
+    public void disposeChallenge() {
+        this.challenge = null;
+
+    }
+
+    /**
+     * This method should return true if the getChalenge method has been called
+     * (has been added in order to properly manage the captcha state.
+     *
+     * @return true if getChallenge has been called false otherwise.
+     */
+    public Boolean hasGetChalengeBeenCalled()
     {
-        BufferedImage out = copyBackground(background);
-        Graphics2D pie = pasteBackgroundAndSetTextColor(out, background);
-        //set font to max in order to retrieve the correct boundaries
-        Font maxFont = getMaxFont(attributedWord.getIterator());
-        Rectangle2D bounds = getTextBoundaries(pie, maxFont, attributedWord);
-        int[] randomDeviation = getRandomDeviation(background, bounds, maxFont);
-        //draw the string
-        pie.drawString(attributedWord.getIterator(), randomDeviation[0],
-                randomDeviation[1]);
-
-        //draw the holes
-        //Composite c = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, .7f);
-        //pie.setComposite(c);
-        //Color circleColor = ((Graphics2D)background.getGraphics()).getColor();
-        //pie.getColor();
-        pie.setColor(holesColor);
-        int numberOfHoles = numberOfHolesPerGlyph.intValue()
-                * attributedWord.getIterator().getEndIndex();
-        int circleMaxSize = maxFont.getSize() / 3;
-        if (circleMaxSize == 0)
-        {
-            throw new CaptchaException("The font is too small");
-        }
-        for (int i = 0 ; i < numberOfHoles ; i++)
-        {
-            int circleSize = myRandom.nextInt(circleMaxSize) / 2
-                    + circleMaxSize / 2;
-            double circlex = bounds.getMaxX() * myRandom.nextGaussian();
-            double circley = bounds.getMaxY() * myRandom.nextGaussian();
-            Ellipse2D circle =
-                    new Ellipse2D.Double(randomDeviation[0] + circlex,
-                            randomDeviation[1] - maxFont.getSize() / 2
-                    + circley, circleSize, circleSize);
-            pie.fill(circle);
-
-        }
-        pie.dispose();
-        return out;
+        return hasChallengeBeenCalled;
     }
 }

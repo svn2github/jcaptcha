@@ -10,8 +10,8 @@
             <p>
 
                 <ul>
-                    <li>This module provides a Roller Plugin captcha ize the commetn process.</li>
-                    <li>It provides specific  CommentAuthenticator implementation.</li>
+                    <li>This module provides a Roller Plugin captcha ize the comment process.</li>
+                    <li>It provides specific CommentAuthenticator implementation.</li>
                     <li>It provides also an integration manual...</li>
 
                 </ul>

@@ -463,15 +463,14 @@
 */
 package com.octo.captcha.module.roller;
 
+import com.octo.captcha.module.config.CaptchaModuleConfigHelper;
+import com.octo.captcha.module.struts.CaptchaServicePlugin;
+import com.octo.captcha.service.CaptchaService;
+import com.octo.captcha.service.CaptchaServiceException;
 import org.roller.presentation.velocity.CommentAuthenticator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.octo.captcha.service.CaptchaService;
-import com.octo.captcha.service.CaptchaServiceException;
-import com.octo.captcha.module.struts.CaptchaServicePlugin;
-import com.octo.captcha.module.config.CaptchaModuleConfigHelper;
 
 /**
  * User: mag

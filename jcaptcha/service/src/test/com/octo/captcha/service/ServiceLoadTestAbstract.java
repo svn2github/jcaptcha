@@ -464,9 +464,9 @@
 
 package com.octo.captcha.service;
 
+import junit.framework.TestCase;
 import net.sourceforge.groboutils.junit.v1.MultiThreadedTestRunner;
 import net.sourceforge.groboutils.junit.v1.TestRunnable;
-import junit.framework.TestCase;
 
 /**
  * Base Load test for service implementation

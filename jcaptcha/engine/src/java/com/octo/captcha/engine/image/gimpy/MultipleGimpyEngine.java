@@ -11,7 +11,7 @@ import com.octo.captcha.component.image.textpaster.DoubleRandomTextPaster;
 import com.octo.captcha.component.image.textpaster.RandomTextPaster;
 import com.octo.captcha.component.image.textpaster.TextPaster;
 
-import java.awt.Color;
+import java.awt.*;
 
 /**
  * <p>Description: very simple gimpy</p>

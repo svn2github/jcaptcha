@@ -464,10 +464,7 @@
 
 package com.octo.captcha.component.image.backgroundgenerator;
 
-import java.awt.Color;
-import java.awt.GradientPaint;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
