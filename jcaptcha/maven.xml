@@ -8,11 +8,12 @@
   xmlns:ant="jelly:ant">
 
   <goal name="jcaptcha:all" description="build and package a jcaptcha distribution, builds the jcaptcha-maven site">
+        <attainGoal name="clean"/>
         <attainGoal name="jcaptcha:deploy-jhlab"/>
-        <attainGoal name="jcaptcha:jars"/>
-<!--        <attainGoal name="clean"/>-->
-<!--        <attainGoal name="multiproject:clean"/>-->
-        <attainGoal name="jcaptcha:dist"/>
+        <attainGoal name="multiproject:install"/>
+        <attainGoal name="multiproject:site"/>
+        <attainGoal name="jcaptcha:dist-src"/>
+        <attainGoal name="jcaptcha:dist-bin"/>
   </goal>
 
      <goal name="jcaptcha:jars" description="build and install jcaptcha jars">
@@ -25,79 +26,60 @@
         ignoreFailures="false"/>
        </goal>
 
-  <goal name="jcaptcha:dist" description="build and package a jcaptcha distribution">
-    <!--maven:reactor
-        basedir="${basedir}"
-        includes="*/project.xml"
-        excludes="project.xml"
-        goals="dist"
-        banner="distribution"
-        ignoreFailures="false"/-->
+  <goal name="jcaptcha:dist-src" description="build and package a jcaptcha distribution">
+    <ant:mkdir dir="${maven.build.dir}/distributions"/>
 
-    <ant:zip zipfile="${maven.build.dir}/${pom.artifactId}-src-${pom.currentVersion}.zip"
-    	basedir=".">
+    <ant:zip zipfile="${maven.build.dir}/distributions/${pom.artifactId}-src-${pom.currentVersion}.zip">
     	<ant:fileset dir="${basedir}">
     		<exclude name="**/target/**"/>
+    		<exclude name="**/CVS/**"/>
     	</ant:fileset>
-    	</ant:zip>
+    </ant:zip>
+  </goal>
 
-    <ant:mkdir dir="${maven.build.dir}/distributions"/>
-
-    <ant:copy todir="${maven.build.dir}/distributions">
+   <goal name="jcaptcha:dist-bin" description="build and package a jcaptcha distribution">
+	<ant:mkdir dir="${maven.build.dir}/distributions/bin/tozip"/>
+    <ant:copy todir="${maven.build.dir}/distributions/bin/temp" flatten="true">
     	<ant:fileset dir="${basedir}">
-    		<include name="**/*.jar"/>
+    		<include name="**/jcaptcha*-${pom.currentVersion}.jar"/>
+    		<include name="**/imaging.jar"/>
+    		<exclude name="${maven.build.dir}"/>
     	</ant:fileset>
     </ant:copy>
+    
+    <unzip dest="${maven.build.dir}/distributions/bin/temp/unjared">
+		<fileset dir="${maven.build.dir}/distributions/bin/temp">
+			<include name="*.jar"/>
+		</fileset>
+	</unzip>
 
-
-
-       <!--
-    <maven:reactor
-        basedir="${basedir}"
-        includes="**/${pattern}/**/project.xml"
-        excludes="project.xml"
-        goals="dist"
-        banner="distribution"
-        ignoreFailures="false"/>
-    <ant:mkdir dir="${maven.build.dir}/distributions"/>
-    <ant:mkdir dir="${maven.build.dir}/src-distributions"/>
-    <ant:unzip dest="${maven.build.dir}/distributions">
-    	<ant:fileset dir="${basedir}" includes="**/target/distributions/*.zip" excludes="*src.zip"/>
-    </ant:unzip>
-
-
-    <ant:unzip dest="${maven.build.dir}/src-distributions">
-    	<ant:fileset dir="${basedir}" includes="**/target/distributions/*src.zip"/>
-    </ant:unzip>
-
-    <ant:copy todir="${maven.build.dir}/distributions">
+  <jar destfile="${maven.build.dir}/distributions/bin/tozip/${pom.artifactId}-all-${pom.currentVersion}.jar" basedir="${maven.build.dir}/distributions/bin/temp/unjared">
+  </jar>
+   
+   <ant:copy todir="${maven.build.dir}/distributions/bin/tozip/">
     	<ant:fileset dir="${basedir}">
-    		<include name="LICENSE.txt"/>
+    		<include name="lib/**.jar"/>
+    		
     	</ant:fileset>
-    </ant:copy>
 
-    <ant:copy todir="${maven.build.dir}/distributions">
-    	<ant:fileset dir="${basedir}">
-    		<include name="**/doc/**"/>
+    	<ant:fileset dir="${basedir}/engine/src/conf">
+    		<include name="**/*.jpg"/>
     	</ant:fileset>
-    </ant:copy>
-
-    <ant:copy todir="${maven.build.dir}/src-distributions">
-    	<ant:fileset dir="${basedir}">
-    		<include name="lib/**"/>
-    		<include name="images/**"/>
-    		<include name="xdocs/**"/>
-    		<include name="*.xml"/>
-    		<include name="*.txt"/>
-    		<include name="*.properties"/>
+    	
+    	<ant:fileset dir="${maven.build.dir}">
+    		<include name="docs/**"/>
     	</ant:fileset>
-    </ant:copy>
-
-    <ant:zip zipfile="${maven.build.dir}/${pom.artifactId}-${pom.currentVersion}.zip"
-    	basedir="${maven.build.dir}/distributions"/>
-    <ant:zip zipfile="${maven.build.dir}/${pom.artifactId}-${pom.currentVersion}-src.zip"
-    	basedir="${maven.build.dir}/src-distributions"/>
-    	-->
+    	
+    	<ant:fileset dir="${maven.build.dir}">
+    		<include name="docs/**"/>
+    	</ant:fileset>
+    </ant:copy> 
+	<ant:zip zipfile="${maven.build.dir}/distributions/${pom.artifactId}-bin-${pom.currentVersion}.zip"
+    	>
+    	<ant:fileset dir="${maven.build.dir}/distributions/bin/tozip">
+    		<exclude name="**"/>
+    	</ant:fileset>
+    </ant:zip>
 
   </goal>
 

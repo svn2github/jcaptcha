@@ -36,11 +36,12 @@
 
                 <ul>
 
-                    <li>Copy the jcaptcha jar to the WEB-INF/lib dir of the roller web-app : jcaptcha-${version}.jar</li>
+                    <li>Copy the jcaptcha jar to the WEB-INF/lib dir of the roller web-app : jcaptcha-all-${version}.jar</li>
                     <li>Copy the gimpybackgrounds folder in the WEB-INF/classes dir of the roller web-app</li>
                     <li>Add the folowing at the end of the struts config file</li>
-                   <source>
+                   <source><![CDATA[
                         <plug-in className="com.octo.captcha.module.struts.CaptchaServicePlugin"/>
+                        ]]>
                     </source>
                     There's many settable property available, but none are required, this is detailed in the module documentation.
                     <li>Add the following action declaration :</li>

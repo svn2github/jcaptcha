@@ -15,7 +15,6 @@
 <br/>
  <br/>
  The captcha roller module is a struts based plugin to configure and integrate a captcha service with the <a href="http://www.rollerweblogger.org/">rollerwebloger</a> system.<BR/>
- This project provide a struts plugin and dedicated classes to easily integrate a captcha service with the <a href="http://www.rollerweblogger.org/">rollerwebloger</a> system.<BR/>
  It uses the jcaptcha-core, jcaptcha-engine, jcaptcha-service, jcaptcha-module-base, jcaptcha-module-stuts.
  ]]>
      </description>
