@@ -14,7 +14,7 @@
   
   <!-- The version of the project under development, e.g.
        1.1, 1.2, 2.0-SNAPSHOT -->
-  <currentVersion>1.0-beta2-SNAPSHOT</currentVersion>
+  <currentVersion>1.0-beta2</currentVersion>
   
   <!-- details about the organization that 'owns' the project -->
   <organization>
@@ -241,7 +241,7 @@
       <!-- The unique id for an artifact produced by the project group, e.g. jboss-boot -->
       <artifactId>jcaptcha-core</artifactId>
       <!-- The version of the dependency., e.g. 3.2.1 -->
-      <version>1.0-beta2-SNAPSHOT</version>
+      <version>1.0-beta2</version>
       <!-- The name of jar file if it doesn't respect <artifactId>-<version>.jar pattern.-->
       <jar/>
       <!-- The type of dependency. This defaults to jar. 
