@@ -51,6 +51,7 @@
 
 package com.octo.captcha.pix.gimpy.wordtoimages.backgroundgenerators;
 
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 import junit.framework.TestCase;
@@ -75,6 +76,19 @@ public class MultipleShapeBackgroundGeneratorTest extends TestCase {
     public void setUp() {
         this.multipleShapeBackgroundGenerator = 
             new MultipleShapeBackgroundGenerator(new Integer(100),new Integer(100));
+    }
+
+    public void testMultipleShapeBackgroundGenerator() {
+        this.multipleShapeBackgroundGenerator =
+            new MultipleShapeBackgroundGenerator(new Integer(100),new Integer(100),
+                null,null,null,null,null,null,null,null,null);
+        this.multipleShapeBackgroundGenerator =
+            new MultipleShapeBackgroundGenerator(new Integer(100),new Integer(100),
+                Color.WHITE,Color.BLACK,
+                new Integer(10),new Integer(10),
+                new Integer(10),new Integer(10),
+                Color.WHITE,Color.BLACK,
+                new Integer(10));
     }
 
     public void testGetBackround() {
