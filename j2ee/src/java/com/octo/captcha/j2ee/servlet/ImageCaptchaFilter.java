@@ -357,8 +357,7 @@ public class ImageCaptchaFilter implements Filter, ImageCaptchaFilterMBean
                     + " and "
                     + CAPTCHA_ERROR_URLS_PARAMETER
                     + " values are not consistant in web.xml : there should be"
-                    + " exactly one forward success and one forward error for"
-                    + " each verification URL !");
+                    + " exactly one forward error for each verification URL !");
         }
         while (verificationURLs.hasMoreTokens())
         {
@@ -486,14 +485,6 @@ public class ImageCaptchaFilter implements Filter, ImageCaptchaFilterMBean
         // Get the URL the user asked for
         String servletPathInfo = request.getServletPath();
 
-        if (log.isDebugEnabled())
-        {
-            log.debug("requestedURL = " + servletPathInfo);
-            log.debug("captchaRenderingURL = " + this.captchaRenderingURL);
-            // @TODO : there's an error here ?
-            log.debug("captchaVerificationURL = " + this.captchaRenderingURL);
-        }
-
         if (servletPathInfo.equals(this.captchaRenderingURL))
         {
             // This is the URL used to ask for captcha generation : do it !
@@ -501,7 +492,7 @@ public class ImageCaptchaFilter implements Filter, ImageCaptchaFilterMBean
         }
         else if (this.verificationForwards.containsKey(servletPathInfo))
         {
-            // This is an URL used to ask for captcha challenge verification :
+            // This is the URL used to ask for captcha challenge verification :
             // do it !
             this.verifyAnswerToACaptchaChallenge(
                 request,
@@ -556,27 +547,27 @@ public class ImageCaptchaFilter implements Filter, ImageCaptchaFilterMBean
             {
                 log.error(
                     "Exception trying to create the object name to"
-                        + " register the CaptchaFilter under",
+                        + " register the ImageCaptchaFilter under",
                     e);
             }
             catch (InstanceAlreadyExistsException e)
             {
                 log.error(
-                    "Exception trying to register the CaptchaFilter to"
+                    "Exception trying to register the ImageCaptchaFilter to"
                         + " the MBean server",
                     e);
             }
             catch (MBeanRegistrationException e)
             {
                 log.error(
-                    "Exception trying to register the CaptchaFilter to"
+                    "Exception trying to register the ImageCaptchaFilter to"
                         + " the MBean server",
                     e);
             }
             catch (NotCompliantMBeanException e)
             {
                 log.error(
-                    "Exception trying to register the CaptchaFilter to"
+                    "Exception trying to register the ImageCaptchaFilter to"
                         + " the MBean server",
                     e);
             }
@@ -599,27 +590,28 @@ public class ImageCaptchaFilter implements Filter, ImageCaptchaFilterMBean
         {
             log.error(
                 "Exception trying to create the object name under witch"
-                    + " the internal store is registered",
+                    + " ImageCaptchaFilter is registered",
                 e);
         }
         catch (InstanceNotFoundException e)
         {
             log.error(
-                "Exception trying to unregister the CaptchaFilter from"
+                "Exception trying to unregister the ImageCaptchaFilter from"
                     + " the MBean server",
                 e);
         }
         catch (MBeanRegistrationException e)
         {
             log.error(
-                "Exception trying to unregister the CaptchaFilter from"
+                "Exception trying to unregister the ImageCaptchaFilter from"
                     + "the MBean server",
                 e);
         }
     }
 
     /**
-     * Generate a new ImageCaptcha and render it as JPEG to the client.
+     * Generate a new ImageCaptcha, store it in the internal store and
+     * render it as JPEG to the client.
      * This method returns a 404 to the client instead of the image if
      * the request isn't correct (missing parameters, etc...).
      *
