@@ -598,7 +598,7 @@ public class MultipleShapeBackgroundGenerator
         BufferedImage bi = new BufferedImage(getImageWidth(),
                 getImageHeight(), BufferedImage.TYPE_INT_RGB);
         Graphics2D g2 = (Graphics2D) bi.getGraphics();
-
+        g2.setBackground(Color.white);
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
 

@@ -476,13 +476,14 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.net.URL;
 
 /**
  * <p>File reader background generator that return a random image (JPEG ONLY)
  * from the ones found in the directory </p>
  * <p/>
  * TODO : add some gif, bmp,... reader facilities.
- * 
+ *
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
@@ -507,10 +508,26 @@ public class FileReaderRandomBackgroundGenerator extends
         File dir = new File(this.rootPath);
         if (!dir.canRead() || !dir.isDirectory())
         {
-            throw new CaptchaException("Root path is not" +
-                    " a directory or cannot be read");
-        } else
-        {
+            //trying with ressource
+            URL url = this.getClass().getResource(this.rootPath);
+            if(url!=null){
+                dir = new File(url.getFile());
+            }else{
+                url=this.getClass().getResource("/"+this.rootPath);
+                if(url!=null){
+                dir = new File(url.getFile());
+                }else{
+                    dir = new File(".");
+                }
+            }
+            if (!dir.canRead() || !dir.isDirectory()){
+                if (!dir.canRead() || !dir.isDirectory()){
+                         throw new CaptchaException("Root path :'"+dir.getAbsolutePath()+"' is not" +
+                        " a directory or cannot be read");
+                }
+            }
+        }
+
             File[] files = dir.listFiles();
 
             //get all jpeg
@@ -530,7 +547,8 @@ public class FileReaderRandomBackgroundGenerator extends
                     }
                 }
 
-            }
+
+
             if (images.size() != 0)
             {
                 for (int i = 0 ; i < images.size() ; i++)
@@ -541,7 +559,7 @@ public class FileReaderRandomBackgroundGenerator extends
             } else
             {
                 throw new CaptchaException("Root path directory is valid but " +
-                        "does not contains any image files");
+                        "does not contains any image (jpg) files");
             }
         }
     }
