@@ -34,39 +34,39 @@
 </tr>
 <tr>
 <td>DefaultGimpyEngineCaptcha</td>
-<td><img src="DefaultGimpyEngineCaptcha_0.jpg"/></td>
-<td><img src="DefaultGimpyEngineCaptcha_1.jpg"/></td>
-<td><img src="DefaultGimpyEngineCaptcha_2.jpg"/></td>
+<td><img src="samples/DefaultGimpyEngineCaptcha_0.jpg"/></td>
+<td><img src="samples/DefaultGimpyEngineCaptcha_1.jpg"/></td>
+<td><img src="samples/DefaultGimpyEngineCaptcha_2.jpg"/></td>
 </tr>
 <tr>
 <td>BaffleListGimpyEngineCaptcha</td>
-<td><img src="BaffleListGimpyEngineCaptcha_0.jpg"/></td>
-<td><img src="BaffleListGimpyEngineCaptcha_1.jpg"/></td>
-<td><img src="BaffleListGimpyEngineCaptcha_2.jpg"/></td>
+<td><img src="samples/BaffleListGimpyEngineCaptcha_0.jpg"/></td>
+<td><img src="samples/BaffleListGimpyEngineCaptcha_1.jpg"/></td>
+<td><img src="samples/BaffleListGimpyEngineCaptcha_2.jpg"/></td>
 </tr>
 <tr>
 <td>BasicListGimpyEngineCaptcha</td>
-<td><img src="BasicListGimpyEngineCaptcha_0.jpg"/></td>
-<td><img src="BasicListGimpyEngineCaptcha_1.jpg"/></td>
-<td><img src="BasicListGimpyEngineCaptcha_2.jpg"/></td>
+<td><img src="samples/BasicListGimpyEngineCaptcha_0.jpg"/></td>
+<td><img src="samples/BasicListGimpyEngineCaptcha_1.jpg"/></td>
+<td><img src="samples/BasicListGimpyEngineCaptcha_2.jpg"/></td>
 </tr>
 <tr>
 <td>DeformedBaffleListGimpyEngineCaptcha</td>
-<td><img src="DeformedBaffleListGimpyEngineCaptcha_0.jpg"/></td>
-<td><img src="DeformedBaffleListGimpyEngineCaptcha_1.jpg"/></td>
-<td><img src="DeformedBaffleListGimpyEngineCaptcha_2.jpg"/></td>
+<td><img src="samples/DeformedBaffleListGimpyEngineCaptcha_0.jpg"/></td>
+<td><img src="samples/DeformedBaffleListGimpyEngineCaptcha_1.jpg"/></td>
+<td><img src="samples/DeformedBaffleListGimpyEngineCaptcha_2.jpg"/></td>
 </tr>
 <tr>
 <td>DoubleRandomListGimpyEngineCaptcha</td>
-<td><img src="DoubleRandomListGimpyEngineCaptcha_0.jpg"/></td>
-<td><img src="DoubleRandomListGimpyEngineCaptcha_1.jpg"/></td>
-<td><img src="DoubleRandomListGimpyEngineCaptcha_2.jpg"/></td>
+<td><img src="samples/DoubleRandomListGimpyEngineCaptcha_0.jpg"/></td>
+<td><img src="samples/DoubleRandomListGimpyEngineCaptcha_1.jpg"/></td>
+<td><img src="samples/DoubleRandomListGimpyEngineCaptcha_2.jpg"/></td>
 </tr>
 <tr>
 <td>SimpleListImageCaptchaEngineCaptcha</td>
-<td><img src="SimpleListImageCaptchaEngineCaptcha_0.jpg"/></td>
-<td><img src="SimpleListImageCaptchaEngineCaptcha_1.jpg"/></td>
-<td><img src="SimpleListImageCaptchaEngineCaptcha_2.jpg"/></td>
+<td><img src="samples/SimpleListImageCaptchaEngineCaptcha_0.jpg"/></td>
+<td><img src="samples/SimpleListImageCaptchaEngineCaptcha_1.jpg"/></td>
+<td><img src="samples/SimpleListImageCaptchaEngineCaptcha_2.jpg"/></td>
 </tr>
 <tr>
 <td>SimpleFishEyeEngineCaptcha</td>

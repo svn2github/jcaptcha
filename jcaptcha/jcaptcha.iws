@@ -327,7 +327,7 @@
     <option name="HIDE_WARNINGS" value="false" />
   </component>
   <component name="FileEditorManager" split-orientation="vertical" split-proportion="0.5">
-    <first-group selected-file="file://$PROJECT_DIR$/xdocs/links.inc">
+    <first-group selected-file="file://$PROJECT_DIR$/maven.xml">
       <entry file="file://$PROJECT_DIR$/xdocs/items.inc" pinned="false">
         <provider selected="true" editor-type-id="text-editor">
           <state line="12" column="22" selection-start="933" selection-end="933" vertical-scroll-proportion="0.4722222">
@@ -342,7 +342,7 @@
           </state>
         </provider>
       </entry>
-      <entry file="file://$PROJECT_DIR$/xdocs/references.xml" pinned="false">
+      <entry file="file://$PROJECT_DIR$/root.iml" pinned="false">
         <provider selected="true" editor-type-id="text-editor">
           <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
             <folding />
@@ -365,14 +365,14 @@
       </entry>
       <entry file="file://$PROJECT_DIR$/project.xml" pinned="false">
         <provider selected="true" editor-type-id="text-editor">
-          <state line="52" column="0" selection-start="1830" selection-end="1830" vertical-scroll-proportion="0.6319444">
+          <state line="26" column="22" selection-start="1091" selection-end="1091" vertical-scroll-proportion="0.03935185">
             <folding />
           </state>
         </provider>
       </entry>
       <entry file="file://$PROJECT_DIR$/maven.xml" pinned="false">
         <provider selected="true" editor-type-id="text-editor">
-          <state line="116" column="8" selection-start="3729" selection-end="3729" vertical-scroll-proportion="0.9212963">
+          <state line="117" column="16" selection-start="3756" selection-end="3756" vertical-scroll-proportion="0.8819444">
             <folding />
           </state>
         </provider>
@@ -939,13 +939,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/engine/project.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="27" selection-start="731" selection-end="731" vertical-scroll-proportion="0.787037">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/xdocs/architecture.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="0" selection-start="33" selection-end="33" vertical-scroll-proportion="0.0787037">
@@ -997,14 +990,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/project.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="0" selection-start="1830" selection-end="1830" vertical-scroll-proportion="0.6319444">
+        <state line="26" column="22" selection-start="1091" selection-end="1091" vertical-scroll-proportion="0.03935185">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/maven.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="116" column="8" selection-start="3729" selection-end="3729" vertical-scroll-proportion="0.9212963">
+        <state line="117" column="16" selection-start="3756" selection-end="3756" vertical-scroll-proportion="0.8819444">
           <folding />
         </state>
       </provider>
@@ -1040,6 +1033,13 @@
     <entry file="file://$PROJECT_DIR$/xdocs/main.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1" column="10" selection-start="32" selection-end="32" vertical-scroll-proportion="0.03935185">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/root.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
