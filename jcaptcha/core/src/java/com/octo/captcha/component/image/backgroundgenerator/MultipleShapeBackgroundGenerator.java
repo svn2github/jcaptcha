@@ -58,8 +58,6 @@
 
 package com.octo.captcha.component.image.backgroundgenerator;
 
-import com.octo.captcha.component.image.backgroundgenerator.AbstractBackgroundGenerator;
-
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;

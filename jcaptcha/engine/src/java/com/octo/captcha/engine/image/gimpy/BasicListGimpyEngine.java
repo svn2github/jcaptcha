@@ -467,8 +467,8 @@ package com.octo.captcha.engine.image.gimpy;
 
 import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
 import com.octo.captcha.component.image.backgroundgenerator.FileReaderRandomBackgroundGenerator;
-import com.octo.captcha.component.image.fontgenerator.TwistedAndShearedRandomFontGenerator;
 import com.octo.captcha.component.image.fontgenerator.FontGenerator;
+import com.octo.captcha.component.image.fontgenerator.TwistedAndShearedRandomFontGenerator;
 import com.octo.captcha.component.image.textpaster.DoubleRandomTextPaster;
 import com.octo.captcha.component.image.textpaster.TextPaster;
 
@@ -476,14 +476,13 @@ import java.awt.*;
 
 /**
  * <p>Description: </p>
+ *
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class BasicListGimpyEngine extends com.octo.captcha.engine.image.ListImageCaptchaEngine
-{
+public class BasicListGimpyEngine extends com.octo.captcha.engine.image.ListImageCaptchaEngine {
 
-    protected void buildInitialFactories()
-    {
+    protected void buildInitialFactories() {
         //word generator
         com.octo.captcha.component.wordgenerator.WordGenerator dictionnaryWords = new com.octo.captcha.component.wordgenerator.DictionaryWordGenerator(new com.octo.captcha.component.wordgenerator.FileDictionnary("toddlist"));
         //wordtoimage components

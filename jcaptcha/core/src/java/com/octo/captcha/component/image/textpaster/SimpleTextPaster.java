@@ -465,7 +465,6 @@ DAMAGES.
 package com.octo.captcha.component.image.textpaster;
 
 import com.octo.captcha.CaptchaException;
-import com.octo.captcha.CaptchaException;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -492,7 +491,8 @@ public class SimpleTextPaster extends AbstractTextPaster {
      * @param background
      * @param attributedWord
      * @return the final image
-     * @throws com.octo.captcha.CaptchaException if any exception accurs during paste routine.
+     * @throws com.octo.captcha.CaptchaException
+     *          if any exception accurs during paste routine.
      */
     public BufferedImage pasteText(final BufferedImage background, final AttributedString attributedWord) throws CaptchaException {
         int x = (background.getWidth()) / 20;

@@ -465,8 +465,6 @@ DAMAGES.
 package com.octo.captcha.component.image.textpaster;
 
 import com.octo.captcha.CaptchaException;
-import com.octo.captcha.component.image.textpaster.BaffleRandomTextPaster;
-import com.octo.captcha.CaptchaException;
 import junit.framework.TestCase;
 
 import java.awt.*;
@@ -475,6 +473,7 @@ import java.text.AttributedString;
 
 /**
  * <p>Description: </p>
+ *
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
  */
@@ -486,8 +485,10 @@ public class BaffleRandomTextPasterTest extends TestCase {
     protected Integer numberHoles = new Integer(10);
     protected Color textColor = Color.BLACK;
     protected Color holesColor = Color.WHITE;
+
     /**
      * Constructor for BaffleRandomTextPasterTest.
+     *
      * @param name
      */
     public BaffleRandomTextPasterTest(String name) {
@@ -496,26 +497,23 @@ public class BaffleRandomTextPasterTest extends TestCase {
 
     protected void setUp() throws Exception {
         super.setUp();
-        this.baffleRandomTextPaster = new BaffleRandomTextPaster(
-            this.minAcceptedWordLength,
-            this.maxAcceptedWordLength,
-            this.textColor,
-            this.numberHoles,
-            this.holesColor
-            );
+        this.baffleRandomTextPaster = new BaffleRandomTextPaster(this.minAcceptedWordLength,
+                this.maxAcceptedWordLength,
+                this.textColor,
+                this.numberHoles,
+                this.holesColor);
     }
 
     public void testPasteText() {
-        BufferedImage imageTest = new BufferedImage(100,50,BufferedImage.TYPE_INT_RGB);
+        BufferedImage imageTest = new BufferedImage(100, 50, BufferedImage.TYPE_INT_RGB);
         AttributedString stringTest = new AttributedString("test");
         BufferedImage test = null;
-        try
-        {
-            test = this.baffleRandomTextPaster.pasteText(imageTest,stringTest);
+        try {
+            test = this.baffleRandomTextPaster.pasteText(imageTest, stringTest);
             assertNotNull(test);
-            assertEquals(imageTest.getHeight(),test.getHeight());
-            assertEquals(imageTest.getWidth(),test.getWidth());
-        }catch(CaptchaException e) {
+            assertEquals(imageTest.getHeight(), test.getHeight());
+            assertEquals(imageTest.getWidth(), test.getWidth());
+        } catch (CaptchaException e) {
             assertNotNull(e);
         }
     }
@@ -527,12 +525,12 @@ public class BaffleRandomTextPasterTest extends TestCase {
 
     public void testGetMaxAcceptedWordLenght() {
         assertEquals(this.maxAcceptedWordLength.intValue(),
-            this.baffleRandomTextPaster.getMaxAcceptedWordLenght());
+                this.baffleRandomTextPaster.getMaxAcceptedWordLenght());
     }
 
     public void testGetMinAcceptedWordLenght() {
         assertEquals(this.minAcceptedWordLength.intValue(),
-            this.baffleRandomTextPaster.getMinAcceptedWordLenght());
+                this.baffleRandomTextPaster.getMinAcceptedWordLenght());
     }
 
 }

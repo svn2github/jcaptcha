@@ -465,7 +465,6 @@ DAMAGES.
 package com.octo.captcha.component.image.wordtoimage;
 
 import com.octo.captcha.CaptchaException;
-import com.octo.captcha.CaptchaException;
 
 import java.awt.*;
 import java.awt.font.TextAttribute;
@@ -505,7 +504,8 @@ public abstract class AbstractWordToImage implements WordToImage {
      * </ul>
      *
      * @return an image representation of the word
-     * @throws com.octo.captcha.CaptchaException if word is invalid or if image generation fails.
+     * @throws com.octo.captcha.CaptchaException
+     *          if word is invalid or if image generation fails.
      */
     public BufferedImage getImage(String word) throws CaptchaException {
         int wordLenght;

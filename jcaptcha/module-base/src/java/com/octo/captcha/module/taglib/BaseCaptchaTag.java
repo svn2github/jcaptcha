@@ -463,17 +463,14 @@ DAMAGES.
 */
 package com.octo.captcha.module.taglib;
 
-import com.octo.captcha.module.config.CaptchaModuleConfig;
 import com.octo.captcha.service.CaptchaService;
 
-import javax.servlet.jsp.tagext.Tag;
-import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.JspException;
-import java.io.IOException;
+import javax.servlet.jsp.PageContext;
+import javax.servlet.jsp.tagext.Tag;
 
 /**
  * Defines the service for the module.
- *
  *
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
@@ -506,7 +503,7 @@ public abstract class BaseCaptchaTag implements Tag {
 
     public void release() {
 
-      }
+    }
 
     public abstract int doEndTag() throws JspException;
 

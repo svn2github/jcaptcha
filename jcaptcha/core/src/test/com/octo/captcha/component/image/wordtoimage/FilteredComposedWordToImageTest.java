@@ -465,17 +465,12 @@ DAMAGES.
 package com.octo.captcha.component.image.wordtoimage;
 
 import com.octo.captcha.CaptchaException;
-
+import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
+import com.octo.captcha.component.image.backgroundgenerator.GradientBackgroundGenerator;
 import com.octo.captcha.component.image.fontgenerator.FontGenerator;
 import com.octo.captcha.component.image.fontgenerator.RandomFontGenerator;
-import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
-import com.octo.captcha.component.image.backgroundgenerator.GradientBackgroundGenerator;
-import com.octo.captcha.component.image.textpaster.TextPaster;
 import com.octo.captcha.component.image.textpaster.SimpleTextPaster;
-import com.octo.captcha.component.image.backgroundgenerator.GradientBackgroundGenerator;
-import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
-import com.octo.captcha.component.image.fontgenerator.RandomFontGenerator;
-import com.octo.captcha.CaptchaException;
+import com.octo.captcha.component.image.textpaster.TextPaster;
 import junit.framework.TestCase;
 
 import java.awt.*;
@@ -485,6 +480,7 @@ import java.awt.image.ReplicateScaleFilter;
 
 /**
  * <p>Description: </p>
+ *
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
  */
@@ -497,8 +493,10 @@ public class FilteredComposedWordToImageTest extends TestCase {
     private Integer imageWidth = new Integer(100);
     private Integer minFontSize = new Integer(10);
     private Integer maxFontSize = new Integer(10);
+
     /**
      * Constructor for FilteredComposedWordToImageTest.
+     *
      * @param name
      */
     public FilteredComposedWordToImageTest(String name) {
@@ -507,18 +505,18 @@ public class FilteredComposedWordToImageTest extends TestCase {
 
     public void setUp() {
 
-        BackgroundGenerator background = new GradientBackgroundGenerator(this.imageHeight,this.imageWidth,Color.BLACK,Color.WHITE);
-        FontGenerator fontGenerator = new RandomFontGenerator(this.minFontSize,this.maxFontSize);
-        TextPaster textPaster = new SimpleTextPaster(this.minAcceptedWordLength,this.maxAcceptedWordLength, Color.BLUE);
+        BackgroundGenerator background = new GradientBackgroundGenerator(this.imageHeight, this.imageWidth, Color.BLACK, Color.WHITE);
+        FontGenerator fontGenerator = new RandomFontGenerator(this.minFontSize, this.maxFontSize);
+        TextPaster textPaster = new SimpleTextPaster(this.minAcceptedWordLength, this.maxAcceptedWordLength, Color.BLUE);
 
         ImageFilter backFilter = new ReplicateScaleFilter(background.getImageWidth(),
-            background.getImageHeight());
+                background.getImageHeight());
 
         ImageFilter textFilter = new ReplicateScaleFilter(background.getImageWidth(),
-                    background.getImageHeight());
+                background.getImageHeight());
 
         ImageFilter finalFilter = new ReplicateScaleFilter(background.getImageWidth(),
-                    background.getImageHeight());
+                background.getImageHeight());
 
         ImageFilter[] backFilters = {backFilter
         };
@@ -529,14 +527,12 @@ public class FilteredComposedWordToImageTest extends TestCase {
         ImageFilter[] finalFilters = {finalFilter
         };
 
-        this.filteredComposedWordToImage = new FilteredComposedWordToImage(
-            fontGenerator,
-            background,
-            textPaster,
-            backFilters,
-            textFilters,
-            finalFilters
-        );
+        this.filteredComposedWordToImage = new FilteredComposedWordToImage(fontGenerator,
+                background,
+                textPaster,
+                backFilters,
+                textFilters,
+                finalFilters);
     }
 
     public void testGetImage() throws CaptchaException {

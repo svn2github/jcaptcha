@@ -466,20 +466,18 @@ package com.octo.captcha.engine.image.utils;
 
 import com.octo.captcha.engine.image.ImageCaptchaEngine;
 import com.octo.captcha.image.ImageCaptcha;
-import com.octo.captcha.image.ImageCaptcha;
 
 import java.io.File;
 
 /**
  * <p>Description: </p>
+ *
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class ImageCaptchaToJPEG
-{
+public class ImageCaptchaToJPEG {
 
-    public static void main(String[] args) throws Exception
-    {
+    public static void main(String[] args) throws Exception {
         System.out.println("args : image captcha engine class='" + args[0] + "', " +
                 "output dir='" + args[1] + "'" +
                 ",iterations='" + args[2] + "'");
@@ -490,8 +488,7 @@ public class ImageCaptchaToJPEG
         //ImageToFile encoder = new ImageToFile();
         System.out.println("Beginning generation");
 
-        for (i = 0 ; i < Integer.parseInt(args[2]) ; i++)
-        {
+        for (i = 0; i < Integer.parseInt(args[2]); i++) {
             ImageCaptcha captcha = pixCapchaEngine.getNextImageCaptcha();
             System.out.println("Captcha " + i + " retrieved");
             File out = new File(args[1] + File.separator + "captcha_" + i + ".jpg");

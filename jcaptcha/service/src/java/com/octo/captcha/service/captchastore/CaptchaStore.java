@@ -59,9 +59,7 @@
 package com.octo.captcha.service.captchastore;
 
 import com.octo.captcha.Captcha;
-import com.octo.captcha.Captcha;
 import com.octo.captcha.service.CaptchaServiceException;
-import com.octo.captcha.Captcha;
 
 import java.util.Collection;
 
@@ -84,7 +82,8 @@ public interface CaptchaStore {
      *
      * @param id      the key
      * @param captcha the captcha
-     * @throws com.octo.captcha.service.CaptchaServiceException if the captcha already exists, or if an error occurs during storing routine.
+     * @throws com.octo.captcha.service.CaptchaServiceException
+     *          if the captcha already exists, or if an error occurs during storing routine.
      */
     void storeCaptcha(String id, Captcha captcha) throws CaptchaServiceException;
 

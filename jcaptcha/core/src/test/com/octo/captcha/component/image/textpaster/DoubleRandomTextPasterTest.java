@@ -465,7 +465,6 @@ DAMAGES.
 package com.octo.captcha.component.image.textpaster;
 
 import com.octo.captcha.CaptchaException;
-import com.octo.captcha.component.image.textpaster.DoubleRandomTextPaster;
 import junit.framework.TestCase;
 
 import java.awt.*;
@@ -474,6 +473,7 @@ import java.text.AttributedString;
 
 /**
  * <p>Description: </p>
+ *
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
  */
@@ -486,6 +486,7 @@ public class DoubleRandomTextPasterTest extends TestCase {
 
     /**
      * Constructor for DoubleRandomTextPasterTest.
+     *
      * @param name
      */
     public DoubleRandomTextPasterTest(String name) {
@@ -494,25 +495,23 @@ public class DoubleRandomTextPasterTest extends TestCase {
 
     protected void setUp() throws Exception {
         super.setUp();
-        this.doubleRandomTextPaster = new DoubleRandomTextPaster(
-            this.minAcceptedWordLength,
-            this.maxAcceptedWordLength,
-            this.textColor);
+        this.doubleRandomTextPaster = new DoubleRandomTextPaster(this.minAcceptedWordLength,
+                this.maxAcceptedWordLength,
+                this.textColor);
     }
 
     public void testPasteText() {
-        BufferedImage imageTest = new BufferedImage(
-            100,150,BufferedImage.TYPE_INT_RGB);
+        BufferedImage imageTest = new BufferedImage(100, 150, BufferedImage.TYPE_INT_RGB);
         AttributedString stringTest = new AttributedString("test");
         BufferedImage test = null;
         try {
-            test = this.doubleRandomTextPaster.pasteText(imageTest,stringTest);
-        }catch (CaptchaException e) {
+            test = this.doubleRandomTextPaster.pasteText(imageTest, stringTest);
+        } catch (CaptchaException e) {
             assertNotNull(e);
         }
         assertNotNull(test);
-        assertEquals(imageTest.getHeight(),test.getHeight());
-        assertEquals(imageTest.getWidth(),test.getWidth());
+        assertEquals(imageTest.getHeight(), test.getHeight());
+        assertEquals(imageTest.getWidth(), test.getWidth());
     }
 
 }

@@ -531,6 +531,7 @@ public interface Captcha {
     /**
      * This method should return true if the getChalenge method has been called (has been added in order to properly
      * manage the captcha state.
+     *
      * @return true if getChallenge has been called false otherwise.
      */
     Boolean hasGetChalengeBeenCalled();

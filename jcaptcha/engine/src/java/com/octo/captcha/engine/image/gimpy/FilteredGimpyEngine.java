@@ -51,10 +51,10 @@
 package com.octo.captcha.engine.image.gimpy;
 
 
-import com.octo.captcha.component.image.backgroundgenerator.FunkyBackgroundGenerator;
 import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
-import com.octo.captcha.component.image.fontgenerator.RandomFontGenerator;
+import com.octo.captcha.component.image.backgroundgenerator.FunkyBackgroundGenerator;
 import com.octo.captcha.component.image.fontgenerator.FontGenerator;
+import com.octo.captcha.component.image.fontgenerator.RandomFontGenerator;
 import com.octo.captcha.component.image.textpaster.RandomTextPaster;
 import com.octo.captcha.component.image.textpaster.TextPaster;
 
@@ -64,16 +64,15 @@ import java.awt.image.ImageFilter;
 /**
  * <p>Static factory initializer, instanciates a ImageCaptchaFactory.
  * This class is a sample which demonstrate how to use teh jhlabs filter with the Filtered</p>
+ *
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class FilteredGimpyEngine extends com.octo.captcha.engine.image.DefaultImageCaptchaEngine
-{
+public class FilteredGimpyEngine extends com.octo.captcha.engine.image.DefaultImageCaptchaEngine {
 
     static com.octo.captcha.image.ImageCaptchaFactory[] factories;
 
-    static
-    {
+    static {
         //build filters
         com.jhlabs.image.EmbossFilter emboss = new com.jhlabs.image.EmbossFilter();
         com.jhlabs.image.SphereFilter sphere = new com.jhlabs.image.SphereFilter();
@@ -136,8 +135,7 @@ public class FilteredGimpyEngine extends com.octo.captcha.engine.image.DefaultIm
 
     }
 
-    public FilteredGimpyEngine()
-    {
+    public FilteredGimpyEngine() {
 
         super(factories);
 

@@ -61,6 +61,7 @@ public interface ImageDeformation {
 
     /**
      * Deforms an image
+     *
      * @param image the image to be deformed
      * @return the deformed image
      */

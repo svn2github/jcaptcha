@@ -465,9 +465,6 @@ DAMAGES.
 package com.octo.captcha.component.image.backgroundgenerator;
 
 import com.octo.captcha.CaptchaException;
-import com.octo.captcha.CaptchaException;
-import com.octo.captcha.component.image.backgroundgenerator.AbstractBackgroundGenerator;
-import com.octo.captcha.CaptchaException;
 
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;

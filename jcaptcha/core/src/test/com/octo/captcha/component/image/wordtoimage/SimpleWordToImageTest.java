@@ -472,6 +472,7 @@ import java.awt.image.BufferedImage;
 
 /**
  * <p>Description: </p>
+ *
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
  */
@@ -481,6 +482,7 @@ public class SimpleWordToImageTest extends TestCase {
 
     /**
      * Constructor for SimpleWordToImageTest.
+     *
      * @param name
      */
     public SimpleWordToImageTest(String name) {
@@ -495,7 +497,7 @@ public class SimpleWordToImageTest extends TestCase {
         Font test = this.simpleWordToImage.getFont();
         Font expected = GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts()[0];
         assertNotNull(test);
-        assertEquals(expected,test);
+        assertEquals(expected, test);
     }
 
     public void testGetBackround() {
@@ -506,31 +508,31 @@ public class SimpleWordToImageTest extends TestCase {
     public void testGetMaxAcceptedWordLenght() {
         int test = this.simpleWordToImage.getMaxAcceptedWordLenght();
         int expected = 10;
-        assertEquals(expected,test);
+        assertEquals(expected, test);
     }
 
     public void testGetMinAcceptedWordLenght() {
         int test = this.simpleWordToImage.getMinAcceptedWordLenght();
         int expected = 1;
-        assertEquals(expected,test);
+        assertEquals(expected, test);
     }
 
     public void testGetImageHeight() {
         int test = this.simpleWordToImage.getImageHeight();
         int expected = 50;
-        assertEquals(expected,test);
+        assertEquals(expected, test);
     }
 
     public void testGetImageWidth() {
         int test = this.simpleWordToImage.getImageWidth();
         int expected = 100;
-        assertEquals(expected,test);
+        assertEquals(expected, test);
     }
 
     public void testGetMinFontSize() {
         int test = this.simpleWordToImage.getMinFontSize();
         int expected = 10;
-        assertEquals(expected,test);
+        assertEquals(expected, test);
     }
 
 }

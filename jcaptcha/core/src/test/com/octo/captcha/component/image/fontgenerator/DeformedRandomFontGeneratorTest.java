@@ -469,10 +469,9 @@ import junit.framework.TestCase;
 
 import java.awt.*;
 
-import com.octo.captcha.component.image.fontgenerator.DeformedRandomFontGenerator;
-
 /**
  * <p>Description: </p>
+ *
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
  */
@@ -483,6 +482,7 @@ public class DeformedRandomFontGeneratorTest extends TestCase {
 
     /**
      * Constructor for DeformedRandomFontGeneratorTest.
+     *
      * @param name
      */
     public DeformedRandomFontGeneratorTest(String name) {
@@ -491,7 +491,7 @@ public class DeformedRandomFontGeneratorTest extends TestCase {
 
     public void setUp() {
         this.deformedRandomFontGenerator =
-            new DeformedRandomFontGenerator(this.minFontSize,null);
+                new DeformedRandomFontGenerator(this.minFontSize, null);
     }
 
     public void testGetFont() {

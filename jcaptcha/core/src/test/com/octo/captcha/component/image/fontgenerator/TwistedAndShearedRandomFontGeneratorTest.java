@@ -469,20 +469,20 @@ import junit.framework.TestCase;
 
 import java.awt.*;
 
-import com.octo.captcha.component.image.fontgenerator.TwistedAndShearedRandomFontGenerator;
-
 /**
  * <p>Description: </p>
+ *
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
  */
 public class TwistedAndShearedRandomFontGeneratorTest extends TestCase {
 
     private TwistedAndShearedRandomFontGenerator
-        twistedAndShearedRandomFontGenerator;
+            twistedAndShearedRandomFontGenerator;
 
     /**
      * Constructor for TwistedAndShearedRandomFontGeneratorTest.
+     *
      * @param arg0
      */
     public TwistedAndShearedRandomFontGeneratorTest(String arg0) {
@@ -491,7 +491,7 @@ public class TwistedAndShearedRandomFontGeneratorTest extends TestCase {
 
     public void setUp() {
         this.twistedAndShearedRandomFontGenerator =
-            new TwistedAndShearedRandomFontGenerator(new Integer(10),null);
+                new TwistedAndShearedRandomFontGenerator(new Integer(10), null);
     }
 
     public void testGetFont() {

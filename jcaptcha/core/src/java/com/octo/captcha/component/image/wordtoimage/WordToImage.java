@@ -465,7 +465,6 @@ DAMAGES.
 package com.octo.captcha.component.image.wordtoimage;
 
 import com.octo.captcha.CaptchaException;
-import com.octo.captcha.CaptchaException;
 
 import java.awt.image.BufferedImage;
 
@@ -507,7 +506,8 @@ public interface WordToImage {
      * Return an image with the specified
      *
      * @return the generated image
-     * @throws com.octo.captcha.CaptchaException if word is invalid or an exception ooxurs during the image generation
+     * @throws com.octo.captcha.CaptchaException
+     *          if word is invalid or an exception ooxurs during the image generation
      */
     BufferedImage getImage(String word) throws CaptchaException;
 

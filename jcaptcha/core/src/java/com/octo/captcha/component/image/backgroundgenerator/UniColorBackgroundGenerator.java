@@ -464,8 +464,6 @@ DAMAGES.
 
 package com.octo.captcha.component.image.backgroundgenerator;
 
-import com.octo.captcha.component.image.backgroundgenerator.AbstractBackgroundGenerator;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 

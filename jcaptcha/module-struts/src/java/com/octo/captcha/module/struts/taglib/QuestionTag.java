@@ -463,7 +463,6 @@ DAMAGES.
 */
 package com.octo.captcha.module.struts.taglib;
 
-import com.octo.captcha.module.taglib.*;
 import com.octo.captcha.module.struts.CaptchaServicePlugin;
 import com.octo.captcha.service.CaptchaService;
 
@@ -473,7 +472,7 @@ import com.octo.captcha.service.CaptchaService;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class QuestionTag extends com.octo.captcha.module.taglib.QuestionTag{
+public class QuestionTag extends com.octo.captcha.module.taglib.QuestionTag {
 
     protected CaptchaService getService() {
         return CaptchaServicePlugin.getInstance().getService();

@@ -466,14 +466,13 @@ package com.octo.captcha.image.gimpy;
 
 import com.octo.captcha.CaptchaException;
 import com.octo.captcha.CaptchaQuestionHelper;
-import com.octo.captcha.image.ImageCaptcha;
 import com.octo.captcha.component.image.wordtoimage.WordToImage;
 import com.octo.captcha.component.wordgenerator.WordGenerator;
+import com.octo.captcha.image.ImageCaptcha;
 
 import java.awt.image.BufferedImage;
 import java.util.Locale;
 import java.util.Random;
-import java.util.ResourceBundle;
 
 /**
  * Factories for Gimpies. Built on top of WordGenerator and WordToImage.
@@ -537,7 +536,7 @@ public class GimpyFactory extends com.octo.captcha.image.ImageCaptchaFactory {
             throw new CaptchaException(e);
         }
 
-        ImageCaptcha captcha = new Gimpy(CaptchaQuestionHelper.getQuestion(locale,BUNDLE_QUESTION_KEY),
+        ImageCaptcha captcha = new Gimpy(CaptchaQuestionHelper.getQuestion(locale, BUNDLE_QUESTION_KEY),
                 image, word);
         return captcha;
     }

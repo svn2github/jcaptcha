@@ -50,12 +50,11 @@
  */
 package com.octo.captcha.module.filter.image;
 
-import com.octo.captcha.service.CaptchaServiceException;
-import com.octo.captcha.service.AbstractManageableCaptchaServiceMBean;
-import com.octo.captcha.module.jmx.JMXRegistrationHelper;
 import com.octo.captcha.module.filter.FilterConfigUtils;
+import com.octo.captcha.module.jmx.JMXRegistrationHelper;
+import com.octo.captcha.service.AbstractManageableCaptchaServiceMBean;
+import com.octo.captcha.service.CaptchaServiceException;
 import com.octo.captcha.service.image.ImageCaptchaService;
-
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
@@ -108,7 +107,7 @@ public class ImageCaptchaFilter implements Filter {
      * Name under witch the CaptchaFilter is registered to an MBean server
      */
     public static final String JMX_REGISTERING_NAME =
-        "com.octo.captcha.module.servlet:object=ImageCaptchaFilter";
+            "com.octo.captcha.module.servlet:object=ImageCaptchaFilter";
 
     /**
      * The delimiter used to specify values as CSV in a string in web.xml
@@ -192,7 +191,7 @@ public class ImageCaptchaFilter implements Filter {
      * captchaRegisterToMBeanServer
      */
     private static final String CAPTCHA_REGISTER_TO_MBEAN_SERVER_PARAMETER =
-        "RegisterToMBeanServer";
+            "RegisterToMBeanServer";
 
 //    /**
 //     * The name of the request parameter that contains the captcha ID
@@ -200,7 +199,7 @@ public class ImageCaptchaFilter implements Filter {
 //     */
 //    private static String captchaIDParameterName = null;
 
-        /**
+    /**
      * A boolean that signal if the CaptchaFilter should be registered to
      * the MBean Server in the Application Server (default value is false)
      * (filter parameter to define in web.xml)
@@ -325,10 +324,10 @@ public class ImageCaptchaFilter implements Filter {
             this.verificationForwards.put(verificationURLs.nextToken(),
                     forwardErrorURLs.nextToken());
         }
-              //   get captcha Question parameter name from web.xml
+        //   get captcha Question parameter name from web.xml
         this.captchaQuestionParameterName =
                 FilterConfigUtils.getStringInitParameter(theFilterConfig,
-                        CAPTCHA_QUESTION_NAME_PARAMETER,true);
+                        CAPTCHA_QUESTION_NAME_PARAMETER, true);
 
 
         // get captcha ID parameter name from web.xml
@@ -353,10 +352,9 @@ public class ImageCaptchaFilter implements Filter {
         // get from web.xml the indicator signaling if the CaptchaFilter
         // should be registered to an MBean Server
         this.captchaRegisterToMBeanServer =
-            FilterConfigUtils.getBooleanInitParameter(
-                theFilterConfig,
-                CAPTCHA_REGISTER_TO_MBEAN_SERVER_PARAMETER,
-                false);
+                FilterConfigUtils.getBooleanInitParameter(theFilterConfig,
+                        CAPTCHA_REGISTER_TO_MBEAN_SERVER_PARAMETER,
+                        false);
 
         // create the ImageCaptchaService
         try {
@@ -374,10 +372,10 @@ public class ImageCaptchaFilter implements Filter {
             throw new CaptchaServiceException(e);
         }
         // register the ImageCaptchaService to an MBean server if specified
-        if (this.captchaRegisterToMBeanServer&&captchaService instanceof AbstractManageableCaptchaServiceMBean) {
-                AbstractManageableCaptchaServiceMBean manageable = (AbstractManageableCaptchaServiceMBean) captchaService;
-                JMXRegistrationHelper.registerToMBeanServer(manageable,JMX_REGISTERING_NAME);
-            }
+        if (this.captchaRegisterToMBeanServer && captchaService instanceof AbstractManageableCaptchaServiceMBean) {
+            AbstractManageableCaptchaServiceMBean manageable = (AbstractManageableCaptchaServiceMBean) captchaService;
+            JMXRegistrationHelper.registerToMBeanServer(manageable, JMX_REGISTERING_NAME);
+        }
 
 
     }
@@ -397,8 +395,8 @@ public class ImageCaptchaFilter implements Filter {
         // Get the URL the user asked for
         StringBuffer servletPathBuff = new StringBuffer()
                 .append(request.getServletPath());
-        if(request.getQueryString()!=null)servletPathBuff.append("?").append(request.getQueryString());
-        String servletPathInfo=servletPathBuff.toString();
+        if (request.getQueryString() != null) servletPathBuff.append("?").append(request.getQueryString());
+        String servletPathInfo = servletPathBuff.toString();
         if (servletPathInfo.startsWith(this.captchaRenderingURL)) {
             // This is the URL used to ask for captcha generation : do it !
             try {
@@ -418,7 +416,7 @@ public class ImageCaptchaFilter implements Filter {
                     theFilterChain);
         } else {
             // this is a question : add it and follow to the filter chain...
-            addQuestionToRequest(request,response);
+            addQuestionToRequest(request, response);
             theFilterChain.doFilter(theRequest, theResponse);
         }
     }
@@ -427,10 +425,10 @@ public class ImageCaptchaFilter implements Filter {
      * Remove from mbean server if needs to
      */
     public void destroy() {
-        if (captchaService instanceof AbstractManageableCaptchaServiceMBean&&this.captchaRegisterToMBeanServer) {
-                AbstractManageableCaptchaServiceMBean manageable = (AbstractManageableCaptchaServiceMBean) captchaService;
-                JMXRegistrationHelper.unregisterFromMBeanServer(JMX_REGISTERING_NAME);
-            }
+        if (captchaService instanceof AbstractManageableCaptchaServiceMBean && this.captchaRegisterToMBeanServer) {
+            AbstractManageableCaptchaServiceMBean manageable = (AbstractManageableCaptchaServiceMBean) captchaService;
+            JMXRegistrationHelper.unregisterFromMBeanServer(JMX_REGISTERING_NAME);
+        }
     }
 
 
@@ -443,11 +441,12 @@ public class ImageCaptchaFilter implements Filter {
      * Add the localized captcha to the current request as an attribute,
      * using the CaptchaQuestionParameterName.
      */
-     private void addQuestionToRequest(HttpServletRequest theRequest, HttpServletResponse theResponse){
+    private void addQuestionToRequest(HttpServletRequest theRequest, HttpServletResponse theResponse) {
         String captchaID = theRequest.getSession().getId();//(String) theRequest.getParameter(captchaIDParameterName);
-        String question = this.captchaService.getQuestionForID(captchaID,theRequest.getLocale());
-        theRequest.setAttribute(getCaptchaQuestionParameterName(),question);
+        String question = this.captchaService.getQuestionForID(captchaID, theRequest.getLocale());
+        theRequest.setAttribute(getCaptchaQuestionParameterName(), question);
     }
+
     /**
      * Generate a new ImageCaptcha, store it in the internal store and
      * render it as JPEG to the client.
@@ -504,9 +503,9 @@ public class ImageCaptchaFilter implements Filter {
         captchaChallengeAsJpeg = jpegOutputStream.toByteArray();
 
         // render the captcha challenge as a JPEG image in the response
-        theResponse.setHeader("Cache-Control","no-store");
-                theResponse.setHeader("Pragma","no-cache");
-                theResponse.setDateHeader ("Expires", 0);
+        theResponse.setHeader("Cache-Control", "no-store");
+        theResponse.setHeader("Pragma", "no-cache");
+        theResponse.setDateHeader("Expires", 0);
 
         theResponse.setContentType("image/jpeg");
         ServletOutputStream responseOutputStream =

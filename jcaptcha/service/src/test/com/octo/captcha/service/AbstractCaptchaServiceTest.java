@@ -482,15 +482,15 @@ public class AbstractCaptchaServiceTest extends TestCase {
     public void testAbstractCaptchaService() throws Exception {
         try {
             new MockedCaptchaService(null, new MockCaptchaEngine());
-                fail("should have thrown an exception");
+            fail("should have thrown an exception");
         } catch (Exception e) {
-            assertTrue("IllegalArgumentException attended",e instanceof IllegalArgumentException);
+            assertTrue("IllegalArgumentException attended", e instanceof IllegalArgumentException);
         }
         try {
-            new MockedCaptchaService(new MapCaptchaStore(),null);
-                fail("should have thrown an exception");
+            new MockedCaptchaService(new MapCaptchaStore(), null);
+            fail("should have thrown an exception");
         } catch (Exception e) {
-            assertTrue("IllegalArgumentException attended",e instanceof IllegalArgumentException);
+            assertTrue("IllegalArgumentException attended", e instanceof IllegalArgumentException);
         }
     }
 
@@ -555,7 +555,6 @@ public class AbstractCaptchaServiceTest extends TestCase {
 
         }
     }
-
 
 
 }

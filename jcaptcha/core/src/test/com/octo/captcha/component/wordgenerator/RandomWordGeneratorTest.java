@@ -471,6 +471,7 @@ import java.util.Locale;
 
 /**
  * <p>Description: </p>
+ *
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
  */
@@ -480,6 +481,7 @@ public class RandomWordGeneratorTest extends TestCase {
 
     /**
      * Constructor for RandomWordGeneratorTest.
+     *
      * @param name
      */
     public RandomWordGeneratorTest(String name) {
@@ -492,10 +494,10 @@ public class RandomWordGeneratorTest extends TestCase {
 
     public void testGetWord() {
         Integer wordLength = new Integer(10);
-        String pickWord = this.randomWordGenerator.getWord(wordLength,Locale.US);
+        String pickWord = this.randomWordGenerator.getWord(wordLength, Locale.US);
         assertNotNull(pickWord);
         assertTrue(pickWord.length() > 0);
-        assertEquals(wordLength.intValue(),pickWord.length());
+        assertEquals(wordLength.intValue(), pickWord.length());
     }
 
 }

@@ -466,8 +466,6 @@ package com.octo.captcha.engine.image.utils;
 
 import com.octo.captcha.image.ImageCaptcha;
 import com.octo.captcha.image.ImageCaptchaFactory;
-import com.octo.captcha.image.ImageCaptcha;
-import com.octo.captcha.image.ImageCaptchaFactory;
 import com.sun.image.codec.jpeg.ImageFormatException;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
@@ -479,13 +477,14 @@ import java.io.IOException;
 
 /**
  * <p>Description: </p>
+ *
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
  */
 public class SimpleImageCaptchaToJPEG {
 
     public static void main(String[] args)
-        throws ImageFormatException, IOException {
+            throws ImageFormatException, IOException {
         com.octo.captcha.engine.image.gimpy.SimpleListImageCaptchaEngine bge =
                 new com.octo.captcha.engine.image.gimpy.SimpleListImageCaptchaEngine();
         System.out.println("got gimpy");
@@ -502,8 +501,7 @@ public class SimpleImageCaptchaToJPEG {
 
         File f = new File("foo.jpg");
 
-        JPEGImageEncoder jpegEncoder = JPEGCodec.createJPEGEncoder(
-            new FileOutputStream(f));
+        JPEGImageEncoder jpegEncoder = JPEGCodec.createJPEGEncoder(new FileOutputStream(f));
         jpegEncoder.encode(bi);
     }
 

@@ -49,8 +49,6 @@
  */
 package com.octo.captcha;
 
-import com.octo.captcha.image.gimpy.Gimpy;
-
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -65,9 +63,10 @@ public final class CaptchaQuestionHelper {
     public static final String BUNDLE_NAME = CaptchaQuestionHelper.class.getName();
 
 
-    private CaptchaQuestionHelper(){};
+    private CaptchaQuestionHelper() {
+    };
 
-    public static final String getQuestion(Locale locale, String key){
+    public static final String getQuestion(Locale locale, String key) {
         return ResourceBundle.getBundle(BUNDLE_NAME, locale).getString(key);
     }
 

@@ -464,8 +464,6 @@ DAMAGES.
 
 package com.octo.captcha.component.image.textpaster;
 
-import com.octo.captcha.component.image.textpaster.TextPaster;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;

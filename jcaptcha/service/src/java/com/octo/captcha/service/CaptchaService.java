@@ -76,10 +76,10 @@ import java.util.Locale;
  * If no captcha exist for this id,
  * create a new captcha
  * return the challenge.
- *
+ * <p/>
  * else if the getChallenge method has been called on the stored captcha,
  * generate a new captcha, else return this captcha challenge.
- *
+ * <p/>
  * <br/>
  * The getQuestionForId should be called after the getChallenge (because this generate a new captcha),
  * and must first see if a captcha is associated with this ID :

@@ -471,6 +471,7 @@ import java.util.Locale;
 
 /**
  * <p>Description: </p>
+ *
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
  */
@@ -483,6 +484,7 @@ public class WordListTest extends TestCase {
 
     /**
      * Constructor for WordListTest.
+     *
      * @param name
      */
     public WordListTest(String name) {
@@ -497,7 +499,7 @@ public class WordListTest extends TestCase {
     public void testGetLocale() {
         Locale expected = Locale.US;
         Locale test = this.wordList.getLocale();
-        assertEquals(expected,test);
+        assertEquals(expected, test);
     }
 
     public void testAddWord() {
@@ -517,28 +519,26 @@ public class WordListTest extends TestCase {
         String expected = WORD1;
         String test = this.wordList.getNextWord(new Integer(WORD1.length()));
         assertNotNull(test);
-        assertEquals(expected,test);
+        assertEquals(expected, test);
         this.wordList.addWord(WORD2);
         test = this.wordList.getNextWord(new Integer(WORD2.length()));
-        assertEquals(WORD2,test);
+        assertEquals(WORD2, test);
     }
 
-    public void testGetMinWord() throws Exception
-    {
-        assertEquals(WORD1.length(),this.wordList.getMinWord().intValue());
+    public void testGetMinWord() throws Exception {
+        assertEquals(WORD1.length(), this.wordList.getMinWord().intValue());
         this.wordList.addWord(WORD2);
-        assertEquals(WORD1.length(),this.wordList.getMinWord().intValue());
+        assertEquals(WORD1.length(), this.wordList.getMinWord().intValue());
         this.wordList.addWord(WORD3);
-        assertEquals(WORD3.length(),this.wordList.getMinWord().intValue());
+        assertEquals(WORD3.length(), this.wordList.getMinWord().intValue());
     }
 
-    public void testGetMaxWord() throws Exception
-    {
-        assertEquals(WORD1.length(),this.wordList.getMaxWord().intValue());
+    public void testGetMaxWord() throws Exception {
+        assertEquals(WORD1.length(), this.wordList.getMaxWord().intValue());
         this.wordList.addWord(WORD2);
-        assertEquals(WORD2.length(),this.wordList.getMaxWord().intValue());
+        assertEquals(WORD2.length(), this.wordList.getMaxWord().intValue());
         this.wordList.addWord(WORD3);
-        assertEquals(WORD2.length(),this.wordList.getMaxWord().intValue());
+        assertEquals(WORD2.length(), this.wordList.getMaxWord().intValue());
 
     }
 }

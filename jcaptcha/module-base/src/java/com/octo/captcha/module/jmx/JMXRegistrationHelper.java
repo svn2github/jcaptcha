@@ -463,8 +463,8 @@ DAMAGES.
 */
 package com.octo.captcha.module.jmx;
 
-import com.octo.captcha.service.CaptchaServiceException;
 import com.octo.captcha.service.AbstractManageableCaptchaServiceMBean;
+import com.octo.captcha.service.CaptchaServiceException;
 
 import javax.management.*;
 import java.util.ArrayList;
@@ -476,22 +476,23 @@ import java.util.ArrayList;
  * @version 1.0
  */
 public class JMXRegistrationHelper {
-   /**
+    /**
      * Register self to the first MBean server available in the JVM, if
      * any.
      *
      * @param name the name the service will be registered
-     *                           to the MBean server.
-     * @throws com.octo.captcha.service.CaptchaServiceException in case of error. Possible
-     *                                 error details are :
-     *                                 <ul>
-     *                                 <li> CaptchaServiceException</li>
-     *                                 </ul>
+     *             to the MBean server.
+     * @throws com.octo.captcha.service.CaptchaServiceException
+     *          in case of error. Possible
+     *          error details are :
+     *          <ul>
+     *          <li> CaptchaServiceException</li>
+     *          </ul>
      * @see com.octo.captcha.service.CaptchaServiceException
      */
     public static void registerToMBeanServer(AbstractManageableCaptchaServiceMBean service, String name)
             throws CaptchaServiceException {
-        if(name==null) throw new CaptchaServiceException("Service registration name can't be null");
+        if (name == null) throw new CaptchaServiceException("Service registration name can't be null");
         ArrayList mbeanServers = MBeanServerFactory.findMBeanServer(null);
         if (mbeanServers.size() == 0) {
             throw new CaptchaServiceException("No current MBean Server, skiping the registering process");
@@ -546,11 +547,10 @@ public class JMXRegistrationHelper {
                         + "the MBean server",
                         e);
             }
-        }else{
+        } else {
             throw new CaptchaServiceException("Service registration name can't be null");
         }
     }
-
 
 
 }

@@ -469,7 +469,7 @@ package com.octo.captcha.module;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class CaptchaModuleException extends RuntimeException{
+public class CaptchaModuleException extends RuntimeException {
     /**
      * Constructs a new runtime exception with <code>null</code> as its
      * detail message.  The cause is not initialized, and may subsequently be

@@ -464,22 +464,20 @@ DAMAGES.
 package com.octo.captcha.component.image;
 
 
-
-
-import com.octo.captcha.component.image.wordtoimage.WordToImage;
 import com.octo.captcha.component.image.wordtoimage.SimpleWordToImage;
-import com.octo.captcha.image.gimpy.Gimpy;
-import com.octo.captcha.image.gimpy.GimpyFactory;
-import com.octo.captcha.image.ImageCaptcha;
-import com.octo.captcha.image.ImageCaptchaFactory;
+import com.octo.captcha.component.image.wordtoimage.WordToImage;
 import com.octo.captcha.component.wordgenerator.DummyWordGenerator;
 import com.octo.captcha.component.wordgenerator.WordGenerator;
+import com.octo.captcha.image.ImageCaptcha;
+import com.octo.captcha.image.ImageCaptchaFactory;
+import com.octo.captcha.image.gimpy.GimpyFactory;
 import junit.framework.TestCase;
 
 import java.awt.image.BufferedImage;
 
 /**
  * <p>Description: </p>
+ *
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
  */
@@ -489,6 +487,7 @@ public class ImageCaptchaTest extends TestCase {
 
     /**
      * Constructor for ImageCaptchaTest.
+     *
      * @param name
      */
     public ImageCaptchaTest(String name) {
@@ -520,7 +519,7 @@ public class ImageCaptchaTest extends TestCase {
      */
     public void testGetChallenge() {
         assertNotNull(pixCaptcha.getChallenge());
-        assertTrue("Captcha challenge is not a BufferedImage",pixCaptcha.getImageChallenge() instanceof BufferedImage);
+        assertTrue("Captcha challenge is not a BufferedImage", pixCaptcha.getImageChallenge() instanceof BufferedImage);
     }
 
     /**
@@ -532,10 +531,8 @@ public class ImageCaptchaTest extends TestCase {
 //    }
 
 
-
-    public void testGetImageChallenge() throws Exception
-    {
-        assertEquals(pixCaptcha.getImageChallenge(),pixCaptcha.getChallenge());
+    public void testGetImageChallenge() throws Exception {
+        assertEquals(pixCaptcha.getImageChallenge(), pixCaptcha.getChallenge());
     }
 
     /**

@@ -1,9 +1,6 @@
 package com.octo.captcha.component.image.textpaster;
 
 import com.octo.captcha.CaptchaException;
-import com.octo.captcha.CaptchaException;
-import com.octo.captcha.component.image.textpaster.SimpleTextPaster;
-import com.octo.captcha.CaptchaException;
 import junit.framework.TestCase;
 
 import java.awt.*;
@@ -12,6 +9,7 @@ import java.text.AttributedString;
 
 /**
  * <p>Description: </p>
+ *
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
  */
@@ -23,6 +21,7 @@ public class SimpleTextPasterTest extends TestCase {
 
     /**
      * Constructor for SimpleTextPasterTest.
+     *
      * @param name
      */
     public SimpleTextPasterTest(String name) {
@@ -30,32 +29,31 @@ public class SimpleTextPasterTest extends TestCase {
     }
 
     public void setUp() {
-        this.simpleTextPaster = new SimpleTextPaster(
-            this.minAcceptedWordLength,this.maxAcceptedWordLength, Color.BLUE);
+        this.simpleTextPaster = new SimpleTextPaster(this.minAcceptedWordLength, this.maxAcceptedWordLength, Color.BLUE);
     }
 
     public void testPasteText() {
-        BufferedImage testBufferedImage = new BufferedImage(100,50,BufferedImage.TYPE_INT_RGB);
+        BufferedImage testBufferedImage = new BufferedImage(100, 50, BufferedImage.TYPE_INT_RGB);
         AttributedString testAttributedString = new AttributedString("test");
         BufferedImage test = null;
         try {
-            test = this.simpleTextPaster.pasteText(testBufferedImage,testAttributedString);
+            test = this.simpleTextPaster.pasteText(testBufferedImage, testAttributedString);
         } catch (CaptchaException e) {
             assertNotNull(e);
         }
         assertNotNull(test);
-        assertEquals(testBufferedImage.getHeight(),test.getHeight());
-        assertEquals(testBufferedImage.getWidth(),test.getWidth());
+        assertEquals(testBufferedImage.getHeight(), test.getHeight());
+        assertEquals(testBufferedImage.getWidth(), test.getWidth());
     }
 
     public void testGetMaxAcceptedWordLenght() {
         assertEquals(this.maxAcceptedWordLength.intValue(),
-            this.simpleTextPaster.getMaxAcceptedWordLenght());
+                this.simpleTextPaster.getMaxAcceptedWordLenght());
     }
 
     public void testGetMinAcceptedWordLenght() {
         assertEquals(this.minAcceptedWordLength.intValue(),
-            this.simpleTextPaster.getMinAcceptedWordLenght());
+                this.simpleTextPaster.getMinAcceptedWordLenght());
     }
 
 }

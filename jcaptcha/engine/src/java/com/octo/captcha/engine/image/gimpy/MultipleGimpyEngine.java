@@ -1,39 +1,35 @@
-
 package com.octo.captcha.engine.image.gimpy;
 
 
+import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
 import com.octo.captcha.component.image.backgroundgenerator.FileReaderRandomBackgroundGenerator;
 import com.octo.captcha.component.image.backgroundgenerator.FunkyBackgroundGenerator;
-import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
+import com.octo.captcha.component.image.fontgenerator.FontGenerator;
 import com.octo.captcha.component.image.fontgenerator.TwistedAndShearedRandomFontGenerator;
 import com.octo.captcha.component.image.fontgenerator.TwistedRandomFontGenerator;
-import com.octo.captcha.component.image.fontgenerator.FontGenerator;
 import com.octo.captcha.component.image.textpaster.DoubleRandomTextPaster;
 import com.octo.captcha.component.image.textpaster.RandomTextPaster;
 import com.octo.captcha.component.image.textpaster.TextPaster;
-
 
 import java.awt.*;
 
 /**
  * <p>Description: very simple gimpy</p>
+ *
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
  */
-public class MultipleGimpyEngine extends com.octo.captcha.engine.image.DefaultImageCaptchaEngine
-{
+public class MultipleGimpyEngine extends com.octo.captcha.engine.image.DefaultImageCaptchaEngine {
 
     static com.octo.captcha.image.ImageCaptchaFactory[] factories;
 
-    static
-    {
+    static {
         //word generator
         com.octo.captcha.component.wordgenerator.WordGenerator dictionnaryWords = new com.octo.captcha.component.wordgenerator.DictionaryWordGenerator(new com.octo.captcha.component.wordgenerator.FileDictionnary("toddlist"));
 
         //wordtoimage components
         TextPaster randomPaster = new RandomTextPaster(new Integer(6), new Integer(8), Color.WHITE);
         TextPaster doublePaster = new DoubleRandomTextPaster(new Integer(6), new Integer(8), Color.WHITE);
-
 
 
         BackgroundGenerator fileBack = new FileReaderRandomBackgroundGenerator(new Integer(200), new Integer(100), "./images");
@@ -66,8 +62,7 @@ public class MultipleGimpyEngine extends com.octo.captcha.engine.image.DefaultIm
 
     }
 
-    public MultipleGimpyEngine()
-    {
+    public MultipleGimpyEngine() {
 
         super(factories);
 

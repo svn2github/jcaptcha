@@ -464,27 +464,26 @@ DAMAGES.
 
 package com.octo.captcha.image.fisheye;
 
-import com.octo.captcha.image.ImageCaptchaFactory;
-import com.octo.captcha.image.ImageCaptcha;
-import com.octo.captcha.image.ImageCaptchaFactory;
-import com.octo.captcha.CaptchaException;
-import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
-import com.octo.captcha.component.image.deformation.ImageDeformation;
 import com.octo.captcha.CaptchaException;
 import com.octo.captcha.CaptchaQuestionHelper;
+import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
+import com.octo.captcha.component.image.deformation.ImageDeformation;
+import com.octo.captcha.image.ImageCaptcha;
+import com.octo.captcha.image.ImageCaptchaFactory;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.Locale;
 import java.util.Random;
-import java.awt.image.BufferedImage;
-import java.awt.*;
 
 /**
  * This factory use a Backgroud generator to retrieve a picture,
  * Selects a random square center for the deformation, and apply it.
+ *
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class FishEyeFactory extends ImageCaptchaFactory{
+public class FishEyeFactory extends ImageCaptchaFactory {
 
     public static final String BUNDLE_QUESTION_KEY = FishEye.class.getName();
 
@@ -494,14 +493,16 @@ public class FishEyeFactory extends ImageCaptchaFactory{
     private ImageDeformation deformation;
     private Integer tolerance;
     private Integer scale;
-/**
- * Construct a new fishEye factory
- * @param generator the picture generator
- * @param deformation a deformation to be apply on the background
- * @param scale the size of the defprmed part (percent)
- * @param tolerance the tolerence (see FishEye)
- * @see FishEye
- */
+
+    /**
+     * Construct a new fishEye factory
+     *
+     * @param generator   the picture generator
+     * @param deformation a deformation to be apply on the background
+     * @param scale       the size of the defprmed part (percent)
+     * @param tolerance   the tolerence (see FishEye)
+     * @see FishEye
+     */
     public FishEyeFactory(BackgroundGenerator generator, ImageDeformation deformation, Integer scale, Integer tolerance) {
         if (generator == null) {
             throw new CaptchaException("Invalid configuration for a FishEyeFactory : BackgroundGenerator can't be null");
@@ -512,17 +513,17 @@ public class FishEyeFactory extends ImageCaptchaFactory{
         }
         this.deformation = deformation;
         this.generator = generator;
-        if (scale == null||scale.intValue()<1 || scale.intValue()>99) {
+        if (scale == null || scale.intValue() < 1 || scale.intValue() > 99) {
             throw new CaptchaException("Invalid configuration for a FishEyeFactory : scale" +
                     " can't be null, and must be between 1 and 99");
         }
-        this.scale=scale;
-        if (tolerance== null||tolerance.intValue()<0) {
-        throw new CaptchaException("Invalid configuration for a FishEyeFactory : tolerance" +
-                " can't be null, and must be positive");
+        this.scale = scale;
+        if (tolerance == null || tolerance.intValue() < 0) {
+            throw new CaptchaException("Invalid configuration for a FishEyeFactory : tolerance" +
+                    " can't be null, and must be positive");
         }
 
-        this.tolerance=tolerance;
+        this.tolerance = tolerance;
     }
 
     /**
@@ -543,23 +544,22 @@ public class FishEyeFactory extends ImageCaptchaFactory{
     public ImageCaptcha getImageCaptcha(Locale locale) {
         BufferedImage background = generator.getBackround();
         BufferedImage out = new BufferedImage(background.getWidth(), background.getHeight(), background.getType());
-        out.getGraphics().drawImage(background,0,0,null,null);
+        out.getGraphics().drawImage(background, 0, 0, null, null);
         int x = background.getWidth();
         int y = background.getHeight();
         //taking a square from original
 
-        int scaledX = Math.max(x*scale.intValue()/100,1);
-        int scaledY = Math.max(y*scale.intValue()/100,1);
-        int xPos = myRandom.nextInt(x-scaledX);
-        int yPos = myRandom.nextInt(y-scaledY);
-        BufferedImage clone = out.getSubimage(xPos,yPos,scaledX,scaledY);
-        out.getGraphics().drawImage(deformation.deformImage(clone),xPos,yPos,Color.WHITE,null);
+        int scaledX = Math.max(x * scale.intValue() / 100, 1);
+        int scaledY = Math.max(y * scale.intValue() / 100, 1);
+        int xPos = myRandom.nextInt(x - scaledX);
+        int yPos = myRandom.nextInt(y - scaledY);
+        BufferedImage clone = out.getSubimage(xPos, yPos, scaledX, scaledY);
+        out.getGraphics().drawImage(deformation.deformImage(clone), xPos, yPos, Color.WHITE, null);
         out.getGraphics().dispose();
-        Point center = new Point(xPos+(scaledX/2),yPos+(scaledY/2));
+        Point center = new Point(xPos + (scaledX / 2), yPos + (scaledY / 2));
 
-        return new FishEye(CaptchaQuestionHelper.getQuestion(locale,BUNDLE_QUESTION_KEY),out,center,tolerance);
+        return new FishEye(CaptchaQuestionHelper.getQuestion(locale, BUNDLE_QUESTION_KEY), out, center, tolerance);
     }
-
 
 
 }

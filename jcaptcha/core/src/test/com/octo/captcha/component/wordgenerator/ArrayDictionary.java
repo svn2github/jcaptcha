@@ -466,15 +466,13 @@ package com.octo.captcha.component.wordgenerator;
 
 import java.util.Locale;
 
-public class ArrayDictionary implements DictionaryReader
-{
+public class ArrayDictionary implements DictionaryReader {
 
     private WordList words;
 
-    public ArrayDictionary(String[] words){
+    public ArrayDictionary(String[] words) {
         this.words = new WordList(Locale.US);
-        for (int i = 0 ; i < words.length ; i++)
-        {
+        for (int i = 0; i < words.length; i++) {
 
             String word = words[i];
             this.words.addWord(word);
@@ -482,13 +480,11 @@ public class ArrayDictionary implements DictionaryReader
     }
 
 
-    public WordList getWordList()
-    {
+    public WordList getWordList() {
         return words;
     }
 
-    public WordList getWordList(Locale locale)
-    {
+    public WordList getWordList(Locale locale) {
         return words;
     }
 }

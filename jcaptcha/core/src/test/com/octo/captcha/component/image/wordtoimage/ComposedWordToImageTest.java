@@ -466,14 +466,11 @@ DAMAGES.
 package com.octo.captcha.component.image.wordtoimage;
 
 
-import com.octo.captcha.component.image.backgroundgenerator.GradientBackgroundGenerator;
 import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
-import com.octo.captcha.component.image.fontgenerator.RandomFontGenerator;
+import com.octo.captcha.component.image.backgroundgenerator.GradientBackgroundGenerator;
 import com.octo.captcha.component.image.fontgenerator.FontGenerator;
+import com.octo.captcha.component.image.fontgenerator.RandomFontGenerator;
 import com.octo.captcha.component.image.textpaster.SimpleTextPaster;
-import com.octo.captcha.component.image.textpaster.TextPaster;
-import com.octo.captcha.component.image.fontgenerator.RandomFontGenerator;
-import com.octo.captcha.component.image.fontgenerator.FontGenerator;
 import com.octo.captcha.component.image.textpaster.TextPaster;
 import junit.framework.TestCase;
 
@@ -482,6 +479,7 @@ import java.awt.image.BufferedImage;
 
 /**
  * <p>Description: </p>
+ *
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
  */
@@ -494,8 +492,10 @@ public class ComposedWordToImageTest extends TestCase {
     private Integer imageWidth = new Integer(100);
     private Integer minFontSize = new Integer(10);
     private Integer maxFontSize = new Integer(12);
+
     /**
      * Constructor for ComposedWordToImageTest.
+     *
      * @param name
      */
     public ComposedWordToImageTest(String name) {
@@ -503,10 +503,10 @@ public class ComposedWordToImageTest extends TestCase {
     }
 
     public void setUp() {
-        BackgroundGenerator background = new GradientBackgroundGenerator(this.imageWidth,this.imageHeight,Color.BLACK,Color.WHITE);
+        BackgroundGenerator background = new GradientBackgroundGenerator(this.imageWidth, this.imageHeight, Color.BLACK, Color.WHITE);
         FontGenerator fontGenerator = new RandomFontGenerator(this.minFontSize, this.maxFontSize);
-        TextPaster textPaster = new SimpleTextPaster(this.minAcceptedWordLength,this.maxAcceptedWordLength, Color.BLUE);
-        this.composedWordToImage = new ComposedWordToImage(fontGenerator,background,textPaster);
+        TextPaster textPaster = new SimpleTextPaster(this.minAcceptedWordLength, this.maxAcceptedWordLength, Color.BLUE);
+        this.composedWordToImage = new ComposedWordToImage(fontGenerator, background, textPaster);
     }
 
     public void testGetFont() {
@@ -522,31 +522,31 @@ public class ComposedWordToImageTest extends TestCase {
     public void testGetMaxAcceptedWordLenght() {
         int expected = this.maxAcceptedWordLength.intValue();
         int test = this.composedWordToImage.getMaxAcceptedWordLenght();
-        assertEquals(expected,test);
+        assertEquals(expected, test);
     }
 
     public void testGetMinAcceptedWordLenght() {
         int expected = this.minAcceptedWordLength.intValue();
         int test = this.composedWordToImage.getMinAcceptedWordLenght();
-        assertEquals(expected,test);
+        assertEquals(expected, test);
     }
 
     public void testGetImageHeight() {
         int expected = this.imageHeight.intValue();
         int test = this.composedWordToImage.getImageHeight();
-        assertEquals(expected,test);
+        assertEquals(expected, test);
     }
 
     public void testGetImageWidth() {
         int expected = this.imageWidth.intValue();
         int test = this.composedWordToImage.getImageWidth();
-        assertEquals(expected,test);
+        assertEquals(expected, test);
     }
 
     public void testGetMinFontSize() {
         int expected = this.minFontSize.intValue();
         int test = this.composedWordToImage.getMinFontSize();
-        assertEquals(expected,test);
+        assertEquals(expected, test);
     }
 
 }

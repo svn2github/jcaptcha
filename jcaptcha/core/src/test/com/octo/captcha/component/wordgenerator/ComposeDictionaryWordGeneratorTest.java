@@ -465,54 +465,55 @@ DAMAGES.
 package com.octo.captcha.component.wordgenerator;
 
 import com.octo.captcha.CaptchaException;
-import com.octo.captcha.CaptchaException;
 import junit.framework.TestCase;
 
 import java.util.Locale;
 
 /**
  * <p>Description: </p>
+ *
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
  */
 public class ComposeDictionaryWordGeneratorTest extends TestCase {
 
     protected ComposeDictionaryWordGenerator composeDictionaryWordGenerator;
-    protected String[] wordList = {"1","12","123","123456"};
-    protected int[]lengths = {1,2,3,6};
+    protected String[] wordList = {"1", "12", "123", "123456"};
+    protected int[] lengths = {1, 2, 3, 6};
 
-    protected String[] badwordList = {"a","b","c","d"};
-    protected int[]badlengths = {1,1,1,1};
+    protected String[] badwordList = {"a", "b", "c", "d"};
+    protected int[] badlengths = {1, 1, 1, 1};
 
     protected String[] emptywordList = {};
     protected int emptylength = 10;
+
     /**
      * Constructor for ComposeDictionaryWordGeneratorTest.
+     *
      * @param name
      */
     public ComposeDictionaryWordGeneratorTest(String name) {
         super(name);
     }
 
-   /**
-    * This method is the setup for each testcase.
-    */
+    /**
+     * This method is the setup for each testcase.
+     */
     protected void setUp() throws Exception {
         super.setUp();
         this.composeDictionaryWordGenerator =
-            new ComposeDictionaryWordGenerator(new ArrayDictionary(wordList));
+                new ComposeDictionaryWordGenerator(new ArrayDictionary(wordList));
     }
 
     /**
      * This testcase verify if the class works normaly.
      */
     public void testGetWordIntegerLocale() {
-        for(int i=0;i<lengths.length;i++){
-            String test = this.composeDictionaryWordGenerator.getWord(
-                new Integer(this.lengths[i]),Locale.FRENCH);
+        for (int i = 0; i < lengths.length; i++) {
+            String test = this.composeDictionaryWordGenerator.getWord(new Integer(this.lengths[i]), Locale.FRENCH);
             assertNotNull(test);
             assertTrue(test.length() > 0);
-            assertEquals(lengths[i],test.length());
+            assertEquals(lengths[i], test.length());
         }
     }
 
@@ -522,14 +523,13 @@ public class ComposeDictionaryWordGeneratorTest extends TestCase {
      */
     public void testSmallWordWithOneLetter() {
         this.composeDictionaryWordGenerator =
-            new ComposeDictionaryWordGenerator(new ArrayDictionary(this.badwordList));
-        for(int i=0;i<badlengths.length;i++){
-                            String test = this.composeDictionaryWordGenerator.getWord(
-                                new Integer(this.badlengths[i]),Locale.FRENCH);
-                            assertNotNull(test);
-                            assertTrue(test.length() > 0);
-                            assertEquals(badlengths[i],test.length());
-                        }
+                new ComposeDictionaryWordGenerator(new ArrayDictionary(this.badwordList));
+        for (int i = 0; i < badlengths.length; i++) {
+            String test = this.composeDictionaryWordGenerator.getWord(new Integer(this.badlengths[i]), Locale.FRENCH);
+            assertNotNull(test);
+            assertTrue(test.length() > 0);
+            assertEquals(badlengths[i], test.length());
+        }
     }
 
     /**
@@ -538,12 +538,11 @@ public class ComposeDictionaryWordGeneratorTest extends TestCase {
      */
     public void testEmptyDictionnary() {
         this.composeDictionaryWordGenerator =
-            new ComposeDictionaryWordGenerator(new ArrayDictionary(this.emptywordList));
+                new ComposeDictionaryWordGenerator(new ArrayDictionary(this.emptywordList));
         try {
-            String test = this.composeDictionaryWordGenerator.getWord(
-                            new Integer(this.emptylength),Locale.FRENCH);
+            String test = this.composeDictionaryWordGenerator.getWord(new Integer(this.emptylength), Locale.FRENCH);
             fail("Shouldn't use empty dictionnary");
-        }catch(CaptchaException e) {
+        } catch (CaptchaException e) {
             assertNotNull(e);
         }
     }

@@ -186,15 +186,15 @@ public interface AbstractManageableCaptchaServiceMBean extends CaptchaService {
 
 
     /**
-     *
      * @return the max captchaStore load before garbage collection of the store
      */
     int getCaptchaStoreSizeBeforeGarbageCollection();
 
     /**
      * max captchaStore size before garbage collection of the store
+     *
      * @param captchaStoreSizeBeforeGarbageCollection
+     *
      */
-    void setCaptchaStoreSizeBeforeGarbageCollection(
-            int captchaStoreSizeBeforeGarbageCollection);
+    void setCaptchaStoreSizeBeforeGarbageCollection(int captchaStoreSizeBeforeGarbageCollection);
 }

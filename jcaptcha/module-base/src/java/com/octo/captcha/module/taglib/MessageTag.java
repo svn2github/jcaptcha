@@ -467,7 +467,6 @@ import com.octo.captcha.module.config.CaptchaModuleConfig;
 import com.octo.captcha.service.CaptchaService;
 
 import java.io.IOException;
-import java.util.Enumeration;
 
 /**
  * <p><ul><li></li></ul></p>
@@ -480,7 +479,7 @@ public class MessageTag extends BaseCaptchaTag implements javax.servlet.jsp.tage
     private String messageKey = CaptchaModuleConfig.getInstance().getMessageKey();
 
     public int doEndTag() throws javax.servlet.jsp.JspException {
-   
+
 
         String message = (String) pageContext.getRequest().getAttribute(messageKey);
         if (message != null) {
@@ -491,7 +490,7 @@ public class MessageTag extends BaseCaptchaTag implements javax.servlet.jsp.tage
             }
 
         }
-         return javax.servlet.jsp.tagext.Tag.EVAL_PAGE;
+        return javax.servlet.jsp.tagext.Tag.EVAL_PAGE;
     }
 
 

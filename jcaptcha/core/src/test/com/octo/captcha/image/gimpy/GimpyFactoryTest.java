@@ -464,76 +464,64 @@ DAMAGES.
 
 package com.octo.captcha.image.gimpy;
 
-import junit.framework.TestCase;
-import com.octo.captcha.component.wordgenerator.RandomWordGenerator;
+import com.octo.captcha.CaptchaException;
 import com.octo.captcha.component.image.wordtoimage.SimpleWordToImage;
-import com.octo.captcha.image.gimpy.GimpyFactory;
-import com.octo.captcha.CaptchaException;
-import com.octo.captcha.image.gimpy.GimpyFactory;
-import com.octo.captcha.CaptchaException;
+import com.octo.captcha.component.wordgenerator.RandomWordGenerator;
+import junit.framework.TestCase;
 
-public class GimpyFactoryTest extends TestCase
-{
+public class GimpyFactoryTest extends TestCase {
 
     GimpyFactory tested;
 
-    public GimpyFactoryTest(String s)
-    {
+    public GimpyFactoryTest(String s) {
         super(s);
     }
 
-    protected void setUp() throws Exception
-    {
+    protected void setUp() throws Exception {
         super.setUp();
-        tested=new GimpyFactory(new RandomWordGenerator("a"), new SimpleWordToImage());
+        tested = new GimpyFactory(new RandomWordGenerator("a"), new SimpleWordToImage());
     }
 
-    public void testGetRandomRange() throws Exception
-    {
+    public void testGetRandomRange() throws Exception {
     }
 
-    public void testGetRandomLenght() throws Exception
-    {
+    public void testGetRandomLenght() throws Exception {
         //be carefull values tide to SimpleWordToImage.
-       for(int i=1;i<11;i++){
-           //System.out.println(" a trouver : "+i);
-           int j;
-           do{
+        for (int i = 1; i < 11; i++) {
+            //System.out.println(" a trouver : "+i);
+            int j;
+            do {
 
-              j = tested.getRandomLenght().intValue();
-               if(j<1||j>10){fail("Out of authorized range!");}
+                j = tested.getRandomLenght().intValue();
+                if (j < 1 || j > 10) {
+                    fail("Out of authorized range!");
+                }
 
-              //System.out.println("trouvé : "+j);
+                //System.out.println("trouvé : "+j);
 
-           }while(j!=i);
-       } ;
+            } while (j != i);
+        }
+        ;
     }
 
-    public void testGimpyFactory() throws Exception
-    {
-        try
-        {
-            new GimpyFactory(null,null);
+    public void testGimpyFactory() throws Exception {
+        try {
+            new GimpyFactory(null, null);
             fail("Test is not implemented");
-        } catch (CaptchaException e)
-        {
+        } catch (CaptchaException e) {
             assertNotNull(e.getMessage());
         }
-         try
-        {
-            new GimpyFactory(new RandomWordGenerator("a"),null);
+        try {
+            new GimpyFactory(new RandomWordGenerator("a"), null);
             fail("Test is not implemented");
-        } catch (CaptchaException e)
-        {
+        } catch (CaptchaException e) {
             assertNotNull(e.getMessage());
         }
 
-             try
-        {
-            new GimpyFactory(null,new  SimpleWordToImage());
+        try {
+            new GimpyFactory(null, new SimpleWordToImage());
             fail("Test is not implemented");
-        } catch (CaptchaException e)
-        {
+        } catch (CaptchaException e) {
             assertNotNull(e.getMessage());
         }
     }

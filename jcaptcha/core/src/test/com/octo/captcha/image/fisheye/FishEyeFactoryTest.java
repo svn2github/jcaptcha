@@ -50,14 +50,11 @@ package com.octo.captcha.image.fisheye;
  *
  */
 
-import junit.framework.*;
-import com.octo.captcha.image.fisheye.FishEyeFactory;
 import com.octo.captcha.component.image.backgroundgenerator.UniColorBackgroundGenerator;
-import com.octo.captcha.component.image.deformation.ImageDeformation;
 import com.octo.captcha.component.image.deformation.ImageDeformationByFilters;
+import junit.framework.TestCase;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class FishEyeFactoryTest extends TestCase {
     FishEyeFactory fishEyeFactory;
@@ -65,24 +62,24 @@ public class FishEyeFactoryTest extends TestCase {
 
     protected void setUp() throws Exception {
         super.setUp();
-        this.fishEyeFactory = new FishEyeFactory(new UniColorBackgroundGenerator(new Integer(300),new Integer(300),
-                Color.BLACK),new ImageDeformationByFilters(null),new Integer(10),new Integer(0));
+        this.fishEyeFactory = new FishEyeFactory(new UniColorBackgroundGenerator(new Integer(300), new Integer(300),
+                Color.BLACK), new ImageDeformationByFilters(null), new Integer(10), new Integer(0));
     }
 
     public void testGetImageCaptcha() throws Exception {
-        for(int i =0;i<10 ; i++){
-            assertTrue("sould be not null",fishEyeFactory.getImageCaptcha().getChallenge() !=null);
+        for (int i = 0; i < 10; i++) {
+            assertTrue("sould be not null", fishEyeFactory.getImageCaptcha().getChallenge() != null);
         }
         try {
-            this.fishEyeFactory = new FishEyeFactory(new UniColorBackgroundGenerator(new Integer(10),new Integer(10),
-                    Color.BLACK),new ImageDeformationByFilters(null),new Integer(100),new Integer(100));
+            this.fishEyeFactory = new FishEyeFactory(new UniColorBackgroundGenerator(new Integer(10), new Integer(10),
+                    Color.BLACK), new ImageDeformationByFilters(null), new Integer(100), new Integer(100));
             fail("should not be able to construct");
         } catch (Exception e) {
         }
-         this.fishEyeFactory = new FishEyeFactory(new UniColorBackgroundGenerator(new Integer(10),new Integer(10),
-                    Color.BLACK),new ImageDeformationByFilters(null),new Integer(1),new Integer(10));
-        for(int i =0;i<10 ; i++){
-            assertTrue("sould be never fail",fishEyeFactory.getImageCaptcha().validateResponse(new Point(5,5)).booleanValue());
+        this.fishEyeFactory = new FishEyeFactory(new UniColorBackgroundGenerator(new Integer(10), new Integer(10),
+                Color.BLACK), new ImageDeformationByFilters(null), new Integer(1), new Integer(10));
+        for (int i = 0; i < 10; i++) {
+            assertTrue("sould be never fail", fishEyeFactory.getImageCaptcha().validateResponse(new Point(5, 5)).booleanValue());
         }
     }
 }

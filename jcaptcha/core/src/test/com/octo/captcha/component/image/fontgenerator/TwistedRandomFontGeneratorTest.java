@@ -469,20 +469,20 @@ import junit.framework.TestCase;
 
 import java.awt.*;
 
-import com.octo.captcha.component.image.fontgenerator.TwistedRandomFontGenerator;
-
 /**
  * <p>Description: </p>
+ *
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
  */
 public class TwistedRandomFontGeneratorTest extends TestCase {
 
     private TwistedRandomFontGenerator
-        twistedRandomFontGenerator;
+            twistedRandomFontGenerator;
 
     /**
      * Constructor for TwistedRandomFontGeneratorTest.
+     *
      * @param arg0
      */
     public TwistedRandomFontGeneratorTest(String arg0) {
@@ -491,7 +491,7 @@ public class TwistedRandomFontGeneratorTest extends TestCase {
 
     public void setUp() {
         this.twistedRandomFontGenerator =
-            new TwistedRandomFontGenerator(new Integer(10),null);
+                new TwistedRandomFontGenerator(new Integer(10), null);
     }
 
     public void testGetFont() {

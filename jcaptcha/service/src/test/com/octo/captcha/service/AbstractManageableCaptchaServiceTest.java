@@ -465,11 +465,8 @@ DAMAGES.
 */
 
 import com.octo.captcha.Captcha;
-import com.octo.captcha.Captcha;
-
-import com.octo.captcha.service.captchastore.MapCaptchaStore;
 import com.octo.captcha.service.captchastore.CaptchaStore;
-import com.octo.captcha.Captcha;
+import com.octo.captcha.service.captchastore.MapCaptchaStore;
 
 import java.util.Locale;
 
@@ -852,7 +849,7 @@ public class AbstractManageableCaptchaServiceTest extends AbstractCaptchaService
             }
         }
         getMService().setMinGuarantedStorageDelayInSeconds(1);
-        Thread.sleep(1*1000+10);
+        Thread.sleep(1 * 1000 + 10);
         fullLoad();
 
     }

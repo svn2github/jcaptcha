@@ -49,15 +49,14 @@
  */
 package com.octo.captcha.component.image.wordtoimage;
 
-import com.octo.captcha.component.image.fontgenerator.FontGenerator;
-import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
-import com.octo.captcha.component.image.textpaster.TextPaster;
-import com.octo.captcha.component.image.utils.ToolkitFactory;
-import com.octo.captcha.component.image.deformation.ImageDeformation;
 import com.octo.captcha.CaptchaException;
+import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
+import com.octo.captcha.component.image.deformation.ImageDeformation;
+import com.octo.captcha.component.image.fontgenerator.FontGenerator;
+import com.octo.captcha.component.image.textpaster.TextPaster;
 
-import java.awt.image.BufferedImage;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.text.AttributedString;
 
 /**
@@ -81,17 +80,17 @@ import java.text.AttributedString;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class DeformedComposedWordToImage extends ComposedWordToImage{
-        private ImageDeformation backgroundDeformation;
+public class DeformedComposedWordToImage extends ComposedWordToImage {
+    private ImageDeformation backgroundDeformation;
     private ImageDeformation textDeformation;
     private ImageDeformation finalDeformation;
 
     /**
      * Composed word to image that applys filters
      *
-     * @param fontGenerator     a AbstractFontGenerator to implement the getFont() method
-     * @param background        a AbstractBackgroundGenerator to implement the getBackround() method
-     * @param textPaster        a AbstractTextParser to implement the pasteText() method
+     * @param fontGenerator         a AbstractFontGenerator to implement the getFont() method
+     * @param background            a AbstractBackgroundGenerator to implement the getBackround() method
+     * @param textPaster            a AbstractTextParser to implement the pasteText() method
      * @param backgroundDeformation to be apply on the background image
      * @param textDeformation       to be apply on the text image
      * @param finalDeformation      to be apply on the final image
@@ -125,7 +124,8 @@ public class DeformedComposedWordToImage extends ComposedWordToImage{
      * </ul>
      *
      * @return an image representation of the word
-     * @throws com.octo.captcha.CaptchaException if word is invalid or if image generation fails.
+     * @throws com.octo.captcha.CaptchaException
+     *          if word is invalid or if image generation fails.
      */
     public BufferedImage getImage(String word) throws CaptchaException {
         BufferedImage background = getBackround();
@@ -138,7 +138,7 @@ public class DeformedComposedWordToImage extends ComposedWordToImage{
         g2.drawImage(background, 0, 0, out.getWidth(), out.getHeight(), null);
 
         //apply filters to backround
-        out =  backgroundDeformation.deformImage(out);
+        out = backgroundDeformation.deformImage(out);
 
         //paste text on a transparent background
         BufferedImage transparent =
@@ -153,7 +153,7 @@ public class DeformedComposedWordToImage extends ComposedWordToImage{
         transparent = pasteText(transparent, aword);
 
         //and apply deformation
-        transparent  =  textDeformation.deformImage(transparent);
+        transparent = textDeformation.deformImage(transparent);
 
 
         // Set a composite with transparency.

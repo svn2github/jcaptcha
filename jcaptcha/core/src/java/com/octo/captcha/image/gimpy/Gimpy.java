@@ -465,7 +465,6 @@ DAMAGES.
 package com.octo.captcha.image.gimpy;
 
 import com.octo.captcha.image.ImageCaptcha;
-import com.octo.captcha.image.ImageCaptcha;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageDecoder;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;

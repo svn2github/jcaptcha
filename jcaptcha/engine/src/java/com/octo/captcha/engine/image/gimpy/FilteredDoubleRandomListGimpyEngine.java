@@ -464,8 +464,8 @@ DAMAGES.
 package com.octo.captcha.engine.image.gimpy;
 
 
-import com.octo.captcha.component.image.backgroundgenerator.MultipleShapeBackgroundGenerator;
 import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
+import com.octo.captcha.component.image.backgroundgenerator.MultipleShapeBackgroundGenerator;
 import com.octo.captcha.component.image.fontgenerator.DeformedRandomFontGenerator;
 import com.octo.captcha.component.image.fontgenerator.FontGenerator;
 import com.octo.captcha.component.image.textpaster.DoubleRandomTextPaster;
@@ -473,49 +473,46 @@ import com.octo.captcha.component.image.textpaster.TextPaster;
 
 import java.awt.*;
 import java.awt.image.ImageFilter;
+
 /**
  * <p>Description: </p>
+ *
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
  */
 public class FilteredDoubleRandomListGimpyEngine
-    extends com.octo.captcha.engine.image.ListImageCaptchaEngine {
+        extends com.octo.captcha.engine.image.ListImageCaptchaEngine {
 
     protected void buildInitialFactories() {
 
-         com.jhlabs.image.RippleFilter rippleBack = new com.jhlabs.image.RippleFilter();
+        com.jhlabs.image.RippleFilter rippleBack = new com.jhlabs.image.RippleFilter();
 
 
-         rippleBack.setWaveType(com.jhlabs.image.RippleFilter.NOISE);
-         rippleBack.setXAmplitude(5);
-         rippleBack.setYAmplitude(5);
-         rippleBack.setXWavelength(10);
-         rippleBack.setYWavelength(10);
-         rippleBack.setEdgeAction(com.jhlabs.image.TransformFilter.CLAMP);
+        rippleBack.setWaveType(com.jhlabs.image.RippleFilter.NOISE);
+        rippleBack.setXAmplitude(5);
+        rippleBack.setYAmplitude(5);
+        rippleBack.setXWavelength(10);
+        rippleBack.setYWavelength(10);
+        rippleBack.setEdgeAction(com.jhlabs.image.TransformFilter.CLAMP);
 
 
+        TextPaster paster =
+                new DoubleRandomTextPaster(new Integer(8), new Integer(15), Color.BLACK);
+        BackgroundGenerator back = new MultipleShapeBackgroundGenerator(new Integer(200), new Integer(100));
+        FontGenerator font =
+                new DeformedRandomFontGenerator(new Integer(25), new Integer(27));
+        com.octo.captcha.component.wordgenerator.WordGenerator words =
+                new com.octo.captcha.component.wordgenerator.DictionaryWordGenerator(new com.octo.captcha.component.wordgenerator.FileDictionnary("toddlist"));
 
-         TextPaster paster =
-             new DoubleRandomTextPaster(
-                new Integer(8),new Integer(15),Color.BLACK);
-         BackgroundGenerator back = new MultipleShapeBackgroundGenerator(
-                new Integer(200),new Integer(100));
-         FontGenerator font =
-                new DeformedRandomFontGenerator(
-                    new Integer(25),new Integer(27));
-         com.octo.captcha.component.wordgenerator.WordGenerator words =
-             new com.octo.captcha.component.wordgenerator.DictionaryWordGenerator(new com.octo.captcha.component.wordgenerator.FileDictionnary("toddlist"));
-
-         com.octo.captcha.component.image.wordtoimage.WordToImage word2image =
-             new com.octo.captcha.component.image.wordtoimage.FilteredComposedWordToImage(
-                 font,
-                 back,
-                 paster,
-                 new ImageFilter[] { rippleBack },
-                 new ImageFilter[] {},
-                 new ImageFilter[] {});
+        com.octo.captcha.component.image.wordtoimage.WordToImage word2image =
+                new com.octo.captcha.component.image.wordtoimage.FilteredComposedWordToImage(font,
+                        back,
+                        paster,
+                        new ImageFilter[]{rippleBack},
+                        new ImageFilter[]{},
+                        new ImageFilter[]{});
         com.octo.captcha.image.ImageCaptchaFactory factory = new com.octo.captcha.image.gimpy.GimpyFactory(words, word2image);
-         this.addFactory(factory);
+        this.addFactory(factory);
     }
 
 }

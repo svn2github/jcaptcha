@@ -49,19 +49,19 @@
  */
 package com.octo.captcha.engine.image.gimpy;
 
-import com.octo.captcha.component.image.textpaster.TextPaster;
-import com.octo.captcha.component.image.textpaster.BaffleRandomTextPaster;
 import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
 import com.octo.captcha.component.image.backgroundgenerator.UniColorBackgroundGenerator;
-import com.octo.captcha.component.image.fontgenerator.FontGenerator;
-import com.octo.captcha.component.image.fontgenerator.TwistedAndShearedRandomFontGenerator;
 import com.octo.captcha.component.image.deformation.ImageDeformation;
 import com.octo.captcha.component.image.deformation.ImageDeformationByFilters;
-import com.octo.captcha.component.image.wordtoimage.DeformedComposedWordToImage;
+import com.octo.captcha.component.image.fontgenerator.FontGenerator;
+import com.octo.captcha.component.image.fontgenerator.TwistedAndShearedRandomFontGenerator;
+import com.octo.captcha.component.image.textpaster.BaffleRandomTextPaster;
+import com.octo.captcha.component.image.textpaster.TextPaster;
 import com.octo.captcha.component.image.wordtoimage.ComposedWordToImage;
+import com.octo.captcha.component.image.wordtoimage.DeformedComposedWordToImage;
 import com.octo.captcha.component.image.wordtoimage.WordToImage;
-import com.octo.captcha.component.wordgenerator.WordGenerator;
 import com.octo.captcha.component.wordgenerator.DictionaryWordGenerator;
+import com.octo.captcha.component.wordgenerator.WordGenerator;
 import com.octo.captcha.engine.image.ListImageCaptchaEngine;
 import com.octo.captcha.image.gimpy.GimpyFactory;
 
@@ -74,13 +74,12 @@ import java.awt.image.ImageFilter;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class DeformedBaffleListGimpyEngine extends ListImageCaptchaEngine  {
+public class DeformedBaffleListGimpyEngine extends ListImageCaptchaEngine {
 
-    protected void buildInitialFactories()
-    {
+    protected void buildInitialFactories() {
 
 
-           //build filters
+        //build filters
         com.jhlabs.image.EmbossFilter emboss = new com.jhlabs.image.EmbossFilter();
         com.jhlabs.image.SphereFilter sphere = new com.jhlabs.image.SphereFilter();
         com.jhlabs.image.RippleFilter rippleBack = new com.jhlabs.image.RippleFilter();
@@ -130,24 +129,24 @@ public class DeformedBaffleListGimpyEngine extends ListImageCaptchaEngine  {
         ImageDeformation embossDef = new ImageDeformationByFilters(new ImageFilter[]{emboss});
         ImageDeformation rippleDefBack = new ImageDeformationByFilters(new ImageFilter[]{rippleBack});
         ImageDeformation cristalDef = new ImageDeformationByFilters(new ImageFilter[]{crystal});
-        ImageDeformation weavesDef= new ImageDeformationByFilters(new ImageFilter[]{weaves});
+        ImageDeformation weavesDef = new ImageDeformationByFilters(new ImageFilter[]{weaves});
 
         ImageDeformation none = new ImageDeformationByFilters(null);
         //word generator
-         WordGenerator words = new DictionaryWordGenerator(new com.octo.captcha.component.wordgenerator.FileDictionnary("toddlist"));
-         //wordtoimage components
-         TextPaster paster = new BaffleRandomTextPaster(new Integer(6), new Integer(8), Color.BLACK,new Integer(3),
-                 Color.WHITE);
-         BackgroundGenerator back = new UniColorBackgroundGenerator(new Integer(200), new Integer(100),Color.WHITE);
-         //BackgroundGenerator back = new FunkyBackgroundGenerator(new Integer(200), new Integer(100));
-         FontGenerator font = new TwistedAndShearedRandomFontGenerator(new Integer(30), new Integer(40));
+        WordGenerator words = new DictionaryWordGenerator(new com.octo.captcha.component.wordgenerator.FileDictionnary("toddlist"));
+        //wordtoimage components
+        TextPaster paster = new BaffleRandomTextPaster(new Integer(6), new Integer(8), Color.BLACK, new Integer(3),
+                Color.WHITE);
+        BackgroundGenerator back = new UniColorBackgroundGenerator(new Integer(200), new Integer(100), Color.WHITE);
+        //BackgroundGenerator back = new FunkyBackgroundGenerator(new Integer(200), new Integer(100));
+        FontGenerator font = new TwistedAndShearedRandomFontGenerator(new Integer(30), new Integer(40));
         //Add factories
-         WordToImage word2image = new ComposedWordToImage(font, back, paster);
+        WordToImage word2image = new ComposedWordToImage(font, back, paster);
         this.addFactory(new com.octo.captcha.image.gimpy.GimpyFactory(words, word2image));
         //build factories
         word2image = new DeformedComposedWordToImage(font, back, paster,
                 rippleDef,
-                 waterDef,
+                waterDef,
                 embossDef);
         this.addFactory(new GimpyFactory(words, word2image));
         //select filters for 2
@@ -158,8 +157,8 @@ public class DeformedBaffleListGimpyEngine extends ListImageCaptchaEngine  {
         this.addFactory(new GimpyFactory(words, word2image));
         //select filters for 3
         word2image = new DeformedComposedWordToImage(font, back, paster,
-                 rippleDefBack,
-                 none,
+                rippleDefBack,
+                none,
                 weavesDef);
         this.addFactory(new GimpyFactory(words, word2image));
 

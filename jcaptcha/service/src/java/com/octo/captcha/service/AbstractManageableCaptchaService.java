@@ -464,10 +464,7 @@ DAMAGES.
 package com.octo.captcha.service;
 
 import com.octo.captcha.Captcha;
-import com.octo.captcha.Captcha;
 import com.octo.captcha.service.captchastore.CaptchaStore;
-import com.octo.captcha.engine.CaptchaEngine;
-import com.octo.captcha.engine.CaptchaEngine;
 
 import java.util.*;
 
@@ -700,7 +697,7 @@ public abstract class AbstractManageableCaptchaService extends AbstractCaptchaSe
         //construct a new collection in order to avoid iterations synchronization pbs :
         Iterator ids = getGarbageCollectableCaptchaIds(now).iterator();
         while (ids.hasNext()) {
-            String id =  ids.next().toString();
+            String id = ids.next().toString();
             if (((Long) times.get(id)).longValue() < limit) {
                 //remove from times
                 times.remove(id);
@@ -726,27 +723,27 @@ public abstract class AbstractManageableCaptchaService extends AbstractCaptchaSe
 
     private Collection getGarbageCollectableCaptchaIds(long now) {
 
-          //construct a new collection in order to avoid iterations synchronization pbs :
-          // this may cause a captcha disparition if a new captcha is asked between
-          // this call and the effective removing from the store!
-          HashSet garbageCollectableCaptchas = new HashSet();
+        //construct a new collection in order to avoid iterations synchronization pbs :
+        // this may cause a captcha disparition if a new captcha is asked between
+        // this call and the effective removing from the store!
+        HashSet garbageCollectableCaptchas = new HashSet();
 
-          //the time limit under which captchas are collectable
-          long limit = now - 1000 * getMinGuarantedStorageDelayInSeconds();
-          if(limit>oldestCaptcha){
-              // iterate to find out if the captcha is perimed
-              Iterator ids = new HashSet(times.keySet()).iterator();
-              while (ids.hasNext()) {
-                  String id = (String) ids.next();
-                  long captchaDate = ((Long) times.get(id)).longValue();
-                  oldestCaptcha = Math.min(captchaDate, oldestCaptcha==0?captchaDate:oldestCaptcha);
-                  if (captchaDate < limit) {
-                      garbageCollectableCaptchas.add(id);
-                  }
-              }
-          }
-          return garbageCollectableCaptchas;
-      }
+        //the time limit under which captchas are collectable
+        long limit = now - 1000 * getMinGuarantedStorageDelayInSeconds();
+        if (limit > oldestCaptcha) {
+            // iterate to find out if the captcha is perimed
+            Iterator ids = new HashSet(times.keySet()).iterator();
+            while (ids.hasNext()) {
+                String id = (String) ids.next();
+                long captchaDate = ((Long) times.get(id)).longValue();
+                oldestCaptcha = Math.min(captchaDate, oldestCaptcha == 0 ? captchaDate : oldestCaptcha);
+                if (captchaDate < limit) {
+                    garbageCollectableCaptchas.add(id);
+                }
+            }
+        }
+        return garbageCollectableCaptchas;
+    }
 
 
 

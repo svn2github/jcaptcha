@@ -469,10 +469,9 @@ import junit.framework.TestCase;
 
 import java.awt.*;
 
-import com.octo.captcha.component.image.fontgenerator.RandomFontGenerator;
-
 /**
  * <p>Description: </p>
+ *
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
  */
@@ -482,6 +481,7 @@ public class RandomFontGeneratorTest extends TestCase {
 
     /**
      * Constructor for RandomFontGeneratorTest.
+     *
      * @param name
      */
     public RandomFontGeneratorTest(String name) {
@@ -490,7 +490,7 @@ public class RandomFontGeneratorTest extends TestCase {
 
     public void setUp() {
         this.randomFontGenerator =
-            new RandomFontGenerator(new Integer(10), new Integer(10));
+                new RandomFontGenerator(new Integer(10), new Integer(10));
     }
 
     public void testGetFont() {

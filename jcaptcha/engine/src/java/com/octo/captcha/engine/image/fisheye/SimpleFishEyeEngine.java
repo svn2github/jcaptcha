@@ -49,11 +49,11 @@
  */
 package com.octo.captcha.engine.image.fisheye;
 
-import com.octo.captcha.engine.image.ListImageCaptchaEngine;
+import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
+import com.octo.captcha.component.image.backgroundgenerator.FileReaderRandomBackgroundGenerator;
 import com.octo.captcha.component.image.deformation.ImageDeformation;
 import com.octo.captcha.component.image.deformation.ImageDeformationByFilters;
-import com.octo.captcha.component.image.backgroundgenerator.FileReaderRandomBackgroundGenerator;
-import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
+import com.octo.captcha.engine.image.ListImageCaptchaEngine;
 import com.octo.captcha.image.fisheye.FishEyeFactory;
 
 import java.awt.image.ImageFilter;
@@ -96,7 +96,6 @@ public class SimpleFishEyeEngine extends ListImageCaptchaEngine {
         sphere.setRefractionIndex(2);
 
 
-
         ImageDeformation rippleDef = new ImageDeformationByFilters(new ImageFilter[]{ripple});
         ImageDeformation sphereDef = new ImageDeformationByFilters(new ImageFilter[]{sphere});
         ImageDeformation waterDef = new ImageDeformationByFilters(new ImageFilter[]{water});
@@ -104,12 +103,12 @@ public class SimpleFishEyeEngine extends ListImageCaptchaEngine {
 
 
         //add background from files
-        BackgroundGenerator generator = new FileReaderRandomBackgroundGenerator(new Integer(300),new Integer(300),
+        BackgroundGenerator generator = new FileReaderRandomBackgroundGenerator(new Integer(300), new Integer(300),
                 "./core/src/conf/images");
-        addFactory(new FishEyeFactory(generator,sphereDef,new Integer(30),new Integer(11)));
-        addFactory(new FishEyeFactory(generator,rippleDef,new Integer(30),new Integer(11)));
-        addFactory(new FishEyeFactory(generator,waterDef,new Integer(30),new Integer(11)));
-        addFactory(new FishEyeFactory(generator,twirlDef,new Integer(30),new Integer(11)));
+        addFactory(new FishEyeFactory(generator, sphereDef, new Integer(30), new Integer(11)));
+        addFactory(new FishEyeFactory(generator, rippleDef, new Integer(30), new Integer(11)));
+        addFactory(new FishEyeFactory(generator, waterDef, new Integer(30), new Integer(11)));
+        addFactory(new FishEyeFactory(generator, twirlDef, new Integer(30), new Integer(11)));
 
     }
 }

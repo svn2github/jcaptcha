@@ -471,6 +471,7 @@ import java.util.Locale;
 
 /**
  * <p>Description: </p>
+ *
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
  */
@@ -480,6 +481,7 @@ public class FileDictionnaryTest extends TestCase {
 
     /**
      * Constructor for FileDictionnaryTest.
+     *
      * @param name
      */
     public FileDictionnaryTest(String name) {
@@ -506,8 +508,8 @@ public class FileDictionnaryTest extends TestCase {
         assertNotNull(test);
         String testWord = test.getNextWord(new Integer(8));
         assertNotNull(testWord);
-        assertEquals(8,testWord.length());
-        assertEquals(expected,test.getLocale());
+        assertEquals(8, testWord.length());
+        assertEquals(expected, test.getLocale());
 
 
     }

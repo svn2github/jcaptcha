@@ -51,34 +51,35 @@ package com.octo.captcha.component.image.deformation;
 
 import com.octo.captcha.component.image.utils.ToolkitFactory;
 
-import java.awt.image.BufferedImage;
-import java.awt.image.ImageFilter;
-import java.awt.image.FilteredImageSource;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.FilteredImageSource;
+import java.awt.image.ImageFilter;
 
 /**
  * Use an array of java.awt.image.ImageFilter to deform an image
+ *
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class ImageDeformationByFilters implements ImageDeformation{
+public class ImageDeformationByFilters implements ImageDeformation {
 
     private ImageFilter[] filters;
 
     public ImageDeformationByFilters(ImageFilter[] filters) {
         super();
-        this.filters=filters;
+        this.filters = filters;
     }
 
     /**
      * Deforms an image
-     *
+     * 
      * @param image the image to be deformed
      * @return the deformed image
      */
     public BufferedImage deformImage(BufferedImage image) {
-       BufferedImage clone = new BufferedImage(image.getWidth(),image.getHeight(),image.getType());
-        clone.getGraphics().drawImage(image,0,0,null,null);
+        BufferedImage clone = new BufferedImage(image.getWidth(), image.getHeight(), image.getType());
+        clone.getGraphics().drawImage(image, 0, 0, null, null);
         FilteredImageSource filtered;
         if (filters != null) {
             for (int i = 0; i < filters.length; i++) {

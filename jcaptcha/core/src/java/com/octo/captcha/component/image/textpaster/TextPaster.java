@@ -59,7 +59,6 @@
 package com.octo.captcha.component.image.textpaster;
 
 import com.octo.captcha.CaptchaException;
-import com.octo.captcha.CaptchaException;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

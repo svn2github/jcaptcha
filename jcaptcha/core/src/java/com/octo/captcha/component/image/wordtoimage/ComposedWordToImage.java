@@ -468,8 +468,6 @@ import com.octo.captcha.CaptchaException;
 import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
 import com.octo.captcha.component.image.fontgenerator.FontGenerator;
 import com.octo.captcha.component.image.textpaster.TextPaster;
-import com.octo.captcha.component.image.fontgenerator.FontGenerator;
-import com.octo.captcha.CaptchaException;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

@@ -470,6 +470,7 @@ import java.util.Locale;
 
 /**
  * <p>Description: </p>
+ *
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
  */
@@ -480,6 +481,7 @@ public class DummyWordGeneratorTest extends TestCase {
 
     /**
      * Constructor for DummyWordGeneratorTest.
+     *
      * @param name
      */
     public DummyWordGeneratorTest(String name) {
@@ -495,22 +497,22 @@ public class DummyWordGeneratorTest extends TestCase {
         String expected = this.expectedString;
         Integer expectedLength = new Integer(8);
         String word = this.dummyWordGenerator.getWord(new Integer(8));
-        assertEquals(expected,word);
+        assertEquals(expected, word);
     }
 
     public void testGetWordInteger() {
         String expected = this.expectedString;
         Integer expectedLength = new Integer(10);
         String word = this.dummyWordGenerator.getWord(new Integer(10));
-        assertEquals(expected+expected.substring(0,2),word);
+        assertEquals(expected + expected.substring(0, 2), word);
         //assertEquals(expectedLength.intValue(),word.length());
     }
 
     public void testGetWordIntegerLocale() {
         String expected = this.expectedString;
         Integer expectedLength = new Integer(10);
-        String word = this.dummyWordGenerator.getWord(new Integer(10),Locale.US);
-        assertEquals(expected+expected.substring(0,2),word);
+        String word = this.dummyWordGenerator.getWord(new Integer(10), Locale.US);
+        assertEquals(expected + expected.substring(0, 2), word);
         //assertEquals(expectedLength.intValue(),word.length());
     }
 

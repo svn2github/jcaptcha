@@ -465,9 +465,7 @@ DAMAGES.
 package com.octo.captcha.service;
 
 import com.octo.captcha.Captcha;
-import com.octo.captcha.Captcha;
 import com.octo.captcha.service.captchastore.CaptchaStore;
-import com.octo.captcha.Captcha;
 
 import java.util.Locale;
 
@@ -490,7 +488,7 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 
     protected AbstractCaptchaService(CaptchaStore captchaStore,
                                      com.octo.captcha.engine.CaptchaEngine captchaEngine) {
-        if(captchaEngine==null||captchaStore==null)throw new IllegalArgumentException("Store or gimpy can't be null");
+        if (captchaEngine == null || captchaStore == null) throw new IllegalArgumentException("Store or gimpy can't be null");
         this.engine = captchaEngine;
         this.store = captchaStore;
     };
@@ -528,7 +526,7 @@ public abstract class AbstractCaptchaService implements CaptchaService {
             captcha = generateAndStoreCaptcha(locale, ID);
         } else {
             captcha = this.store.getCaptcha(ID);
-            if(captcha.hasGetChalengeBeenCalled().booleanValue()){
+            if (captcha.hasGetChalengeBeenCalled().booleanValue()) {
                 captcha = generateAndStoreCaptcha(locale, ID);
             }
         }
@@ -606,6 +604,7 @@ public abstract class AbstractCaptchaService implements CaptchaService {
      * the challenge of the captcha after rendering.
      * It should be implemented for all captcha type (@see ImageCaptchaService implementations
      * for exemple)
+     *
      * @param captcha
      * @return a Challenge Clone
      */

@@ -465,11 +465,10 @@ DAMAGES.
 package com.octo.captcha.engine.image.gimpy;
 
 
-
 import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
 import com.octo.captcha.component.image.backgroundgenerator.FunkyBackgroundGenerator;
-import com.octo.captcha.component.image.fontgenerator.TwistedAndShearedRandomFontGenerator;
 import com.octo.captcha.component.image.fontgenerator.FontGenerator;
+import com.octo.captcha.component.image.fontgenerator.TwistedAndShearedRandomFontGenerator;
 import com.octo.captcha.component.image.textpaster.DoubleRandomTextPaster;
 import com.octo.captcha.component.image.textpaster.TextPaster;
 import com.octo.captcha.engine.image.DefaultImageCaptchaEngine;
@@ -478,16 +477,15 @@ import java.awt.*;
 
 /**
  * <p>Description: </p>
+ *
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class BasicGimpyEngine extends DefaultImageCaptchaEngine
-{
+public class BasicGimpyEngine extends DefaultImageCaptchaEngine {
 
     static com.octo.captcha.image.ImageCaptchaFactory[] factories;
 
-    static
-    {
+    static {
         //word generator
         //WordGenerator dictionnaryWords = new DictionaryWordGenerator(new FileDictionnary("toddlist"));
         com.octo.captcha.component.wordgenerator.WordGenerator randomWords = new com.octo.captcha.component.wordgenerator.RandomWordGenerator("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
@@ -510,8 +508,7 @@ public class BasicGimpyEngine extends DefaultImageCaptchaEngine
 
     }
 
-    public BasicGimpyEngine()
-    {
+    public BasicGimpyEngine() {
 
         super(factories);
 

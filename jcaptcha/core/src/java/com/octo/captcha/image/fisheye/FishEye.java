@@ -466,9 +466,8 @@ package com.octo.captcha.image.fisheye;
 
 import com.octo.captcha.image.ImageCaptcha;
 
-import java.awt.image.BufferedImage;
 import java.awt.*;
-import java.util.StringTokenizer;
+import java.awt.image.BufferedImage;
 
 /**
  * FishEye is an ImageCaptcha
@@ -482,23 +481,22 @@ import java.util.StringTokenizer;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class FishEye extends ImageCaptcha{
+public class FishEye extends ImageCaptcha {
 
     private Point deformationCenter;
     private Integer tolerance;
 
     /**
-     *
-     * @param question the question
-     * @param challenge the imageChallenge
+     * @param question          the question
+     * @param challenge         the imageChallenge
      * @param deformationCenter the center of the deformation that
-     * has been applied to the image in order to validate the answer
-     * @param tolerance the max distance to the center of the deformation accepted by the validation
-     * routine in pixels.
+     *                          has been applied to the image in order to validate the answer
+     * @param tolerance         the max distance to the center of the deformation accepted by the validation
+     *                          routine in pixels.
      */
     protected FishEye(String question, BufferedImage challenge, Point deformationCenter, Integer tolerance) {
         super(question, challenge);
-        this.deformationCenter=deformationCenter;
+        this.deformationCenter = deformationCenter;
         this.tolerance = tolerance;
     }
 
@@ -514,18 +512,18 @@ public class FishEye extends ImageCaptcha{
             Point point = (Point) response;
             return validateResponse(point);
             //else if string response
-        }else if (response instanceof String) {
+        } else if (response instanceof String) {
             String s = (String) response;
             //ty to parse it
             try {
                 String[] coordonates = s.split(",");
-                Point point = new Point(Integer.parseInt(coordonates[0]),Integer.parseInt(coordonates[1]));
+                Point point = new Point(Integer.parseInt(coordonates[0]), Integer.parseInt(coordonates[1]));
                 return validateResponse(point);
             } catch (Throwable e) {
                 //catch all and return false
                 return Boolean.FALSE;
             }
-        }else{
+        } else {
             return Boolean.FALSE;
         }
 
@@ -533,13 +531,14 @@ public class FishEye extends ImageCaptcha{
 
     /**
      * Real validation
+     *
      * @param point the given point
      * @return true if distance from the given point and the deformation center is less than tolerance,
-     * false otherwise
+     *         false otherwise
      */
-    private Boolean validateResponse(Point point){
+    private Boolean validateResponse(Point point) {
 
-        if (point.distance(deformationCenter)<= tolerance.doubleValue()) {
+        if (point.distance(deformationCenter) <= tolerance.doubleValue()) {
             return Boolean.TRUE;
         }
         return Boolean.FALSE;

@@ -464,8 +464,6 @@ DAMAGES.
 
 package com.octo.captcha.component.image.fontgenerator;
 
-import com.octo.captcha.component.image.fontgenerator.FontGenerator;
-
 
 /**
  * <p>Base class for Font generators. Sub classes must implement the getFont()

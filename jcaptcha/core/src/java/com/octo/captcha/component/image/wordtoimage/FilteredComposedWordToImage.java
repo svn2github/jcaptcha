@@ -465,13 +465,10 @@ DAMAGES.
 package com.octo.captcha.component.image.wordtoimage;
 
 import com.octo.captcha.CaptchaException;
-import com.octo.captcha.component.image.utils.ToolkitFactory;
 import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
 import com.octo.captcha.component.image.fontgenerator.FontGenerator;
 import com.octo.captcha.component.image.textpaster.TextPaster;
-import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
-import com.octo.captcha.component.image.fontgenerator.FontGenerator;
-import com.octo.captcha.CaptchaException;
+import com.octo.captcha.component.image.utils.ToolkitFactory;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

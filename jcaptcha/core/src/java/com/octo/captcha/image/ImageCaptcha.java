@@ -465,7 +465,6 @@ DAMAGES.
 package com.octo.captcha.image;
 
 import com.octo.captcha.Captcha;
-import com.octo.captcha.Captcha;
 
 import java.awt.image.BufferedImage;
 

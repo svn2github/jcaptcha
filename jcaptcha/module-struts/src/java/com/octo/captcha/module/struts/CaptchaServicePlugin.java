@@ -1,22 +1,17 @@
 package com.octo.captcha.module.struts;
 
-import org.apache.struts.action.PlugIn;
-import org.apache.struts.action.ActionServlet;
-import org.apache.struts.config.ModuleConfig;
-import org.apache.commons.logging.LogFactory;
-import org.apache.commons.logging.Log;
-
-import javax.servlet.ServletException;
-
-
-import com.octo.captcha.service.image.ImageCaptchaService;
-import com.octo.captcha.service.AbstractManageableCaptchaServiceMBean;
-import com.octo.captcha.service.CaptchaServiceException;
-import com.octo.captcha.service.CaptchaService;
 import com.octo.captcha.module.config.CaptchaModuleConfig;
 import com.octo.captcha.module.jmx.JMXRegistrationHelper;
+import com.octo.captcha.service.AbstractManageableCaptchaServiceMBean;
+import com.octo.captcha.service.CaptchaService;
+import com.octo.captcha.service.CaptchaServiceException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.struts.action.ActionServlet;
+import org.apache.struts.action.PlugIn;
+import org.apache.struts.config.ModuleConfig;
 
-import java.util.ResourceBundle;
+import javax.servlet.ServletException;
 
 /*
                   GNU LESSER GENERAL PUBLIC LICENSE
@@ -492,7 +487,7 @@ public class CaptchaServicePlugin implements PlugIn {
 
     private static CaptchaServicePlugin instance;
 
-    public static CaptchaServicePlugin getInstance(){
+    public static CaptchaServicePlugin getInstance() {
         return instance;
     }
 
@@ -502,20 +497,20 @@ public class CaptchaServicePlugin implements PlugIn {
 
 
     public CaptchaService getService() {
-            return service;
-        }
+        return service;
+    }
 
     private CaptchaModuleConfig captchaModuleConfig;
 
 
     //~ Methods ================================================================
 
-    public CaptchaServicePlugin(){
+    public CaptchaServicePlugin() {
         captchaModuleConfig = CaptchaModuleConfig.getInstance();
     }
 
     public void init(ActionServlet servlet, ModuleConfig config)
-    throws ServletException {
+            throws ServletException {
         instance = this;
 
         if (log.isDebugEnabled()) {
@@ -527,7 +522,7 @@ public class CaptchaServicePlugin implements PlugIn {
         //validate configuration
         captchaModuleConfig.validate();
 
-         // create the CaptchaService
+        // create the CaptchaService
         try {
             service = (CaptchaService) Class.forName(captchaModuleConfig.getServiceClass()).newInstance();
         } catch (InstantiationException e) {
@@ -546,19 +541,19 @@ public class CaptchaServicePlugin implements PlugIn {
 
 
         // register the CaptchaService to an MBean server if specified
-        if (captchaModuleConfig.getRegisterToMbean().booleanValue()&&service instanceof AbstractManageableCaptchaServiceMBean) {
-                AbstractManageableCaptchaServiceMBean manageable = (AbstractManageableCaptchaServiceMBean) service;
-                JMXRegistrationHelper.registerToMBeanServer(manageable,CaptchaModuleConfig.JMX_REGISTERING_NAME);
-            }
-            if (log.isDebugEnabled()) {
-                log.debug("struts-captcha plugin initialization successfull");
-            }
+        if (captchaModuleConfig.getRegisterToMbean().booleanValue() && service instanceof AbstractManageableCaptchaServiceMBean) {
+            AbstractManageableCaptchaServiceMBean manageable = (AbstractManageableCaptchaServiceMBean) service;
+            JMXRegistrationHelper.registerToMBeanServer(manageable, CaptchaModuleConfig.JMX_REGISTERING_NAME);
+        }
+        if (log.isDebugEnabled()) {
+            log.debug("struts-captcha plugin initialization successfull");
+        }
     }
 
     public void destroy() {
-        if (service instanceof AbstractManageableCaptchaServiceMBean&&captchaModuleConfig.getRegisterToMbean().booleanValue()) {
-                    JMXRegistrationHelper.unregisterFromMBeanServer(CaptchaModuleConfig.JMX_REGISTERING_NAME);
-                }
+        if (service instanceof AbstractManageableCaptchaServiceMBean && captchaModuleConfig.getRegisterToMbean().booleanValue()) {
+            JMXRegistrationHelper.unregisterFromMBeanServer(CaptchaModuleConfig.JMX_REGISTERING_NAME);
+        }
 
     }
 
@@ -629,7 +624,6 @@ public class CaptchaServicePlugin implements PlugIn {
     public void setRegisterToMbean(Boolean registerToMbean) {
         captchaModuleConfig.setRegisterToMbean(registerToMbean);
     }
-
 
 
 }

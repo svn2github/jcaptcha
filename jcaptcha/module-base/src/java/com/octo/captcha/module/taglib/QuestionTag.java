@@ -463,12 +463,6 @@ DAMAGES.
 */
 package com.octo.captcha.module.taglib;
 
-import com.octo.captcha.module.config.CaptchaModuleConfig;
-import com.octo.captcha.service.CaptchaService;
-
-import javax.servlet.jsp.tagext.Tag;
-import javax.servlet.jsp.PageContext;
-import javax.servlet.jsp.JspException;
 import java.io.IOException;
 
 /**
@@ -477,12 +471,11 @@ import java.io.IOException;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public abstract class QuestionTag extends BaseCaptchaTag implements javax.servlet.jsp.tagext.Tag{
+public abstract class QuestionTag extends BaseCaptchaTag implements javax.servlet.jsp.tagext.Tag {
 
     public int doEndTag() throws javax.servlet.jsp.JspException {
-        String question = getService().getQuestionForID(
-                pageContext.getSession().getId()
-                ,pageContext.getRequest().getLocale());
+        String question = getService().getQuestionForID(pageContext.getSession().getId()
+                , pageContext.getRequest().getLocale());
 
         try {
             pageContext.getOut().write(question);

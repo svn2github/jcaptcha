@@ -465,8 +465,6 @@ DAMAGES.
 package com.octo.captcha.component.wordgenerator;
 
 import com.octo.captcha.CaptchaException;
-import com.octo.captcha.CaptchaException;
-import com.octo.captcha.CaptchaException;
 
 import java.util.HashMap;
 import java.util.Locale;

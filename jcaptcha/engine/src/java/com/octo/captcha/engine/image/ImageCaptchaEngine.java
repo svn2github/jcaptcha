@@ -60,8 +60,6 @@ package com.octo.captcha.engine.image;
 
 import com.octo.captcha.Captcha;
 import com.octo.captcha.image.ImageCaptcha;
-import com.octo.captcha.image.ImageCaptcha;
-import com.octo.captcha.Captcha;
 
 import java.util.Locale;
 
@@ -72,7 +70,6 @@ import java.util.Locale;
  * @version 1.0
  */
 public abstract class ImageCaptchaEngine implements com.octo.captcha.engine.CaptchaEngine {
-
 
 
     /**
@@ -93,7 +90,6 @@ public abstract class ImageCaptchaEngine implements com.octo.captcha.engine.Capt
     public Captcha getNextCaptcha(Locale locale) {
         return getNextImageCaptcha(locale);
     }
-
 
 
     /**

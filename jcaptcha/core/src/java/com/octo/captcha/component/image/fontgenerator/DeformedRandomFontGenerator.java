@@ -1,7 +1,5 @@
 package com.octo.captcha.component.image.fontgenerator;
 
-import com.octo.captcha.component.image.fontgenerator.RandomFontGenerator;
-
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.util.Random;

@@ -463,9 +463,8 @@ DAMAGES.
 */
 package com.octo.captcha.module.config;
 
-import com.octo.captcha.service.CaptchaServiceException;
-import com.octo.captcha.service.CaptchaService;
 import com.octo.captcha.module.CaptchaModuleException;
+import com.octo.captcha.service.CaptchaService;
 
 import java.util.ResourceBundle;
 
@@ -480,7 +479,7 @@ public class CaptchaModuleConfig {
 
     private static CaptchaModuleConfig instance = new CaptchaModuleConfig();
 
-    public static CaptchaModuleConfig getInstance(){
+    public static CaptchaModuleConfig getInstance() {
         return instance;
     }
 
@@ -489,10 +488,10 @@ public class CaptchaModuleConfig {
     public static final String MESSAGE_TYPE_TEXT = "text";
     public static final String ID_SESSION = "session";
     public static final String JMX_REGISTERING_NAME =
-        "com.octo.captcha.module.struts:object=CaptchaServicePlugin";
+            "com.octo.captcha.module.struts:object=CaptchaServicePlugin";
 
 
-    private CaptchaModuleConfig(){
+    private CaptchaModuleConfig() {
     }
 
     private Boolean registerToMbean = Boolean.FALSE;
@@ -554,12 +553,12 @@ public class CaptchaModuleConfig {
     }
 
     public String getResponseKey() {
-         return responseKey;
-     }
+        return responseKey;
+    }
 
-     public void setResponseKey(String responseKey) {
-         this.responseKey = responseKey;
-     }
+    public void setResponseKey(String responseKey) {
+        this.responseKey = responseKey;
+    }
 
     public Boolean getRegisterToMbean() {
         return registerToMbean;
@@ -570,53 +569,54 @@ public class CaptchaModuleConfig {
     }
 
 
-
-    public void validate(){
+    public void validate() {
 
         //verify values
-        if(!(com.octo.captcha.module.config.CaptchaModuleConfig.MESSAGE_TYPE_TEXT.equals(messageType)||com.octo.captcha.module.config.CaptchaModuleConfig.MESSAGE_TYPE_BUNDLE.equals(messageType)))throw new com.octo.captcha.service.CaptchaServiceException("messageType can " +
-                "only be set to '"+com.octo.captcha.module.config.CaptchaModuleConfig.MESSAGE_TYPE_TEXT+"' or '"+com.octo.captcha.module.config.CaptchaModuleConfig.MESSAGE_TYPE_BUNDLE+"'");
+        if (!(com.octo.captcha.module.config.CaptchaModuleConfig.MESSAGE_TYPE_TEXT.equals(messageType) || com.octo.captcha.module.config.CaptchaModuleConfig.MESSAGE_TYPE_BUNDLE.equals(messageType)))
+            throw new com.octo.captcha.service.CaptchaServiceException("messageType can " +
+                    "only be set to '" + com.octo.captcha.module.config.CaptchaModuleConfig.MESSAGE_TYPE_TEXT + "' or '" + com.octo.captcha.module.config.CaptchaModuleConfig.MESSAGE_TYPE_BUNDLE + "'");
 
-        if(!(com.octo.captcha.module.config.CaptchaModuleConfig.ID_SESSION.equals(idType)||com.octo.captcha.module.config.CaptchaModuleConfig.ID_GENERATED.equals(idType)))throw new com.octo.captcha.service.CaptchaServiceException("idType can " +
-                        "only be set to '"+com.octo.captcha.module.config.CaptchaModuleConfig.ID_SESSION+"' or '"+com.octo.captcha.module.config.CaptchaModuleConfig.ID_GENERATED+"'");
+        if (!(com.octo.captcha.module.config.CaptchaModuleConfig.ID_SESSION.equals(idType) || com.octo.captcha.module.config.CaptchaModuleConfig.ID_GENERATED.equals(idType)))
+            throw new com.octo.captcha.service.CaptchaServiceException("idType can " +
+                    "only be set to '" + com.octo.captcha.module.config.CaptchaModuleConfig.ID_SESSION + "' or '" + com.octo.captcha.module.config.CaptchaModuleConfig.ID_GENERATED + "'");
 
-        if(messageValue==null)throw new CaptchaModuleException("messageValue cannot be null");
+        if (messageValue == null) throw new CaptchaModuleException("messageValue cannot be null");
 
-        if(messageKey==null||"".equals(messageKey))throw new CaptchaModuleException(
-                "messageKey cannot be null or empty");
+        if (messageKey == null || "".equals(messageKey))
+            throw new CaptchaModuleException("messageKey cannot be null or empty");
 
-        if(responseKey==null||"".equals(responseKey))throw new CaptchaModuleException(
-                "responseKey cannot be null or empty");
+        if (responseKey == null || "".equals(responseKey))
+            throw new CaptchaModuleException("responseKey cannot be null or empty");
 
-         if((idType.equals(com.octo.captcha.module.config.CaptchaModuleConfig.ID_GENERATED))&&(idKey==null||"".equals(idKey)))throw new com.octo.captcha.service.CaptchaServiceException(
-                 "idKey cannot be null or empty when id is generated (ie idType='"+com.octo.captcha.module.config.CaptchaModuleConfig.ID_GENERATED+"'");
+        if ((idType.equals(com.octo.captcha.module.config.CaptchaModuleConfig.ID_GENERATED)) && (idKey == null || "".equals(idKey)))
+            throw new com.octo.captcha.service.CaptchaServiceException("idKey cannot be null or empty when id is generated (ie idType='" + com.octo.captcha.module.config.CaptchaModuleConfig.ID_GENERATED + "'");
 
 
         //if message is in a bundle, try to load it
-        if(this.messageType.equals(com.octo.captcha.module.config.CaptchaModuleConfig.MESSAGE_TYPE_BUNDLE)){
-            ResourceBundle bundle=ResourceBundle.getBundle(getMessageValue());
-            if(bundle==null){
+        if (this.messageType.equals(com.octo.captcha.module.config.CaptchaModuleConfig.MESSAGE_TYPE_BUNDLE)) {
+            ResourceBundle bundle = ResourceBundle.getBundle(getMessageValue());
+            if (bundle == null) {
                 throw new CaptchaModuleException("can't initialize module config with a unfound bundle : "
-                +"resource bundle "+getMessageValue()+ " has  not been found");
-            }else{
-                if(bundle.getString(getMessageKey())==null){
+                        + "resource bundle " + getMessageValue() + " has  not been found");
+            } else {
+                if (bundle.getString(getMessageKey()) == null) {
                     throw new CaptchaModuleException("can't initialize module config with a unfound message : "
-                    +"resource bundle "+getMessageValue()+ " has  no key named :"+getMessageKey());
+                            + "resource bundle " + getMessageValue() + " has  no key named :" + getMessageKey());
                 }
             }
 
         }
 
         // try to create the CaptchaService
-          try {
-              CaptchaService service = (CaptchaService) Class.forName(serviceClass).newInstance();
-          } catch (InstantiationException e) {
-              throw new CaptchaModuleException("Error during Service Class initialization", e);
-          } catch (IllegalAccessException e) {
-              throw new CaptchaModuleException("Error during Service Class initialization", e);
-          } catch (ClassNotFoundException e) {
-              throw new CaptchaModuleException("Error during Service Class initialization", e);
-          }
+        try {
+            CaptchaService service = (CaptchaService) Class.forName(serviceClass).newInstance();
+        } catch (InstantiationException e) {
+            throw new CaptchaModuleException("Error during Service Class initialization", e);
+        } catch (IllegalAccessException e) {
+            throw new CaptchaModuleException("Error during Service Class initialization", e);
+        } catch (ClassNotFoundException e) {
+            throw new CaptchaModuleException("Error during Service Class initialization", e);
+        }
 
 
     }

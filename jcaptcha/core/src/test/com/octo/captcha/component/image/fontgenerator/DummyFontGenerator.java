@@ -464,34 +464,30 @@ DAMAGES.
 
 package com.octo.captcha.component.image.fontgenerator;
 
-import com.octo.captcha.component.image.fontgenerator.AbstractFontGenerator;
-
 import java.awt.*;
 
 /**
  * <p>Description: </p>
+ *
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class DummyFontGenerator extends AbstractFontGenerator
-{
+public class DummyFontGenerator extends AbstractFontGenerator {
     private Font font;
 
-    DummyFontGenerator(Integer minFontSize, Integer maxFontSize)
-    {
+    DummyFontGenerator(Integer minFontSize, Integer maxFontSize) {
         super(minFontSize, maxFontSize);
-        font = new Font("serif",Font.BOLD,getMaxFontSize());
+        font = new Font("serif", Font.BOLD, getMaxFontSize());
     }
-
 
 
     /**
      * Method from imageFromWord method to apply font to String.
      * Implementations must take into account the minFontSize and the MaxFontSize.
+     *
      * @return a Font
      */
-    public Font getFont()
-    {
+    public Font getFont() {
         return font;
     }
 }

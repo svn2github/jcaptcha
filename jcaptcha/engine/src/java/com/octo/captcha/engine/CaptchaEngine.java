@@ -88,5 +88,4 @@ public interface CaptchaEngine {
     com.octo.captcha.Captcha getNextCaptcha(Locale locale);
 
 
-
 }

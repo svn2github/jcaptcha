@@ -463,13 +463,10 @@ DAMAGES.
 */
 package com.octo.captcha.service.image;
 
-import com.octo.captcha.engine.image.ImageCaptchaEngine;
+import com.octo.captcha.Captcha;
 import com.octo.captcha.service.AbstractManageableCaptchaService;
 import com.octo.captcha.service.CaptchaServiceException;
 import com.octo.captcha.service.captchastore.CaptchaStore;
-import com.octo.captcha.Captcha;
-import com.octo.captcha.engine.CaptchaEngine;
-import com.octo.captcha.Captcha;
 
 import java.awt.image.BufferedImage;
 import java.util.Locale;
@@ -515,7 +512,7 @@ public abstract class AbstractManageableImageCaptchaService extends AbstractMana
      *          if the ticket is invalid
      */
     public BufferedImage getImageChallengeForID(String ID, Locale locale) throws CaptchaServiceException {
-        return (BufferedImage) this.getChallengeForID(ID,locale);
+        return (BufferedImage) this.getChallengeForID(ID, locale);
     }
 
     /**
@@ -532,10 +529,10 @@ public abstract class AbstractManageableImageCaptchaService extends AbstractMana
      * @return a Challenge Clone
      */
     protected Object getChallengeClone(Captcha captcha) {
-        BufferedImage challenge = (BufferedImage)captcha.getChallenge();
-        BufferedImage clone = new BufferedImage(challenge.getWidth(), challenge.getHeight(),challenge.getType());
+        BufferedImage challenge = (BufferedImage) captcha.getChallenge();
+        BufferedImage clone = new BufferedImage(challenge.getWidth(), challenge.getHeight(), challenge.getType());
 
-        clone.getGraphics().drawImage(challenge,0,0,clone.getWidth(),clone.getHeight(),null);
+        clone.getGraphics().drawImage(challenge, 0, 0, clone.getWidth(), clone.getHeight(), null);
         clone.getGraphics().dispose();
 
 

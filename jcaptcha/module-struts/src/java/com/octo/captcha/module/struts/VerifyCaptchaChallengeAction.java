@@ -463,11 +463,9 @@ DAMAGES.
 */
 package com.octo.captcha.module.struts;
 
+import com.octo.captcha.module.config.CaptchaModuleConfigHelper;
 import com.octo.captcha.service.CaptchaService;
 import com.octo.captcha.service.CaptchaServiceException;
-import com.octo.captcha.module.config.CaptchaModuleConfigHelper;
-
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.*;
@@ -504,10 +502,10 @@ public class VerifyCaptchaChallengeAction extends Action {
         String challengeResponse =
                 httpServletRequest.getParameter(responseKey);
 
-        if(log.isDebugEnabled())log.debug("response for id " +captchaID +" : "+challengeResponse);
+        if (log.isDebugEnabled()) log.debug("response for id " + captchaID + " : " + challengeResponse);
 
         //cleanning the request
-             httpServletRequest.removeAttribute(responseKey);
+        httpServletRequest.removeAttribute(responseKey);
 
         Boolean isResponseCorrect = Boolean.FALSE;
 
@@ -523,9 +521,9 @@ public class VerifyCaptchaChallengeAction extends Action {
                 log.debug("Error during challenge verification", e);
                 // so the user will be redirected to the error page
                 httpServletRequest.setAttribute(CaptchaServicePlugin.getInstance().getMessageKey(),
-                CaptchaModuleConfigHelper.getMessage(httpServletRequest));
+                        CaptchaModuleConfigHelper.getMessage(httpServletRequest));
 
-                log.debug("forward to error with message : "+CaptchaModuleConfigHelper.getMessage(httpServletRequest));
+                log.debug("forward to error with message : " + CaptchaModuleConfigHelper.getMessage(httpServletRequest));
 
                 return actionMapping.findForward("error");
             }
@@ -537,18 +535,17 @@ public class VerifyCaptchaChallengeAction extends Action {
             log.debug("correct : forward to success");
             return actionMapping.findForward("success");
         } else {
-            if(log.isDebugEnabled()){
-                log.debug("false  : forward to failure with message : "+CaptchaModuleConfigHelper.getMessage(httpServletRequest));
-                log.debug("in request attribute key : "+CaptchaServicePlugin.getInstance().getMessageKey());
+            if (log.isDebugEnabled()) {
+                log.debug("false  : forward to failure with message : " + CaptchaModuleConfigHelper.getMessage(httpServletRequest));
+                log.debug("in request attribute key : " + CaptchaServicePlugin.getInstance().getMessageKey());
             }
             // If the challenge response is not specified, forward failure
             httpServletRequest.setAttribute(CaptchaServicePlugin.getInstance().getMessageKey(),
-            CaptchaModuleConfigHelper.getMessage(httpServletRequest));
+                    CaptchaModuleConfigHelper.getMessage(httpServletRequest));
             return actionMapping.findForward("failure");
         }
 
     }
-
 
 
 }
