@@ -60,11 +60,20 @@ import java.awt.Rectangle;
  */
 public class PixelsWarper {
 
+
+
         Point			fromPoint, toPoint;
         int				fromPixels[], toPixels[];
         int				width, height;			// width & height of warp image
 
 
+
+        public static int[] Warp( int fromPixels[],int w, int h, Point fromPoint, Point toPoint ){
+            int[] out = new int[w*h];
+            PixelsWarper warper = new PixelsWarper(fromPixels, out,w, h, fromPoint, toPoint);
+            warper.WarpPixels();
+            return warper.toPixels;
+        }
 
         public PixelsWarper( int fromPixels[], int toPixels[], int w, int h, Point fromPoint, Point toPoint )
         {
