@@ -477,6 +477,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Enumeration;
+import java.util.StringTokenizer;
 
 /**
  * <p>File reader background generator that return a random image (JPEG ONLY)
@@ -488,102 +490,131 @@ import java.util.List;
  * @version 1.0
  */
 public class FileReaderRandomBackgroundGenerator extends
-        AbstractBackgroundGenerator
-{
+        AbstractBackgroundGenerator {
 
     private List images = new ArrayList();
     private String rootPath = ".";
 
     public FileReaderRandomBackgroundGenerator(Integer width,
-                                               Integer height, String rootPath)
-    {
+                                               Integer height, String rootPath) {
         super(width, height);
         //this.images=images;
         if (rootPath != null)
             this.rootPath = rootPath;
-        StringBuffer triedPath = new StringBuffer();
 
-        File dir = new File(this.rootPath);
-        triedPath.append(dir.getAbsolutePath());
-        triedPath.append("\n");
+        File dir = findDirectory(this.rootPath);
 
-        if (!dir.canRead() || !dir.isDirectory())
-        {
-            //trying with ressource
-            URL url = this.getClass().getResource(this.rootPath);
-            if(url!=null){
-                dir = new File(url.getFile());
-                triedPath.append(dir.getAbsolutePath());
-                triedPath.append("\n");
+        File[] files = dir.listFiles();
 
-            }else{
-                url=this.getClass().getResource("/"+this.rootPath);
-                if(url!=null){
-                dir = new File(url.getFile());
-                triedPath.append(dir.getAbsolutePath());
-                triedPath.append("\n");
-
-                }else{
-                    dir = new File(".");
-                    triedPath.append(dir.getAbsolutePath());
-                    triedPath.append("\n");
+        //get all jpeg
+        if (files != null) {
+            for (int i = 0; i < files.length; i++) {
+                File file = files[i];
+                BufferedImage out = null;
+                if (file.isFile()) {
+                    out = getImage(file);
+                }
+                if (out != null) {
+                    images.add(images.size(), out);
                 }
             }
-            if (!dir.canRead() || !dir.isDirectory()){
-                if (!dir.canRead() || !dir.isDirectory()){
-                         throw new CaptchaException("None of the tried path :'"+triedPath.toString()+"' is not" +
-                        " a directory or cannot be read");
-                }
-            }
-        }
-
-            File[] files = dir.listFiles();
-
-            //get all jpeg
-            if (files != null)
-            {
-                for (int i = 0 ; i < files.length ; i++)
-                {
-                    File file = files[i];
-                    BufferedImage out = null;
-                    if (file.isFile())
-                    {
-                        out = getImage(file);
-                    }
-                    if (out != null)
-                    {
-                        images.add(images.size(), out);
-                    }
-                }
 
 
-
-            if (images.size() != 0)
-            {
-                for (int i = 0 ; i < images.size() ; i++)
-                {
+            if (images.size() != 0) {
+                for (int i = 0; i < images.size(); i++) {
                     BufferedImage bufferedImage = (BufferedImage) images.get(i);
                     images.set(i, tile(bufferedImage));
                 }
-            } else
-            {
+            } else {
                 throw new CaptchaException("Root path directory is valid but " +
                         "does not contains any image (jpg) files");
             }
         }
     }
 
-    private BufferedImage tile(BufferedImage tileImage)
-    {
+    protected  File findDirectory(String rootPath) {
+
+        //try direct path
+        File dir = new File(rootPath);
+        StringBuffer triedPath = new StringBuffer();
+        appendFilePath(triedPath, dir);
+        if (!dir.canRead() || !dir.isDirectory()) {
+            //try with . parent
+            dir = new File(".", rootPath);
+            appendFilePath(triedPath, dir);
+            if (!dir.canRead() || !dir.isDirectory()) {
+                //try with / parent
+                dir = new File("/", rootPath);
+                appendFilePath(triedPath, dir);
+
+                if (!dir.canRead() || !dir.isDirectory()) {
+                    //trying with ressource
+                    URL url = FileReaderRandomBackgroundGenerator.class.getClassLoader().getResource(rootPath);
+                    if (url != null) {
+                        dir = new File(url.getFile());
+                        appendFilePath(triedPath, dir);
+
+                    } else {
+                        //trying the class path
+                        url = ClassLoader.getSystemClassLoader().getResource(rootPath);
+
+                        if (url != null) {
+                            dir = new File(url.getFile());
+                            appendFilePath(triedPath, dir);
+
+                        }
+                    }
+                }
+            }
+        }
+        //trying from system classpath
+        StringTokenizer token = getClasspathFromSystemProperty();
+        while(token.hasMoreElements()){
+            String path=token.nextToken();
+            if(!path.endsWith(".jar")){
+                dir = new File(path, rootPath);
+                appendFilePath(triedPath,dir);
+                if(dir.canRead()&&dir.isDirectory()){
+                    break;
+                }
+            }
+        }
+
+
+        if (!dir.canRead() || !dir.isDirectory()) {
+            throw new CaptchaException("All tried paths :'" + triedPath.toString() + "' is not" +
+                    " a directory or cannot be read");
+        }
+
+
+        return dir;
+    }
+
+    private StringTokenizer getClasspathFromSystemProperty()
+	{
+		String classpath ;
+		String[] elements ;
+		String suffix ;
+
+		classpath = System.getProperty( "java.class.path") ;
+		StringTokenizer token = new StringTokenizer(classpath,File.pathSeparator );
+    	return token;
+	}
+
+
+    private  void appendFilePath(StringBuffer triedPath, File dir) {
+        triedPath.append(dir.getAbsolutePath());
+        triedPath.append("\n");
+    }
+
+    private BufferedImage tile(BufferedImage tileImage) {
         BufferedImage image = new BufferedImage(getImageWidth(),
                 getImageHeight(), tileImage.getType());
         Graphics2D g2 = (Graphics2D) image.getGraphics();
         int NumberX = (getImageWidth() / tileImage.getWidth());
         int NumberY = (getImageHeight() / tileImage.getHeight());
-        for (int k = 0 ; k <= NumberY ; k++)
-        {
-            for (int l = 0 ; l <= NumberX ; l++)
-            {
+        for (int k = 0; k <= NumberY; k++) {
+            for (int l = 0; l <= NumberX; l++) {
                 g2.drawImage(tileImage, l * tileImage.getWidth(), k *
                         tileImage.getHeight(),
                         Math.min(tileImage.getWidth(), getImageWidth()),
@@ -595,11 +626,9 @@ public class FileReaderRandomBackgroundGenerator extends
         return image;
     }
 
-    private static BufferedImage getImage(File o)
-    {
+    private static BufferedImage getImage(File o) {
         BufferedImage out = null;
-        try
-        {
+        try {
 
             //            ImageInfo info = new ImageInfo();
             //            Image image = ToolkitFactory.getToolkit().createImage(o.toString());
@@ -616,11 +645,9 @@ public class FileReaderRandomBackgroundGenerator extends
 
             // Return the format name
             return out;
-        } catch (IOException e)
-        {
+        } catch (IOException e) {
             throw new CaptchaException("Unknown error during file reading ", e);
-        } catch (ImageFormatException e)
-        {
+        } catch (ImageFormatException e) {
             return null;
         }
     }
@@ -631,8 +658,7 @@ public class FileReaderRandomBackgroundGenerator extends
      *
      * @return the background image
      */
-    public BufferedImage getBackround()
-    {
+    public BufferedImage getBackround() {
         return (BufferedImage) images.get(myRandom.nextInt(images.size()));
     }
 

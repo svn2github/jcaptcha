@@ -494,7 +494,7 @@ public class    BasicListGimpyEngine
         TextPaster randomPaster = new DoubleRandomTextPaster(new Integer(6),
                 new Integer(8), Color.white);
         BackgroundGenerator fileBack = new FileReaderRandomBackgroundGenerator(
-                new Integer(200), new Integer(100), "/gimpybackgrounds");
+                new Integer(200), new Integer(100), "gimpybackgrounds");
         //BackgroundGenerator funkyBack = new FunkyBackgroundGenerator(new Integer(200), new Integer(100));
         FontGenerator shearedFont = new TwistedAndShearedRandomFontGenerator(
                 new Integer(30), new Integer(35));
