@@ -59,7 +59,7 @@
     <ant:copy todir="${maven.build.dir}/distributions/bin/temp" flatten="true">
     	<ant:fileset dir="${basedir}">
     		<include name="**/jcaptcha*-${pom.currentVersion}.jar"/>
-    		<include name="**/imaging.jar"/>
+    		<include name="**/imaging-01012005.jar"/>
     		<exclude name="${maven.build.dir}"/>
     	</ant:fileset>
     </ant:copy>

@@ -11,7 +11,7 @@
     <!-- The full name of the organization. -->
     <name>JCaptcha corp.</name>
     <!-- The URL to the organization's home page. -->
-    <url>http://jcaptcha.sourceforge.net/</url>
+    <url>http://www.jcaptcha.net/</url>
     <!-- The URL to the organization's logo image. This can be an URL relative to the base directory of the generated
          web site, (e.g., /images/org-logo.png) or an absolute URL (e.g., http://my.corp/logo.png). This value is used
          when generating the project documentation. -->
@@ -35,7 +35,7 @@
   <url/>
   <repository>
   <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/jcaptcha:jcaptcha</connection>
-    <url>http://cvs.sourceforge.net/viewcvs.py/jcaptcha/jcaptcha</url>
+    <url>http://cvs.sourceforge.net/viewcvs.py/jcaptcha/jcaptcha/</url>
 
    </repository>
    <mailingLists>
@@ -93,7 +93,7 @@
   </build>
 
   <reports>
-	 <report>maven-dashboard-plugin</report>
+	<report>maven-dashboard-plugin</report>
   	<report>maven-changelog-plugin</report>
   	<report>maven-file-activity-plugin</report>
 	<report>maven-license-plugin</report>
