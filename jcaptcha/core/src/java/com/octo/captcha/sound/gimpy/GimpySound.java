@@ -464,13 +464,15 @@
 
 package com.octo.captcha.sound.gimpy;
 
-import com.octo.captcha.component.sound.utils.Sound;
+import javax.sound.sampled.AudioInputStream;
+
 import com.octo.captcha.sound.SoundCaptcha;
 
 /**
  * <p>Description: </p>
  *
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
+ * @author Benoit Doumas
  * @version 1.0
  */
 public class GimpySound extends SoundCaptcha
@@ -479,7 +481,7 @@ public class GimpySound extends SoundCaptcha
     private String response;
 
     public GimpySound(String thequestion,
-                      Sound thechallenge, String theresponse)
+        AudioInputStream thechallenge, String theresponse)
     {
         super(thequestion, thechallenge);
         this.response = theresponse;

@@ -50,23 +50,30 @@
 
 package com.octo.captcha.sound;
 
+import java.io.IOException;
+
+import javax.sound.sampled.AudioInputStream;
+
 import com.octo.captcha.Captcha;
-import com.octo.captcha.component.sound.utils.Sound;
+import com.octo.captcha.CaptchaException;
 
 /**
- * <p>Description: </p> <p>String question about a Line challenge, this class is
- * abstract.
- *
- * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
+ * <p>
+ * Description: String question about a Line challenge, this class is abstract.
+ * </p>
+ * 
+ * @author <a href="mailto:mga@octo.com">Mathieu Gandin </a>
+ * @author Benoit Doumas
  * @version 1.0
  */
 public abstract class SoundCaptcha implements Captcha
 {
 
     protected String question;
-    protected Sound challenge;
 
-    protected SoundCaptcha(String thequestion, Sound thechallenge)
+    protected AudioInputStream challenge;
+
+    protected SoundCaptcha(String thequestion, AudioInputStream thechallenge)
     {
         this.question = thequestion;
         this.challenge = thechallenge;
@@ -90,23 +97,30 @@ public abstract class SoundCaptcha implements Captcha
 
     /**
      * Accessor to the sound challenge.
-     *
-     * @return a Line
+     * 
+     * @return an AudioInputStream
      */
-    public final Sound getSoundChallenge()
+    public final AudioInputStream getSoundChallenge()
     {
         return this.challenge;
     }
+
     /*
-        public Boolean validateResponse(Object response) {
-            return null;
-        }
-    */
+     * public Boolean validateResponse(Object response) { return null; }
+     */
     /**
      * this method is to clean the challenge.
      */
     public void disposeChallenge()
     {
+        try
+        {
+            challenge.close();
+        }
+        catch (IOException e)
+        {
+            throw new CaptchaException(e);
+        }
         this.challenge = null;
     }
 

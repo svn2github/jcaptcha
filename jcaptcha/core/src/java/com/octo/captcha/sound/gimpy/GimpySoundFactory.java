@@ -466,7 +466,6 @@ package com.octo.captcha.sound.gimpy;
 
 import com.octo.captcha.CaptchaException;
 import com.octo.captcha.CaptchaQuestionHelper;
-import com.octo.captcha.component.sound.utils.Sound;
 import com.octo.captcha.component.sound.wordtosound.WordToSound;
 import com.octo.captcha.component.wordgenerator.WordGenerator;
 import com.octo.captcha.sound.SoundCaptcha;
@@ -475,16 +474,22 @@ import com.octo.captcha.sound.SoundCaptchaFactory;
 import java.util.Locale;
 import java.util.Random;
 
+import javax.sound.sampled.AudioInputStream;
+
 /**
  * @author Gandin Mathieu
+ * @author Benoit Doumas
  * @version 1.0
  */
 public class GimpySoundFactory extends SoundCaptchaFactory
 {
 
     private WordGenerator wordGenerator;
+    
     private WordToSound word2Sound;
+    
     private Random myRandom = new Random();
+    
     /**
      * The bundle question key for CaptchaQuestionHelper
      */
@@ -539,7 +544,7 @@ public class GimpySoundFactory extends SoundCaptchaFactory
     public SoundCaptcha getSoundCaptcha(Locale locale)
     {
         String word = this.wordGenerator.getWord(getRandomLenght(), locale);
-        Sound sound = this.word2Sound.getSound(word);
+        AudioInputStream sound = this.word2Sound.getSound(word);
         SoundCaptcha soundCaptcha = new GimpySound(
                 CaptchaQuestionHelper.getQuestion(locale, BUNDLE_QUESTION_KEY),
                 sound, word);
