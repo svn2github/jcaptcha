@@ -50,22 +50,20 @@
  */
 package com.octo.captcha.image.gimpy;
 
-
-import com.octo.captcha.image.ImageCaptchaEngine;
-import com.octo.captcha.image.ImageCaptchaFactory;
-import com.octo.captcha.image.ImageCaptcha;
-import com.octo.captcha.image.gimpy.wordtoimage.fontgenerator.RandomFontGenerator;
-import com.octo.captcha.image.gimpy.wordtoimage.backgroundgenerator.FunkyBackgroundGenerator;
-import com.octo.captcha.image.gimpy.wordtoimage.textpaster.DoubleTextPaster;
-import com.octo.captcha.image.gimpy.wordgenerator.RandomWordGenerator;
-import com.octo.captcha.Captcha;
-
 import java.awt.Color;
 import java.util.Locale;
 
+import com.octo.captcha.image.ImageCaptcha;
+import com.octo.captcha.image.ImageCaptchaEngine;
+import com.octo.captcha.image.ImageCaptchaFactory;
+import com.octo.captcha.image.gimpy.wordgenerator.RandomWordGenerator;
+import com.octo.captcha.image.gimpy.wordtoimage.backgroundgenerator.FunkyBackgroundGenerator;
+import com.octo.captcha.image.gimpy.wordtoimage.fontgenerator.RandomFontGenerator;
+import com.octo.captcha.image.gimpy.wordtoimage.textpaster.DoubleTextPaster;
+
 /**
- * A ImageCaptchaEngine which factory creates captcha which challenge is a random
- * string composed with characters A,B,C,D and E.
+ * A ImageCaptchaEngine which factory creates captcha which challenge is a
+ * random string composed with characters A,B,C,D and E.
  *
  * @version $Id$
  *
@@ -123,9 +121,12 @@ public class SimpleGimpyEngine extends ImageCaptchaEngine
         WordGenerator wordGenerator = new RandomWordGenerator("ABCDE");
         WordToImage word2Image =
             new com.octo.captcha.image.gimpy.wordtoimage.ComposedWordToImage(
-                new RandomFontGenerator(MIN_FONT_SIZE,null),
+                new RandomFontGenerator(MIN_FONT_SIZE, null),
                 new FunkyBackgroundGenerator(IMAGE_WIDTH, IMAGE_HEIGHT),
-                new DoubleTextPaster(WORD_MIN_LENGTH, WORD_MAX_LENGTH, Color.GRAY));
+                new DoubleTextPaster(
+                    WORD_MIN_LENGTH,
+                    WORD_MAX_LENGTH,
+                    Color.GRAY));
         this.factory = new GimpyFactory(wordGenerator, word2Image);
     }
 
@@ -152,12 +153,12 @@ public class SimpleGimpyEngine extends ImageCaptchaEngine
 
     /**
      * This return a new captcha. It may be used directly.
-     * @param locale the desired locale
+     * @param theLocale the desired locale
      * @return a new Captcha
      */
-    public ImageCaptcha getNextImageCaptcha(Locale locale)
+    public ImageCaptcha getNextImageCaptcha(Locale theLocale)
     {
-        return this.factory.getImageCaptcha(locale);
+        return this.factory.getImageCaptcha(theLocale);
     }
 
 }
