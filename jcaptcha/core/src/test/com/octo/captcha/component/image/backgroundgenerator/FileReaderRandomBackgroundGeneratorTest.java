@@ -936,28 +936,44 @@ public class FileReaderRandomBackgroundGeneratorTest extends TestCase {
 
     protected void setUp() throws Exception {
         super.setUp();
-        fileReaderRandomBackgroundGenerator = new FileReaderRandomBackgroundGenerator(new Integer(2),
-                                                                                        new Integer(2),"imagedir");
+        fileReaderRandomBackgroundGenerator =
+                new FileReaderRandomBackgroundGenerator(new Integer(2), new Integer(2), "imagedir");
     }
 
     public void testFindDirectory() throws Exception {
 
-        File dir =fileReaderRandomBackgroundGenerator.findDirectory("com");
-        assertTrue("should be a readeable directory",dir.canRead()&&dir.isDirectory());
+        File dir = fileReaderRandomBackgroundGenerator.findDirectory("com");
+        assertValidDir(dir, "com");
         try {
-            fileReaderRandomBackgroundGenerator.findDirectory("does not exists");
+            dir = fileReaderRandomBackgroundGenerator.findDirectory("does not exists");
             fail("should never pass");
-        } catch (Exception e) {
-
         }
-        fileReaderRandomBackgroundGenerator.findDirectory("imagedir");
-        fileReaderRandomBackgroundGenerator.findDirectory("emptyimagedir");
+        catch (Exception e) {
+             // should throw exception
+        }
+        dir = fileReaderRandomBackgroundGenerator.findDirectory("imagedir");
+        assertValidDir(dir, "imagedir");
+        dir = fileReaderRandomBackgroundGenerator.findDirectory("emptyimagedir");
+        assertValidDir(dir, "emptyimagedir");
         try {
-            new FileReaderRandomBackgroundGenerator(new Integer(2),new Integer(2),"emptyimagedir");
+            new FileReaderRandomBackgroundGenerator(new Integer(2), new Integer(2), "emptyimagedir");
             fail("should never pass");
-        } catch (Exception e) {
-          
         }
-
+        catch (Exception e) {
+             // should throw exception
+        }
     }
+
+
+    /**
+     * Requires that directory be a directory, be readable, and have the right name.
+     * @param dir
+     * @param expectedName
+     */
+    private void assertValidDir(File dir, String expectedName) {
+        assertTrue("should be readable", dir.canRead());
+        assertTrue("should be a directory", dir.canRead());
+        assertEquals("Name of root path should match name of directory", expectedName, dir.getName());
+    }
+
 }

@@ -478,6 +478,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
+import java.util.Map;
+import java.util.HashMap;
 
 /**
  * <p>File reader background generator that return a random image (JPEG ONLY)
@@ -531,12 +533,15 @@ public class FileReaderRandomBackgroundGenerator extends
         }
     }
 
-    protected static File cachedDirectory = null;
+    /**
+     *
+     */
+    protected static Map cachedDirectories = new HashMap();
 
     protected  File findDirectory(String rootPath) {
-//        if ( cachedDirectory != null ) {
-//            return cachedDirectory;
-//        }
+        if ( cachedDirectories.containsKey(rootPath) ) {
+            return (File) cachedDirectories.get(rootPath);
+        }
 
         //try direct path
         File dir = new File(rootPath);
@@ -594,7 +599,10 @@ public class FileReaderRandomBackgroundGenerator extends
         }
 
 
-        return cachedDirectory = dir;
+        // cache answer for later
+        cachedDirectories.put(rootPath, dir);
+
+        return dir;
     }
 
     private StringTokenizer getClasspathFromSystemProperty()
