@@ -1,0 +1,486 @@
+\documentclass[a4paper,12pt,titlepage]{article}
+\usepackage{graphicx}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PREAMBLE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{ImageCaptchaFilter User Manual}
+\author{sbrunot@octo.com}
+\date{\today}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BEGIN DOCUMENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+% Make document title
+\maketitle
+% Generate tables of contentsant figures on a new page
+\tableofcontents
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{What is ImageCaptchaFilter ?}
+
+ImageCaptchaFilter is a J2EE Filter provided by the jcaptcha-j2ee library \footnote{see http://jcaptcha.sourceforge.net to get the last jcaptcha release}. It is designed to help you add visual captchas (see http://www.captcha.net if you don't know yet what a captcha is) to the entry forms of your existing MVC web applications. 
+
+Current features of ImageCaptchaFilter are:
+
+\begin{itemize}
+	\item Generation and rendering of Captcha images (as JPEG) at runtime for inclusion in an existing entry form. ImageCaptchaFilter use a ImageCaptchaEngine \footnote{see jcaptcha-core  documentation at http://jcaptcha.sourceforge.net} to generate captchas : a simple one, SimpleGimpyEngine from the com.octo.captcha.image.gimpy package, which displays a random string made up with characters A,B,C,D and E, is provided with jcaptcha-j2ee but you can author your own or use one of those provided with jcaptcha-samples ;
+	\item Verification of the HTTP client entry in response to the challenge displayed as an image in the entry form:
+	\begin{itemize}
+		\item Redirection of the HTTP client to an error page if the captcha challenge is not passed ;
+		\item Transparent follow up of the request to the web application, without any information concerning the captcha, if the challenge is successfully passed ;
+		\item Many forms can be protected by captchas in the same web application, each one having its own error redirection page ;
+	\end{itemize}
+	\item Monitoring via JMX :
+		\begin{itemize}
+			\item Number of captcha generated since the filter is up;
+			\item Number of captcha which challenge has been successfully passed;
+			\item Number of captcha the client failed to pass the challenge;
+			\item Performance tuning;
+		\end{itemize}
+	\item Administration via JMX :
+		\begin{itemize}
+			\item Hot modification of the ImageCaptchaEngine implementation used by the filter;
+			\item Performance tuning.
+		\end{itemize}
+	\item Security audit: generation of WARN messages providing client IP address when the ImageCaptchaFilter receives incorrect requests.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{How to add captchas to your webapp ?}
+
+This section of the manual is a tutorial on adding captchas to an existing webapp's form using the ImageCaptchaFilter component. The Sun J2EE petstore  application version 1.3.2 is used here as a sample. It can be downloaded at http://java.sun.com/developer/releases/petstore/. For more information about the Sun J2EE petstore application version 1.3.2, have a look at http://java.sun.com/blueprints/code/jps132/docs/index.html.
+
+In this tutorial, we'll add a captcha to the petstore form provided to declare a new user to the system (let's name it the "Add new user" form). This is a typical usage of captchas: preventing robots from massively declaring fake users to the system (see http://login.yahoo.com/ and follow the "Sign up now" link to see a real world example of such usage). Figure \ref{fig:original_petstore} shows how the "Add new user form" looks like in the original J2EE petstore: 
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=1.00\textwidth]{C:/outils/eclipse/workspace/jcaptcha-j2ee/doc/original_petstore.jpg}
+	\caption{original J2EE petstore's "Add new user" form}
+	\label{fig:original_petstore}
+\end{figure}
+
+Assuming you've deployed the original petstore on a local j2ee server which listen for incoming HTTP requests on port 8000, the original "Add new user" form can be reached at http://localhost:8000/petstore/signon\_welcome.screen. 
+
+What we are going to do in this tutorial is to add a gimpy captcha before the "Create New Account" button : an image will be displaying a random string, which the user will be requested to spell in a dedicated text field. Figure \ref{fig:captcha_petstore} shows how the form will look with our captcha :
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=1.00\textwidth]{C:/outils/eclipse/workspace/jcaptcha-j2ee/doc/captcha_petstore.jpg}
+	\caption{J2EE petstore's "Add new user form" with a basic captcha}
+	\label{fig:captcha_petstore}
+\end{figure}
+
+With a captcha in it, the user manual for the "Add new user" form is:
+
+\begin{itemize}
+	\item	Type user information (name and password) in the dedicated fields, as it had to be done in the original form ;
+	\item	Type the string displayed by the captcha image in the text field labelled "Please spell the string displayed in the image" (the string displayed in Figure 2 being "ADADEAAD") ;
+	\item	Press the "Create New Account" button to ask for the new account creation, as it had to be done in the original form.
+\end{itemize}
+
+When the modified petstore receives such a "create new account" request, we want it to behave like this:
+
+\begin{itemize}
+	\item	If the string "entered by the user" is the one displayed by the captcha image, process exactly as it was done in the original petstore application (we don't even have to know what this processing was) ;
+	\item	If not, re display the entry form.
+\end{itemize}
+
+To achieve those new requirements with ImageCaptchaFilter, we just have to:
+
+\begin{itemize}
+	\item	Modify the entry form so that it displays the captcha, which implies authoring some jsp code ;
+	\item Add the ImageCaptchaFilter to the J2EE petstore web app and parameterize it, which implies adding some extra libraries in the petstore WEB-INF\begin{math}\setminus\end{math}lib subdirectory and extra deployment descriptors in its web.xml.
+\end{itemize}
+
+\subsection{Modify your entry form so that it displays the captcha}
+The jsp code we have to modify is in the signon.jsp source file, which is stored in the src/apps/petstore/scr/docroot subdirectory of the J2EE petstore sources directory:
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=1.00\textwidth]{C:/outils/eclipse/workspace/jcaptcha-j2ee/doc/signon_src_directory.jpg}
+	\caption{localization of signon.jsp in the petstore source directory}
+	\label{fig:signon_src_directory}
+\end{figure}
+
+\emph{WARNING : because of the petstore design, we also have to modify the signon.jsp files which are stored in the src/apps/petstore/scr/docroot/ja/ and src/apps/petstore/scr/docroot/zh/ subdirectories to provide captcha for the Japanese and Chinese users. If we don't, the new petstore won't be protected from robots massive fake users creation.}
+
+Here is the jsp code that produce the "Add new user" form (lines 131 to 183 of signon.jsp) :
+
+\begin{verbatim}
+<waf:form name="newcustomer" action="createuser.do" method="POST">
+	<table cellpadding="5" cellspacing="0" border="0">
+	<tr>
+	<td class="petstore" align="center" colspan="2">
+	<b>No. I would like to sign up for an account.</b>
+	</td>
+	</tr>
+	<tr>
+	<td class="petstore_form" align="right">
+	<b>User Name:</b>
+	</td>
+	<td class="petstore_form">
+	<waf:input cssClass="petstore_form"
+	           type="text"
+	           size="15"
+	           validation="validation"
+	           name="j_username"/>
+	</td>
+	</tr>
+	<tr>
+	<td class="petstore_form" align="right">
+	<b>Password:</b>
+	</td>
+	<td class="petstore_form">
+	<waf:input cssClass="petstore_form" 
+	           type="password"
+	           size="15"
+	           validation="validation"
+	           name="j_password"/>
+	</td>
+	</tr>
+	<tr>
+	<td class="petstore_form" align="right">
+	<b>Password (Repeat):</b>
+	</td>
+	<td class="petstore_form">
+	<waf:input cssClass="petstore_form"
+	           type="password"
+	           size="15"
+	           validation="validation"
+	           name="j_password_2"/>
+	</td>
+	</tr>
+	<tr>
+	<td align="center" colspan="2">
+	<input class="petstore_form"
+	       name="submit"
+	       type="submit"
+	       value="Create New Account"/>
+	</td>
+	</tr>
+	</table>
+</waf:form>
+\end{verbatim}
+
+Here is the modified jsp after adding a captcha (the extra code is diplayed in bold) :
+
+\begin{verbatim}
+<waf:form name="newcustomer" action="createuser.do" method="POST">
+	<table cellpadding="5" cellspacing="0" border="0">
+	<tr>
+	<td class="petstore" align="center" colspan="2">
+	<b>No. I would like to sign up for an account.</b>
+	</td>
+	</tr>
+	<tr>
+	<td class="petstore_form" align="right">
+	<b>User Name:</b>
+	</td>
+	<td class="petstore_form">
+	<waf:input cssClass="petstore_form"
+	           type="text"
+	           size="15"
+	           validation="validation"
+	           name="j_username"/>
+	</td>
+	</tr>
+	<tr>
+	<td class="petstore_form" align="right">
+	<b>Password:</b>
+	</td>
+	<td class="petstore_form">
+	<waf:input cssClass="petstore_form" 
+	           type="password"
+	           size="15"
+	           validation="validation"
+	           name="j_password"/>
+	</td>
+	</tr>
+	<tr>
+	<td class="petstore_form" align="right">
+	<b>Password (Repeat):</b>
+	</td>
+	<td class="petstore_form">
+	<waf:input cssClass="petstore_form"
+	           type="password"
+	           size="15"
+	           validation="validation"
+	           name="j_password_2"/>
+	</td>
+	</tr>
+	<%-- EXTRA CODE TO ADD CAPTCHA BEGINS HERE --%>
+	<tr>
+	<%
+	  int captchaID = (int) (Math.random() * Integer.MAX_VALUE);
+	  String captchaRenderingURL = "/captcha/render.do";
+	  String captchaIDParameterName = "captcha_id";
+	  String  renderURL = "/petstore" + captchaRenderingURL + "?" + captchaIDParameterName + "=" + captchaID;
+	%>
+	<td>
+	</td>
+	<td>
+	<img src=<%=renderURL%>>
+	<input type="hidden" name="<%=captchaIDParameterName%>" value="<%=captchaID%>">
+	</td>
+	</tr>
+	<tr>
+	<td class="petstore_form" align="right">
+	<b>Please spell the string displayed in the image:</b>
+	</td>
+	<td class="petstore_form">
+	<%
+	  String captchaChallengeResponseParameterName = "challenge_response";
+	%>
+	<waf:input cssClass="petstore_form"
+			       type="text"
+			       name="<%=captchaChallengeResponseParameterName%>"/>
+	</td>
+	</tr>
+	<%-- EXTRA CODE TO ADD CAPTCHA ENDS HERE --%>
+	<tr>
+	<td align="center" colspan="2">
+	<input class="petstore_form"
+	       name="submit"
+	       type="submit"
+	       value="Create New Account"/>
+	</td>
+	</tr>
+	</table>
+</waf:form>
+\end{verbatim}
+
+The first part of the extra code addresses the generation of a captcha by the ImageCaptchaFilter and the rendering of his challenge as a jpeg image in the "Create new user" form:
+
+\begin{verbatim}
+ <%
+     int captchaID = (int) (Math.random() * Integer.MAX_VALUE);
+     String captchaRenderingURL = "/captcha/render.do";
+     String captchaIDParameterName = "captcha_id";
+     String  renderURL = "/petstore" + captchaRenderingURL + "?" + captchaIDParameterName + "=" + captchaID;
+  %>
+ […]
+ <img src=<%=renderURL%>>
+\end{verbatim}
+
+They are more elegant ways to code this (using a taglib instead of "ugly" jsp code, etc…), but the principle here it to keep it simple so that the mechanism remains easily understandable:
+
+\begin{itemize}
+	\item	First of all, we generate an id for the captcha we want the ImageCaptchaFilter to generate. The "generate and render as jpeg" function of CaptchaFiler associates an id with each captcha instance it creates and this id must be provided by the filter client. They are three simple rules to follow for generating this id :
+	\begin{itemize}
+		\item It is a string, which is passed to the ImageCaptchaFilter as an HTTP request parameter ;
+		\item It has a maximum length. As this maximum length is a parameter of the ImageCaptchaFilter ("CaptchaIDMaxLength" : see Table 1 for more details about this), you can choose whichever maximum length you want but you must ensure that the length of the id that is created in the jsp minors it. If not, any request done to the ImageCaptchaFilter providing this id will return a 404 and, as a result, no image will be displayed by the form ;
+		\item It must be a different one for each generated HTML page. ImageCaptchaFilter associates an unique captcha for a given id: if you ask for the generation of a captcha providing id id1, and then ask for another captcha with the same id id1 while the first one hasn't been challenged yet, the second generated captcha will replace the first one (so your first user, in order to prove he is a human being, will have to pass the second captcha challenge while being submitted the first one by the form… hope this is clear enough).
+	\end{itemize}
+In our example here, we generated a random id that is an integer (as a string) between 0 and $2^{31} - 1$, so the maximum length of this id is 10.
+	\item	Then we add an \verb|<img>| tag which HREF URL means to the ImageCaptchaFilter "generate a captcha and render it as jpeg in the response". This URL base is a parameter of the ImageCaptchaFilter ("RenderURL" : see Table 1 for more details about this). The name of the HTTP request parameter we use to transmit the captcha id is also a parameter of the ImageCaptchaFilter ("CaptchaIDParameterName" : see Table 1 for more details about this) ;
+\end{itemize}
+
+The second part of the extra code addresses the verification by the ImageCaptchaFilter of the user's response to the captcha challenge:
+
+\begin{verbatim}
+<input type="hidden" name="<%=captchaIDParameterName%>" value="<%=captchaID%>">
+[…]
+<td class="petstore_form" align="right">
+  <b>Please spell the string displayed in the image:</b>
+</td>
+<td class="petstore_form">
+<%
+     String captchaChallengeResponseParameterName = "challenge_response";
+  %>
+<waf:input cssClass="petstore_form"
+	     type="text"
+	     name="<%=captchaChallengeResponseParameterName%>"/>
+</td>
+\end{verbatim}
+
+\begin{itemize}
+	\item	First, we add a hidden input that stores the captcha id so that it is transmitted to the ImageCaptchaFilter on form validation. The name of this hidden input is the name of the HTTP request parameter also used for the generation and rendering of the captcha (see above);
+	\item Then we add the text field entry in which the user must spell the string displayed by the captcha image. The name of the text field (which is the name of the HTTP request parameter used to transmit the user's response to the ImageCaptchaFilter) is a parameter of the ImageCaptchaFilter ("CaptchaChallengeResponseParameterName" : see Table 1 for more details about this). 
+\end{itemize}
+
+\subsection{Add ImageCaptchaFilter to the web app and parameterize it}
+
+To add the captcha filter to the web app (petstore in our example) and parameterize it, we just have to:
+
+\begin{itemize}
+	\item	Include in the WEB-INF\begin{math}\setminus\end{math}lib subdirectory of the web application the jcaptch-core-version.jar and jcaptcha-j2ee-version.jar libraries provided with the JCaptcha distribution. As the filter provides JMX management capabilities and rely on Jakarta commons-logging (http://jakarta.apache.org/commons-logging) for its logs, you must ensure that the corresponding libraries are present in the classpath of your application server. If not, and  it is the case with the j2ee 1.3.1 RI, bundle them in your web app copying the corresponding jars in the WEB-INF\begin{math}\setminus\end{math}lib (for JMX, you can download the reference implementation at http://java.sun.com/products/JavaManagement)~;
+	\item	Modify the web.xml to declare the filter. Keep in mind that the ImageCaptchaFilter must be the first filter declared in web.xml.
+\end{itemize}
+
+Please consult the documentation provided with J2EE petstore 1.3.1 for details about how to modify its build script and rebuild it.
+
+Here is the reference for all the parameters that should be set to configure ImageCaptchaFilter:
+
+\begin{description}
+	\item[ImageCaptchaEngineClass] The ImageCaptchaEngine concrete class used by ImageCaptchaFilter to create captchas (see jcaptcha-core documentation to get more information about how to provide your own concrete class : http://jcaptcha.sourceforge.net).
+
+Example : to use the simple gimpy engine provided with jcaptcha-j2ee, declare this simple engine class :
+
+<init-param>
+  <param-name>ImageCaptchaEngineClass</param-name>
+  <param-value>
+     com.octo.captcha.image.gimpy.SimpleGimpyEngine
+  </param-value>
+</init-param>
+	\item[CaptchaRenderingURL] This is the URL used to request generation and rendering as jpeg of a new captcha. It is relative to the web application root and must begin with a "/". A Call to this URL providing under parameter CaptchaIDParameterName (see below) an id which length is between 1 and CaptchaIDMaxLength (see below) returns a captcha challenge as a jpeg image.
+
+Example : if you want that a call to http://server:port/WebApp/captcha/render.do?CaptchaIDParameterName=ID creates a new captcha and returns its challenge as a jpeg image, use :
+
+<init-param>
+  <param-name>CaptchaRenderingURL</param-name>
+  <param-value>/captcha/render.do</param-value>
+</init-param>
+
+	\item[CaptchaVerificationURLs] This is the ";" separated values list of the captcha-ized form's action URL. Each one is relative to the web application root and must begin with a "/". The ImageCaptchaFilter intercepts all requests to those URLs and search for a captcha id and a challenge response in it (respectively the  CaptchaIDParameterName and the CaptchaChallengeResponseParameterName request parameters). If those parameters are not included in the request, or if a captcha id is present but doesn't match any captcha previously generated and not yet checked, the filter sends back an HTTP 404 error and a security event is logged. If the parameters are present, the filter verifies the response to the captcha challenge. If the response is correct, the request is cleaned of the captcha specific parameters and then forwarded to the component that processes it in the original web application (the original web application being the web application without ImageCaptchaFilter). If the response is not correct, the client is redirected to an URL : CaptchaErrorURLs is the ";" separated values list of URL the client is redirected to (the first is used with the first verification URL, the second with the second one, etc…).
+
+Example : if a captcha verification must be done for any request to http://server:port/WebApp/usecaseone/step2.do and  http://server:port/WebApp/usecasetwo/step2.do, and that the "user" must be redirected to http://server:port/WebApp/error1.jsp if he fails the captcha challenge for the first URL, and http://server:port/WebApp/error2.jsp if he failes the captcha challenge for the second URL : 
+
+<init-param>
+  <param-name>CaptchaVerificationURLs</param-name>
+  <param-value>
+    /usecaseone/step2.do;/usecasetwo/step2.do
+  </param-value>
+</init-param>
+<init-param>
+  <param-name>CaptchaErrorURLs</param-name>
+  <param-value>error1.jsp;error2.jsp</param-value>
+</init-param>
+
+	\item[CaptchaErrorURLs] See CaptchaVerificationURLs above
+
+	\item[CaptchaIDParameterName] This is the name of the HTTP request parameter used to provide a captcha id for captcha generation and verification (see CaptchaRenderingURL and CaptchaVerificationURLs above).
+
+Example : HTTP request parameter captcha\_id contains the captcha id :
+
+<init-param>
+  <param-name>CaptchaIDParameterName</param-name>
+  <param-value>captcha\_id</param-value>
+</init-param>
+
+	\item[CaptchaIDMaxLength] This is the maximum length of a captcha id. If the filter intercepts a generation or verification request which provides an id which length majors this value, it will return an HTTP 404 Error and will generate a security log providing the caller's IP address.
+
+Example : Captcha id must be 10 character longs max :
+
+<init-param>
+  <param-name>CaptchaIDMaxLength</param-name>
+  <param-value>10</param-value>
+</init-param>
+
+	\item[CaptchaChallengeResponseParameterName] This is the name of the HTTP request parameter used to provide a user's response to a captcha challenge for verification (see CaptchaVerificationURLs above).
+
+Exemple : HTTP request parameter challenge\_response contains the user's challenge  response :
+
+<init-param>
+  <param-name>
+    CaptchaChallengeResponseParameterName
+  </param-name>
+  <param-value>challenge\_response</param-value>
+</init-param>
+
+	\item[MaxNumberOfSimultaneousCaptchas] This is the maximum number of captchas the filter can manage simultaneously. When the filter generates a captcha, it stores it in an internal store. When it receives a verification request for a captcha, it delete it from the internal store. When the internal store is full, the filter try to remove the captchas which time to live (CaptchaTimeToLive, the time to live in milliseconds) is over. If it can't remove any captcha, it didn't generate a new one and the user must reload the form to try to get a captcha. MaxNumberOfSimultaneousCaptchas is the size of the internal store.
+
+Example : 1000 captchas maximum in the internal store with a time to live of 2 minutes (120000 milliseconds) :
+
+<init-param>
+  <param-name>MaxNumberOfSimultaneousCaptchas</param-name>
+  <param-value>1000</param-value>
+</init-param>
+<init-param>
+  <param-name>MinGuarantedStorageDelayInSeconds</param-name>
+  <param-value>120</param-value>
+</init-param>
+
+	\item[MinGuarantedStorageDelayInSeconds] See MaxNumberOfSimultaneousCaptchas above
+	
+	\item[RegisterToMBeanServer] This is a boolean value : if "true", the CaptchaFilter will try to register itself to a JMX server during initialization (use "true" with JBoss, for example). If "false", it will not.
+
+Example : try to register with a JMX server :
+
+<init-param>
+  <param-name>RegisterToMBeanServer</param-name>
+  <param-value>true</param-value>
+</init-param>
+
+\end{description}
+
+Here is the modified petstore web.xml after declaring and parameterizing ImageCaptchaFilter (the extra deployment descriptors are displayed in bold):
+
+\begin{verbatim}
+[…]
+
+<web-app>
+  <display-name>PetStoreWAR</display-name>
+  <description>Web Tier DD for the PetStore application</description>
+  <!-- Captcha Filter Declaration Start -->
+  <filter>
+    <filter-name>ImageCaptchaFilter</filter-name>
+    <filter-class>com.octo.captcha.j2ee.servlet.ImageCaptchaFilter</filter-class>
+    <init-param>
+      <!-- The image engine used to generate captchas -->
+      <param-name>ImageCaptchaEngineClass</param-name>
+      <param-value>com.octo.captcha.image.gimpy.SimpleGimpyEngine</param-value>
+    </init-param>    
+    <init-param>
+      <!-- the URL to call for captcha generation and JPEG rendering -->
+      <param-name>CaptchaRenderingURL</param-name>
+      <param-value>/captcha/render.do</param-value>
+    </init-param>
+    <init-param>
+      <!--The URL where "Add new user" form data are posted to -->
+      <param-name>CaptchaVerificationURLs</param-name>
+      <param-value>/createuser.do</param-value>
+    </init-param>
+    <init-param>
+      <!--The URL of the "Add new user" form (redirect to this form if the
+         captcha challenge is not resolved) -->
+      <param-name>CaptchaErrorURLs</param-name>
+      <param-value>/signon_welcome.screen</param-value>
+    </init-param>
+    <init-param>
+      <param-name>CaptchaIDParameterName</param-name>
+      <param-value>captcha_id</param-value>
+    </init-param>
+    <init-param>
+      <param-name>CaptchaIDMaxLength</param-name>
+      <param-value>10</param-value>
+    </init-param>
+    <init-param>
+      <param-name>CaptchaChallengeResponseParameterName</param-name>
+      <param-value>challenge_response</param-value>
+    </init-param>
+    <init-param>
+      <param-name>MaxNumberOfSimultaneousCaptchas</param-name>
+      <param-value>100</param-value>
+    </init-param>
+    <init-param>
+      <param-name>MinGuarantedStorageDelayInSeconds</param-name>
+      <param-value>120</param-value>
+    </init-param>
+    <init-param>
+      <param-name>RegisterToMBeanServer</param-name>
+      <param-value>false</param-value>
+    </init-param>
+  </filter>
+  <!-- Captcha Filter Declaration End -->  
+  <!-- Encoding Filter Declaration Start -->
+
+[…]
+
+  <!-- Signon Filter Declaration End -->
+  <!-- Captcha Filter Mapping Start -->
+  <filter-mapping>
+    <filter-name>ImageCaptchaFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <!-- Captcha Filter Mapping End -->
+  <!-- ComponentManager Listener -->
+
+[…]
+\end{verbatim}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% END DOCUMENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
