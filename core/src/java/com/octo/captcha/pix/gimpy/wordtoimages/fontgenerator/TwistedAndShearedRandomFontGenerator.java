@@ -58,7 +58,7 @@ import java.awt.geom.AffineTransform;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class TwistedAndShearedRandomFontGenerator extends TwistedRandomFontGenerator{
+public class TwistedAndShearedRandomFontGenerator extends TwistedRandomFontGenerator {
     public TwistedAndShearedRandomFontGenerator(Integer minFontSize) {
         super(minFontSize);
     }
@@ -72,7 +72,7 @@ public class TwistedAndShearedRandomFontGenerator extends TwistedRandomFontGener
         Font font = super.getFont();
         double rx = myRandom.nextDouble() % 0.5;
         double ry = myRandom.nextDouble() % 0.5;
-        AffineTransform at = AffineTransform.getShearInstance(rx,ry);
+        AffineTransform at = AffineTransform.getShearInstance(rx, ry);
         font = font.deriveFont(at);
         return font;
     }

@@ -64,7 +64,7 @@ import java.awt.image.BufferedImage;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class EllipseBackgroundGenerator extends AbstractBackgroundGenerator{
+public class EllipseBackgroundGenerator extends AbstractBackgroundGenerator {
 
 
     public EllipseBackgroundGenerator(Integer height, Integer width) {
@@ -80,26 +80,26 @@ public class EllipseBackgroundGenerator extends AbstractBackgroundGenerator{
     public BufferedImage getBackround() {
         BufferedImage bimgTP = new BufferedImage(getImageWidth(), getImageHeight(), BufferedImage.TYPE_INT_BGR);
         Graphics2D g2d = bimgTP.createGraphics();
-       // g2d.setColor(Color.white);
+        // g2d.setColor(Color.white);
         //g2d.fillRect(0, 0, getImageWidth(), getImageHeight());
-       BasicStroke bs = new BasicStroke(2.0f,BasicStroke.CAP_BUTT,
-                                         BasicStroke.JOIN_MITER,2.0f,new float[] {2.0f,2.0f},0.0f);
+        BasicStroke bs = new BasicStroke(2.0f, BasicStroke.CAP_BUTT,
+                BasicStroke.JOIN_MITER, 2.0f, new float[]{2.0f, 2.0f}, 0.0f);
         g2d.setStroke(bs);
-        AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.75f);
+        AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.75f);
         g2d.setComposite(ac);
 
         AffineTransform old = g2d.getTransform();
-        g2d.translate(getImageWidth() * -1.0,0.0);
+        g2d.translate(getImageWidth() * -1.0, 0.0);
         double delta = 5.0;
         double xt;
         double ts = 0.0;
         for (xt = 0.0; xt < (2.0 * getImageWidth()); xt += delta) {
-            Arc2D arc = new Arc2D.Double(0,0,
-                                         getImageWidth(),getImageHeight(),0.0,360.0,Arc2D.OPEN);
+            Arc2D arc = new Arc2D.Double(0, 0,
+                    getImageWidth(), getImageHeight(), 0.0, 360.0, Arc2D.OPEN);
             g2d.draw(arc);
-            g2d.translate(delta,0.0);
+            g2d.translate(delta, 0.0);
             ts += delta;
-    }
+        }
         return bimgTP;
     }
 }

@@ -74,18 +74,18 @@ import java.awt.image.BufferedImage;
  * @version 1.0
  */
 public class MultipleShapeBackgroundGenerator
-    extends AbstractBackgroundGenerator {
+        extends AbstractBackgroundGenerator {
 
     /**
      * Default value for the first color (black) of the gradient paint of ellipses.
      */
     private Color firstEllipseColor = new Color(210, 210, 210);
-    
+
     /**
      * Default value for the first color (White) of the gradient paint of ellipses.
      */
     private Color secondEllipseColor = new Color(0, 0, 0);
-    
+
     /**
      * Default value for the first color (black) of the gradient paint of rectangles.
      */
@@ -95,22 +95,22 @@ public class MultipleShapeBackgroundGenerator
      * Default value for the first color (White) of the gradient paint of rectangles.
      */
     private Color secondRectangleColor = new Color(0, 0, 0);
-    
+
     /**
      * Default space between lines: 10 pixels.
      */
     private Integer spaceBetweenLine = new Integer(10);
-    
+
     /**
      * Default space between circles: 10 pixels.
      */
     private Integer spaceBetweenCircle = new Integer(10);
-    
+
     /**
      * Default height for the ellipse: 8 pixels.
      */
     private Integer ellipseHeight = new Integer(8);
-    
+
     /**
      * Default width for the ellipse: 8 pixels.
      */
@@ -126,10 +126,10 @@ public class MultipleShapeBackgroundGenerator
      * @param height height of the background.
      * @param width width of the background.
      */
-    public MultipleShapeBackgroundGenerator(Integer height,Integer width) {
-        super(height,width);
+    public MultipleShapeBackgroundGenerator(Integer height, Integer width) {
+        super(height, width);
     }
-   
+
     /**
      * Constructor with full parameters
      * @param height
@@ -145,64 +145,64 @@ public class MultipleShapeBackgroundGenerator
      * @param rectangleWidth
      */
     public MultipleShapeBackgroundGenerator(
-        Integer height, Integer width, Color firstEllipseColor, Color secondEllipseColor,
-        Integer spaceBetweenLine,Integer spaceBetweenCircle,
-        Integer ellipseHeight,Integer ellipseWidth,
-        Color firstRectangleColor,Color secondRectangleColor,
-        Integer rectangleWidth) {
-            
+            Integer height, Integer width, Color firstEllipseColor, Color secondEllipseColor,
+            Integer spaceBetweenLine, Integer spaceBetweenCircle,
+            Integer ellipseHeight, Integer ellipseWidth,
+            Color firstRectangleColor, Color secondRectangleColor,
+            Integer rectangleWidth) {
+
         super(height, width);
-        
-        if(firstEllipseColor != null)
+
+        if (firstEllipseColor != null)
             this.firstEllipseColor = firstEllipseColor;
-        if(secondEllipseColor != null)
-            this.secondEllipseColor = secondEllipseColor; 
-        if(spaceBetweenLine != null)
+        if (secondEllipseColor != null)
+            this.secondEllipseColor = secondEllipseColor;
+        if (spaceBetweenLine != null)
             this.spaceBetweenLine = spaceBetweenCircle;
-        if(spaceBetweenCircle != null)
+        if (spaceBetweenCircle != null)
             this.spaceBetweenCircle = spaceBetweenCircle;
-        if(ellipseHeight != null)
+        if (ellipseHeight != null)
             this.ellipseHeight = ellipseHeight;
-        if(ellipseWidth != null)
+        if (ellipseWidth != null)
             this.ellipseWidth = ellipseWidth;
-        if(firstRectangleColor != null)
+        if (firstRectangleColor != null)
             this.firstRectangleColor = firstRectangleColor;
-        if(secondRectangleColor != null)
+        if (secondRectangleColor != null)
             this.secondRectangleColor = secondRectangleColor;
-        if(rectangleWidth != null)
+        if (rectangleWidth != null)
             this.rectangleWidth = rectangleWidth;
     }
 
     /**
-     * Main method. It generates a background of the captcha with 
+     * Main method. It generates a background of the captcha with
      * a large number of lines, ellipse, and gradient paint.
-     * @return the background full of shapes 
+     * @return the background full of shapes
      */
     public BufferedImage getBackround() {
-        BufferedImage bi = new BufferedImage(getImageWidth(),getImageHeight(),BufferedImage.TYPE_INT_RGB);
-        Graphics2D g2 = (Graphics2D)bi.getGraphics();
-       
+        BufferedImage bi = new BufferedImage(getImageWidth(), getImageHeight(), BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2 = (Graphics2D) bi.getGraphics();
+
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-            RenderingHints.VALUE_ANTIALIAS_ON);
-        
-        for(int i = 0;i < getImageWidth();
-            i = i + this.getSpaceBetweenLine()) {
-            for(int j = 0 ; j < getImageHeight(); 
-                j = j + this.getSpaceBetweenCircle()) {
-                Ellipse2D e2 = new Ellipse2D.Double(i,j,this.getEllipseHeight(),this.getEllipseWidth());
-                GradientPaint gp = new GradientPaint(0, this.getEllipseHeight(), 
-                    firstEllipseColor, this.getEllipseWidth(), 0, secondEllipseColor,true);
-                
+                RenderingHints.VALUE_ANTIALIAS_ON);
+
+        for (int i = 0; i < getImageWidth();
+             i = i + this.getSpaceBetweenLine()) {
+            for (int j = 0; j < getImageHeight();
+                 j = j + this.getSpaceBetweenCircle()) {
+                Ellipse2D e2 = new Ellipse2D.Double(i, j, this.getEllipseHeight(), this.getEllipseWidth());
+                GradientPaint gp = new GradientPaint(0, this.getEllipseHeight(),
+                        firstEllipseColor, this.getEllipseWidth(), 0, secondEllipseColor, true);
+
                 g2.setPaint(gp);
                 g2.fill(e2);
             }
-            GradientPaint gp2 = new GradientPaint(0, getImageHeight(),this.firstRectangleColor ,
-                this.getRectangleWidth(), 0,this.secondRectangleColor ,true);   
+            GradientPaint gp2 = new GradientPaint(0, getImageHeight(), this.firstRectangleColor,
+                    this.getRectangleWidth(), 0, this.secondRectangleColor, true);
             g2.setPaint(gp2);
-            Rectangle2D r2 = new Rectangle2D.Double(i,0,this.getRectangleWidth(),
-                getImageHeight());
-            g2.fill(r2);   
-        }     
+            Rectangle2D r2 = new Rectangle2D.Double(i, 0, this.getRectangleWidth(),
+                    getImageHeight());
+            g2.fill(r2);
+        }
         g2.dispose();
         return bi;
     }
@@ -214,7 +214,7 @@ public class MultipleShapeBackgroundGenerator
     protected int getSpaceBetweenLine() {
         return this.spaceBetweenLine.intValue();
     }
-    
+
     /**
      * Helper method to get the int value of the number of pixels between circles.
      * @return number of pixels between circles.
@@ -230,7 +230,7 @@ public class MultipleShapeBackgroundGenerator
     protected int getEllipseHeight() {
         return this.ellipseHeight.intValue();
     }
-    
+
     /**
      * Helper method to get the width of drawn ellipses.
      * @return width of ellipses.
@@ -238,7 +238,7 @@ public class MultipleShapeBackgroundGenerator
     protected int getEllipseWidth() {
         return this.ellipseWidth.intValue();
     }
-    
+
     /**
      * Helper method to get the width of drawn rectangles.
      * @return width of rectangles.

@@ -97,15 +97,18 @@ public abstract class AbstractWordToImage implements WordToImage {
     public BufferedImage getImage(String word) throws CaptchaException {
         int wordLenght;
         //check word
-        if (word == null) {
-            throw new CaptchaException("null word");
-        } else {
-            wordLenght = word.length();
-            if (wordLenght > this.getMaxAcceptedWordLenght() || wordLenght < getMinAcceptedWordLenght()) {
-                throw new CaptchaException("invalid lenght word");
-            }
-        }
+        wordLenght = checkWordLenght(word);
         //create attribute string from word
+        AttributedString attributedWord = getAttributedString(word, wordLenght);
+
+        //create backgound
+        BufferedImage background = getBackround();
+        //apply text on background
+        return pasteText(background, attributedWord);
+
+    }
+
+    AttributedString getAttributedString(String word, int wordLenght) {
         AttributedString attributedWord = new AttributedString(word);
         //apply font to string
 
@@ -114,12 +117,20 @@ public abstract class AbstractWordToImage implements WordToImage {
             //apply font to next character
             attributedWord.addAttribute(TextAttribute.FONT, font, i, i + 1);
         }
+        return attributedWord;
+    }
 
-        //create backgound
-        BufferedImage background = getBackround();
-        //apply text on background
-        return pasteText(background, attributedWord);
-
+    int checkWordLenght(String word) throws CaptchaException {
+        int wordLenght;
+        if (word == null) {
+            throw new CaptchaException("null word");
+        } else {
+            wordLenght = word.length();
+            if (wordLenght > this.getMaxAcceptedWordLenght() || wordLenght < getMinAcceptedWordLenght()) {
+                throw new CaptchaException("invalid lenght word");
+            }
+        }
+        return wordLenght;
     }
 
     /**

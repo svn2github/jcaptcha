@@ -75,6 +75,11 @@ public class ComposedWordToImage extends AbstractWordToImage {
     private AbstractBackgroundGenerator background;
     private AbstractTextPaster textPaster;
 
+    /**
+     * @param fontGenerator a AbstractFontGenerator to implement the getFont() method
+     * @param background a AbstractBackgroundGenerator to implement the getBackround() method
+     * @param textPaster a AbstractTextParser to implement the pasteText() method
+     */
     public ComposedWordToImage(AbstractFontGenerator fontGenerator, AbstractBackgroundGenerator background, AbstractTextPaster textPaster) {
         this.background = background;
         this.fontGenerator = fontGenerator;
