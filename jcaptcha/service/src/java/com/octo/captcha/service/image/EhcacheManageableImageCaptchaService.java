@@ -480,6 +480,10 @@ public abstract class EhcacheManageableImageCaptchaService extends EhcacheManage
         super(captchaEngine, minGuarantedStorageDelayInSeconds, maxCaptchaStoreSize);
     }
 
+    protected EhcacheManageableImageCaptchaService(CaptchaEngine captchaEngine, int minGuarantedStorageDelayInSeconds, int maxCaptchaStoreSize, String cacheName) {
+        super(captchaEngine, minGuarantedStorageDelayInSeconds, maxCaptchaStoreSize, cacheName);
+    }
+
     /**
      * Method to retrive the image challenge corresponding to the given ticket.
      *

@@ -480,7 +480,7 @@ public class EhcacheManageableCaptchaServiceTest extends AbstractManageableCaptc
     protected void tearDown() throws Exception {
         super.tearDown();
         getMService().emptyCaptchaStore();
-        CacheManager.getInstance().removeCache(EhcacheManageableCaptchaService.CAPTCHA_STORE_CACHE_NAME);
+        CacheManager.getInstance().removeCache(EhcacheManageableCaptchaService.CACHE_NAME_PREFIX  + EhcacheManageableCaptchaService.DEFAULT_CACHE_NAME);
     }
 
 

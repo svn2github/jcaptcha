@@ -494,6 +494,22 @@ public abstract class BufferedEhcacheManageableCaptchaService extends EhcacheMan
         this.bufferedCaptchaEngineContainer = (BufferedCaptchaEngineContainer)this.engine;
     }
 
+     /**
+     * contructor
+     * @param engine an engine
+     * @param diskPersistant (does the buffer is persistant on disk between shutdown (experiemental)
+     * @param bufferSize the total buffer size
+     * @param maxMemorySize the max in memory cahche size, set it equals to bufferSize if you want to avoid disk cache
+     * @param deamonPeriod the wake up deamon period
+     * @param minGuarantedStorageDelayInSeconds
+     * @param maxCaptchaStoreSize
+     */
+    protected BufferedEhcacheManageableCaptchaService(CaptchaEngine engine, boolean diskPersistant,
+                                          int bufferSize, int maxMemorySize, long deamonPeriod,
+                                          int minGuarantedStorageDelayInSeconds, int maxCaptchaStoreSize, String cacheName) {
+        super(new BufferedCaptchaEngineContainer(engine, diskPersistant,bufferSize, maxMemorySize,deamonPeriod), minGuarantedStorageDelayInSeconds, maxCaptchaStoreSize,cacheName);
+        this.bufferedCaptchaEngineContainer = (BufferedCaptchaEngineContainer)this.engine;
+    }
 
 
     //overiding set and get engine class

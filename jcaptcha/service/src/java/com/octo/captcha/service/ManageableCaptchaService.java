@@ -1,11 +1,7 @@
 package com.octo.captcha.service;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Administrator
- * Date: 16 sept. 2004
- * Time: 16:51:04
- * To change this template use File | Settings | File Templates.
+ * Management interface for the {@link CaptchaService} interface.
  */
 public interface ManageableCaptchaService extends CaptchaService {
     /**

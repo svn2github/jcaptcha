@@ -477,7 +477,7 @@ import java.util.*;
  */
 public abstract class AbstractManageableCaptchaService
         extends AbstractCaptchaService
-        implements AbstractManageableCaptchaServiceMBean {
+        implements AbstractManageableCaptchaServiceMBean, CaptchaService {
 
 
     private int minGuarantedStorageDelayInSeconds;

@@ -487,6 +487,13 @@ public class DefaultManageableImageCaptchaService extends EhcacheManageableImage
 
     public DefaultManageableImageCaptchaService() {
         super(new DefaultGimpyEngine(), 180,
-                100000);
+                100000, "image");
+    }
+
+
+
+    public DefaultManageableImageCaptchaService(String cacheName) {
+        super(new DefaultGimpyEngine(), 180,
+                100000, cacheName);
     }
 }
