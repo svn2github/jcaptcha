@@ -106,8 +106,6 @@ public interface PixCaptchaFilterMBean
 
     /**
      * Get the number of timeouted entries in the internal store
-     * WARNING : this value won't be significant if the total number
-     * is > Long.MAX_VALUE
      * @return the number of entries of the internal store that are timeouted
      */
     int getNumberOfTimeoutedEntriesInInternalStore();
