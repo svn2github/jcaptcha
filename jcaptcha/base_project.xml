@@ -145,6 +145,7 @@
   </build>
 
   <reports>
+  	 <report>maven-dashboard-plugin</report>
   	<report>maven-changelog-plugin</report>
   	<report>maven-file-activity-plugin</report>
 	<report>maven-checkstyle-plugin</report>
