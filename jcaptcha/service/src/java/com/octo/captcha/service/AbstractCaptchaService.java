@@ -524,18 +524,21 @@ public abstract class AbstractCaptchaService implements CaptchaService {
     public Object getChallengeForID(String ID, Locale locale)
             throws CaptchaServiceException {
         Captcha captcha;
+        Object challenge;
         //check if has capthca
         if (!this.store.hasCaptcha(ID)) {
             //if not see if it
-            captcha = generateAndStoreCaptcha(locale, ID);
+            captcha = this.engine.getNextCaptcha(locale);
+
         } else {
             captcha = this.store.getCaptcha(ID);
             if (captcha.hasGetChalengeBeenCalled().booleanValue()) {
-                captcha = generateAndStoreCaptcha(locale, ID);
+                captcha = captcha = this.engine.getNextCaptcha(locale);
             }
         }
-        Object challenge = getChallengeClone(captcha);
+        challenge= getChallengeClone(captcha);
         captcha.disposeChallenge();
+        this.store.storeCaptcha(ID,captcha);
         return challenge;
     }
 
@@ -585,7 +588,7 @@ public abstract class AbstractCaptchaService implements CaptchaService {
     public Boolean validateResponseForID(String ID, Object response)
             throws CaptchaServiceException {
         if (!store.hasCaptcha(ID)) {
-            throw new CaptchaServiceException("Invalid ID, could not validate!");
+            throw new CaptchaServiceException("Invalid ID, could not validate!" );
         } else {
             Boolean valid = store.getCaptcha(ID).validateResponse(response);
             store.removeCaptcha(ID);
@@ -599,6 +602,8 @@ public abstract class AbstractCaptchaService implements CaptchaService {
         this.store.storeCaptcha(ID, captcha);
         return captcha;
     }
+
+
 
     /**
      * This method must be implemented by sublcasses and :

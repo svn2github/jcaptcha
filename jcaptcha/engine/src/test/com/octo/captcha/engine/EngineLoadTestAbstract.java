@@ -510,9 +510,9 @@ public abstract class EngineLoadTestAbstract extends TestCase
 
     }
 
-     public void testGetNextCaptchaLongRun10000() throws Exception
+     public void testGetNextCaptchaLongRun1000() throws Exception
     {
-        for(int i =0;i<10000;i++){
+        for(int i =0;i<1000;i++){
         Captcha captcha = engine.getNextCaptcha();
         assertNotNull(captcha.getChallenge());
         }

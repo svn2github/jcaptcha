@@ -461,32 +461,181 @@
 
                        END OF TERMS AND CONDITIONS
 */
+package com.octo.captcha.service;
 
-package com.octo.captcha.service.image;
+import EDU.oswego.cs.dl.util.concurrent.ClockDaemon;
+import com.octo.captcha.Captcha;
+import com.octo.captcha.engine.CaptchaEngine;
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.CacheException;
+import net.sf.ehcache.CacheManager;
+import net.sf.ehcache.Element;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
-
-import com.octo.captcha.engine.image.gimpy.DefaultGimpyEngine;
+import java.util.List;
+import java.util.Locale;
 
 /**
- * <p>Default service implementation : use a ehCache as captcha store, a bufferedEngineContainer and a DefaultGimpyEngine </p>
- * It is initialized with thoses default values :
- * <ul>
- * <li>min guaranted delay : 180s
- * </li>
- * <li>max store size : 100000 captchas
- * </li>
- * <li>max store size before garbage collection : non applicable
- * </li>
- * </ul>
- *
- * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
- * @version 1.0
+ * This class is an Engine container that asunchronously creates a buffer of captcha
+ * for performance optimisation.
+ * <p/>
+ * <p/>
+ * User: mag
+ * TODO : localized captcha buffering
  */
-public class DefaultManageableImageCaptchaService extends EhcacheManageableImageCaptchaService
-        implements ImageCaptchaService {
+public class BufferedCaptchaEngineContainer implements CaptchaEngine {
+    private static final String CACHE_BUFFER_NAME = "BuffuredCaptchaEngineContainerCache";
 
-    public DefaultManageableImageCaptchaService() {
-        super(new DefaultGimpyEngine(), 180,
-                100000);
+    private static final Log log = LogFactory.getLog(BufferedCaptchaEngineContainer.class);
+
+    /**
+     * Contained engine
+     */
+    private CaptchaEngine captchaEngine;
+
+    private Cache captchaBuffer;
+
+
+    private ClockDaemon clockDaemon;
+
+    private Integer bufferSize;
+    private Integer maxMemorySize;
+    private Boolean overflowToDisk;
+    private Long deamonPeriod;
+
+
+    public final Captcha getNextCaptcha() {
+        Captcha captcha = getNextCaptchaFromBuffer();
+        if (captcha == null) {
+            return captchaEngine.getNextCaptcha();
+        } else {
+            return captcha;
+        }
     }
+
+    public final Captcha getNextCaptcha(Locale locale) {
+        return captchaEngine.getNextCaptcha(locale);
+    }
+
+
+    public BufferedCaptchaEngineContainer(CaptchaEngine engine, Boolean overflowToDisk,
+                                          Integer bufferSize, Integer maxMemorySize, Long deamonPeriod) {
+        log.debug("Initializing BufferDeamon with a size of " + bufferSize + " a memory max size : " + maxMemorySize +
+                " and a period of " + deamonPeriod);
+        log.debug("Engine : " + engine.getClass());
+        if (overflowToDisk == null || deamonPeriod == null || engine == null || maxMemorySize == null) {
+            log.error("Trying to initialize a Buffered engine with a null value, aborting...");
+            throw new CaptchaServiceException("Trying to initialize a " +
+                    "Buffered engine with a null value, aborting...");
+        }
+        this.bufferSize = bufferSize;
+        this.maxMemorySize = maxMemorySize;
+        this.overflowToDisk = overflowToDisk;
+        this.deamonPeriod = deamonPeriod;
+        this.captchaEngine = engine;
+        this.captchaBuffer = new Cache(CACHE_BUFFER_NAME,
+                this.maxMemorySize.intValue(),
+                this.overflowToDisk.booleanValue(),
+                true,
+                0, 0,
+                true,
+                0);
+
+        try {
+            CacheManager.getInstance().addCache(captchaBuffer);
+        } catch (CacheException e) {
+            log.warn(e);
+
+        }
+        log.debug("cache initialized");
+        clockDaemon = new ClockDaemon();
+        log.debug("demon initialized");
+        startJob(this.deamonPeriod.longValue());
+        log.debug("demon started");
+
+    }
+
+
+    public void startJob(long periods) {
+
+        clockDaemon.executePeriodically(periods, new Job(this.captchaEngine, clockDaemon), true);
+
+    }
+
+
+    class Job implements Runnable {
+        CaptchaEngine engine;
+        ClockDaemon deamon;
+
+        public Job(CaptchaEngine engine, ClockDaemon deamon) {
+            super();
+            this.engine = engine;
+            this.deamon = deamon;
+
+        }
+
+        public void run() {
+            this.deamon.getThread().setPriority(Thread.MIN_PRIORITY);
+            log.debug("Scheduled job has been triggered");
+            Cache captchaCache = null;
+            List keys = null;
+
+            try {
+                captchaCache = CacheManager.getInstance().getCache(CACHE_BUFFER_NAME);
+                keys = captchaCache.getKeys();
+
+
+                for (int i = 0; i < bufferSize.intValue(); i++) {
+                    Integer I = new Integer(i);
+                    if (!keys.contains(I)) {
+                        if (log.isDebugEnabled()) {
+                            log.debug("buffering new captcha for key : " + i);
+                        }
+                        captchaCache.put(new Element(I, engine.getNextCaptcha()));
+                    } else {
+                        if (log.isDebugEnabled()) {
+                            log.debug("captcha already exists in buffer for key : " + i);
+                        }
+                    }
+                    ;
+
+                }
+            } catch (Throwable e) {
+                log.warn(e);
+            }
+
+
+        }
+    }
+
+    private Captcha getNextCaptchaFromBuffer() {
+        Captcha captcha = null;
+        for (int i = 0; i < bufferSize.intValue(); i++) {
+
+            Integer I = new Integer(i);
+
+            try {
+                if (this.captchaBuffer.getKeys().contains(I)) {
+                    if (log.isDebugEnabled()) {
+                        log.debug("captcha found in buffer for key : " + i);
+                    }
+                    captcha = (Captcha) captchaBuffer.get(I).getValue();
+                    captchaBuffer.remove(I);
+                    break;
+                } else {
+                    if (log.isDebugEnabled()) {
+                        log.debug("captcha not found in buffer for key : " + i);
+                    }
+                }
+                ;
+            } catch (Throwable e) {
+                log.warn(e);
+            }
+
+        }
+        return captcha;
+    };
+
+
 }

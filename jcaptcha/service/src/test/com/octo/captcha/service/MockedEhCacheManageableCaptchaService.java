@@ -461,32 +461,39 @@
 
                        END OF TERMS AND CONDITIONS
 */
+package com.octo.captcha.service;
 
-package com.octo.captcha.service.image;
-
-
-import com.octo.captcha.engine.image.gimpy.DefaultGimpyEngine;
+import com.octo.captcha.Captcha;
 
 /**
- * <p>Default service implementation : use a ehCache as captcha store, a bufferedEngineContainer and a DefaultGimpyEngine </p>
- * It is initialized with thoses default values :
- * <ul>
- * <li>min guaranted delay : 180s
- * </li>
- * <li>max store size : 100000 captchas
- * </li>
- * <li>max store size before garbage collection : non applicable
- * </li>
- * </ul>
- *
- * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
- * @version 1.0
+ * User: mag
+ * Date: 17 oct. 2004
+ * Time: 12:47:51
  */
-public class DefaultManageableImageCaptchaService extends EhcacheManageableImageCaptchaService
-        implements ImageCaptchaService {
+public class MockedEhCacheManageableCaptchaService extends EhcacheManageableCaptchaService {
 
-    public DefaultManageableImageCaptchaService() {
-        super(new DefaultGimpyEngine(), 180,
-                100000);
+        protected MockedEhCacheManageableCaptchaService (com.octo.captcha.engine.CaptchaEngine captchaEngine,
+
+                                                         int minGuarantedStorageDelayInSeconds, int maxCaptchaStoreSize
+                                                 ) {
+            super(captchaEngine,  minGuarantedStorageDelayInSeconds,maxCaptchaStoreSize);
+        }
+
+        /**
+         * This method must be implemented by sublcasses and :
+         * Retrieve the challenge from the captcha
+         * Make and return a clone of the challenge
+         * Return the clone
+         * It has be design in order to let the service dipose
+         * the challenge of the captcha after rendering.
+         * It should be implemented for all captcha type (@see ImageCaptchaService implementations
+         * for exemple)
+         *
+         * @param captcha
+         * @return a Challenge Clone
+         */
+        protected Object getChallengeClone(Captcha captcha) {
+            return new String(captcha.getChallenge().toString()) + MockedCaptchaService.CLONE_CHALLENGE;
+        }
+
     }
-}

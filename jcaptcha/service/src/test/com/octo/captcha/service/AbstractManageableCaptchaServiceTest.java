@@ -554,7 +554,7 @@ public class AbstractManageableCaptchaServiceTest extends AbstractCaptchaService
             String id = String.valueOf(myRandom.nextInt());
             service.generateAndStoreCaptcha(Locale.getDefault(), id);
         }
-        long now = System.currentTimeMillis();
+
         getMService().garbageCollectCaptchaStore();
         assertTrue("store size should be the same(this test may fail if time to load the store is > min guaranted...)",
                 getMService().getCaptchaStoreSize() == CAPTCHA_STORE_LOAD_BEFORE_GARBAGE_COLLECTION);

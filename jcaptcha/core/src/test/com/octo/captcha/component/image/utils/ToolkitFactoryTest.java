@@ -12,6 +12,12 @@ import java.awt.*;
  */
 public class ToolkitFactoryTest extends TestCase {
 
+
+    protected void setUp() throws Exception {
+        super.setUp();
+
+    }
+
     /**
      * Constructor for ToolkitFactoryTest.
      *
@@ -38,5 +44,11 @@ public class ToolkitFactoryTest extends TestCase {
             //assertTrue();
         }
 
+    }
+
+    protected void tearDown() throws Exception {
+        super.tearDown();
+         System.setProperty(ToolkitFactory.TOOLKIT_IMPL,Toolkit.getDefaultToolkit().getClass().toString());
+        
     }
 }

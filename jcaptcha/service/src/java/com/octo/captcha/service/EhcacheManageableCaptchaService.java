@@ -466,16 +466,19 @@ package com.octo.captcha.service;
 import com.octo.captcha.Captcha;
 import com.octo.captcha.service.captchastore.CaptchaStore;
 import com.octo.captcha.service.captchastore.MapCaptchaStore;
+import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheException;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
-import net.sf.ehcache.Cache;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.Locale;
-import java.util.Iterator;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Locale;
+
+import org.apache.commons.logging.LogFactory;
+import org.apache.commons.logging.Log;
 
 /**
  * This class provides an implementation for the ehcache enhanced management interface.
@@ -488,7 +491,7 @@ public abstract class EhcacheManageableCaptchaService
         extends AbstractCaptchaService
         implements AbstractManageableCaptchaServiceMBean {
 
-
+    private static Log log = LogFactory.getLog(EhcacheManageableCaptchaService.class);
     private CacheManager cacheManager;
     private int minGuarantedStorageDelayInSeconds;
 
@@ -499,7 +502,6 @@ public abstract class EhcacheManageableCaptchaService
     private int numberOfCorrectResponse = 0;
     private int numberOfUncorrectResponse = 0;
     private static final String CACHE_NAME = "CaptchaCache";
-
 
 
     protected EhcacheManageableCaptchaService(com.octo.captcha.engine.CaptchaEngine captchaEngine,
@@ -530,7 +532,7 @@ public abstract class EhcacheManageableCaptchaService
         super.store = new EhcacheStore(cache);
 
         this.captchaStoreMaxSize = maxCaptchaStoreSize;
-        this.minGuarantedStorageDelayInSeconds= minGuarantedStorageDelayInSeconds;
+        this.minGuarantedStorageDelayInSeconds = minGuarantedStorageDelayInSeconds;
 
     }
 
@@ -670,7 +672,7 @@ public abstract class EhcacheManageableCaptchaService
      * @return the number of captcha garbage collected since the service is up
      */
     public long getNumberOfGarbageCollectedCaptcha() {
-            return 0;
+        return 0;
     }
 
     /**
@@ -721,12 +723,17 @@ public abstract class EhcacheManageableCaptchaService
      */
     public void garbageCollectCaptchaStore() {
         //to garbage collect, wait 5 minutes or get : see ehcache doco
-        Iterator it = cacheManager.getCache(CACHE_NAME).getKeys().iterator();
+        Iterator it=null;
+        try {
+            it = cacheManager.getCache(CACHE_NAME).getKeys().iterator();
+        } catch (CacheException e) {
+            log.error(e);
+        }
         while (it.hasNext()) {
             try {
                 cacheManager.getCache(CACHE_NAME).get(it.next().toString());
             } catch (CacheException e) {
-                e.printStackTrace();
+                log.error(e);
             }
         }
     }
@@ -741,29 +748,38 @@ public abstract class EhcacheManageableCaptchaService
     }
 
 
-    private void updateCache() {
+    private void updateCache()  {
         Cache cache = new Cache(CACHE_NAME, captchaStoreMaxSize, true, false, minGuarantedStorageDelayInSeconds,
                 minGuarantedStorageDelayInSeconds);
-        Iterator it = copyCacheContent().iterator();
+        Iterator it = null;
+        try {
+            it = copyCacheContent().iterator();
+        } catch (CacheException e) {
+            log.error(e);
+        }
         synchronized (cacheManager) {
 
 
             try {
-               cacheManager.removeCache(CACHE_NAME);
+                cacheManager.removeCache(CACHE_NAME);
                 cacheManager.addCache(cache);
                 this.store = new EhcacheStore(cache);
                 Cache myCache = cacheManager.getCache(CACHE_NAME);
-                while(it.hasNext()){
-                    myCache.put((Element)it.next());
+                long now = System.currentTimeMillis();
+                while (it.hasNext()) {
+                    Element el= (Element) it.next();
+                    if(now-el.getCreationTime()<cache.getTimeToLiveSeconds()*1000){
+                        myCache.put(el);
+                    }
                 }
             } catch (CacheException e) {
-                e.printStackTrace();
+               log.error(e);
             }
         }
     }
 
 
-    private Collection copyCacheContent() {
+    private Collection copyCacheContent() throws CacheException {
         Cache currentcache = cacheManager.getCache(CACHE_NAME);
         Iterator it = currentcache.getKeys().iterator();
         Collection els = new HashSet();
@@ -775,7 +791,7 @@ public abstract class EhcacheManageableCaptchaService
                 }
                 ;
             } catch (CacheException e) {
-                e.printStackTrace();
+               log.error(e);
             }
         }
         return els;
@@ -791,12 +807,16 @@ public abstract class EhcacheManageableCaptchaService
     ///****
 
     protected Captcha generateAndStoreCaptcha(Locale locale, String ID) {
-        if (this.cacheManager.getCache(CACHE_NAME).getSize() >= this.captchaStoreMaxSize) {
-            //impossible ! has to wait
-            throw new CaptchaServiceException("Store is full," +
-                    " try to increase CaptchaStore Size or " +
-                    "to decrease time out");
+        try {
+            if (this.cacheManager.getCache(CACHE_NAME).getSize() >= this.captchaStoreMaxSize) {
+                //impossible ! has to wait
+                throw new CaptchaServiceException("Store is full," +
+                        " try to increase CaptchaStore Size or " +
+                        "to decrease time out");
 
+            }
+        } catch (CacheException e) {
+            log.error(e);
         }
         Captcha captcha = this.engine.getNextCaptcha(locale);
         this.numberOfGeneratedCaptchas++;
@@ -844,7 +864,12 @@ public abstract class EhcacheManageableCaptchaService
          * @return true if a captcha for this id is stored, false otherwise
          */
         public boolean hasCaptcha(String id) {
-            return this.cache.getKeys().contains(id);
+            try {
+                return this.cache.getKeys().contains(id);
+            } catch (CacheException e) {
+                log.error(e);
+                return false;
+            }
         }
 
         /**
@@ -897,14 +922,24 @@ public abstract class EhcacheManageableCaptchaService
          * get the size of this store
          */
         public int getSize() {
-            return cache.getSize();
+            try {
+                return cache.getSize();
+            } catch (CacheException e) {
+                log.error(e);
+                return -1;
+            }
         }
 
         /**
          * Return all the contained keys
          */
         public Collection getKeys() {
-            return cache.getKeys();
+            try {
+                return cache.getKeys();
+            } catch (CacheException e) {
+                log.error(e);
+                return null;
+            }
         }
 
         /**

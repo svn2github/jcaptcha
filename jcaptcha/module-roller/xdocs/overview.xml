@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<document>
+
+    <meta name="keyword" content="captcha, java, module,struts, jcaptcha"/>
+
+    <body>
+
+        <section name="Purpose">
+
+            <p>
+
+                <ul>
+                    <li>This module provides a Roller Plugin captcha ize the commetn process.</li>
+                    <li>It provides specific  CommentAuthenticator implementation.</li>
+                    <li>It provides also an integration manual...</li>
+
+                </ul>
+            </p>
+
+        </section>
+
+    </body>
+</document>

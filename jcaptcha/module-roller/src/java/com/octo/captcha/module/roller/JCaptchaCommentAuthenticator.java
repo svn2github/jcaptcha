@@ -461,32 +461,89 @@
 
                        END OF TERMS AND CONDITIONS
 */
+package com.octo.captcha.module.roller;
 
-package com.octo.captcha.service.image;
+import org.roller.presentation.velocity.CommentAuthenticator;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import com.octo.captcha.engine.image.gimpy.DefaultGimpyEngine;
+import com.octo.captcha.service.CaptchaService;
+import com.octo.captcha.service.CaptchaServiceException;
+import com.octo.captcha.module.struts.CaptchaServicePlugin;
+import com.octo.captcha.module.config.CaptchaModuleConfigHelper;
 
 /**
- * <p>Default service implementation : use a ehCache as captcha store, a bufferedEngineContainer and a DefaultGimpyEngine </p>
- * It is initialized with thoses default values :
- * <ul>
- * <li>min guaranted delay : 180s
- * </li>
- * <li>max store size : 100000 captchas
- * </li>
- * <li>max store size before garbage collection : non applicable
- * </li>
- * </ul>
- *
- * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
- * @version 1.0
+ * User: mag
+ * Date: 17 oct. 2004
+ * Time: 17:36:22
  */
-public class DefaultManageableImageCaptchaService extends EhcacheManageableImageCaptchaService
-        implements ImageCaptchaService {
+public class JCaptchaCommentAuthenticator implements CommentAuthenticator{
 
-    public DefaultManageableImageCaptchaService() {
-        super(new DefaultGimpyEngine(), 180,
-                100000);
+    private static final String htmlheader=
+            "<table cellspacing=\"0\" cellpadding=\"1\" border=\"0\" width=\"95%\"><tr><th>" ;
+    
+    private static final String htmlendheader=
+            ":</th>";
+ private static final String htmlinput=
+                    "<td>" +
+                    "<input type=\"text\" name=\"";
+    private static final String htmlendinput=
+                "\" " +"size=\"50\" maxlength=\"255\" /></td></tr>";
+    private static final String htmlChallenge=
+                "<tr><td><img src=\"";
+
+    private static final String htmlendChallenge=
+                "\"></td></tr>" +
+            "</tr></table>";
+        
+
+    
+    public String getHtml(org.apache.velocity.context.Context context, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        String captchaID = CaptchaModuleConfigHelper.getId(httpServletRequest);;
+        String question=CaptchaServicePlugin.getInstance().getService().getQuestionForID(captchaID);
+        String  challengeUrl = context.get("ctxPath")+"/jcaptcha.do";
+        String responseKey = CaptchaServicePlugin.getInstance().getResponseKey();
+        StringBuffer html = new StringBuffer();
+        html.append(htmlheader);
+        html.append(question);
+        html.append(htmlendheader);
+        html.append(htmlinput);
+        html.append(responseKey);
+        html.append(htmlendinput);
+        html.append(htmlChallenge);
+        html.append(challengeUrl);
+        html.append(htmlendChallenge);
+        return html.toString();
+    }
+
+    public boolean authenticate(org.roller.pojos.CommentData commentData, HttpServletRequest httpServletRequest) {
+
+        CaptchaService service = CaptchaServicePlugin.getInstance().getService();
+
+        String responseKey = CaptchaServicePlugin.getInstance().getResponseKey();
+
+        String captchaID;
+
+        captchaID = CaptchaModuleConfigHelper.getId(httpServletRequest);
+
+        // get challenge response from the request
+        String challengeResponse =
+                httpServletRequest.getParameter(responseKey);
+
+        //cleanning the request
+        httpServletRequest.removeAttribute(responseKey);
+        Boolean isResponseCorrect = Boolean.FALSE;
+        if (challengeResponse != null) {
+        // Call the Service method
+            try {
+                isResponseCorrect = service.validateResponseForID(captchaID,
+                        challengeResponse);
+            } catch (CaptchaServiceException e) {
+                e.printStackTrace();
+            }
+        }
+        // return
+        return isResponseCorrect.booleanValue();
     }
 }

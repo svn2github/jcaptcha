@@ -461,32 +461,29 @@
 
                        END OF TERMS AND CONDITIONS
 */
-
-package com.octo.captcha.service.image;
-
-
-import com.octo.captcha.engine.image.gimpy.DefaultGimpyEngine;
+package com.octo.captcha.service;
 
 /**
- * <p>Default service implementation : use a ehCache as captcha store, a bufferedEngineContainer and a DefaultGimpyEngine </p>
- * It is initialized with thoses default values :
- * <ul>
- * <li>min guaranted delay : 180s
- * </li>
- * <li>max store size : 100000 captchas
- * </li>
- * <li>max store size before garbage collection : non applicable
- * </li>
- * </ul>
- *
- * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
- * @version 1.0
+ * User: mag
+ * Date: 16 oct. 2004
+ * Time: 17:09:25
  */
-public class DefaultManageableImageCaptchaService extends EhcacheManageableImageCaptchaService
-        implements ImageCaptchaService {
 
-    public DefaultManageableImageCaptchaService() {
-        super(new DefaultGimpyEngine(), 180,
-                100000);
+import junit.framework.*;
+import com.octo.captcha.service.BufferedCaptchaEngineContainer;
+import com.octo.captcha.Captcha;
+
+public class BufferedCaptchaEngineContainerTest extends TestCase {
+    BufferedCaptchaEngineContainer bufferedCaptchaEngineContainer;
+
+    public void testGetNextCaptcha() throws Exception {
+        MockCaptchaEngine engine = new MockCaptchaEngine();
+        bufferedCaptchaEngineContainer = new BufferedCaptchaEngineContainer(engine,Boolean.FALSE,
+                new Integer(100), new Integer(100),new Long(1000));
+         for (int i = 0; i < 1000; ++i)
+            {
+                Captcha captcha =this.bufferedCaptchaEngineContainer.getNextCaptcha();
+                assertNotNull(captcha);
+            }
     }
 }

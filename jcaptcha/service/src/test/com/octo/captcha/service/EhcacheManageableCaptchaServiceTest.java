@@ -517,31 +517,5 @@ public class EhcacheManageableCaptchaServiceTest extends AbstractManageableCaptc
         
     }
 
-     protected class MockedEhCacheManageableCaptchaService extends EhcacheManageableCaptchaService {
-
-        protected MockedEhCacheManageableCaptchaService (com.octo.captcha.engine.CaptchaEngine captchaEngine,
-
-                                                         int minGuarantedStorageDelayInSeconds, int maxCaptchaStoreSize
-                                                 ) {
-            super(captchaEngine,  minGuarantedStorageDelayInSeconds,maxCaptchaStoreSize);
-        }
-
-        /**
-         * This method must be implemented by sublcasses and :
-         * Retrieve the challenge from the captcha
-         * Make and return a clone of the challenge
-         * Return the clone
-         * It has be design in order to let the service dipose
-         * the challenge of the captcha after rendering.
-         * It should be implemented for all captcha type (@see ImageCaptchaService implementations
-         * for exemple)
-         *
-         * @param captcha
-         * @return a Challenge Clone
-         */
-        protected Object getChallengeClone(Captcha captcha) {
-            return new String(captcha.getChallenge().toString()) + MockedCaptchaService.CLONE_CHALLENGE;
-        }
-
-    }
+     
 }

@@ -464,29 +464,19 @@
 
 package com.octo.captcha.service.image;
 
-
-import com.octo.captcha.engine.image.gimpy.DefaultGimpyEngine;
+import com.octo.captcha.service.ServiceLoadTestAbstract;
+import com.octo.captcha.service.MockedCaptchaService;
 
 /**
- * <p>Default service implementation : use a ehCache as captcha store, a bufferedEngineContainer and a DefaultGimpyEngine </p>
- * It is initialized with thoses default values :
- * <ul>
- * <li>min guaranted delay : 180s
- * </li>
- * <li>max store size : 100000 captchas
- * </li>
- * <li>max store size before garbage collection : non applicable
- * </li>
- * </ul>
- *
+ * Load test of the default Service implementation
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class DefaultManageableImageCaptchaService extends EhcacheManageableImageCaptchaService
-        implements ImageCaptchaService {
+public class DefaultBufferedManageableImageCaptchaServiceLoadTest extends ServiceLoadTestAbstract
+{
 
-    public DefaultManageableImageCaptchaService() {
-        super(new DefaultGimpyEngine(), 180,
-                100000);
+    protected void setUp() throws Exception
+    {
+        this.service = new DefaultBufferedManageableImageCaptchaService();
     }
 }

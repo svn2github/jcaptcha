@@ -461,32 +461,129 @@
 
                        END OF TERMS AND CONDITIONS
 */
+package com.octo.captcha.service;
 
-package com.octo.captcha.service.image;
 
 
-import com.octo.captcha.engine.image.gimpy.DefaultGimpyEngine;
+import junit.framework.*;
+import com.octo.captcha.service.EhcacheManageableCaptchaService;
+import com.octo.captcha.service.captchastore.MapCaptchaStore;
+import com.octo.captcha.service.captchastore.CaptchaStore;
+import com.octo.captcha.Captcha;
 
-/**
- * <p>Default service implementation : use a ehCache as captcha store, a bufferedEngineContainer and a DefaultGimpyEngine </p>
- * It is initialized with thoses default values :
- * <ul>
- * <li>min guaranted delay : 180s
- * </li>
- * <li>max store size : 100000 captchas
- * </li>
- * <li>max store size before garbage collection : non applicable
- * </li>
- * </ul>
- *
- * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
- * @version 1.0
- */
-public class DefaultManageableImageCaptchaService extends EhcacheManageableImageCaptchaService
-        implements ImageCaptchaService {
+public class BufferedEhcacheManageableCaptchaServiceTest extends AbstractManageableCaptchaServiceTest {
+    EhcacheManageableCaptchaService ehcacheManageableCaptchaService;
 
-    public DefaultManageableImageCaptchaService() {
-        super(new DefaultGimpyEngine(), 180,
-                100000);
+    protected void setUp() throws Exception {
+         this.service = new MockedEhCacheManageableCaptchaService(new BufferedCaptchaEngineContainer(new MockCaptchaEngine(),
+         Boolean.TRUE, new Integer(1000),new Integer(100),new Long(10000)),
+                 MIN_GUARANTED_STORAGE_DELAY_IN_SECONDS,MAX_CAPTCHA_STORE_SIZE
+                );
+        AbstractManageableCaptchaServiceTest.CAPTCHA_STORE_LOAD_BEFORE_GARBAGE_COLLECTION = 0;
+    }
+
+    protected void tearDown() throws Exception {
+        getMService().emptyCaptchaStore();
+    }
+
+
+
+    /*
+    OVERRIDE TO SKIP or replace
+    */
+
+    public void testSetCaptchaStoreMaxSize() throws Exception {
+            super.getMService().setCaptchaStoreMaxSize(CAPTCHA_STORE_LOAD_BEFORE_GARBAGE_COLLECTION);
+        assertEquals("modified size",
+                CAPTCHA_STORE_LOAD_BEFORE_GARBAGE_COLLECTION, getMService().getCaptchaStoreMaxSize());
+    }
+
+    public void testSetCaptchaStoreSizeBeforeGarbageCollection() throws Exception {
+
+    }
+
+    public void testGetNumberOfGarbageCollectedCaptcha() throws Exception {
+
+    }
+
+    public void testGetCaptchaStoreSizeBeforeGarbageCollection() throws Exception {
+
+    }
+
+    public void testAutomaticGarbaging() throws Exception {
+
+    }
+
+    public void testGetNumberOfGarbageCollectableCaptchas() throws Exception {
+
+    }
+
+     protected class MockedEhCacheManageableCaptchaService extends EhcacheManageableCaptchaService {
+
+        protected MockedEhCacheManageableCaptchaService (com.octo.captcha.engine.CaptchaEngine captchaEngine,
+
+                                                         int minGuarantedStorageDelayInSeconds, int maxCaptchaStoreSize
+                                                 ) {
+            super(captchaEngine,  minGuarantedStorageDelayInSeconds,maxCaptchaStoreSize);
+        }
+
+        /**
+         * This method must be implemented by sublcasses and :
+         * Retrieve the challenge from the captcha
+         * Make and return a clone of the challenge
+         * Return the clone
+         * It has be design in order to let the service dipose
+         * the challenge of the captcha after rendering.
+         * It should be implemented for all captcha type (@see ImageCaptchaService implementations
+         * for exemple)
+         *
+         * @param captcha
+         * @return a Challenge Clone
+         */
+        protected Object getChallengeClone(Captcha captcha) {
+            return new String(captcha.getChallenge().toString()) + MockedCaptchaService.CLONE_CHALLENGE;
+        }
+
+    }
+
+    public void testGetCaptchaEngineClass() throws Exception {
+        assertEquals("Sould be the mockEngine...", BufferedCaptchaEngineContainer.class.getName(),
+                getMService().getCaptchaEngineClass());
+    }
+
+    public void testSetCaptchaEngineClass() throws Exception {
+        try {
+            getMService().setCaptchaEngineClass("unknown");
+            fail("shoul have thown an exception");
+        } catch (IllegalArgumentException e) {
+            assertEquals("Sould still be the BufferedCaptchaEngineContainer...",
+                    BufferedCaptchaEngineContainer.class.getName(),
+                    getMService().getCaptchaEngineClass());
+
+        }
+        try {
+            getMService().setCaptchaEngineClass("java.lang.String");
+            fail("shoul have thown an exception");
+        } catch (IllegalArgumentException e) {
+            assertEquals("Sould still be the BufferedCaptchaEngineContainer...",
+                    BufferedCaptchaEngineContainer.class.getName(),
+                    getMService().getCaptchaEngineClass());
+
+        }
+        assertEquals("Sould still be the BufferedCaptchaEngineContainer...", BufferedCaptchaEngineContainer.class.getName(),
+                getMService().getCaptchaEngineClass());
+
+        try {
+            getMService().setCaptchaEngineClass(SecondMockCaptchaEngine.class.getName());
+            assertEquals("Sould be the SecondmockEngine...", SecondMockCaptchaEngine.class.getName(),
+                    getMService().getCaptchaEngineClass());
+        } catch (IllegalArgumentException e) {
+            fail("should be ok " + e);
+            assertEquals("Sould be the mockEngine...",
+                    BufferedCaptchaEngineContainer.class.getName(),
+                    getMService().getCaptchaEngineClass());
+
+        }
+
     }
 }

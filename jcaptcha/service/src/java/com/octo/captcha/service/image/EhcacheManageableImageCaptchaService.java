@@ -463,21 +463,21 @@
 */
 package com.octo.captcha.service.image;
 
-import com.octo.captcha.service.CaptchaServiceException;
-import com.octo.captcha.service.EhcacheManageableCaptchaService;
 import com.octo.captcha.Captcha;
 import com.octo.captcha.engine.CaptchaEngine;
+import com.octo.captcha.service.CaptchaServiceException;
+import com.octo.captcha.service.EhcacheManageableCaptchaService;
 
 import java.awt.image.BufferedImage;
 import java.util.Locale;
 
 /**
-  * Base implementation of the EhcacheManageableImageCaptchaService.
+ * Base implementation of the EhcacheManageableImageCaptchaService.
  */
-public abstract class EhcacheManageableImageCaptchaService extends EhcacheManageableCaptchaService  implements ImageCaptchaService {
+public abstract class EhcacheManageableImageCaptchaService extends EhcacheManageableCaptchaService implements ImageCaptchaService {
 
     protected EhcacheManageableImageCaptchaService(CaptchaEngine captchaEngine, int minGuarantedStorageDelayInSeconds, int maxCaptchaStoreSize) {
-        super(captchaEngine, minGuarantedStorageDelayInSeconds, maxCaptchaStoreSize);    
+        super(captchaEngine, minGuarantedStorageDelayInSeconds, maxCaptchaStoreSize);
     }
 
     /**

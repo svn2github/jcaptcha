@@ -466,6 +466,7 @@ package com.octo.captcha.service.image;
 
 
 import com.octo.captcha.engine.image.gimpy.DefaultGimpyEngine;
+import com.octo.captcha.service.BufferedCaptchaEngineContainer;
 
 /**
  * <p>Default service implementation : use a ehCache as captcha store, a bufferedEngineContainer and a DefaultGimpyEngine </p>
@@ -477,16 +478,33 @@ import com.octo.captcha.engine.image.gimpy.DefaultGimpyEngine;
  * </li>
  * <li>max store size before garbage collection : non applicable
  * </li>
+ * <p/>
+ * <li>buffering configuration :
+ * <ul>
+ * <li>buffer size  : 10000
+ * </li>
+ * <li>memory buffer size : 200 captchas
+ * </li>
+ * <li>buffer update period : 60s
+ * </li>
+ * <p/>
+ * <li>buffering configuration :
+ * <p/>
+ * </li>
+ * <p/>
+ * </ul>
+ * </li>
+ * <p/>
  * </ul>
  *
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class DefaultManageableImageCaptchaService extends EhcacheManageableImageCaptchaService
+public class DefaultBufferedManageableImageCaptchaService extends EhcacheManageableImageCaptchaService
         implements ImageCaptchaService {
 
-    public DefaultManageableImageCaptchaService() {
-        super(new DefaultGimpyEngine(), 180,
+    public DefaultBufferedManageableImageCaptchaService() {
+        super(new BufferedCaptchaEngineContainer(new DefaultGimpyEngine(), Boolean.TRUE, new Integer(10000), new Integer(200), new Long(60000)), 180,
                 100000);
     }
 }
