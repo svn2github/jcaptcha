@@ -462,92 +462,121 @@
  END OF TERMS AND CONDITIONS
  */
 
-package com.octo.captcha.engine;
+package com.octo.captcha.engine.sound;
 
-import java.lang.reflect.Constructor;
+import com.octo.captcha.CaptchaException;
+import com.octo.captcha.sound.SoundCaptcha;
+import com.octo.captcha.sound.SoundCaptchaFactory;
 
-import com.octo.captcha.Captcha;
-
-import junit.framework.TestCase;
-import net.sourceforge.groboutils.junit.v1.MultiThreadedTestRunner;
-import net.sourceforge.groboutils.junit.v1.TestRunnable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Random;
 
 /**
- * Base class for CaptchaEngine load tests...
+ * <p>
+ * This engine is based on a java.util.List of factories. It has a default constructor. Sub class
+ * must implements the buildInitialFactories() method that should build an initial set of factories.
+ * </p>
+ * 
+ * @author Benoit Doumas
+ * @version 1.0
  */
-public abstract class EngineLoadTestAbstract extends TestCase
+public abstract class ListSoundCaptchaEngine extends SoundCaptchaEngine
 {
-    protected CaptchaEngine engine;
 
-    // loader init by default
-    protected Class loader = DefaultEngineLoadTestHelper.class;
+    List factories = new ArrayList();
 
-    public void testGetNextCaptcha() throws Exception
+    private Random myRandom = new Random();
+
+    public ListSoundCaptchaEngine()
     {
-        Captcha captcha = engine.getNextCaptcha();
-        assertNotNull(captcha);
+        buildInitialFactories();
+        checkFactoriesSize();
     }
 
-    public void testGetNextCaptchaLongRun1000() throws Exception
+    /**
+     * this method should be implemented as folow :
+     * <ul>
+     * <li>First construct all the factories you want to initialize the gimpy with</li>
+     * <li>then call the this.addFactoriy method for each factory</li>
+     * </ul>
+     */
+    protected abstract void buildInitialFactories();
+
+    /**
+     * Add a factory to the gimpy list
+     * 
+     * @param factory
+     * @return true if added false otherwise
+     */
+    public boolean addFactory(SoundCaptchaFactory factory)
     {
-        for (int i = 0; i < 1000; i++)
+        return this.factories.add(factory);
+    }
+
+    /**
+     * Add an array of factories to the gimpy list
+     * 
+     * @param factories
+     */
+    public void addFactories(SoundCaptchaFactory[] factories)
+    {
+        for (int i = 0; i < factories.length; i++)
         {
-            Captcha captcha = engine.getNextCaptcha();
-            assertNotNull(captcha.getChallenge());
+            this.factories.add(factories[i]);
         }
     }
 
-    public void test_100It_0Del_1Us_2min() throws Throwable
+    /**
+     * remove the factory from the gimpy list
+     * 
+     * @param factory
+     * @return true if removed, false otherwise
+     */
+    //    public boolean removeFactory(
+    //            com.octo.captcha.Sound.SoundCaptchaFactory factory)
+    //    {
+    //        return this.factories.remove(factory);
+    //    }
+    /**
+     * This method build a SoundCaptchaFactory.
+     * 
+     * @return a CaptchaFactory
+     */
+    public SoundCaptchaFactory getSoundCaptchaFactory()
     {
-        int count = 100;
-        int delay = 0;
-        int users = 1;
-        int max_time = 2 * 60 * 1000;
-        load(users, count, delay, max_time);
-
+        return (SoundCaptchaFactory) factories.get(myRandom
+            .nextInt(factories.size()));
     }
 
-    public void test_1It_0Del_100Us_2min() throws Throwable
+    /**
+     * This method build a SoundCaptchaFactory.
+     * 
+     * @return a SoundCaptcha
+     */
+    public SoundCaptcha getNextSoundCaptcha()
     {
-        int count = 1;
-        int delay = 0;
-        int users = 100;
-        int max_time = 2 * 60 * 1000;
-        load(users, count, delay, max_time);
+        return getSoundCaptchaFactory().getSoundCaptcha();
     }
 
-    public void test_10It_100Del_10Us_2min() throws Throwable
+    /**
+     * This method build a SoundCaptchaFactory.
+     * 
+     * @param locale
+     * @return a SoundCaptcha
+     */
+    public SoundCaptcha getNextSoundCaptcha(Locale locale)
     {
-        int count = 10;
-        int delay = 100;
-        int users = 10;
-        int max_time = 2 * 60 * 1000;
-        load(users, count, delay, max_time);
+        return getSoundCaptchaFactory().getSoundCaptcha(locale);
     }
 
-    public void test_2It_1000Del_100Us_5min() throws Throwable
+    private void checkFactoriesSize()
     {
-
-        int count = 2;
-        int delay = 1000;
-        int users = 100;
-        int max_time = 5 * 60 * 1000;
-        load(users, count, delay, max_time);
+        if (factories.size() == 0)
+            throw new CaptchaException("This gimpy has no factories. Please initialize it "
+                + "properly with the buildInitialFactory() called by "
+                + "the constructor or the addFactory() mehtod later!");
     }
 
-    protected void load(int users, int count, int delay, int max_time) throws Throwable
-    {
-        TestRunnable[] tcs = new TestRunnable[users];
-        Constructor contructor = loader.getConstructor(new Class[] { CaptchaEngine.class,
-            int.class, int.class});
-
-        for (int i = 0; i < users; i++)
-        {
-            tcs[i] = (TestRunnable) contructor.newInstance(new Object[] { this.engine,
-                new Integer(count), new Integer(delay)});
-        }
-        MultiThreadedTestRunner mttr = new MultiThreadedTestRunner(tcs);
-
-        mttr.runTestRunnables(max_time);
-    }
 }

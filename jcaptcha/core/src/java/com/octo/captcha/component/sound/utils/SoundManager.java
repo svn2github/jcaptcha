@@ -461,93 +461,44 @@
 
  END OF TERMS AND CONDITIONS
  */
+package com.octo.captcha.component.sound.utils;
 
-package com.octo.captcha.engine;
+import javax.sound.sampled.AudioInputStream;
 
-import java.lang.reflect.Constructor;
-
-import com.octo.captcha.Captcha;
-
-import junit.framework.TestCase;
-import net.sourceforge.groboutils.junit.v1.MultiThreadedTestRunner;
-import net.sourceforge.groboutils.junit.v1.TestRunnable;
+import com.octo.captcha.CaptchaException;
 
 /**
- * Base class for CaptchaEngine load tests...
+ * @author Benoit
+ * @version 1.0
  */
-public abstract class EngineLoadTestAbstract extends TestCase
+public interface SoundManager
 {
-    protected CaptchaEngine engine;
-
-    // loader init by default
-    protected Class loader = DefaultEngineLoadTestHelper.class;
-
-    public void testGetNextCaptcha() throws Exception
-    {
-        Captcha captcha = engine.getNextCaptcha();
-        assertNotNull(captcha);
-    }
-
-    public void testGetNextCaptchaLongRun1000() throws Exception
-    {
-        for (int i = 0; i < 1000; i++)
-        {
-            Captcha captcha = engine.getNextCaptcha();
-            assertNotNull(captcha.getChallenge());
-        }
-    }
-
-    public void test_100It_0Del_1Us_2min() throws Throwable
-    {
-        int count = 100;
-        int delay = 0;
-        int users = 1;
-        int max_time = 2 * 60 * 1000;
-        load(users, count, delay, max_time);
-
-    }
-
-    public void test_1It_0Del_100Us_2min() throws Throwable
-    {
-        int count = 1;
-        int delay = 0;
-        int users = 100;
-        int max_time = 2 * 60 * 1000;
-        load(users, count, delay, max_time);
-    }
-
-    public void test_10It_100Del_10Us_2min() throws Throwable
-    {
-        int count = 10;
-        int delay = 100;
-        int users = 10;
-        int max_time = 2 * 60 * 1000;
-        load(users, count, delay, max_time);
-    }
-
-    public void test_2It_1000Del_100Us_5min() throws Throwable
-    {
-
-        int count = 2;
-        int delay = 1000;
-        int users = 100;
-        int max_time = 5 * 60 * 1000;
-        load(users, count, delay, max_time);
-    }
-
-    protected void load(int users, int count, int delay, int max_time) throws Throwable
-    {
-        TestRunnable[] tcs = new TestRunnable[users];
-        Constructor contructor = loader.getConstructor(new Class[] { CaptchaEngine.class,
-            int.class, int.class});
-
-        for (int i = 0; i < users; i++)
-        {
-            tcs[i] = (TestRunnable) contructor.newInstance(new Object[] { this.engine,
-                new Integer(count), new Integer(delay)});
-        }
-        MultiThreadedTestRunner mttr = new MultiThreadedTestRunner(tcs);
-
-        mttr.runTestRunnables(max_time);
-    }
+    /**
+     * Main method for this service Return an sound from the specified sentence.
+     * 
+     * @return the generated sound
+     * @throws com.octo.captcha.CaptchaException
+     *             if word is invalid or an exception occurs during the sound generation
+     */
+    public AudioInputStream stringToSound(String sentence) throws CaptchaException;
+    
+    /**
+     * @return the voice name used to create the sound
+     */
+    public String getVoiceName();
+    
+    /**
+     * @return the voice volume
+     */
+    public float getVolume();
+    
+    /**
+     * @return the voice name used to create the sound
+     */
+    public float getPitch();
+    
+    /**
+     * @return the speaking rate
+     */
+    public float getSpeakingRate();
 }

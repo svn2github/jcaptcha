@@ -461,93 +461,404 @@
 
  END OF TERMS AND CONDITIONS
  */
+package com.octo.captcha.component.sound.utils;
 
-package com.octo.captcha.engine;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.SequenceInputStream;
+import java.util.Vector;
 
-import java.lang.reflect.Constructor;
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
 
-import com.octo.captcha.Captcha;
-
-import junit.framework.TestCase;
-import net.sourceforge.groboutils.junit.v1.MultiThreadedTestRunner;
-import net.sourceforge.groboutils.junit.v1.TestRunnable;
+import com.octo.captcha.CaptchaException;
+import com.sun.speech.freetts.Voice;
+import com.sun.speech.freetts.VoiceManager;
+import com.sun.speech.freetts.audio.AudioPlayer;
+import com.sun.speech.freetts.util.Utilities;
 
 /**
- * Base class for CaptchaEngine load tests...
+ * <p>
+ * SoundToolkit Implemention using FreeTTS. Not using FreeTTS implementation of JSAPI 1.0
+ * specification, as it dosen't seem to allow AudioStream manipulation.
+ * </p>
+ * 
+ * @author Benoit
+ * @version 1.0
  */
-public abstract class EngineLoadTestAbstract extends TestCase
+public class SoundManagerFreeTTS implements SoundManager
 {
-    protected CaptchaEngine engine;
+    private static String defaultVoice = "kevin16";
 
-    // loader init by default
-    protected Class loader = DefaultEngineLoadTestHelper.class;
+    private String voiceName = null;
 
-    public void testGetNextCaptcha() throws Exception
+    private Voice voice = null;
+
+    private VoiceManager voiceManager = null;
+
+    private boolean isInitiated = false;
+
+    public SoundManagerFreeTTS()
     {
-        Captcha captcha = engine.getNextCaptcha();
-        assertNotNull(captcha);
+        voiceName = SoundManagerFreeTTS.defaultVoice;
     }
 
-    public void testGetNextCaptchaLongRun1000() throws Exception
+    public SoundManagerFreeTTS(String voiceName)
     {
-        for (int i = 0; i < 1000; i++)
+        this.voiceName = voiceName;
+    }
+
+    /**
+     * Method to initialise the toolkit
+     * 
+     * @param voice
+     *            name
+     */
+    private void init()
+    {
+        if (!isInitiated)
         {
-            Captcha captcha = engine.getNextCaptcha();
-            assertNotNull(captcha.getChallenge());
+            //Voices use by freeTTS, we define where they are, currently in the java en_us.jar
+            System
+                .getProperties()
+                .put(
+                    "freetts.voices",
+                    "com.sun.speech.freetts.en.us.cmu_time_awb.AlanVoiceDirectory,com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory");
+            // The VoiceManager manages all the voices for FreeTTS.
+            voiceManager = VoiceManager.getInstance();
+
+            this.voice = voiceManager.getVoice(this.voiceName);
+            // Allocates the resources for the voice.
+            this.voice.allocate();
+            isInitiated = true;
         }
     }
 
-    public void test_100It_0Del_1Us_2min() throws Throwable
+    /**
+     * Main method for this service Return an image with the specified. Synchronisation is very
+     * important, for multi threading execution
+     * 
+     * @return the generated sound
+     * @throws com.octo.captcha.CaptchaException
+     *             if word is invalid or an exception occurs during the sound generation
+     */
+    public synchronized AudioInputStream stringToSound(String sentence) throws CaptchaException
     {
-        int count = 100;
-        int delay = 0;
-        int users = 1;
-        int max_time = 2 * 60 * 1000;
-        load(users, count, delay, max_time);
+        init();
+        //use the custom (see inner class) InputStreamAudioPlayer, which provide interface to
+        // Audio Stream
+        InputStreamAudioPlayer audioPlayer = new InputStreamAudioPlayer();
 
+        this.voice.setAudioPlayer(audioPlayer);
+
+        // Synthesize speech.
+        this.voice.speak(sentence);
+
+        AudioInputStream ais = audioPlayer.getAudioInputStream();
+        return ais;
     }
 
-    public void test_1It_0Del_100Us_2min() throws Throwable
+    /**
+     * @see com.octo.captcha.component.sound.utils.SoundManager#getVoiceName()
+     */
+    public String getVoiceName()
     {
-        int count = 1;
-        int delay = 0;
-        int users = 100;
-        int max_time = 2 * 60 * 1000;
-        load(users, count, delay, max_time);
+        init();
+        return voiceName;
     }
 
-    public void test_10It_100Del_10Us_2min() throws Throwable
+    /**
+     * @see com.octo.captcha.component.sound.utils.SoundManager#getVolume()
+     */
+    public float getVolume()
     {
-        int count = 10;
-        int delay = 100;
-        int users = 10;
-        int max_time = 2 * 60 * 1000;
-        load(users, count, delay, max_time);
+        return voice.getVolume();
     }
 
-    public void test_2It_1000Del_100Us_5min() throws Throwable
+    /**
+     * @see com.octo.captcha.component.sound.utils.SoundManager#getPitch()
+     */
+    public float getPitch()
     {
-
-        int count = 2;
-        int delay = 1000;
-        int users = 100;
-        int max_time = 5 * 60 * 1000;
-        load(users, count, delay, max_time);
+        init();
+        return voice.getPitch();
     }
 
-    protected void load(int users, int count, int delay, int max_time) throws Throwable
+    /**
+     * @see com.octo.captcha.component.sound.utils.SoundManager#getSpeakingRate()
+     */
+    public float getSpeakingRate()
     {
-        TestRunnable[] tcs = new TestRunnable[users];
-        Constructor contructor = loader.getConstructor(new Class[] { CaptchaEngine.class,
-            int.class, int.class});
+        init();
+        return voice.getRate();
+    }
 
-        for (int i = 0; i < users; i++)
+    /**
+     * Implementation of freeTTS AudioPlayer interface, to produce an audioInputStream, this is not
+     * a very clean way since it doesn't really play. But it is the only way to get a stream easily
+     */
+    public class InputStreamAudioPlayer implements AudioPlayer
+    {
+        private boolean debug = false;
+
+        private AudioFormat currentFormat = null;
+
+        private byte[] outputData;
+
+        private int curIndex = 0;
+
+        private int totBytes = 0;
+
+        private Vector outputList;
+
+        private AudioInputStream audioInputStream;
+
+        /**
+         * Constructs a InputStreamAudioPlayer
+         * 
+         * @param baseName
+         *            the base name of the audio file
+         * @param type
+         *            the type of audio output
+         */
+        public InputStreamAudioPlayer()
         {
-            tcs[i] = (TestRunnable) contructor.newInstance(new Object[] { this.engine,
-                new Integer(count), new Integer(delay)});
+            debug = Utilities.getBoolean("com.sun.speech.freetts.audio.AudioPlayer.debug");
+            outputList = new Vector();
         }
-        MultiThreadedTestRunner mttr = new MultiThreadedTestRunner(tcs);
 
-        mttr.runTestRunnables(max_time);
+        /**
+         * Sets the audio format for this player
+         * 
+         * @param format
+         *            the audio format
+         * @throws UnsupportedOperationException
+         *             if the line cannot be opened with the given format
+         */
+        public synchronized void setAudioFormat(AudioFormat format)
+        {
+            currentFormat = format;
+        }
+
+        /**
+         * Gets the audio format for this player
+         * 
+         * @return format the audio format
+         */
+        public AudioFormat getAudioFormat()
+        {
+            return currentFormat;
+        }
+
+        /**
+         * Pauses audio output
+         */
+        public void pause()
+        {
+        }
+
+        /**
+         * Resumes audio output
+         */
+        public synchronized void resume()
+        {
+        }
+
+        /**
+         * Cancels currently playing audio
+         */
+        public synchronized void cancel()
+        {
+        }
+
+        /**
+         * Prepares for another batch of output. Larger groups of output (such as all output
+         * associated with a single FreeTTSSpeakable) should be grouped between a reset/drain pair.
+         */
+        public synchronized void reset()
+        {
+        }
+
+        /**
+         * Starts the first sample timer
+         */
+        public void startFirstSampleTimer()
+        {
+        }
+
+        /**
+         * Closes this audio player
+         */
+        public synchronized void close()
+        {
+            try
+            {
+                audioInputStream.close();
+            }
+            catch (IOException ioe)
+            {
+                System.err.println("Problem while closing the audioInputSteam");
+            }
+
+        }
+
+        public AudioInputStream getAudioInputStream()
+        {
+            InputStream tInputStream = new SequenceInputStream(outputList.elements());
+            AudioInputStream tAudioInputStream = new AudioInputStream(tInputStream, currentFormat,
+                totBytes / currentFormat.getFrameSize());
+
+            return tAudioInputStream;
+        }
+
+        /**
+         * Returns the current volume.
+         * 
+         * @return the current volume (between 0 and 1)
+         */
+        public float getVolume()
+        {
+            return 1.0f;
+        }
+
+        /**
+         * Sets the current volume.
+         * 
+         * @param volume
+         *            the current volume (between 0 and 1)
+         */
+        public void setVolume(float volume)
+        {
+        }
+
+        /**
+         * Starts the output of a set of data. Audio data for a single utterance should be grouped
+         * between begin/end pairs.
+         * 
+         * @param size
+         *            the size of data between now and the end
+         */
+        public void begin(int size)
+        {
+            outputData = new byte[size];
+            curIndex = 0;
+        }
+
+        /**
+         * Marks the end of a set of data. Audio data for a single utterance should be groupd
+         * between begin/end pairs.
+         * 
+         * @return true if the audio was output properly, false if the output was cancelled or
+         *         interrupted.
+         */
+        public boolean end()
+        {
+            outputList.add(new ByteArrayInputStream(outputData));
+            totBytes += outputData.length;
+            return true;
+        }
+
+        /**
+         * Waits for all queued audio to be played
+         * 
+         * @return true if the audio played to completion, false if the audio was stopped
+         */
+        public boolean drain()
+        {
+            return true;
+        }
+
+        /**
+         * Gets the amount of played since the last mark
+         * 
+         * @return the amount of audio in milliseconds
+         */
+        public synchronized long getTime()
+        {
+            return -1L;
+        }
+
+        /**
+         * Resets the audio clock
+         */
+        public synchronized void resetTime()
+        {
+        }
+
+        /**
+         * Writes the given bytes to the audio stream
+         * 
+         * @param audioData
+         *            audio data to write to the device
+         * @return <code>true</code> of the write completed successfully, <code> false </code> if
+         *         the write was cancelled.
+         */
+        public boolean write(byte[] audioData)
+        {
+            return write(audioData, 0, audioData.length);
+        }
+
+        /**
+         * Writes the given bytes to the audio stream
+         * 
+         * @param bytes
+         *            audio data to write to the device
+         * @param offset
+         *            the offset into the buffer
+         * @param size
+         *            the size into the buffer
+         * @return <code>true</code> of the write completed successfully, <code> false </code> if
+         *         the write was cancelled.
+         */
+        public boolean write(byte[] bytes, int offset, int size)
+        {
+            System.arraycopy(bytes, offset, outputData, curIndex, size);
+            curIndex += size;
+            return true;
+        }
+
+        /**
+         * Waits for resume. If this audio player is paused waits for the player to be resumed.
+         * Returns if resumed, cancelled or shutdown.
+         * 
+         * @return true if the output has been resumed, false if the output has been cancelled or
+         *         shutdown.
+         */
+        private synchronized boolean waitResume()
+        {
+            return true;
+        }
+
+        /**
+         * Returns the name of this audioplayer
+         * 
+         * @return the name of the audio player
+         */
+        public String toString()
+        {
+            return "AudioInputStreamAudioPlayer";
+        }
+
+        /**
+         * Outputs a debug message if debugging is turned on
+         * 
+         * @param msg
+         *            the message to output
+         */
+        private void debugPrint(String msg)
+        {
+            if (debug)
+            {
+                System.out.println(toString() + ": " + msg);
+            }
+        }
+
+        /**
+         * Shows metrics for this audio player
+         */
+        public void showMetrics()
+        {
+        }
     }
 }

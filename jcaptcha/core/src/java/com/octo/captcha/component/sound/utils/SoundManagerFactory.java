@@ -461,93 +461,83 @@
 
  END OF TERMS AND CONDITIONS
  */
+package com.octo.captcha.component.sound.utils;
 
-package com.octo.captcha.engine;
+import java.util.Properties;
 
-import java.lang.reflect.Constructor;
-
-import com.octo.captcha.Captcha;
-
-import junit.framework.TestCase;
-import net.sourceforge.groboutils.junit.v1.MultiThreadedTestRunner;
-import net.sourceforge.groboutils.junit.v1.TestRunnable;
+import com.octo.captcha.CaptchaException;
 
 /**
- * Base class for CaptchaEngine load tests...
+ * <p>
+ * Factory for SoundManagers. It look into systems properties for key : soundmanager.implementation.
+ * If an implementation is defined, is used it, or use to default one : SoundManagerFreeTTS
+ * </p>
+ * 
+ * @author Benoit Doumas
+ * @version 1.0
  */
-public abstract class EngineLoadTestAbstract extends TestCase
+public class SoundManagerFactory
 {
-    protected CaptchaEngine engine;
+    public static String SOUNDMNG_IMPL = "soundmanager.implementation";
 
-    // loader init by default
-    protected Class loader = DefaultEngineLoadTestHelper.class;
+    public static String DEFAULT_SOUNDMANGER = "com.octo.captcha.component.sound.utils.SoundManagerFreeTTS";
 
-    public void testGetNextCaptcha() throws Exception
+    private static String managerClass;
+
+    /**
+     * Get either the default soundManger or the imlp defined in system properties.
+     * 
+     * @return the soundManger
+     */
+    public static SoundManager getSoundManager()
     {
-        Captcha captcha = engine.getNextCaptcha();
-        assertNotNull(captcha);
-    }
+        SoundManager soundManager = null;
 
-    public void testGetNextCaptchaLongRun1000() throws Exception
-    {
-        for (int i = 0; i < 1000; i++)
+        Properties props = System.getProperties();
+
+        String tempSoundManagerClass = props.getProperty(SOUNDMNG_IMPL);
+        if (props.containsKey(SOUNDMNG_IMPL))
         {
-            Captcha captcha = engine.getNextCaptcha();
-            assertNotNull(captcha.getChallenge());
+            soundManager = getSoundManager(tempSoundManagerClass);
         }
-    }
-
-    public void test_100It_0Del_1Us_2min() throws Throwable
-    {
-        int count = 100;
-        int delay = 0;
-        int users = 1;
-        int max_time = 2 * 60 * 1000;
-        load(users, count, delay, max_time);
-
-    }
-
-    public void test_1It_0Del_100Us_2min() throws Throwable
-    {
-        int count = 1;
-        int delay = 0;
-        int users = 100;
-        int max_time = 2 * 60 * 1000;
-        load(users, count, delay, max_time);
-    }
-
-    public void test_10It_100Del_10Us_2min() throws Throwable
-    {
-        int count = 10;
-        int delay = 100;
-        int users = 10;
-        int max_time = 2 * 60 * 1000;
-        load(users, count, delay, max_time);
-    }
-
-    public void test_2It_1000Del_100Us_5min() throws Throwable
-    {
-
-        int count = 2;
-        int delay = 1000;
-        int users = 100;
-        int max_time = 5 * 60 * 1000;
-        load(users, count, delay, max_time);
-    }
-
-    protected void load(int users, int count, int delay, int max_time) throws Throwable
-    {
-        TestRunnable[] tcs = new TestRunnable[users];
-        Constructor contructor = loader.getConstructor(new Class[] { CaptchaEngine.class,
-            int.class, int.class});
-
-        for (int i = 0; i < users; i++)
+        else
         {
-            tcs[i] = (TestRunnable) contructor.newInstance(new Object[] { this.engine,
-                new Integer(count), new Integer(delay)});
+            soundManager = getDefaultSoundManager();
         }
-        MultiThreadedTestRunner mttr = new MultiThreadedTestRunner(tcs);
 
-        mttr.runTestRunnables(max_time);
+        return soundManager;
     }
+
+    /**
+     * Get the default soundManger.
+     * 
+     * @return the default soundManger
+     */
+    private static SoundManager getDefaultSoundManager()
+    {
+        return getSoundManager(DEFAULT_SOUNDMANGER);
+    }
+
+    /**
+     * Build sound manager from class name.
+     * 
+     * @return the default soundManger
+     */
+    private static SoundManager getSoundManager(String className)
+    {
+        SoundManager soundManager = null;
+
+        try
+        {
+            soundManager = (SoundManager) Class.forName(className).newInstance();
+
+        }
+        catch (Throwable e)
+        {
+            throw new CaptchaException("Sound Manager has not been abble to be " + "initialized", e);
+
+        }
+        return soundManager;
+    }
+
 }
