@@ -327,7 +327,7 @@
     <option name="HIDE_WARNINGS" value="false" />
   </component>
   <component name="FileEditorManager" split-orientation="vertical" split-proportion="0.5">
-    <first-group selected-file="file://$PROJECT_DIR$/maven.xml">
+    <first-group selected-file="file://$PROJECT_DIR$/project.xml">
       <entry file="file://$PROJECT_DIR$/xdocs/items.inc" pinned="false">
         <provider selected="true" editor-type-id="text-editor">
           <state line="12" column="22" selection-start="933" selection-end="933" vertical-scroll-proportion="0.4722222">
@@ -365,7 +365,7 @@
       </entry>
       <entry file="file://$PROJECT_DIR$/project.xml" pinned="false">
         <provider selected="true" editor-type-id="text-editor">
-          <state line="26" column="22" selection-start="1091" selection-end="1091" vertical-scroll-proportion="0.03935185">
+          <state line="74" column="22" selection-start="2907" selection-end="2907" vertical-scroll-proportion="0.787037">
             <folding />
           </state>
         </provider>
@@ -990,7 +990,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/project.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="22" selection-start="1091" selection-end="1091" vertical-scroll-proportion="0.03935185">
+        <state line="74" column="22" selection-start="2907" selection-end="2907" vertical-scroll-proportion="0.787037">
           <folding />
         </state>
       </provider>
