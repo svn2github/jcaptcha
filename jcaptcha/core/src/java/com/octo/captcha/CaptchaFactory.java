@@ -484,7 +484,7 @@ public interface CaptchaFactory
      *
      * @return a captcha
      */
-    com.octo.captcha.Captcha getCatcha();
+    com.octo.captcha.Captcha getCaptcha();
 
     /**
      * build Localized captcha (don't forget those captcha are for human
@@ -493,6 +493,6 @@ public interface CaptchaFactory
      * @param locale the locale
      * @return a captcha corresponding to the locale
      */
-    com.octo.captcha.Captcha getCatcha(Locale locale);
+    com.octo.captcha.Captcha getCaptcha(Locale locale);
 
 }

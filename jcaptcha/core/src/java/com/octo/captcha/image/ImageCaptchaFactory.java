@@ -483,7 +483,7 @@ public abstract class ImageCaptchaFactory implements CaptchaFactory
      *
      * @return a captcha
      */
-    public final Captcha getCatcha()
+    public final Captcha getCaptcha()
     {
         return getImageCaptcha();
     }
@@ -495,7 +495,7 @@ public abstract class ImageCaptchaFactory implements CaptchaFactory
      * @param locale
      * @return a captcha corresponding to the locale
      */
-    public final Captcha getCatcha(final Locale locale)
+    public final Captcha getCaptcha(final Locale locale)
     {
         return getImageCaptcha(locale);
     }
