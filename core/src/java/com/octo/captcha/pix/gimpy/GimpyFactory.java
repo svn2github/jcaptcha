@@ -93,8 +93,8 @@ public class GimpyFactory extends PixCaptchaFactory {
     public PixCaptcha getPixCaptcha(Locale locale) {
         //lenght
         Integer wordLenght;
-        int range = getWordToImage().getMinAcceptedWordLenght() -
-                getWordToImage().getMaxAcceptedWordLenght();
+        int range = getWordToImage().getMaxAcceptedWordLenght() -
+                getWordToImage().getMinAcceptedWordLenght();
         int randomRange = range != 0 ? new Random().nextInt(range) : 0;
 
 
