@@ -77,15 +77,16 @@
     	<ant:fileset dir="${basedir}/engine/src/conf">
     		<include name="**/*.jpg"/>
     	</ant:fileset>
-    	
+
+       <ant:fileset dir="${basedir}/module-struts/src/java/META-INF">
+              <include name="jcaptcha.tld"/>
+       </ant:fileset>
+
     	<ant:fileset dir="${maven.build.dir}">
     		<include name="docs/**"/>
     	</ant:fileset>
-    	
-    	<ant:fileset dir="${maven.build.dir}">
-    		<include name="docs/**"/>
-    	</ant:fileset>
-    </ant:copy> 
+
+   </ant:copy>
 	
    <ant:zip zipfile="${maven.build.dir}/distributions/${pom.artifactId}-bin-${pom.currentVersion}.zip"
     	>
