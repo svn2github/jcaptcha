@@ -251,7 +251,11 @@
     	    <artifactId>imaging</artifactId>
             <version>1.0</version>
     	</dependency>
-
+    	<dependency>
+    	    <groupId>jcaptcha</groupId>
+    	    <artifactId>jcaptcha-core</artifactId>
+            <version>${project.version}</version>
+    	</dependency>
 
 
   </dependencies>

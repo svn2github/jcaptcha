@@ -479,6 +479,7 @@ import java.awt.image.ImageFilter;
  *
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
+ * @deprecated
  */
 public class FilteredBaffleListGimpyEngine extends com.octo.captcha.engine.image.ListImageCaptchaEngine {
 

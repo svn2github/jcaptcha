@@ -105,13 +105,24 @@
       <excludes>
         <exclude>**/*Test*All.java</exclude>
       </excludes>
+        <resources>
+    	<ressource>
+    		<directory>${basedir}/src/java</directory>
+    		<includes>
+    			<include>**/*.properties</include>
+    		</includes>
+    
+    	</ressource>
+    </resources>
+    
     </unitTest>
-<resources>
+    <resources>
     	<ressource>
     		<directory>${basedir}/src/conf</directory>
     		<includes>
     			<include>toddlist.properties</include>
     		</includes>
+    
     	</ressource>
       </resources>
   </build>

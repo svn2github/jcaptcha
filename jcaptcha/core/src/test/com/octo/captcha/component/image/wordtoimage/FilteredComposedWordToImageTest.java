@@ -483,6 +483,7 @@ import java.awt.image.ReplicateScaleFilter;
  *
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
+ * @deprecated 
  */
 public class FilteredComposedWordToImageTest extends TestCase {
 

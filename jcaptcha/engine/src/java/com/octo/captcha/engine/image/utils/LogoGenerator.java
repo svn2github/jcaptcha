@@ -466,6 +466,7 @@ package com.octo.captcha.engine.image.utils;
 
 import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
 import com.octo.captcha.component.image.backgroundgenerator.EllipseBackgroundGenerator;
+import com.octo.captcha.component.image.backgroundgenerator.FileReaderRandomBackgroundGenerator;
 import com.octo.captcha.component.image.fontgenerator.FontGenerator;
 import com.octo.captcha.component.image.fontgenerator.TwistedAndShearedRandomFontGenerator;
 import com.octo.captcha.component.image.textpaster.SimpleTextPaster;
@@ -492,7 +493,8 @@ public class LogoGenerator {
 
     public static void main(String[] args) throws IOException {
         TextPaster paster = new SimpleTextPaster(new Integer(8), new Integer(8), Color.BLUE);
-        BackgroundGenerator back = new EllipseBackgroundGenerator(new Integer(50), new Integer(100));
+        BackgroundGenerator back = new FileReaderRandomBackgroundGenerator(new Integer(100), new Integer(200),
+                "/images/backgroundForLogo");
         FontGenerator font = new TwistedAndShearedRandomFontGenerator(new Integer(12), null);
         WordGenerator words = new DummyWordGenerator("JCAPTCHA");
         WordToImage word2image = new ComposedWordToImage(font, back, paster);

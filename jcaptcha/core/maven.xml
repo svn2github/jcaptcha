@@ -18,6 +18,14 @@
     <ant:copy file="src/conf/toddlist.properties" todir="target/test-classes"/>
   </preGoal>
 
+  <postGoal name="clover:on">
+    <ant:copy todir="target/clover/classes">
+    <fileset dir="src/java/">
+     <include name="**/*.properties"/>
+     </fileset>
+    </ant:copy>
+  </postGoal>
+
   <!--postGoal name="site">
     <ant:copy file="${basedir}/images/organization-logo.jpg" todir="${maven.build.dir}/docs/images"/>
     <ant:copy file="${basedir}/images/project-logo.jpg" todir="${maven.build.dir}/docs/images"/>

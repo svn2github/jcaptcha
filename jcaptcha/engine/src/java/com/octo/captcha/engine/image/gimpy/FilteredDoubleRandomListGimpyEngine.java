@@ -479,6 +479,7 @@ import java.awt.image.ImageFilter;
  *
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
+ * @deprecated 
  */
 public class FilteredDoubleRandomListGimpyEngine
         extends com.octo.captcha.engine.image.ListImageCaptchaEngine {
