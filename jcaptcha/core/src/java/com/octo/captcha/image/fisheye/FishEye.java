@@ -526,7 +526,7 @@ public class FishEye extends ImageCaptcha
             {
 
                 //String[] coordonates = new String[2];
-                StringTokenizer token = new StringTokenizer(s,",");
+                StringTokenizer token = new StringTokenizer(s, ",");
 
                 Point point = new Point(Integer.parseInt(token.nextToken()),
                         Integer.parseInt(token.nextToken()));

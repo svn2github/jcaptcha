@@ -510,8 +510,7 @@ public class FishEyeFactory extends ImageCaptchaFactory
     {
         if (generator == null)
         {
-            throw new CaptchaException(
-                    "Invalid configuration for a FishEyeFactory "
+            throw new CaptchaException("Invalid configuration for a FishEyeFactory "
                     + ": BackgroundGenerator can't be null");
         }
         if (deformation == null)

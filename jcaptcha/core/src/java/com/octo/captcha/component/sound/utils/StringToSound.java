@@ -477,8 +477,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Enumeration;
 import java.util.ResourceBundle;
-import java.util.TreeMap;
 import java.util.StringTokenizer;
+import java.util.TreeMap;
 
 /**
  * @author Gandin Mathieu
@@ -564,7 +564,7 @@ public class StringToSound
         while (words.hasMoreElements())
         {
             String line = (String) words.nextElement();
-            StringTokenizer token = new StringTokenizer(line,";");
+            StringTokenizer token = new StringTokenizer(line, ";");
             list.put(token.nextToken(), token.nextToken());
         }
     }

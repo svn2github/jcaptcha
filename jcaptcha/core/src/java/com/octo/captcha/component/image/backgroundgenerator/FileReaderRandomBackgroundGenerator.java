@@ -465,35 +465,24 @@
 package com.octo.captcha.component.image.backgroundgenerator;
 
 import com.octo.captcha.CaptchaException;
-import com.octo.captcha.component.image.utils.ToolkitFactory;
-import com.octo.captcha.component.image.utils.ImageInfo;
+import com.sun.image.codec.jpeg.ImageFormatException;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageDecoder;
-import com.sun.image.codec.jpeg.ImageFormatException;
 
-//import javax.imageio.ImageIO;
-//import javax.imageio.ImageReader;
-//import javax.imageio.stream.ImageInputStream;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-
-
 
 /**
  * <p>File reader background generator that return a random image (JPEG ONLY)
- *  from the ones
- * found in the directory </p>
- *
+ * from the ones found in the directory </p>
+ * <p/>
  * TODO : add some gif, bmp,... reader facilities.
- *
+ * 
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
@@ -579,34 +568,32 @@ public class FileReaderRandomBackgroundGenerator extends
         return image;
     }
 
-
     private static BufferedImage getImage(File o)
     {
         BufferedImage out = null;
         try
         {
 
-
-//            ImageInfo info = new ImageInfo();
-//            Image image = ToolkitFactory.getToolkit().createImage(o.toString());
-//            info.setInput(new FileInputStream(o));
-//            out = new BufferedImage(info.getWidth(), info.getHeight(),BufferedImage.TYPE_INT_RGB );
-//            out.getGraphics().drawImage(image,out.getWidth(),out.getHeight(),null);
-//            out.getGraphics().dispose();
-             //
+            //            ImageInfo info = new ImageInfo();
+            //            Image image = ToolkitFactory.getToolkit().createImage(o.toString());
+            //            info.setInput(new FileInputStream(o));
+            //            out = new BufferedImage(info.getWidth(), info.getHeight(),BufferedImage.TYPE_INT_RGB );
+            //            out.getGraphics().drawImage(image,out.getWidth(),out.getHeight(),null);
+            //            out.getGraphics().dispose();
+            //
             FileInputStream fis = new FileInputStream(o);
-                    JPEGImageDecoder decoder = JPEGCodec.createJPEGDecoder(fis);
-                    out = decoder.decodeAsBufferedImage();
-                    fis.close();
+            JPEGImageDecoder decoder = JPEGCodec.createJPEGDecoder(fis);
+            out = decoder.decodeAsBufferedImage();
+            fis.close();
 
 
             // Return the format name
             return out;
-        }
-        catch (IOException e)
+        } catch (IOException e)
         {
             throw new CaptchaException("Unknown error during file reading ", e);
-        }catch(ImageFormatException e){
+        } catch (ImageFormatException e)
+        {
             return null;
         }
     }
