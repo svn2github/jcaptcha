@@ -64,7 +64,7 @@ import com.octo.captcha.j2ee.ImageCaptchaServiceException;
  *
  * @version $Id$
  *
- * @author <a href="mailto:sbr@octo.com">Sebastien Brunot</a>
+ * @author <a href="mailto:sebastien.brunot@club-internet.fr">Sebastien Brunot</a>
  */
 public class ImageCaptchaWebServiceEndpoint implements Remote
 {

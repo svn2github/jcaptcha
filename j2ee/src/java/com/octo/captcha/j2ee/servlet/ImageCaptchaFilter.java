@@ -101,7 +101,7 @@ import com.octo.utils.FilterConfigUtils;
  * 
  * @version $Id$
  *
- * @author <a href="mailto:sbr@octo.com">Sebastien Brunot</a>
+ * @author <a href="mailto:sebastien.brunot@club-internet.fr">Sebastien Brunot</a>
  */
 public class ImageCaptchaFilter implements Filter
 {

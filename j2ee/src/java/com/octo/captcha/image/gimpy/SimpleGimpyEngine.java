@@ -67,7 +67,7 @@ import com.octo.captcha.image.gimpy.wordtoimage.textpaster.DoubleTextPaster;
  *
  * @version $Id$
  *
- * @author <a href="mailto:sbr@octo.com">Sebastien Brunot</a>
+ * @author <a href="mailto:sebastien.brunot@club-internet.fr">Sebastien Brunot</a>
  */
 public class SimpleGimpyEngine extends ImageCaptchaEngine
 {

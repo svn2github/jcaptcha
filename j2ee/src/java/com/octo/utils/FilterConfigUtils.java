@@ -58,7 +58,7 @@ import javax.servlet.ServletException;
  *
  * @version $Id$
  *
- * @author <a href="mailto:sbr@octo.com">Sebastien Brunot</a>
+ * @author <a href="mailto:sebastien.brunot@club-internet.fr">Sebastien Brunot</a>
  */
 public class FilterConfigUtils
 {

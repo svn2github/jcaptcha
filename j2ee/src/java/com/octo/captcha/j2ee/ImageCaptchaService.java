@@ -83,7 +83,7 @@ import com.sun.image.codec.jpeg.JPEGImageEncoder;
  * (name provided by the caller)
  * @version $Id$
  *
- * @author <a href="mailto:sbr@octo.com">Sebastien Brunot</a>
+ * @author <a href="mailto:sebastien.brunot@club-internet.fr">Sebastien Brunot</a>
  */
 public class ImageCaptchaService implements ImageCaptchaServiceMBean
 {
@@ -606,7 +606,7 @@ public class ImageCaptchaService implements ImageCaptchaServiceMBean
     }
 
     //////////////////////////////////////
-    // Private methods
+    // Protected methods
     //////////////////////////////////////
 
     /**
@@ -616,7 +616,7 @@ public class ImageCaptchaService implements ImageCaptchaServiceMBean
      * @param theInitializationValues the Properties that
      * contains the initialization parameters
      */
-    private void initializeService(Properties theInitializationValues)
+    protected void initializeService(Properties theInitializationValues)
     {
         // Verfify that all required initialization values are present
         if (theInitializationValues == null)
