@@ -48,7 +48,6 @@
  *
  */
 
-
 package com.octo.captcha.image.gimpy.wordtoimage.textpaster;
 
 import com.octo.captcha.image.gimpy.wordtoimage.TextPaster;
@@ -69,7 +68,8 @@ import java.util.Random;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public abstract class AbstractTextPaster implements TextPaster {
+public abstract class AbstractTextPaster implements TextPaster
+{
 
     public Random myRandom = new Random();
 
@@ -77,11 +77,11 @@ public abstract class AbstractTextPaster implements TextPaster {
     private int min = 6;
     private Color textColor = Color.BLUE;
 
-
-    AbstractTextPaster(Integer minAcceptedWordLenght, Integer maxAcceptedWordLenght, Color textColor) {
+    AbstractTextPaster(Integer minAcceptedWordLenght, Integer maxAcceptedWordLenght, Color textColor)
+    {
         this.max = maxAcceptedWordLenght != null ? maxAcceptedWordLenght.intValue() : this.max;
         this.min = minAcceptedWordLenght != null && minAcceptedWordLenght.intValue() <= this.max
-                ? minAcceptedWordLenght.intValue() : Math.min(this.min,this.max-1);
+                ? minAcceptedWordLenght.intValue() : Math.min(this.min, this.max - 1);
         if (textColor != null) this.textColor = textColor;
     }
 
@@ -89,36 +89,40 @@ public abstract class AbstractTextPaster implements TextPaster {
      *
      * @return the color that will be used to paste the text
      */
-    public Color getTextColor() {
+    public Color getTextColor()
+    {
         return textColor;
     }
 
     /**
      * @return the max word lenght accepted by this word2image service
      */
-    public int getMaxAcceptedWordLenght() {
+    public int getMaxAcceptedWordLenght()
+    {
         return max;
     }
 
     /**
      *@return the min word lenght accepted by this word2image service
      */
-    public int getMinAcceptedWordLenght() {
+    public int getMinAcceptedWordLenght()
+    {
         return min;
     }
 
-    BufferedImage copyBackground(final BufferedImage background) {
+    BufferedImage copyBackground(final BufferedImage background)
+    {
         BufferedImage out = new BufferedImage(background.getWidth(), background.getHeight(), background.getType());
         return out;
     }
 
-    Graphics2D pasteBackgroundAndSetTextColor(BufferedImage out, final BufferedImage background) {
+    Graphics2D pasteBackgroundAndSetTextColor(BufferedImage out, final BufferedImage background)
+    {
         Graphics2D pie = (Graphics2D) out.getGraphics();
         //paste background
         pie.drawImage(background, 0, 0, out.getWidth(), out.getHeight(), null);
         pie.setColor(getTextColor());
         return pie;
     }
-
 
 }

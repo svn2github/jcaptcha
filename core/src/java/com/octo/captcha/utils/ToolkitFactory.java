@@ -47,10 +47,10 @@
  * ====================================================================
  *
  */
+
 package com.octo.captcha.utils;
 
 import java.awt.Toolkit;
-
 import java.util.Properties;
 
 /**
@@ -60,32 +60,38 @@ import java.util.Properties;
  * But if the the parameter toolkit.implementation is fixed as a parameter of
  * the virtual machine with the value of the class name of another implementatio
  * of Toolkit, this factory return an implementation of this class.
- * For exemple if you set to your virtual machine 
+ * For exemple if you set to your virtual machine
  * -Dtoolkit.implementation=com.eteks.awt.PJAToolkit, the factory
  * returns an implementation of com.eteks.awt.PJAToolkit
  * </p>
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
  */
-public class ToolkitFactory {
-    
+public class ToolkitFactory
+{
+
     private static String TOOLKIT_IMPL = "toolkit.implementation";
     private static String toolkitClass;
-    
-    public static Toolkit getToolkit() {
+
+    public static Toolkit getToolkit()
+    {
         Toolkit defaultToolkit = Toolkit.getDefaultToolkit();
-        
+
         Properties props = System.getProperties();
-        
-        try {
-            
-            if(props.containsKey(TOOLKIT_IMPL)) {
+
+        try
+        {
+
+            if (props.containsKey(TOOLKIT_IMPL))
+            {
                 toolkitClass = props.getProperty(TOOLKIT_IMPL);
             }
-            if(toolkitClass != null) {
-                defaultToolkit = (Toolkit)Class.forName(toolkitClass).newInstance();
+            if (toolkitClass != null)
+            {
+                defaultToolkit = (Toolkit) Class.forName(toolkitClass).newInstance();
             }
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             e.printStackTrace();
         }
         return defaultToolkit;

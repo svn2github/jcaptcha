@@ -59,11 +59,13 @@ import java.util.Locale;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class DummyWordGenerator implements WordGenerator {
+public class DummyWordGenerator implements WordGenerator
+{
 
     private String word = "JCAPTCHA";
 
-    public DummyWordGenerator(String word) {
+    public DummyWordGenerator(String word)
+    {
         this.word = word == null || "".equals(word) ? this.word : word;
     }
 
@@ -72,15 +74,18 @@ public class DummyWordGenerator implements WordGenerator {
      * @param lenght
      * @return a String of lenght between min and max lenght
      */
-    public String getWord(Integer lenght) {
-        int mod = lenght.intValue()% word.length();
+    public String getWord(Integer lenght)
+    {
+        int mod = lenght.intValue() % word.length();
         String cut = "";
-        int mul = (lenght.intValue()-mod)/word.length();
-        if (mod > 0) {
-            cut = word.substring(0,mod);
+        int mul = (lenght.intValue() - mod) / word.length();
+        if (mod > 0)
+        {
+            cut = word.substring(0, mod);
         }
         StringBuffer returned = new StringBuffer();
-        for (int i = 0; i < mul; i++) {
+        for (int i = 0 ; i < mul ; i++)
+        {
             returned.append(word);
         }
         returned.append(cut);
@@ -93,7 +98,8 @@ public class DummyWordGenerator implements WordGenerator {
      * @param locale
      * @return a String of lenght between min and max lenght according to the given locale
      */
-    public String getWord(Integer lenght, Locale locale) {
+    public String getWord(Integer lenght, Locale locale)
+    {
         return getWord(lenght);
     }
 }

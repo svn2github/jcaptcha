@@ -48,7 +48,6 @@
  *
  */
 
-
 package com.octo.captcha.image.gimpy.wordtoimage;
 
 import com.octo.captcha.CaptchaException;
@@ -64,9 +63,11 @@ import java.text.AttributedString;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class SimpleWordToImage extends AbstractWordToImage {
+public class SimpleWordToImage extends AbstractWordToImage
+{
 
-    public SimpleWordToImage() {
+    public SimpleWordToImage()
+    {
         super();
     }
 
@@ -74,21 +75,24 @@ public class SimpleWordToImage extends AbstractWordToImage {
      *
      * @return the max word lenght accepted by this word2image service
      */
-    public int getMaxAcceptedWordLenght() {
+    public int getMaxAcceptedWordLenght()
+    {
         return 10;
     }
 
     /**
      *@return the min word lenght accepted by this word2image service
      */
-    public int getMinAcceptedWordLenght() {
+    public int getMinAcceptedWordLenght()
+    {
         return 1;
     }
 
     /**
      * @return the generated image height
      */
-    public int getImageHeight() {
+    public int getImageHeight()
+    {
         return 50;
     }
 
@@ -96,7 +100,8 @@ public class SimpleWordToImage extends AbstractWordToImage {
      *
      * @return the generated image width
      */
-    public int getImageWidth() {
+    public int getImageWidth()
+    {
         return 100;
     }
 
@@ -104,7 +109,8 @@ public class SimpleWordToImage extends AbstractWordToImage {
      *
      * @return the min font size for the generated image
      */
-    public int getMinFontSize() {
+    public int getMinFontSize()
+    {
         return 10;
     }
 
@@ -113,7 +119,8 @@ public class SimpleWordToImage extends AbstractWordToImage {
      * Implementations must take into account the minFontSize and the MaxFontSize.
      * @return a Font
      */
-    public Font getFont() {
+    public Font getFont()
+    {
         return GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts()[0];
     }
 
@@ -122,7 +129,8 @@ public class SimpleWordToImage extends AbstractWordToImage {
      * Implementations must take into account the imageHeigt and imageWidth.
      * @return the background image
      */
-    public BufferedImage getBackround() {
+    public BufferedImage getBackround()
+    {
         BufferedImage background = new BufferedImage(getImageWidth(), getImageHeight(), BufferedImage.TYPE_INT_ARGB);
         return background;
     }
@@ -136,7 +144,8 @@ public class SimpleWordToImage extends AbstractWordToImage {
      * @return the final image
      * @throws CaptchaException if any exception accurs during paste routine.
      */
-    BufferedImage pasteText(BufferedImage background, AttributedString attributedWord) throws CaptchaException {
+    BufferedImage pasteText(BufferedImage background, AttributedString attributedWord) throws CaptchaException
+    {
         //get graphics
         Graphics graph = background.getGraphics();
         // calcul text position
@@ -147,6 +156,5 @@ public class SimpleWordToImage extends AbstractWordToImage {
         graph.dispose();
         return background;
     }
-
 
 }

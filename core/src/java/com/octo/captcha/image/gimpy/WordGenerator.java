@@ -48,7 +48,6 @@
  *
  */
 
-
 package com.octo.captcha.image.gimpy;
 
 import java.util.Locale;
@@ -58,7 +57,8 @@ import java.util.Locale;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public interface WordGenerator {
+public interface WordGenerator
+{
 
     /**
      * Return a word of lenght between min and max lenght
@@ -66,7 +66,6 @@ public interface WordGenerator {
      * @return a String of lenght between min and max lenght
      */
     String getWord(Integer lenght);
-
 
     /**
      * Return a word of lenght between min and max lenght according to the given locale

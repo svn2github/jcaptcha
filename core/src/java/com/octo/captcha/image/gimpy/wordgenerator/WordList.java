@@ -59,7 +59,8 @@ import java.util.Random;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class WordList {
+public class WordList
+{
 
     private ArrayList words = new ArrayList();
 
@@ -67,19 +68,23 @@ public class WordList {
 
     private Random myRandom = new Random();
 
-    public WordList(Locale locale) {
+    public WordList(Locale locale)
+    {
         this.locale = locale;
     };
 
-    public Locale getLocale() {
+    public Locale getLocale()
+    {
         return locale;
     }
 
-    public void addWord(String word) {
+    public void addWord(String word)
+    {
         words.add(word);
     };
 
-    public String getNextWord() {
+    public String getNextWord()
+    {
         int pickAWord = myRandom.nextInt(words.size());
         return (String) words.get(pickAWord);
     }

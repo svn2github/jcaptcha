@@ -48,7 +48,6 @@
  *
  */
 
-
 package com.octo.captcha.image;
 
 import com.octo.captcha.Captcha;
@@ -61,15 +60,17 @@ import java.util.Locale;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public abstract class ImageCaptchaFactory implements CaptchaFactory {
+public abstract class ImageCaptchaFactory implements CaptchaFactory
+{
+
     /**
      * builds a captcha.
      * @return a captcha
      */
-    public final Captcha getCatcha() {
+    public final Captcha getCatcha()
+    {
         return getImageCaptcha();
     }
-
 
     /**
      *
@@ -77,10 +78,10 @@ public abstract class ImageCaptchaFactory implements CaptchaFactory {
      * @param locale
      * @return a captcha corresponding to the locale
      */
-    public final Captcha getCatcha(final Locale locale) {
+    public final Captcha getCatcha(final Locale locale)
+    {
         return getImageCaptcha(locale);
     }
-
 
     /**
      * ImageCaptcha.

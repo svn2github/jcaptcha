@@ -48,48 +48,85 @@
  *
  */
 
-package com.octo.captcha.image.gimpy.wordtoimage.textpaster;
+package com.octo.captcha.image;
 
-import com.octo.captcha.CaptchaException;
-
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.text.AttributedString;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Random;
 
 /**
- * <p>Pastes two times the attributed string with a random decalage from width/20 and height/2</p>
+ * <p>This engine is based on a java.util.List of factories. It has a default constructor.
+ * Sub class must implements the buildInitialFactories() method that should build an initial set of factories.</p>
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class DoubleTextPaster extends AbstractTextPaster
+public abstract class ListImageCaptchaEngine extends ImageCaptchaEngine
 {
 
-    public DoubleTextPaster(Integer minAcceptedWordLenght, Integer maxAcceptedWordLenght, Color textColor)
+    private List factories = new ArrayList();
+    private Random myRandom = new Random();
+
+    public ListImageCaptchaEngine()
     {
-        super(minAcceptedWordLenght, maxAcceptedWordLenght, textColor);
+        buildInitialFactories();
     }
 
     /**
-     * Pastes the attributed string on the backround image and return the final image.
-     * Implementation must take into account the fact that the text must be readable
-     * by human and non by programs.
-     * Pastes two times the attributed string with a random decalage from width/20 and height/2
-     * @param background
-     * @param attributedWord
-     * @return the final image
-     * @throws CaptchaException if any exception accurs during paste routine.
+     * this method should be implemented as folow :
+     * <ul>
+     * <li>First construct all the factories you want to initialize the engine with</li>
+     * <li>then call the this.addFactoriy method for each factory</li>
+     * </ul>
      */
-    public BufferedImage pasteText(final BufferedImage background, final AttributedString attributedWord)
-    {
-        int x = (background.getWidth()) / 20;
-        int y = (background.getHeight()) / 2;
-        BufferedImage out = copyBackground(background);
-        Graphics2D pie = pasteBackgroundAndSetTextColor(out, background);
+    protected abstract void buildInitialFactories();
 
-        pie.drawString(attributedWord.getIterator(), x, y);
-        pie.drawString(attributedWord.getIterator(), x + myRandom.nextInt(5) + 5, y + myRandom.nextInt(5) + 5);
-        pie.dispose();
-        return out;
+    /**
+     * Add a factory to the engine list
+     * @param factory
+     * @return true if added false otherwise
+     */
+    public boolean addFactory(ImageCaptchaFactory factory)
+    {
+        return this.factories.add(factory);
     }
+
+    /**
+     * remove the factory from the engine list
+     * @param factory
+     * @return true if removed, false otherwise
+     */
+    public boolean removeFactory(ImageCaptchaFactory factory)
+    {
+        return this.factories.remove(factory);
+    }
+
+    /**
+     * This method build a ImageCaptchaFactory.
+     * @return a CaptchaFactory
+     */
+    public ImageCaptchaFactory getImageCaptchaFactory()
+    {
+        return (ImageCaptchaFactory) factories.get(myRandom.nextInt(factories.size()));
+    }
+
+    /**
+     * This method build a ImageCaptchaFactory.
+     * @return a CaptchaFactory
+     */
+    public ImageCaptcha getNextImageCaptcha()
+    {
+        return getImageCaptchaFactory().getImageCaptcha();
+    }
+
+    /**
+     * This method build a ImageCaptchaFactory.
+     * @param locale
+     * @return a CaptchaFactory
+     */
+    public ImageCaptcha getNextImageCaptcha(Locale locale)
+    {
+        return getImageCaptchaFactory().getImageCaptcha(locale);
+    }
+
 }

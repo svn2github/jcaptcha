@@ -48,7 +48,6 @@
  *
  */
 
-
 package com.octo.captcha.image.gimpy.wordtoimage.fontgenerator;
 
 import java.awt.Font;
@@ -60,12 +59,13 @@ import java.util.Random;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class RandomFontGenerator extends AbstractFontGenerator {
-
+public class RandomFontGenerator extends AbstractFontGenerator
+{
 
     Random myRandom = new Random();
 
-    public RandomFontGenerator(Integer minFontSize, Integer maxFontSize) {
+    public RandomFontGenerator(Integer minFontSize, Integer maxFontSize)
+    {
         super(minFontSize, maxFontSize);
     }
 
@@ -74,13 +74,15 @@ public class RandomFontGenerator extends AbstractFontGenerator {
      * Implementations must take into account the minFontSize and the MaxFontSize.
      * @return a Font
      */
-    public Font getFont() {
+    public Font getFont()
+    {
         Font[] fonts;
         fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts();
         int numero = myRandom.nextInt(fonts.length);
         Font font = fonts[Math.abs(numero)];
         int plus = 0;
-        if (getMaxFontSize() - getMinFontSize() != 0) {
+        if (getMaxFontSize() - getMinFontSize() != 0)
+        {
             plus = Math.abs(myRandom.nextInt(getMaxFontSize() - getMinFontSize()));
         }
         Font styled = new Font(font.toString(), Font.PLAIN, getMinFontSize() + plus);

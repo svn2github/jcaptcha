@@ -51,15 +51,15 @@
 package com.octo.captcha.image.gimpy;
 
 import com.octo.captcha.image.ImageCaptcha;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageDecoder;
+import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
-import java.io.ObjectOutputStream;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.awt.image.BufferedImage;
 
 /**
  * <p>Description: </p>
@@ -69,11 +69,11 @@ import java.awt.image.BufferedImage;
 public class Gimpy extends ImageCaptcha implements Serializable
 {
 
-     private String response;
+    private String response;
 
-
-    Gimpy(String question, BufferedImage challenge, String response){
-        super(question,challenge);
+    Gimpy(String question, BufferedImage challenge, String response)
+    {
+        super(question, challenge);
         this.response = response;
     }
 
@@ -83,32 +83,33 @@ public class Gimpy extends ImageCaptcha implements Serializable
      * @param response
      * @return true if the given response equals the internal response, false otherwise.
      */
-    public final Boolean validateResponse(final Object response) {
+    public final Boolean validateResponse(final Object response)
+    {
         return (null != response && response instanceof String) ? validateResponse((String) response) : Boolean.FALSE;
     }
-
 
     /**
      * Very simple validation routine that compares the given response to the internal string.
      * @return true if the given response equals the internal response, false otherwise.
      */
-    private final Boolean validateResponse(final String response) {
+    private final Boolean validateResponse(final String response)
+    {
         return Boolean.valueOf(response.equals(this.response));
     };
 
-      /**
+    /**
      *
      * @param out
      * @throws java.io.IOException
      */
-    public void writeObject(final ObjectOutputStream out) throws IOException {
+    public void writeObject(final ObjectOutputStream out) throws IOException
+    {
         //write serializable values
         out.writeUTF(this.question);
         out.writeUTF(response);
         //write image as jpeg
         final JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
         encoder.encode(this.getImageChallenge());
-
 
     }
 
@@ -117,7 +118,8 @@ public class Gimpy extends ImageCaptcha implements Serializable
      * @param in
      * @throws java.io.IOException
      */
-    public void readObject(final ObjectInputStream in) throws IOException {
+    public void readObject(final ObjectInputStream in) throws IOException
+    {
         //read serializable values
         this.question = in.readUTF();
         this.response = in.readUTF();

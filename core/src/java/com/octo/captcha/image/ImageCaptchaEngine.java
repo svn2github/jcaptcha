@@ -69,12 +69,15 @@ import java.util.Locale;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public abstract class ImageCaptchaEngine implements CaptchaEngine {
+public abstract class ImageCaptchaEngine implements CaptchaEngine
+{
+
     /**
      * This method build a CaptchaFactory.
      * @return a CaptchaFactory
      */
-    public final CaptchaFactory getCaptchaFactory() {
+    public final CaptchaFactory getCaptchaFactory()
+    {
         return getImageCaptchaFactory();
     }
 
@@ -82,7 +85,8 @@ public abstract class ImageCaptchaEngine implements CaptchaEngine {
      * This return a new captcha. It may be used directly.
      * @return a new Captcha
      */
-    public final Captcha getNextCaptcha() {
+    public final Captcha getNextCaptcha()
+    {
         return getNextImageCaptcha();
     }
 
@@ -102,17 +106,16 @@ public abstract class ImageCaptchaEngine implements CaptchaEngine {
      */
     public abstract ImageCaptchaFactory getImageCaptchaFactory();
 
-
     /**
      * This method build a ImageCaptchaFactory.
      * @return a CaptchaFactory
      */
     public abstract ImageCaptcha getNextImageCaptcha();
 
-     /**
+    /**
      * This method build a ImageCaptchaFactory.
      * @param locale
-      * @return a CaptchaFactory
+     * @return a CaptchaFactory
      */
     public abstract ImageCaptcha getNextImageCaptcha(Locale locale);
 

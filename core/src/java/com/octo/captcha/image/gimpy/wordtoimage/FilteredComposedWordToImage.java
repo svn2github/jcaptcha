@@ -83,12 +83,12 @@ import java.text.AttributedString;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class FilteredComposedWordToImage extends ComposedWordToImage {
+public class FilteredComposedWordToImage extends ComposedWordToImage
+{
 
     private ImageFilter[] backgroundFilters;
     private ImageFilter[] textFilters;
     private ImageFilter[] finalFilters;
-
 
     /**
      *Composed word to image that applys filters
@@ -103,7 +103,8 @@ public class FilteredComposedWordToImage extends ComposedWordToImage {
     public FilteredComposedWordToImage(FontGenerator fontGenerator, BackgroundGenerator background,
                                        TextPaster textPaster,
                                        ImageFilter[] backgroundFilters, ImageFilter[] textFilters,
-                                       ImageFilter[] finalFilters) {
+                                       ImageFilter[] finalFilters)
+    {
         super(fontGenerator, background, textPaster);
         this.backgroundFilters = backgroundFilters;
         this.textFilters = textFilters;
@@ -131,7 +132,8 @@ public class FilteredComposedWordToImage extends ComposedWordToImage {
      * @return an image representation of the word
      * @throws CaptchaException if word is invalid or if image generation fails.
      */
-    public BufferedImage getImage(String word) throws CaptchaException {
+    public BufferedImage getImage(String word) throws CaptchaException
+    {
         BufferedImage background = getBackround();
         AttributedString aword = getAttributedString(word, checkWordLenght(word));
         //copy background
@@ -170,11 +172,13 @@ public class FilteredComposedWordToImage extends ComposedWordToImage {
         return out;
     }
 
-
-    private void applyFilters(BufferedImage image, ImageFilter[] filters) {
+    private void applyFilters(BufferedImage image, ImageFilter[] filters)
+    {
         FilteredImageSource filtered;
-        if (filters != null) {
-            for (int i = 0; i < filters.length; i++) {
+        if (filters != null)
+        {
+            for (int i = 0 ; i < filters.length ; i++)
+            {
                 ImageFilter backgroundFilter = filters[i];
                 filtered = new FilteredImageSource(image.getSource(), backgroundFilter);
                 Image temp = ToolkitFactory.getToolkit().createImage(filtered);

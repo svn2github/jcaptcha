@@ -65,9 +65,11 @@ import java.text.AttributedString;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class DoubleRandomTextPaster extends RandomTextPaster {
+public class DoubleRandomTextPaster extends RandomTextPaster
+{
 
-    public DoubleRandomTextPaster(Integer minAcceptedWordLenght, Integer maxAcceptedWordLenght, Color textColor) {
+    public DoubleRandomTextPaster(Integer minAcceptedWordLenght, Integer maxAcceptedWordLenght, Color textColor)
+    {
         super(minAcceptedWordLenght, maxAcceptedWordLenght, textColor);
     }
 
@@ -82,7 +84,8 @@ public class DoubleRandomTextPaster extends RandomTextPaster {
      * @throws com.octo.captcha.CaptchaException if any exception occurs during paste routine.
      */
     public BufferedImage pasteText(final BufferedImage background, final AttributedString attributedWord)
-            throws CaptchaException {
+            throws CaptchaException
+    {
         BufferedImage out = copyBackground(background);
         Graphics2D pie = pasteBackgroundAndSetTextColor(out, background);
 
@@ -117,6 +120,5 @@ public class DoubleRandomTextPaster extends RandomTextPaster {
         return out;
 
     }
-
 
 }

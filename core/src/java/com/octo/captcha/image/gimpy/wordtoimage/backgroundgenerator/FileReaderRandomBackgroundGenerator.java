@@ -63,19 +63,20 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-
 /**
  * <p>File reader background generator that return a random image from the ones found in the directory
  * NOTE : this implementation only takes </p>
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class FileReaderRandomBackgroundGenerator extends AbstractBackgroundGenerator {
+public class FileReaderRandomBackgroundGenerator extends AbstractBackgroundGenerator
+{
 
     private List images = new ArrayList();
     private String rootPath = ".";
 
-    public FileReaderRandomBackgroundGenerator(Integer width, Integer height, String rootPath) {
+    public FileReaderRandomBackgroundGenerator(Integer width, Integer height, String rootPath)
+    {
         super(width, height);
         //this.images=images;
         if (rootPath != null) this.rootPath = rootPath;
@@ -83,41 +84,56 @@ public class FileReaderRandomBackgroundGenerator extends AbstractBackgroundGener
 //            throw new CaptchaException("Can't be initialized with a null or empty array of images");
 //        }
         File dir = new File(this.rootPath);
-        if (!dir.canRead() || !dir.isDirectory()) {
+        if (!dir.canRead() || !dir.isDirectory())
+        {
             throw new CaptchaException("Root path is not a directory or cannot be read");
-        } else {
+        } else
+        {
             File[] files = dir.listFiles();
 
             //get all jpeg
-            if (files != null) {
-                for (int i = 0; i < files.length; i++) {
+            if (files != null)
+            {
+                for (int i = 0 ; i < files.length ; i++)
+                {
                     File file = files[i];
-                    BufferedImage out = getImage(file);
-                    if (out != null) {
+                    BufferedImage out = null;
+                    if (file.isFile())
+                    {
+                        out = getImage(file);
+                    }
+                    if (out != null)
+                    {
                         images.add(images.size(), out);
                     }
                 }
 
             }
-            if (images.size() != 0) {
-                for (int i = 0; i < images.size(); i++) {
+            if (images.size() != 0)
+            {
+                for (int i = 0 ; i < images.size() ; i++)
+                {
                     BufferedImage bufferedImage = (BufferedImage) images.get(i);
                     images.set(i, tile(bufferedImage));
                 }
-            } else {
+            } else
+            {
                 throw new CaptchaException("Root path directory is valid but " +
                         "does not contains any image files");
             }
         }
     }
 
-    private BufferedImage tile(BufferedImage tileImage) {
+    private BufferedImage tile(BufferedImage tileImage)
+    {
         BufferedImage image = new BufferedImage(getImageWidth(), getImageHeight(), tileImage.getType());
         Graphics2D g2 = (Graphics2D) image.getGraphics();
         int NumberX = (getImageWidth() / tileImage.getWidth());
         int NumberY = (getImageHeight() / tileImage.getHeight());
-        for (int k = 0; k <= NumberY; k++) {
-            for (int l = 0; l <= NumberX; l++) {
+        for (int k = 0 ; k <= NumberY ; k++)
+        {
+            for (int l = 0 ; l <= NumberX ; l++)
+            {
                 g2.drawImage(tileImage, l * tileImage.getWidth(), k * tileImage.getHeight(),
                         Math.min(tileImage.getWidth(), getImageWidth()), Math.min(tileImage.getHeight(), getImageHeight()), null);
             }
@@ -129,15 +145,18 @@ public class FileReaderRandomBackgroundGenerator extends AbstractBackgroundGener
     // Returns the format name of the image in the object 'o'.
     // 'o' can be either a File or InputStream object.
     // Returns null if the format is not known.
-    private static BufferedImage getImage(File o) {
+    private static BufferedImage getImage(File o)
+    {
         BufferedImage out = null;
-        try {
+        try
+        {
             // Create an image input stream on the image
             ImageInputStream iis = ImageIO.createImageInputStream(o);
 
             // Find all image readers that recognize the image format
             Iterator iter = ImageIO.getImageReaders(iis);
-            if (!iter.hasNext()) {
+            if (!iter.hasNext())
+            {
                 // No readers found
                 return out;
             }
@@ -151,18 +170,19 @@ public class FileReaderRandomBackgroundGenerator extends AbstractBackgroundGener
 
             // Return the format name
             return out;
-        } catch (IOException e) {
+        } catch (IOException e)
+        {
             throw new CaptchaException("Unknown error during file reading ", e);
         }
     }
-
 
     /**
      * Generates a backround image on wich text will be paste.
      * Implementations must take into account the imageHeigt and imageWidth.
      * @return the background image
      */
-    public BufferedImage getBackround() {
+    public BufferedImage getBackround()
+    {
         return (BufferedImage) images.get(myRandom.nextInt(images.size()));
     }
 

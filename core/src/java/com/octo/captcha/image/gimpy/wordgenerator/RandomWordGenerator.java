@@ -60,13 +60,15 @@ import java.util.Random;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class RandomWordGenerator implements WordGenerator {
+public class RandomWordGenerator implements WordGenerator
+{
 
     private char[] possiblesChars;
 
     private Random myRandom = new Random();
 
-    public RandomWordGenerator(String acceptedChars) {
+    public RandomWordGenerator(String acceptedChars)
+    {
         possiblesChars = acceptedChars.toCharArray();
     }
 
@@ -75,9 +77,11 @@ public class RandomWordGenerator implements WordGenerator {
      * @param lenght
      * @return a String of lenght between min and max lenght
      */
-    public String getWord(Integer lenght) {
+    public String getWord(Integer lenght)
+    {
         StringBuffer word = new StringBuffer(lenght.intValue());
-        for (int i = 0; i < lenght.intValue(); i++) {
+        for (int i = 0 ; i < lenght.intValue() ; i++)
+        {
             word.append(possiblesChars[myRandom.nextInt(possiblesChars.length)]);
         }
         return word.toString();
@@ -89,7 +93,8 @@ public class RandomWordGenerator implements WordGenerator {
      * @param locale
      * @return a String of lenght between min and max lenght according to the given locale
      */
-    public String getWord(Integer lenght, Locale locale) {
+    public String getWord(Integer lenght, Locale locale)
+    {
         return getWord(lenght);
     }
 

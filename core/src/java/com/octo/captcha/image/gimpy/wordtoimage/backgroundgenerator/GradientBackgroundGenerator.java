@@ -48,7 +48,6 @@
  *
  */
 
-
 package com.octo.captcha.image.gimpy.wordtoimage.backgroundgenerator;
 
 import java.awt.Color;
@@ -62,26 +61,27 @@ import java.awt.image.BufferedImage;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class GradientBackgroundGenerator extends AbstractBackgroundGenerator {
+public class GradientBackgroundGenerator extends AbstractBackgroundGenerator
+{
 
     Color firstColor = new Color(210, 210, 210);
     Color secondColor = new Color(0, 0, 0);
 
-
-    public GradientBackgroundGenerator(Integer width, Integer height, Color firstColor, Color secondColor) {
+    public GradientBackgroundGenerator(Integer width, Integer height, Color firstColor, Color secondColor)
+    {
         super(width, height);
         this.firstColor = firstColor;
         this.secondColor = secondColor;
 
     }
 
-
     /**
      * Generates a backround image on wich text will be paste.
      * Implementations must take into account the imageHeigt and imageWidth.
      * @return the background image
      */
-    public BufferedImage getBackround() {
+    public BufferedImage getBackround()
+    {
         BufferedImage bi = new BufferedImage(getImageWidth(), getImageHeight(), BufferedImage.TYPE_INT_RGB);
         Graphics2D pie = (Graphics2D) bi.getGraphics();
         pie.setRenderingHint(RenderingHints.KEY_ANTIALIASING,

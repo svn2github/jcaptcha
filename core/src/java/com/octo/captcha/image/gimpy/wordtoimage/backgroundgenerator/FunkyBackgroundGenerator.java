@@ -48,7 +48,6 @@
  *
  */
 
-
 package com.octo.captcha.image.gimpy.wordtoimage.backgroundgenerator;
 
 import java.awt.Color;
@@ -60,9 +59,11 @@ import java.awt.image.BufferedImage;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class FunkyBackgroundGenerator extends AbstractBackgroundGenerator {
+public class FunkyBackgroundGenerator extends AbstractBackgroundGenerator
+{
 
-    public FunkyBackgroundGenerator(Integer width, Integer height) {
+    public FunkyBackgroundGenerator(Integer width, Integer height)
+    {
         super(width, height);
     }
 
@@ -71,14 +72,17 @@ public class FunkyBackgroundGenerator extends AbstractBackgroundGenerator {
      * Implementations must take into account the imageHeigt and imageWidth.
      * @return the background image
      */
-    public BufferedImage getBackround() {
+    public BufferedImage getBackround()
+    {
         BufferedImage bimgTP = new BufferedImage(getImageWidth(), getImageHeight(), BufferedImage.TYPE_INT_BGR);
         Graphics2D g2d = bimgTP.createGraphics();
         g2d.setColor(Color.white);
         g2d.fillRect(0, 0, getImageHeight(), getImageWidth());
-        for (int j = 0; j < getImageHeight(); j++) {
+        for (int j = 0 ; j < getImageHeight() ; j++)
+        {
             float red = j / (float) getImageHeight();
-            for (int i = 0; i < getImageWidth(); i++) {
+            for (int i = 0 ; i < getImageWidth() ; i++)
+            {
                 float green = i / (float) getImageWidth();
                 g2d.setColor(new Color(1.0f - myRandom.nextFloat() * red, 1.0f - myRandom.nextFloat() * green, 0.0f, 1.0f));
                 g2d.drawLine(i, j, i, j);
@@ -87,6 +91,5 @@ public class FunkyBackgroundGenerator extends AbstractBackgroundGenerator {
         g2d.dispose();
         return bimgTP;
     }
-
 
 }

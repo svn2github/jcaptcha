@@ -65,7 +65,9 @@ import java.awt.image.BufferedImage;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public interface BackgroundGenerator {
+public interface BackgroundGenerator
+{
+
     /**
      * @return the generated image height
      */

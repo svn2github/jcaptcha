@@ -51,10 +51,9 @@
 package com.octo.captcha.image;
 
 import com.octo.captcha.CaptchaException;
-import com.octo.captcha.Captcha;
 
-import java.util.Random;
 import java.util.Locale;
+import java.util.Random;
 
 /**
  * <p>This is a very simple engine, which is constructed from an array of Factory and
@@ -62,18 +61,21 @@ import java.util.Locale;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class DefaultImageCaptchaEngine extends ImageCaptchaEngine {
+public abstract class DefaultImageCaptchaEngine extends ImageCaptchaEngine
+{
 
     private ImageCaptchaFactory[] factories;
     private Random myRandom = new Random();
 
-/**
- * Default constructor : takes an array of ImageCaptchaFactories.
- * @param factories
- */
-    public DefaultImageCaptchaEngine(final ImageCaptchaFactory[] factories) {
+    /**
+     * Default constructor : takes an array of ImageCaptchaFactories.
+     * @param factories
+     */
+    public DefaultImageCaptchaEngine(final ImageCaptchaFactory[] factories)
+    {
         this.factories = factories;
-        if (factories == null || factories.length == 0) {
+        if (factories == null || factories.length == 0)
+        {
             throw new CaptchaException("DefaultImageCaptchaEngine cannot be " +
                     "constructed with a null or empty factories array");
         }
@@ -83,7 +85,8 @@ public class DefaultImageCaptchaEngine extends ImageCaptchaEngine {
      * This method build a ImageCaptchaFactory.
      * @return a CaptchaFactory
      */
-    public final ImageCaptchaFactory getImageCaptchaFactory() {
+    public final ImageCaptchaFactory getImageCaptchaFactory()
+    {
         return factories[myRandom.nextInt(factories.length)];
     }
 
@@ -91,7 +94,8 @@ public class DefaultImageCaptchaEngine extends ImageCaptchaEngine {
      * This method use an object parameter to build a CaptchaFactory.
      * @return a CaptchaFactory
      */
-    public final ImageCaptcha getNextImageCaptcha() {
+    public final ImageCaptcha getNextImageCaptcha()
+    {
         return getImageCaptchaFactory().getImageCaptcha();
     }
 

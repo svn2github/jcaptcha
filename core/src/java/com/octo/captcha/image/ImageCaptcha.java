@@ -48,61 +48,54 @@
  *
  */
 
-
 package com.octo.captcha.image;
 
 import com.octo.captcha.Captcha;
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGImageDecoder;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
 
 /**
  * <p>String question about a BufferedImage challenge. Abstract.</p>
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public abstract class ImageCaptcha implements Captcha {
+public abstract class ImageCaptcha implements Captcha
+{
 
     protected String question;
 
     protected BufferedImage challenge;
 
-    protected ImageCaptcha(String question, BufferedImage challenge){
-        this.challenge =challenge;
+    protected ImageCaptcha(String question, BufferedImage challenge)
+    {
+        this.challenge = challenge;
         this.question = question;
     }
-
 
     /**
      * Accessor captcha question
      * @return the question
      */
-    public final String getQuestion() {
+    public final String getQuestion()
+    {
         return question;
     }
-
-
 
     /**
      *
      * @return the challenge
      */
-    public final Object getChallenge() {
+    public final Object getChallenge()
+    {
         return getImageChallenge();
     }
-
 
     /**
      *
      * @return the image challenge
      */
-    public final BufferedImage getImageChallenge() {
+    public final BufferedImage getImageChallenge()
+    {
         return challenge;
     };
 
@@ -116,10 +109,9 @@ public abstract class ImageCaptcha implements Captcha {
      * So here it is!
      *
      */
-    public final void disposeChallenge() {
+    public final void disposeChallenge()
+    {
         this.challenge = null;
     }
-
-
 
 }

@@ -48,7 +48,6 @@
  *
  */
 
-
 package com.octo.captcha.image.gimpy.wordgenerator;
 
 import java.util.Locale;
@@ -58,7 +57,8 @@ import java.util.Locale;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public interface DictionaryReader {
+public interface DictionaryReader
+{
 
     WordList getWordList();
 

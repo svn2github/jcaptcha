@@ -50,7 +50,6 @@
 
 package com.octo.captcha;
 
-
 /**
  * This interface represent a CAPTCHA.
  *
@@ -81,13 +80,14 @@ package com.octo.captcha;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public interface Captcha {
+public interface Captcha
+{
+
     /**
      * Accessor captcha question.
      * @return the question
      */
     String getQuestion();
-    
 
     /**
      * Accerssor for the questionned challenge.
@@ -112,6 +112,5 @@ public interface Captcha {
      *
      */
     void disposeChallenge();
-
 
 }

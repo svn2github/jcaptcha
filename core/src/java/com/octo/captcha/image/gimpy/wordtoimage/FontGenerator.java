@@ -65,7 +65,9 @@ import java.awt.Font;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public interface FontGenerator {
+public interface FontGenerator
+{
+
     /**
      * Method from imageFromWord method to apply font to String.
      * Implementations must take into account the minFontSize and the MaxFontSize.
@@ -84,6 +86,5 @@ public interface FontGenerator {
      * @return the max font size for the generated image
      */
     int getMaxFontSize();
-
 
 }

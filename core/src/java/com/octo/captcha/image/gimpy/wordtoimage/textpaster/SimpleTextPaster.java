@@ -62,9 +62,11 @@ import java.text.AttributedString;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class SimpleTextPaster extends AbstractTextPaster {
+public class SimpleTextPaster extends AbstractTextPaster
+{
 
-    public SimpleTextPaster(Integer minAcceptedWordLenght, Integer maxAcceptedWordLenght, Color textColor) {
+    public SimpleTextPaster(Integer minAcceptedWordLenght, Integer maxAcceptedWordLenght, Color textColor)
+    {
         super(minAcceptedWordLenght, maxAcceptedWordLenght, textColor);
     }
 
@@ -78,7 +80,8 @@ public class SimpleTextPaster extends AbstractTextPaster {
      * @return the final image
      * @throws CaptchaException if any exception accurs during paste routine.
      */
-    public BufferedImage pasteText(final BufferedImage background, final AttributedString attributedWord) throws CaptchaException {
+    public BufferedImage pasteText(final BufferedImage background, final AttributedString attributedWord) throws CaptchaException
+    {
         int x = (background.getWidth()) / 20;
         int y = (background.getHeight()) / 2;
         BufferedImage out = copyBackground(background);

@@ -61,7 +61,9 @@ import java.util.Locale;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public interface CaptchaFactory {
+public interface CaptchaFactory
+{
+
     /**
      * builds a captcha
      * @return a captcha
@@ -75,6 +77,5 @@ public interface CaptchaFactory {
      * @return a captcha corresponding to the locale
      */
     Captcha getCatcha(Locale locale);
-
 
 }

@@ -48,7 +48,6 @@
  *
  */
 
-
 package com.octo.captcha.image.gimpy.wordgenerator;
 
 import com.octo.captcha.image.gimpy.WordGenerator;
@@ -61,14 +60,15 @@ import java.util.Locale;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class DictionaryWordGenerator implements WordGenerator {
+public class DictionaryWordGenerator implements WordGenerator
+{
 
     private DictionaryReader factory;
 
     private WordList words;
 
-
-    public DictionaryWordGenerator(DictionaryReader reader) {
+    public DictionaryWordGenerator(DictionaryReader reader)
+    {
         this.factory = reader;
         this.words = factory.getWordList();
     }
@@ -78,9 +78,11 @@ public class DictionaryWordGenerator implements WordGenerator {
      * @param lenght
      * @return a String of lenght between min and max lenght
      */
-    public String getWord(Integer lenght) {
+    public String getWord(Integer lenght)
+    {
         String word = null;
-        do {
+        do
+        {
             word = words.getNextWord();
         } while (word.length() != lenght.intValue());
         return word;
@@ -92,8 +94,10 @@ public class DictionaryWordGenerator implements WordGenerator {
      * @param locale
      * @return a String of lenght between min and max lenght according to the given locale
      */
-    public String getWord(Integer lenght, Locale locale) {
-        if (this.words.getLocale() != locale) {
+    public String getWord(Integer lenght, Locale locale)
+    {
+        if (this.words.getLocale() != locale)
+        {
             this.words = factory.getWordList(locale);
         }
         return getWord(lenght);

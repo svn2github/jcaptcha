@@ -54,15 +54,16 @@ package com.octo.captcha;
  * Runtime exception for the captcha implemenentations.
  * @author gandin
  */
-public class CaptchaException extends RuntimeException {
-
+public class CaptchaException extends RuntimeException
+{
 
     /**
      * Constructs a new exception with <code>null</code> as its detail message.
      * The cause is not initialized, and may subsequently be initialized by a
      * call to {@link #initCause}.
      */
-    public CaptchaException() {
+    public CaptchaException()
+    {
     }
 
     /**
@@ -73,7 +74,8 @@ public class CaptchaException extends RuntimeException {
      * @param   message   the detail message. The detail message is saved for
      *          later retrieval by the {@link #getMessage()} method.
      */
-    public CaptchaException(final String message) {
+    public CaptchaException(final String message)
+    {
         super(message);
     }
 
@@ -91,7 +93,8 @@ public class CaptchaException extends RuntimeException {
      *         unknown.)
      * @since  1.4
      */
-    public CaptchaException(final String message, final Throwable cause) {
+    public CaptchaException(final String message, final Throwable cause)
+    {
         super(message, cause);
     }
 
@@ -109,9 +112,9 @@ public class CaptchaException extends RuntimeException {
      *         unknown.)
      * @since  1.4
      */
-    public CaptchaException(final Throwable cause) {
+    public CaptchaException(final Throwable cause)
+    {
         super(cause);
     }
-
 
 }

@@ -72,9 +72,11 @@ import java.awt.image.BufferedImage;
  * @version 1.0
  */
 public class MultipleShapeBackgroundGenerator
-        extends AbstractBackgroundGenerator {
+        extends AbstractBackgroundGenerator
+{
 
-    public MultipleShapeBackgroundGenerator(Integer width, Integer height) {
+    public MultipleShapeBackgroundGenerator(Integer width, Integer height)
+    {
         super(width, height);
     }
 
@@ -123,7 +125,6 @@ public class MultipleShapeBackgroundGenerator
      */
     private Integer rectangleWidth = new Integer(3);
 
-
     /**
      * Constructor with full parameters
      * @param width
@@ -143,7 +144,8 @@ public class MultipleShapeBackgroundGenerator
             Integer spaceBetweenLine, Integer spaceBetweenCircle,
             Integer ellipseHeight, Integer ellipseWidth,
             Color firstRectangleColor, Color secondRectangleColor,
-            Integer rectangleWidth) {
+            Integer rectangleWidth)
+    {
 
         super(width, height);
 
@@ -172,17 +174,20 @@ public class MultipleShapeBackgroundGenerator
      * a large number of lines, ellipse, and gradient paint.
      * @return the background full of shapes
      */
-    public BufferedImage getBackround() {
+    public BufferedImage getBackround()
+    {
         BufferedImage bi = new BufferedImage(getImageWidth(), getImageHeight(), BufferedImage.TYPE_INT_RGB);
         Graphics2D g2 = (Graphics2D) bi.getGraphics();
 
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
 
-        for (int i = 0; i < getImageWidth();
-             i = i + this.getSpaceBetweenLine()) {
-            for (int j = 0; j < getImageHeight();
-                 j = j + this.getSpaceBetweenCircle()) {
+        for (int i = 0 ; i < getImageWidth() ;
+             i = i + this.getSpaceBetweenLine())
+        {
+            for (int j = 0 ; j < getImageHeight() ;
+                 j = j + this.getSpaceBetweenCircle())
+            {
                 Ellipse2D e2 = new Ellipse2D.Double(i, j, this.getEllipseHeight(), this.getEllipseWidth());
                 GradientPaint gp = new GradientPaint(0, this.getEllipseHeight(),
                         firstEllipseColor, this.getEllipseWidth(), 0, secondEllipseColor, true);
@@ -205,7 +210,8 @@ public class MultipleShapeBackgroundGenerator
      * Helper method to get the int value of the number of pixels between lines.
      * @return number of pixels between lines.
      */
-    protected int getSpaceBetweenLine() {
+    protected int getSpaceBetweenLine()
+    {
         return this.spaceBetweenLine.intValue();
     }
 
@@ -213,7 +219,8 @@ public class MultipleShapeBackgroundGenerator
      * Helper method to get the int value of the number of pixels between circles.
      * @return number of pixels between circles.
      */
-    protected int getSpaceBetweenCircle() {
+    protected int getSpaceBetweenCircle()
+    {
         return this.spaceBetweenCircle.intValue();
     }
 
@@ -221,7 +228,8 @@ public class MultipleShapeBackgroundGenerator
      * Helper method to get the height of drawn ellipses.
      * @return height of ellipses.
      */
-    protected int getEllipseHeight() {
+    protected int getEllipseHeight()
+    {
         return this.ellipseHeight.intValue();
     }
 
@@ -229,7 +237,8 @@ public class MultipleShapeBackgroundGenerator
      * Helper method to get the width of drawn ellipses.
      * @return width of ellipses.
      */
-    protected int getEllipseWidth() {
+    protected int getEllipseWidth()
+    {
         return this.ellipseWidth.intValue();
     }
 
@@ -237,7 +246,8 @@ public class MultipleShapeBackgroundGenerator
      * Helper method to get the width of drawn rectangles.
      * @return width of rectangles.
      */
-    protected int getRectangleWidth() {
+    protected int getRectangleWidth()
+    {
         return this.rectangleWidth.intValue();
     }
 }

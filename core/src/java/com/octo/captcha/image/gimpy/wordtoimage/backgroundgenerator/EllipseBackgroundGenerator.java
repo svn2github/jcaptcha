@@ -53,7 +53,6 @@ package com.octo.captcha.image.gimpy.wordtoimage.backgroundgenerator;
 import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
 import java.awt.geom.Arc2D;
 import java.awt.image.BufferedImage;
 
@@ -62,20 +61,21 @@ import java.awt.image.BufferedImage;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class EllipseBackgroundGenerator extends AbstractBackgroundGenerator {
+public class EllipseBackgroundGenerator extends AbstractBackgroundGenerator
+{
 
-
-    public EllipseBackgroundGenerator(Integer width, Integer height) {
+    public EllipseBackgroundGenerator(Integer width, Integer height)
+    {
         super(width, height);
     }
-
 
     /**
      * Generates a backround image on wich text will be paste.
      * Implementations must take into account the imageHeigt and imageWidth.
      * @return the background image
      */
-    public BufferedImage getBackround() {
+    public BufferedImage getBackround()
+    {
         BufferedImage bimgTP = new BufferedImage(getImageWidth(), getImageHeight(), BufferedImage.TYPE_INT_BGR);
         Graphics2D g2d = bimgTP.createGraphics();
         // g2d.setColor(Color.white);
@@ -90,7 +90,8 @@ public class EllipseBackgroundGenerator extends AbstractBackgroundGenerator {
         double delta = 5.0;
         double xt;
         double ts = 0.0;
-        for (xt = 0.0; xt < (2.0 * getImageWidth()); xt += delta) {
+        for (xt = 0.0 ; xt < (2.0 * getImageWidth()) ; xt += delta)
+        {
             Arc2D arc = new Arc2D.Double(0, 0,
                     getImageWidth(), getImageHeight(), 0.0, 360.0, Arc2D.OPEN);
             g2d.draw(arc);

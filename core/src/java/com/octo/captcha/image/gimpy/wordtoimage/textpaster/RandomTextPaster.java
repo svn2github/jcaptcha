@@ -67,9 +67,11 @@ import java.text.AttributedString;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class RandomTextPaster extends AbstractTextPaster {
+public class RandomTextPaster extends AbstractTextPaster
+{
 
-    public RandomTextPaster(Integer minAcceptedWordLenght, Integer maxAcceptedWordLenght, Color textColor) {
+    public RandomTextPaster(Integer minAcceptedWordLenght, Integer maxAcceptedWordLenght, Color textColor)
+    {
         super(minAcceptedWordLenght, maxAcceptedWordLenght, textColor);
     }
 
@@ -83,7 +85,8 @@ public class RandomTextPaster extends AbstractTextPaster {
      * @return the final image
      * @throws com.octo.captcha.CaptchaException if any exception accurs during paste routine.
      */
-    public BufferedImage pasteText(final BufferedImage background, final AttributedString attributedWord) {
+    public BufferedImage pasteText(final BufferedImage background, final AttributedString attributedWord)
+    {
         BufferedImage out = copyBackground(background);
         Graphics2D pie = pasteBackgroundAndSetTextColor(out, background);
 
@@ -104,7 +107,7 @@ public class RandomTextPaster extends AbstractTextPaster {
         //evaluate the random deviation
         int x = myRandom.nextInt(maxx.intValue());
         //don't forget y goes down!
-        int y = maxFont.getSize() + myRandom.nextInt(Math.max(maxy.intValue() - maxFont.getSize(),1));
+        int y = maxFont.getSize() + myRandom.nextInt(Math.max(maxy.intValue() - maxFont.getSize(), 1));
         //draw the string
         pie.drawString(attributedWord.getIterator(), x, y);
         pie.dispose();
@@ -112,19 +115,22 @@ public class RandomTextPaster extends AbstractTextPaster {
 
     }
 
-    Font getMaxFont(AttributedCharacterIterator it) {
+    Font getMaxFont(AttributedCharacterIterator it)
+    {
         Font max = new Font("serif", 10, 2);
-        for (int i = it.getBeginIndex(); i < it.getEndIndex(); i++) {
+        for (int i = it.getBeginIndex() ; i < it.getEndIndex() ; i++)
+        {
             it.setIndex(i);
             Font font = (Font) it.getAttribute(TextAttribute.FONT);
-            if (font != null) {
-                if (font.getSize() >= max.getSize()) {
+            if (font != null)
+            {
+                if (font.getSize() >= max.getSize())
+                {
                     max = font;
                 }
             }
         }
         return max;
     }
-
 
 }

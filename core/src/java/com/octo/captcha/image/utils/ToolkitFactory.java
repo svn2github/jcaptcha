@@ -47,6 +47,7 @@
  * ====================================================================
  *
  */
+
 package com.octo.captcha.image.utils;
 
 import java.awt.Toolkit;
@@ -66,25 +67,31 @@ import java.util.Properties;
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
  */
-public class ToolkitFactory {
+public class ToolkitFactory
+{
 
     private static String TOOLKIT_IMPL = "toolkit.implementation";
     private static String toolkitClass;
 
-    public static Toolkit getToolkit() {
+    public static Toolkit getToolkit()
+    {
         Toolkit defaultToolkit = Toolkit.getDefaultToolkit();
 
         Properties props = System.getProperties();
 
-        try {
+        try
+        {
 
-            if (props.containsKey(TOOLKIT_IMPL)) {
+            if (props.containsKey(TOOLKIT_IMPL))
+            {
                 toolkitClass = props.getProperty(TOOLKIT_IMPL);
             }
-            if (toolkitClass != null) {
+            if (toolkitClass != null)
+            {
                 defaultToolkit = (Toolkit) Class.forName(toolkitClass).newInstance();
             }
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             e.printStackTrace();
         }
         return defaultToolkit;

@@ -58,9 +58,11 @@ import java.awt.geom.AffineTransform;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class TwistedAndShearedRandomFontGenerator extends TwistedRandomFontGenerator {
+public class TwistedAndShearedRandomFontGenerator extends TwistedRandomFontGenerator
+{
 
-    public TwistedAndShearedRandomFontGenerator(Integer minFontSize, Integer maxFontSize) {
+    public TwistedAndShearedRandomFontGenerator(Integer minFontSize, Integer maxFontSize)
+    {
         super(minFontSize, maxFontSize);
     }
 
@@ -69,7 +71,8 @@ public class TwistedAndShearedRandomFontGenerator extends TwistedRandomFontGener
      * Implementations must take into account the minFontSize and the MaxFontSize.
      * @return a Font
      */
-    public Font getFont() {
+    public Font getFont()
+    {
         Font font = super.getFont();
         double rx = myRandom.nextDouble() % 0.3;
         double ry = myRandom.nextDouble() % 0.3;

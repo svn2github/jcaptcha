@@ -48,7 +48,6 @@
  *
  */
 
-
 package com.octo.captcha.image.gimpy;
 
 import com.octo.captcha.CaptchaException;
@@ -59,12 +58,14 @@ import java.awt.image.BufferedImage;
 import java.util.Locale;
 import java.util.Random;
 import java.util.ResourceBundle;
+
 /**
  * Factories for Gimpies. Built on top of WordGenerator and WordToImage.
  * It uses thoses interfaces to build an ImageCaptha answered by a String and for which the question is :
  * Spell the word.
  */
-public class GimpyFactory extends ImageCaptchaFactory {
+public class GimpyFactory extends ImageCaptchaFactory
+{
 
     private WordToImage wordToImage;
     private WordGenerator wordGenerator;
@@ -72,13 +73,14 @@ public class GimpyFactory extends ImageCaptchaFactory {
     public static final String BUNDLE_NAME = Gimpy.class.getName();
     public static final String BUNDLE_QUESTION_KEY = "question";
 
-
-
-    public GimpyFactory(WordGenerator generator, WordToImage word2image) {
-        if (word2image == null) {
+    public GimpyFactory(WordGenerator generator, WordToImage word2image)
+    {
+        if (word2image == null)
+        {
             throw new CaptchaException("Invalid configuration for a GimpyFactory : WordToImage can't be null");
         }
-        if (generator == null) {
+        if (generator == null)
+        {
             throw new CaptchaException("Invalid configuration for a GimpyFactory : WordGenerator can't be null");
         }
         wordToImage = word2image;
@@ -90,25 +92,27 @@ public class GimpyFactory extends ImageCaptchaFactory {
      * gimpies are ImageCaptcha
      * @return the image captcha with default locale
      */
-    public ImageCaptcha getImageCaptcha() {
+    public ImageCaptcha getImageCaptcha()
+    {
         return getImageCaptcha(Locale.getDefault());
     }
 
-    public WordToImage getWordToImage() {
+    public WordToImage getWordToImage()
+    {
         return wordToImage;
     }
 
-
-    public WordGenerator getWordGenerator() {
+    public WordGenerator getWordGenerator()
+    {
         return wordGenerator;
     }
-
 
     /**
      * gimpies are ImageCaptcha
      * @return a pixCaptcha with the question :"spell the word"
      */
-    public ImageCaptcha getImageCaptcha(Locale locale) {
+    public ImageCaptcha getImageCaptcha(Locale locale)
+    {
 
         //lenght
         Integer wordLenght;
@@ -116,20 +120,20 @@ public class GimpyFactory extends ImageCaptchaFactory {
                 getWordToImage().getMinAcceptedWordLenght();
         int randomRange = range != 0 ? new Random().nextInt(range) : 0;
 
-
         wordLenght = new Integer(
                 randomRange + getWordToImage().getMinAcceptedWordLenght());
         String word = getWordGenerator().getWord(wordLenght, locale);
 
         BufferedImage image = null;
-        try {
+        try
+        {
             image = getWordToImage().getImage(word);
-        } catch (Throwable e) {
+        } catch (Throwable e)
+        {
             throw new CaptchaException(e);
         }
 
-
-        ImageCaptcha captcha = new Gimpy(ResourceBundle.getBundle(BUNDLE_NAME,locale).getString(BUNDLE_QUESTION_KEY),
+        ImageCaptcha captcha = new Gimpy(ResourceBundle.getBundle(BUNDLE_NAME, locale).getString(BUNDLE_QUESTION_KEY),
                 image, word);
         return captcha;
     }

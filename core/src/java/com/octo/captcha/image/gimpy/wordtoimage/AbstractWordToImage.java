@@ -75,8 +75,8 @@ import java.text.AttributedString;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public abstract class AbstractWordToImage implements WordToImage {
-
+public abstract class AbstractWordToImage implements WordToImage
+{
 
     /**
      * Creates an image of the provided String
@@ -94,7 +94,8 @@ public abstract class AbstractWordToImage implements WordToImage {
      * @return an image representation of the word
      * @throws CaptchaException if word is invalid or if image generation fails.
      */
-    public BufferedImage getImage(String word) throws CaptchaException {
+    public BufferedImage getImage(String word) throws CaptchaException
+    {
         int wordLenght;
         //check word
         wordLenght = checkWordLenght(word);
@@ -108,11 +109,13 @@ public abstract class AbstractWordToImage implements WordToImage {
 
     }
 
-    AttributedString getAttributedString(String word, int wordLenght) {
+    AttributedString getAttributedString(String word, int wordLenght)
+    {
         AttributedString attributedWord = new AttributedString(word);
         //apply font to string
 
-        for (int i = 0; i < wordLenght; i++) {
+        for (int i = 0 ; i < wordLenght ; i++)
+        {
             Font font = getFont();//get the new font for next character
             //apply font to next character
             attributedWord.addAttribute(TextAttribute.FONT, font, i, i + 1);
@@ -120,13 +123,17 @@ public abstract class AbstractWordToImage implements WordToImage {
         return attributedWord;
     }
 
-    int checkWordLenght(String word) throws CaptchaException {
+    int checkWordLenght(String word) throws CaptchaException
+    {
         int wordLenght;
-        if (word == null) {
+        if (word == null)
+        {
             throw new CaptchaException("null word");
-        } else {
+        } else
+        {
             wordLenght = word.length();
-            if (wordLenght > this.getMaxAcceptedWordLenght() || wordLenght < getMinAcceptedWordLenght()) {
+            if (wordLenght > this.getMaxAcceptedWordLenght() || wordLenght < getMinAcceptedWordLenght())
+            {
                 throw new CaptchaException("invalid lenght word");
             }
         }
@@ -158,6 +165,5 @@ public abstract class AbstractWordToImage implements WordToImage {
      */
     abstract BufferedImage pasteText(final BufferedImage background, final AttributedString attributedWord)
             throws CaptchaException;
-
 
 }

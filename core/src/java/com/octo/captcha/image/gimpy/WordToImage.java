@@ -48,7 +48,6 @@
  *
  */
 
-
 package com.octo.captcha.image.gimpy;
 
 import com.octo.captcha.CaptchaException;
@@ -60,8 +59,8 @@ import java.awt.image.BufferedImage;
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public interface WordToImage {
-
+public interface WordToImage
+{
 
     /**
      * @return the max word lenght accepted by this word2image service
@@ -72,7 +71,6 @@ public interface WordToImage {
      *@return the min word lenght accepted by this word2image service
      */
     int getMinAcceptedWordLenght();
-
 
     /**
      * @return the generated image height
@@ -98,6 +96,5 @@ public interface WordToImage {
      * @throws CaptchaException if word is invalid or an exception ooxurs during the image generation
      */
     BufferedImage getImage(String word) throws CaptchaException;
-
 
 }

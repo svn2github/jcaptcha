@@ -1,3 +1,4 @@
+
 package com.octo.captcha.image.gimpy.wordtoimage.fontgenerator;
 
 import java.awt.Font;
@@ -9,15 +10,19 @@ import java.util.Random;
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
  */
-public class DeformedRandomFontGenerator extends RandomFontGenerator {
+public class DeformedRandomFontGenerator extends RandomFontGenerator
+{
+
     private Random seed = new Random();
     private float angle;
 
-    public DeformedRandomFontGenerator(Integer minFontSize, Integer maxFontSize) {
+    public DeformedRandomFontGenerator(Integer minFontSize, Integer maxFontSize)
+    {
         super(minFontSize, maxFontSize);
     }
 
-    public Font getFont() {
+    public Font getFont()
+    {
         angle = seed.nextFloat() / 5;
         AffineTransform at = new AffineTransform();
         at.rotate(angle, seed.nextDouble(), seed.nextDouble());

@@ -3,7 +3,7 @@
 <project>
   <extends>${basedir}/../project.xml</extends>
   <pomVersion>1</pomVersion>
-  <currentVersion>1.0-beta1</currentVersion>
+  <currentVersion>1.0-beta2-SNAPSHOT</currentVersion>
   <id>jcaptcha-core</id> 
   <name>JCaptcha-core</name>
   <groupId>jcaptcha</groupId>
@@ -15,34 +15,99 @@
     <!-- The URL to the organization's logo image. This can be an URL relative to the base directory of the generated
          web site, (e.g., /images/org-logo.png) or an absolute URL (e.g., http://my.corp/logo.png). This value is used
          when generating the project documentation. -->
-    <logo>/images/organization-logo.jpg</logo>
+        <logo>../images/organization-logo.jpg</logo>
   </organization>
   <package>com.octo.captcha</package>
   
   <description>
   <![CDATA[
-  <b>CAPTCHA</b>, for <b>C</b>ompletely <b>A</b>utomated <b>P</b>ublic <b>T</b>est to tell <b>H</b>umans and <b>C</b>omputers 
-  <b>A</b>part, is a test based on several cognitives puzzles based on challenging problems
-  of artificial intelligence. These tests are to prevent computer programs or
-  robots to obtain information, by challenging with a problem that only human can
-  resolve.
-  <p/>
-  Several tests has been specified:
-  <p/>
-  <ul>
-  <li><b>Gimpy</b>: This test is based on distorted image and text. Gimpy randomly
-  generate a distorted and corrupted text in an image, and asks to the user to 
-  type the word displayed in the image.
-  </li>
-  <li><b>Sound</b>: This test is based on distorted sound. It randomly generate a distorted 
-  sound and asks to user to type the word which was played.
-  </li>
-  <li><b>Pix</b>: This test randomly pick 6 images which have on object in common. Then it
-  asks to user to type the object in common.
-  </li>
-  <li><b>Bongo</b>: This is a logical an memory test based on shape recognition.
-  </li>
-  </ul>
+<div>
+<h1><a id='s-1' name='s-1'></a> Design and Architecture <a class='purple' href='#s-1'>#</a></h1>
+The core has been designed in order to provide very simple and useful interfaces
+</div>
+<br />
+<div>
+It is based on two main concepts
+</div>
+<br />
+<div>
+<h2><a id='s-1.1' name='s-1.1'></a> Two concepts <a class='purple' href='#s-1.1'>#</a></h2>
+<ul>
+<li>Captcha terminology : see <a  href='http://www.captcha.net'>http://www.captcha.net</a>
+</li>
+<li>Inversion Of Control, Constructor Injection pattern : see <a  href='http://martinfowler.com/articles/injection.html#ConstructorInjectionWithPicocontainer'>http://martinfowler.com/articles/injection.html#ConstructorInjectionWithPicocontainer</a>
+<br />
+<br />
+</li>
+</ul>
+<h2><a id='s-1.2' name='s-1.2'></a> Main interfaces <a class='purple' href='#s-1.2'>#</a></h2>
+</div>
+<br />
+<div>
+<img alt='http://jcaptcha.sourceforge.net/imagesWiki/main.jpg' src='http://jcaptcha.sourceforge.net/imagesWiki/main.jpg' />
+</div>
+<br />
+<div>
+The framework defines three main interfaces :
+</div>
+<br />
+<div>
+<h3><a id='s-1.2.1' name='s-1.2.1'></a> Captcha <a class='purple' href='#s-1.2.1'>#</a></h3>
+A Captcha is basically a computer generated test that human can pass and robot should not. It is composed of a Question concerning a Challenge. It is also able to validate a response, and so to distinguish an human from a robot.
+</div>
+<br />
+<div>
+This is a very hight level interface that can be specialized in many ways. The first specialization is the challenge type : image, or sound.
+<h3><a id='s-1.2.2' name='s-1.2.2'></a> Captcha Factory <a class='purple' href='#s-1.2.2'>#</a></h3>
+A <a class='nonexistent' href='/moniwiki/wiki.php/CaptchaFactory'>?</a>CaptchaFactory has the ability to build a Capctha : a captcha holds the question, the validation routine and the challenge, but don't know how to construct itself.
+This is the job of the factory which is able to build localized captchas.
+</div>
+<br />
+<div>
+<h3><a id='s-1.2.3' name='s-1.2.3'></a> Captcha Engine <a class='purple' href='#s-1.2.3'>#</a></h3>
+A <a class='nonexistent' href='/moniwiki/wiki.php/CaptchaEngine'>?</a>CaptchaEngine is a factories container.
+It builds one or more factories manage it and use it to build Captchas.
+If you want to integrate a captcha in your application, you should use one of its implementations.
+</div>
+<br />
+<br />
+<br />
+<div>
+<h2><a id='s-1.3' name='s-1.3'></a> The three interfaces in action <a class='purple' href='#s-1.3'>#</a></h2>
+</div>
+<br />
+<div>
+<img alt='http://jcaptcha.sourceforge.net/imagesWiki/conceptsmall.gif' src='http://jcaptcha.sourceforge.net/imagesWiki/conceptsmall.gif' />
+</div>
+<br />
+<br />
+<br />
+<br />
+<div>
+<h2><a id='s-1.4' name='s-1.4'></a> Captchas by challenge type <a class='purple' href='#s-1.4'>#</a></h2>
+* Image : see <a href='/moniwiki/wiki.php/ImageCaptcha' >ImageCaptcha</a>
+Implementations of captchas with image challenge are in the sub package 'captcha.image'.
+</div>
+<br />
+<div>
+This package implements the three main interfaces, returning a <a class='nonexistent' href='/moniwiki/wiki.php/BufferedImage'>?</a>BufferedImage instead of Object.
+</div>
+<br />
+<br />
+<div>
+<img alt='http://jcaptcha.sourceforge.net/imagesWiki/image.jpg' src='http://jcaptcha.sourceforge.net/imagesWiki/image.jpg' />
+</div>
+<br />
+<div>
+<ul>
+<li>Sound
+</li>
+</ul>
+Implementations of captchas with sound challenge are in the sub package 'captcha.sound'.
+<div class='indent'>
+<b>Note : there is no implementation yet.</b>
+</div>
+</div>
   ]]>
   </description>
   
@@ -92,7 +157,7 @@
     </developer>
     <developer>
       <name>Marc-Antoine Garrigue</name>
-      <id>maguarrigue</id>
+      <id>mag</id>
       <email>mgarrigue@octo.com</email>
       <organization>Octo</organization>
       <roles>

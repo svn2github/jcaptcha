@@ -109,18 +109,20 @@ public interface CaptchaService
      * @throws CaptchaServiceException if the ticket is invalid
      */
     Object getChallengeForID(String ID) throws CaptchaServiceException;
-/**
- * Method to retrive the question corresponding to the given ticket.
-    * @param ID the ticket provided by the buildCaptchaAndGetID method
-    * @return the question
-    * @throws CaptchaServiceException if the ticket is invalid
-    */
+
+    /**
+     * Method to retrive the question corresponding to the given ticket.
+     * @param ID the ticket provided by the buildCaptchaAndGetID method
+     * @return the question
+     * @throws CaptchaServiceException if the ticket is invalid
+     */
     String getQuestionForID(String ID) throws CaptchaServiceException;
-/**
-    * Method to validate a response to the challenge corresponding to the given ticket.
-       * @param ID the ticket provided by the buildCaptchaAndGetID method
-       * @return true if the response is correct, false otherwise.
-       * @throws CaptchaServiceException if the ticket is invalid
-   */
+
+    /**
+     * Method to validate a response to the challenge corresponding to the given ticket.
+     * @param ID the ticket provided by the buildCaptchaAndGetID method
+     * @return true if the response is correct, false otherwise.
+     * @throws CaptchaServiceException if the ticket is invalid
+     */
     Boolean validateResponseForID(String ID, Object response) throws CaptchaServiceException;
 }
