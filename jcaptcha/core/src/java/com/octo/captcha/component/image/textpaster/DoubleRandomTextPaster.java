@@ -519,7 +519,7 @@ public class DoubleRandomTextPaster extends RandomTextPaster
         // attributedString.addAttribute(TextAttribute.WIDTH, TextAttribute.WIDTH_EXTENDED);
 
         // convert string into a series of glyphs we can work with
-        ChangeableAttributedString newAttrString = new ChangeableAttributedString(g2, attributedWord);
+        ChangeableAttributedString newAttrString = new ChangeableAttributedString(g2, attributedWord,kerning);
 
         // space out the glyphs with a little kerning
         newAttrString.useMinimumSpacing(kerning);

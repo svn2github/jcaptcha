@@ -69,6 +69,9 @@ import java.util.Hashtable;
 import java.util.StringTokenizer;
 import java.util.Locale;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * ImageCaptchaFilter is a J2EE Filter designed to add image captchas to the
  * entry forms of existing MVC web applications.
@@ -104,6 +107,7 @@ public class ImageCaptchaFilter implements Filter {
     // Constants
     ////////////////////////////////////
 
+    private static Log  log = LogFactory.getLog(ImageCaptchaFilter.class);
 
     /**
      * Name under witch the CaptchaFilter is registered to an MBean server
@@ -468,7 +472,7 @@ public class ImageCaptchaFilter implements Filter {
         String captchaID = theRequest.getSession().getId();//(String) theRequest.getParameter(captchaIDParameterName);
         Locale locale = theRequest.getLocale();
 
-        ImageToJpegHelper.flushNewCaptchaToResponse(theRequest, theResponse, null,captchaService, captchaID,locale);
+        ImageToJpegHelper.flushNewCaptchaToResponse(theRequest, theResponse, log,captchaService, captchaID,locale);
     }
 
     /**

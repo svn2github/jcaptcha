@@ -527,8 +527,8 @@ public class DefaultGimpyEngine extends ListImageCaptchaEngine
         BackgroundGenerator back = new UniColorBackgroundGenerator(
                 new Integer(200), new Integer(100), Color.white);
 
-        FontGenerator shearedFont = new RandomFontGenerator(new Integer(40),
-                new Integer(40));
+        FontGenerator shearedFont = new RandomFontGenerator(new Integer(30),
+                new Integer(35));
         //word2image 1
         com.octo.captcha.component.image.wordtoimage.WordToImage word2image;
         word2image = new DeformedComposedWordToImage(shearedFont, back, randomPaster,

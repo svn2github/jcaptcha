@@ -497,7 +497,7 @@ public class    BasicListGimpyEngine
                 new Integer(200), new Integer(100), "gimpybackgrounds");
         //BackgroundGenerator funkyBack = new FunkyBackgroundGenerator(new Integer(200), new Integer(100));
         FontGenerator shearedFont = new TwistedAndShearedRandomFontGenerator(
-                new Integer(30), new Integer(35));
+                new Integer(20), new Integer(25));
         //word2image 1
         com.octo.captcha.component.image.wordtoimage.WordToImage word2image =
                 new com.octo.captcha.component.image.wordtoimage.ComposedWordToImage(

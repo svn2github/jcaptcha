@@ -466,10 +466,9 @@ package com.octo.captcha.component.image.textpaster;
 
 import com.octo.captcha.CaptchaException;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+import java.awt.*;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.text.AttributedString;
 
@@ -482,18 +481,25 @@ import java.text.AttributedString;
  * @version 1.0
  * @see {http://www.parc.xerox.com/research/istl/projects/captcha/default.html}
  */
-public class BaffleRandomTextPaster extends RandomTextPaster
-{
+public class BaffleRandomTextPaster extends RandomTextPaster {
 
     private Integer numberOfHolesPerGlyph = new Integer(3);
     private Color holesColor;
 
+
+    /**
+     *
+     * @param minAcceptedWordLenght
+     * @param maxAcceptedWordLenght
+     * @param textColor
+     * @param numberOfHolesPerGlyph
+     * @param holesColor
+     */
     public BaffleRandomTextPaster(Integer minAcceptedWordLenght,
                                   Integer maxAcceptedWordLenght,
                                   Color textColor,
                                   Integer numberOfHolesPerGlyph,
-                                  Color holesColor)
-    {
+                                  Color holesColor) {
         super(minAcceptedWordLenght, maxAcceptedWordLenght, textColor);
         this.numberOfHolesPerGlyph = numberOfHolesPerGlyph != null
                 ? numberOfHolesPerGlyph : this.numberOfHolesPerGlyph;
@@ -512,8 +518,7 @@ public class BaffleRandomTextPaster extends RandomTextPaster
      */
     public BufferedImage pasteText(BufferedImage background,
                                    AttributedString attributedWord)
-            throws CaptchaException
-    {
+            throws CaptchaException {
         BufferedImage out = copyBackground(background);
         Graphics2D g2 = pasteBackgroundAndSetTextColor(out, background);
         g2.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS,
@@ -526,7 +531,7 @@ public class BaffleRandomTextPaster extends RandomTextPaster
         // attributedString.addAttribute(TextAttribute.WIDTH, TextAttribute.WIDTH_EXTENDED);
 
         // convert string into a series of glyphs we can work with
-        ChangeableAttributedString newAttrString = new ChangeableAttributedString(g2, attributedWord);
+        ChangeableAttributedString newAttrString = new ChangeableAttributedString(g2, attributedWord, kerning);
 
         // space out the glyphs with a little kerning
         newAttrString.useMinimumSpacing(kerning);
@@ -536,22 +541,24 @@ public class BaffleRandomTextPaster extends RandomTextPaster
         newAttrString.drawString(g2);
 
         g2.setColor(holesColor);
-        int numberOfHoles = numberOfHolesPerGlyph.intValue()
-                * attributedWord.getIterator().getEndIndex();
-        int circleMaxSize = ((int) newAttrString.getMaxHeight()) / 3;
-        if (circleMaxSize == 0)
-        {
-            throw new CaptchaException("The font is too small");
+
+
+
+
+        for (int j = 0; j < attributedWord.getIterator().getEndIndex(); j++) {
+            Rectangle2D bounds =    newAttrString.getBounds(j).getFrame();
+            double circleMaxSize = (double) bounds.getWidth() / 2;
+            for (int i = 0; i < numberOfHolesPerGlyph.intValue(); i++) {
+                double circleSize = circleMaxSize*(1+myRandom.nextDouble())/2;
+                double circlex = bounds.getMinX() + bounds.getWidth() * 0.7*myRandom.nextDouble();
+                double circley = bounds.getMinY() - bounds.getHeight() * 0.5 *myRandom.nextDouble();
+                Ellipse2D circle =
+                        new Ellipse2D.Double(circlex, circley, circleSize, circleSize);
+                g2.fill(circle);
+            }
         }
-        for (int i = 0 ; i < numberOfHoles ; i++)
-        {
-            int circleSize = myRandom.nextInt(circleMaxSize) / 2 + circleMaxSize / 2;
-            double circlex = newAttrString.getMaxX() * (1 + myRandom.nextGaussian());
-            double circley = newAttrString.getMaxY() * (1 + myRandom.nextGaussian());
-            Ellipse2D circle =
-                    new Ellipse2D.Double(circlex, circley, circleSize, circleSize);
-            g2.fill(circle);
-        }
+
+
         g2.dispose();
         return out;
     }
