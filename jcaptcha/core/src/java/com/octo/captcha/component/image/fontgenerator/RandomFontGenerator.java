@@ -530,7 +530,7 @@ public class RandomFontGenerator extends AbstractFontGenerator {
         Font font = (Font) fonts.get(myRandom.nextInt(fonts.size()));
 
         int plus = 0;
-        if (getMaxFontSize() - getMinFontSize() != 0) {
+        if (getMaxFontSize() - getMinFontSize() > 0) {
             plus = Math.abs(myRandom.nextInt(getMaxFontSize()
                     - getMinFontSize()));
         }
@@ -566,9 +566,12 @@ public class RandomFontGenerator extends AbstractFontGenerator {
             Font f = (Font) iter.next();
 
             // a font is removed if it cannot display the characters we need.
-            if (f.canDisplayUpTo(requiredCharacters) != -1) {
-                iter.remove();
-                continue;
+
+            for(int i=0;i<requiredCharacters.length();i++){
+                if (!f.canDisplay(requiredCharacters.charAt(i))) {
+                    iter.remove();
+                     break;
+                }
             }
 
             // a font is also removed if it is prefixed by a known-bad name
