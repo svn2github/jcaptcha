@@ -1,6 +1,6 @@
 package com.octo.captcha.pix;
 
-import com.octo.captcha.engine.FactoryInitializer;
+import com.octo.captcha.pix.PixCaptchaEngine;
 import com.octo.captcha.pix.gimpy.GimpyFactory;
 import com.octo.captcha.pix.gimpy.WordGenerator;
 import com.octo.captcha.pix.gimpy.WordToImage;

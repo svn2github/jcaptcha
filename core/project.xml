@@ -9,6 +9,39 @@
   <groupId>jcaptcha</groupId>
   
   <package>com.octo.captcha</package>
+  
+  <description>
+  <![CDATA[
+  <b>CAPTCHA</b>, for <b>C</b>ompletely <b>A</b>utomated <b>P</b>ublic <b>T</b>est to tell <b>H</b>umans and <b>C</b>omputers 
+  <b>A</b>part, is a test based on several cognitives puzzles based on challenging problems
+  of artificial intelligence. These tests are to prevent computer programs or
+  robots to obtain information, by challenging with a problem that only human can
+  resolve.
+  <p/>
+  Several tests has been specified:
+  <p/>
+  <ul>
+  <li><b>Gimpy</b>: This test is based on distorted image and text. Gimpy randomly
+  generate a distorted and corrupted text in an image, and asks to the user to 
+  type the word displayed in the image.
+  </li>
+  <li><b>Sound</b>: This test is based on distorted sound. It randomly generate a distorted 
+  sound and asks to user to type the word which was played.
+  </li>
+  <li><b>Pix</b>: This test randomly pick 6 images which have on object in common. Then it
+  asks to user to type the object in common.
+  </li>
+  <li><b>Bongo</b>: This is a logical an memory test based on shape recognition.
+  </li>
+  </ul>
+  ]]>
+  </description>
+  
+  <shortDescription>
+  CAPTCHA is a test based on several cognitives puzzles based on challenging problems
+  of artificial intelligence.
+  </shortDescription>
+  
 <repository>
   <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/jcaptcha:.</connection>
     <url>http://cvs.sourceforge.net/viewcvs.py/jcaptcha/</url>

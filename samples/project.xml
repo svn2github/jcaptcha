@@ -6,7 +6,7 @@
   <id>jcaptcha-samples</id>
   <name>JCaptcha-samples</name>
   <groupId>jcaptcha</groupId>
-  <currentVersion>0.1</currentVersion>
+  <currentVersion>1.0</currentVersion>
   <organization>
     <name>octo</name>
     <url>http://www.octo.com</url>
@@ -123,8 +123,14 @@
     	<dependency>
     	    <groupId>jcaptcha</groupId>
             <artifactId>jcaptcha-core</artifactId>
-            <version>0.1</version>
+            <version>1.0</version>
             <url>http://jcaptcha.sourceforge.net</url>
+    	</dependency>
+    	
+    	<dependency>
+    	    <groupId>jhlabs</groupId>
+    	    <artifactId>jhlabs</artifactId>
+            <jar>imaging.jar</jar>
     	</dependency>
     	
   </dependencies>

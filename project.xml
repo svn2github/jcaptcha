@@ -7,9 +7,14 @@
   <groupId>jcaptcha</groupId>
   <currentVersion>1.0</currentVersion>
   <organization>
-    <name>octo</name>
-    <url>http://www.octo.com</url>
-    <logo/>
+    <!-- The full name of the organization. -->
+    <name>JCaptcha corp.</name>
+    <!-- The URL to the organization's home page. -->
+    <url>http://jcaptcha.sourceforge.net/</url>
+    <!-- The URL to the organization's logo image. This can be an URL relative to the base directory of the generated
+         web site, (e.g., /images/org-logo.png) or an absolute URL (e.g., http://my.corp/logo.png). This value is used
+         when generating the project documentation. -->
+    <logo>/images/organization-logo.jpg</logo>
   </organization>
   <inceptionYear>2003</inceptionYear>
   <package>com.octo.captcha</package>

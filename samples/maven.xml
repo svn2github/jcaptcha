@@ -6,4 +6,5 @@
   xmlns:ant="jelly:ant">
   
 	<goal name="assemble" prereqs="jar:install"/>
+	
 </project>

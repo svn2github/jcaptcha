@@ -18,6 +18,9 @@
   </preGoal>
     
   <goal name="assemble">
+    <ant:mkdir dir="${maven.repo.local}/jhlabs/jars"/>
+    <ant:get src="http://www.jhlabs.com/ip/imaging.jar"
+    	dest="${maven.repo.local}/jhlabs/jars/imaging.jar"/>
     <maven:reactor 
         basedir="${basedir}"
         includes="**/${pattern}/**/project.xml"
@@ -26,5 +29,4 @@
         banner="Building"
         ignoreFailures="false"/>
   </goal>
-  
 </project>
