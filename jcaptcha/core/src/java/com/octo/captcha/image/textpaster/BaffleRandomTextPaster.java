@@ -462,43 +462,89 @@ DAMAGES.
                      END OF TERMS AND CONDITIONS
 */
 
-package com.octo.captcha.engine.image.utils;
+package com.octo.captcha.image.textpaster;
 
-import com.octo.captcha.image.ImageCaptcha;
-import com.octo.captcha.image.ImageCaptchaFactory;
-import com.octo.captcha.image.gimpy.GimpyFactory;
-import com.octo.captcha.image.wordtoimage.ComposedWordToImage;
-import com.octo.captcha.image.wordtoimage.WordToImage;
-import com.octo.captcha.image.backgroundgenerator.EllipseBackgroundGenerator;
-import com.octo.captcha.image.backgroundgenerator.BackgroundGenerator;
-import com.octo.captcha.image.fontgenerator.TwistedAndShearedRandomFontGenerator;
-import com.octo.captcha.image.fontgenerator.FontGenerator;
-import com.octo.captcha.image.textpaster.SimpleTextPaster;
-import com.octo.captcha.image.textpaster.TextPaster;
-import com.octo.captcha.wordgenerator.DummyWordGenerator;
-import com.octo.captcha.wordgenerator.WordGenerator;
+import com.octo.captcha.CaptchaException;
 
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.text.AttributedString;
 
 /**
- * <p>Description: Generate a sample logo for the master webSite. Main method takes one arg : the file path of the generated logo</p>
+ * <p>text paster that paint white holes on the string (erase some parts)</p>
+ * You may specify the number of holes per glyph : 3 by default.
+ * You may specify the color of holes : TextColor by default.
+ *
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
+ * @see {http://www.parc.xerox.com/research/istl/projects/captcha/default.html}
  */
-public class LogoGenerator
-{
+public class BaffleRandomTextPaster extends RandomTextPaster {
+    private Integer numberOfHolesPerGlyph = new Integer(3);
+    private Color holesColor;
 
-    public static void main(String[] args) throws IOException
-    {
-        TextPaster paster = new SimpleTextPaster(new Integer(8), new Integer(8), Color.BLUE);
-        BackgroundGenerator back = new EllipseBackgroundGenerator(new Integer(50), new Integer(100));
-        FontGenerator font = new TwistedAndShearedRandomFontGenerator(new Integer(12), null);
-        WordGenerator words = new DummyWordGenerator("JCAPTCHA");
-        WordToImage word2image = new ComposedWordToImage(font, back, paster);
-        ImageCaptchaFactory factory = new GimpyFactory(words, word2image);
-        ImageCaptcha pix = factory.getImageCaptcha();
-        ImageToFile.serialize(pix.getImageChallenge(), new File(args[0]));
+//    public BaffleRandomTextPaster(Integer minAcceptedWordLenght, Integer maxAcceptedWordLenght, Color textColor)
+//    {
+//        super(minAcceptedWordLenght, maxAcceptedWordLenght, textColor);
+//    }
+//
+//    public BaffleRandomTextPaster(Integer minAcceptedWordLenght, Integer maxAcceptedWordLenght, Color textColor,
+//                                 Integer numberOfHolesPerGlyph)
+//    {
+//        super(minAcceptedWordLenght, maxAcceptedWordLenght, textColor);
+//        this.numberOfHolesPerGlyph = numberOfHolesPerGlyph!=null?numberOfHolesPerGlyph:this.numberOfHolesPerGlyph;
+//    }
+
+    public BaffleRandomTextPaster(Integer minAcceptedWordLenght, Integer maxAcceptedWordLenght, Color textColor,
+                                  Integer numberOfHolesPerGlyph, Color holesColor) {
+        super(minAcceptedWordLenght, maxAcceptedWordLenght, textColor);
+        this.numberOfHolesPerGlyph = numberOfHolesPerGlyph != null ? numberOfHolesPerGlyph : this.numberOfHolesPerGlyph;
+        this.holesColor = holesColor != null ? holesColor : textColor;
+    }
+
+    /**
+     * Pastes the attributed string on the backround image and return the final image.
+     * Implementation must take into account the fact that the text must be readable
+     * by human and non by programs
+     *
+     * @param background
+     * @param attributedWord
+     * @return the final image
+     * @throws CaptchaException if any exception accurs during paste routine.
+     */
+    public BufferedImage pasteText(BufferedImage background, AttributedString attributedWord) throws CaptchaException {
+        BufferedImage out = copyBackground(background);
+        Graphics2D pie = pasteBackgroundAndSetTextColor(out, background);
+        //set font to max in order to retrieve the correct boundaries
+        Font maxFont = getMaxFont(attributedWord.getIterator());
+        Rectangle2D bounds = getTextBoundaries(pie, maxFont, attributedWord);
+        int[] randomDeviation = getRandomDeviation(background, bounds, maxFont);
+        //draw the string
+        pie.drawString(attributedWord.getIterator(), randomDeviation[0], randomDeviation[1]);
+
+        //draw the holes
+        //Composite c = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, .7f);
+        //pie.setComposite(c);
+        //Color circleColor = ((Graphics2D)background.getGraphics()).getColor();
+        //pie.getColor();
+        pie.setColor(holesColor);
+        int numberOfHoles = numberOfHolesPerGlyph.intValue() * attributedWord.getIterator().getEndIndex();
+        int circleMaxSize = maxFont.getSize() / 3;
+        if (circleMaxSize == 0) {
+            throw new CaptchaException("The font is too small");
+        }
+        for (int i = 0; i < numberOfHoles; i++) {
+            int circleSize = myRandom.nextInt(circleMaxSize) / 2 + circleMaxSize / 2;
+            double circlex = bounds.getMaxX() * myRandom.nextGaussian();
+            double circley = bounds.getMaxY() * myRandom.nextGaussian();
+            Ellipse2D circle = new Ellipse2D.Double(randomDeviation[0] + circlex,
+                    randomDeviation[1] - maxFont.getSize() / 2 + circley, circleSize, circleSize);
+            pie.fill(circle);
+
+        }
+        pie.dispose();
+        return out;
     }
 }

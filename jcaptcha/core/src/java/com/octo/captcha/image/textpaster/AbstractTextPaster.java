@@ -462,43 +462,73 @@ DAMAGES.
                      END OF TERMS AND CONDITIONS
 */
 
-package com.octo.captcha.engine.image.utils;
+package com.octo.captcha.image.textpaster;
 
-import com.octo.captcha.image.ImageCaptcha;
-import com.octo.captcha.image.ImageCaptchaFactory;
-import com.octo.captcha.image.gimpy.GimpyFactory;
-import com.octo.captcha.image.wordtoimage.ComposedWordToImage;
-import com.octo.captcha.image.wordtoimage.WordToImage;
-import com.octo.captcha.image.backgroundgenerator.EllipseBackgroundGenerator;
-import com.octo.captcha.image.backgroundgenerator.BackgroundGenerator;
-import com.octo.captcha.image.fontgenerator.TwistedAndShearedRandomFontGenerator;
-import com.octo.captcha.image.fontgenerator.FontGenerator;
-import com.octo.captcha.image.textpaster.SimpleTextPaster;
 import com.octo.captcha.image.textpaster.TextPaster;
-import com.octo.captcha.wordgenerator.DummyWordGenerator;
-import com.octo.captcha.wordgenerator.WordGenerator;
 
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
+import java.awt.image.BufferedImage;
+import java.util.Random;
 
 /**
- * <p>Description: Generate a sample logo for the master webSite. Main method takes one arg : the file path of the generated logo</p>
+ * <p>Base class for Font generators. Sub classes must implement the
+ * pasteText(BufferedImage background, AttributedString attributedWord)
+ * method that return an image containing the pasted string.</br>
+ * use constructor to specify your paster properties.
+ * This base class use two Integers, maxAcceptedWordLenght and minAcceptedWordLenghtby wich are the lenght
+ * boundaries for the implementation.
+ * By default minAcceptedWordLenght = 6 and maxAcceptedWordLenght = 20</p>
+ *
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class LogoGenerator
-{
+public abstract class AbstractTextPaster implements TextPaster {
 
-    public static void main(String[] args) throws IOException
-    {
-        TextPaster paster = new SimpleTextPaster(new Integer(8), new Integer(8), Color.BLUE);
-        BackgroundGenerator back = new EllipseBackgroundGenerator(new Integer(50), new Integer(100));
-        FontGenerator font = new TwistedAndShearedRandomFontGenerator(new Integer(12), null);
-        WordGenerator words = new DummyWordGenerator("JCAPTCHA");
-        WordToImage word2image = new ComposedWordToImage(font, back, paster);
-        ImageCaptchaFactory factory = new GimpyFactory(words, word2image);
-        ImageCaptcha pix = factory.getImageCaptcha();
-        ImageToFile.serialize(pix.getImageChallenge(), new File(args[0]));
+    public Random myRandom = new Random();
+
+    private int max = 20;
+    private int min = 6;
+    private Color textColor = Color.BLUE;
+
+    AbstractTextPaster(Integer minAcceptedWordLenght, Integer maxAcceptedWordLenght, Color textColor) {
+        this.max = maxAcceptedWordLenght != null ? maxAcceptedWordLenght.intValue() : this.max;
+        this.min = minAcceptedWordLenght != null && minAcceptedWordLenght.intValue() <= this.max
+                ? minAcceptedWordLenght.intValue() : Math.min(this.min, this.max - 1);
+        if (textColor != null) this.textColor = textColor;
     }
+
+    /**
+     * @return the color that will be used to paste the text
+     */
+    public Color getTextColor() {
+        return textColor;
+    }
+
+    /**
+     * @return the max word lenght accepted by this word2image service
+     */
+    public int getMaxAcceptedWordLenght() {
+        return max;
+    }
+
+    /**
+     * @return the min word lenght accepted by this word2image service
+     */
+    public int getMinAcceptedWordLenght() {
+        return min;
+    }
+
+    BufferedImage copyBackground(final BufferedImage background) {
+        BufferedImage out = new BufferedImage(background.getWidth(), background.getHeight(), background.getType());
+        return out;
+    }
+
+    Graphics2D pasteBackgroundAndSetTextColor(BufferedImage out, final BufferedImage background) {
+        Graphics2D pie = (Graphics2D) out.getGraphics();
+        //paste background
+        pie.drawImage(background, 0, 0, out.getWidth(), out.getHeight(), null);
+        pie.setColor(getTextColor());
+        return pie;
+    }
+
 }

@@ -462,43 +462,41 @@ DAMAGES.
                      END OF TERMS AND CONDITIONS
 */
 
-package com.octo.captcha.engine.image.utils;
 
-import com.octo.captcha.image.ImageCaptcha;
-import com.octo.captcha.image.ImageCaptchaFactory;
-import com.octo.captcha.image.gimpy.GimpyFactory;
-import com.octo.captcha.image.wordtoimage.ComposedWordToImage;
-import com.octo.captcha.image.wordtoimage.WordToImage;
-import com.octo.captcha.image.backgroundgenerator.EllipseBackgroundGenerator;
-import com.octo.captcha.image.backgroundgenerator.BackgroundGenerator;
-import com.octo.captcha.image.fontgenerator.TwistedAndShearedRandomFontGenerator;
-import com.octo.captcha.image.fontgenerator.FontGenerator;
-import com.octo.captcha.image.textpaster.SimpleTextPaster;
-import com.octo.captcha.image.textpaster.TextPaster;
-import com.octo.captcha.wordgenerator.DummyWordGenerator;
-import com.octo.captcha.wordgenerator.WordGenerator;
+package com.octo.captcha.image.fontgenerator;
+
+import junit.framework.TestCase;
 
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
+
+import com.octo.captcha.image.fontgenerator.DeformedRandomFontGenerator;
 
 /**
- * <p>Description: Generate a sample logo for the master webSite. Main method takes one arg : the file path of the generated logo</p>
- * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
+ * <p>Description: </p>
+ * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
  */
-public class LogoGenerator
-{
+public class DeformedRandomFontGeneratorTest extends TestCase {
 
-    public static void main(String[] args) throws IOException
-    {
-        TextPaster paster = new SimpleTextPaster(new Integer(8), new Integer(8), Color.BLUE);
-        BackgroundGenerator back = new EllipseBackgroundGenerator(new Integer(50), new Integer(100));
-        FontGenerator font = new TwistedAndShearedRandomFontGenerator(new Integer(12), null);
-        WordGenerator words = new DummyWordGenerator("JCAPTCHA");
-        WordToImage word2image = new ComposedWordToImage(font, back, paster);
-        ImageCaptchaFactory factory = new GimpyFactory(words, word2image);
-        ImageCaptcha pix = factory.getImageCaptcha();
-        ImageToFile.serialize(pix.getImageChallenge(), new File(args[0]));
+    private DeformedRandomFontGenerator deformedRandomFontGenerator;
+    private Integer minFontSize = new Integer(10);
+
+    /**
+     * Constructor for DeformedRandomFontGeneratorTest.
+     * @param name
+     */
+    public DeformedRandomFontGeneratorTest(String name) {
+        super(name);
+    }
+
+    public void setUp() {
+        this.deformedRandomFontGenerator =
+            new DeformedRandomFontGenerator(this.minFontSize,null);
+    }
+
+    public void testGetFont() {
+        Font test = this.deformedRandomFontGenerator.getFont();
+        int expected = this.minFontSize.intValue();
+        assertNotNull(test);
     }
 }

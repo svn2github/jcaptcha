@@ -462,43 +462,44 @@ DAMAGES.
                      END OF TERMS AND CONDITIONS
 */
 
-package com.octo.captcha.engine.image.utils;
-
-import com.octo.captcha.image.ImageCaptcha;
-import com.octo.captcha.image.ImageCaptchaFactory;
-import com.octo.captcha.image.gimpy.GimpyFactory;
-import com.octo.captcha.image.wordtoimage.ComposedWordToImage;
-import com.octo.captcha.image.wordtoimage.WordToImage;
-import com.octo.captcha.image.backgroundgenerator.EllipseBackgroundGenerator;
-import com.octo.captcha.image.backgroundgenerator.BackgroundGenerator;
-import com.octo.captcha.image.fontgenerator.TwistedAndShearedRandomFontGenerator;
-import com.octo.captcha.image.fontgenerator.FontGenerator;
-import com.octo.captcha.image.textpaster.SimpleTextPaster;
-import com.octo.captcha.image.textpaster.TextPaster;
-import com.octo.captcha.wordgenerator.DummyWordGenerator;
-import com.octo.captcha.wordgenerator.WordGenerator;
+package com.octo.captcha.image.backgroundgenerator;
 
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
+import java.awt.image.BufferedImage;
 
 /**
- * <p>Description: Generate a sample logo for the master webSite. Main method takes one arg : the file path of the generated logo</p>
+ * <p>Gradient background. Use the constructor to specify colors. Default color are Black and Gray</p>
+ *
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class LogoGenerator
-{
+public class GradientBackgroundGenerator extends AbstractBackgroundGenerator {
 
-    public static void main(String[] args) throws IOException
-    {
-        TextPaster paster = new SimpleTextPaster(new Integer(8), new Integer(8), Color.BLUE);
-        BackgroundGenerator back = new EllipseBackgroundGenerator(new Integer(50), new Integer(100));
-        FontGenerator font = new TwistedAndShearedRandomFontGenerator(new Integer(12), null);
-        WordGenerator words = new DummyWordGenerator("JCAPTCHA");
-        WordToImage word2image = new ComposedWordToImage(font, back, paster);
-        ImageCaptchaFactory factory = new GimpyFactory(words, word2image);
-        ImageCaptcha pix = factory.getImageCaptcha();
-        ImageToFile.serialize(pix.getImageChallenge(), new File(args[0]));
+    Color firstColor = Color.BLACK;
+    Color secondColor = Color.GRAY;
+
+    public GradientBackgroundGenerator(Integer width, Integer height, Color firstColor, Color secondColor) {
+        super(width, height);
+        this.firstColor = firstColor;
+        this.secondColor = secondColor;
+
+    }
+
+    /**
+     * Generates a backround image on wich text will be paste.
+     * Implementations must take into account the imageHeigt and imageWidth.
+     *
+     * @return the background image
+     */
+    public BufferedImage getBackround() {
+        BufferedImage bi = new BufferedImage(getImageWidth(), getImageHeight(), BufferedImage.TYPE_INT_RGB);
+        Graphics2D pie = (Graphics2D) bi.getGraphics();
+        pie.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
+        GradientPaint gp = new GradientPaint(0, getImageHeight(), firstColor, getImageWidth(), 0, secondColor);
+        pie.setPaint(gp);
+        pie.fillRect(0, 0, getImageWidth(), getImageHeight());
+        pie.dispose();
+        return bi;
     }
 }

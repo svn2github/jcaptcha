@@ -466,9 +466,11 @@ package com.octo.captcha.image.wordtoimage;
 
 import com.octo.captcha.CaptchaException;
 import com.octo.captcha.image.utils.ToolkitFactory;
-import com.octo.captcha.image.wordtoimage.backgroundgenerator.BackgroundGenerator;
-import com.octo.captcha.image.wordtoimage.fontgenerator.FontGenerator;
-import com.octo.captcha.image.wordtoimage.textpaster.TextPaster;
+import com.octo.captcha.image.backgroundgenerator.BackgroundGenerator;
+import com.octo.captcha.image.fontgenerator.FontGenerator;
+import com.octo.captcha.image.textpaster.TextPaster;
+import com.octo.captcha.image.backgroundgenerator.BackgroundGenerator;
+import com.octo.captcha.image.fontgenerator.FontGenerator;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

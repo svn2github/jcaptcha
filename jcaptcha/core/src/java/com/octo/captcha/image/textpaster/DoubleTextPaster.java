@@ -462,43 +462,44 @@ DAMAGES.
                      END OF TERMS AND CONDITIONS
 */
 
-package com.octo.captcha.engine.image.utils;
-
-import com.octo.captcha.image.ImageCaptcha;
-import com.octo.captcha.image.ImageCaptchaFactory;
-import com.octo.captcha.image.gimpy.GimpyFactory;
-import com.octo.captcha.image.wordtoimage.ComposedWordToImage;
-import com.octo.captcha.image.wordtoimage.WordToImage;
-import com.octo.captcha.image.backgroundgenerator.EllipseBackgroundGenerator;
-import com.octo.captcha.image.backgroundgenerator.BackgroundGenerator;
-import com.octo.captcha.image.fontgenerator.TwistedAndShearedRandomFontGenerator;
-import com.octo.captcha.image.fontgenerator.FontGenerator;
-import com.octo.captcha.image.textpaster.SimpleTextPaster;
-import com.octo.captcha.image.textpaster.TextPaster;
-import com.octo.captcha.wordgenerator.DummyWordGenerator;
-import com.octo.captcha.wordgenerator.WordGenerator;
+package com.octo.captcha.image.textpaster;
 
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
+import java.awt.image.BufferedImage;
+import java.text.AttributedString;
 
 /**
- * <p>Description: Generate a sample logo for the master webSite. Main method takes one arg : the file path of the generated logo</p>
+ * <p>Pastes two times the attributed string with a random decalage from width/20 and height/2</p>
+ *
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class LogoGenerator
-{
+public class DoubleTextPaster extends AbstractTextPaster {
 
-    public static void main(String[] args) throws IOException
-    {
-        TextPaster paster = new SimpleTextPaster(new Integer(8), new Integer(8), Color.BLUE);
-        BackgroundGenerator back = new EllipseBackgroundGenerator(new Integer(50), new Integer(100));
-        FontGenerator font = new TwistedAndShearedRandomFontGenerator(new Integer(12), null);
-        WordGenerator words = new DummyWordGenerator("JCAPTCHA");
-        WordToImage word2image = new ComposedWordToImage(font, back, paster);
-        ImageCaptchaFactory factory = new GimpyFactory(words, word2image);
-        ImageCaptcha pix = factory.getImageCaptcha();
-        ImageToFile.serialize(pix.getImageChallenge(), new File(args[0]));
+    public DoubleTextPaster(Integer minAcceptedWordLenght, Integer maxAcceptedWordLenght, Color textColor) {
+        super(minAcceptedWordLenght, maxAcceptedWordLenght, textColor);
+    }
+
+    /**
+     * Pastes the attributed string on the backround image and return the final image.
+     * Implementation must take into account the fact that the text must be readable
+     * by human and non by programs.
+     * Pastes two times the attributed string with a random decalage from width/20 and height/2
+     *
+     * @param background
+     * @param attributedWord
+     * @return the final image
+     * @throws CaptchaException if any exception accurs during paste routine.
+     */
+    public BufferedImage pasteText(final BufferedImage background, final AttributedString attributedWord) {
+        int x = (background.getWidth()) / 20;
+        int y = (background.getHeight()) / 2;
+        BufferedImage out = copyBackground(background);
+        Graphics2D pie = pasteBackgroundAndSetTextColor(out, background);
+
+        pie.drawString(attributedWord.getIterator(), x, y);
+        pie.drawString(attributedWord.getIterator(), x + myRandom.nextInt(5) + 5, y + myRandom.nextInt(5) + 5);
+        pie.dispose();
+        return out;
     }
 }

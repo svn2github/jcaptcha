@@ -466,12 +466,15 @@ package com.octo.captcha.image.wordtoimage;
 
 import com.octo.captcha.CaptchaException;
 
-import com.octo.captcha.image.wordtoimage.fontgenerator.FontGenerator;
-import com.octo.captcha.image.wordtoimage.fontgenerator.RandomFontGenerator;
-import com.octo.captcha.image.wordtoimage.backgroundgenerator.BackgroundGenerator;
-import com.octo.captcha.image.wordtoimage.backgroundgenerator.GradientBackgroundGenerator;
-import com.octo.captcha.image.wordtoimage.textpaster.TextPaster;
-import com.octo.captcha.image.wordtoimage.textpaster.SimpleTextPaster;
+import com.octo.captcha.image.fontgenerator.FontGenerator;
+import com.octo.captcha.image.fontgenerator.RandomFontGenerator;
+import com.octo.captcha.image.backgroundgenerator.BackgroundGenerator;
+import com.octo.captcha.image.backgroundgenerator.GradientBackgroundGenerator;
+import com.octo.captcha.image.textpaster.TextPaster;
+import com.octo.captcha.image.textpaster.SimpleTextPaster;
+import com.octo.captcha.image.backgroundgenerator.GradientBackgroundGenerator;
+import com.octo.captcha.image.backgroundgenerator.BackgroundGenerator;
+import com.octo.captcha.image.fontgenerator.RandomFontGenerator;
 import junit.framework.TestCase;
 
 import java.awt.*;

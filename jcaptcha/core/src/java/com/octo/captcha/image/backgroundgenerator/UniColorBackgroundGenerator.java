@@ -462,43 +462,49 @@ DAMAGES.
                      END OF TERMS AND CONDITIONS
 */
 
-package com.octo.captcha.engine.image.utils;
+package com.octo.captcha.image.backgroundgenerator;
 
-import com.octo.captcha.image.ImageCaptcha;
-import com.octo.captcha.image.ImageCaptchaFactory;
-import com.octo.captcha.image.gimpy.GimpyFactory;
-import com.octo.captcha.image.wordtoimage.ComposedWordToImage;
-import com.octo.captcha.image.wordtoimage.WordToImage;
-import com.octo.captcha.image.backgroundgenerator.EllipseBackgroundGenerator;
-import com.octo.captcha.image.backgroundgenerator.BackgroundGenerator;
-import com.octo.captcha.image.fontgenerator.TwistedAndShearedRandomFontGenerator;
-import com.octo.captcha.image.fontgenerator.FontGenerator;
-import com.octo.captcha.image.textpaster.SimpleTextPaster;
-import com.octo.captcha.image.textpaster.TextPaster;
-import com.octo.captcha.wordgenerator.DummyWordGenerator;
-import com.octo.captcha.wordgenerator.WordGenerator;
+import com.octo.captcha.image.backgroundgenerator.AbstractBackgroundGenerator;
 
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
+import java.awt.image.BufferedImage;
 
 /**
- * <p>Description: Generate a sample logo for the master webSite. Main method takes one arg : the file path of the generated logo</p>
+ * <p>Contructs uniform painted background, with default wolor White.</p>
+ *
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class LogoGenerator
-{
+public class UniColorBackgroundGenerator extends AbstractBackgroundGenerator {
 
-    public static void main(String[] args) throws IOException
-    {
-        TextPaster paster = new SimpleTextPaster(new Integer(8), new Integer(8), Color.BLUE);
-        BackgroundGenerator back = new EllipseBackgroundGenerator(new Integer(50), new Integer(100));
-        FontGenerator font = new TwistedAndShearedRandomFontGenerator(new Integer(12), null);
-        WordGenerator words = new DummyWordGenerator("JCAPTCHA");
-        WordToImage word2image = new ComposedWordToImage(font, back, paster);
-        ImageCaptchaFactory factory = new GimpyFactory(words, word2image);
-        ImageCaptcha pix = factory.getImageCaptcha();
-        ImageToFile.serialize(pix.getImageChallenge(), new File(args[0]));
+
+    private BufferedImage backround;
+
+    public UniColorBackgroundGenerator(Integer width, Integer height) {
+        this(width, height, Color.WHITE);
+
+
+    }
+
+    public UniColorBackgroundGenerator(Integer width, Integer height, Color color) {
+        super(width, height);
+        backround = new BufferedImage(getImageWidth(), getImageHeight(), BufferedImage.TYPE_INT_RGB);
+        Graphics2D pie = (Graphics2D) backround.getGraphics();
+        pie.setColor(color != null ? color : Color.WHITE);
+        pie.setBackground(color != null ? color : Color.WHITE);
+        pie.fillRect(0, 0, getImageWidth(), getImageHeight());
+        pie.dispose();
+
+    }
+
+    /**
+     * Generates a backround image on wich text will be paste.
+     * Implementations must take into account the imageHeigt and imageWidth.
+     *
+     * @return the background image
+     */
+    public BufferedImage getBackround() {
+
+        return backround;
     }
 }

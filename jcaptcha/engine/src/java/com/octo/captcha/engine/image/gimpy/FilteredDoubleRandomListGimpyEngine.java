@@ -464,12 +464,12 @@ DAMAGES.
 package com.octo.captcha.engine.image.gimpy;
 
 
-import com.octo.captcha.image.wordtoimage.backgroundgenerator.MultipleShapeBackgroundGenerator;
-import com.octo.captcha.image.wordtoimage.backgroundgenerator.BackgroundGenerator;
-import com.octo.captcha.image.wordtoimage.fontgenerator.DeformedRandomFontGenerator;
-import com.octo.captcha.image.wordtoimage.fontgenerator.FontGenerator;
-import com.octo.captcha.image.wordtoimage.textpaster.DoubleRandomTextPaster;
-import com.octo.captcha.image.wordtoimage.textpaster.TextPaster;
+import com.octo.captcha.image.backgroundgenerator.MultipleShapeBackgroundGenerator;
+import com.octo.captcha.image.backgroundgenerator.BackgroundGenerator;
+import com.octo.captcha.image.fontgenerator.DeformedRandomFontGenerator;
+import com.octo.captcha.image.fontgenerator.FontGenerator;
+import com.octo.captcha.image.textpaster.DoubleRandomTextPaster;
+import com.octo.captcha.image.textpaster.TextPaster;
 
 import java.awt.*;
 import java.awt.image.ImageFilter;

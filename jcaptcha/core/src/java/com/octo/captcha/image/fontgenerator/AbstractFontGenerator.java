@@ -462,43 +462,44 @@ DAMAGES.
                      END OF TERMS AND CONDITIONS
 */
 
-package com.octo.captcha.engine.image.utils;
+package com.octo.captcha.image.fontgenerator;
 
-import com.octo.captcha.image.ImageCaptcha;
-import com.octo.captcha.image.ImageCaptchaFactory;
-import com.octo.captcha.image.gimpy.GimpyFactory;
-import com.octo.captcha.image.wordtoimage.ComposedWordToImage;
-import com.octo.captcha.image.wordtoimage.WordToImage;
-import com.octo.captcha.image.backgroundgenerator.EllipseBackgroundGenerator;
-import com.octo.captcha.image.backgroundgenerator.BackgroundGenerator;
-import com.octo.captcha.image.fontgenerator.TwistedAndShearedRandomFontGenerator;
 import com.octo.captcha.image.fontgenerator.FontGenerator;
-import com.octo.captcha.image.textpaster.SimpleTextPaster;
-import com.octo.captcha.image.textpaster.TextPaster;
-import com.octo.captcha.wordgenerator.DummyWordGenerator;
-import com.octo.captcha.wordgenerator.WordGenerator;
 
-import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 
 /**
- * <p>Description: Generate a sample logo for the master webSite. Main method takes one arg : the file path of the generated logo</p>
+ * <p>Base class for Font generators. Sub classes must implement the getFont()
+ * method that return a Font.</br>
+ * use constructor to specify your generator properties.
+ * This base class only use two parameters, minFontSize and maxFontsize wich are the size font boundaries
+ * returned by the implementation.
+ * By default minFontSize=10 and maxFontSize = 14.</p>
+ *
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class LogoGenerator
-{
+public abstract class AbstractFontGenerator implements FontGenerator {
 
-    public static void main(String[] args) throws IOException
-    {
-        TextPaster paster = new SimpleTextPaster(new Integer(8), new Integer(8), Color.BLUE);
-        BackgroundGenerator back = new EllipseBackgroundGenerator(new Integer(50), new Integer(100));
-        FontGenerator font = new TwistedAndShearedRandomFontGenerator(new Integer(12), null);
-        WordGenerator words = new DummyWordGenerator("JCAPTCHA");
-        WordToImage word2image = new ComposedWordToImage(font, back, paster);
-        ImageCaptchaFactory factory = new GimpyFactory(words, word2image);
-        ImageCaptcha pix = factory.getImageCaptcha();
-        ImageToFile.serialize(pix.getImageChallenge(), new File(args[0]));
+    private int minFontSize = 10;
+    private int maxFontSize = 14;
+
+    AbstractFontGenerator(Integer minFontSize, Integer maxFontSize) {
+        this.minFontSize = minFontSize != null ? minFontSize.intValue() : this.minFontSize;
+        this.maxFontSize = maxFontSize != null && maxFontSize.intValue() >= this.minFontSize ? maxFontSize.intValue()
+                : Math.max(this.maxFontSize, this.minFontSize + 1);
+    }
+
+    /**
+     * @return the min font size for the generated image
+     */
+    public int getMinFontSize() {
+        return minFontSize;
+    };
+
+    /**
+     * @return the max font size for the generated image
+     */
+    public int getMaxFontSize() {
+        return maxFontSize;
     }
 }

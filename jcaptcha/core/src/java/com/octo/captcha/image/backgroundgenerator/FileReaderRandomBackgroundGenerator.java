@@ -462,43 +462,126 @@ DAMAGES.
                      END OF TERMS AND CONDITIONS
 */
 
-package com.octo.captcha.engine.image.utils;
+package com.octo.captcha.image.backgroundgenerator;
 
-import com.octo.captcha.image.ImageCaptcha;
-import com.octo.captcha.image.ImageCaptchaFactory;
-import com.octo.captcha.image.gimpy.GimpyFactory;
-import com.octo.captcha.image.wordtoimage.ComposedWordToImage;
-import com.octo.captcha.image.wordtoimage.WordToImage;
-import com.octo.captcha.image.backgroundgenerator.EllipseBackgroundGenerator;
-import com.octo.captcha.image.backgroundgenerator.BackgroundGenerator;
-import com.octo.captcha.image.fontgenerator.TwistedAndShearedRandomFontGenerator;
-import com.octo.captcha.image.fontgenerator.FontGenerator;
-import com.octo.captcha.image.textpaster.SimpleTextPaster;
-import com.octo.captcha.image.textpaster.TextPaster;
-import com.octo.captcha.wordgenerator.DummyWordGenerator;
-import com.octo.captcha.wordgenerator.WordGenerator;
+import com.octo.captcha.CaptchaException;
+import com.octo.captcha.image.backgroundgenerator.AbstractBackgroundGenerator;
 
+import javax.imageio.ImageIO;
+import javax.imageio.ImageReader;
+import javax.imageio.stream.ImageInputStream;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
- * <p>Description: Generate a sample logo for the master webSite. Main method takes one arg : the file path of the generated logo</p>
+ * <p>File reader background generator that return a random image from the ones found in the directory
+ * NOTE : this implementation only takes </p>
+ *
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class LogoGenerator
-{
+public class FileReaderRandomBackgroundGenerator extends AbstractBackgroundGenerator {
 
-    public static void main(String[] args) throws IOException
-    {
-        TextPaster paster = new SimpleTextPaster(new Integer(8), new Integer(8), Color.BLUE);
-        BackgroundGenerator back = new EllipseBackgroundGenerator(new Integer(50), new Integer(100));
-        FontGenerator font = new TwistedAndShearedRandomFontGenerator(new Integer(12), null);
-        WordGenerator words = new DummyWordGenerator("JCAPTCHA");
-        WordToImage word2image = new ComposedWordToImage(font, back, paster);
-        ImageCaptchaFactory factory = new GimpyFactory(words, word2image);
-        ImageCaptcha pix = factory.getImageCaptcha();
-        ImageToFile.serialize(pix.getImageChallenge(), new File(args[0]));
+    private List images = new ArrayList();
+    private String rootPath = ".";
+
+    public FileReaderRandomBackgroundGenerator(Integer width, Integer height, String rootPath) {
+        super(width, height);
+        //this.images=images;
+        if (rootPath != null) this.rootPath = rootPath;
+//        if(images==null||images.length == 0){
+//            throw new CaptchaException("Can't be initialized with a null or empty array of images");
+//        }
+        File dir = new File(this.rootPath);
+        if (!dir.canRead() || !dir.isDirectory()) {
+            throw new CaptchaException("Root path is not a directory or cannot be read");
+        } else {
+            File[] files = dir.listFiles();
+
+            //get all jpeg
+            if (files != null) {
+                for (int i = 0; i < files.length; i++) {
+                    File file = files[i];
+                    BufferedImage out = null;
+                    if (file.isFile()) {
+                        out = getImage(file);
+                    }
+                    if (out != null) {
+                        images.add(images.size(), out);
+                    }
+                }
+
+            }
+            if (images.size() != 0) {
+                for (int i = 0; i < images.size(); i++) {
+                    BufferedImage bufferedImage = (BufferedImage) images.get(i);
+                    images.set(i, tile(bufferedImage));
+                }
+            } else {
+                throw new CaptchaException("Root path directory is valid but " +
+                        "does not contains any image files");
+            }
+        }
     }
+
+    private BufferedImage tile(BufferedImage tileImage) {
+        BufferedImage image = new BufferedImage(getImageWidth(), getImageHeight(), tileImage.getType());
+        Graphics2D g2 = (Graphics2D) image.getGraphics();
+        int NumberX = (getImageWidth() / tileImage.getWidth());
+        int NumberY = (getImageHeight() / tileImage.getHeight());
+        for (int k = 0; k <= NumberY; k++) {
+            for (int l = 0; l <= NumberX; l++) {
+                g2.drawImage(tileImage, l * tileImage.getWidth(), k * tileImage.getHeight(),
+                        Math.min(tileImage.getWidth(), getImageWidth()), Math.min(tileImage.getHeight(), getImageHeight()), null);
+            }
+        }
+        g2.dispose();
+        return image;
+    }
+
+    // Returns the format name of the image in the object 'o'.
+    // 'o' can be either a File or InputStream object.
+    // Returns null if the format is not known.
+    private static BufferedImage getImage(File o) {
+        BufferedImage out = null;
+        try {
+            // Create an image input stream on the image
+            ImageInputStream iis = ImageIO.createImageInputStream(o);
+
+            // Find all image readers that recognize the image format
+            Iterator iter = ImageIO.getImageReaders(iis);
+            if (!iter.hasNext()) {
+                // No readers found
+                return out;
+            }
+
+            // Use the first reader
+            ImageReader reader = (ImageReader) iter.next();
+            reader.setInput(iis);
+            out = reader.read(0);
+            // Close stream
+            iis.close();
+
+            // Return the format name
+            return out;
+        } catch (IOException e) {
+            throw new CaptchaException("Unknown error during file reading ", e);
+        }
+    }
+
+    /**
+     * Generates a backround image on wich text will be paste.
+     * Implementations must take into account the imageHeigt and imageWidth.
+     *
+     * @return the background image
+     */
+    public BufferedImage getBackround() {
+        return (BufferedImage) images.get(myRandom.nextInt(images.size()));
+    }
+
 }

@@ -462,43 +462,76 @@ DAMAGES.
                      END OF TERMS AND CONDITIONS
 */
 
-package com.octo.captcha.engine.image.utils;
+package com.octo.captcha.image.textpaster;
 
-import com.octo.captcha.image.ImageCaptcha;
-import com.octo.captcha.image.ImageCaptchaFactory;
-import com.octo.captcha.image.gimpy.GimpyFactory;
-import com.octo.captcha.image.wordtoimage.ComposedWordToImage;
-import com.octo.captcha.image.wordtoimage.WordToImage;
-import com.octo.captcha.image.backgroundgenerator.EllipseBackgroundGenerator;
-import com.octo.captcha.image.backgroundgenerator.BackgroundGenerator;
-import com.octo.captcha.image.fontgenerator.TwistedAndShearedRandomFontGenerator;
-import com.octo.captcha.image.fontgenerator.FontGenerator;
-import com.octo.captcha.image.textpaster.SimpleTextPaster;
-import com.octo.captcha.image.textpaster.TextPaster;
-import com.octo.captcha.wordgenerator.DummyWordGenerator;
-import com.octo.captcha.wordgenerator.WordGenerator;
+import com.octo.captcha.CaptchaException;
+import com.octo.captcha.image.textpaster.BaffleRandomTextPaster;
+import junit.framework.TestCase;
 
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
+import java.awt.image.BufferedImage;
+import java.text.AttributedString;
 
 /**
- * <p>Description: Generate a sample logo for the master webSite. Main method takes one arg : the file path of the generated logo</p>
- * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
+ * <p>Description: </p>
+ * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
  */
-public class LogoGenerator
-{
+public class BaffleRandomTextPasterTest extends TestCase {
 
-    public static void main(String[] args) throws IOException
-    {
-        TextPaster paster = new SimpleTextPaster(new Integer(8), new Integer(8), Color.BLUE);
-        BackgroundGenerator back = new EllipseBackgroundGenerator(new Integer(50), new Integer(100));
-        FontGenerator font = new TwistedAndShearedRandomFontGenerator(new Integer(12), null);
-        WordGenerator words = new DummyWordGenerator("JCAPTCHA");
-        WordToImage word2image = new ComposedWordToImage(font, back, paster);
-        ImageCaptchaFactory factory = new GimpyFactory(words, word2image);
-        ImageCaptcha pix = factory.getImageCaptcha();
-        ImageToFile.serialize(pix.getImageChallenge(), new File(args[0]));
+    protected BaffleRandomTextPaster baffleRandomTextPaster;
+    protected Integer minAcceptedWordLength = new Integer(10);
+    protected Integer maxAcceptedWordLength = new Integer(10);
+    protected Integer numberHoles = new Integer(10);
+    protected Color textColor = Color.BLACK;
+    protected Color holesColor = Color.WHITE;
+    /**
+     * Constructor for BaffleRandomTextPasterTest.
+     * @param name
+     */
+    public BaffleRandomTextPasterTest(String name) {
+        super(name);
     }
+
+    protected void setUp() throws Exception {
+        super.setUp();
+        this.baffleRandomTextPaster = new BaffleRandomTextPaster(
+            this.minAcceptedWordLength,
+            this.maxAcceptedWordLength,
+            this.textColor,
+            this.numberHoles,
+            this.holesColor
+            );
+    }
+
+    public void testPasteText() {
+        BufferedImage imageTest = new BufferedImage(100,50,BufferedImage.TYPE_INT_RGB);
+        AttributedString stringTest = new AttributedString("test");
+        BufferedImage test = null;
+        try
+        {
+            test = this.baffleRandomTextPaster.pasteText(imageTest,stringTest);
+            assertNotNull(test);
+            assertEquals(imageTest.getHeight(),test.getHeight());
+            assertEquals(imageTest.getWidth(),test.getWidth());
+        }catch(CaptchaException e) {
+            assertNotNull(e);
+        }
+    }
+
+    public void testGetTextColor() {
+        Color colorTest = this.baffleRandomTextPaster.getTextColor();
+        assertNotNull(colorTest);
+    }
+
+    public void testGetMaxAcceptedWordLenght() {
+        assertEquals(this.maxAcceptedWordLength.intValue(),
+            this.baffleRandomTextPaster.getMaxAcceptedWordLenght());
+    }
+
+    public void testGetMinAcceptedWordLenght() {
+        assertEquals(this.minAcceptedWordLength.intValue(),
+            this.baffleRandomTextPaster.getMinAcceptedWordLenght());
+    }
+
 }

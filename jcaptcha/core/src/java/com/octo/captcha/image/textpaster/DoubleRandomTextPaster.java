@@ -462,43 +462,70 @@ DAMAGES.
                      END OF TERMS AND CONDITIONS
 */
 
-package com.octo.captcha.engine.image.utils;
+package com.octo.captcha.image.textpaster;
 
-import com.octo.captcha.image.ImageCaptcha;
-import com.octo.captcha.image.ImageCaptchaFactory;
-import com.octo.captcha.image.gimpy.GimpyFactory;
-import com.octo.captcha.image.wordtoimage.ComposedWordToImage;
-import com.octo.captcha.image.wordtoimage.WordToImage;
-import com.octo.captcha.image.backgroundgenerator.EllipseBackgroundGenerator;
-import com.octo.captcha.image.backgroundgenerator.BackgroundGenerator;
-import com.octo.captcha.image.fontgenerator.TwistedAndShearedRandomFontGenerator;
-import com.octo.captcha.image.fontgenerator.FontGenerator;
-import com.octo.captcha.image.textpaster.SimpleTextPaster;
-import com.octo.captcha.image.textpaster.TextPaster;
-import com.octo.captcha.wordgenerator.DummyWordGenerator;
-import com.octo.captcha.wordgenerator.WordGenerator;
+import com.octo.captcha.CaptchaException;
 
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
+import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.text.AttributedString;
 
 /**
- * <p>Description: Generate a sample logo for the master webSite. Main method takes one arg : the file path of the generated logo</p>
+ * <p>Randomly pastes two times the attributed string with a random(5) decalage</p>
+ *
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class LogoGenerator
-{
+public class DoubleRandomTextPaster extends RandomTextPaster {
 
-    public static void main(String[] args) throws IOException
-    {
-        TextPaster paster = new SimpleTextPaster(new Integer(8), new Integer(8), Color.BLUE);
-        BackgroundGenerator back = new EllipseBackgroundGenerator(new Integer(50), new Integer(100));
-        FontGenerator font = new TwistedAndShearedRandomFontGenerator(new Integer(12), null);
-        WordGenerator words = new DummyWordGenerator("JCAPTCHA");
-        WordToImage word2image = new ComposedWordToImage(font, back, paster);
-        ImageCaptchaFactory factory = new GimpyFactory(words, word2image);
-        ImageCaptcha pix = factory.getImageCaptcha();
-        ImageToFile.serialize(pix.getImageChallenge(), new File(args[0]));
+    public DoubleRandomTextPaster(Integer minAcceptedWordLenght, Integer maxAcceptedWordLenght, Color textColor) {
+        super(minAcceptedWordLenght, maxAcceptedWordLenght, textColor);
     }
+
+    /**
+     * Pastes the attributed string on the backround image and return the final image.
+     * Implementation must take into account the fact that the text must be readable
+     * by human and non by programs.
+     * Paste the text randomly on the background<
+     *
+     * @param background
+     * @param attributedWord
+     * @return the final image
+     * @throws com.octo.captcha.CaptchaException
+     *          if any exception occurs during paste routine.
+     */
+    public BufferedImage pasteText(final BufferedImage background, final AttributedString attributedWord)
+            throws CaptchaException {
+        BufferedImage out = copyBackground(background);
+        Graphics2D pie = pasteBackgroundAndSetTextColor(out, background);
+
+        //set font to max in order to retrieve the correct boundaries
+        Font maxFont = getMaxFont(attributedWord.getIterator());
+        Rectangle2D bounds = getTextBoundaries(pie, maxFont, attributedWord);
+
+        //evaluate the max deviation
+        Double maxx = new Double(background.getWidth() - bounds.getWidth());
+        Double maxy = new Double(background.getHeight() - bounds.getHeight() - 0.4 * maxFont.getSize());
+        if (maxx.intValue() < 0 || maxy.intValue() < 0)
+            throw new CaptchaException("word is too big, try to use less letters, smaller font or bigger background");
+
+        //evaluate the first to second deviation
+        int xdev = new Double((1 + myRandom.nextDouble()) * 0.25 * maxFont.getSize()).intValue();
+        int ydev = new Double((1 + myRandom.nextDouble()) * 0.2 * maxFont.getSize()).intValue();
+
+        //evaluate the random deviation
+        int x = myRandom.nextInt(maxx.intValue() - xdev);
+        //don't forget y goes down!
+        int y = maxFont.getSize() + myRandom.nextInt(maxy.intValue() - ydev);
+        //draw the string
+        pie.drawString(attributedWord.getIterator(), x, y);
+        // draw the second one
+        pie.drawString(attributedWord.getIterator(), x + xdev, y + ydev);
+        pie.dispose();
+        return out;
+
+    }
+
+
 }
