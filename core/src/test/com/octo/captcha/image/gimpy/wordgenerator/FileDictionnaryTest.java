@@ -54,6 +54,7 @@ package com.octo.captcha.image.gimpy.wordgenerator;
 import java.util.Locale;
 
 import junit.framework.TestCase;
+import com.octo.captcha.CaptchaException;
 
 /**
  * <p>Description: </p>
@@ -79,19 +80,23 @@ public class FileDictionnaryTest extends TestCase {
     public void testGetWordList() {
         WordList test = this.fileDictionnary.getWordList();
         assertNotNull(test);
-        String testWord = test.getNextWord();
+        String testWord = test.getNextWord(new Integer(8));
         assertNotNull(testWord);
-        assertTrue(testWord.length() > 0);
+        assertEquals(8, testWord.length());
+
+
     }
 
     public void testGetWordListLocale() {
         WordList test = this.fileDictionnary.getWordList(Locale.US);
         Locale expected = Locale.US;
         assertNotNull(test);
-        String testWord = test.getNextWord();
+        String testWord = test.getNextWord(new Integer(8));
         assertNotNull(testWord);
-        assertTrue(testWord.length() > 0);
+        assertEquals(8,testWord.length());
         assertEquals(expected,test.getLocale());
+
+      
     }
 
 }

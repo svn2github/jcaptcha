@@ -51,26 +51,33 @@
 package com.octo.captcha.image.gimpy.wordgenerator;
 
 import com.octo.captcha.image.gimpy.WordGenerator;
+import com.octo.captcha.CaptchaException;
 
 import java.util.Locale;
+import java.util.HashMap;
 
 /**
  * <p>WordGenerator based on a dictionary. Uses a Dictionary reader to retrieve words and an WordList to
- * store the words retrieved. </p>
+ * store the words retrieved. Be sure your dictionary contains words whose lenght covers the whole range
+ * specified in your factory, some rutime exception will occur!</p>
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public class DictionaryWordGenerator implements WordGenerator
 {
 
+    private Locale defaultLocale;
+
     private DictionaryReader factory;
 
-    private WordList words;
+    private HashMap localizedwords = new HashMap();
 
     public DictionaryWordGenerator(DictionaryReader reader)
     {
         this.factory = reader;
-        this.words = factory.getWordList();
+        //add the default wordlist to the localisedWordList
+        this.defaultLocale = factory.getWordList().getLocale();
+        this.localizedwords.put(defaultLocale, factory.getWordList());
     }
 
     /**
@@ -80,12 +87,7 @@ public class DictionaryWordGenerator implements WordGenerator
      */
     public String getWord(Integer lenght)
     {
-        String word = null;
-        do
-        {
-            word = words.getNextWord();
-        } while (word.length() != lenght.intValue());
-        return word;
+        return getWord(lenght, defaultLocale);
     }
 
     /**
@@ -96,10 +98,24 @@ public class DictionaryWordGenerator implements WordGenerator
      */
     public String getWord(Integer lenght, Locale locale)
     {
-        if (this.words.getLocale() != locale)
+        WordList words;
+        if (localizedwords.containsKey(locale))
         {
-            this.words = factory.getWordList(locale);
+           words = (WordList)localizedwords.get(locale);
+        }else{
+
+            words = factory.getWordList(locale);
+            //add to cache
+            localizedwords.put(locale,words);
         }
-        return getWord(lenght);
+
+        String word = words.getNextWord(lenght);
+        //check if word with the specified lenght exist
+        if(word==null){
+        //if not see if any
+        throw new CaptchaException("No word of lenght : "+lenght+ " exists in dictionnary! please " +
+        "update your dictionary or your range!");
+        }
+       return word;
     }
 }

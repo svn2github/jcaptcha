@@ -76,7 +76,6 @@ import java.awt.image.BufferedImage;
  */
 public class ImageCaptchaTest extends TestCase {
     private ImageCaptcha pixCaptcha;
-    private ImageCaptchaFactory factory;
 
     /**
      * Constructor for ImageCaptchaTest.

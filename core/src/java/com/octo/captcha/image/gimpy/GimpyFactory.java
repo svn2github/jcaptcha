@@ -67,6 +67,7 @@ import java.util.ResourceBundle;
 public class GimpyFactory extends ImageCaptchaFactory
 {
 
+    private Random myRandom = new Random();
     private WordToImage wordToImage;
     private WordGenerator wordGenerator;
 
@@ -115,13 +116,9 @@ public class GimpyFactory extends ImageCaptchaFactory
     {
 
         //lenght
-        Integer wordLenght;
-        int range = getWordToImage().getMaxAcceptedWordLenght() -
-                getWordToImage().getMinAcceptedWordLenght();
-        int randomRange = range != 0 ? new Random().nextInt(range) : 0;
+        Integer wordLenght = getRandomLenght();
 
-        wordLenght = new Integer(
-                randomRange + getWordToImage().getMinAcceptedWordLenght());
+
         String word = getWordGenerator().getWord(wordLenght, locale);
 
         BufferedImage image = null;
@@ -136,6 +133,17 @@ public class GimpyFactory extends ImageCaptchaFactory
         ImageCaptcha captcha = new Gimpy(ResourceBundle.getBundle(BUNDLE_NAME, locale).getString(BUNDLE_QUESTION_KEY),
                 image, word);
         return captcha;
+    }
+
+    protected Integer getRandomLenght()
+    {
+       Integer wordLenght;
+        int range = getWordToImage().getMaxAcceptedWordLenght() -
+                getWordToImage().getMinAcceptedWordLenght();
+        int randomRange = range != 0 ? myRandom.nextInt(range+1) : 0;
+        wordLenght = new Integer(
+                randomRange + getWordToImage().getMinAcceptedWordLenght());
+        return wordLenght;
     }
 
 }

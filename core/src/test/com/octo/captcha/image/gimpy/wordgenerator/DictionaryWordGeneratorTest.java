@@ -53,6 +53,7 @@ package com.octo.captcha.image.gimpy.wordgenerator;
 import java.util.Locale;
 
 import junit.framework.TestCase;
+import com.octo.captcha.CaptchaException;
 
 /**
  * <p>Description: </p>
@@ -62,6 +63,9 @@ import junit.framework.TestCase;
 public class DictionaryWordGeneratorTest extends TestCase {
 
     private DictionaryWordGenerator dictionaryWordGenerator;
+    private static String[] wordlist ={"1","1234","123456","123456789","123"};
+    private static int[] lenghts={1,4,6,9,3};
+    private static Integer UNKNOWN_LENGHT =new Integer(100);
 
     /**
      * Constructor for DictionaryWordGeneratorTest.
@@ -73,23 +77,45 @@ public class DictionaryWordGeneratorTest extends TestCase {
 
     public void setUp() {
         this.dictionaryWordGenerator = new DictionaryWordGenerator(
-            new FileDictionnary("toddlist"));
+            new ArrayDictionary(wordlist));
     }
 
     public void testGetWordInteger() {
-        Integer length = new Integer(10);
-        String test = this.dictionaryWordGenerator.getWord(length);
+        for(int i=0;i<lenghts.length;i++){
+            Integer length = new Integer(lenghts[i]);
+            String test = this.dictionaryWordGenerator.getWord(length);
         assertNotNull(test);
         assertTrue(test.length() > 0);
-        assertEquals(length.intValue(),test.length());;
+        assertEquals(length.intValue(),test.length());
+
+        }
+        try
+        {
+            String test = this.dictionaryWordGenerator.getWord(UNKNOWN_LENGHT);
+            fail("Should throw a CaptchaException");
+        } catch (CaptchaException e)
+        {
+            assertNotNull(e.getMessage());
+        }
     }
 
     public void testGetWordIntegerLocale() {
-        Integer length = new Integer(10);
+        for(int i=0;i<lenghts.length;i++){
+            Integer length = new Integer(lenghts[i]);
         String test = this.dictionaryWordGenerator.getWord(length,Locale.US);
         assertNotNull(test);
         assertTrue(test.length() > 0);
         assertEquals(length.intValue(),test.length());
+            }
+           try
+        {
+            String test = this.dictionaryWordGenerator.getWord(UNKNOWN_LENGHT);
+            fail("Should throw a CaptchaException");
+        } catch (CaptchaException e)
+        {
+            assertNotNull(e.getMessage());
+        }
     }
+
 
 }
