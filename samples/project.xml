@@ -136,7 +136,7 @@
     	<dependency>
     	    <groupId>jhlabs</groupId>
     	    <artifactId>jhlabs</artifactId>
-            <jar>imaging.jar</jar>
+            <jar>imageeditor.jar</jar>
     	</dependency>
     	
   </dependencies>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 
-<project 
+<project
   default="assemble"
   xmlns:j="jelly:core"
   xmlns:maven="jelly:maven"
   xmlns:artifact="artifact"
   xmlns:ant="jelly:ant">
-  
+
   <preGoal name="multiproject:site">
-    <maven:reactor 
+    <maven:reactor
         basedir="${basedir}"
         includes="**/${pattern}/**/project.xml"
         excludes="project.xml"
@@ -16,12 +16,25 @@
         banner="generating documentation"
         ignoreFailures="false"/>
   </preGoal>
-    
+
   <goal name="assemble">
-    <ant:mkdir dir="${maven.repo.local}/jhlabs/jars"/>
-    <ant:get src="http://www.jhlabs.com/ip/imaging.jar"
-    	dest="${maven.repo.local}/jhlabs/jars/imaging.jar"/>
-    <maven:reactor 
+
+
+      <ant:mkdir dir="${maven.repo.local}/jhlabs/jars"/>
+      <ant:mkdir dir="${maven.repo.local}/jhlabs/zips"/>
+      <ant:get src="http://www.jhlabs.com/ip/imageeditor.zip"
+    	dest="${maven.repo.local}/jhlabs/zips/imageeditor.zip" usetimestamp="true"/>
+      <ant:unzip src="${maven.repo.local}/jhlabs/zips/imageeditor.zip" dest="${maven.repo.local}/jhlabs/zips/">
+          <patternset>
+                  <include name="**/imageeditor.jar"/>
+              </patternset>
+
+      </ant:unzip>
+      <ant:copy file="${maven.repo.local}/jhlabs/zips/imageeditor/imageeditor.jar" todir="${maven.repo.local}/jhlabs/jars/"/>
+      <delete dir="${maven.repo.local}/jhlabs/zips/imageeditor"/>
+
+
+    <maven:reactor
         basedir="${basedir}"
         includes="**/${pattern}/**/project.xml"
         excludes="project.xml"
@@ -29,7 +42,7 @@
         banner="Building"
         ignoreFailures="false"/>
   </goal>
-  
+
   <postGoal name="site">
     <ant:copy file="${basedir}/images/organization-logo.jpg" todir="${maven.build.dir}/docs/images"/>
     <ant:copy file="${basedir}/images/project-logo.jpg" todir="${maven.build.dir}/docs/images"/>
