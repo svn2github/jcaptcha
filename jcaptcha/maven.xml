@@ -26,15 +26,15 @@
        </goal>
 
   <goal name="jcaptcha:dist" description="build and package a jcaptcha distribution">
-    <maven:reactor
+    <!--maven:reactor
         basedir="${basedir}"
         includes="*/project.xml"
         excludes="project.xml"
         goals="dist"
         banner="distribution"
-        ignoreFailures="false"/>
+        ignoreFailures="false"/-->
 
-    <ant:zip zipfile="${maven.build.dir}/${pom.artifactId}-${pom.currentVersion}-src.zip"
+    <ant:zip zipfile="${maven.build.dir}/${pom.artifactId}-src-${pom.currentVersion}.zip"
     	basedir=".">
     	<ant:fileset dir="${basedir}">
     		<exclude name="**/target/**"/>
@@ -101,81 +101,6 @@
 
   </goal>
 
-     <goal name="jcaptcha:dist" description="build and package a jcaptcha distribution">
-    <maven:reactor
-        basedir="${basedir}"
-        includes="*/project.xml"
-        excludes="project.xml"
-        goals="dist"
-        banner="distribution"
-        ignoreFailures="false"/>
-
-   <ant:zip zipfile="${maven.build.dir}/${pom.artifactId}-${pom.currentVersion}-src.zip"
-    	basedir=".">
-    	<ant:fileset dir="${basedir}">
-    		<exclude name="**/target/**"/>
-    	</ant:fileset>
-    	</ant:zip>
-
-    <ant:mkdir dir="${maven.build.dir}/distributions"/>
-
-    <ant:copy todir="${maven.build.dir}/distributions">
-    	<ant:fileset dir="${basedir}">
-    		<include name="**/*.jar"/>
-    	</ant:fileset>
-    </ant:copy>
-
-
-
-       <!--
-    <maven:reactor
-        basedir="${basedir}"
-        includes="**/${pattern}/**/project.xml"
-        excludes="project.xml"
-        goals="dist"
-        banner="distribution"
-        ignoreFailures="false"/>
-    <ant:mkdir dir="${maven.build.dir}/distributions"/>
-    <ant:mkdir dir="${maven.build.dir}/src-distributions"/>
-    <ant:unzip dest="${maven.build.dir}/distributions">
-    	<ant:fileset dir="${basedir}" includes="**/target/distributions/*.zip" excludes="*src.zip"/>
-    </ant:unzip>
-
-
-    <ant:unzip dest="${maven.build.dir}/src-distributions">
-    	<ant:fileset dir="${basedir}" includes="**/target/distributions/*src.zip"/>
-    </ant:unzip>
-
-    <ant:copy todir="${maven.build.dir}/distributions">
-    	<ant:fileset dir="${basedir}">
-    		<include name="LICENSE.txt"/>
-    	</ant:fileset>
-    </ant:copy>
-
-    <ant:copy todir="${maven.build.dir}/distributions">
-    	<ant:fileset dir="${basedir}">
-    		<include name="**/doc/**"/>
-    	</ant:fileset>
-    </ant:copy>
-
-    <ant:copy todir="${maven.build.dir}/src-distributions">
-    	<ant:fileset dir="${basedir}">
-    		<include name="lib/**"/>
-    		<include name="images/**"/>
-    		<include name="xdocs/**"/>
-    		<include name="*.xml"/>
-    		<include name="*.txt"/>
-    		<include name="*.properties"/>
-    	</ant:fileset>
-    </ant:copy>
-
-    <ant:zip zipfile="${maven.build.dir}/${pom.artifactId}-${pom.currentVersion}.zip"
-    	basedir="${maven.build.dir}/distributions"/>
-    <ant:zip zipfile="${maven.build.dir}/${pom.artifactId}-${pom.currentVersion}-src.zip"
-    	basedir="${maven.build.dir}/src-distributions"/>
-    	-->
-
-  </goal>
 
   <goal name="jcaptcha:deploy-jhlab" description="copy jhlabs librairy to your maven local repository">
     <ant:mkdir dir="${maven.repo.local}/jhlabs/jars"/>
