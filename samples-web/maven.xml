@@ -10,6 +10,10 @@
     <ant:copy file="${basedir}/images/project-logo.jpg" todir="${maven.build.dir}/docs/images"/>
   </postGoal>
   
+  <preGoal name="war:init">
+    <ant:copy file="${basedir}/src/conf/toddlist.properties" todir="${maven.build.dir}/${pom.artifactId}/WEB-INF/classes"/>
+  </preGoal>
+  
   <goal name="assemble" prereqs="war:install"/>
 	
 </project>
