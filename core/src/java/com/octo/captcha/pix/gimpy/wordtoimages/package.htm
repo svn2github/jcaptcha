@@ -1,0 +1,10 @@
+this package provides implementations of the WordToImage interface.</br>
+Main class is the AbstractWordToImage wich defines the strucure of the implementations provided.</br>
+ComposedWordToImage is the first concrete WordToImage. It is based on the Template method pattern in order to build an image from a word :</br>
+It uses three subclasses :
+<ul>
+<li>Uses an AbstractFontGenerator to apply a font to a word</li>
+<li>Uses an AbstractBackgroundGenerator to retrieve a background image on which text will be pasted</li>
+<li>Uses an AbstractTextPaster to past the formated word on the background</li>
+</ul>
+See sub packages for implementations of Abstracts classes.
