@@ -53,6 +53,7 @@ package com.octo.captcha;
 
 /**
  * This intrface represent a CAPTCHA.
+ *
  * A CAPTCHA is a program that can generate and grade tests that:
  * <ul>
  * <li>Most humans can pass.</li>
@@ -60,12 +61,23 @@ package com.octo.captcha;
  * </ul>
  * see http://www.captcha.net/ for sample, articles, and definitions.
  *
- * A catchta is basically a test composed of :
- *<ul>
- * <li>A question about :</li>
- * <li>a challenge (can be an image for pix captchas or a sound, or wathever)</li>
- * <li>a validation routine a of a given response</li>
+ * A capchta is basically a test composed of :
+  *<ul>
+  * <li>A question about :</li>
+  * <li>a challenge (can be an image for pix captchas or a sound, or wathever)</li>
+  * <li>a validation routine a of a given response</li>
+  * </ul>
+  *
+ * This is a container for the CAPTCHA challenge which is also able to validate the answer.
+ * Class implementing this interface must follow the rules :
+ * <ul>
+ * <li>As all 'components' of this project, it must have a single constructor</li>
+ * <li>It must not build the challenge! use instead the CaptchaFactory</li>
+ * <li>It must know how to validate the answer</li>
+ * <li>It must not expose the answer</li>
  * </ul>
+ *
+ *
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
