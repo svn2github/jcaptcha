@@ -74,11 +74,6 @@
   </jar>
    
    <ant:copy todir="${maven.build.dir}/distributions/bin/tozip/">
-    	<ant:fileset dir="${basedir}">
-    		<include name="lib/**.jar"/>
-    		
-    	</ant:fileset>
-
     	<ant:fileset dir="${basedir}/engine/src/conf">
     		<include name="**/*.jpg"/>
     	</ant:fileset>
