@@ -46,19 +46,81 @@
  * SUCH DAMAGE.
  * ====================================================================
  *
- *
  */
-package com.octo.utils;
+
+package com.octo.captcha.service.captchastore;
+
+import com.octo.captcha.service.CaptchaStore;
+import com.octo.captcha.CaptchaServiceException;
+import com.octo.captcha.Captcha;
+
+import java.util.HashMap;
+import java.util.Map;
+
 
 /**
- * An exception that is raised when a ConstantCapacityHashtable, can't
- * be garbage collected and someone try to put a new entry in it...
- *
- * @version $Id$
- *
- * @author <a href="mailto:sbr@octo.com">Sebastien Brunot</a>
+ * Simple store based on a HashMap
  */
-public class ConstantCapacityHashtableFullException extends RuntimeException
+public class MapCaptchaStore implements CaptchaStore
 {
+    private Map store;
 
+    public MapCaptchaStore(){
+        this.store = new HashMap();
+    };
+
+    /**
+     * Check if a captcha is stored for this id
+     * @param id
+     * @return true if a captcha for this id is stored, false otherwise
+     */
+    public boolean hasCaptcha(String id)
+    {
+        return store.containsKey(id);
+    }
+
+    /**
+     * Store the captcha with the provided id as key.
+     * The key is assumed to be unique, so if the same key is used twice to store a captcha, the store will return an
+     * exception
+     *
+     * @param id the key
+     * @param captcha the captcha
+     * @throws CaptchaServiceException if the captcha already exists, or if an error occurs during storing routine.
+     */
+    public void storeCaptcha(String id, Captcha captcha) throws CaptchaServiceException
+    {
+        if(store.get(id)!=null){throw new CaptchaServiceException("a captcha with this id already exist. This error must " +
+                "not occurs, this is an implementation pb!");}
+        store.put(id,captcha);
+    }
+
+    /**
+     * Retrieve the captcha for this key from the store.
+     * @param id
+     * @return the captcha for this id
+     * @throws CaptchaServiceException if a captcha for this key is not found or if
+     * an error occurs during retrieving routine.
+     */
+    public Captcha getCaptcha(String id) throws CaptchaServiceException
+    {
+        Object captcha = store.get(id);
+        if(captcha==null){throw new CaptchaServiceException("no captcha for specified id is found");}
+        return (Captcha)captcha;
+    }
+
+    /**
+     * Remove the captcha with the provided id as key.
+     * @param id the key
+     * @return true if found, false otherwise
+     * @throws CaptchaServiceException if an error occurs during remove routine
+     */
+    public boolean removeCaptcha(String id)
+    {
+        if(store.get(id)!=null){
+            store.remove(id);
+            return true;
+        }
+        return false;
+    }
 }

@@ -79,8 +79,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 
-import com.octo.utils.ConstantCapacityHashtable;
-import com.octo.utils.ConstantCapacityHashtableFullException;
+import com.octo.captcha.utils.ConstantCapacityHashtable;
+import com.octo.captcha.utils.ConstantCapacityHashtableFullException;
 import com.octo.utils.FilterConfigUtils;
 import com.octo.captcha.image.ImageCaptcha;
 import com.octo.captcha.image.ImageCaptchaEngine;

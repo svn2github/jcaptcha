@@ -4,11 +4,13 @@
  * To change the template for this generated file go to
  * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
  */
-package com.octo.utils;
+package com.octo.captcha.utils;
 
 import java.util.Hashtable;
 
 import junit.framework.TestCase;
+import com.octo.captcha.utils.ConstantCapacityHashtable;
+import com.octo.captcha.utils.ConstantCapacityHashtableFullException;
 
 /**
  * 
