@@ -1,6 +1,3 @@
-
-package com.octo.captcha.image.gimpy;
-
 /* ====================================================================
  * The Apache Software License, Version 1.1
  *
@@ -51,43 +48,48 @@ package com.octo.captcha.image.gimpy;
  *
  */
 
+package com.octo.captcha.image.gimpy;
+
+import java.awt.Color;
+
+import com.octo.captcha.image.ImageCaptchaFactory;
 import com.octo.captcha.image.ListImageCaptchaEngine;
+import com.octo.captcha.image.gimpy.wordgenerator.DictionaryWordGenerator;
 import com.octo.captcha.image.gimpy.wordgenerator.FileDictionnary;
-import com.octo.captcha.image.gimpy.wordgenerator.ComposeDictionaryWordGenerator;
 import com.octo.captcha.image.gimpy.wordtoimage.BackgroundGenerator;
 import com.octo.captcha.image.gimpy.wordtoimage.ComposedWordToImage;
 import com.octo.captcha.image.gimpy.wordtoimage.FontGenerator;
 import com.octo.captcha.image.gimpy.wordtoimage.TextPaster;
-import com.octo.captcha.image.gimpy.wordtoimage.backgroundgenerator.UniColorBackgroundGenerator;
-import com.octo.captcha.image.gimpy.wordtoimage.fontgenerator.RandomFontGenerator;
-import com.octo.captcha.image.gimpy.wordtoimage.textpaster.BaffleRandomTextPaster;
-import com.octo.captcha.image.gimpy.WordGenerator;
-import com.octo.captcha.image.gimpy.WordToImage;
-import com.octo.captcha.image.gimpy.GimpyFactory;
-
-import java.awt.Color;
+import com.octo.captcha.image.gimpy.wordtoimage.backgroundgenerator.MultipleShapeBackgroundGenerator;
+import com.octo.captcha.image.gimpy.wordtoimage.fontgenerator.DeformedRandomFontGenerator;
+import com.octo.captcha.image.gimpy.wordtoimage.textpaster.DoubleRandomTextPaster;
 
 /**
  * <p>Description: </p>
- * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
  */
-public class BaffleListGimpyEngine extends ListImageCaptchaEngine
-{
+public class DoubleRandomListGimpyEngine extends ListImageCaptchaEngine { 
 
-    protected void buildInitialFactories()
-    {
-        //word generator
-        WordGenerator dictionnaryWords = new ComposeDictionaryWordGenerator(new FileDictionnary("toddlist"));
-        //wordtoimage components
-        TextPaster randomPaster = new BaffleRandomTextPaster(new Integer(8), new Integer(15), Color.BLACK,new Integer(3),Color.BLUE);
-        BackgroundGenerator back = new UniColorBackgroundGenerator(new Integer(200), new Integer(100),Color.BLUE);
-        //BackgroundGenerator back = new FunkyBackgroundGenerator(new Integer(200), new Integer(100));
-        FontGenerator shearedFont = new RandomFontGenerator(new Integer(20), new Integer(25));
-        //word2image 1
-        WordToImage word2image = new ComposedWordToImage(shearedFont, back, randomPaster);
+    protected void buildInitialFactories() {
+        WordGenerator wordGenerator = new DictionaryWordGenerator(
+            new FileDictionnary("toddlist"));
         
+        TextPaster doubleRandomTextPaster = new DoubleRandomTextPaster(
+            new Integer(8),new Integer(15),Color.WHITE);
         
-        this.addFactory(new GimpyFactory(dictionnaryWords, word2image));
+        BackgroundGenerator back = new MultipleShapeBackgroundGenerator(
+            new Integer(200),new Integer(100));
+            
+        FontGenerator fontGenerator = new DeformedRandomFontGenerator(
+            new Integer(25),new Integer(27));
+        
+        WordToImage word2image = new ComposedWordToImage(fontGenerator,
+            back,doubleRandomTextPaster);
+        
+        ImageCaptchaFactory imageCaptchaFactory = new GimpyFactory(wordGenerator,word2image);
+        
+        this.addFactory(imageCaptchaFactory);
     }
+
 }

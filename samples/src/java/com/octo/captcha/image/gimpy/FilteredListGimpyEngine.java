@@ -48,45 +48,57 @@
  *
  */
 
-package com.octo.captcha.image.gimpy;
 
-import com.octo.captcha.image.ListImageCaptchaEngine;
-import com.octo.captcha.image.gimpy.wordgenerator.DictionaryWordGenerator;
-import com.octo.captcha.image.gimpy.wordgenerator.FileDictionnary;
-import com.octo.captcha.image.gimpy.wordtoimage.BackgroundGenerator;
-import com.octo.captcha.image.gimpy.wordtoimage.ComposedWordToImage;
-import com.octo.captcha.image.gimpy.wordtoimage.FontGenerator;
-import com.octo.captcha.image.gimpy.wordtoimage.TextPaster;
-import com.octo.captcha.image.gimpy.wordtoimage.FilteredComposedWordToImage;
-import com.octo.captcha.image.gimpy.wordtoimage.backgroundgenerator.UniColorBackgroundGenerator;
-import com.octo.captcha.image.gimpy.wordtoimage.fontgenerator.TwistedAndShearedRandomFontGenerator;
-import com.octo.captcha.image.gimpy.wordtoimage.textpaster.BaffleRandomTextPaster;
-import com.jhlabs.image.EmbossFilter;
-import com.jhlabs.image.SphereFilter;
-import com.jhlabs.image.RippleFilter;
-import com.jhlabs.image.TwirlFilter;
-import com.jhlabs.image.WaterFilter;
-import com.jhlabs.image.MarbleFilter;
-import com.jhlabs.image.WeaveFilter;
-import com.jhlabs.image.CrystalizeFilter;
-import com.jhlabs.image.TransformFilter;
+package com.octo.captcha.image.gimpy;
 
 import java.awt.Color;
 import java.awt.image.ImageFilter;
 
+import com.jhlabs.image.CrystalizeFilter;
+import com.jhlabs.image.EmbossFilter;
+import com.jhlabs.image.MarbleFilter;
+import com.jhlabs.image.RippleFilter;
+import com.jhlabs.image.SphereFilter;
+import com.jhlabs.image.TransformFilter;
+import com.jhlabs.image.TwirlFilter;
+import com.jhlabs.image.WaterFilter;
+import com.jhlabs.image.WeaveFilter;
+import com.octo.captcha.image.ImageCaptchaFactory;
+import com.octo.captcha.image.ListImageCaptchaEngine;
+import com.octo.captcha.image.gimpy.wordgenerator.DictionaryWordGenerator;
+import com.octo.captcha.image.gimpy.wordgenerator.FileDictionnary;
+import com.octo.captcha.image.gimpy.wordtoimage.BackgroundGenerator;
+import com.octo.captcha.image.gimpy.wordtoimage.FilteredComposedWordToImage;
+import com.octo.captcha.image.gimpy.wordtoimage.FontGenerator;
+import com.octo.captcha.image.gimpy.wordtoimage.TextPaster;
+import com
+    .octo
+    .captcha
+    .image
+    .gimpy
+    .wordtoimage
+    .backgroundgenerator
+    .FunkyBackgroundGenerator;
+import com
+    .octo
+    .captcha
+    .image
+    .gimpy
+    .wordtoimage
+    .fontgenerator
+    .RandomFontGenerator;
+import com.octo.captcha.image.gimpy.wordtoimage.textpaster.RandomTextPaster;
+
 /**
  * <p>Description: </p>
- * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
  */
-public class FilteredBaffleListGimpyEngine extends ListImageCaptchaEngine
-{
+public class FilteredListGimpyEngine extends ListImageCaptchaEngine {
 
-    protected void buildInitialFactories()
-    {
+    protected void buildInitialFactories() {
 
-
-           //build filters
+        //      build filters
         EmbossFilter emboss = new EmbossFilter();
         SphereFilter sphere = new SphereFilter();
         RippleFilter rippleBack = new RippleFilter();
@@ -100,7 +112,7 @@ public class FilteredBaffleListGimpyEngine extends ListImageCaptchaEngine
         emboss.setBumpHeight(2.0f);
 
         ripple.setWaveType(RippleFilter.NOISE);
-        ripple.setXAmplitude(3);
+        ripple.setXAmplitude(10);
         ripple.setYAmplitude(3);
         ripple.setXWavelength(20);
         ripple.setYWavelength(10);
@@ -129,27 +141,47 @@ public class FilteredBaffleListGimpyEngine extends ListImageCaptchaEngine
         crystal.setEdgeThickness(0.2f);
         crystal.setRandomness(0.1f);
 
+        TextPaster paster =
+            new RandomTextPaster(new Integer(8), new Integer(10), Color.gray);
+        BackgroundGenerator back =
+            new FunkyBackgroundGenerator(new Integer(200), new Integer(100));
+        FontGenerator font =
+            new RandomFontGenerator(new Integer(25), new Integer(35));
+        WordGenerator words =
+            new DictionaryWordGenerator(new FileDictionnary("toddlist"));
 
-        //word generator
-         WordGenerator words = new DictionaryWordGenerator(new FileDictionnary("toddlist"));
-         //wordtoimage components
-         TextPaster paster = new BaffleRandomTextPaster(new Integer(6), new Integer(8), Color.BLACK,new Integer(3),
-                 Color.WHITE);
-         BackgroundGenerator back = new UniColorBackgroundGenerator(new Integer(200), new Integer(100),Color.WHITE);
-         //BackgroundGenerator back = new FunkyBackgroundGenerator(new Integer(200), new Integer(100));
-         FontGenerator font = new TwistedAndShearedRandomFontGenerator(new Integer(30), new Integer(40));
-        //Add factories
-         WordToImage word2image = new ComposedWordToImage(font, back, paster);
-        this.addFactory(new GimpyFactory(words, word2image));
         //build factories
-        word2image = new FilteredComposedWordToImage(font, back, paster, new ImageFilter[]{water}, new ImageFilter[]{emboss}, new ImageFilter[]{ripple});
-        this.addFactory(new GimpyFactory(words, word2image));
+        ImageCaptchaFactory[] factories = new ImageCaptchaFactory[3];
+        WordToImage word2image =
+            new FilteredComposedWordToImage(
+                font,
+                back,
+                paster,
+                new ImageFilter[] { water },
+                new ImageFilter[] { emboss },
+                new ImageFilter[] { ripple });
+        factories[0] = new GimpyFactory(words, word2image);
         //select filters for 2
-        word2image = new FilteredComposedWordToImage(font, back, paster, new ImageFilter[]{rippleBack}, new ImageFilter[]{crystal}, new ImageFilter[]{ripple});
-        this.addFactory(new GimpyFactory(words, word2image));
+        word2image =
+            new FilteredComposedWordToImage(
+                font,
+                back,
+                paster,
+                new ImageFilter[] { rippleBack },
+                new ImageFilter[] { crystal },
+                new ImageFilter[] { ripple });
+        factories[1] = new GimpyFactory(words, word2image);
         //select filters for 3
-        word2image = new FilteredComposedWordToImage(font, back, paster, new ImageFilter[]{rippleBack}, new ImageFilter[]{}, new ImageFilter[]{weaves});
-        this.addFactory(new GimpyFactory(words, word2image));
-
+        word2image =
+            new FilteredComposedWordToImage(
+                font,
+                back,
+                paster,
+                new ImageFilter[] { rippleBack },
+                new ImageFilter[] {},
+                new ImageFilter[] { weaves });
+        factories[2] = new GimpyFactory(words, word2image);
+        this.addFactories(factories);
     }
+
 }

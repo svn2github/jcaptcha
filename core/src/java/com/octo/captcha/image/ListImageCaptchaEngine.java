@@ -93,6 +93,16 @@ public abstract class ListImageCaptchaEngine extends ImageCaptchaEngine
     {
         return this.factories.add(factory);
     }
+    
+    /**
+     * Add an array of factories to the engine list
+     * @param factories
+     */
+    public void addFactories(ImageCaptchaFactory[] factories) {
+        for(int i = 0; i < factories.length; i++) {
+            this.factories.add(factories[i]);
+        }
+    }
 
     /**
      * remove the factory from the engine list

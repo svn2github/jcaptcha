@@ -74,7 +74,7 @@ public class ImageCaptchaToJPEG
 
         int i;
 
-        ImageToFile encoder = new ImageToFile();
+        //ImageToFile encoder = new ImageToFile();
         System.out.println("Beginning generation");
 
         for (i = 0 ; i < Integer.parseInt(args[2]) ; i++)
@@ -82,7 +82,7 @@ public class ImageCaptchaToJPEG
             ImageCaptcha captcha = pixCapchaEngine.getNextImageCaptcha();
             System.out.println("Captcha " + i + " retrieved");
             File out = new File(args[1] + File.separator + "captcha_" + i + ".jpg");
-            encoder.serialize(captcha.getImageChallenge(), out);
+            ImageToFile.serialize(captcha.getImageChallenge(), out);
             System.out.println("File i created " + out.toURI());
         }
 
