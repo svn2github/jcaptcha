@@ -52,8 +52,8 @@ package com.octo.captcha.module.filter.image;
 
 import com.octo.captcha.module.filter.FilterConfigUtils;
 import com.octo.captcha.module.jmx.JMXRegistrationHelper;
-import com.octo.captcha.service.AbstractManageableCaptchaServiceMBean;
 import com.octo.captcha.service.CaptchaServiceException;
+import com.octo.captcha.service.ManageableCaptchaService;
 import com.octo.captcha.service.image.ImageCaptchaService;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
@@ -372,8 +372,8 @@ public class ImageCaptchaFilter implements Filter {
             throw new CaptchaServiceException(e);
         }
         // register the ImageCaptchaService to an MBean server if specified
-        if (this.captchaRegisterToMBeanServer && captchaService instanceof AbstractManageableCaptchaServiceMBean) {
-            AbstractManageableCaptchaServiceMBean manageable = (AbstractManageableCaptchaServiceMBean) captchaService;
+        if (this.captchaRegisterToMBeanServer && captchaService instanceof ManageableCaptchaService) {
+            ManageableCaptchaService manageable = (ManageableCaptchaService) captchaService;
             JMXRegistrationHelper.registerToMBeanServer(manageable, JMX_REGISTERING_NAME);
         }
 
@@ -425,8 +425,8 @@ public class ImageCaptchaFilter implements Filter {
      * Remove from mbean server if needs to
      */
     public void destroy() {
-        if (captchaService instanceof AbstractManageableCaptchaServiceMBean && this.captchaRegisterToMBeanServer) {
-            AbstractManageableCaptchaServiceMBean manageable = (AbstractManageableCaptchaServiceMBean) captchaService;
+        if (captchaService instanceof ManageableCaptchaService && this.captchaRegisterToMBeanServer) {
+            ManageableCaptchaService manageable = (ManageableCaptchaService) captchaService;
             JMXRegistrationHelper.unregisterFromMBeanServer(JMX_REGISTERING_NAME);
         }
     }

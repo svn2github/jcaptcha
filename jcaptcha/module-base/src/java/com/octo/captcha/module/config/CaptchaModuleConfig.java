@@ -464,12 +464,13 @@ DAMAGES.
 package com.octo.captcha.module.config;
 
 import com.octo.captcha.module.CaptchaModuleException;
-import com.octo.captcha.service.CaptchaService;
+
+import com.octo.captcha.service.image.DefaultManageableImageCaptchaService;
 
 import java.util.ResourceBundle;
 
 /**
- * <p><ul><li></li></ul></p>
+ * Configuration base class for modules.
  *
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
@@ -483,10 +484,26 @@ public class CaptchaModuleConfig {
         return instance;
     }
 
+    /**
+     * Set the message type to be a bundle
+     */
     public static final String MESSAGE_TYPE_BUNDLE = "bundle";
+
+    /**
+     * Set the id to be generated
+     */
     public static final String ID_GENERATED = "generated";
+    /**
+     * Set the message type to be a text
+     */
     public static final String MESSAGE_TYPE_TEXT = "text";
+    /**
+     * Set the id to be retrieved from session id
+     */
     public static final String ID_SESSION = "session";
+    /**
+     * Set the default JMX registration name
+     */
     public static final String JMX_REGISTERING_NAME =
             "com.octo.captcha.module.struts:object=CaptchaServicePlugin";
 
@@ -495,14 +512,24 @@ public class CaptchaModuleConfig {
     }
 
     private Boolean registerToMbean = Boolean.FALSE;
+
     private String responseKey = "jcaptcha_response";
-    private String serviceClass;
+
+    private String serviceClass = "com.octo.captcha.service.image.DefaultManageableImageCaptchaService";
+
     private String messageType = com.octo.captcha.module.config.CaptchaModuleConfig.MESSAGE_TYPE_TEXT;
+
     private String messageValue = "You failed the jcaptcha test";
+
     private String messageKey = "jcaptcha_fail";
+
     private String idType = com.octo.captcha.module.config.CaptchaModuleConfig.ID_SESSION;
+
     private String idKey = "jcaptcha_id";
 
+    /**
+     * @return The key parameter name, default jcatpcha_id
+     */
     public String getIdKey() {
         return idKey;
     }
@@ -510,6 +537,10 @@ public class CaptchaModuleConfig {
     public void setIdKey(String idKey) {
         this.idKey = idKey;
     }
+
+    /**
+     * @return The message type parameter value, default text
+     */
 
     public String getMessageType() {
         return messageType;
@@ -519,6 +550,9 @@ public class CaptchaModuleConfig {
         this.messageType = messageType;
     }
 
+    /**
+     * @return The message parameter value, default "you failed the captcha test"
+     */
     public String getMessageValue() {
         return messageValue;
     }
@@ -527,6 +561,9 @@ public class CaptchaModuleConfig {
         this.messageValue = messageValue;
     }
 
+    /**
+     * @return The message parameter key, default "jcaptcha_fail"
+     */
     public String getMessageKey() {
         return messageKey;
     }
@@ -534,7 +571,9 @@ public class CaptchaModuleConfig {
     public void setMessageKey(String messageKey) {
         this.messageKey = messageKey;
     }
-
+     /**
+     * @return The id generation type, default "session"
+     */
     public String getIdType() {
         return idType;
     }
@@ -543,7 +582,9 @@ public class CaptchaModuleConfig {
         this.idType = idType;
     }
 
-
+    /**
+     * @return The jcaptcha service class name, default "jcaptcha_fail"
+     */
     public String getServiceClass() {
         return serviceClass;
     }
@@ -609,12 +650,9 @@ public class CaptchaModuleConfig {
 
         // try to create the CaptchaService
         try {
-            CaptchaService service = (CaptchaService) Class.forName(serviceClass).newInstance();
-        } catch (InstantiationException e) {
-            throw new CaptchaModuleException("Error during Service Class initialization", e);
-        } catch (IllegalAccessException e) {
-            throw new CaptchaModuleException("Error during Service Class initialization", e);
-        } catch (ClassNotFoundException e) {
+             Class.forName(serviceClass).newInstance();
+        } catch (Throwable e) {
+            e.printStackTrace();
             throw new CaptchaModuleException("Error during Service Class initialization", e);
         }
 

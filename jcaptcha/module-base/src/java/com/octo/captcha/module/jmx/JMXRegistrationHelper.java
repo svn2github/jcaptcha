@@ -463,8 +463,8 @@ DAMAGES.
 */
 package com.octo.captcha.module.jmx;
 
-import com.octo.captcha.service.AbstractManageableCaptchaServiceMBean;
 import com.octo.captcha.service.CaptchaServiceException;
+import com.octo.captcha.service.ManageableCaptchaService;
 
 import javax.management.*;
 import java.util.ArrayList;
@@ -490,7 +490,7 @@ public class JMXRegistrationHelper {
      *          </ul>
      * @see com.octo.captcha.service.CaptchaServiceException
      */
-    public static void registerToMBeanServer(AbstractManageableCaptchaServiceMBean service, String name)
+    public static void registerToMBeanServer(ManageableCaptchaService service, String name)
             throws CaptchaServiceException {
         if (name == null) throw new CaptchaServiceException("Service registration name can't be null");
         ArrayList mbeanServers = MBeanServerFactory.findMBeanServer(null);
