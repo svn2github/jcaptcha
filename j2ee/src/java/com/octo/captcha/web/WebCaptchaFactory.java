@@ -92,7 +92,7 @@ public class WebCaptchaFactory
      * Default captcha implementation used by the factory.
      */
     private static String webCaptchaDefaultImplementation =
-        "com.octo.captcha.impl.RandomStringCaptcha";
+        "com.octo.captcha.web.impl.TestGimpy";
 
     ////////////////////////////////////
     // Static initialization
