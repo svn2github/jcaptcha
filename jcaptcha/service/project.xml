@@ -54,6 +54,11 @@
               </dependency>
 
 
+    	<dependency>
+    	    <groupId>jhlabs</groupId>
+    	    <artifactId>imaging</artifactId>
+            <version>01012005</version>
+    	</dependency>
 
       <dependency>
            <groupId>ehcache</groupId>
