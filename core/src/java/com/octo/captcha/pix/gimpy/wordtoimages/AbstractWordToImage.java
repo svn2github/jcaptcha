@@ -108,6 +108,7 @@ public abstract class AbstractWordToImage implements WordToImage {
         //create attribute string from word
         AttributedString attributedWord = new AttributedString(word);
         //apply font to string
+        
         for (int i = 0; i < wordLenght; i++) {
             Font font = getFont();//get the new font for next character
             //apply font to next character
