@@ -89,7 +89,7 @@ public class ImageCaptchaWebServiceEndpoint implements Remote
     /////////////////////////////
 
     /**
-     * @TODO : THIS IS ONLY A TEST VERSION
+     * @TODO : MAKE REGISTERING TO MBEAN SERVER AN OPTION !
      */
     public ImageCaptchaWebServiceEndpoint()
     {
@@ -100,7 +100,9 @@ public class ImageCaptchaWebServiceEndpoint implements Remote
         }
         catch (ImageCaptchaServiceException e)
         {
-            log.warn("Unable to register the internal service to an MBean server : ", e);
+            log.warn(
+                "Unable to register the internal service to an MBean server : ",
+                e);
         }
     }
 
@@ -109,7 +111,7 @@ public class ImageCaptchaWebServiceEndpoint implements Remote
     /////////////////////////////
 
     /**
-     * @TODO : THIS IS ONLY A TEST VERSION
+     * @TODO : WHAT IS THE LIFECYCLE OF THE SERVICE ? WHEN TO UNREGISTER ?
      */
     public void finalize()
     {

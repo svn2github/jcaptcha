@@ -48,67 +48,79 @@
  *
  *
  */
+package com.octo.captcha.j2ee;
 
-package com.octo.captcha.j2ee.servlet;
+import java.util.Properties;
 
-import com.octo.captcha.image.ImageCaptchaEngine;
-
-import javax.servlet.http.HttpServlet;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
+import junit.framework.TestCase;
 
 /**
- * <p>intitialize an engine which name has been declared in the init parameter
- * EngineClass and provide it via getEngine method</p>
- * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
+ * @TODO : DOCUMENT ME !
+ *
  * @version $Id$
+ *
+ * @author <a href="mailto:sbr@octo.com">Sebastien Brunot</a>
  */
-public class ImageCaptchaEngineInitializerServlet extends HttpServlet
+public class ImageCaptchaServiceTest extends TestCase
 {
 
     /**
-     * @TODO : DOCUMENT ME !
+     * Constructor for ImageCaptchaServiceTest.
+     * @param theName the name of the test case
      */
-    public static String JCAPTCHA = "JCAPTCHA";
-
-    /**
-     * @TODO DOCUMENT ME !
-     */
-    public static String ENGINE_CLASS = "engineClass";
-
-    /**
-     * @TODO : DOCUMENT ME !
-     */
-    private static ImageCaptchaEngine engine;
-
-    /**
-     * @see javax.servlet.Servlet#init(javax.servlet.ServletConfig)
-     */
-    public void init(ServletConfig theServletConfig) throws ServletException
+    public ImageCaptchaServiceTest(String theName)
     {
-        super.init(theServletConfig);
-        String engineClassName =
-            theServletConfig.getInitParameter(ENGINE_CLASS);
+        super(theName);
+    }
+
+    /**
+     * @see TestCase#setUp()
+     */
+    protected void setUp() throws Exception
+    {
+        super.setUp();
+    }
+
+    /**
+     * @see TestCase#tearDown()
+     */
+    protected void tearDown() throws Exception
+    {
+        super.tearDown();
+    }
+
+    /**
+     * Test for null ImageCaptchaService(Properties)
+     */
+    public void testImageCaptchaServicePropertiesNull()
+    {
         try
         {
-            engine =
-                (ImageCaptchaEngine) Class
-                    .forName(engineClassName)
-                    .newInstance();
+            ImageCaptchaService testedService = new ImageCaptchaService(null);
+            fail("A runtime exception should have been thrown !");
         }
-        catch (Throwable e)
+        catch (RuntimeException e)
         {
-            e.printStackTrace();
-            throw new ServletException(e);
+            assertTrue(true);
         }
     }
 
     /**
-     * @TODO : DOCUMENT ME !
-     * @return @TODO : DOCUMENT ME !
+     * Test for empty ImageCaptchaService(Properties)
      */
-    public static ImageCaptchaEngine getEngine()
+    public void testImageCaptchaServicePropertiesEmpty()
     {
-        return engine;
+        try
+        {
+            Properties emptyProperties = new Properties();
+            ImageCaptchaService testedService =
+                new ImageCaptchaService(emptyProperties);
+            fail("A runtime exception should have been thrown !");
+        }
+        catch (RuntimeException e)
+        {
+            assertTrue(true);
+        }
     }
+
 }

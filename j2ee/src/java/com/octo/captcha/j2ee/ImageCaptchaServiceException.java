@@ -99,19 +99,16 @@ public class ImageCaptchaServiceException extends Exception
     public static final int NO_CAPTCHA_WITH_THIS_ID_ERROR = 2;
 
     /**
-     * @TODO : DESCRIBE ME WITH JMX SPEC (MalformedObjectNameException)
+     * The format of the string to use as the registering name for the
+     * service does not correspond to a valid javax.management.ObjectName
+     * @see javax.management.MalformedObjectNameException
      */
     public static final int MALFORMED_REGISTERING_NAME = 3;
 
     /**
-     * @TODO : DESCRIBE ME WITH JMX SPEC (InstanceAlreadyExistsException)
+     * The service is already registered to the MBean Server.
      */
     public static final int INSTANCE_ALREADY_REGISTERED = 4;
-
-    /**
-     * @TODO : DESCRIBE ME WITH JMX SPEC (MBeanRegistrationException)
-     */
-    public static final int REGISTRATION_EXCEPTION = 5;
 
     /////////////////////////////////
     // Attributes
@@ -126,9 +123,8 @@ public class ImageCaptchaServiceException extends Exception
             "Unknown error",
             "Too many client are using the service",
             "No captcha associated with this id in the service internal store",
-            "TO BE DESCRIBED (MalformedObjectNameException)",
-            "TO BE DESCRIBED (InstanceAlreadyExistsException)",
-            "TO BE DESCRIBED (MBeanRegistrationException)" };
+            "The registering name is not a valid javax.management.ObjectName",
+            "The service is already registered to the MBean server"};
 
     /**
      * a code that details the error cause (see constants)

@@ -46,46 +46,64 @@
  * SUCH DAMAGE.
  * ====================================================================
  *
+ *
  */
 
 package com.octo.captcha.j2ee.servlet;
 
-import com.octo.captcha.image.ImageCaptchaEngine;
-import com.octo.captcha.image.ImageCaptcha;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.servlet.ServletException;
-import javax.servlet.ServletConfig;
-import javax.imageio.ImageIO;
-import java.io.IOException;
+
+import com.octo.captcha.image.ImageCaptcha;
 
 /**
  * <p>Description: </p>
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
- * @version 1.0
+ * @version $Id$
  */
 public class ImageCaptchaToImageServlet extends HttpServlet
 {
 
-
-    protected void doGet(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException
+    /**
+     * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     */
+    protected void doGet(
+        HttpServletRequest theHttpServletRequest,
+        HttpServletResponse theHttpServletResponse)
+        throws ServletException, IOException
     {
-       //HttpSession session = httpServletRequest.getSession();
-       ImageCaptcha captcha =(ImageCaptcha) httpServletRequest.getSession().getAttribute(ImageCaptchaEngineInitializerServlet.JCAPTCHA);
-       if(captcha!=null){
-        ImageIO.write(captcha.getImageChallenge(),"jpg",httpServletResponse.getOutputStream());
-           httpServletResponse.getOutputStream().flush();
-           return;
-       }else{
-           return;
-       }
+        //HttpSession session = httpServletRequest.getSession();
+        ImageCaptcha captcha =
+            (ImageCaptcha) theHttpServletRequest.getSession().getAttribute(
+                ImageCaptchaEngineInitializerServlet.JCAPTCHA);
+        if (captcha != null)
+        {
+            ImageIO.write(
+                captcha.getImageChallenge(),
+                "jpg",
+                theHttpServletResponse.getOutputStream());
+            theHttpServletResponse.getOutputStream().flush();
+            return;
+        }
+        else
+        {
+            return;
+        }
     }
 
-    protected void doPost(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException
+    /**
+     * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     */
+    protected void doPost(
+        HttpServletRequest theHttpServletRequest,
+        HttpServletResponse theHttpServletResponse)
+        throws ServletException, IOException
     {
-        doGet(httpServletRequest, httpServletResponse);
+        doGet(theHttpServletRequest, theHttpServletResponse);
     }
 }

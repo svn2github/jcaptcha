@@ -108,7 +108,7 @@ public class ImageCaptchaService implements ImageCaptchaServiceMBean
      * service initialization file. This is mandatory parameter in
      * the service initialization file.
      */
-    private static final String MAX_NUMBER_OF_SIMULTANEOUS_CAPTCHAS =
+    public static final String MAX_NUMBER_OF_SIMULTANEOUS_CAPTCHAS_PROP =
         "com.octo.captcha.j2ee.maxNumberOfSimultaneousCaptchas";
 
     /**
@@ -117,7 +117,7 @@ public class ImageCaptchaService implements ImageCaptchaServiceMBean
      * intialization file. This is a mandatory parameter in the
      * service initialization file.
      */
-    private static final String MIN_GUARANTED_STORAGE_DELAY_IN_SECONDS =
+    public static final String MIN_GUARANTED_STORAGE_DELAY_IN_SECONDS_PROP =
         "com.octo.captcha.j2ee.minGuarantedStorageDelayInSeconds";
 
     /**
@@ -126,7 +126,7 @@ public class ImageCaptchaService implements ImageCaptchaServiceMBean
      * initialization file. This is a mandatory parameter in the service
      * initialization file.
      */
-    private static final String ENGINE_CLASS_INIT_PARAMETER =
+    public static final String ENGINE_CLASS_INIT_PARAMETER_PROP =
         "com.octo.captcha.j2ee.imageCaptchaEngineClass";
 
     ////////////////////////////////////
@@ -254,6 +254,7 @@ public class ImageCaptchaService implements ImageCaptchaServiceMBean
      * <ul>
      *  <li> ImageCaptchaServiceException.TOO_MANY_USERS_ERROR </li>
      * </ul>
+     * @see com.octo.captcha.j2ee.ImageCaptchaServiceException#TOO_MANY_USERS_ERROR
      */
     public byte[] generateCaptchaAndRenderChallengeAsJpeg(String theCaptchaID)
         throws ImageCaptchaServiceException
@@ -327,6 +328,7 @@ public class ImageCaptchaService implements ImageCaptchaServiceMBean
      * <ul>
      *  <li> ImageCaptchaServiceException.NO_CAPTCHA_WITH_THIS_ID_ERROR </li>
      * </ul>
+     * @see com.octo.captcha.j2ee.ImageCaptchaServiceException#NO_CAPTCHA_WITH_THIS_ID_ERROR
      */
     public boolean verifyResponseToACaptchaChallenge(
         String theCaptchaID,
@@ -388,12 +390,12 @@ public class ImageCaptchaService implements ImageCaptchaServiceMBean
      * to the MBean server.
      * @throws ImageCaptchaServiceException in case of error. Possible
      * error details are :
-     * @TODO : DESCRIBE EXCEPTION DETAILS !!!!
      * <ul>
      *  <li> ImageCaptchaServiceException.MALFORMED_REGISTERING_NAME</li>
      *  <li> ImageCaptchaServiceException.INSTANCE_ALREADY_REGISTERED</li>
-     *  <li> ImageCaptchaServiceException.REGISTRATION_ERROR</li>
      * </ul>
+     * @see com.octo.captcha.j2ee.ImageCaptchaServiceException#MALFORMED_REGISTERING_NAME
+     * @see com.octo.captcha.j2ee.ImageCaptchaServiceException#INSTANCE_ALREADY_REGISTERED
      */
     public void registerToMBeanServer(String theRegisteringName)
         throws ImageCaptchaServiceException
@@ -427,8 +429,12 @@ public class ImageCaptchaService implements ImageCaptchaServiceMBean
             }
             catch (MBeanRegistrationException e)
             {
-                throw new ImageCaptchaServiceException(
-                    ImageCaptchaServiceException.REGISTRATION_EXCEPTION,
+                // this exception should never be raised (raised
+                // only by an MBean that implements the MBeanRegistration
+                // interface.
+                log.error(
+                    "An unexpected exception has been raised : "
+                        + "ImageCaptchaService needs maintenance !",
                     e);
             }
             catch (NotCompliantMBeanException e)
@@ -593,11 +599,10 @@ public class ImageCaptchaService implements ImageCaptchaServiceMBean
     /**
      * @see com.octo.captcha.j2ee.ImageCaptchaServiceMBean#setMinGuarantedStorageDelayInSeconds(int)
      */
-    public void setMinGuarantedStorageDelayInSeconds(int theMinGuarantedStorageDelayInSeconds)
+    public void setMinGuarantedStorageDelayInSeconds(int theDelayInSeconds)
     {
-        this.minGuarantedStorageDelayInSeconds =
-            theMinGuarantedStorageDelayInSeconds;
-        this.internalStore.setTimeToLive(theMinGuarantedStorageDelayInSeconds);
+        this.minGuarantedStorageDelayInSeconds = theDelayInSeconds;
+        this.internalStore.setTimeToLive(theDelayInSeconds);
     }
 
     //////////////////////////////////////
@@ -613,11 +618,43 @@ public class ImageCaptchaService implements ImageCaptchaServiceMBean
      */
     private void initializeService(Properties theInitializationValues)
     {
+        // Verfify that all required initialization values are present
+        if (theInitializationValues == null)
+        {
+            throw new RuntimeException(
+                "No initialization values provided"
+                    + " (Properties object is null)");
+        }
+        else
+        {
+            if (!theInitializationValues
+                .containsKey(MAX_NUMBER_OF_SIMULTANEOUS_CAPTCHAS_PROP))
+            {
+                throw new RuntimeException(
+                    MAX_NUMBER_OF_SIMULTANEOUS_CAPTCHAS_PROP
+                        + " initialization parameter missing");
+            }
+            if (!theInitializationValues
+                .containsKey(MIN_GUARANTED_STORAGE_DELAY_IN_SECONDS_PROP))
+            {
+                throw new RuntimeException(
+                    MIN_GUARANTED_STORAGE_DELAY_IN_SECONDS_PROP
+                        + " initialization parameter missing");
+            }
+            if (!theInitializationValues
+                .containsKey(ENGINE_CLASS_INIT_PARAMETER_PROP))
+            {
+                throw new RuntimeException(
+                    ENGINE_CLASS_INIT_PARAMETER_PROP
+                        + " initialization parameter missing");
+            }
+        }
+
         // get the maximum number of simultaneous captchas from the
-        // resource bundle
+        // properties
         String maxNumberOfSimultaneousCaptchasAsString =
             theInitializationValues.getProperty(
-                MAX_NUMBER_OF_SIMULTANEOUS_CAPTCHAS);
+                MAX_NUMBER_OF_SIMULTANEOUS_CAPTCHAS_PROP);
         Integer maxNumberOfSimultaneousCaptchas;
         try
         {
@@ -628,7 +665,7 @@ public class ImageCaptchaService implements ImageCaptchaServiceMBean
         {
             throw new RuntimeException(
                 "Initialization error : initialization parameter "
-                    + MAX_NUMBER_OF_SIMULTANEOUS_CAPTCHAS
+                    + MAX_NUMBER_OF_SIMULTANEOUS_CAPTCHAS_PROP
                     + " must be an integer !");
         }
         this.maxNumberOfSimultaneousCaptchas =
@@ -636,10 +673,10 @@ public class ImageCaptchaService implements ImageCaptchaServiceMBean
 
         // get the maximum waiting delay between guaranted to the user
         // between generation and verification of a captcha from the
-        // resource bundle
+        // properties
         String minGuarantedStorageDelayInSecondsAsString =
             theInitializationValues.getProperty(
-                MIN_GUARANTED_STORAGE_DELAY_IN_SECONDS);
+                MIN_GUARANTED_STORAGE_DELAY_IN_SECONDS_PROP);
         Integer minGuarantedStorageDelayInSeconds;
         try
         {
@@ -650,7 +687,7 @@ public class ImageCaptchaService implements ImageCaptchaServiceMBean
         {
             throw new RuntimeException(
                 "Initialization error : initialization parameter "
-                    + MIN_GUARANTED_STORAGE_DELAY_IN_SECONDS
+                    + MIN_GUARANTED_STORAGE_DELAY_IN_SECONDS_PROP
                     + " must be an integer !");
         }
         this.minGuarantedStorageDelayInSeconds =
@@ -662,9 +699,10 @@ public class ImageCaptchaService implements ImageCaptchaServiceMBean
                 this.maxNumberOfSimultaneousCaptchas,
                 (this.minGuarantedStorageDelayInSeconds * 1000));
 
-        // get the ImageCaptchaEngine class name from the resource bundle
+        // get the ImageCaptchaEngine class name from the properties
         String engineClassName =
-            theInitializationValues.getProperty(ENGINE_CLASS_INIT_PARAMETER);
+            theInitializationValues.getProperty(
+                ENGINE_CLASS_INIT_PARAMETER_PROP);
 
         // create an instance of the engine
         try
@@ -678,19 +716,19 @@ public class ImageCaptchaService implements ImageCaptchaServiceMBean
         {
             throw new RuntimeException(
                 "Initialization error : can't find class "
-                    + ENGINE_CLASS_INIT_PARAMETER);
+                    + ENGINE_CLASS_INIT_PARAMETER_PROP);
         }
         catch (InstantiationException e)
         {
             throw new RuntimeException(
                 "Initialization error : can't instanciate class "
-                    + ENGINE_CLASS_INIT_PARAMETER);
+                    + ENGINE_CLASS_INIT_PARAMETER_PROP);
         }
         catch (IllegalAccessException e)
         {
             throw new RuntimeException(
                 "Initialization error : can't instanciate class "
-                    + ENGINE_CLASS_INIT_PARAMETER);
+                    + ENGINE_CLASS_INIT_PARAMETER_PROP);
         }
     }
 

@@ -50,20 +50,11 @@
  */
 package com.octo.captcha.j2ee.servlet;
 
-import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Properties;
 import java.util.StringTokenizer;
 
-import javax.management.InstanceAlreadyExistsException;
-import javax.management.InstanceNotFoundException;
-import javax.management.MBeanRegistrationException;
-import javax.management.MBeanServer;
-import javax.management.MBeanServerFactory;
-import javax.management.MalformedObjectNameException;
-import javax.management.NotCompliantMBeanException;
-import javax.management.ObjectName;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -78,14 +69,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-
-import com.octo.captcha.utils.ConstantCapacityHashtable;
-import com.octo.captcha.utils.ConstantCapacityHashtableFullException;
+import com.octo.captcha.j2ee.ImageCaptchaService;
+import com.octo.captcha.j2ee.ImageCaptchaServiceException;
 import com.octo.utils.FilterConfigUtils;
-import com.octo.captcha.image.ImageCaptcha;
-import com.octo.captcha.image.ImageCaptchaEngine;
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 /**
  * ImageCaptchaFilter is a J2EE Filter designed to add image captchas to the
@@ -117,7 +103,7 @@ import com.sun.image.codec.jpeg.JPEGImageEncoder;
  *
  * @author <a href="mailto:sbr@octo.com">Sebastien Brunot</a>
  */
-public class ImageCaptchaFilter implements Filter, ImageCaptchaFilterMBean
+public class ImageCaptchaFilter implements Filter
 {
     ////////////////////////////////////
     // Constants
@@ -143,6 +129,11 @@ public class ImageCaptchaFilter implements Filter, ImageCaptchaFilterMBean
      * Logger (commons-logging)
      */
     private static Log log = LogFactory.getLog(ImageCaptchaFilter.class);
+
+    /**
+     * The ImageCaptchaService internaly used by the filter
+     */
+    private ImageCaptchaService captchaService = null;
 
     /**
      * The URL that commands a new captcha creation and its rendering as
@@ -195,13 +186,6 @@ public class ImageCaptchaFilter implements Filter, ImageCaptchaFilterMBean
         "CaptchaIDParameterName";
 
     /**
-     * The maximum length for the captcha ID, so that one can't try to attack
-     * the system by requesting captcha generation providing heavy keys
-     * (filter parameter to define in web.xml)
-     */
-    private int captchaIDMaxLength = 0;
-
-    /**
      * The name of the filter parameter in web.xml for captchaIDMaxLength
      */
     private static final String CAPTCHA_ID_MAX_LENGTH_PARAMETER =
@@ -222,30 +206,24 @@ public class ImageCaptchaFilter implements Filter, ImageCaptchaFilterMBean
         "CaptchaChallengeResponseParameterName";
 
     /**
-     * The size of the internal store
-     * @TODO : add more documentation about this !!!
-     * (filter parameter to define in web.xml)
+     * The name of the filter parameter in web.xml for the
+     * internal ImageCaptcha Service 
+     * ImageCaptchaService.MAX_NUMBER_OF_SIMULTANEOUS_CAPTCHAS_PROP
+     * initialization parameter.
+     * @see com.octo.captcha.j2ee.ImageCaptchaService#MAX_NUMBER_OF_SIMULTANEOUS_CAPTCHAS_PROP
      */
-    private int captchaInternalStoreSize = 0;
+    private static final String MAX_NUMBER_OF_SIMULTANEOUS_CAPTCHAS_PROP =
+        "MaxNumberOfSimultaneousCaptchas";
 
     /**
-     * The name of the filter parameter in web.xml for captchaInternalStoreSize
+     * The name of the filter parameter in web.xml for the
+     * internal ImageCaptchaService
+     * ImageCaptchaService.MIN_GUARANTED_STORAGE_DELAY_IN_SECONDS_PROP
+     * initialization parameter.
+     * @see com.octo.captcha.j2ee.ImageCaptchaService#MIN_GUARANTED_STORAGE_DELAY_IN_SECONDS_PROP
      */
-    private static final String CAPTCHA_INTERNAL_STORE_SIZE_PARAMETER =
-        "CaptchaInternalStoreSize";
-
-    /**
-     * The time to live of a captcha in the internal store
-     * before it is garbage collected
-     * (filter parameter to define in web.xml)
-     */
-    private int captchaTimeToLive = 0;
-
-    /**
-     * The name of the filter parameter in web.xml for captchaTimeToLive
-     */
-    private static final String CAPTCHA_TIME_TO_LIVE_PARAMETER =
-        "CaptchaTimeToLive";
+    private static final String MIN_GUARANTED_STORAGE_DELAY_IN_SECONDS_PROP =
+        "MinGuarantedStorageDelayInSeconds";
 
     /**
      * A boolean that signal if the CaptchaFilter should be registered to
@@ -267,48 +245,14 @@ public class ImageCaptchaFilter implements Filter, ImageCaptchaFilterMBean
     private ServletContext servletContext = null;
 
     /**
-     * A ConstantCapacityHashtable used to store and check generated captcha
-     */
-    private ConstantCapacityHashtable internalStore = null;
-
-    /**
-     * Engine used by the filter to generate captchas (the concrete
-     * implementation class must be specified in web.xml)
-     */
-    private ImageCaptchaEngine engine = null;
-
-    /**
-     * The name of the filter parameter in web.xml for
-     * the class name of the engine used by the filter
-     * to generate captchas
+     * The name of the filter parameter in web.xml for the
+     * internal ImageCaptchaService
+     * ImageCaptchaService.ENGINE_CLASS_INIT_PARAMETER_PROP
+     * initialization parameter.
+     * @see com.octo.captcha.j2ee.ImageCaptchaService#ENGINE_CLASS_INIT_PARAMETER_PROP
      */
     private static final String CAPTCHA_ENGINE_CLASS_PARAMETER =
         "ImageCaptchaEngineClass";
-
-    /**
-     * Was the filter successfully registered to a JMX MBean server ?
-     */
-    private boolean registeredToMBeanServer = false;
-
-    /**
-     * Number of captcha generated since the filter is up
-     */
-    private long totalNumberOfGeneratedCaptcha = 0;
-
-    /**
-     * Number of captcha correctly answered since the filter is up
-     */
-    private long totalNumberOfCaptchaCorrectlyAnswered = 0;
-
-    /**
-     * Number of captcha badly answered since the filter is up
-     */
-    private long totalNumberOfCaptchaBadlyAnswered = 0;
-
-    /**
-     * Number of captcha garbage collected since the filter is up
-     */
-    private long totalNumberOfGarbageCollectedCaptcha = 0;
 
     ////////////////////////////////////
     // Filter implementation
@@ -322,6 +266,10 @@ public class ImageCaptchaFilter implements Filter, ImageCaptchaFilterMBean
     public void init(final FilterConfig theFilterConfig)
         throws ServletException
     {
+
+        // get associated servlet context
+        this.servletContext = theFilterConfig.getServletContext();
+
         // get rendering URL from web.xml
         this.captchaRenderingURL =
             FilterConfigUtils.getStringInitParameter(
@@ -375,52 +323,12 @@ public class ImageCaptchaFilter implements Filter, ImageCaptchaFilterMBean
                 CAPTCHA_ID_PARAMETER_NAME_PARAMETER,
                 true);
 
-        // get captcha ID max length from web.xml
-        Integer captchaIDMaxMLengthAsInteger =
-            FilterConfigUtils.getIntegerInitParameter(
-                theFilterConfig,
-                CAPTCHA_ID_MAX_LENGTH_PARAMETER,
-                true,
-                0,
-                Integer.MAX_VALUE);
-        if (captchaIDMaxMLengthAsInteger != null)
-        {
-            this.captchaIDMaxLength = captchaIDMaxMLengthAsInteger.intValue();
-        }
-
         // get challenge response parameter name from web.xml
         this.captchaChallengeResponseParameterName =
             FilterConfigUtils.getStringInitParameter(
                 theFilterConfig,
                 CAPTCHA_RESPONSE_PARAMETER_NAME_PARAMETER,
                 true);
-
-        // get internal store size from web.xml
-        Integer captchaInternalStoreSizeAsInteger =
-            FilterConfigUtils.getIntegerInitParameter(
-                theFilterConfig,
-                CAPTCHA_INTERNAL_STORE_SIZE_PARAMETER,
-                true,
-                0,
-                Integer.MAX_VALUE);
-        if (captchaInternalStoreSizeAsInteger != null)
-        {
-            this.captchaInternalStoreSize =
-                captchaInternalStoreSizeAsInteger.intValue();
-        }
-
-        // get captcha time to live from web.xml
-        Integer captchaTimeToLiveAsInteger =
-            FilterConfigUtils.getIntegerInitParameter(
-                theFilterConfig,
-                CAPTCHA_TIME_TO_LIVE_PARAMETER,
-                true,
-                Integer.MIN_VALUE,
-                Integer.MAX_VALUE);
-        if (captchaTimeToLiveAsInteger != null)
-        {
-            this.captchaTimeToLive = captchaTimeToLiveAsInteger.intValue();
-        }
 
         // get from web.xml the indicator signaling if the CaptchaFilter
         // should be registered to an MBean Server
@@ -430,40 +338,58 @@ public class ImageCaptchaFilter implements Filter, ImageCaptchaFilterMBean
                 CAPTCHA_REGISTER_TO_MBEAN_SERVER_PARAMETER,
                 false);
 
-        // get from web.xml the ImageCaptchaEngine implementation class name
-        String engineClass =
-            FilterConfigUtils.getStringInitParameter(
+        // Extract the ImageCaptchaService initialization parameters
+        // from web.xml
+        Properties captchaServiceInitParameters = new Properties();
+        {
+            // get max number of simultaneous captchas from web.xml
+            String captchaInternalStoreSize =
+                FilterConfigUtils.getStringInitParameter(
+                    theFilterConfig,
+                    MAX_NUMBER_OF_SIMULTANEOUS_CAPTCHAS_PROP,
+                    true);
+            captchaServiceInitParameters.setProperty(
+                ImageCaptchaService.MAX_NUMBER_OF_SIMULTANEOUS_CAPTCHAS_PROP,
+                captchaInternalStoreSize);
+            // get minimum guaranted storage delay in seconds from web.xml
+            String captchaTimeToLive =
+                FilterConfigUtils.getStringInitParameter(
+                    theFilterConfig,
+                    MIN_GUARANTED_STORAGE_DELAY_IN_SECONDS_PROP,
+                    true);
+            captchaServiceInitParameters.setProperty(
+                ImageCaptchaService.MIN_GUARANTED_STORAGE_DELAY_IN_SECONDS_PROP,
+                captchaTimeToLive);
+            // get from web.xml the ImageCaptchaEngine implementation class name
+            String engineClass =
+                FilterConfigUtils.getStringInitParameter(
+                    theFilterConfig,
+                    CAPTCHA_ENGINE_CLASS_PARAMETER,
+                    true);
+            captchaServiceInitParameters.setProperty(
+                ImageCaptchaService.ENGINE_CLASS_INIT_PARAMETER_PROP,
+                engineClass);
+        }
+
+        // create the ImageCaptchaService
+        this.captchaService =
+            new ImageCaptchaService(captchaServiceInitParameters);
+
+        // get captcha ID max length from web.xml and set the
+        // ImageCaptchaService captcha ID max length value with it
+        Integer captchaIDMaxMLengthAsInteger =
+            FilterConfigUtils.getIntegerInitParameter(
                 theFilterConfig,
-                CAPTCHA_ENGINE_CLASS_PARAMETER,
-                true);
+                CAPTCHA_ID_MAX_LENGTH_PARAMETER,
+                true,
+                0,
+                Integer.MAX_VALUE);
+        this.captchaService.setCaptchaIDMaxLength(
+            captchaIDMaxMLengthAsInteger.intValue());
 
-        // create the engine
-        try
-        {
-            this.engine =
-                (ImageCaptchaEngine) Class.forName(engineClass).newInstance();
-        }
-        catch (Exception e)
-        {
-            throw new ServletException(
-                "Error trying to instanciate the engine (class "
-                    + engineClass
-                    + ")",
-                e);
-        }
-
-        // get associated servlet context
-        this.servletContext = theFilterConfig.getServletContext();
-
-        // init internal store
-        this.internalStore =
-            new ConstantCapacityHashtable(
-                this.captchaInternalStoreSize,
-                this.captchaTimeToLive);
-
+        // register the ImageCaptchaService to an MBean server if specified
         if (this.captchaRegisterToMBeanServer)
         {
-            // try to register to the current JMX MBeanServer, if any
             registerToMBeanServer();
         }
     }
@@ -512,11 +438,8 @@ public class ImageCaptchaFilter implements Filter, ImageCaptchaFilterMBean
      */
     public void destroy()
     {
-        if (this.registeredToMBeanServer)
-        {
-            // Unregister from the JMX MBean server
-            unregisterFromMBeanServer();
-        }
+        // Unregister ImageCaptchaService from the JMX MBean server
+        unregisterFromMBeanServer();
     }
 
     ////////////////////////////////////
@@ -524,89 +447,29 @@ public class ImageCaptchaFilter implements Filter, ImageCaptchaFilterMBean
     ////////////////////////////////////
 
     /**
-     * Register this to a JMX MBean Server, if any
+     * Register the internal ImageCaptchaService to a JMX MBean Server, if any
      */
     private void registerToMBeanServer()
     {
-        ArrayList mbeanServers = MBeanServerFactory.findMBeanServer(null);
-        if (mbeanServers.size() == 0)
+        try
         {
-            log.warn(
-                "No current MBean Server, skiping the registering process");
+            this.captchaService.registerToMBeanServer(JMX_REGISTERING_NAME);
         }
-        else
+        catch (ImageCaptchaServiceException e)
         {
-            MBeanServer mbeanServer = (MBeanServer) mbeanServers.get(0);
-            try
-            {
-                ObjectName name = new ObjectName(JMX_REGISTERING_NAME);
-                mbeanServer.registerMBean(this, name);
-                this.registeredToMBeanServer = true;
-            }
-            catch (MalformedObjectNameException e)
-            {
-                log.error(
-                    "Exception trying to create the object name to"
-                        + " register the ImageCaptchaFilter under",
-                    e);
-            }
-            catch (InstanceAlreadyExistsException e)
-            {
-                log.error(
-                    "Exception trying to register the ImageCaptchaFilter to"
-                        + " the MBean server",
-                    e);
-            }
-            catch (MBeanRegistrationException e)
-            {
-                log.error(
-                    "Exception trying to register the ImageCaptchaFilter to"
-                        + " the MBean server",
-                    e);
-            }
-            catch (NotCompliantMBeanException e)
-            {
-                log.error(
-                    "Exception trying to register the ImageCaptchaFilter to"
-                        + " the MBean server",
-                    e);
-            }
+            log.error(
+                "Exception trying to create the object name to"
+                    + " register the ImageCaptchaFilter under",
+                e);
         }
     }
 
     /**
-     * Unregister from an MBean server
+     * Unregister the internal ImageCaptchaService from an MBean server
      */
     private void unregisterFromMBeanServer()
     {
-        ArrayList mbeanServers = MBeanServerFactory.findMBeanServer(null);
-        MBeanServer mbeanServer = (MBeanServer) mbeanServers.get(0);
-        try
-        {
-            ObjectName name = new ObjectName(JMX_REGISTERING_NAME);
-            mbeanServer.unregisterMBean(name);
-        }
-        catch (MalformedObjectNameException e)
-        {
-            log.error(
-                "Exception trying to create the object name under witch"
-                    + " ImageCaptchaFilter is registered",
-                e);
-        }
-        catch (InstanceNotFoundException e)
-        {
-            log.error(
-                "Exception trying to unregister the ImageCaptchaFilter from"
-                    + " the MBean server",
-                e);
-        }
-        catch (MBeanRegistrationException e)
-        {
-            log.error(
-                "Exception trying to unregister the ImageCaptchaFilter from"
-                    + "the MBean server",
-                e);
-        }
+        this.captchaService.unregisterFromMBeanServer();
     }
 
     /**
@@ -627,11 +490,18 @@ public class ImageCaptchaFilter implements Filter, ImageCaptchaFilterMBean
     {
         // get captcha ID from the request
         String captchaID = theRequest.getParameter(captchaIDParameterName);
-        if ((captchaID == null)
-            || (captchaID.length() > this.captchaIDMaxLength))
+
+        // call the ImageCaptchaService methods
+        byte[] captchaChallengeAsJpeg = null;
+        try
         {
-            // If the captcha ID is not specified or is too long, return
-            // a 404 error
+            captchaChallengeAsJpeg =
+                this.captchaService.generateCaptchaAndRenderChallengeAsJpeg(
+                    captchaID);
+        }
+        catch (IllegalArgumentException e)
+        {
+            // log a security warning and return a 404...
             if (log.isWarnEnabled())
             {
                 log.warn(
@@ -639,43 +509,26 @@ public class ImageCaptchaFilter implements Filter, ImageCaptchaFilterMBean
                         + theRequest.getRemoteAddr()
                         + " to render an URL without ID"
                         + " or with a too long one");
+                theResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
+                return;
             }
-            theResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
-            return;
         }
-        // create a new captcha and associate it with the captcha ID
-        ImageCaptcha captcha = null;
-        captcha =
-            this.engine.getImageCaptchaFactory().getImageCaptcha(
-                theRequest.getLocale());
-        try
-        {
-            this.internalStore.put(captchaID, captcha);
-        }
-        catch (ConstantCapacityHashtableFullException e)
+        catch (ImageCaptchaServiceException e)
         {
             // log and return a 404 instead of an image...
             log.warn(
-                "Get an error trying to store a captcha in"
-                    + " the internal store : ",
+                "Error trying to generate a captcha and "
+                    + "render its challenge as JPEG",
                 e);
             theResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
 
-        // render the captcha in the response as a JPEG image
+        // render the captcha challenge as a JPEG image in the response
         theResponse.setContentType("image/jpeg");
         ServletOutputStream responseOutputStream =
             theResponse.getOutputStream();
-        BufferedImage image = captcha.getImageChallenge();
-        JPEGImageEncoder jpegEncoder =
-            JPEGCodec.createJPEGEncoder(responseOutputStream);
-        jpegEncoder.encode(image);
-        // dispose of the captcha image
-        captcha.disposeChallenge();
-
-        // update the total number of generated captcha
-        totalNumberOfGeneratedCaptcha += 1;
+        responseOutputStream.write(captchaChallengeAsJpeg);
     }
 
     /**
@@ -699,22 +552,6 @@ public class ImageCaptchaFilter implements Filter, ImageCaptchaFilterMBean
     {
         // get captcha ID from the request
         String captchaID = theRequest.getParameter(captchaIDParameterName);
-        if ((captchaID == null)
-            || (captchaID.length() > this.captchaIDMaxLength))
-        {
-            // If the captcha ID is not specified or is too long,
-            // return a 404 error
-            if (log.isWarnEnabled())
-            {
-                log.warn(
-                    "There was a try from "
-                        + theRequest.getRemoteAddr()
-                        + " to render an URL without ID"
-                        + " or with a too long one");
-            }
-            theResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
-            return;
-        }
 
         // get challenge response from the request
         String challengeResponse =
@@ -726,32 +563,30 @@ public class ImageCaptchaFilter implements Filter, ImageCaptchaFilterMBean
             return;
         }
 
-        // get the captcha from internal store and remove it from there
-        ImageCaptcha captcha = (ImageCaptcha) this.internalStore.get(captchaID);
-        this.internalStore.remove(captchaID);
-
-        // if captcha is null, it means that captcha ID is a fake one or that
-        // the timeout is expired and there was a run of the garbage collector
-        // -> forward error
-        if (captcha == null)
+        // Call the ImageCaptchaService method
+        boolean isResponseCorrect = false;
+        try
         {
-            this.redirectError(theVerificationURL, theRequest, theResponse);
-            return;
+            isResponseCorrect =
+                this.captchaService.verifyResponseToACaptchaChallenge(
+                    captchaID,
+                    challengeResponse);
+        }
+        catch (ImageCaptchaServiceException e)
+        {
+            // nothing to do : isResponseCorrect is false
+            // so the user will be redirected to the error page
         }
 
-        // verify challenge response and forward to the corresponding URL
-        if (captcha.validateResponse(challengeResponse).booleanValue())
+        // forward user to the success URL or redirect it to the error URL
+        if (isResponseCorrect)
         {
-            // update the total number of captcha correctly answered
-            totalNumberOfCaptchaCorrectlyAnswered += 1;
             // clean the request and call the next element in filter chain
             // (forward success)
             this.forwardSuccess(theFilterChain, theRequest, theResponse);
         }
         else
         {
-            // update the total number of captcha badly answered
-            totalNumberOfCaptchaBadlyAnswered += 1;
             // forward
             this.redirectError(theVerificationURL, theRequest, theResponse);
         }
@@ -821,121 +656,5 @@ public class ImageCaptchaFilter implements Filter, ImageCaptchaFilterMBean
     {
         theRequest.removeAttribute(CAPTCHA_RESPONSE_PARAMETER_NAME_PARAMETER);
         theRequest.removeAttribute(CAPTCHA_ID_PARAMETER_NAME_PARAMETER);
-    }
-
-    ////////////////////////////////////
-    // Management interface implementation
-    ////////////////////////////////////
-
-    /**
-     * @see com.octo.captcha.j2ee.servlet.ImageCaptchaFilterMBean#getImageCaptchaEngineClass()
-     */
-    public String getImageCaptchaEngineClass()
-    {
-        return this.engine.getClass().getName();
-    }
-
-    /**
-     * @see com.octo.captcha.j2ee.servlet.ImageCaptchaFilterMBean#setImageCaptchaEngineClass
-     */
-    public void setImageCaptchaEngineClass(String theClassName)
-        throws IllegalArgumentException
-    {
-        // try to use this concrete ImageCaptchaEngine class as the
-        // engine
-        try
-        {
-            this.engine =
-                (ImageCaptchaEngine) Class.forName(theClassName).newInstance();
-        }
-        catch (Exception e)
-        {
-            throw new IllegalArgumentException(e.getMessage());
-        }
-    }
-
-    /**
-     * @see com.octo.captcha.j2ee.servlet.ImageCaptchaFilterMBean#getInternalStoreCapacity()
-     */
-    public int getInternalStoreCapacity()
-    {
-        return this.captchaInternalStoreSize;
-    }
-
-    /**
-     * @see com.octo.captcha.j2ee.servlet.ImageCaptchaFilterMBean#getTimeToLiveInMilliseconds()
-     */
-    public int getTimeToLiveInMilliseconds()
-    {
-        return this.internalStore.getTimeToLive();
-    }
-
-    /**
-     * @see com.octo.captcha.j2ee.servlet.ImageCaptchaFilterMBean#setTimeToLiveInMilliseconds(int)
-     */
-    public void setTimeToLiveInMilliseconds(int theTimeToLive)
-    {
-        // store the new time to live
-        this.captchaTimeToLive = theTimeToLive;
-        this.internalStore.setTimeToLive(theTimeToLive);
-    }
-
-    /**
-     * @see com.octo.captcha.j2ee.servlet.ImageCaptchaFilterMBean#getInternalStoreLoad()
-     */
-    public double getInternalStoreLoad()
-    {
-        double internalStoreSizeAsDouble = (double) this.internalStore.size();
-        double capacityAsDouble = (double) this.captchaInternalStoreSize;
-        return ((internalStoreSizeAsDouble / capacityAsDouble) * 100.0);
-    }
-
-    /**
-     * @see com.octo.captcha.j2ee.servlet.ImageCaptchaFilterMBean#getNumberOfTimeoutedEntriesInInternalStore()
-     */
-    public int getNumberOfTimeoutedEntriesInInternalStore()
-    {
-        return this.internalStore.getNumberOfGarbageCollectableEntries();
-    }
-
-    /**
-     * @see com.octo.captcha.j2ee.servlet.ImageCaptchaFilterMBean#getTotalNumberOfGeneratedCaptcha()
-     */
-    public long getTotalNumberOfGeneratedCaptcha()
-    {
-        return this.totalNumberOfGeneratedCaptcha;
-    }
-
-    /**
-     * @see com.octo.captcha.j2ee.servlet.ImageCaptchaFilterMBean#getTotalNumberOfCaptchaCorrectlyAnswered()
-     */
-    public long getTotalNumberOfCaptchaCorrectlyAnswered()
-    {
-        return this.totalNumberOfCaptchaCorrectlyAnswered;
-    }
-
-    /**
-     * @see com.octo.captcha.j2ee.servlet.ImageCaptchaFilterMBean#getTotalNumberOfCaptchaBadlyAnswered()
-     */
-    public long getTotalNumberOfCaptchaBadlyAnswered()
-    {
-        return this.totalNumberOfCaptchaBadlyAnswered;
-    }
-
-    /**
-     * @see com.octo.captcha.j2ee.servlet.ImageCaptchaFilterMBean#getTotalNumberOfGarbageCollectedCaptcha()
-     */
-    public long getTotalNumberOfGarbageCollectedCaptcha()
-    {
-        return this.totalNumberOfGarbageCollectedCaptcha;
-    }
-
-    /**
-     * @see com.octo.captcha.j2ee.servlet.ImageCaptchaFilterMBean#garbageCollectInternalStore()
-     */
-    public void garbageCollectInternalStore()
-    {
-        totalNumberOfGarbageCollectedCaptcha
-            += this.internalStore.garbageCollect();
     }
 }
