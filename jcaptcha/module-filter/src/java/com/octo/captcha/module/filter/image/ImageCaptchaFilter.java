@@ -52,6 +52,7 @@ package com.octo.captcha.module.filter.image;
 
 import com.octo.captcha.module.filter.FilterConfigUtils;
 import com.octo.captcha.module.jmx.JMXRegistrationHelper;
+import com.octo.captcha.module.web.image.ImageToJpegHelper;
 import com.octo.captcha.service.CaptchaServiceException;
 import com.octo.captcha.service.ManageableCaptchaService;
 import com.octo.captcha.service.image.ImageCaptchaService;
@@ -66,6 +67,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Hashtable;
 import java.util.StringTokenizer;
+import java.util.Locale;
 
 /**
  * ImageCaptchaFilter is a J2EE Filter designed to add image captchas to the
@@ -464,53 +466,9 @@ public class ImageCaptchaFilter implements Filter {
 
 
         String captchaID = theRequest.getSession().getId();//(String) theRequest.getParameter(captchaIDParameterName);
+        Locale locale = theRequest.getLocale();
 
-        // call the ManageableImageCaptchaService methods
-        byte[] captchaChallengeAsJpeg = null;
-        ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();
-        try {
-            BufferedImage challenge =
-                    this.captchaService.getImageChallengeForID(captchaID, theRequest.getLocale());
-            // the output stream to render the captcha image as jpeg into
-
-            // a jpeg encoder
-            JPEGImageEncoder jpegEncoder =
-                    JPEGCodec.createJPEGEncoder(jpegOutputStream);
-            jpegEncoder.encode(challenge);
-        } catch (IllegalArgumentException e) {
-            // log a security warning and return a 404...
-//            if (log.isWarnEnabled())
-//            {
-//                log.warn(
-//                    "There was a try from "
-//                        + theRequest.getRemoteAddr()
-//                        + " to render an URL without ID"
-//                        + " or with a too long one");
-//                theResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
-            return;
-//            }
-        } catch (CaptchaServiceException e) {
-            // log and return a 404 instead of an image...
-//            log.warn(
-//                "Error trying to generate a captcha and "
-//                    + "render its challenge as JPEG",
-//                e);
-            theResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
-            return;
-        }
-
-        captchaChallengeAsJpeg = jpegOutputStream.toByteArray();
-
-        // render the captcha challenge as a JPEG image in the response
-        theResponse.setHeader("Cache-Control", "no-store");
-        theResponse.setHeader("Pragma", "no-cache");
-        theResponse.setDateHeader("Expires", 0);
-
-        theResponse.setContentType("image/jpeg");
-        ServletOutputStream responseOutputStream =
-                theResponse.getOutputStream();
-        responseOutputStream.write(captchaChallengeAsJpeg);
-
+        ImageToJpegHelper.flushNewCaptchaToResponse(theRequest, theResponse, null,captchaService, captchaID,locale);
     }
 
     /**

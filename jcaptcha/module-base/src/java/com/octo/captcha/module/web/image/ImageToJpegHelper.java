@@ -461,88 +461,106 @@
 
                        END OF TERMS AND CONDITIONS
 */
-package com.octo.captcha.module.roller;
+package com.octo.captcha.module.web.image;
 
-import com.octo.captcha.module.config.CaptchaModuleConfigHelper;
-import com.octo.captcha.module.struts.CaptchaServicePlugin;
-import com.octo.captcha.service.CaptchaService;
+import com.sun.image.codec.jpeg.JPEGImageEncoder;
+import com.sun.image.codec.jpeg.JPEGCodec;
 import com.octo.captcha.service.CaptchaServiceException;
-import org.roller.presentation.velocity.CommentAuthenticator;
+import com.octo.captcha.service.image.ImageCaptchaService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.ServletOutputStream;
+import java.io.IOException;
+import java.io.ByteArrayOutputStream;
+import java.awt.image.BufferedImage;
+import java.util.Locale;
+
+import org.apache.commons.logging.Log;
 
 /**
- * User: mag
- * Date: 17 oct. 2004
- * Time: 17:36:22
+ * Helper class
+ *
+ * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
+ * @version 1.0
  */
-public class JCaptchaCommentAuthenticator implements CommentAuthenticator{
+public class ImageToJpegHelper {
 
-    private static final String htmlheader=
-            "<table cellspacing=\"0\" cellpadding=\"1\" border=\"0\" width=\"95%\"><tr><th width=\"116\">" ;
-    
-    private static final String htmlendheader=
-            ":</th>";
- private static final String htmlinput=
-                    "<td>" +
-                    "<input type=\"text\" name=\"";
-    private static final String htmlendinput=
-                "\" " +"size=\"50\" maxlength=\"255\" /></td></tr></table>";
-    private static final String htmlChallenge=
-                "<table cellspacing=\"0\" cellpadding=\"1\" border=\"0\" width=\"95%\"><tr><td><img src=\"";
+     /**
+     * retrieve a new ImageCaptcha using ImageCaptchaService and
+     * flush it to the response.<br/>
+     * Captcha are localized using request locale.<br/>
+     *
+     * This method returns a 404 to the client instead of the image if
+     * the request isn't correct (missing parameters, etc...)..<br/>
+     * The log may be null.<br/>
+      *
+     * @param theRequest  the request
+     * @param theResponse the response
+     * @param log a commons logger
+      *@param service an ImageCaptchaService instance
+     * @throws java.io.IOException if a problem occurs during the jpeg generation process
+     */
+    public static void flushNewCaptchaToResponse(HttpServletRequest theRequest,
+                                          HttpServletResponse theResponse, 
+                                          Log log, 
+                                          ImageCaptchaService service,
+                                          String id,
+                                          Locale locale)
+            throws IOException {
 
-    private static final String htmlendChallenge=
-                "\"></td></tr>" +
-            "</table>";
-        
 
-    
-    public String getHtml(org.apache.velocity.context.Context context, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-        String captchaID = CaptchaModuleConfigHelper.getId(httpServletRequest);
-        String question=CaptchaServicePlugin.getInstance().getService().getQuestionForID(captchaID,httpServletRequest.getLocale());
-        String  challengeUrl = context.get("ctxPath")+"/jcaptcha.do";
-        String responseKey = CaptchaServicePlugin.getInstance().getResponseKey();
-        StringBuffer html = new StringBuffer();
-        html.append(htmlheader);
-        html.append(question);
-        html.append(htmlendheader);
-        html.append(htmlinput);
-        html.append(responseKey);
-        html.append(htmlendinput);
-        html.append(htmlChallenge);
-        html.append(challengeUrl);
-        html.append(htmlendChallenge);
-        return html.toString();
-    }
 
-    public boolean authenticate(org.roller.pojos.CommentData commentData, HttpServletRequest httpServletRequest) {
 
-        CaptchaService service = CaptchaServicePlugin.getInstance().getService();
+        // call the ImageCaptchaService method to retrieve a captcha
+        byte[] captchaChallengeAsJpeg = null;
+        ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();
+        try {
+            BufferedImage challenge =
+                    service.getImageChallengeForID(id, locale);
+            // the output stream to render the captcha image as jpeg into
 
-        String responseKey = CaptchaServicePlugin.getInstance().getResponseKey();
-
-        String captchaID;
-
-        captchaID = CaptchaModuleConfigHelper.getId(httpServletRequest);
-
-        // get challenge response from the request
-        String challengeResponse =
-                httpServletRequest.getParameter(responseKey);
-
-        //cleanning the request
-        httpServletRequest.removeAttribute(responseKey);
-        Boolean isResponseCorrect = Boolean.FALSE;
-        if (challengeResponse != null) {
-        // Call the Service method
-            try {
-                isResponseCorrect = service.validateResponseForID(captchaID,
-                        challengeResponse);
-            } catch (CaptchaServiceException e) {
-                //e.printStackTrace();
+            // a jpeg encoder
+            JPEGImageEncoder jpegEncoder =
+                    JPEGCodec.createJPEGEncoder(jpegOutputStream);
+            jpegEncoder.encode(challenge);
+        } catch (IllegalArgumentException e) {
+        //    log a security warning and return a 404...
+        if (log!=null&&log.isWarnEnabled())
+        {
+                log.warn(
+                    "There was a try from "
+                        + theRequest.getRemoteAddr()
+                        + " to render an captcha with invalid ID :'"+id
+                        + "' or with a too long one");
+                theResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return;
             }
+        } catch (CaptchaServiceException e) {
+            // log and return a 404 instead of an image...
+            if (log!=null&&log.isWarnEnabled())
+        {
+                log.warn(
+
+                "Error trying to generate a captcha and "
+                    + "render its challenge as JPEG",
+                e);
         }
-        // return
-        return isResponseCorrect.booleanValue();
-    }
+            theResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return;
+        }
+             captchaChallengeAsJpeg = jpegOutputStream.toByteArray();
+
+        // render the captcha challenge as a JPEG image in the response
+        theResponse.setHeader("Cache-Control", "no-store");
+        theResponse.setHeader("Pragma", "no-cache");
+        theResponse.setDateHeader("Expires", 0);
+
+        theResponse.setContentType("image/jpeg");
+        ServletOutputStream responseOutputStream =
+                theResponse.getOutputStream();
+        responseOutputStream.write(captchaChallengeAsJpeg);
+     }
+
+
 }
