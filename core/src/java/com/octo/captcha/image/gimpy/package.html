@@ -1,0 +1,18 @@
+<HTML>
+<HEAD>
+	<TITLE>CAPTCHA</TITLE>
+</HEAD>
+<BODY>
+This package a struture for implementing gimpys<br>
+A gimpy is PixCaptcha with the question "Spell the word".
+Gimpy is based on the human ability to read extremely distorted and corrupted text,
+and the inability of current computer programs to do the same.
+
+This package defines a new CaptchaFactory and two new interfaces :
+<ul>
+<li>GimpyFactory : a CaptchaFactory building Gimpies from words</li>
+<li>WordGenerator : provides words to GimpyFactory</li>
+<li>WordToImage : build a image (BufferedImage) from a word (String)</li>
+</ul>
+</body>
+</html>
