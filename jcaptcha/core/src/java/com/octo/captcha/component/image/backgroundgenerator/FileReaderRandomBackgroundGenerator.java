@@ -484,7 +484,7 @@ import java.util.List;
  * <p/>
  * TODO : add some gif, bmp,... reader facilities.
  *
- * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public class FileReaderRandomBackgroundGenerator extends

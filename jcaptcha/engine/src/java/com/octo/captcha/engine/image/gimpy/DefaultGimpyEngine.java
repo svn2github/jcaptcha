@@ -505,37 +505,26 @@ public class DefaultGimpyEngine extends ListImageCaptchaEngine
      * this method should be implemented as folow : <ul> <li>First construct all
      * the factories you want to initialize the gimpy with</li> <li>then call
      * the this.addFactoriy method for each factory</li> </ul>
+     *
      */
     protected void buildInitialFactories()
     {
 
         //build filters
-        com.jhlabs.image.RippleFilter ripple = new com.jhlabs.image.RippleFilter();
-        com.jhlabs.image.TextureFilter tnoise = new com.jhlabs.image.TextureFilter();
+        com.jhlabs.image.WaterFilter water= new com.jhlabs.image.WaterFilter();
 
+        water.setAmplitude(3d);
+        water.setAntialias(true);
+        water.setPhase(20d);
+        water.setWavelength(70d);
 
-        ripple.setWaveType(com.jhlabs.image.RippleFilter.NOISE);
-        ripple.setXAmplitude(3);
-        ripple.setYAmplitude(3);
-        ripple.setXWavelength(20);
-        ripple.setYWavelength(10);
-        ripple.setEdgeAction(com.jhlabs.image.TransformFilter.CLAMP);
-
-
-            tnoise.setAmount(1.5d);
-            tnoise.gain = 0.4d;
-            tnoise.setScale(8d);
-
-           tnoise.setStretch(1d);
-
-        tnoise.bias =0.55f;
 
         ImageDeformation backDef = new ImageDeformationByFilters(
-                new ImageFilter[]{tnoise});
+                new ImageFilter[]{});
         ImageDeformation textDef = new ImageDeformationByFilters(
                 new ImageFilter[]{});
         ImageDeformation postDef = new ImageDeformationByFilters(
-                new ImageFilter[]{ripple});
+                new ImageFilter[]{water});
 
  //word generator
         com.octo.captcha.component.wordgenerator.WordGenerator dictionnaryWords = new com.octo.captcha.component.wordgenerator.ComposeDictionaryWordGenerator(
@@ -544,7 +533,7 @@ public class DefaultGimpyEngine extends ListImageCaptchaEngine
         //wordtoimage components
         TextPaster randomPaster = new BaffleRandomTextPaster(new Integer(6), new Integer(
                 7), Color.black,
-                new Integer(3), Color.white);
+                new Integer(2), Color.white);
         BackgroundGenerator back = new UniColorBackgroundGenerator(
                 new Integer(200), new Integer(100), Color.white);
 
@@ -554,7 +543,8 @@ public class DefaultGimpyEngine extends ListImageCaptchaEngine
         com.octo.captcha.component.image.wordtoimage.WordToImage word2image;
         word2image = new DeformedComposedWordToImage(shearedFont, back, randomPaster,
                         backDef,
-                        textDef,postDef
+                        textDef,
+                        postDef
                         );
 
 
