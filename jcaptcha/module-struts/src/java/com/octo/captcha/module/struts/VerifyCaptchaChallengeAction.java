@@ -481,7 +481,7 @@ import javax.servlet.http.HttpServletResponse;
  * Forwads to success if passed, to failure otherwise if exists or to input page adding the message to the corresponding key
  * @see  com.octo.captcha.module.config.CaptchaModuleConfig for the key names 
  *
- * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public class VerifyCaptchaChallengeAction extends Action {

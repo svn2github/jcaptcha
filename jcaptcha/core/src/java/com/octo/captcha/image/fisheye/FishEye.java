@@ -477,7 +477,7 @@ import java.util.StringTokenizer;
  * <li>Description : An image of a distorded picture. User have to point the
  * center of the deformation and to submit it.</li> </ul>
  *
- * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public class FishEye extends ImageCaptcha

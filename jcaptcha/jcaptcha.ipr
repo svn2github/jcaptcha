@@ -237,7 +237,7 @@
   </component>
   <component name="TDDConfig">
     <option name="idleMsBeforeTimerPause" value="300000" />
-    <option name="masterSuiteConfigurationName" />
+    <option name="masterSuiteConfigurationName" value="main" />
     <option name="rollingActivityCycleTimelineSampleSize" value="40" />
   </component>
   <component name="WebManager">

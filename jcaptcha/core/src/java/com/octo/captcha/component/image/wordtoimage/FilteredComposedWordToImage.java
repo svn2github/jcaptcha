@@ -489,7 +489,7 @@ import java.text.AttributedString;
  * alpha composite</li> <li>Apply the final filters </li> <li>Return the newly
  * created image</li> </ul>
  *
- * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
  * @version 1.0
  * @deprecated since beta-4 : use DeformedComposedWordToImage, that now use the
  *             new deformation component.

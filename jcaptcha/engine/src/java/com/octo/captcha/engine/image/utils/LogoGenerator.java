@@ -486,7 +486,7 @@ import java.io.IOException;
  * <p>Description: Generate a sample logo for the master webSite. Main method
  * takes one arg : the file path of the generated logo</p>
  *
- * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public class LogoGenerator

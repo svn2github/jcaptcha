@@ -480,7 +480,7 @@ import java.util.Random;
  * This factory use a Backgroud generator to retrieve a picture, Selects a
  * random square center for the deformation, and apply it.
  *
- * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public class FishEyeFactory extends ImageCaptchaFactory

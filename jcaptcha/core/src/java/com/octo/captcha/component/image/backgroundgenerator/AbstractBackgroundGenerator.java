@@ -473,7 +473,7 @@ import java.util.Random;
  * properties. This base class only use two parameter, width and height of the
  * generated background. By default widht = 200 and height= 100.</p>
  *
- * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public abstract class AbstractBackgroundGenerator

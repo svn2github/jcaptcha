@@ -944,7 +944,7 @@ DAMAGES.
  * Struts plugin, uses the module config.
  * @see com.octo.captcha.module.config.CaptchaModuleConfig
  *
- * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public class CaptchaServicePlugin implements PlugIn {

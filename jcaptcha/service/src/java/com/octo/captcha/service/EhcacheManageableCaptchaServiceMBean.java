@@ -470,7 +470,7 @@ package com.octo.captcha.service;
  * Change Service implementations classe.
  * Manage the captchaStore for use with the ehcache framework
  *
- * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine GARRIGUE</a>
+ * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine GARRIGUE</a>
  * @version 1.0
  */
 public interface EhcacheManageableCaptchaServiceMBean extends ManageableCaptchaService {

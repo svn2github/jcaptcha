@@ -469,7 +469,7 @@ import java.util.Locale;
 /**
  * <p>Base interface used by the DictionaryWordGenerator to retrieve words.</p>
  *
- * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public interface DictionaryReader

@@ -469,7 +469,7 @@ import java.awt.image.BufferedImage;
 /**
  * An image deformation takes an image, deforms it, and returns it.
  *
- * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public interface ImageDeformation

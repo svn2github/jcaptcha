@@ -469,7 +469,7 @@ import java.util.Locale;
 /**
  * <p>This interface defines methods to retrieve random words </p>.
  *
- * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public interface WordGenerator

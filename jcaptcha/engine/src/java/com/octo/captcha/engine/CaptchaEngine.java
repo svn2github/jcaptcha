@@ -67,7 +67,7 @@ import java.util.Locale;
  * to retrieve captchas. Sub classes may implement container services around
  * capcthas as, for example, Captchas pooling, serialization, and so.
  *
- * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public interface CaptchaEngine

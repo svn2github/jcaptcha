@@ -471,7 +471,7 @@ import java.awt.image.BufferedImage;
  * <p>Gradient background. Use the constructor to specify colors. Default color
  * are Black and Gray</p>
  *
- * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public class GradientBackgroundGenerator extends AbstractBackgroundGenerator

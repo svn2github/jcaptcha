@@ -93,7 +93,7 @@ import java.util.Locale;
  * All method may throw a CaptchaServiceException if an error occurs during Captcha Generation.
  * </p>
  *
- * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public interface CaptchaService {

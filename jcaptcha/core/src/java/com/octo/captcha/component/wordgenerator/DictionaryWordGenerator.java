@@ -475,7 +475,7 @@ import java.util.Locale;
  * contains words whose lenght covers the whole range specified in your factory,
  * some rutime exception will occur!</p>
  *
- * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public class DictionaryWordGenerator implements WordGenerator

@@ -94,7 +94,7 @@ import java.util.StringTokenizer;
  * The JMX Management interface for ImageCaptchaFilter is PixCaptchaFilterMbean.
  *
  * @author <a href="mailto:sbr@octo.com">Sebastien Brunot</a>
- * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine GARRIGUE</a>
+ * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine GARRIGUE</a>
  * @version $Id$
  */
 public class ImageCaptchaFilter implements Filter {

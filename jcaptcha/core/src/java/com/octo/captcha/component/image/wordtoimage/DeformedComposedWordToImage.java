@@ -487,7 +487,7 @@ import java.text.AttributedString;
  * <li>Paste the transparent image using an alpha composite</li> <li>Apply the
  * final deformations </li> <li>Return the newly created image</li> </ul>
  *
- * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public class DeformedComposedWordToImage extends ComposedWordToImage

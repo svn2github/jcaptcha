@@ -470,7 +470,7 @@ import java.awt.image.BufferedImage;
 /**
  * <p>Three color gradient background with randomization</p>
  *
- * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public class FunkyBackgroundGenerator extends AbstractBackgroundGenerator

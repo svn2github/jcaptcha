@@ -473,7 +473,7 @@ import java.util.Locale;
  * captcha constructor. Defines two methods to build and retrieve a captcha. A
  * no paramterer method and a localized method.
  *
- * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public interface CaptchaFactory

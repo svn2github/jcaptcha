@@ -495,7 +495,7 @@ import java.awt.image.ImageFilter;
  *
  * </p>
  *
- * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public class DefaultGimpyEngine extends ListImageCaptchaEngine

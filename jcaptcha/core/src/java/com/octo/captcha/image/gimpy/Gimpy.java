@@ -475,7 +475,7 @@ import java.io.Serializable;
  * <li>Description : An image of a distorded word is shown. User have to
  * recognize the word and to submit it.</li> </ul>
  *
- * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public class Gimpy extends ImageCaptcha implements Serializable

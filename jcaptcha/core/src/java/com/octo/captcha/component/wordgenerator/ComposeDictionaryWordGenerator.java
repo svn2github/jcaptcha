@@ -473,7 +473,7 @@ import java.util.Locale;
  * words.</p> It avoid dictionnary systematic submission, and may compose words
  * of any length.
  *
- * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public class ComposeDictionaryWordGenerator extends DictionaryWordGenerator

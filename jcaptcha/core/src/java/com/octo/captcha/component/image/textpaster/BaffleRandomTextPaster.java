@@ -477,7 +477,7 @@ import java.text.AttributedString;
  * You may specify the number of holes per glyph : 3 by default. You may specify
  * the color of holes : TextColor by default.
  *
- * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
  * @version 1.0
  * @see {http://www.parc.xerox.com/research/istl/projects/captcha/default.html}
  */

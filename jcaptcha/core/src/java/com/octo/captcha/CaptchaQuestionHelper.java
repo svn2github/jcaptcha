@@ -471,7 +471,7 @@ import java.util.ResourceBundle;
  * Helps to retrieve internationalized questions for captchas. Used by captcha
  * factories.
  *
- * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public final class CaptchaQuestionHelper

@@ -471,7 +471,7 @@ package com.octo.captcha.component.image.fontgenerator;
  * maxFontsize wich are the size font boundaries returned by the implementation.
  * By default minFontSize=10 and maxFontSize = 14.</p>
  *
- * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public abstract class AbstractFontGenerator implements FontGenerator

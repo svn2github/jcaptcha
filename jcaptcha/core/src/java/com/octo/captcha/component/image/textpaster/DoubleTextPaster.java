@@ -472,7 +472,7 @@ import java.text.AttributedString;
  * <p>Pastes two times the attributed string with a random decalage from
  * width/20 and height/2</p>
  *
- * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
 public class DoubleTextPaster extends AbstractTextPaster

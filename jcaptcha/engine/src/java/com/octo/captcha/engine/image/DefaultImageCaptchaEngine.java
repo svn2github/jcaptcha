@@ -475,7 +475,7 @@ import java.util.Random;
  * <p>This is a very simple gimpy, which is constructed from an array of Factory
  * and randomly return one when the getCaptchaFactory is called</p>
  *
- * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
+ * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
  * @version 1.0
  * @deprecated since beta 2 : use the ListImageCaptchaEngine instead.
  */
