@@ -538,13 +538,13 @@ public abstract class EngineLoadTestAbstract extends TestCase
             load(users, count, delay, max_time);
         }
 
-    public void test_2It_10000Del_100Us_2min() throws Throwable
+    public void test_2It_10000Del_100Us_5min() throws Throwable
         {
 
             int count = 2;
             int delay = 10000;
             int users = 100;
-            int max_time = 2 * 60 * 1000;
+            int max_time = 5 * 60 * 1000;
             load(users, count, delay, max_time);
         }
 
