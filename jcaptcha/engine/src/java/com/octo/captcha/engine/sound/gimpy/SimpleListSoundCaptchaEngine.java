@@ -464,9 +464,8 @@ DAMAGES.
 
 package com.octo.captcha.engine.sound.gimpy;
 
-
-import com.octo.captcha.component.sound.wordtosound.SimpleWordToSound;
 import com.octo.captcha.component.sound.wordtosound.WordToSound;
+import com.octo.captcha.component.sound.wordtosound.WordToSoundFreeTTS;
 import com.octo.captcha.engine.sound.ListSoundCaptchaEngine;
 import com.octo.captcha.sound.gimpy.GimpySoundFactory;
 
@@ -485,7 +484,7 @@ public class SimpleListSoundCaptchaEngine
     {
         com.octo.captcha.component.wordgenerator.WordGenerator wordGenerator = new com.octo.captcha.component.wordgenerator.RandomWordGenerator(
                 "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
-        WordToSound wordToSound = new SimpleWordToSound();
+        WordToSound wordToSound = new WordToSoundFreeTTS();
         this.addFactory(
                 new GimpySoundFactory(wordGenerator,
                     wordToSound));
