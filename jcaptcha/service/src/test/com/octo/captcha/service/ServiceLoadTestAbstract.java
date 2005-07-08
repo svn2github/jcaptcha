@@ -607,10 +607,10 @@ public abstract class ServiceLoadTestAbstract extends TestCase
         }
 
 
-    public void testNominal_2It_1000Del_500Us_Spam_100It_10Del_5Us_5min() throws Throwable
+    public void testNominal_2It_100Del_500Us_Spam_100It_10Del_5Us_5min() throws Throwable
         {
             int count_nominal = 2;
-            int delay_nominal = 1000;
+            int delay_nominal = 100;
             int users_nominal = 500;
 
             int count_spam = 100;

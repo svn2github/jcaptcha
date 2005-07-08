@@ -488,7 +488,7 @@ public class EllipseBackgroundGenerator extends AbstractBackgroundGenerator
      *
      * @return the background image
      */
-    public BufferedImage getBackround()
+    public BufferedImage getBackground()
     {
         BufferedImage bimgTP = new BufferedImage(getImageWidth(),
                 getImageHeight(), BufferedImage.TYPE_INT_RGB);

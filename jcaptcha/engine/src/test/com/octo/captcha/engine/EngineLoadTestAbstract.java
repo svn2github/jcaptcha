@@ -515,6 +515,25 @@ public abstract class EngineLoadTestAbstract extends TestCase
         int max_time = 2 * 60 * 1000;
         load(users, count, delay, max_time);
     }
+    
+    public void test_1000It_0Del_1Us_5min() throws Throwable
+    {
+        int count = 1000;
+        int delay = 0;
+        int users = 1;
+        int max_time = 5 * 60 * 1000;
+        load(users, count, delay, max_time);
+
+    }
+
+    public void test_200It_0Del_5Us_5min() throws Throwable
+    {
+        int count = 200;
+        int delay = 0;
+        int users = 5;
+        int max_time = 5 * 60 * 1000;
+        load(users, count, delay, max_time);
+    }
 
     public void test_10It_100Del_10Us_2min() throws Throwable
     {
@@ -525,11 +544,11 @@ public abstract class EngineLoadTestAbstract extends TestCase
         load(users, count, delay, max_time);
     }
 
-    public void test_2It_1000Del_100Us_5min() throws Throwable
+    public void test_2It_100Del_100Us_5min() throws Throwable
     {
 
         int count = 2;
-        int delay = 1000;
+        int delay = 100;
         int users = 100;
         int max_time = 5 * 60 * 1000;
         load(users, count, delay, max_time);

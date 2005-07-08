@@ -116,14 +116,14 @@ public abstract class SoundCaptcha implements Captcha
      */
     public void disposeChallenge()
     {
-        try
-        {
-            challenge.close();
-        }
-        catch (IOException e)
-        {
-            throw new CaptchaException(e);
-        }
+//        try
+//        {
+//            challenge.close();
+//        }
+//        catch (IOException e)
+//        {
+//            throw new CaptchaException(e);
+//        }
         this.challenge = null;
     }
     

@@ -498,9 +498,9 @@ public class EhcacheCaptchaStore implements CaptchaStore {
      */
     public boolean hasCaptcha(String id) {
         try {
-            return this.cache.getKeys().contains(id);
+            Element el = this.cache.get(id);
+            return el!=null&&el.getValue()!=null;
         } catch (CacheException e) {
-            log.error(e);
             return false;
         }
     }
@@ -524,8 +524,7 @@ public class EhcacheCaptchaStore implements CaptchaStore {
      *
      * @param id
      * @return the captcha for this id
-     * @throws CaptchaServiceException if a captcha for this key is not found or if
-     *                                 an error occurs during retrieving routine.
+     * @throws CaptchaServiceException if an error occurs during retrieving routine.
      */
     public Captcha getCaptcha(String id) throws CaptchaServiceException {
 
@@ -534,10 +533,10 @@ public class EhcacheCaptchaStore implements CaptchaStore {
             if (el != null) {
                 return (Captcha) el.getValue();
             } else {
-                throw new CaptchaServiceException("no captcha for specified id is found");
+              return null;
             }
         } catch (CacheException e) {
-            throw new CaptchaServiceException(e);
+           return null;
         }
     }
 

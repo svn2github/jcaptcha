@@ -539,7 +539,7 @@ public class JCaptchaCommentAuthenticator implements CommentAuthenticator{
                 isResponseCorrect = service.validateResponseForID(captchaID,
                         challengeResponse);
             } catch (CaptchaServiceException e) {
-                //e.printStackTrace();
+                e.printStackTrace();
             }
         }
         // return

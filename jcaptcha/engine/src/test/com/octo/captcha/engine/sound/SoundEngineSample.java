@@ -473,7 +473,7 @@ import javax.sound.sampled.AudioInputStream;
 
 import com.octo.captcha.component.sound.soundconfigurator.FreeTTSSoundConfigurator;
 import com.octo.captcha.component.sound.soundconfigurator.SoundConfigurator;
-import com.octo.captcha.component.sound.wordtosound.CleanFreeTTSWordToSound;
+import com.octo.captcha.component.sound.wordtosound.FreeTTSWordToSound;
 import com.octo.captcha.component.sound.wordtosound.WordToSound;
 
 import com.octo.captcha.component.worddecorator.SpellerWordDecorator;
@@ -494,6 +494,10 @@ import com.octo.captcha.sound.speller.SpellerSoundFactory;
  */
 public class SoundEngineSample
 {
+    private static String voiceName = "kevin16";
+
+    private static String voicePackage = "com.sun.speech.freetts.en.us.cmu_time_awb.AlanVoiceDirectory,com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory";
+    
     static String[] wordlist;
 
     static WordGenerator words;
@@ -512,7 +516,8 @@ public class SoundEngineSample
 
         SoundConfigurator configurator = new FreeTTSSoundConfigurator("kevin16",
             "com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory", 1.0f, 100, 70);
-        SoundEngineSample.wordToSound = new CleanFreeTTSWordToSound();
+        SoundEngineSample.wordToSound = new FreeTTSWordToSound(new FreeTTSSoundConfigurator(
+            voiceName, voicePackage, 1.0f, 100, 100), 3, 6);
         SpellerWordDecorator decorator = new SpellerWordDecorator(", ");
         SoundEngineSample.factory = new SpellerSoundFactory(words, wordToSound, decorator);
         //SoundEngineSample.factory = new GimpySoundFactory(words, wordToSound);
@@ -523,7 +528,7 @@ public class SoundEngineSample
 
     public static void test()
     {
-        SoundCaptcha tCaptcha = factory.getSoundCaptcha(Locale.FRANCE);
+        SoundCaptcha tCaptcha = factory.getSoundCaptcha(Locale.US);
 
         System.out.println(tCaptcha.getQuestion());
         AudioInputStream tInputStream = tCaptcha.getSoundChallenge();

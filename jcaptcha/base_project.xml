@@ -158,7 +158,7 @@
 	<report>maven-pmd-plugin</report>
 	<report>maven-jdepend-plugin</report>
 	<report>maven-tasklist-plugin</report>
-    <report>maven-clover-plugin</report>
+  <!--  <report>maven-clover-plugin</report>-->
   </reports>
 
 </project>

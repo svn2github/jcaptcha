@@ -531,13 +531,17 @@ public abstract class AbstractCaptchaService implements CaptchaService {
             captcha = generateAndStoreCaptcha(locale,ID);
         } else {
             //else get it
-            captcha = this.store.getCaptcha(ID);
-            //if dirty
-            if (captcha.hasGetChalengeBeenCalled().booleanValue()) {
-                //get a new one and store it
-                captcha = generateAndStoreCaptcha(locale,ID);
-            }else{
-                //else nothing
+            captcha = this.store.getCaptcha(ID);            
+            if (captcha == null) {
+                captcha = generateAndStoreCaptcha(locale, ID);
+            } else {
+                //if dirty
+                if (captcha.hasGetChalengeBeenCalled().booleanValue()) {
+                    //get a new one and store it
+                    captcha = generateAndStoreCaptcha(locale, ID);
+                } else {
+                    //else nothing
+                }
             }
         }
         challenge= getChallengeClone(captcha);
@@ -564,6 +568,9 @@ public abstract class AbstractCaptchaService implements CaptchaService {
             captcha = generateAndStoreCaptcha(locale, ID);
         } else {
             captcha = this.store.getCaptcha(ID);
+            if(captcha==null){
+                captcha = generateAndStoreCaptcha(locale, ID);
+            }
         }
         return captcha.getQuestion();
     }

@@ -482,7 +482,12 @@ public class RandomFontGenerator extends AbstractFontGenerator {
     /**
      * list of valid fonts.
      */
-    protected static java.util.List fonts;
+    protected static java.util.List defaultFonts;
+    
+    /**
+     * list of fonts given by constructor.
+     */
+    protected java.util.List fonts = null;
 
     /**
      * These are the valid font styles.
@@ -510,6 +515,11 @@ public class RandomFontGenerator extends AbstractFontGenerator {
     public RandomFontGenerator(Integer minFontSize, Integer maxFontSize) {
         super(minFontSize, maxFontSize);
     }
+    
+    public RandomFontGenerator(Integer minFontSize, Integer maxFontSize, Font[] fontsList) {
+        super(minFontSize, maxFontSize);
+        fonts = initializeFonts(fontsList);
+    }
 
     /**
      * Method from imageFromWord method to apply font to String. Implementations
@@ -518,13 +528,20 @@ public class RandomFontGenerator extends AbstractFontGenerator {
      * @return a Font
      */
     public Font getFont() {
-        if (fonts == null) {
+        
+        //defaultFonts are initialized one time, cause static
+        if (defaultFonts == null) {
             // we cache a lot of decisions about fonts -- do this as little as possible
             synchronized (RandomFontGenerator.class) {
-                if (fonts == null) {
-                    fonts = initializeFonts();
+                if (defaultFonts == null) {
+                    defaultFonts = initializeFonts(GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts());
                 }
             }
+        }
+        
+        if (fonts == null)
+        {
+            fonts = defaultFonts;
         }
 
         Font font = (Font) fonts.get(myRandom.nextInt(fonts.size()));
@@ -550,16 +567,16 @@ public class RandomFontGenerator extends AbstractFontGenerator {
      * @see #requiredCharacters
      * @return array of fonts
      */
-    private List initializeFonts() {
+    private List initializeFonts(Font[] uncheckFonts) {
 
         // get a copy of the fonts
         // NB: be careful with this first array! -- the graphics environment obligingly
         // provides a pointer into its internal font array.
-        Font[] tmpFonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts();
-        List goodFonts = new ArrayList(tmpFonts.length);
+            
+        List goodFonts = new ArrayList(uncheckFonts.length);
         // add copy of copy of list of fonts because of asList's special class and also because
         // of the graphics environment's internal point
-        goodFonts.addAll(Arrays.asList(tmpFonts));
+        goodFonts.addAll(Arrays.asList(uncheckFonts));
 
         // Iterate through all fonts, remove the bad ones
         for (Iterator iter = goodFonts.iterator(); iter.hasNext();) {
@@ -576,7 +593,7 @@ public class RandomFontGenerator extends AbstractFontGenerator {
 
             // a font is also removed if it is prefixed by a known-bad name
             for (int i = 0; i < badFontNamePrefixes.length; i++) {
-                if (f.getFontName().startsWith(badFontNamePrefixes[i])) {
+                if (f.getName().startsWith(badFontNamePrefixes[i])) {
                     iter.remove();
                     break;
                 }
@@ -599,7 +616,7 @@ public class RandomFontGenerator extends AbstractFontGenerator {
     public static void setRequiredCharacters(String requiredCharacters) {
         RandomFontGenerator.requiredCharacters = requiredCharacters;
         // force reinitialization of this variable
-        RandomFontGenerator.fonts = null;
+        RandomFontGenerator.defaultFonts = null;
     }
 
     /**
@@ -616,7 +633,7 @@ public class RandomFontGenerator extends AbstractFontGenerator {
     public void setBadFontNamePrefixes(String[] badFontNamePrefixes) {
         this.badFontNamePrefixes = badFontNamePrefixes;
         // force reinitialization of this variable
-        RandomFontGenerator.fonts = null;
+        RandomFontGenerator.defaultFonts = null;
     }
 
 }

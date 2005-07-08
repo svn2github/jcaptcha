@@ -491,5 +491,5 @@ public interface BackgroundGenerator
      *
      * @return the background image
      */
-    BufferedImage getBackround();
+    BufferedImage getBackground();
 }

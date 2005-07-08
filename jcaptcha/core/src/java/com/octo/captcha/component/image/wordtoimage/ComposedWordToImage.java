@@ -567,7 +567,7 @@ public class ComposedWordToImage extends AbstractWordToImage
      */
     BufferedImage getBackround()
     {
-        return background.getBackround();
+        return background.getBackground();
     }
 
     /**

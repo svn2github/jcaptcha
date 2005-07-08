@@ -468,6 +468,8 @@ import com.octo.captcha.service.captchastore.CaptchaStore;
 
 import java.util.*;
 
+import org.apache.commons.collections.FastHashMap;
+
 /**
  * This class provides default implementation for the management interface.
  * It uses an HashMap to store the timestamps for garbage collection.
@@ -505,7 +507,7 @@ public abstract class AbstractManageableCaptchaService
         this.setCaptchaStoreMaxSize(maxCaptchaStoreSize);
         this.setMinGuarantedStorageDelayInSeconds(minGuarantedStorageDelayInSeconds);
         this.setCaptchaStoreSizeBeforeGarbageCollection(captchaStoreLoadBeforeGarbageCollection);
-        times = new HashMap();
+        times = new FastHashMap();
     }
 
 

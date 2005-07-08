@@ -481,11 +481,6 @@ public interface TextPaster
 {
 
     /**
-     * @return the color that will be used to paste the text
-     */
-    Color getTextColor();
-
-    /**
      * @return the max word lenght accepted by this word2image service
      */
     int getMaxAcceptedWordLenght();

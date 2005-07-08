@@ -671,7 +671,7 @@ public class FileReaderRandomBackgroundGenerator extends
      *
      * @return the background image
      */
-    public BufferedImage getBackround() {
+    public BufferedImage getBackground() {
         return (BufferedImage) images.get(myRandom.nextInt(images.size()));
     }
 

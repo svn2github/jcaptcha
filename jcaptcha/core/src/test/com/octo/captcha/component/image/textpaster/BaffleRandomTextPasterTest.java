@@ -518,11 +518,6 @@ public class BaffleRandomTextPasterTest extends TestCase {
         }
     }
 
-    public void testGetTextColor() {
-        Color colorTest = this.baffleRandomTextPaster.getTextColor();
-        assertNotNull(colorTest);
-    }
-
     public void testGetMaxAcceptedWordLenght() {
         assertEquals(this.maxAcceptedWordLength.intValue(),
                 this.baffleRandomTextPaster.getMaxAcceptedWordLenght());

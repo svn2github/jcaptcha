@@ -471,6 +471,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.collections.FastHashMap;
+
 
 /**
  * Simple store based on a HashMap
@@ -479,7 +481,7 @@ public class MapCaptchaStore implements CaptchaStore {
     private Map store;
 
     public MapCaptchaStore() {
-        this.store = new HashMap();
+        this.store = new FastHashMap();
     };
 
     /**

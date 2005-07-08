@@ -478,6 +478,8 @@ import java.awt.*;
 public class RandomFontGeneratorTest extends TestCase {
 
     private RandomFontGenerator randomFontGenerator;
+    
+    private RandomFontGenerator randomFontGeneratorWithList;
 
     /**
      * Constructor for RandomFontGeneratorTest.
@@ -491,11 +493,24 @@ public class RandomFontGeneratorTest extends TestCase {
     public void setUp() {
         this.randomFontGenerator =
                 new RandomFontGenerator(new Integer(10), new Integer(10));
+        
+        Font[] fontsList= new Font[2];
+        fontsList[0] = new Font("Courier", Font.BOLD, 10);
+        fontsList[1] = new Font("Arial", Font.BOLD, 10);
+        
+        this.randomFontGeneratorWithList =
+            new RandomFontGenerator(new Integer(10), new Integer(10), fontsList);
     }
 
     public void testGetFont() {
         Font test = this.randomFontGenerator.getFont();
         assertNotNull(test);
+    }
+    
+    public void testGetFontWithList() {
+        Font test = this.randomFontGeneratorWithList.getFont();
+        assertNotNull(test);
+        assertTrue(test.getName().startsWith("Arial"));
     }
 
 }

@@ -468,7 +468,9 @@ import javax.sound.sampled.AudioInputStream;
 
 import junit.framework.TestCase;
 
-import com.octo.captcha.component.sound.wordtosound.CleanFreeTTSWordToSound;
+import com.octo.captcha.component.sound.soundconfigurator.FreeTTSSoundConfigurator;
+import com.octo.captcha.component.sound.soundconfigurator.SoundConfigurator;
+import com.octo.captcha.component.sound.wordtosound.FreeTTSWordToSound;
 import com.octo.captcha.component.sound.wordtosound.WordToSound;
 import com.octo.captcha.component.wordgenerator.ArrayDictionary;
 import com.octo.captcha.component.wordgenerator.DictionaryWordGenerator;
@@ -487,6 +489,10 @@ public class SoundCaptchaTest extends TestCase
 {
     private SoundCaptcha soundCaptcha;
 
+    private static String voiceName = "kevin16";
+
+    private static String voicePackage = "com.sun.speech.freetts.en.us.cmu_time_awb.AlanVoiceDirectory,com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory";
+    
     /**
      * Constructor for ImageCaptchaTest.
      * 
@@ -507,7 +513,9 @@ public class SoundCaptchaTest extends TestCase
 
         WordGenerator words = new DictionaryWordGenerator(new ArrayDictionary(wordlist));
 
-        WordToSound word2sound = new CleanFreeTTSWordToSound();
+        SoundConfigurator configurator = new FreeTTSSoundConfigurator(voiceName, voicePackage, 1.0f, 100, 100);
+        
+        WordToSound word2sound = new FreeTTSWordToSound(configurator, 3, 6);
         SoundCaptchaFactory factory = new GimpySoundFactory(words, word2sound);
         soundCaptcha = factory.getSoundCaptcha();
     }
@@ -551,8 +559,11 @@ public class SoundCaptchaTest extends TestCase
 
         WordGenerator words = new DictionaryWordGenerator(new ArrayDictionary(wordlist));
 
-        WordToSound wordToSound = new CleanFreeTTSWordToSound();
-        SoundCaptchaFactory factory = new GimpySoundFactory(words, wordToSound);
+        SoundConfigurator configurator = new FreeTTSSoundConfigurator(voiceName, voicePackage, 1.0f, 100, 100);
+        
+        WordToSound word2sound = new FreeTTSWordToSound(configurator, 3, 6);
+        
+        SoundCaptchaFactory factory = new GimpySoundFactory(words, word2sound);
         SoundCaptcha tCaptcha = factory.getSoundCaptcha();
 
         System.out.println(tCaptcha.getQuestion());

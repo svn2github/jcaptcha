@@ -479,7 +479,7 @@ import junit.framework.TestCase;
 public class SpellingFreeTTSWordToSoundTest extends TestCase
 {
 
-    private CleanFreeTTSWordToSound cleanFreeTTSwordToSound;
+    private FreeTTSWordToSound cleanFreeTTSwordToSound;
 
     private String voiceName = "kevin16";
 
@@ -497,7 +497,7 @@ public class SpellingFreeTTSWordToSoundTest extends TestCase
 
     public void setUp()
     {
-        this.cleanFreeTTSwordToSound = new CleanFreeTTSWordToSound(new FreeTTSSoundConfigurator(
+        this.cleanFreeTTSwordToSound = new FreeTTSWordToSound(new FreeTTSSoundConfigurator(
             voiceName, voicePackage, 1.0f, 100, 100), 3, 6);
     }
 

@@ -471,6 +471,10 @@ package com.octo.captcha.component.worddecorator;
  */
 public class SpellerWordDecorator implements WordDecorator
 {
+    
+    /**
+     * String that separate each charater from the word
+     */
     private String separtor;
 
     /**
@@ -495,7 +499,9 @@ public class SpellerWordDecorator implements WordDecorator
         {
             chars += " " + original.charAt(i);
             if (i < original.length() - 1)
+            {
                 chars += separtor;
+            }
         }
         return chars;
     }

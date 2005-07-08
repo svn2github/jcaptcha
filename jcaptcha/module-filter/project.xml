@@ -49,11 +49,6 @@
 
            </dependency>
 
-       <dependency>
-            <id>commons-logging</id>
-            <version>1.0.3</version>
-        </dependency>
-
          <dependency>
          <groupId>servletapi</groupId>
          <artifactId>servletapi</artifactId>

@@ -477,7 +477,7 @@ public class FishEyeTest extends TestCase {
             Color.black);
 
     public void testValidateResponse() throws Exception {
-        fishEye = new FishEye("question", back.getBackround(), new Point(10, 10), new Integer(0));
+        fishEye = new FishEye("question", back.getBackground(), new Point(10, 10), new Integer(0));
         assertTrue("string answer", fishEye.validateResponse("10,10").booleanValue());
         assertTrue("point answer", fishEye.validateResponse(new Point(10, 10)).booleanValue());
         assertFalse("invalid point answer", fishEye.validateResponse(new Point(11, 10)).booleanValue());
@@ -488,7 +488,7 @@ public class FishEyeTest extends TestCase {
     }
 
     public void testValidateResponseTolerance() throws Exception {
-        fishEye = new FishEye("question", back.getBackround(), new Point(10, 10), new Integer(1));
+        fishEye = new FishEye("question", back.getBackground(), new Point(10, 10), new Integer(1));
         assertTrue("string answer", fishEye.validateResponse("10,11").booleanValue());
         assertTrue("string answer", fishEye.validateResponse("11,10").booleanValue());
         assertTrue("point answer", fishEye.validateResponse(new Point(11, 10)).booleanValue());

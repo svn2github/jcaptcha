@@ -554,7 +554,7 @@ public class FishEyeFactory extends ImageCaptchaFactory
      */
     public ImageCaptcha getImageCaptcha(Locale locale)
     {
-        BufferedImage background = generator.getBackround();
+        BufferedImage background = generator.getBackground();
         BufferedImage out = new BufferedImage(background.getWidth(),
                 background.getHeight(), background.getType());
         out.getGraphics().drawImage(background, 0, 0, null, null);

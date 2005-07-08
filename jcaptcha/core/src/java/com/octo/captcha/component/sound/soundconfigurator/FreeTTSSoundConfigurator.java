@@ -493,7 +493,7 @@ public class FreeTTSSoundConfigurator implements SoundConfigurator
      * @param volume
      *            Between 0 and 1.0
      * @param pitch
-     * 			  Level of the sound (hetz), between 50 and 250, normal 100
+     *            Level of the sound (hetz), between 50 and 250, normal 100
      * @param rate
      *            Words per minute, between 1 and 999, normal 150
      */
@@ -521,7 +521,7 @@ public class FreeTTSSoundConfigurator implements SoundConfigurator
         {
             throw new CaptchaException("Pitch is between 50 and 250");
         }
-        
+
         if ((rate < 1000) && (rate > 0))
         {
             this.rate = rate;
@@ -530,7 +530,7 @@ public class FreeTTSSoundConfigurator implements SoundConfigurator
         {
             throw new CaptchaException("Rate is between 1 and 999");
         }
-        
+
     }
 
     /**

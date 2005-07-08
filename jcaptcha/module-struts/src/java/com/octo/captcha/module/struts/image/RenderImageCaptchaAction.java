@@ -465,8 +465,6 @@ package com.octo.captcha.module.struts.image;
 
 import com.octo.captcha.module.config.CaptchaModuleConfigHelper;
 import com.octo.captcha.module.struts.CaptchaServicePlugin;
-import com.octo.captcha.module.web.image.ImageToJpegHelper;
-import com.octo.captcha.module.web.image.ImageToJpegHelper;
 import com.octo.captcha.service.CaptchaServiceException;
 import com.octo.captcha.service.image.ImageCaptchaService;
 import com.sun.image.codec.jpeg.JPEGCodec;
@@ -502,9 +500,55 @@ public class RenderImageCaptchaAction extends Action {
         ImageCaptchaService service = (ImageCaptchaService) 
         CaptchaServicePlugin.getInstance().getService();
         String captchaID = CaptchaModuleConfigHelper.getId(httpServletRequest);
-        //flush image or 404
-        ImageToJpegHelper.flushNewCaptchaToResponse(httpServletRequest, httpServletResponse, log,service, captchaID, httpServletRequest.getLocale());
-        //return statement mandatory
+        //(String) theRequest.getParameter(captchaIDParameterName);
+
+        // call the ManageableImageCaptchaService methods
+        byte[] captchaChallengeAsJpeg = null;
+        ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();
+        try {
+            BufferedImage challenge =
+                    service.getImageChallengeForID(captchaID, 
+                    httpServletRequest.getLocale());
+            // the output stream to render the captcha image as jpeg into
+
+            // a jpeg encoder
+            JPEGImageEncoder jpegEncoder =
+                    JPEGCodec.createJPEGEncoder(jpegOutputStream);
+            jpegEncoder.encode(challenge);
+        } catch (IllegalArgumentException e) {
+            // log a security warning and return a 404...
+            if (log.isWarnEnabled()) {
+                log.warn("There was a try from "
+                        + httpServletRequest.getRemoteAddr()
+                        + " to render an URL without ID"
+                        + " or with a too long one");
+                httpServletResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
+                log.error("should never pass here!");
+                return actionMapping.findForward("error");
+            }
+        } catch (CaptchaServiceException e) {
+            // log and return a 404 instead of an image...
+            log.warn("Error trying to generate a captcha and "
+                    + "render its challenge as JPEG",
+                    e);
+            httpServletResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
+            // log.error("should never pass here!");
+            return actionMapping.findForward("error");
+        }
+
+        captchaChallengeAsJpeg = jpegOutputStream.toByteArray();
+
+        // render the captcha challenge as a JPEG image in the response
+        httpServletResponse.setHeader("Cache-Control", "no-store");
+        httpServletResponse.setHeader("Pragma", "no-cache");
+        httpServletResponse.setDateHeader("Expires", 0);
+        httpServletResponse.setContentType("image/jpeg");
+        ServletOutputStream responseOutputStream =
+                httpServletResponse.getOutputStream();
+        responseOutputStream.write(captchaChallengeAsJpeg);
+        responseOutputStream.flush();
+        responseOutputStream.close();
+        // log.error("should never pass here!");
         return null;
     }
 

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans SYSTEM "http://www.springframework.org/dtd/spring-beans.dtd">
+<!-- ==========================================================================
+*     SPRING BEAN DEFINITION FILE
+*     Javaworld Article - Simple Sequence Workflow Example
+  ========================================================================== -->
+<beans>
+	<bean id="factory" class="com.octo.captcha.configuration.SimpleFactory" />
+</beans>
+

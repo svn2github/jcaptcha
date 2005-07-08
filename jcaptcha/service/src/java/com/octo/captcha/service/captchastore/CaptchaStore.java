@@ -91,9 +91,8 @@ public interface CaptchaStore {
      * Retrieve the captcha for this key from the store.
      *
      * @param id
-     * @return the captcha for this id
-     * @throws CaptchaServiceException if a captcha for this key is not found or if
-     *                                 an error occurs during retrieving routine.
+     * @return the captcha for this id, null if not found
+     * @throws CaptchaServiceException if an error occurs during retrieving routine.
      */
     Captcha getCaptcha(String id) throws CaptchaServiceException;
 

@@ -467,6 +467,7 @@ package com.octo.captcha.component.wordgenerator;
 import java.util.Enumeration;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.StringTokenizer;
 
 /**
  * <p>Implementation of the DictionaryReader interface, uses a .properties file
@@ -489,7 +490,7 @@ public class FileDictionnary implements DictionaryReader
     public WordList getWordList()
     {
         ResourceBundle bundle = ResourceBundle.getBundle(myBundle);
-        WordList list = generateWordList(Locale.US, bundle);
+        WordList list = generateWordList(Locale.getDefault(), bundle);
         return list;
     }
 
@@ -502,14 +503,13 @@ public class FileDictionnary implements DictionaryReader
 
     protected WordList generateWordList(Locale locale, ResourceBundle bundle)
     {
-        Enumeration words = bundle.getKeys();
         WordList list = new WordList(locale);
-
-        while (words.hasMoreElements())
+        StringTokenizer tokenizer = new StringTokenizer(bundle.getString("words"), ";");
+        int count = tokenizer.countTokens();
+        for( int i = 0; i < count;i++)
         {
-            list.addWord((String) words.nextElement());
+            list.addWord(tokenizer.nextToken());
         }
-
         return list;
     }
 

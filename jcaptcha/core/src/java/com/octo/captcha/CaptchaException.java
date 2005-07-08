@@ -465,7 +465,7 @@
 package com.octo.captcha;
 
 /**
- * Runtime exception for the captcha implemenentations.
+ * Runtime exception for the captcha implementations.
  *
  * @author gandin
  * @version 1.0
