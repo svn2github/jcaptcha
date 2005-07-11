@@ -21,6 +21,8 @@
   </classpathentry>
   <classpathentry kind="var" path="MAVEN_REPO/freeTTS/jars/cmulex-1.2.jar">
   </classpathentry>
+  <classpathentry kind="var" path="MAVEN_REPO/jhlabs/jars/imaging-01012005.jar">
+  </classpathentry>
   <classpathentry kind="var" path="MAVEN_REPO/GroboUtils/jars/GroboUtils-5-core.jar">
   </classpathentry>
   <classpathentry kind="output" path="target/classes">

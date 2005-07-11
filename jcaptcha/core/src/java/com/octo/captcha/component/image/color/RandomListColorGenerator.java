@@ -17,12 +17,6 @@ import com.octo.captcha.CaptchaException;
  * @author Benoit Doumas
  * @author Chrsitian Blavier
  */
-/**
- * @author Benoit
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
- */
 public class RandomListColorGenerator implements ColorGenerator
 {
     /**

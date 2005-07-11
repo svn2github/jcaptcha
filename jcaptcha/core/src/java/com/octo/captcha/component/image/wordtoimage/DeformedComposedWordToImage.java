@@ -542,11 +542,10 @@ public class DeformedComposedWordToImage extends ComposedWordToImage
     public BufferedImage getImage(String word) throws CaptchaException
     {
         BufferedImage background = getBackround();
-        AttributedString aword = getAttributedString(word,
-                checkWordLenght(word));
+        AttributedString aword = getAttributedString(word, checkWordLenght(word));
         //copy background
         BufferedImage out = new BufferedImage(background.getWidth(), background.getHeight(),
-                        background.getType());
+            background.getType());
         Graphics2D g2 = (Graphics2D) out.getGraphics();
         //paste background
         g2.drawImage(background, 0, 0, out.getWidth(), out.getHeight(), null);
@@ -555,15 +554,9 @@ public class DeformedComposedWordToImage extends ComposedWordToImage
         out = backgroundDeformation.deformImage(out);
 
         //paste text on a transparent background
-        BufferedImage transparent =
-                new BufferedImage(out.getWidth(), out.getHeight(),
-                        BufferedImage.TYPE_INT_ARGB);
-        //Graphics2D tpie = (Graphics2D) transparent.getGraphics();
+        BufferedImage transparent = new BufferedImage(out.getWidth(), out.getHeight(),
+            BufferedImage.TYPE_INT_ARGB);
 
-        //tpie.setBackground(Color.white);
-        //tpie.clearRect(0, 0, out.getWidth(), out.getHeight());
-        //tpie.setPaint(Color.white);
-        //tpie.dispose();
         //use textpaster to paste the text
         transparent = pasteText(transparent, aword);
 
@@ -571,9 +564,7 @@ public class DeformedComposedWordToImage extends ComposedWordToImage
         transparent = textDeformation.deformImage(transparent);
 
         Graphics2D g3 = (Graphics2D) out.getGraphics();
-        // Set a composite with transparency.
-        Composite c = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f);
-        g3.setComposite(c);
+
         g3.drawImage(transparent, 0, 0, null);
         g3.dispose();
         //apply final deformation

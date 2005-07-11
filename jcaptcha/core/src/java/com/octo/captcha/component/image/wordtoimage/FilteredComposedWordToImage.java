@@ -546,42 +546,32 @@ public class FilteredComposedWordToImage extends ComposedWordToImage
     public BufferedImage getImage(String word) throws CaptchaException
     {
         BufferedImage background = getBackround();
-        AttributedString aword = getAttributedString(word,
-                checkWordLenght(word));
+        AttributedString aword = getAttributedString(word, checkWordLenght(word));
         //copy background
-        BufferedImage out =
-                new BufferedImage(background.getWidth(), background.getHeight(),
-                        background.getType());
+        BufferedImage out = new BufferedImage(background.getWidth(), background.getHeight(),
+            background.getType());
         Graphics2D g2 = (Graphics2D) out.getGraphics();
         //paste background
         g2.drawImage(background, 0, 0, out.getWidth(), out.getHeight(), null);
-
+        g2.dispose();
         //apply filters to backround
         applyFilters(out, backgroundFilters);
 
         //paste text on a transparent background
-        BufferedImage transparent =
-                new BufferedImage(out.getWidth(), out.getHeight(),
-                        out.getType());
-        Graphics2D tpie = (Graphics2D) transparent.getGraphics();
+        BufferedImage transparent = new BufferedImage(out.getWidth(), out.getHeight(),
+            BufferedImage.TYPE_INT_ARGB);
 
-        tpie.setBackground(Color.white);
-        tpie.clearRect(0, 0, out.getWidth(), out.getHeight());
-        tpie.setPaint(Color.white);
-        tpie.dispose();
         //use textpaster to paste the text
         transparent = pasteText(transparent, aword);
 
-        //and apply filters
+        //and apply deformation
         applyFilters(transparent, textFilters);
 
+        Graphics2D g3 = (Graphics2D) out.getGraphics();
 
-        // Set a composite with transparency.
-        Composite c = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, .7f);
-        g2.setComposite(c);
-        g2.drawImage(transparent, 0, 0, null);
-        g2.dispose();
-        //apply final filters
+        g3.drawImage(transparent, 0, 0, null);
+        g3.dispose();
+        //apply final deformation
         applyFilters(out, finalFilters);
         return out;
     }
@@ -597,7 +587,7 @@ public class FilteredComposedWordToImage extends ComposedWordToImage
                 filtered = new FilteredImageSource(image.getSource(),
                         backgroundFilter);
                 Image temp = ToolkitFactory.getToolkit().createImage(filtered);
-                image.getGraphics().drawImage(temp, 0, 0, Color.white, null);
+                image.getGraphics().drawImage(temp, 0, 0, new Color(255,255,255,0), null);
             }
         }
     }

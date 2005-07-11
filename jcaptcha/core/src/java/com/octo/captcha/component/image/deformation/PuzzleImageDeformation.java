@@ -464,69 +464,122 @@
 
 package com.octo.captcha.component.image.deformation;
 
-import com.octo.captcha.component.image.utils.ToolkitFactory;
-
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.awt.image.FilteredImageSource;
 import java.awt.image.ImageFilter;
+import java.util.Random;
+
+import com.jhlabs.image.RotateFilter;
+import com.octo.captcha.component.image.utils.ToolkitFactory;
 
 /**
- * Use an array of java.awt.image.ImageFilter to deform an image
+ * Deformation where the image is divided in little squares, moved individualty in a random
+ * position. Each move is really light, in order to let the captcha readble.
  * 
- * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue </a>
- * @version 1.0
+ * @author Benoit Doumas
  */
-public class ImageDeformationByFilters implements ImageDeformation
+public class PuzzleImageDeformation implements ImageDeformation
 {
 
     /**
-     * Filters to defrom the image
+     * Number of colums to divide the image, max number if rows and colums are managed randomly
      */
-    private ImageFilter[] filters;
+    private int colNum = 6;
 
     /**
-     * Constructor with an array of ImageFilter
-     * 
-     * @param filters
-     *                  Filters to defrom the image
+     * Number of rows to divide the image, max number if rows and colums are managed randomly
      */
-    public ImageDeformationByFilters(ImageFilter[] filters)
+    private int rowNum = 4;
+
+    /**
+     * Maximal angle of rotation for each square.
+     */
+    private double maxAngleRotation = 0.3;
+
+    /**
+     * Rows and colums are managed randomly
+     */
+    private boolean manageRowAndColRandomly = false;
+
+    private Random random = new Random();
+
+    /**
+     * Conststruct a PuzzleImageDeformation, with the numbers of colums and rows. If
+     * manageRowAndColRandomly is set to true, the numbers of rows and colums are choosed between 1
+     * and colNum/rowNum
+     * 
+     * @param colNum
+     *                  Number of colums to divide the image, max number if rows and colums are managed
+     *                  randomly
+     * @param rowNum
+     *                  Number of rows to divide the image, max number if rows and colums are managed
+     *                  randomly
+     * @param maxAngleRotation
+     *                  Maximal angle of rotation for each square.
+     * @param manageRowAndColRandomly
+     *                  Rows and colums are managed randomly
+     */
+    public PuzzleImageDeformation(int colNum, int rowNum, double maxAngleRotation,
+        boolean manageRowAndColRandomly)
     {
         super();
-        this.filters = filters;
+        this.colNum = colNum;
+        this.rowNum = rowNum;
+        this.maxAngleRotation = maxAngleRotation;
+        this.manageRowAndColRandomly = manageRowAndColRandomly;
     }
 
-    /**
-     * Deforms an image
-     * 
-     * @param image
-     *                  the image to be deformed
-     * @return the deformed image
+    /*
+     * @see com.octo.captcha.component.image.deformation.ImageDeformation#deformImage(java.awt.image.BufferedImage)
      */
     public BufferedImage deformImage(BufferedImage image)
     {
-        if (filters != null)
-        {
-            BufferedImage clone = new BufferedImage(image.getWidth(), image.getHeight(), image
-                .getType());
-            clone.getGraphics().drawImage(image, 0, 0, null, null);
-            FilteredImageSource filtered;
 
-            for (int i = 0; i < filters.length; i++)
+        int height = image.getHeight();
+        int width = image.getWidth();
+
+        int xd = width / colNum;
+        int yd = height / rowNum;
+
+        BufferedImage backround = new BufferedImage(width, height, image.getType());
+        Graphics2D pie = (Graphics2D) backround.getGraphics();
+
+        pie.setColor(Color.white);
+        pie.setBackground(Color.white);
+        pie.fillRect(0, 0, width, height);
+        pie.dispose();
+
+        Graphics2D g = (Graphics2D) image.getGraphics();
+        g.setBackground(Color.white);
+
+        BufferedImage smallPart = new BufferedImage(xd, yd, image.getType());
+        Graphics2D gSmall = smallPart.createGraphics();
+        FilteredImageSource filtered;
+
+        for (int i = 0; i < colNum; i++)
+        {
+            for (int j = 0; j < rowNum; j++)
             {
-                ImageFilter filter = filters[i];
-                filtered = new FilteredImageSource(clone.getSource(), filter);
-                Image temp = ToolkitFactory.getToolkit().createImage(filtered);
-                clone.getGraphics().drawImage(temp, 0, 0, new Color(255,255,255,0), null);
-            }
+                gSmall.drawImage(image, 0, 0, xd, yd, xd * i, yd * j, xd * i + xd, yd * j + yd,
+                    null);
 
-            clone.getGraphics().dispose();
-            return clone;
+                ImageFilter filter = new RotateFilter(maxAngleRotation * random.nextDouble()
+                    * (random.nextBoolean() ? -1 : 1));
+
+                filtered = new FilteredImageSource(smallPart.getSource(), filter);
+                Image temp = ToolkitFactory.getToolkit().createImage(filtered);
+                smallPart.getGraphics().drawImage(temp, 0, 0, new Color(0, 0, 0, 0), null);
+
+                smallPart.getGraphics().dispose();
+
+                g.drawImage(smallPart, xd * i, yd * j, null, null);
+            }
         }
-        else
-        {
-            return image;
-        }
+
+        return image;
     }
+
 }
