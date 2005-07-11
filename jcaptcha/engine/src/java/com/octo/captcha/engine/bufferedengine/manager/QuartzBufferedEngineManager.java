@@ -47,17 +47,17 @@ public class QuartzBufferedEngineManager implements BufferedEngineContainerManag
      * Constructor of the manager
      * 
      * @param container
-     * The QuartzBufferedEngineContainer
+     *                  The QuartzBufferedEngineContainer
      * @param factory
-     * 	The scheduler Factory to manipulate Qua	rtz
+     *                  The scheduler Factory to manipulate Qua rtz
      * @param cronFeeder
-     * The CronTrigger that feed the persistent memory
+     *                  The CronTrigger that feed the persistent memory
      * @param cronSwapper
-     * 	The CronTrigger that swap between the persistent memory and the volatile memory
+     *                  The CronTrigger that swap between the persistent memory and the volatile memory
      * @param jobFeeder
-     * Job detail of the feeding job
+     *                  Job detail of the feeding job
      * @param jobSwapper
-     * Job detail of the swapping job
+     *                  Job detail of the swapping job
      */
     public QuartzBufferedEngineManager(QuartzBufferedEngineContainer container,
         org.quartz.Scheduler factory, CronTrigger cronFeeder, CronTrigger cronSwapper,
@@ -141,6 +141,12 @@ public class QuartzBufferedEngineManager implements BufferedEngineContainerManag
         }
     }
 
+    /**
+     * Set the cron expression for feeding operations
+     * 
+     * @param feedCronExpr
+     *                  the cron expression in a quartz way
+     */
     public void setFeedCronExpr(String feedCronExpr)
     {
         if (!cronFeeder.getCronExpression().equalsIgnoreCase(feedCronExpr))
@@ -165,6 +171,12 @@ public class QuartzBufferedEngineManager implements BufferedEngineContainerManag
         }
     }
 
+    /**
+     * Set the cron expression for swapping operations
+     * 
+     * @param swapCronExpr
+     *                  the cron expression in a quartz way
+     */
     public void setSwapCronExpr(String swapCronExpr)
     {
         if (!cronSwapper.getCronExpression().equalsIgnoreCase(swapCronExpr))
@@ -190,11 +202,17 @@ public class QuartzBufferedEngineManager implements BufferedEngineContainerManag
         }
     }
 
+    /**
+     * @return the cron expresson for feeding operations
+     */
     public String getFeedCronExpr()
     {
         return cronFeeder.getCronExpression();
     }
 
+    /**
+     * @return the cron expresson for swapping operations
+     */
     public String getSwapCronExpr()
     {
         return cronSwapper.getCronExpression();
@@ -254,44 +272,56 @@ public class QuartzBufferedEngineManager implements BufferedEngineContainerManag
 
     }
 
-    public Integer getPersistentFeedings()
-    {
-        return container.getPersistentFeedings();
-    }
-
-    public Integer getPersistentMemoryHits()
-    {
-        return container.getPersistentMemoryHits();
-    }
-
-    public Integer getPersistentToVolatileSwaps()
-    {
-        return container.getPersistentToVolatileSwaps();
-    }
-
-    public Integer getVolatileMemoryHits()
-    {
-        return container.getVolatileMemoryHits();
-    }
-
     /**
-     * @return
+     * @see com.octo.captcha.engine.bufferedengine.manager.BufferedEngineContainerManager#getPersistentFeedings
      */
-    public Integer  getFeedSize()
+    public int getPersistentFeedings()
     {
-        return config.getFeedSize();
+        return container.getPersistentFeedings().intValue();
     }
 
     /**
-     * @param feedSize
+     * @see com.octo.captcha.engine.bufferedengine.manager.BufferedEngineContainerManager#getPersistentMemoryHits
      */
-    public void setFeedSize(Integer  feedSize)
+    public int getPersistentMemoryHits()
     {
-        config.setFeedSize(feedSize);
+        return container.getPersistentMemoryHits().intValue();
     }
 
     /**
-     * @return
+     * @see com.octo.captcha.engine.bufferedengine.manager.BufferedEngineContainerManager#getPersistentToVolatileSwaps
+     */
+    public int getPersistentToVolatileSwaps()
+    {
+        return container.getPersistentToVolatileSwaps().intValue();
+    }
+
+    /**
+     * @see com.octo.captcha.engine.bufferedengine.manager.BufferedEngineContainerManager#getVolatileMemoryHits
+     */
+    public int getVolatileMemoryHits()
+    {
+        return container.getVolatileMemoryHits().intValue();
+    }
+
+    /**
+     * @see com.octo.captcha.engine.bufferedengine.manager.BufferedEngineContainerManager#getFeedSize
+     */
+    public int getFeedSize()
+    {
+        return config.getFeedSize().intValue();
+    }
+
+    /**
+     * @see com.octo.captcha.engine.bufferedengine.manager.BufferedEngineContainerManager#setFeedSize
+     */
+    public void setFeedSize(int feedSize)
+    {
+        config.setFeedSize(new Integer(feedSize));
+    }
+
+    /**
+     * @see com.octo.captcha.engine.bufferedengine.manager.BufferedEngineContainerManager#getLocaleRatio
      */
     public HashedMap getLocaleRatio()
     {
@@ -299,18 +329,18 @@ public class QuartzBufferedEngineManager implements BufferedEngineContainerManag
     }
 
     /**
-     * @param localeRatio
+     * @see com.octo.captcha.engine.bufferedengine.manager.BufferedEngineContainerManager#setLocaleRatio
      */
-public synchronized void setLocaleRatio(String localeName, double ratio)
+    public synchronized void setLocaleRatio(String localeName, double ratio)
     {
-       
+
         Locale locale = getLocaleFromName(localeName);
-        
+
         MapIterator it = config.getLocaleRatio().mapIterator();
         boolean isSet = false;
         double coef = ratio;
         double oldValue = 0.0f;
-        
+
         if (config.getLocaleRatio().containsKey(locale))
         {
             oldValue = ((Double) config.getLocaleRatio().get(locale)).doubleValue();
@@ -330,7 +360,7 @@ public synchronized void setLocaleRatio(String localeName, double ratio)
             {
                 if (coef < 0)
                 {
-                    it.setValue(new Double(value - ( coef * value / (1.0 - oldValue) )) );
+                    it.setValue(new Double(value - (coef * value / (1.0 - oldValue))));
                 }
                 else
                 {
@@ -345,6 +375,10 @@ public synchronized void setLocaleRatio(String localeName, double ratio)
             config.getLocaleRatio().put(locale, new Double(ratio));
         }
     }
+
+    /**
+     * @see com.octo.captcha.engine.bufferedengine.manager.BufferedEngineContainerManager#getLocaleFromName
+     */
     protected Locale getLocaleFromName(String localeName)
     {
         StringTokenizer tokenizer = new StringTokenizer(localeName, "_");
@@ -354,26 +388,23 @@ public synchronized void setLocaleRatio(String localeName, double ratio)
             case 2:
                 return new Locale(tokenizer.nextToken(), tokenizer.nextToken());
             case 3:
-                return new Locale(tokenizer.nextToken(), tokenizer.nextToken(), tokenizer.nextToken());
-            default:
-                return Locale.getDefault();
-        }        
-        /*String[] localeTab = localeName.split("_");
-        switch (localeTab.length)
-        {
-            case 1:
-                return  new Locale(localeTab[0]);
-            case 2:
-                return new Locale(localeTab[0], localeTab[1]);
-            case 3:
-                return new Locale(localeTab[0], localeTab[1], localeTab[2]);
+                return new Locale(tokenizer.nextToken(), tokenizer.nextToken(), tokenizer
+                    .nextToken());
             default:
                 return Locale.getDefault();
         }
-        */
+        /*
+         * JDK 1.4 String[] localeTab = localeName.split("_"); switch (localeTab.length) { case 1:
+         * return new Locale(localeTab[0]); case 2: return new Locale(localeTab[0], localeTab[1]);
+         * case 3: return new Locale(localeTab[0], localeTab[1], localeTab[2]); default: return
+         * Locale.getDefault(); }
+         */
     }
 
-    public synchronized void removeLocaleRatio(String  localeName)
+    /**
+     * @see com.octo.captcha.engine.bufferedengine.manager.BufferedEngineContainerManager#removeLocaleRatio
+     */
+    public synchronized void removeLocaleRatio(String localeName)
     {
         Locale locale = getLocaleFromName(localeName);
         //if it exist
@@ -389,51 +420,51 @@ public synchronized void setLocaleRatio(String localeName, double ratio)
     /**
      * @see com.octo.captcha.engine.bufferedengine.manager.BufferedEngineContainerManager#getMaxPersistentMemorySize
      */
-    public Integer getMaxPersistentMemorySize()
+    public int getMaxPersistentMemorySize()
     {
-        return config.getMaxPersistentMemorySize();
+        return config.getMaxPersistentMemorySize().intValue();
     }
 
     /**
      * @see com.octo.captcha.engine.bufferedengine.manager.BufferedEngineContainerManager#setMaxPersistentMemorySize
      */
-    public void setMaxPersistentMemorySize(Integer maxPersistentMemorySize)
+    public void setMaxPersistentMemorySize(int maxPersistentMemorySize)
     {
-        config.setMaxPersistentMemorySize(maxPersistentMemorySize);
+        config.setMaxPersistentMemorySize(new Integer(maxPersistentMemorySize));
     }
 
     /**
      * @see com.octo.captcha.engine.bufferedengine.manager.BufferedEngineContainerManager#getMaxVolatileMemorySize
      */
-    public Integer  getMaxVolatileMemorySize()
+    public int getMaxVolatileMemorySize()
     {
-        return config.getMaxVolatileMemorySize();
+        return config.getMaxVolatileMemorySize().intValue();
     }
 
     /**
      * @see com.octo.captcha.engine.bufferedengine.manager.BufferedEngineContainerManager#setMaxVolatileMemorySize
      */
-    public void setMaxVolatileMemorySize(Integer maxVolatileMemorySize)
+    public void setMaxVolatileMemorySize(int maxVolatileMemorySize)
     {
-        config.setMaxVolatileMemorySize(maxVolatileMemorySize);
+        config.setMaxVolatileMemorySize(new Integer(maxVolatileMemorySize));
     }
 
     /**
      * @see com.octo.captcha.engine.bufferedengine.manager.BufferedEngineContainerManager#getSwapSize
      */
-    public Integer getSwapSize()
+    public int getSwapSize()
     {
-        return config.getSwapSize();
+        return config.getSwapSize().intValue();
     }
 
     /**
      * @see com.octo.captcha.engine.bufferedengine.manager.BufferedEngineContainerManager#setSwapSize
      */
-    public void setSwapSize(Integer swapSize)
+    public void setSwapSize(int swapSize)
     {
-        config.setSwapSize(swapSize);
+        config.setSwapSize(new Integer(swapSize));
     }
-    
+
     /**
      * @see com.octo.captcha.engine.bufferedengine.manager.BufferedEngineContainerManager#getVolatileBufferSize
      */
@@ -441,55 +472,61 @@ public synchronized void setLocaleRatio(String localeName, double ratio)
     {
         return container.getVolatileBuffer().size();
     }
-    
+
     /**
      * @see com.octo.captcha.engine.bufferedengine.manager.BufferedEngineContainerManager#getVolatileBufferSizeByLocales
      */
     public HashedMap getVolatileBufferSizeByLocales()
     {
         HashedMap map = new HashedMap();
-        
-         Iterator it = container.getVolatileBuffer().getLocales().iterator();
-         while (it.hasNext())
-         {
-             Locale locale  = (Locale) it.next();
-             map.put(locale, new Integer(container.getVolatileBuffer().size(locale)));
-         }
-         return map;
+
+        Iterator it = container.getVolatileBuffer().getLocales().iterator();
+        while (it.hasNext())
+        {
+            Locale locale = (Locale) it.next();
+            map.put(locale, new Integer(container.getVolatileBuffer().size(locale)));
+        }
+        return map;
     }
-    
+
     /**
-     * @return
+     * @see com.octo.captcha.engine.bufferedengine.manager.BufferedEngineContainerManager#getPersistentBufferSize
      */
     public int getPersistentBufferSize()
     {
         return container.getPersistentBuffer().size();
     }
-    
+
     /**
-     * @return
+     * @see com.octo.captcha.engine.bufferedengine.manager.BufferedEngineContainerManager#getPersistentBufferSizesByLocales
      */
     public HashedMap getPersistentBufferSizesByLocales()
     {
         HashedMap map = new HashedMap();
-        
-         Iterator it = container.getPersistentBuffer().getLocales().iterator();
-         while (it.hasNext())
-         {
-             Locale locale  = (Locale) it.next();
-             map.put(locale, new Integer(container.getPersistentBuffer().size(locale)));
-         }
-         return map;
+
+        Iterator it = container.getPersistentBuffer().getLocales().iterator();
+        while (it.hasNext())
+        {
+            Locale locale = (Locale) it.next();
+            map.put(locale, new Integer(container.getPersistentBuffer().size(locale)));
+        }
+        return map;
     }
-    
+
+    /**
+     * @see com.octo.captcha.engine.bufferedengine.manager.BufferedEngineContainerManager#clearVolatileBuffer
+     */
     public void clearVolatileBuffer()
     {
         container.getVolatileBuffer().clear();
     }
-    
+
+    /**
+     * @see com.octo.captcha.engine.bufferedengine.manager.BufferedEngineContainerManager#clearPersistentBuffer
+     */
     public void clearPersistentBuffer()
     {
         container.getPersistentBuffer().clear();
     }
-    
+
 }

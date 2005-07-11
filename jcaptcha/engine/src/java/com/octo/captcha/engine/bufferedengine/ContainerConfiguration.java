@@ -69,7 +69,7 @@ public class ContainerConfiguration
     }
 
     /**
-     * @return
+     * @return Map of the ratio of locales
      */
     public HashedMap getLocaleRatio()
     {
@@ -77,7 +77,7 @@ public class ContainerConfiguration
     }
 
     /**
-     * @param localeRatio
+     * @param localeRatio Map of the ratio of locales, to produce captcha and to swap captchas
      */
     public void setLocaleRatio(HashedMap localeRatio)
     {
@@ -86,6 +86,7 @@ public class ContainerConfiguration
 
     /**
      * @return
+     * Get maximum size for the disk buffer
      */
     public Integer getMaxPersistentMemorySize()
     {
@@ -93,7 +94,8 @@ public class ContainerConfiguration
     }
 
     /**
-     * @param maxDiskSize
+     * @param maxDiskSize 
+     * Set maximum size for the disk buffer
      */
     public void setMaxPersistentMemorySize(Integer maxPersistentMemorySize)
     {
@@ -101,7 +103,7 @@ public class ContainerConfiguration
     }
 
     /**
-     * @return
+     * @return Get maximun size for the volatile buffer
      */
     public Integer getMaxVolatileMemorySize()
     {
@@ -110,6 +112,7 @@ public class ContainerConfiguration
 
     /**
      * @param maxMemorySize
+     *  Set maximun size for the volatile buffer
      */
     public  void setMaxVolatileMemorySize(Integer maxVolatileMemorySize)
     {
@@ -117,7 +120,7 @@ public class ContainerConfiguration
     }
 
     /**
-     * @return
+     * @return Get number of captchas to swap between the volatil buffer and the disk buffer
      */
     public Integer getSwapSize()
     {
@@ -126,6 +129,7 @@ public class ContainerConfiguration
 
     /**
      * @param swapSize
+     * Set number of captchas to swap between the volatil buffer and the disk buffer
      */
     public void  setSwapSize(Integer swapSize)
     {
