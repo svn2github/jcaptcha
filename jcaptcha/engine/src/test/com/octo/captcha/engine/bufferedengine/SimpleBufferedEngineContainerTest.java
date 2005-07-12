@@ -25,12 +25,15 @@ public class SimpleBufferedEngineContainerTest extends TestCase
         ConfigurableBeanFactory bf = new XmlBeanFactory(ressource);
         BufferedEngineContainer container = (BufferedEngineContainer) bf.getBean("container");
 
-        Thread.sleep(10000);
+        Thread.sleep(8000);
         for (int i = 0; i < 30; i++)
         {
             assertNotNull(container.getNextCaptcha(Locale.US));
 
         }
+        
+        Thread.sleep(4000);
+        
         ((SimpleBufferedEngineContainer)container).stopDaemon();
     }
 }

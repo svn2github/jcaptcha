@@ -79,9 +79,10 @@ public class ContainerConfiguration
     /**
      * @param localeRatio Map of the ratio of locales, to produce captcha and to swap captchas
      */
-    public void setLocaleRatio(HashedMap localeRatio)
+    public void setLocaleRatio(Map localeRatio)
     {
-        this.localeRatio = localeRatio;
+        this.localeRatio = new HashedMap(localeRatio.size());
+        this.localeRatio.putAll(localeRatio);
     }
 
     /**

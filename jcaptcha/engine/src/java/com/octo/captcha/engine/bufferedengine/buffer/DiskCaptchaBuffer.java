@@ -72,6 +72,8 @@ public class DiskCaptchaBuffer implements CaptchaBuffer
      */
     private int maxDataSize;
 
+    private boolean isDisposed = false;
+
     /**
      * Constructor for a disk captcha buffer
      * 
@@ -315,6 +317,8 @@ public class DiskCaptchaBuffer implements CaptchaBuffer
     public synchronized void dispose()
     {
 
+        //set allready in case some concurrent access
+        isDisposed = true;
         // Close the cache
         try
         {
@@ -579,6 +583,7 @@ public class DiskCaptchaBuffer implements CaptchaBuffer
      */
     public Captcha removeCaptcha() throws BufferUnderflowException
     {
+        if (isDisposed) return null;
         return removeCaptcha(Locale.getDefault());
     }
 
@@ -587,6 +592,7 @@ public class DiskCaptchaBuffer implements CaptchaBuffer
      */
     public Collection removeCaptcha(int number)
     {
+        if (isDisposed) return null;
         log.debug("Entering removeCaptcha(int number) ");
         Collection c = null;
         try
@@ -616,6 +622,7 @@ public class DiskCaptchaBuffer implements CaptchaBuffer
     public void putAllCaptcha(Collection captchas)
     {
         log.debug("Entering putAllCaptcha()");
+        
         putAllCaptcha(captchas, Locale.getDefault());
     }
 
@@ -650,20 +657,20 @@ public class DiskCaptchaBuffer implements CaptchaBuffer
     {
         log.debug("entering removeCaptcha(Locale locale)");
         
-        Captcha[] captchas = null;
+        Collection captchas = null;
         try
         {
-            captchas = (Captcha[] ) remove(1, locale).toArray();
+            captchas = remove(1, locale);
         }
         catch (IOException e)
         {
             throw new CaptchaException(e);
         }
-        if (captchas.length == 0)
+        if (captchas.size() == 0)
         {
             throw new BufferUnderflowException();
         }
-        return captchas[0];
+        return (Captcha) captchas.toArray()[0];
     }
 
     /**
@@ -672,6 +679,8 @@ public class DiskCaptchaBuffer implements CaptchaBuffer
      */
     public Collection removeCaptcha(int number, Locale locale)
     {   
+        if (isDisposed) return null;
+        
         try
         {
             return remove(number, locale);
@@ -688,6 +697,8 @@ public class DiskCaptchaBuffer implements CaptchaBuffer
      */
     public void putCaptcha(Captcha captcha, Locale locale)
     {
+        if (isDisposed) return;
+        
         try
         {
             store(captcha, locale);
@@ -704,7 +715,7 @@ public class DiskCaptchaBuffer implements CaptchaBuffer
      */
     public void putAllCaptcha(Collection captchas, Locale locale)
     {
-        
+        if (isDisposed) return;
         try
         {
             store(captchas, locale);
@@ -721,7 +732,7 @@ public class DiskCaptchaBuffer implements CaptchaBuffer
      */
     public int size(Locale locale)
     {
-        if (!isInitalized) return 0;
+        if (!isInitalized || isDisposed) return 0;
         return ((LinkedList) diskElements.get(locale)).size();
     }
 
@@ -746,6 +757,7 @@ public class DiskCaptchaBuffer implements CaptchaBuffer
      */
     public Collection getLocales()
     {
+        if (isDisposed) return null;
         return diskElements.keySet();
     }
 

@@ -58,7 +58,6 @@ public class SimpleBufferedEngineContainer extends BufferedEngineContainer
     {
         this.clockDaemonFeed.shutDown();
         this.clockDaemonSwap.shutDown();
-
     }
 
     protected void startDaemon()

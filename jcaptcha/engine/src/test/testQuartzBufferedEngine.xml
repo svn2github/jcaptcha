@@ -18,6 +18,15 @@
 	  <constructor-arg index="0"><value>0.8</value></constructor-arg>
 	  </bean>
 	  
+	<bean
+		class="com.octo.captcha.engine.bufferedengine.manager.QuartzBufferedEngineManager" id="manager">
+						<constructor-arg type="com.octo.captcha.engine.bufferedengine.QuartzBufferedEngineContainer" index="0"><ref bean="container"/></constructor-arg>
+						<constructor-arg type="org.quartz.Scheduler" index="1"><ref bean="quartz"/></constructor-arg>
+						<constructor-arg type="org.quartz.CronTrigger" index="2"><ref bean="cronTriggerFeeder"/></constructor-arg>
+						<constructor-arg type="org.quartz.CronTrigger" index="3"><ref bean="cronTriggerSwapper"/></constructor-arg>
+						<constructor-arg type="org.quartz.JobDetail" index="4"><ref bean="feederJobDetail"/></constructor-arg>
+						<constructor-arg type="org.quartz.JobDetail" index="5"><ref bean="swapperJobDetail"/></constructor-arg>
+	</bean>
 	  
 	 <bean id="configuration"
 	  class="com.octo.captcha.engine.bufferedengine.ContainerConfiguration">
