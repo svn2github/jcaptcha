@@ -16,7 +16,7 @@ import java.util.Locale;
 /**
  * @author NIDWMAG
  */
-public class SimpleBufferedEngineContainerTest extends TestCase
+public class SimpleBufferedEngineContainerTest extends BufferedEngineContainerTestAbstract
 {
 
     public void testExecute() throws Exception
@@ -35,5 +35,24 @@ public class SimpleBufferedEngineContainerTest extends TestCase
         Thread.sleep(4000);
         
         ((SimpleBufferedEngineContainer)container).stopDaemon();
+    }
+
+    /**
+     * @see com.octo.captcha.engine.bufferedengine.BufferedEngineContainerTestAbstract#getEngine()
+     */
+    public BufferedEngineContainer getEngine()
+    {
+        Resource ressource = new ClassPathResource("testSimpleBufferedEngine.xml");
+        ConfigurableBeanFactory bf = new XmlBeanFactory(ressource);
+        BufferedEngineContainer container = (BufferedEngineContainer) bf.getBean("container");
+        return container;
+    }
+
+    /**
+     * @see com.octo.captcha.engine.bufferedengine.BufferedEngineContainerTestAbstract#releaseEngine(com.octo.captcha.engine.bufferedengine.BufferedEngineContainer)
+     */
+    public void releaseEngine(BufferedEngineContainer engine)
+    {
+        ((SimpleBufferedEngineContainer)engine).stopDaemon();
     }
 }
