@@ -465,10 +465,9 @@ DAMAGES.
 package com.octo.captcha.sound.gimpy;
 
 import com.octo.captcha.CaptchaException;
-
 import com.octo.captcha.component.sound.soundconfigurator.FreeTTSSoundConfigurator;
 import com.octo.captcha.component.sound.wordtosound.FreeTTSWordToSound;
-import com.octo.captcha.component.wordgenerator.RandomWordGenerator;
+import com.octo.captcha.component.word.wordgenerator.RandomWordGenerator;
 import junit.framework.TestCase;
 
 public class SoundGimpyFactoryTest extends TestCase {
@@ -476,7 +475,7 @@ public class SoundGimpyFactoryTest extends TestCase {
     private static String voiceName = "kevin16";
 
     private static String voicePackage = "com.sun.speech.freetts.en.us.cmu_time_awb.AlanVoiceDirectory,com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory";
-    
+
     GimpySoundFactory tested;
 
     public SoundGimpyFactoryTest(String s) {
@@ -485,14 +484,13 @@ public class SoundGimpyFactoryTest extends TestCase {
 
     protected void setUp() throws Exception {
         super.setUp();
-        tested = new GimpySoundFactory(new RandomWordGenerator("a"), new FreeTTSWordToSound(new FreeTTSSoundConfigurator(
-            voiceName, voicePackage, 1.0f, 100, 100), 3, 6));
+        tested = new GimpySoundFactory(new RandomWordGenerator("a"), new FreeTTSWordToSound(new FreeTTSSoundConfigurator(voiceName, voicePackage, 1.0f, 100, 100), 3, 6));
     }
 
     public void testGetRandomRange() throws Exception {
     }
 
-    public void testGetRandomLenght() throws Exception {
+    public void testGetRandomLength() throws Exception {
 
     }
 
@@ -511,8 +509,7 @@ public class SoundGimpyFactoryTest extends TestCase {
         }
 
         try {
-            new GimpySoundFactory(null, new FreeTTSWordToSound(new FreeTTSSoundConfigurator(
-                voiceName, voicePackage, 1.0f, 100, 100), 3, 6));
+            new GimpySoundFactory(null, new FreeTTSWordToSound(new FreeTTSSoundConfigurator(voiceName, voicePackage, 1.0f, 100, 100), 3, 6));
             fail("Test is not implemented");
         } catch (CaptchaException e) {
             assertNotNull(e.getMessage());

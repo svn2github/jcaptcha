@@ -8,7 +8,7 @@
         <section name="Roadmap">
 
             <p>
-Future directions for this module are :
+                Future directions for this module are :
                 <ul>
                     <li>Ehcache implementation : done</li>
                     <li>Buffered implementation : done</li>

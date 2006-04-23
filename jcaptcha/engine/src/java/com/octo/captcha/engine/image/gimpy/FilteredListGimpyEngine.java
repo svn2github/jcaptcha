@@ -482,11 +482,9 @@ import java.awt.image.ImageFilter;
  * @deprecated
  */
 public class FilteredListGimpyEngine
-        extends com.octo.captcha.engine.image.ListImageCaptchaEngine
-{
+        extends com.octo.captcha.engine.image.ListImageCaptchaEngine {
 
-    protected void buildInitialFactories()
-    {
+    protected void buildInitialFactories() {
 
         //      build filters
         com.jhlabs.image.EmbossFilter emboss = new com.jhlabs.image.EmbossFilter();
@@ -539,9 +537,9 @@ public class FilteredListGimpyEngine
                         new Integer(100));
         FontGenerator font =
                 new RandomFontGenerator(new Integer(25), new Integer(35));
-        com.octo.captcha.component.wordgenerator.WordGenerator words =
-                new com.octo.captcha.component.wordgenerator.DictionaryWordGenerator(
-                        new com.octo.captcha.component.wordgenerator.FileDictionnary(
+        com.octo.captcha.component.word.wordgenerator.WordGenerator words =
+                new com.octo.captcha.component.word.wordgenerator.DictionaryWordGenerator(
+                        new com.octo.captcha.component.word.FileDictionary(
                                 "toddlist"));
 
         //build factories

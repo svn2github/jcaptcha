@@ -20,8 +20,6 @@ public class ToolkitFactoryTest extends TestCase {
 
     /**
      * Constructor for ToolkitFactoryTest.
-     *
-     * @param name
      */
     public ToolkitFactoryTest(String name) {
         super(name);
@@ -31,16 +29,14 @@ public class ToolkitFactoryTest extends TestCase {
         assertTrue(ToolkitFactory.getToolkit() instanceof Toolkit);
     }
 
-    public void testGetCustomToolkit(){
-        System.setProperty(ToolkitFactory.TOOLKIT_IMPL,MockToolkit.class.getName());
+    public void testGetCustomToolkit() {
+        System.setProperty(ToolkitFactory.TOOLKIT_IMPL, MockToolkit.class.getName());
         assertTrue(ToolkitFactory.getToolkit() instanceof MockToolkit);
-        System.setProperty(ToolkitFactory.TOOLKIT_IMPL,"toto");
-        try
-        {
+        System.setProperty(ToolkitFactory.TOOLKIT_IMPL, "toto");
+        try {
             ToolkitFactory.getToolkit();
             fail("should throw an exception");
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             //assertTrue();
         }
 
@@ -48,7 +44,7 @@ public class ToolkitFactoryTest extends TestCase {
 
     protected void tearDown() throws Exception {
         super.tearDown();
-         System.setProperty(ToolkitFactory.TOOLKIT_IMPL,Toolkit.getDefaultToolkit().getClass().toString());
-        
+        System.setProperty(ToolkitFactory.TOOLKIT_IMPL, Toolkit.getDefaultToolkit().getClass().toString());
+
     }
 }

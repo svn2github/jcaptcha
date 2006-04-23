@@ -56,7 +56,7 @@
     <developer>
       <name>Marc-Antoine Garrigue</name>
       <id>magarrigue</id>
-      <email>magarrigue@octo.com</email>
+      <email>marc.antoine.garrigue@gmail.com</email>
       <organization>Octo</organization>
       <roles>
         <role>Project Leader</role>
@@ -66,7 +66,6 @@
     <developer>
       <name>Sébastien Brunot</name>
       <id>sbrunot</id>
-      <email>sbrunot@octo.com</email>
       <organization>Octo</organization>
       <roles>
         <role>Java Developer</role>
@@ -75,7 +74,14 @@
     <developer>
       <name>Mathieu Gandin</name>
       <id>mgandin</id>
-      <email>mgandin@octo.com</email>
+      <organization>Octo</organization>
+      <roles>
+        <role>Java Developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <name>Benoit doumas</name>
+      <id>bdoumas</id>
       <organization>Octo</organization>
       <roles>
         <role>Java Developer</role>
@@ -105,6 +111,7 @@
       </includes>
       <excludes>
         <exclude>**/*Test*All.java</exclude>
+        <exclude>${jcaptcha.load.test.exclude}</exclude>
       </excludes>
       <resources>
             <resource>
@@ -148,9 +155,7 @@
 
   <reports>
   	<!--report>maven-dashboard-plugin</report-->
-  	<report>maven-changelog-plugin</report>
-  	<report>maven-file-activity-plugin</report>
-	<report>maven-checkstyle-plugin</report>
+  	<report>maven-checkstyle-plugin</report>
 	<report>maven-junit-report-plugin</report>
 	<report>maven-javadoc-plugin</report>
 	<report>maven-jxr-plugin</report>

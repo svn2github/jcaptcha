@@ -1,159 +1,168 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <project>
 
-   <extend>${basedir}/../base_project.xml</extend>
-   <artifactId>jcaptcha-engine</artifactId>
+    <extend>${basedir}/../base_project.xml</extend>
+    <artifactId>jcaptcha-engine</artifactId>
 
-  <name>jcaptcha-engine</name>
+    <name>jcaptcha-engine</name>
 
-  <package>com.octo.captcha.engine</package>
+    <package>com.octo.captcha.engine</package>
 
 
-  <description>
-      <![CDATA[
-      <b>JCAPTCHA</b>, for <b>J</b>ava <b>C</b>ompletely <b>A</b>utomated <b>P</b>ublic <b>T</b>est to tell <b>C</b>omputers and <b>H</b>umans <b>A</b>part
+    <description><![CDATA[<b>JCAPTCHA</b>, for <b>J</b>ava <b>C</b>ompletely <b>A</b>utomated <b>P</b>ublic <b>T</b>est to tell <b>C</b>omputers and <b>H</b>umans <b>A</b>part
 <br/>The open source java framework for captcha definition and integration
 <br/>
  A captcha engine is able to provides captchas and localized captchas.<BR/>
  This jar aims to provide interfaces and implementation of generic and typed captcha engines.<BR/>
- It uses the jcaptcha-core factories to build captchas.
+ It uses the jcaptcha-core factories to build captchas.]]></description>
+    <!-- a short description of what the project does -->
+    <shortDescription>JCAPTCHA engine : Ready to use captcha tests configurations</shortDescription>
 
 
-  ]]>
-  </description>
-  <!-- a short description of what the project does -->
-  <shortDescription>
-     JCAPTCHA engine : Ready to use captcha tests configurations
-    </shortDescription>
-
-
-
-  <dependencies>
-    <dependency>
-      <groupId>jcaptcha</groupId>
-      <artifactId>jcaptcha-core</artifactId>
-      <version>${project.version}</version>
-      <jar/>
-      <type/>
-      <url>http://jcaptcha.sourceforge.net</url>
-      <properties/>
-    </dependency>
-
-    	<dependency>
-    	    <groupId>jhlabs</groupId>
-    	    <artifactId>imaging</artifactId>
-            <version>01012005</version>
-    	</dependency>
-    	<dependency>
-    	    <groupId>jcaptcha</groupId>
-    	    <artifactId>jcaptcha-core</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>jcaptcha</groupId>
+            <artifactId>jcaptcha-core</artifactId>
             <version>${project.version}</version>
-    	</dependency>
+            <jar/>
+            <type/>
+            <url>http://jcaptcha.sourceforge.net</url>
+            <properties/>
+        </dependency>
+
+        <dependency>
+            <groupId>jhlabs</groupId>
+            <artifactId>imaging</artifactId>
+            <version>01012005</version>
+        </dependency>
+        <dependency>
+            <groupId>jcaptcha</groupId>
+            <artifactId>jcaptcha-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <dependency>
             <groupId>freeTTS</groupId>
-    		<artifactId>freetts</artifactId>
+            <artifactId>freetts</artifactId>
             <version>1.2</version>
             <url>http://freetts.sourceforge.net/docs/</url>
         </dependency>
-        
-       	<dependency>
-       	    <groupId>freeTTS</groupId>
-    		<artifactId>en_us</artifactId>
-            <version>1.2</version>
-            <url>http://freetts.sourceforge.net/docs/</url>
-        </dependency>
-        
-		<dependency>
-       	    <groupId>freeTTS</groupId>
-    		<artifactId>cmu_us_kal</artifactId>
-            <version>1.2</version>
-            <url>http://freetts.sourceforge.net/docs/</url>
-        </dependency>
-        
-        <dependency>
-       	    <groupId>freeTTS</groupId>
-    		<artifactId>cmu_time_awb</artifactId>
-            <version>1.2</version>
-            <url>http://freetts.sourceforge.net/docs/</url>
-        </dependency>
-        
-       <dependency>
-       	    <groupId>freeTTS</groupId>
-    		<artifactId>cmutimelex</artifactId>
-            <version>1.2</version>
-            <url>http://freetts.sourceforge.net/docs/</url>
-        </dependency>
-        
-       	<dependency>
-       	    <groupId>freeTTS</groupId>
-    		<artifactId>cmulex</artifactId>
-            <version>1.2</version>
-            <url>http://freetts.sourceforge.net/docs/</url>
-        </dependency>
-        
-        <dependency>
-       	    <groupId>freeTTS</groupId>
-    		<artifactId>cmutimelex</artifactId>
-            <version>1.2</version>
-            <url>http://freetts.sourceforge.net/docs/</url>
-        </dependency>
-        
-    	<dependency>
-    	    <groupId>quartz</groupId>
-    	    <artifactId>quartz</artifactId>
-            <version>1.4.5</version>
-    	</dependency>
-    	
-      <dependency>
-           <groupId>commons-logging</groupId>
-           <artifactId>commons-logging</artifactId>
-           <version>1.0.4</version>
-           <jar/>
-           <type/>
-           <properties/>
-         </dependency>
 
-      <dependency>
-           <groupId>commons-collections</groupId>
-           <artifactId>commons-collections</artifactId>
-           <version>3.1</version>
-           <jar/>
-           <type/>
-           <properties/>
-         </dependency>
-         
-      <dependency>
-           <groupId>ehcache</groupId>
-           <artifactId>ehcache</artifactId>
-           <version>1.0</version>
-           <jar/>
-           <type/>
-           <properties/>
-         </dependency>
-         
-         <dependency>
-                <groupId>concurrent</groupId>
-                <artifactId>concurrent</artifactId>
-                <version>1.3.2</version>
-                <jar/>
-                <type/>
-                <properties/>
-              </dependency>
-              
         <dependency>
-            <groupId>springframework</groupId>
-            <artifactId>spring-dao</artifactId>
+            <groupId>freeTTS</groupId>
+            <artifactId>en_us</artifactId>
             <version>1.2</version>
-            <type>jar</type>
+            <url>http://freetts.sourceforge.net/docs/</url>
         </dependency>
-        
+
+        <dependency>
+            <groupId>freeTTS</groupId>
+            <artifactId>cmu_us_kal</artifactId>
+            <version>1.2</version>
+            <url>http://freetts.sourceforge.net/docs/</url>
+        </dependency>
+
+        <dependency>
+            <groupId>freeTTS</groupId>
+            <artifactId>cmu_time_awb</artifactId>
+            <version>1.2</version>
+            <url>http://freetts.sourceforge.net/docs/</url>
+        </dependency>
+
+        <dependency>
+            <groupId>freeTTS</groupId>
+            <artifactId>cmutimelex</artifactId>
+            <version>1.2</version>
+            <url>http://freetts.sourceforge.net/docs/</url>
+        </dependency>
+
+        <dependency>
+            <groupId>freeTTS</groupId>
+            <artifactId>cmulex</artifactId>
+            <version>1.2</version>
+            <url>http://freetts.sourceforge.net/docs/</url>
+        </dependency>
+
+        <dependency>
+            <groupId>freeTTS</groupId>
+            <artifactId>cmutimelex</artifactId>
+            <version>1.2</version>
+            <url>http://freetts.sourceforge.net/docs/</url>
+        </dependency>
+
+        <dependency>
+            <groupId>quartz</groupId>
+            <artifactId>quartz</artifactId>
+            <version>1.4.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.0.4</version>
+            <jar/>
+            <type/>
+            <properties/>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>1.2.1</version>
+            <jar/>
+            <type/>
+            <properties/>
+        </dependency>
+        <dependency>
+            <groupId>commons-pool</groupId>
+            <artifactId>commons-pool</artifactId>
+            <version>1.1</version>
+            <jar/>
+            <type/>
+            <properties/>
+        </dependency>
+        <dependency>
+            <groupId>hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>1.7.3.0</version>
+            <jar/>
+            <type/>
+            <properties/>
+        </dependency>
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.1</version>
+            <jar/>
+            <type/>
+            <properties/>
+        </dependency>
+
+        <dependency>
+            <groupId>ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <version>1.0</version>
+            <jar/>
+            <type/>
+            <properties/>
+        </dependency>
+
+        <dependency>
+            <groupId>concurrent</groupId>
+            <artifactId>concurrent</artifactId>
+            <version>1.3.2</version>
+            <jar/>
+            <type/>
+            <properties/>
+        </dependency>
+
+
         <dependency>
             <groupId>springframework</groupId>
             <artifactId>spring</artifactId>
             <version>1.2</version>
             <type>jar</type>
         </dependency>
-  </dependencies>
+    </dependencies>
 
 
 </project>

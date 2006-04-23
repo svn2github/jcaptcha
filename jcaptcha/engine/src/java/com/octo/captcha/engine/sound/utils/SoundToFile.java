@@ -463,33 +463,27 @@
  */
 package com.octo.captcha.engine.sound.utils;
 
-import java.io.File;
-import java.io.IOException;
-
 import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
+import java.io.File;
+import java.io.IOException;
 
 /**
- * <p>
- * Create a wave file from an AudioInputStream
- * </p>
- * 
+ * <p/>
+ * Create a wave file from an AudioInputStream </p>
+ *
  * @author Benoit
  * @version 1.0
  */
-public class SoundToFile
-{
+public class SoundToFile {
     /**
      * Create a wave file from an AudioInputStream
-     * 
-     * @param pAudioInputStream
-     *            Audio Steam to serialize
-     * @param pFile
-     *            File to write to audio stream
+     *
+     * @param pAudioInputStream Audio Steam to serialize
+     * @param pFile             File to write to audio stream
      */
-    public static void serialize(AudioInputStream pAudioInputStream, File pFile) throws IOException
-    {
+    public static void serialize(AudioInputStream pAudioInputStream, File pFile) throws IOException {
         pFile.createNewFile();
         AudioSystem.write(pAudioInputStream, AudioFileFormat.Type.WAVE, pFile);
     }

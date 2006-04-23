@@ -1,30 +1,31 @@
 /*
- * Copyright (c) 2005 Your Corporation. All Rights Reserved.
+ * jcaptcha, the open source java framework for captcha definition and integration
+ * Copyright (c) 2005 jcaptcha.net. All Rights Reserved.
+ * See the LICENSE.txt file distributed with this package.
  */
 package com.octo.captcha.component.image.textpaster;
 
 import com.octo.captcha.CaptchaException;
 import com.octo.captcha.component.image.color.ColorGenerator;
 
-import java.text.AttributedString;
-import java.text.AttributedCharacterIterator;
-import java.awt.geom.Rectangle2D;
-import java.awt.geom.Point2D;
+import java.awt.*;
+import java.awt.font.FontRenderContext;
 import java.awt.font.LineMetrics;
 import java.awt.font.TextAttribute;
-import java.awt.font.FontRenderContext;
-import java.awt.font.TextLayout;
-import java.awt.*;
+import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.security.SecureRandom;
+import java.text.AttributedCharacterIterator;
+import java.text.AttributedString;
 import java.util.Random;
 
 /**
- * This class is the decomposition of a single AttributedString into its component glyphs. It
- * wouldn't be necessary if Java2D correctly handled spacing issues with fonts changed
- * AffineTransformation -- there is a possibility that it will not be necessary with java 1.5
+ * This class is the decomposition of a single AttributedString into its component glyphs. It wouldn't be necessary if
+ * Java2D correctly handled spacing issues with fonts changed AffineTransformation -- there is a possibility that it
+ * will not be necessary with java 1.5
  */
-public class ChangeableAttributedString
-{
+public class ChangeableAttributedString {
 
     /**
      * each character is stored as its own AttributedString
@@ -44,26 +45,22 @@ public class ChangeableAttributedString
     /**
      * Comment for <code>myRandom</code>
      */
-    private Random myRandom = new Random();
+    private Random myRandom = new SecureRandom();
 
     /**
-     * In typography, kerning refers to adjusting the space between characters, especially by
-     * placing two characters closer together than normal. Kerning makes certain combinations of
-     * letters, such as WA, MW, TA, and VA, look better.
+     * In typography, kerning refers to adjusting the space between characters, especially by placing two characters
+     * closer together than normal. Kerning makes certain combinations of letters, such as WA, MW, TA, and VA, look
+     * better.
      */
     private int kerning;
 
     /**
-     * Given an attributed string and the graphics environment it lives in, pull it apart into its
-     * components.
-     * 
-     * @param g2
-     *                  graphics
-     * @param aString
-     *                  attributed String
+     * Given an attributed string and the graphics environment it lives in, pull it apart into its components.
+     *
+     * @param g2      graphics
+     * @param aString attributed String
      */
-    protected ChangeableAttributedString(Graphics2D g2, AttributedString aString, int kerning)
-    {
+    protected ChangeableAttributedString(Graphics2D g2, AttributedString aString, int kerning) {
         this.kerning = kerning;
         AttributedCharacterIterator iter = aString.getIterator();
         int n = iter.getEndIndex();
@@ -71,13 +68,11 @@ public class ChangeableAttributedString
         bounds = new Rectangle2D[n];
         metrics = new LineMetrics[n];
 
-        for (int i = iter.getBeginIndex(); i < iter.getEndIndex(); i++)
-        {
+        for (int i = iter.getBeginIndex(); i < iter.getEndIndex(); i++) {
             iter.setIndex(i);
             aStrings[i] = new AttributedString(iter, i, i + 1);
             Font font = (Font) iter.getAttribute(TextAttribute.FONT);
-            if (font != null)
-            {
+            if (font != null) {
                 g2.setFont(font); // needed for getFont, -and- getFontRenderContext
             }
             final FontRenderContext frc = g2.getFontRenderContext();
@@ -85,61 +80,48 @@ public class ChangeableAttributedString
             bounds[i] = g2.getFont().getStringBounds(iter, i, i + 1, frc);
 
             metrics[i] = g2.getFont().getLineMetrics((new Character(iter.current())).toString(),
-                frc);
+                    frc);
         }
 
     }
 
     /**
      * Draw all characters according to their computed positions
-     * 
-     * @param g2
      */
-    void drawString(Graphics2D g2)
-    {
-        for (int i = 0; i < length(); i++)
-        {
+    void drawString(Graphics2D g2) {
+        for (int i = 0; i < length(); i++) {
             g2.drawString(getIterator(i), (float) getX(i), (float) getY(i));
         }
     }
 
     /**
-     * Draw all characters according to their computed positions, and a color from the
-     * colorGenerator
-     * 
-     * @param g2
-     * @param colorGenerator
-     *                  generate color for each glyph
+     * Draw all characters according to their computed positions, and a color from the colorGenerator
+     *
+     * @param colorGenerator generate color for each glyph
      */
-    void drawString(Graphics2D g2, ColorGenerator colorGenerator)
-    {
-        for (int i = 0; i < length(); i++)
-        {
+    void drawString(Graphics2D g2, ColorGenerator colorGenerator) {
+        for (int i = 0; i < length(); i++) {
             g2.setColor(colorGenerator.getNextColor());
             g2.drawString(getIterator(i), (float) getX(i), (float) getY(i));
         }
     }
 
-    Point2D moveToRandomSpot(final BufferedImage background)
-    {
+    Point2D moveToRandomSpot(final BufferedImage background) {
         return moveToRandomSpot(background, null);
     }
 
     /**
-     * Given a background image (for size only), pick a random spot such that the entire string can
-     * be displayed. This method implicitly assumes that all resizing issues have been taken care of
-     * first. If you resize afterwards, any type of clipping is possible.
-     * 
-     * @param background
-     *                  the image that will lie under the text
-     * @param startingPoint
-     *                  the suggested starting point, or null if any point is acceptable.
+     * Given a background image (for size only), pick a random spot such that the entire string can be displayed. This
+     * method implicitly assumes that all resizing issues have been taken care of first. If you resize afterwards, any
+     * type of clipping is possible.
+     *
+     * @param background    the image that will lie under the text
+     * @param startingPoint the suggested starting point, or null if any point is acceptable.
      * @return a Point2D object indicating the initial starting point of the text
      * @throws com.octo.captcha.CaptchaException
-     *                  if the image size is too small, or the word too long, or the fonts too large.
+     *          if the image size is too small, or the word too long, or the fonts too large.
      */
-    Point2D moveToRandomSpot(final BufferedImage background, Point2D startingPoint)
-    {
+    Point2D moveToRandomSpot(final BufferedImage background, Point2D startingPoint) {
         int maxHeight = (int) getMaxHeight();
 
         // this padding is necessary due to flaws in this algorithm and how it interacts
@@ -155,38 +137,31 @@ public class ChangeableAttributedString
 
         int newY;
 
-        if (startingPoint == null)
-        {
+        if (startingPoint == null) {
             // we cannot start above the maximum ascent, or below the difference
             // between text size and image size. nextInt requires values > 0.
             // no suggested starting point is given - any spot on the vertical axis is ok
             newY = (int) getMaxAscent() + myRandom.nextInt(Math.max(1, (int) maxY));
-        }
-        else
-        {
+        } else {
             newY = (int) (startingPoint.getY() + myRandom.nextInt(arbitraryVerticalPadding * 2));
         }
 
         // the bounding box we're using is too small. can we fix the problem?
-        if (maxX < 0 || maxY < 0)
-        {
+        if (maxX < 0 || maxY < 0) {
             String problem = "too tall:"; // no, we cannot handle this case
 
-            if (maxX < 0 && maxY > 0)
-            {
+            if (maxX < 0 && maxY > 0) {
                 problem = "too long:";
 
                 // ok, the text slammed into the end of the image. let's try half the kerning:
                 useMinimumSpacing(kerning / 2);
                 maxX = background.getWidth() - getTotalWidth();
-                if (maxX < 0)
-                {
+                if (maxX < 0) {
                     // that didn't work. let's try no kerning
                     useMinimumSpacing(0);
 
                     maxX = background.getWidth() - getTotalWidth();
-                    if (maxX < 0)
-                    {
+                    if (maxX < 0) {
                         // that didn't work either. let's try gradual steps of negative kerning.
                         maxX = reduceHorizontalSpacing(background.getWidth(), 0.05 /*
                                                                                                                     * max
@@ -198,8 +173,7 @@ public class ChangeableAttributedString
 
                 // if one of the above steps worked, then return now;
                 // otherwise, fall through to exception
-                if (maxX > 0)
-                {
+                if (maxX > 0) {
                     moveTo(0, newY);
                     return new Point2D.Float(0, newY);
                 }
@@ -207,21 +181,18 @@ public class ChangeableAttributedString
 
             // situtation is unrecoverable -- throw exception
             throw new CaptchaException("word is " + problem
-                + " try to use less letters, smaller font" + " or bigger background: "
-                + " text bounds = " + this + " with fonts " + this.getFontListing()
-                + " versus image width = " + background.getWidth() + ", height = "
-                + background.getHeight());
+                    + " try to use less letters, smaller font" + " or bigger background: "
+                    + " text bounds = " + this + " with fonts " + this.getFontListing()
+                    + " versus image width = " + background.getWidth() + ", height = "
+                    + background.getHeight());
         }
 
         int newX;
-        if (startingPoint == null)
-        {
+        if (startingPoint == null) {
             // no suggested starting point - the string can start anywhere horizontal if
             // the string is long enough
             newX = myRandom.nextInt(Math.max(1, (int) maxX));
-        }
-        else
-        {
+        } else {
             newX = (int) (startingPoint.getX() + myRandom.nextInt(arbitraryHorizontalPadding));
         }
 
@@ -231,20 +202,17 @@ public class ChangeableAttributedString
 
     /**
      * helper method for error message
-     * 
+     *
      * @return list of fonts
      */
-    String getFontListing()
-    {
+    String getFontListing() {
         StringBuffer buf = new StringBuffer();
         final String RS = "\n\t";
         buf.append("{");
-        for (int i = 0; i < length(); i++)
-        {
+        for (int i = 0; i < length(); i++) {
             AttributedCharacterIterator iter = aStrings[i].getIterator();
             Font font = (Font) iter.getAttribute(TextAttribute.FONT);
-            if (font != null)
-            {
+            if (font != null) {
                 buf.append(font.toString()).append(RS);
             }
         }
@@ -253,63 +221,52 @@ public class ChangeableAttributedString
     }
 
     /**
-     * Rearrange the string so that all characters are treated as if they are as wide as the widest
-     * character in the same string.
-     * 
-     * @param kerning
-     *                  the space between the characters
+     * Rearrange the string so that all characters are treated as if they are as wide as the widest character in the
+     * same string.
+     *
+     * @param kerning the space between the characters
      */
-    void useMonospacing(double kerning)
-    {
+    void useMonospacing(double kerning) {
         double maxWidth = getMaxWidth();
         // for every glyph after the first, space it out so that they are maxWidth characters apart
-        for (int i = 1; i < bounds.length; i++)
-        {
+        for (int i = 1; i < bounds.length; i++) {
             // each character between where the previous character ends
             getBounds(i).setRect(getX(i - 1) + maxWidth + kerning, getY(i), getWidth(i),
-                getHeight(i));
+                    getHeight(i));
         }
     }
 
     /**
-     * Rearrange the string so that all characters are treated as if they are as wide as the widest
-     * character in the same string.
-     * 
-     * @param kerning
-     *                  the space between the characters
+     * Rearrange the string so that all characters are treated as if they are as wide as the widest character in the
+     * same string.
+     *
+     * @param kerning the space between the characters
      */
-    void useMinimumSpacing(double kerning)
-    {
+    void useMinimumSpacing(double kerning) {
 
-        for (int i = 1; i < length(); i++)
-        {
+        for (int i = 1; i < length(); i++) {
             bounds[i].setRect(bounds[i - 1].getX() + bounds[i - 1].getWidth() + kerning, bounds[i]
-                .getY(), bounds[i].getWidth(), bounds[i].getHeight());
+                    .getY(), bounds[i].getWidth(), bounds[i].getHeight());
         }
     }
 
     /**
-     * Gradually reduce spacing between letters until the total length is less than the final image
-     * width. In many cases, this will guarantee collisions between the letters.
-     * 
-     * @param imageWidth
-     * @param maxReductionPct
-     *                  maximum percentage reduction
-     * @return if positive, the highest X value that can be safely used for placement of box; if
-     *             negative, there is no safe way to display the text without clipping the ends.
+     * Gradually reduce spacing between letters until the total length is less than the final image width. In many
+     * cases, this will guarantee collisions between the letters.
+     *
+     * @param maxReductionPct maximum percentage reduction
+     * @return if positive, the highest X value that can be safely used for placement of box; if negative, there is no
+     *         safe way to display the text without clipping the ends.
      */
-    double reduceHorizontalSpacing(int imageWidth, double maxReductionPct)
-    {
+    double reduceHorizontalSpacing(int imageWidth, double maxReductionPct) {
         double maxX = imageWidth - getTotalWidth();
 
         double pct = 0;
         final double stepSize = maxReductionPct / 25;
-        for (pct = stepSize; pct < maxReductionPct && maxX < 0; pct += stepSize)
-        {
-            for (int i = 1; i < length(); i++)
-            {
+        for (pct = stepSize; pct < maxReductionPct && maxX < 0; pct += stepSize) {
+            for (int i = 1; i < length(); i++) {
                 bounds[i].setRect((1 - pct) * bounds[i].getX(), bounds[i].getY(), bounds[i]
-                    .getWidth(), bounds[i].getHeight());
+                        .getWidth(), bounds[i].getHeight());
             }
             maxX = (imageWidth - getTotalWidth());
         }
@@ -318,32 +275,24 @@ public class ChangeableAttributedString
 
     /**
      * Change the x,y values in the boundaries so they can be used for position.
-     * 
-     * @param newX
-     * @param newY
      */
-    void moveTo(double newX, double newY)
-    {
+    void moveTo(double newX, double newY) {
         bounds[0].setRect(newX, newY, bounds[0].getWidth(), bounds[0].getHeight());
-        for (int i = 1; i < length(); i++)
-        {
+        for (int i = 1; i < length(); i++) {
             bounds[i].setRect(newX + bounds[i].getX(), newY, bounds[i].getWidth(), bounds[i]
-                .getHeight());
+                    .getHeight());
         }
     }
 
-    public String toString()
-    {
+    public String toString() {
         StringBuffer buf = new StringBuffer();
         buf.append("{text=");
-        for (int i = 0; i < length(); i++)
-        {
+        for (int i = 0; i < length(); i++) {
             buf.append(aStrings[i].getIterator().current());
         }
         final String RS = "\n\t";
         buf.append(RS);
-        for (int i = 0; i < length(); i++)
-        {
+        for (int i = 0; i < length(); i++) {
             buf.append(bounds[i].toString());
             final String FS = " ";
             final LineMetrics m = metrics[i];
@@ -358,131 +307,106 @@ public class ChangeableAttributedString
         return buf.toString();
     }
 
-    int length()
-    {
+    public int length() {
         return bounds.length;
     }
 
-    double getX(int index)
-    {
+    public double getX(int index) {
         return getBounds(index).getX();
     }
 
-    double getY(int index)
-    {
+    public double getY(int index) {
         return getBounds(index).getY();
     }
 
-    double getHeight(int index)
-    {
+    public double getHeight(int index) {
         return getBounds(index).getHeight();
     }
 
-    double getTotalWidth()
-    {
+    public double getTotalWidth() {
         return getX(length() - 1) + getWidth(length() - 1);
     }
 
-    double getWidth(int index)
-    {
+    public double getWidth(int index) {
         return getBounds(index).getWidth();
     }
 
-    double getAscent(int index)
-    {
+    public double getAscent(int index) {
         return getMetric(index).getAscent();
     }
 
-    double getDescent(int index)
-    {
+    double getDescent(int index) {
         return getMetric(index).getDescent();
     }
 
-    double getMaxWidth()
-    {
+    public double getMaxWidth() {
         double maxWidth = -1;
 
-        for (int i = 0; i < bounds.length; i++)
-        {
+        for (int i = 0; i < bounds.length; i++) {
             final double w = getWidth(i);
 
-            if (maxWidth < w)
-            {
+            if (maxWidth < w) {
                 maxWidth = w;
             }
         }
         return maxWidth;
     }
 
-    double getMaxAscent()
-    {
+    public double getMaxAscent() {
         double maxAscent = -1;
 
-        for (int i = 0; i < bounds.length; i++)
-        {
+        for (int i = 0; i < bounds.length; i++) {
             final double a = getAscent(i);
 
-            if (maxAscent < a)
-            {
+            if (maxAscent < a) {
                 maxAscent = a;
             }
         }
         return maxAscent;
     }
 
-    double getMaxDescent()
-    {
+    public double getMaxDescent() {
         double maxDescent = -1;
 
-        for (int i = 0; i < bounds.length; i++)
-        {
+        for (int i = 0; i < bounds.length; i++) {
             final double d = getDescent(i);
 
-            if (maxDescent < d)
-            {
+            if (maxDescent < d) {
                 maxDescent = d;
             }
         }
         return maxDescent;
     }
 
-    double getMaxHeight()
-    {
+    public double getMaxHeight() {
         double maxHeight = -1;
-        for (int i = 0; i < bounds.length; i++)
-        {
+        for (int i = 0; i < bounds.length; i++) {
             double h = getHeight(i);
 
-            if (maxHeight < h)
-            {
+            if (maxHeight < h) {
                 maxHeight = h;
             }
         }
         return maxHeight;
     }
 
-    public double getMaxX()
-    {
+    public double getMaxX() {
         return getX(0) + getTotalWidth();
     }
 
-    public double getMaxY()
-    {
+    public double getMaxY() {
         return getY(0) + getMaxHeight();
     }
 
-    Rectangle2D getBounds(int index)
-    {
+    public Rectangle2D getBounds(int index) {
         return bounds[index];
     }
 
-    LineMetrics getMetric(int index)
-    {
+    public LineMetrics getMetric(int index) {
         return metrics[index];
     }
 
-    AttributedCharacterIterator getIterator(int i)
-    {
+    public AttributedCharacterIterator getIterator(int i) {
         return aStrings[i].getIterator();
     }
 

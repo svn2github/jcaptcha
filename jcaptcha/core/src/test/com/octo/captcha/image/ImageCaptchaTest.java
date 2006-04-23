@@ -466,8 +466,8 @@ package com.octo.captcha.image;
 
 import com.octo.captcha.component.image.wordtoimage.SimpleWordToImage;
 import com.octo.captcha.component.image.wordtoimage.WordToImage;
-import com.octo.captcha.component.wordgenerator.DummyWordGenerator;
-import com.octo.captcha.component.wordgenerator.WordGenerator;
+import com.octo.captcha.component.word.wordgenerator.DummyWordGenerator;
+import com.octo.captcha.component.word.wordgenerator.WordGenerator;
 import com.octo.captcha.image.gimpy.GimpyFactory;
 import junit.framework.TestCase;
 
@@ -485,8 +485,6 @@ public class ImageCaptchaTest extends TestCase {
 
     /**
      * Constructor for ImageCaptchaTest.
-     *
-     * @param name
      */
     public ImageCaptchaTest(String name) {
         super(name);
@@ -504,16 +502,14 @@ public class ImageCaptchaTest extends TestCase {
     }
 
     /**
-     * This test is for verifying if the question of the captcha
-     * is correctly instantiated.
+     * This test is for verifying if the question of the captcha is correctly instantiated.
      */
     public void testGetQuestion() {
         assertNotNull(pixCaptcha.getQuestion());
     }
 
     /**
-     * This test is for verifying if the challenge of the captcha
-     * is correctly instantiated.
+     * This test is for verifying if the challenge of the captcha is correctly instantiated.
      */
     public void testGetChallenge() {
         assertNotNull(pixCaptcha.getChallenge());
@@ -521,14 +517,11 @@ public class ImageCaptchaTest extends TestCase {
     }
 
     /**
-     * This test is for verifying if the response of the captcha
-     * is valid.
+     * This test is for verifying if the response of the captcha is valid.
      */
 //    public void testValidateResponse() {
 //        assertTrue(pixCaptcha.validateResponse(pixCaptcha.getResponse()).booleanValue());
 //    }
-
-
     public void testGetImageChallenge() throws Exception {
         assertEquals(pixCaptcha.getImageChallenge(), pixCaptcha.getChallenge());
     }

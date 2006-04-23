@@ -1,2 +1,5 @@
 target
 *.log
+.classpath
+.project
+junit1745254937.properties

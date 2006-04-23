@@ -1,19 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE navigation[
  <!ENTITY items_inc SYSTEM "file:xdocs/items.inc">
- <!ENTITY links_inc SYSTEM "file:xdocs/links.inc">  <!ENTITY nav_inc SYSTEM "file:xdocs/sub_nav.inc">
+ <!ENTITY links_inc SYSTEM "file:xdocs/links.inc">
+        <!ENTITY overview_inc SYSTEM "file:xdocs/overview.inc">
+
+        <!ENTITY nav_inc SYSTEM "file:xdocs/sub_nav.inc">
+ <!ENTITY footer_inc SYSTEM "file:xdocs/footer.inc">
  ]>
+
 <project name="JCaptcha" href="http://jcaptcha.sourceforge.net/">
+
     <title>JCaptcha</title>
     <body>
-       &links_inc;
-        <menu name="Menu" collapse="true">
-            <item name="Overview" href="overview.html"/>
-            <item name="Installation" href="roller.html"/>
-            <item name="RoadMap" href="roadmap.html"/>
+        &links_inc;
+        <menu name="JCAPTCHA-MODULE-ROLLER">
+            <item name="Home" href="../../index.html"/>
+            <item name="About" href="/index.html"/>
             <item name="Api" href="apidocs/index.html"/>
-            &nav_inc; 
-            &items_inc;
+             <item name="Overview" href="overview.html"/>
         </menu>
+        &overview_inc;
+
+        &nav_inc;
+        &items_inc;
+        &footer_inc;
     </body>
+
 </project>

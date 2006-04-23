@@ -11,8 +11,8 @@
 
                 <ul>
                     <li>This module provides a servlet filter to intecept and captcha ize some specific requests.</li>
-                     <li>This module is not recommended for production use as it present performance issues.</li>
-                     <li>It is a great sample to see how to use the jcaptcha service.</li>
+                    <li>This module is not recommended for production use as it present performance issues.</li>
+                    <li>It is a great sample to see how to use the jcaptcha service.</li>
                 </ul>
             </p>
 

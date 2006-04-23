@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <project>
 
-  <extend>${basedir}/../base_project.xml</extend>
-  <artifactId>jcaptcha-module-filter</artifactId>
+    <extend>${basedir}/../base_project.xml</extend>
+    <artifactId>jcaptcha-module-filter</artifactId>
 
-  <name>jcaptcha-module-filter</name>
+    <name>jcaptcha-module-filter</name>
 
     <package>com.octo.captcha.module.filter</package>
 
     <description>
-     <![CDATA[
+        <![CDATA[
          <b>JCAPTCHA</b>, for <b>J</b>ava <b>C</b>ompletely <b>A</b>utomated <b>P</b>ublic <b>T</b>est to tell <b>C</b>omputers and <b>H</b>umans <b>A</b>part
 <br/>The open source java framework for captcha definition and integration
 <br/>
@@ -17,51 +17,50 @@
     This jar aims to provide a filter configuration, and initialization to easily integrate a captcha service in your application.<BR/>
     It uses the jcaptcha-core, jcaptcha-service, jcaptcha-module-base.
     ]]>
-        </description>
+    </description>
 
-       <shortDescription>
-         JCAPTCHA filter module : Servlet filter to Captcha-ize your web application.
-         </shortDescription>
-
-
-       <dependencies>
-
-           <dependency>
-               <groupId>jcaptcha</groupId>
-               <artifactId>jcaptcha-core</artifactId>
-               <version>${project.version}</version>
-               <url>http://jcaptcha.sourceforge.net</url>
-           </dependency>
-
-           <dependency>
-               <groupId>jcaptcha</groupId>
-               <artifactId>jcaptcha-service</artifactId>
-               <version>${project.version}</version>
-               <url>http://jcaptcha.sourceforge.net</url>
-
-           </dependency>
-
-           <dependency>
-               <groupId>jcaptcha</groupId>
-               <artifactId>jcaptcha-module-base</artifactId>
-               <version>${project.version}</version>
-               <url>http://jcaptcha.sourceforge.net</url>
-
-           </dependency>
-
-         <dependency>
-         <groupId>servletapi</groupId>
-         <artifactId>servletapi</artifactId>
-         <version>2.3</version>
-         <jar/>
-         <type/>
-         <url>http://java.sun.com</url>
-         <properties/>
-       </dependency>
+    <shortDescription>
+        JCAPTCHA filter module : Servlet filter to Captcha-ize your web application.
+    </shortDescription>
 
 
-       </dependencies>
+    <dependencies>
 
+        <dependency>
+            <groupId>jcaptcha</groupId>
+            <artifactId>jcaptcha-core</artifactId>
+            <version>${project.version}</version>
+            <url>http://jcaptcha.sourceforge.net</url>
+        </dependency>
+
+        <dependency>
+            <groupId>jcaptcha</groupId>
+            <artifactId>jcaptcha-service</artifactId>
+            <version>${project.version}</version>
+            <url>http://jcaptcha.sourceforge.net</url>
+
+        </dependency>
+
+        <dependency>
+            <groupId>jcaptcha</groupId>
+            <artifactId>jcaptcha-module-base</artifactId>
+            <version>${project.version}</version>
+            <url>http://jcaptcha.sourceforge.net</url>
+
+        </dependency>
+
+        <dependency>
+            <groupId>servletapi</groupId>
+            <artifactId>servletapi</artifactId>
+            <version>2.3</version>
+            <jar/>
+            <type/>
+            <url>http://java.sun.com</url>
+            <properties/>
+        </dependency>
+
+
+    </dependencies>
 
 
 </project>

@@ -6,22 +6,16 @@
     <name>jcaptcha-module-base</name>
     <package>com.octo.captcha.module</package>
 
-    <description><![CDATA[
-      <b>JCAPTCHA</b>, for <b>J</b>ava <b>C</b>ompletely <b>A</b>utomated <b>P</b>ublic <b>T</b>est to tell <b>C</b>omputers and <b>H</b>umans <b>A</b>part
+    <description><![CDATA[<b>JCAPTCHA</b>, for <b>J</b>ava <b>C</b>ompletely <b>A</b>utomated <b>P</b>ublic <b>T</b>est to tell <b>C</b>omputers and <b>H</b>umans <b>A</b>part
 <br/>The open source java framework for captcha definition and integration
 <br/>
  <br/>
  A captcha module contains common utilities for captcha-modules which aims to your integrate a captcha service in your application<BR/>
  jcaptcha base module aims to provide base components to build a specialized module.<br/>
- It uses the jcaptcha-sevice for the captchas life cycle and generation.
-  ]]>
-     </description>
+ It uses the jcaptcha-sevice for the captchas life cycle and generation.]]></description>
 
-    <shortDescription>
-      JCAPTCHA module base : base for integrating a captcha service in applications.
-    </shortDescription>
+    <shortDescription>JCAPTCHA module base : base for integrating a captcha service in applications.</shortDescription>
 
-    <url/>
     <repository>
         <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/jcaptcha:jcaptcha/module-base</connection>
         <url>http://cvs.sourceforge.net/viewcvs.py/jcaptcha/</url>
@@ -44,7 +38,7 @@
 
         <dependency>
             <id>commons-logging</id>
-            <version>1.0.3</version>
+            <version>1.0.4</version>
         </dependency>
 
         <dependency>
@@ -59,28 +53,27 @@
         </dependency>
 
 
-     <dependency>
-      <groupId>servletapi</groupId>
-      <artifactId>servletapi</artifactId>
-      <version>2.3</version>
-      <jar/>
-      <type/>
-      <url>http://java.sun.com</url>
-      <properties/>
-    </dependency>
-     <dependency>
-      <groupId>jmx</groupId>
-      <artifactId>jmxri</artifactId>
-      <version>1.2.1</version>
-      <jar/>
-      <type/>
-      <url>http://www.bluesunrise.com/maven/jmx</url>
-      <properties/>
-    </dependency>
+        <dependency>
+            <groupId>servletapi</groupId>
+            <artifactId>servletapi</artifactId>
+            <version>2.3</version>
+            <jar/>
+            <type/>
+            <url>http://java.sun.com</url>
+            <properties/>
+        </dependency>
+        <dependency>
+            <groupId>jmx</groupId>
+            <artifactId>jmxri</artifactId>
+            <version>1.2.1</version>
+            <jar/>
+            <type/>
+            <url>http://www.bluesunrise.com/maven/jmx</url>
+            <properties/>
+        </dependency>
 
 
     </dependencies>
-
 
 
 </project>

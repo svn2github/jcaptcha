@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<document>
+
+    <meta name="keyword" content="captcha, java, module,struts, jcaptcha"/>
+
+    <body>
+
+        <section name="Purpose">
+
+            <p>
+
+                <ul>
+                    <li>This module provides a acegi captcha proxy implementation.</li>
+
+                </ul>
+            </p>
+
+        </section>
+
+    </body>
+</document>

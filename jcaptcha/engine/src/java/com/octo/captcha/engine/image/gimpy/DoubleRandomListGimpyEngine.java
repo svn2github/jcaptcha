@@ -480,15 +480,13 @@ import java.awt.*;
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
  */
-public class DoubleRandomListGimpyEngine extends ListImageCaptchaEngine
-{
+public class DoubleRandomListGimpyEngine extends ListImageCaptchaEngine {
 
-    protected void buildInitialFactories()
-    {
-        com.octo.captcha.component.wordgenerator.WordGenerator wordGenerator =
-                new com.octo.captcha.component.wordgenerator.DictionaryWordGenerator(
-                new com.octo.captcha.component.wordgenerator.FileDictionnary(
-                        "toddlist"));
+    protected void buildInitialFactories() {
+        com.octo.captcha.component.word.wordgenerator.WordGenerator wordGenerator =
+                new com.octo.captcha.component.word.wordgenerator.DictionaryWordGenerator(
+                        new com.octo.captcha.component.word.FileDictionary(
+                                "toddlist"));
 
         TextPaster doubleRandomTextPaster = new DoubleRandomTextPaster(
                 new Integer(8), new Integer(10), Color.white);
@@ -501,12 +499,12 @@ public class DoubleRandomListGimpyEngine extends ListImageCaptchaEngine
 
         com.octo.captcha.component.image.wordtoimage.WordToImage word2image =
                 new com.octo.captcha.component.image.wordtoimage.ComposedWordToImage(
-                fontGenerator,
-                back, doubleRandomTextPaster);
+                        fontGenerator,
+                        back, doubleRandomTextPaster);
 
         com.octo.captcha.image.ImageCaptchaFactory imageCaptchaFactory =
                 new com.octo.captcha.image.gimpy.GimpyFactory(
-                wordGenerator, word2image);
+                        wordGenerator, word2image);
 
         this.addFactory(imageCaptchaFactory);
     }

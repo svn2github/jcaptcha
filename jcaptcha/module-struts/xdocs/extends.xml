@@ -4,11 +4,11 @@
     <meta name="keyword" content="captcha, java, module,struts, jcaptcha"/>
 
     <body>
-    <section name="extend">
-<p>
- See the roller module ;)
-</p>
-</section>
+        <section name="extend">
+            <p>
+                See the roller module ;)
+            </p>
+        </section>
 
     </body>
 </document>

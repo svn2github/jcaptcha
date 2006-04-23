@@ -464,57 +464,50 @@
 package com.octo.captcha.sound;
 
 
-import javax.sound.sampled.AudioInputStream;
-
-import junit.framework.TestCase;
-
 import com.octo.captcha.component.sound.soundconfigurator.FreeTTSSoundConfigurator;
 import com.octo.captcha.component.sound.soundconfigurator.SoundConfigurator;
 import com.octo.captcha.component.sound.wordtosound.FreeTTSWordToSound;
 import com.octo.captcha.component.sound.wordtosound.WordToSound;
-import com.octo.captcha.component.wordgenerator.ArrayDictionary;
-import com.octo.captcha.component.wordgenerator.DictionaryWordGenerator;
-import com.octo.captcha.component.wordgenerator.WordGenerator;
+import com.octo.captcha.component.word.ArrayDictionary;
+import com.octo.captcha.component.word.wordgenerator.DictionaryWordGenerator;
+import com.octo.captcha.component.word.wordgenerator.WordGenerator;
 import com.octo.captcha.sound.gimpy.GimpySoundFactory;
+import junit.framework.TestCase;
+
+import javax.sound.sampled.AudioInputStream;
 
 /**
- * <p>
- * Description:
- * </p>
- * 
+ * <p/>
+ * Description: </p>
+ *
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin </a>
  * @version 1.0
  */
-public class SoundCaptchaTest extends TestCase
-{
+public class SoundCaptchaTest extends TestCase {
     private SoundCaptcha soundCaptcha;
 
     private static String voiceName = "kevin16";
 
     private static String voicePackage = "com.sun.speech.freetts.en.us.cmu_time_awb.AlanVoiceDirectory,com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory";
-    
+
     /**
      * Constructor for ImageCaptchaTest.
-     * 
-     * @param name
      */
-    public SoundCaptchaTest(String name)
-    {
+    public SoundCaptchaTest(String name) {
         super(name);
     }
 
     /**
      * this method is for initialisation for all the test cases
      */
-    public void setUp() throws Exception
-    {
+    public void setUp() throws Exception {
         super.setUp();
-        String[] wordlist = { "and", "oh", "test", "test", "hello", "lame", "eating", "snake"};
+        String[] wordlist = {"and", "oh", "test", "test", "hello", "lame", "eating", "snake"};
 
         WordGenerator words = new DictionaryWordGenerator(new ArrayDictionary(wordlist));
 
         SoundConfigurator configurator = new FreeTTSSoundConfigurator(voiceName, voicePackage, 1.0f, 100, 100);
-        
+
         WordToSound word2sound = new FreeTTSWordToSound(configurator, 3, 6);
         SoundCaptchaFactory factory = new GimpySoundFactory(words, word2sound);
         soundCaptcha = factory.getSoundCaptcha();
@@ -523,19 +516,17 @@ public class SoundCaptchaTest extends TestCase
     /**
      * This test is for verifying if the question of the captcha is correctly instantiated.
      */
-    public void testGetQuestion()
-    {
+    public void testGetQuestion() {
         assertNotNull(soundCaptcha.getQuestion());
     }
 
     /**
      * This test is for verifying if the challenge of the captcha is correctly instantiated.
      */
-    public void testGetChallenge()
-    {
+    public void testGetChallenge() {
         assertNotNull(soundCaptcha.getChallenge());
         assertTrue("Captcha challenge is not an AudioInputStream",
-            soundCaptcha.getChallenge() instanceof AudioInputStream);
+                soundCaptcha.getChallenge() instanceof AudioInputStream);
     }
 
     /**
@@ -544,25 +535,22 @@ public class SoundCaptchaTest extends TestCase
     //public void testValidateResponse() {
     //assertTrue(pixCaptcha.validateResponse(pixCaptcha.getResponse()).booleanValue());
     //}
-
-    public void testGetImageChallenge() throws Exception
-    {
+    public void testGetImageChallenge() throws Exception {
         assertEquals(soundCaptcha.getSoundChallenge(), soundCaptcha.getChallenge());
     }
 
     /**
      * This test is for verifying if the question of the captcha is correctly instantiated.
      */
-    public static void main(String[] args)
-    {
-        String[] wordlist = { "and", "oh", "test", "test", "hello", "lame", "eating", "snake"};
+    public static void main(String[] args) {
+        String[] wordlist = {"and", "oh", "test", "test", "hello", "lame", "eating", "snake"};
 
         WordGenerator words = new DictionaryWordGenerator(new ArrayDictionary(wordlist));
 
         SoundConfigurator configurator = new FreeTTSSoundConfigurator(voiceName, voicePackage, 1.0f, 100, 100);
-        
+
         WordToSound word2sound = new FreeTTSWordToSound(configurator, 3, 6);
-        
+
         SoundCaptchaFactory factory = new GimpySoundFactory(words, word2sound);
         SoundCaptcha tCaptcha = factory.getSoundCaptcha();
 

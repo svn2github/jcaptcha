@@ -30,6 +30,9 @@
   </component>
   <component name="DataSourceManager" />
   <component name="DataSourceManagerImpl" />
+  <component name="DependenciesAnalyzeManager">
+    <option name="myForwardDirection" value="false" />
+  </component>
   <component name="DependencyValidationManager" />
   <component name="EjbActionsConfiguration">
     <option name="NEW_MESSAGE_BEAN_LAST_PACKAGE" value="" />
@@ -46,6 +49,15 @@
     <option name="OUTPUT_DIRECTORY" />
   </component>
   <component name="GUI Designer component loader factory" />
+  <component name="Hibero.Configuration">
+    <option name="JdbcDriverClass" value="" />
+    <option name="JdbcUrl" value="" />
+    <option name="JdbcUsername" value="" />
+    <option name="JdbcPassword" value="" />
+    <option name="HibernateVersion" value="HIBERNATE_3" />
+    <option name="LoadJdbcDriverFromProjectClasspath" value="true" />
+    <JdbcDriverFiles />
+  </component>
   <component name="ImportConfiguration">
     <option name="VENDOR" />
     <option name="RELEASE_TAG" />
@@ -61,7 +73,6 @@
     <option name="DEPRECATION" value="true" />
     <option name="ADDITIONAL_OPTIONS_STRING" value="" />
     <option name="MAXIMUM_HEAP_SIZE" value="128" />
-    <option name="USE_GENERICS_COMPILER" value="false" />
   </component>
   <component name="JavadocGenerationManager">
     <option name="OUTPUT_DIRECTORY" />
@@ -86,30 +97,6 @@
     <option name="GENERATE_NO_WARNINGS" value="false" />
     <option name="IS_EMACS_ERRORS_MODE" value="true" />
     <option name="ADDITIONAL_OPTIONS_STRING" value="" />
-  </component>
-  <component name="Monitor.Log4jWindowPlugin" />
-  <component name="PEExternalization">
-    <option name="IGNORE_METHOD_NAMES" value="" />
-    <option name="IGNORE_METHOD_NAMES_ENABLED" value="false" />
-    <option name="IGNORE_CLASS_CONSTRUCTORS">
-      <value>
-        <option class="Exception" includeInheritors="true" />
-      </value>
-    </option>
-    <option name="IGNORE_CLASS_CONSTRUCTOR_NAMES_ENABLED" value="true" />
-    <option name="IGNORE_CLASS_METHODS_ENABLED" value="true" />
-    <option name="IGNORE_STRINGS_CONTAINS_ONLY_ENABLED" value="true" />
-    <option name="IGNORE_STRINGS_CONTAINS_ONLY_WHITESPACES" value="true" />
-    <option name="IGNORE_STRINGS_CONTAINS_ONLY_PUNCTUATIONS" value="true" />
-    <option name="IGNORE_STRINGS_CONTAINS_ONLY_SPECIFIED_ENABLED" value="true" />
-    <option name="IGNORE_STRINGS_CONTAINS_ONLY_SPECIFIED" value="" />
-    <option name="IGNORE_CLASS_METHODS">
-      <value>
-        <option class="Exception" includeInheritors="false" />
-        <option class="java.util.ResourceBundle" includeInheritors="true" />
-      </value>
-    </option>
-    <option name="IGNORE_CONSTANTS_DECLARATIONS" value="true" />
   </component>
   <component name="Palette2">
     <group name="Swing">
@@ -219,15 +206,16 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/core/jcaptcha-core.iml" filepath="$PROJECT_DIR$/core/jcaptcha-core.iml" />
       <module fileurl="file://$PROJECT_DIR$/engine/jcaptcha-engine.iml" filepath="$PROJECT_DIR$/engine/jcaptcha-engine.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module-acegi/jcaptcha-module-acegi.iml" filepath="$PROJECT_DIR$/module-acegi/jcaptcha-module-acegi.iml" />
       <module fileurl="file://$PROJECT_DIR$/module-base/jcaptcha-module-base.iml" filepath="$PROJECT_DIR$/module-base/jcaptcha-module-base.iml" />
       <module fileurl="file://$PROJECT_DIR$/module-filter/jcaptcha-module-filter.iml" filepath="$PROJECT_DIR$/module-filter/jcaptcha-module-filter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module-roller/jcaptcha-module-roller.iml" filepath="$PROJECT_DIR$/module-roller/jcaptcha-module-roller.iml" />
       <module fileurl="file://$PROJECT_DIR$/module-struts/jcaptcha-module-struts.iml" filepath="$PROJECT_DIR$/module-struts/jcaptcha-module-struts.iml" />
       <module fileurl="file://$PROJECT_DIR$/service/jcaptcha-service.iml" filepath="$PROJECT_DIR$/service/jcaptcha-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/module-roller/module-roller.iml" filepath="$PROJECT_DIR$/module-roller/module-roller.iml" />
       <module fileurl="file://$PROJECT_DIR$/root.iml" filepath="$PROJECT_DIR$/root.iml" />
     </modules>
   </component>
-  <component name="ProjectRootManager" version="2" assert-keyword="false" jdk-15="false" project-jdk-name="java version &quot;1.3.1_15&quot;" />
+  <component name="ProjectRootManager" version="2" assert-keyword="false" jdk-15="false" project-jdk-name="1.4" />
   <component name="RmicSettings">
     <option name="IS_EANABLED" value="false" />
     <option name="DEBUGGING_INFO" value="true" />
@@ -235,93 +223,56 @@
     <option name="GENERATE_IIOP_STUBS" value="false" />
     <option name="ADDITIONAL_OPTIONS_STRING" value="" />
   </component>
-  <component name="TDDConfig">
-    <option name="idleMsBeforeTimerPause" value="300000" />
-    <option name="masterSuiteConfigurationName" value="main" />
-    <option name="rollingActivityCycleTimelineSampleSize" value="40" />
-  </component>
   <component name="WebManager">
     <OPTION enabled="false" />
   </component>
   <component name="WebRootContainer" />
+  <component name="com.yanaware.intellij.ideaspring.PluginConfigurable">
+    <option name="autoscrolling" value="false" />
+    <config-set name="factories">
+      <config-file name="$PROJECT_DIR$/engine/src/test/testSwapingQuartzBufferedEngine.xml" />
+      <config-file name="$PROJECT_DIR$/engine/src/test/testNoBufferedCaptchaQuartzBufferedEngine.xml" />
+      <config-file name="$PROJECT_DIR$/engine/src/test/testDatabaseCaptchaBuffer.xml" />
+      <config-file name="$PROJECT_DIR$/engine/src/test/testFillDiskQuartzBufferedEngine.xml" />
+      <config-file name="$PROJECT_DIR$/engine/src/test/testSimpleBufferedEngine.xml" />
+      <config-file name="$PROJECT_DIR$/engine/src/test/testSimpleManageableBufferedEngine.xml" />
+      <config-file name="$PROJECT_DIR$/engine/src/test/testFillDiskMockQuartzBufferedEngine.xml" />
+      <config-file name="$PROJECT_DIR$/engine/src/test/testQuartzBufferedEngine.xml" />
+      <config-file name="$PROJECT_DIR$/engine/src/test/testFillingQuartzManageableBufferedEngine.xml" />
+      <config-file name="$PROJECT_DIR$/engine/src/test/testQuartzManageableBufferedEngine.xml" />
+      <config-file name="$PROJECT_DIR$/engine/src/test/testHeavyLoadQuartzBufferedEngine.xml" />
+    </config-set>
+  </component>
   <component name="copyright">
-    <option name="body" value="/*&#10;                    GNU LESSER GENERAL PUBLIC LICENSE&#10;                         Version 2.1, February 1999&#10;&#10;   Copyright (C) 1991, 1999 Free Software Foundation, Inc.&#10;       59 Temple Place, Suite 330, Boston, MA  02111-1307  USA&#10;   Everyone is permitted to copy and distribute verbatim copies&#10;   of this license document, but changing it is not allowed.&#10;&#10;  [This is the first released version of the Lesser GPL.  It also counts&#10;   as the successor of the GNU Library Public License, version 2, hence&#10;   the version number 2.1.]&#10;&#10;                              Preamble&#10;&#10;    The licenses for most software are designed to take away your&#10;  freedom to share and change it.  By contrast, the GNU General Public&#10;  Licenses are intended to guarantee your freedom to share and change&#10;  free software--to make sure the software is free for all its users.&#10;&#10;    This license, the Lesser General Public License, applies to some&#10;  specially designated software packages--typically libraries--of the&#10;  Free Software Foundation and other authors who decide to use it.  You&#10;  can use it too, but we suggest you first think carefully about whether&#10;  this license or the ordinary General Public License is the better&#10;  strategy to use in any particular case, based on the explanations&#10;  below.&#10;&#10;    When we speak of free software, we are referring to freedom of use,&#10;  not price.  Our General Public Licenses are designed to make sure that&#10;  you have the freedom to distribute copies of free software (and charge&#10;  for this service if you wish); that you receive source code or can get&#10;  it if you want it; that you can change the software and use pieces of&#10;  it in new free programs; and that you are informed that you can do&#10;  these things.&#10;&#10;    To protect your rights, we need to make restrictions that forbid&#10;  distributors to deny you these rights or to ask you to surrender these&#10;  rights.  These restrictions translate to certain responsibilities for&#10;  you if you distribute copies of the library or if you modify it.&#10;&#10;    For example, if you distribute copies of the library, whether gratis&#10;  or for a fee, you must give the recipients all the rights that we gave&#10;  you.  You must make sure that they, too, receive or can get the source&#10;  code.  If you link other code with the library, you must provide&#10;  complete object files to the recipients, so that they can relink them&#10;  with the library after making changes to the library and recompiling&#10;  it.  And you must show them these terms so they know their rights.&#10;&#10;    We protect your rights with a two-step method: (1) we copyright the&#10;  library, and (2) we offer you this license, which gives you legal&#10;  permission to copy, distribute and/or modify the library.&#10;&#10;    To protect each distributor, we want to make it very clear that&#10;  there is no warranty for the free library.  Also, if the library is&#10;  modified by someone else and passed on, the recipients should know&#10;  that what they have is not the original version, so that the original&#10;  author's reputation will not be affected by problems that might be&#10;  introduced by others.&#10;&#10;    Finally, software patents pose a constant threat to the existence of&#10;  any free program.  We wish to make sure that a company cannot&#10;  effectively restrict the users of a free program by obtaining a&#10;  restrictive license from a patent holder.  Therefore, we insist that&#10;  any patent license obtained for a version of the library must be&#10;  consistent with the full freedom of use specified in this license.&#10;&#10;    Most GNU software, including some libraries, is covered by the&#10;  ordinary GNU General Public License.  This license, the GNU Lesser&#10;  General Public License, applies to certain designated libraries, and&#10;  is quite different from the ordinary General Public License.  We use&#10;  this license for certain libraries in order to permit linking those&#10;  libraries into non-free programs.&#10;&#10;    When a program is linked with a library, whether statically or using&#10;  a shared library, the combination of the two is legally speaking a&#10;  combined work, a derivative of the original library.  The ordinary&#10;  General Public License therefore permits such linking only if the&#10;  entire combination fits its criteria of freedom.  The Lesser General&#10;  Public License permits more lax criteria for linking other code with&#10;  the library.&#10;&#10;    We call this license the &quot;Lesser&quot; General Public License because it&#10;  does Less to protect the user's freedom than the ordinary General&#10;  Public License.  It also provides other free software developers Less&#10;  of an advantage over competing non-free programs.  These disadvantages&#10;  are the reason we use the ordinary General Public License for many&#10;  libraries.  However, the Lesser license provides advantages in certain&#10;  special circumstances.&#10;&#10;    For example, on rare occasions, there may be a special need to&#10;  encourage the widest possible use of a certain library, so that it&#10;  becomes a de-facto standard.  To achieve this, non-free programs must&#10;  be allowed to use the library.  A more frequent case is that a free&#10;  library does the same job as widely used non-free libraries.  In this&#10;  case, there is little to gain by limiting the free library to free&#10;  software only, so we use the Lesser General Public License.&#10;&#10;    In other cases, permission to use a particular library in non-free&#10;  programs enables a greater number of people to use a large body of&#10;  free software.  For example, permission to use the GNU C Library in&#10;  non-free programs enables many more people to use the whole GNU&#10;  operating system, as well as its variant, the GNU/Linux operating&#10;  system.&#10;&#10;    Although the Lesser General Public License is Less protective of the&#10;  users' freedom, it does ensure that the user of a program that is&#10;  linked with the Library has the freedom and the wherewithal to run&#10;  that program using a modified version of the Library.&#10;&#10;    The precise terms and conditions for copying, distribution and&#10;  modification follow.  Pay close attention to the difference between a&#10;  &quot;work based on the library&quot; and a &quot;work that uses the library&quot;.  The&#10;  former contains code derived from the library, whereas the latter must&#10;  be combined with the library in order to run.&#10;&#10;&#10;                    GNU LESSER GENERAL PUBLIC LICENSE&#10;     TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION&#10;&#10;    0. This License Agreement applies to any software library or other&#10;  program which contains a notice placed by the copyright holder or&#10;  other authorized party saying it may be distributed under the terms of&#10;  this Lesser General Public License (also called &quot;this License&quot;).&#10;  Each licensee is addressed as &quot;you&quot;.&#10;&#10;    A &quot;library&quot; means a collection of software functions and/or data&#10;  prepared so as to be conveniently linked with application programs&#10;  (which use some of those functions and data) to form executables.&#10;&#10;    The &quot;Library&quot;, below, refers to any such software library or work&#10;  which has been distributed under these terms.  A &quot;work based on the&#10;  Library&quot; means either the Library or any derivative work under&#10;  copyright law: that is to say, a work containing the Library or a&#10;  portion of it, either verbatim or with modifications and/or translated&#10;  straightforwardly into another language.  (Hereinafter, translation is&#10;  included without limitation in the term &quot;modification&quot;.)&#10;&#10;    &quot;Source code&quot; for a work means the preferred form of the work for&#10;  making modifications to it.  For a library, complete source code means&#10;  all the source code for all modules it contains, plus any associated&#10;  interface definition files, plus the scripts used to control&#10;  compilation and installation of the library.&#10;&#10;    Activities other than copying, distribution and modification are not&#10;  covered by this License; they are outside its scope.  The act of&#10;  running a program using the Library is not restricted, and output from&#10;  such a program is covered only if its contents constitute a work based&#10;  on the Library (independent of the use of the Library in a tool for&#10;  writing it).  Whether that is true depends on what the Library does&#10;  and what the program that uses the Library does.&#10;&#10;    1. You may copy and distribute verbatim copies of the Library's&#10;  complete source code as you receive it, in any medium, provided that&#10;  you conspicuously and appropriately publish on each copy an&#10;  appropriate copyright notice and disclaimer of warranty; keep intact&#10;  all the notices that refer to this License and to the absence of any&#10;  warranty; and distribute a copy of this License along with the&#10;  Library.&#10;&#10;    You may charge a fee for the physical act of transferring a copy,&#10;  and you may at your option offer warranty protection in exchange for a&#10;  fee.&#10;&#10;    2. You may modify your copy or copies of the Library or any portion&#10;  of it, thus forming a work based on the Library, and copy and&#10;  distribute such modifications or work under the terms of Section 1&#10;  above, provided that you also meet all of these conditions:&#10;&#10;      a) The modified work must itself be a software library.&#10;&#10;      b) You must cause the files modified to carry prominent notices&#10;      stating that you changed the files and the date of any change.&#10;&#10;      c) You must cause the whole of the work to be licensed at no&#10;      charge to all third parties under the terms of this License.&#10;&#10;      d) If a facility in the modified Library refers to a function or a&#10;      table of data to be supplied by an application program that uses&#10;      the facility, other than as an argument passed when the facility&#10;      is invoked, then you must make a good faith effort to ensure that,&#10;      in the event an application does not supply such function or&#10;      table, the facility still operates, and performs whatever part of&#10;      its purpose remains meaningful.&#10;&#10;      (For example, a function in a library to compute square roots has&#10;      a purpose that is entirely well-defined independent of the&#10;      application.  Therefore, Subsection 2d requires that any&#10;      application-supplied function or table used by this function must&#10;      be optional: if the application does not supply it, the square&#10;      root function must still compute square roots.)&#10;&#10;  These requirements apply to the modified work as a whole.  If&#10;  identifiable sections of that work are not derived from the Library,&#10;  and can be reasonably considered independent and separate works in&#10;  themselves, then this License, and its terms, do not apply to those&#10;  sections when you distribute them as separate works.  But when you&#10;  distribute the same sections as part of a whole which is a work based&#10;  on the Library, the distribution of the whole must be on the terms of&#10;  this License, whose permissions for other licensees extend to the&#10;  entire whole, and thus to each and every part regardless of who wrote&#10;  it.&#10;&#10;  Thus, it is not the intent of this section to claim rights or contest&#10;  your rights to work written entirely by you; rather, the intent is to&#10;  exercise the right to control the distribution of derivative or&#10;  collective works based on the Library.&#10;&#10;  In addition, mere aggregation of another work not based on the Library&#10;  with the Library (or with a work based on the Library) on a volume of&#10;  a storage or distribution medium does not bring the other work under&#10;  the scope of this License.&#10;&#10;    3. You may opt to apply the terms of the ordinary GNU General Public&#10;  License instead of this License to a given copy of the Library.  To do&#10;  this, you must alter all the notices that refer to this License, so&#10;  that they refer to the ordinary GNU General Public License, version 2,&#10;  instead of to this License.  (If a newer version than version 2 of the&#10;  ordinary GNU General Public License has appeared, then you can specify&#10;  that version instead if you wish.)  Do not make any other change in&#10;  these notices.&#10;&#10;    Once this change is made in a given copy, it is irreversible for&#10;  that copy, so the ordinary GNU General Public License applies to all&#10;  subsequent copies and derivative works made from that copy.&#10;&#10;    This option is useful when you wish to copy part of the code of&#10;  the Library into a program that is not a library.&#10;&#10;    4. You may copy and distribute the Library (or a portion or&#10;  derivative of it, under Section 2) in object code or executable form&#10;  under the terms of Sections 1 and 2 above provided that you accompany&#10;  it with the complete corresponding machine-readable source code, which&#10;  must be distributed under the terms of Sections 1 and 2 above on a&#10;  medium customarily used for software interchange.&#10;&#10;    If distribution of object code is made by offering access to copy&#10;  from a designated place, then offering equivalent access to copy the&#10;  source code from the same place satisfies the requirement to&#10;  distribute the source code, even though third parties are not&#10;  compelled to copy the source along with the object code.&#10;&#10;    5. A program that contains no derivative of any portion of the&#10;  Library, but is designed to work with the Library by being compiled or&#10;  linked with it, is called a &quot;work that uses the Library&quot;.  Such a&#10;  work, in isolation, is not a derivative work of the Library, and&#10;  therefore falls outside the scope of this License.&#10;&#10;    However, linking a &quot;work that uses the Library&quot; with the Library&#10;  creates an executable that is a derivative of the Library (because it&#10;  contains portions of the Library), rather than a &quot;work that uses the&#10;  library&quot;.  The executable is therefore covered by this License.&#10;  Section 6 states terms for distribution of such executables.&#10;&#10;    When a &quot;work that uses the Library&quot; uses material from a header file&#10;  that is part of the Library, the object code for the work may be a&#10;  derivative work of the Library even though the source code is not.&#10;  Whether this is true is especially significant if the work can be&#10;  linked without the Library, or if the work is itself a library.  The&#10;  threshold for this to be true is not precisely defined by law.&#10;&#10;    If such an object file uses only numerical parameters, data&#10;  structure layouts and accessors, and small macros and small inline&#10;  functions (ten lines or less in length), then the use of the object&#10;  file is unrestricted, regardless of whether it is legally a derivative&#10;  work.  (Executables containing this object code plus portions of the&#10;  Library will still fall under Section 6.)&#10;&#10;    Otherwise, if the work is a derivative of the Library, you may&#10;  distribute the object code for the work under the terms of Section 6.&#10;  Any executables containing that work also fall under Section 6,&#10;  whether or not they are linked directly with the Library itself.&#10;&#10;    6. As an exception to the Sections above, you may also combine or&#10;  link a &quot;work that uses the Library&quot; with the Library to produce a&#10;  work containing portions of the Library, and distribute that work&#10;  under terms of your choice, provided that the terms permit&#10;  modification of the work for the customer's own use and reverse&#10;  engineering for debugging such modifications.&#10;&#10;    You must give prominent notice with each copy of the work that the&#10;  Library is used in it and that the Library and its use are covered by&#10;  this License.  You must supply a copy of this License.  If the work&#10;  during execution displays copyright notices, you must include the&#10;  copyright notice for the Library among them, as well as a reference&#10;  directing the user to the copy of this License.  Also, you must do one&#10;  of these things:&#10;&#10;      a) Accompany the work with the complete corresponding&#10;      machine-readable source code for the Library including whatever&#10;      changes were used in the work (which must be distributed under&#10;      Sections 1 and 2 above); and, if the work is an executable linked&#10;      with the Library, with the complete machine-readable &quot;work that&#10;      uses the Library&quot;, as object code and/or source code, so that the&#10;      user can modify the Library and then relink to produce a modified&#10;      executable containing the modified Library.  (It is understood&#10;      that the user who changes the contents of definitions files in the&#10;      Library will not necessarily be able to recompile the application&#10;      to use the modified definitions.)&#10;&#10;      b) Use a suitable shared library mechanism for linking with the&#10;      Library.  A suitable mechanism is one that (1) uses at run time a&#10;      copy of the library already present on the user's computer system,&#10;      rather than copying library functions into the executable, and (2)&#10;      will operate properly with a modified version of the library, if&#10;      the user installs one, as long as the modified version is&#10;      interface-compatible with the version that the work was made with.&#10;&#10;      c) Accompany the work with a written offer, valid for at least&#10;      three years, to give the same user the materials specified in&#10;      Subsection 6a, above, for a charge no more than the cost of&#10;      performing this distribution.&#10;&#10;      d) If distribution of the work is made by offering access to copy&#10;      from a designated place, offer equivalent access to copy the above&#10;      specified materials from the same place.&#10;&#10;      e) Verify that the user has already received a copy of these&#10;      materials or that you have already sent this user a copy.&#10;&#10;    For an executable, the required form of the &quot;work that uses the&#10;  Library&quot; must include any data and utility programs needed for&#10;  reproducing the executable from it.  However, as a special exception,&#10;  the materials to be distributed need not include anything that is&#10;  normally distributed (in either source or binary form) with the major&#10;  components (compiler, kernel, and so on) of the operating system on&#10;  which the executable runs, unless that component itself accompanies&#10;  the executable.&#10;&#10;    It may happen that this requirement contradicts the license&#10;  restrictions of other proprietary libraries that do not normally&#10;  accompany the operating system.  Such a contradiction means you cannot&#10;  use both them and the Library together in an executable that you&#10;  distribute.&#10;&#10;    7. You may place library facilities that are a work based on the&#10;  Library side-by-side in a single library together with other library&#10;  facilities not covered by this License, and distribute such a combined&#10;  library, provided that the separate distribution of the work based on&#10;  the Library and of the other library facilities is otherwise&#10;  permitted, and provided that you do these two things:&#10;&#10;      a) Accompany the combined library with a copy of the same work&#10;      based on the Library, uncombined with any other library&#10;      facilities.  This must be distributed under the terms of the&#10;      Sections above.&#10;&#10;      b) Give prominent notice with the combined library of the fact&#10;      that part of it is a work based on the Library, and explaining&#10;      where to find the accompanying uncombined form of the same work.&#10;&#10;    8. You may not copy, modify, sublicense, link with, or distribute&#10;  the Library except as expressly provided under this License.  Any&#10;  attempt otherwise to copy, modify, sublicense, link with, or&#10;  distribute the Library is void, and will automatically terminate your&#10;  rights under this License.  However, parties who have received copies,&#10;  or rights, from you under this License will not have their licenses&#10;  terminated so long as such parties remain in full compliance.&#10;&#10;    9. You are not required to accept this License, since you have not&#10;  signed it.  However, nothing else grants you permission to modify or&#10;  distribute the Library or its derivative works.  These actions are&#10;  prohibited by law if you do not accept this License.  Therefore, by&#10;  modifying or distributing the Library (or any work based on the&#10;  Library), you indicate your acceptance of this License to do so, and&#10;  all its terms and conditions for copying, distributing or modifying&#10;  the Library or works based on it.&#10;&#10;    10. Each time you redistribute the Library (or any work based on the&#10;  Library), the recipient automatically receives a license from the&#10;  original licensor to copy, distribute, link with or modify the Library&#10;  subject to these terms and conditions.  You may not impose any further&#10;  restrictions on the recipients' exercise of the rights granted herein.&#10;  You are not responsible for enforcing compliance by third parties with&#10;  this License.&#10;&#10;    11. If, as a consequence of a court judgment or allegation of patent&#10;  infringement or for any other reason (not limited to patent issues),&#10;  conditions are imposed on you (whether by court order, agreement or&#10;  otherwise) that contradict the conditions of this License, they do not&#10;  excuse you from the conditions of this License.  If you cannot&#10;  distribute so as to satisfy simultaneously your obligations under this&#10;  License and any other pertinent obligations, then as a consequence you&#10;  may not distribute the Library at all.  For example, if a patent&#10;  license would not permit royalty-free redistribution of the Library by&#10;  all those who receive copies directly or indirectly through you, then&#10;  the only way you could satisfy both it and this License would be to&#10;  refrain entirely from distribution of the Library.&#10;&#10;  If any portion of this section is held invalid or unenforceable under&#10;  any particular circumstance, the balance of the section is intended to&#10;  apply, and the section as a whole is intended to apply in other&#10;  circumstances.&#10;&#10;  It is not the purpose of this section to induce you to infringe any&#10;  patents or other property right claims or to contest validity of any&#10;  such claims; this section has the sole purpose of protecting the&#10;  integrity of the free software distribution system which is&#10;  implemented by public license practices.  Many people have made&#10;  generous contributions to the wide range of software distributed&#10;  through that system in reliance on consistent application of that&#10;  system; it is up to the author/donor to decide if he or she is willing&#10;  to distribute software through any other system and a licensee cannot&#10;  impose that choice.&#10;&#10;  This section is intended to make thoroughly clear what is believed to&#10;  be a consequence of the rest of this License.&#10;&#10;    12. If the distribution and/or use of the Library is restricted in&#10;  certain countries either by patents or by copyrighted interfaces, the&#10;  original copyright holder who places the Library under this License&#10;  may add an explicit geographical distribution limitation excluding those&#10;  countries, so that distribution is permitted only in or among&#10;  countries not thus excluded.  In such case, this License incorporates&#10;  the limitation as if written in the body of this License.&#10;&#10;    13. The Free Software Foundation may publish revised and/or new&#10;  versions of the Lesser General Public License from time to time.&#10;  Such new versions will be similar in spirit to the present version,&#10;  but may differ in detail to address new problems or concerns.&#10;&#10;  Each version is given a distinguishing version number.  If the Library&#10;  specifies a version number of this License which applies to it and&#10;  &quot;any later version&quot;, you have the option of following the terms and&#10;  conditions either of that version or of any later version published by&#10;  the Free Software Foundation.  If the Library does not specify a&#10;  license version number, you may choose any version ever published by&#10;  the Free Software Foundation.&#10;&#10;    14. If you wish to incorporate parts of the Library into other free&#10;  programs whose distribution conditions are incompatible with these,&#10;  write to the author to ask for permission.  For software which is&#10;  copyrighted by the Free Software Foundation, write to the Free&#10;  Software Foundation; we sometimes make exceptions for this.  Our&#10;  decision will be guided by the two goals of preserving the free status&#10;  of all derivatives of our free software and of promoting the sharing&#10;  and reuse of software generally.&#10;&#10;                              NO WARRANTY&#10;&#10;    15. BECAUSE THE LIBRARY IS LICENSED FREE OF CHARGE, THERE IS NO&#10;  WARRANTY FOR THE LIBRARY, TO THE EXTENT PERMITTED BY APPLICABLE LAW.&#10;  EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR&#10;  OTHER PARTIES PROVIDE THE LIBRARY &quot;AS IS&quot; WITHOUT WARRANTY OF ANY&#10;  KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE&#10;  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR&#10;  PURPOSE.  THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE&#10;  LIBRARY IS WITH YOU.  SHOULD THE LIBRARY PROVE DEFECTIVE, YOU ASSUME&#10;  THE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION.&#10;&#10;    16. IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN&#10;  WRITING WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY&#10;  AND/OR REDISTRIBUTE THE LIBRARY AS PERMITTED ABOVE, BE LIABLE TO YOU&#10;  FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL OR&#10;  CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE THE&#10;  LIBRARY (INCLUDING BUT NOT LIMITED TO LOSS OF DATA OR DATA BEING&#10;  RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A&#10;  FAILURE OF THE LIBRARY TO OPERATE WITH ANY OTHER SOFTWARE), EVEN IF&#10;  SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH&#10;  DAMAGES.&#10;&#10;                       END OF TERMS AND CONDITIONS&#10;*/" />
-    <option name="location" value="1" />
-    <option name="remove" value="false" />
-    <option name="replace" value="3" />
+    <Base>
+      <setting name="state" value="2" />
+    </Base>
+    <LanguageOptions name="JAVA">
+      <option name="templateOptions">
+        <value>
+          <option name="block" value="true" />
+          <option name="separateBefore" value="false" />
+          <option name="separateAfter" value="false" />
+          <option name="prefixLines" value="true" />
+          <option name="lenBefore" value="80" />
+          <option name="lenAfter" value="80" />
+          <option name="box" value="false" />
+          <option name="filler" value=" " />
+        </value>
+      </option>
+      <option name="notice" value="/*&#10; * jcaptcha, the open source java framework for captcha definition and integration&#10; * Copyright (c) &amp;#36;today.year jcaptcha.net. All Rights Reserved.&#10; * See the LICENSE.txt file distributed with this package. &#10; */" />
+      <option name="keyword" value="Copyright" />
+      <option name="fileTypeOverride" value="4" />
+      <option name="relativeBefore" value="true" />
+      <option name="addBlankAfter" value="true" />
+      <option name="fileLocation" value="1" />
+      <option name="useAlternate" value="false" />
+    </LanguageOptions>
   </component>
   <component name="libraryTable">
-    <library name="concurrent-1.3.2">
+    <library name="imaging">
       <CLASSES>
-        <root url="jar://C:/Documents and Settings/mag/.maven/repository/concurrent/jars/concurrent-1.3.2.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES />
-    </library>
-    <library name="ehcache-1.0">
-      <CLASSES>
-        <root url="jar://C:/Documents and Settings/mag/.maven/repository/ehcache/jars/ehcache-1.0.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES />
-    </library>
-    <library name="junit">
-      <CLASSES>
-        <root url="jar://C:/Documents and Settings/mag/.maven/repository/junit/jars/junit-3.8.1.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES />
-    </library>
-    <library name="grobo">
-      <CLASSES>
-        <root url="jar://C:/Documents and Settings/mag/.maven/repository/GroboUtils/jars/GroboUtils-5-core.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES />
-    </library>
-    <library name="xml">
-      <CLASSES>
-        <root url="jar://C:/Documents and Settings/mag/.maven/repository/xerces/jars/xerces-2.2.1.jar!/" />
-        <root url="jar://C:/Documents and Settings/mag/.maven/repository/xerces/jars/xmlParserAPIs-2.2.1.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES />
-    </library>
-    <library name="serveur">
-      <CLASSES>
-        <root url="jar://C:/Documents and Settings/mag/.maven/repository/jmx/jars/jmxri-1.2.1.jar!/" />
-        <root url="jar://C:/Documents and Settings/mag/.maven/repository/servletapi/jars/servletapi-2.3.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES />
-    </library>
-    <library name="commons">
-      <CLASSES>
-        <root url="jar://C:/Documents and Settings/mag/.maven/repository/commons-logging/jars/commons-logging-1.0.4.jar!/" />
-        <root url="jar://C:/Documents and Settings/mag/.maven/repository/commons-collections/jars/commons-collections-2.1.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES />
-    </library>
-    <library name="struts">
-      <CLASSES>
-        <root url="jar://C:/Documents and Settings/mag/.maven/repository/struts/jars/struts-1.1.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES />
-    </library>
-    <library name="roller">
-      <CLASSES>
-        <root url="jar://C:/Documents and Settings/mag/.maven/repository/roller/jars/rollerbeans-1.0-RC2.jar!/" />
-        <root url="jar://C:/Documents and Settings/mag/.maven/repository/roller/jars/rollerweb-1.0-RC2.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES />
-    </library>
-    <library name="velocity">
-      <CLASSES>
-        <root url="jar://C:/Documents and Settings/mag/.maven/repository/velocity/jars/velocity-1.3.jar!/" />
-        <root url="jar://C:/Documents and Settings/mag/.maven/repository/velocity/jars/velocity-1.4-dev.jar!/" />
+        <root url="jar://$maven.repo$/jhlabs/jars/imaging-01012005.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />
@@ -331,5 +282,8 @@
     <option name="INSTRUMENT_CLASSES" value="true" />
     <option name="COPY_FORMS_RUNTIME_TO_OUTPUT" value="true" />
   </component>
+  <UsedPathMacros>
+    <macro name="maven.repo" />
+  </UsedPathMacros>
 </project>
 

@@ -482,11 +482,9 @@ import java.awt.image.ImageFilter;
  * @deprecated
  */
 public class FilteredBaffleListGimpyEngine
-        extends com.octo.captcha.engine.image.ListImageCaptchaEngine
-{
+        extends com.octo.captcha.engine.image.ListImageCaptchaEngine {
 
-    protected void buildInitialFactories()
-    {
+    protected void buildInitialFactories() {
 
         //build filters
         com.jhlabs.image.EmbossFilter emboss = new com.jhlabs.image.EmbossFilter();
@@ -531,10 +529,9 @@ public class FilteredBaffleListGimpyEngine
         crystal.setEdgeThickness(0.2f);
         crystal.setRandomness(0.1f);
 
-
         //word generator
-        com.octo.captcha.component.wordgenerator.WordGenerator words = new com.octo.captcha.component.wordgenerator.DictionaryWordGenerator(
-                new com.octo.captcha.component.wordgenerator.FileDictionnary(
+        com.octo.captcha.component.word.wordgenerator.WordGenerator words = new com.octo.captcha.component.word.wordgenerator.DictionaryWordGenerator(
+                new com.octo.captcha.component.word.FileDictionary(
                         "toddlist"));
         //wordtoimage components
         TextPaster paster = new BaffleRandomTextPaster(new Integer(6), new Integer(

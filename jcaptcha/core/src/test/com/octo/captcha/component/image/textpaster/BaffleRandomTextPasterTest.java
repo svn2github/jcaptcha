@@ -488,8 +488,6 @@ public class BaffleRandomTextPasterTest extends TestCase {
 
     /**
      * Constructor for BaffleRandomTextPasterTest.
-     *
-     * @param name
      */
     public BaffleRandomTextPasterTest(String name) {
         super(name);

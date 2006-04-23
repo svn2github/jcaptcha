@@ -4,34 +4,36 @@
     <meta name="keyword" content="captcha, java, engine, jcaptcha"/>
 
     <body>
-    <section name="extend">
-<p>
-    Making your own CaptchaEngine is very easy :
-<ul>
-<li>Create a class that extends one of the typed CaptchaEngine implementation
-(ListImageCaptchaEngine is a good candidate)
-in the test sub package (for exemple com.octo.captcha.engine.image.gimpy)
-</li>
+        <section name="extend">
+            <p>
+                Making your own CaptchaEngine is very easy :
+                <ul>
+                    <li>Create a class that extends one of the typed CaptchaEngine implementation
+                        (ListImageCaptchaEngine is a good candidate)
+                        in the test sub package (for exemple com.octo.captcha.engine.image.gimpy)
+                    </li>
 
-<li>
-Implement the method that builds CaptchaFactories (for ListImageCaptchaEngine implements the
-<code>protected abstract void buildInitialFactories();
-</code> method) corresponding to your choosen test (Exemple GimpyFactory).
-</li>
+                    <li>
+                        Implement the method that builds CaptchaFactories (for ListImageCaptchaEngine implements the
+                        <code>protected abstract void buildInitialFactories();
+                        </code>
+                        method) corresponding to your choosen test (Exemple GimpyFactory).
+                    </li>
 
 
-<li>
-You may take a look at the samples provided in this jar</li>
+                    <li>
+                        You may take a look at the samples provided in this jar</li>
 
-</ul>
-</p>
-</section>
+                </ul>
+            </p>
+        </section>
 
-<section name="Samples">
+        <section name="Samples">
 
-    <p>
-  See : <a href="main.html">samples engines</a>
-</p>
-</section>
+            <p>
+                See :
+                <a href="main.html">samples engines</a>
+            </p>
+        </section>
     </body>
 </document>

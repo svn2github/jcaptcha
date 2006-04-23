@@ -21,8 +21,6 @@ public class DoubleTextPasterTest extends TestCase {
 
     /**
      * Constructor for DoubleTextPasterTest.
-     *
-     * @param name
      */
     public DoubleTextPasterTest(String name) {
         super(name);
@@ -56,5 +54,16 @@ public class DoubleTextPasterTest extends TestCase {
         assertEquals(this.minAcceptedWordLength.intValue(),
                 this.doubleTextPaster.getMinAcceptedWordLenght());
     }
+
+    public void testGetMaxAcceptedWordLength() {
+            assertEquals(this.maxAcceptedWordLength.intValue(),
+                    this.doubleTextPaster.getMaxAcceptedWordLength());
+        }
+
+        public void testGetMinAcceptedWordLength() {
+            assertEquals(this.minAcceptedWordLength.intValue(),
+                    this.doubleTextPaster.getMinAcceptedWordLength());
+        }
+
 
 }

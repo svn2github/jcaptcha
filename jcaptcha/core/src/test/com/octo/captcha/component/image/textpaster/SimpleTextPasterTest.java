@@ -21,8 +21,6 @@ public class SimpleTextPasterTest extends TestCase {
 
     /**
      * Constructor for SimpleTextPasterTest.
-     *
-     * @param name
      */
     public SimpleTextPasterTest(String name) {
         super(name);
@@ -54,6 +52,16 @@ public class SimpleTextPasterTest extends TestCase {
     public void testGetMinAcceptedWordLenght() {
         assertEquals(this.minAcceptedWordLength.intValue(),
                 this.simpleTextPaster.getMinAcceptedWordLenght());
+    }
+
+     public void testGetMaxAcceptedWordLength() {
+        assertEquals(this.maxAcceptedWordLength.intValue(),
+                this.simpleTextPaster.getMaxAcceptedWordLength());
+    }
+
+    public void testGetMinAcceptedWordLength() {
+        assertEquals(this.minAcceptedWordLength.intValue(),
+                this.simpleTextPaster.getMinAcceptedWordLength());
     }
 
 }

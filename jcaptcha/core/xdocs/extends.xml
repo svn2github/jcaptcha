@@ -6,45 +6,50 @@
     <body>
         <section name="Extend">
             <p>
-    Making your own captcha is very easy. To do so you'll have to :
+                Making your own captcha is very easy. To do so you'll have to :
                 <ul>
                     <li>find a name for your captcha, for exemple mycapthca
                     </li>
 
                     <li>
-Make a new package mycaptcha under captcha.image or captcha.sound (depending of the type of challenge)
+                        Make a new package mycaptcha under captcha.image or captcha.sound (depending of the type of
+                        challenge)
                     </li>
 
                     <li>
-Define two new classes in this package :
+                        Define two new classes in this package :
                     </li>
 
                     <ul>
                         <li>
-MyCaptcha extending com.octo.captcha.image.ImageCaptcha or com.octo.captcha.sound.SoundCaptcha
+                            MyCaptcha extending com.octo.captcha.image.ImageCaptcha or
+                            com.octo.captcha.sound.SoundCaptcha
                         </li>
                         <ul>
                             <li>
-provide a friendly constructor (for your factory)
+                                provide a friendly constructor (for your factory)
                             </li>
                             <li>
-implements the validateResponse method
+                                implements the validateResponse method
                             </li>
                             <li>
-implements the writeObject and readObject methods in order to make your capthca serializable
+                                implements the writeObject and readObject methods in order to make your capthca
+                                serializable
                             </li>
                         </ul>
                         <li>
 
-MyCapthcaFactory extending com.octo.captcha.image.?ImageCaptchaFactory or com.octo.captcha.sound.SoundCaptchaFactory
+                            MyCapthcaFactory extending com.octo.captcha.image.?ImageCaptchaFactory or
+                            com.octo.captcha.sound.SoundCaptchaFactory
                         </li>
 
                         <ul>
                             <li>
-provide a public constructor that takes components to build captchas.
+                                provide a public constructor that takes components to build captchas.
                             </li>
                             <li>
-implement the getImageCaptcha or getSoundCaptcha method that use your contructor initialized components to construct a new captcha.
+                                implement the getImageCaptcha or getSoundCaptcha method that use your contructor
+                                initialized components to construct a new captcha.
                             </li>
                         </ul>
                     </ul>
@@ -58,8 +63,9 @@ implement the getImageCaptcha or getSoundCaptcha method that use your contructor
             <p>
 
 
-  See :
-                <a href="http://jcaptcha.sourceforge.net/moniwiki/wiki.php/CoreModule#s-3">the wiki doc for samples and gimpys</a>
+                See :
+                <a href="http://jcaptcha.sourceforge.net/moniwiki/wiki.php/CoreModule#s-3">the wiki doc for samples and
+                    gimpys</a>
             </p>
         </section>
     </body>

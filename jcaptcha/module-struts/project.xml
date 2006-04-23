@@ -7,22 +7,16 @@
     <name>jcaptcha-module-struts</name>
     <package>com.octo.captcha.module.struts</package>
 
-    <description>
-        <![CDATA[
-      <b>JCAPTCHA</b>, for <b>J</b>ava <b>C</b>ompletely <b>A</b>utomated <b>P</b>ublic <b>T</b>est to tell <b>C</b>omputers and <b>H</b>umans <b>A</b>part
+    <description><![CDATA[<b>JCAPTCHA</b>, for <b>J</b>ava <b>C</b>ompletely <b>A</b>utomated <b>P</b>ublic <b>T</b>est to tell <b>C</b>omputers and <b>H</b>umans <b>A</b>part
 
 <br/>The open source java framework for captcha definition and integration
 <br/>
  <br/>
  The captcha struts module is a struts plugin to configure and integrate a captcha service with your struts application.<BR/>
  This jar aims to provide a struts plugin and Action classes to easily integrate a captcha service in your application.<BR/>
- It uses the jcaptcha-core, jcaptcha-service, jcaptcha-module-base.
- ]]>
-    </description>
+ It uses the jcaptcha-core, jcaptcha-service, jcaptcha-module-base.]]></description>
 
-    <shortDescription>
-      JCAPTCHA Struts module : Struts plugin to Captcha-ize your Struts application
-    </shortDescription>
+    <shortDescription>JCAPTCHA Struts module : Struts plugin to Captcha-ize your Struts application</shortDescription>
 
 
     <dependencies>
@@ -79,7 +73,7 @@
 
         <dependency>
             <id>commons-logging</id>
-            <version>1.0.3</version>
+            <version>1.0.4</version>
         </dependency>
     </dependencies>
 

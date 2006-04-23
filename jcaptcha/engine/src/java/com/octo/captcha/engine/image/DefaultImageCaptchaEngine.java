@@ -465,48 +465,47 @@ DAMAGES.
 package com.octo.captcha.engine.image;
 
 import com.octo.captcha.CaptchaException;
+import com.octo.captcha.CaptchaFactory;
+import com.octo.captcha.engine.CaptchaEngineException;
 import com.octo.captcha.image.ImageCaptcha;
 import com.octo.captcha.image.ImageCaptchaFactory;
 
+import java.security.SecureRandom;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Random;
 
 /**
- * <p>This is a very simple gimpy, which is constructed from an array of Factory
- * and randomly return one when the getCaptchaFactory is called</p>
+ * <p>This is a very simple gimpy, which is constructed from an array of Factory and randomly return one when the
+ * getCaptchaFactory is called</p>
  *
  * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
  * @version 1.0
- * @deprecated since beta 2 : use the ListImageCaptchaEngine instead.
  */
-public abstract class DefaultImageCaptchaEngine extends ImageCaptchaEngine
-{
+public abstract class DefaultImageCaptchaEngine extends ImageCaptchaEngine {
 
     private ImageCaptchaFactory[] factories;
-    private Random myRandom = new Random();
+    private Random myRandom = new SecureRandom();
 
     /**
      * Default constructor : takes an array of ImageCaptchaFactories.
-     *
-     * @param factories
      */
-    public DefaultImageCaptchaEngine(final ImageCaptchaFactory[] factories)
-    {
+    public DefaultImageCaptchaEngine(final ImageCaptchaFactory[] factories) {
         this.factories = factories;
-        if (factories == null || factories.length == 0)
-        {
+        if (factories == null || factories.length == 0) {
             throw new CaptchaException("DefaultImageCaptchaEngine cannot be " +
                     "constructed with a null or empty factories array");
         }
-    };
+    }
+
+    ;
 
     /**
      * This method build a ImageCaptchaFactory.
      *
      * @return a CaptchaFactory
      */
-    public final ImageCaptchaFactory getImageCaptchaFactory()
-    {
+    public final ImageCaptchaFactory getImageCaptchaFactory() {
         return factories[myRandom.nextInt(factories.length)];
     }
 
@@ -515,8 +514,7 @@ public abstract class DefaultImageCaptchaEngine extends ImageCaptchaEngine
      *
      * @return a CaptchaFactory
      */
-    public final ImageCaptcha getNextImageCaptcha()
-    {
+    public final ImageCaptcha getNextImageCaptcha() {
         return getImageCaptchaFactory().getImageCaptcha();
     }
 
@@ -526,9 +524,35 @@ public abstract class DefaultImageCaptchaEngine extends ImageCaptchaEngine
      * @param locale the desired locale
      * @return a new Captcha
      */
-    public ImageCaptcha getNextImageCaptcha(Locale locale)
-    {
+    public ImageCaptcha getNextImageCaptcha(Locale locale) {
         return getImageCaptchaFactory().getImageCaptcha(locale);
+    }
+
+
+    /**
+     * @return captcha factories used by this engine
+     */
+    public CaptchaFactory[] getFactories() {
+        return factories;
+    }
+
+    /**
+     * @param factories new captcha factories for this engine
+     */
+    public void setFactories(CaptchaFactory[] factories) throws CaptchaEngineException {
+        if (factories == null || factories.length == 0) {
+            throw new CaptchaEngineException("impossible to set null or empty factories");
+        }
+        ArrayList tempFactories = new ArrayList();
+
+        for (int i = 0; i < factories.length; i++) {
+            if (ImageCaptchaFactory.class.isAssignableFrom(factories[i].getClass())) {
+                throw new CaptchaEngineException("This factory is not an image captcha factory " + factories[i].getClass());
+            }
+
+        }
+
+        this.factories = (ImageCaptchaFactory[]) tempFactories.toArray(new ImageCaptchaFactory[factories.length]);
     }
 
 }

@@ -466,7 +466,7 @@ package com.octo.captcha.image.gimpy;
 
 import com.octo.captcha.CaptchaException;
 import com.octo.captcha.component.image.wordtoimage.SimpleWordToImage;
-import com.octo.captcha.component.wordgenerator.RandomWordGenerator;
+import com.octo.captcha.component.word.wordgenerator.RandomWordGenerator;
 import junit.framework.TestCase;
 
 public class GimpyFactoryTest extends TestCase {
@@ -485,14 +485,14 @@ public class GimpyFactoryTest extends TestCase {
     public void testGetRandomRange() throws Exception {
     }
 
-    public void testGetRandomLenght() throws Exception {
+    public void testGetRandomLength() throws Exception {
         //be carefull values tide to SimpleWordToImage.
         for (int i = 1; i < 11; i++) {
             //System.out.println(" a trouver : "+i);
             int j;
             do {
 
-                j = tested.getRandomLenght().intValue();
+                j = tested.getRandomLength().intValue();
                 if (j < 1 || j > 10) {
                     fail("Out of authorized range!");
                 }

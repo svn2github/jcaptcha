@@ -2,7 +2,10 @@
 <!DOCTYPE navigation[
  <!ENTITY items_inc SYSTEM "file:xdocs/items.inc">
  <!ENTITY links_inc SYSTEM "file:xdocs/links.inc">
- <!ENTITY nav_inc SYSTEM "file:xdocs/nav.inc">
+        <!ENTITY overview_inc SYSTEM "file:xdocs/overview.inc">
+
+        <!ENTITY nav_inc SYSTEM "file:xdocs/nav.inc">
+ <!ENTITY footer_inc SYSTEM "file:xdocs/footer.inc">
  ]>
 
 <project name="JCaptcha" href="http://jcaptcha.sourceforge.net/">
@@ -10,17 +13,16 @@
     <title>JCaptcha</title>
     <body>
         &links_inc;
-       <menu name="Menu" collapse="true">
-            <item name="Main" href="main.html"/>
-            <item name="Architecture" href="architecture.html"/>
-            <item name="Why?" href="why.html"/>
-			<item name="Current status" href="status.html"/>
-            <item name="RoadMap" href="roadmap.html"/>
+        <menu name="JCAPTCHA">
+            <item name="About" href="index.html"/>
+            <item name="Downloads" href="http://sourceforge.net/project/showfiles.php?group_id=97877"/>
+            <item name="License" href="license.html"/>
             <item name="Thanks" href="thanks.html"/>
-            <item name="References" href="references.html"/>
-           &nav_inc;
-           &items_inc;
         </menu>
-
+        &overview_inc;
+        &nav_inc;
+        &items_inc;
+        &footer_inc;
     </body>
+
 </project>

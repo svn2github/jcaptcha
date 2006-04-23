@@ -1,9 +1,11 @@
 /*
- * Created on May 2, 2005
- *
+ * jcaptcha, the open source java framework for captcha definition and integration
+ * Copyright (c) 2005 jcaptcha.net. All Rights Reserved.
+ * See the LICENSE.txt file distributed with this package.
  */
 package com.octo.captcha.engine.bufferedengine;
 
+import com.octo.captcha.engine.DefaultEngineLoadTestHelper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
@@ -11,36 +13,28 @@ import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
-import com.octo.captcha.engine.DefaultEngineLoadTestHelper;
-
-import junit.framework.TestCase;
-
 /**
  * @author Doumas Benoit
  */
-public class QuartzBufferedEngineContainerTest extends BufferedEngineContainerTestAbstract
-{
+public class QuartzBufferedEngineContainerTest extends BufferedEngineContainerTestAbstract {
     private static final Log log = LogFactory.getLog(QuartzBufferedEngineContainerTest.class
-        .getName());
+            .getName());
 
     // loader init by default
     protected Class loader = DefaultEngineLoadTestHelper.class;
 
-    public void testBasic() throws Exception
-    {
+    public void testBasic() throws Exception {
         Resource ressource = new ClassPathResource("testQuartzBufferedEngine.xml");
         ConfigurableBeanFactory bf = new XmlBeanFactory(ressource);
         BufferedEngineContainer container = (BufferedEngineContainer) bf.getBean("container");
         Object scheduler = bf.getBean("quartz");
         Thread.sleep(10000);
-        for (int i = 0; i < 100; i++)
-        {
+        for (int i = 0; i < 100; i++) {
             assertNotNull(container.getNextCaptcha());
         }
     }
 
-    public void testMockFillingDisk() throws Exception
-    {
+    public void testMockFillingDisk() throws Exception {
         Resource ressource = new ClassPathResource("testFillDiskMockQuartzBufferedEngine.xml");
         ConfigurableBeanFactory bf = new XmlBeanFactory(ressource);
         BufferedEngineContainer container = (BufferedEngineContainer) bf.getBean("container");
@@ -50,18 +44,14 @@ public class QuartzBufferedEngineContainerTest extends BufferedEngineContainerTe
 
     /**
      * The buffer is never feed during the test (every 24h ...) the swap is every 3 second
-     * 
-     * @throws Exception
      */
-    public void testNoBufferdedCaptcha() throws Exception
-    {
+    public void testNoBufferdedCaptcha() throws Exception {
         Resource ressource = new ClassPathResource("testNoBufferedCaptchaQuartzBufferedEngine.xml");
         ConfigurableBeanFactory bf = new XmlBeanFactory(ressource);
         BufferedEngineContainer container = (BufferedEngineContainer) bf.getBean("container");
         Object scheduler = bf.getBean("quartz");
         Thread.sleep(10000);
-        for (int i = 0; i < 100; i++)
-        {
+        for (int i = 0; i < 100; i++) {
             assertNotNull(container.getNextCaptcha());
         }
     }
@@ -69,8 +59,7 @@ public class QuartzBufferedEngineContainerTest extends BufferedEngineContainerTe
     /**
      * @see com.octo.captcha.engine.bufferedengine.BufferedEngineContainerTestAbstract#getEngine()
      */
-    public BufferedEngineContainer getEngine()
-    {
+    public BufferedEngineContainer getEngine() {
         Resource ressource = new ClassPathResource("testQuartzBufferedEngine.xml");
         ConfigurableBeanFactory bf = new XmlBeanFactory(ressource);
         BufferedEngineContainer container = (BufferedEngineContainer) bf.getBean("container");
@@ -81,9 +70,8 @@ public class QuartzBufferedEngineContainerTest extends BufferedEngineContainerTe
     /**
      * @see com.octo.captcha.engine.bufferedengine.BufferedEngineContainerTestAbstract#releaseEngine()
      */
-    public void releaseEngine(BufferedEngineContainer engine)
-    {
-       
+    public void releaseEngine(BufferedEngineContainer engine) {
+
     }
 
 }

@@ -463,10 +463,10 @@ DAMAGES.
 */
 package com.octo.captcha.engine.sound;
 
-import java.util.Locale;
-
 import com.octo.captcha.Captcha;
 import com.octo.captcha.sound.SoundCaptcha;
+
+import java.util.Locale;
 
 /**
  * <p>Description: abstract base class for SoundCaptcha engines</p>.
@@ -475,16 +475,14 @@ import com.octo.captcha.sound.SoundCaptcha;
  * @version 1.0
  */
 public abstract class SoundCaptchaEngine
-implements com.octo.captcha.engine.CaptchaEngine
-{
+        implements com.octo.captcha.engine.CaptchaEngine {
 
     /**
      * This return a new captcha. It may be used directly.
      *
      * @return a new Captcha
      */
-    public final Captcha getNextCaptcha()
-    {
+    public final Captcha getNextCaptcha() {
         return getNextSoundCaptcha();
     }
 
@@ -492,10 +490,10 @@ implements com.octo.captcha.engine.CaptchaEngine
      * This return a new captcha. It may be used directly.
      *
      * @param locale the desired locale
+     *
      * @return a new Captcha
      */
-    public final Captcha getNextCaptcha(Locale locale)
-    {
+    public final Captcha getNextCaptcha(Locale locale) {
         return getNextSoundCaptcha(locale);
     }
 
@@ -509,7 +507,6 @@ implements com.octo.captcha.engine.CaptchaEngine
     /**
      * This method build a SoundCaptchaFactory.
      *
-     * @param locale
      * @return a SoundCaptcha
      */
     public abstract SoundCaptcha getNextSoundCaptcha(Locale locale);

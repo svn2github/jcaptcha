@@ -1,4 +1,3 @@
-
 package com.octo.captcha.engine.image.gimpy;
 
 /*
@@ -481,14 +480,12 @@ import java.awt.*;
  * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class BaffleListGimpyEngine extends ListImageCaptchaEngine
-{
+public class BaffleListGimpyEngine extends ListImageCaptchaEngine {
 
-    protected void buildInitialFactories()
-    {
+    protected void buildInitialFactories() {
         //word generator
-        com.octo.captcha.component.wordgenerator.WordGenerator dictionnaryWords = new com.octo.captcha.component.wordgenerator.ComposeDictionaryWordGenerator(
-                new com.octo.captcha.component.wordgenerator.FileDictionnary(
+        com.octo.captcha.component.word.wordgenerator.WordGenerator dictionnaryWords = new com.octo.captcha.component.word.wordgenerator.ComposeDictionaryWordGenerator(
+                new com.octo.captcha.component.word.FileDictionary(
                         "toddlist"));
         //wordtoimage components
         TextPaster randomPaster = new BaffleRandomTextPaster(new Integer(8), new Integer(

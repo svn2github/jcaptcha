@@ -482,11 +482,9 @@ import java.awt.image.ImageFilter;
  * @deprecated
  */
 public class FilteredDoubleRandomListGimpyEngine
-        extends com.octo.captcha.engine.image.ListImageCaptchaEngine
-{
+        extends com.octo.captcha.engine.image.ListImageCaptchaEngine {
 
-    protected void buildInitialFactories()
-    {
+    protected void buildInitialFactories() {
 
         com.jhlabs.image.RippleFilter rippleBack = new com.jhlabs.image.RippleFilter();
 
@@ -505,9 +503,9 @@ public class FilteredDoubleRandomListGimpyEngine
         FontGenerator font =
                 new DeformedRandomFontGenerator(new Integer(25),
                         new Integer(27));
-        com.octo.captcha.component.wordgenerator.WordGenerator words =
-                new com.octo.captcha.component.wordgenerator.DictionaryWordGenerator(
-                        new com.octo.captcha.component.wordgenerator.FileDictionnary(
+        com.octo.captcha.component.word.wordgenerator.WordGenerator words =
+                new com.octo.captcha.component.word.wordgenerator.DictionaryWordGenerator(
+                        new com.octo.captcha.component.word.FileDictionary(
                                 "toddlist"));
 
         com.octo.captcha.component.image.wordtoimage.WordToImage word2image =

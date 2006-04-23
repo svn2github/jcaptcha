@@ -480,16 +480,13 @@ import java.io.OutputStream;
  * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class ImageToFile
-{
+public class ImageToFile {
 
-    public ImageToFile()
-    {
+    public ImageToFile() {
     }
 
     public static void serialize(BufferedImage image, File file)
-            throws IOException
-    {
+            throws IOException {
         file.createNewFile();
         FileOutputStream fos = new FileOutputStream(file);
         encodeJPG(fos, image);
@@ -498,8 +495,7 @@ public class ImageToFile
     }
 
     public static void encodeJPG(OutputStream sos, BufferedImage image)
-            throws IOException
-    {
+            throws IOException {
         JPEGImageEncoder encoder =
                 JPEGCodec.createJPEGEncoder(sos);
 

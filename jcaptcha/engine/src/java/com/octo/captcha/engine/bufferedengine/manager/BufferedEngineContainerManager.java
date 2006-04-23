@@ -10,11 +10,10 @@ import org.apache.commons.collections.map.HashedMap;
 
 /**
  * Interface that adds manageability options to the BufferedEngineContainer
- * 
+ *
  * @author Benoit Doumas
  */
-public interface BufferedEngineContainerManager
-{
+public interface BufferedEngineContainerManager {
 
     /**
      * Get number of captchas to feed the disk buffer
@@ -22,14 +21,12 @@ public interface BufferedEngineContainerManager
     int getFeedSize();
 
     /**
-     * @param feedSize
-     *                  Set number of captchas to produce at each iteration.
+     * @param feedSize Set number of captchas to produce at each iteration.
      */
     public void setFeedSize(int feedSize);
 
     /**
-     * @param size
-     *                  Set number of captchas to swap between the volatil buffer and the disk buffer
+     * @param size Set number of captchas to swap between the volatil buffer and the disk buffer
      */
     void setSwapSize(int size);
 
@@ -39,8 +36,7 @@ public interface BufferedEngineContainerManager
     int getSwapSize();
 
     /**
-     * @param size
-     *                  Set maximun size for the volatile buffer
+     * @param size Set maximun size for the volatile buffer
      */
     void setMaxVolatileMemorySize(int size);
 
@@ -50,8 +46,7 @@ public interface BufferedEngineContainerManager
     int getMaxVolatileMemorySize();
 
     /**
-     * @param size
-     *                  Set maximum size for the disk buffer
+     * @param size Set maximum size for the disk buffer
      */
     void setMaxPersistentMemorySize(int size);
 
@@ -61,10 +56,8 @@ public interface BufferedEngineContainerManager
     int getMaxPersistentMemorySize();
 
     /**
-     * @param localeName
-     *                  Name of th locale to set or to create
-     * @param ratio
-     *                  The ratio of the locale
+     * @param localeName Name of th locale to set or to create
+     * @param ratio      The ratio of the locale
      */
     void setLocaleRatio(String localeName, double ratio);
 
@@ -149,8 +142,7 @@ public interface BufferedEngineContainerManager
     abstract void resume();
 
     /**
-     * Shutdown scheduling, the container will use its memory buffer until its empty and swtich to
-     * the engine.
+     * Shutdown scheduling, the container will use its memory buffer until its empty and swtich to the engine.
      */
     void shutdown();
 }

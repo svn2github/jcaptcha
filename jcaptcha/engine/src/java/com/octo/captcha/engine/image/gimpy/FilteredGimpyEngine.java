@@ -61,22 +61,19 @@ import java.awt.*;
 import java.awt.image.ImageFilter;
 
 /**
- * <p>Static factory initializer, instanciates a ImageCaptchaFactory. This class
- * is a sample which demonstrate how to use teh jhlabs filter with the
- * Filtered</p>
+ * <p>Static factory initializer, instanciates a ImageCaptchaFactory. This class is a sample which demonstrate how to
+ * use teh jhlabs filter with the Filtered</p>
  *
  * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
  * @version 1.0
- * @deprecated 
+ * @deprecated
  */
 public class FilteredGimpyEngine
-        extends com.octo.captcha.engine.image.DefaultImageCaptchaEngine
-{
+        extends com.octo.captcha.engine.image.DefaultImageCaptchaEngine {
 
     static com.octo.captcha.image.ImageCaptchaFactory[] factories;
 
-    static
-    {
+    static {
         //build filters
         com.jhlabs.image.EmbossFilter emboss = new com.jhlabs.image.EmbossFilter();
         com.jhlabs.image.SphereFilter sphere = new com.jhlabs.image.SphereFilter();
@@ -126,10 +123,9 @@ public class FilteredGimpyEngine
                 new Integer(200), new Integer(100));
         FontGenerator font = new RandomFontGenerator(new Integer(25),
                 new Integer(35));
-        com.octo.captcha.component.wordgenerator.WordGenerator words = new com.octo.captcha.component.wordgenerator.DictionaryWordGenerator(
-                new com.octo.captcha.component.wordgenerator.FileDictionnary(
+        com.octo.captcha.component.word.wordgenerator.WordGenerator words = new com.octo.captcha.component.word.wordgenerator.DictionaryWordGenerator(
+                new com.octo.captcha.component.word.FileDictionary(
                         "toddlist"));
-
 
         //build factories
         factories = new com.octo.captcha.image.ImageCaptchaFactory[3];
@@ -158,8 +154,7 @@ public class FilteredGimpyEngine
 
     }
 
-    public FilteredGimpyEngine()
-    {
+    public FilteredGimpyEngine() {
 
         super(factories);
 

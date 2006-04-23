@@ -1,52 +1,7 @@
-/* ====================================================================
- * The Apache Software License, Version 1.1
- *
- * Copyright (c) 2000 The Apache Software Foundation.  All rights
- * reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
- *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:
- *       "This product includes software developed by the
- *        Apache Software Foundation (http://www.apache.org/)."
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
- *
- * 4. The names "Apache" and "Apache Software Foundation" must
- *    not be used to endorse or promote products derived from this
- *    software without prior written permission. For written
- *    permission, please contact apache@apache.org.
- *
- * 5. Products derived from this software may not be called "Apache",
- *    nor may "Apache" appear in their name, without prior written
- *    permission of the Apache Software Foundation.
- *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL THE APACHE SOFTWARE FOUNDATION OR
- * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
- * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
- * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- * ====================================================================
- *
- *
+/*
+ * jcaptcha, the open source java framework for captcha definition and integration
+ * Copyright (c) 2005 jcaptcha.net. All Rights Reserved.
+ * See the LICENSE.txt file distributed with this package.
  */
 package com.octo.captcha.module.filter.image;
 
@@ -68,30 +23,17 @@ import java.util.Hashtable;
 import java.util.StringTokenizer;
 
 /**
- * ImageCaptchaFilter is a J2EE Filter designed to add image captchas to the
- * entry forms of existing MVC web applications.
- * <br>
- * Current features of ImageCaptchaFilter are:
- * <ul>
- * <li> Generation and rendering of Captcha images (as JPEG) at runtime for
- * inclusion in an existing entry form. ImageCaptchaFilter use a
- * ImageCaptchaEngine to generate captchas : a simple one
- * (com.octo.captcha.image.gimpy.MultipleGimpyEngine, which displays a
- * random string composed with characters A,B,C,D and E) is provided
- * with jcaptcha-j2ee, but you can code your own or use one of those
- * provided with jcaptcha-sample ;
- * </li>
- * <li> Verification of the HTTP client entry in response to the challenge
- * displayed as an image in the entry form: Redirection of the HTTP
- * client to an error page if the captcha challenge is not passed ;
- * Transparent follow up of the request to the web application, without
- * any information concerning the captcha, if the challenge is
- * successfully passed ;
- * Many forms can be protected by captchas in the same web application,
- * each one having its own error redirection page ;
- * </li>
- * </ul>
- * The JMX Management interface for ImageCaptchaFilter is PixCaptchaFilterMbean.
+ * ImageCaptchaFilter is a J2EE Filter designed to add image captchas to the entry forms of existing MVC web
+ * applications. <br> Current features of ImageCaptchaFilter are: <ul> <li> Generation and rendering of Captcha images
+ * (as JPEG) at runtime for inclusion in an existing entry form. ImageCaptchaFilter use a ImageCaptchaEngine to generate
+ * captchas : a simple one (com.octo.captcha.image.gimpy.MultipleGimpyEngine, which displays a random string composed
+ * with characters A,B,C,D and E) is provided with jcaptcha-j2ee, but you can code your own or use one of those provided
+ * with jcaptcha-sample ; </li> <li> Verification of the HTTP client entry in response to the challenge displayed as an
+ * image in the entry form: Redirection of the HTTP client to an error page if the captcha challenge is not passed ;
+ * Transparent follow up of the request to the web application, without any information concerning the captcha, if the
+ * challenge is successfully passed ; Many forms can be protected by captchas in the same web application, each one
+ * having its own error redirection page ; </li> </ul> The JMX Management interface for ImageCaptchaFilter is
+ * PixCaptchaFilterMbean.
  *
  * @author <a href="mailto:sbr@octo.com">Sebastien Brunot</a>
  * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine GARRIGUE</a>
@@ -110,8 +52,7 @@ public class ImageCaptchaFilter implements Filter {
             "com.octo.captcha.module.servlet:object=ImageCaptchaFilter";
 
     /**
-     * The delimiter used to specify values as CSV in a string in web.xml
-     * (used for verification URLs, etc...)
+     * The delimiter used to specify values as CSV in a string in web.xml (used for verification URLs, etc...)
      */
     public static final String CSV_DELIMITER = ";";
 
@@ -123,7 +64,6 @@ public class ImageCaptchaFilter implements Filter {
      * Logger (commons-logging)
      */
 //    private static Log log = LogFactory.getLog(ImageCaptchaFilter.class);
-
 
 
     /**
@@ -139,18 +79,15 @@ public class ImageCaptchaFilter implements Filter {
             "CaptchaRenderingURL";
 
     /**
-     * The name of the filter parameter in web.xml for the CSV list of URLs
-     * that commands the captcha verification
+     * The name of the filter parameter in web.xml for the CSV list of URLs that commands the captcha verification
      */
     public static final String CAPTCHA_VERIFICATION_URLS_PARAMETER =
             "CaptchaVerificationURLs";
 
     /**
-     * The name of the filter parameter in web.xml for the CSV list of URLs
-     * (one for each verification URL) to which the request should be forwarded,
-     * after cleaning captchaID and the captchaChallengeResponse from it, if the
-     * challengeResponse is uncorrect
-     * (filter parameter to define in web.xml)
+     * The name of the filter parameter in web.xml for the CSV list of URLs (one for each verification URL) to which the
+     * request should be forwarded, after cleaning captchaID and the captchaChallengeResponse from it, if the
+     * challengeResponse is uncorrect (filter parameter to define in web.xml)
      */
     public static final String CAPTCHA_FAIL_URLS_PARAMETER =
             "CaptchaFailURLs";
@@ -168,26 +105,21 @@ public class ImageCaptchaFilter implements Filter {
 
 
     /**
-     * The name of the filter parameter in web.xml for
-     * captchaChallengeResponseParameterName
+     * The name of the filter parameter in web.xml for captchaChallengeResponseParameterName
      */
     public static final String CAPTCHA_RESPONSE_PARAMETER_NAME_PARAMETER =
             "CaptchaChallengeResponseParameterName";
 
     /**
-     * The name of the filter parameter in web.xml for the
-     * internal ManageableImageCaptchaService
-     * ManageableImageCaptchaService.ENGINE_CLASS_INIT_PARAMETER_PROP
-     * initialization parameter.
-     *
+     * The name of the filter parameter in web.xml for the internal ManageableImageCaptchaService
+     * ManageableImageCaptchaService.ENGINE_CLASS_INIT_PARAMETER_PROP initialization parameter.
      */
     private static final String CAPTCHA_SERVICE_CLASS_PARAMETER =
             "ImageCaptchaServiceClass";
 
 
     /**
-     * The name of the filter parameter in web.xml for
-     * captchaRegisterToMBeanServer
+     * The name of the filter parameter in web.xml for captchaRegisterToMBeanServer
      */
     private static final String CAPTCHA_REGISTER_TO_MBEAN_SERVER_PARAMETER =
             "RegisterToMBeanServer";
@@ -199,16 +131,14 @@ public class ImageCaptchaFilter implements Filter {
 //    private static String captchaIDParameterName = null;
 
     /**
-     * A boolean that signal if the CaptchaFilter should be registered to
-     * the MBean Server in the Application Server (default value is false)
-     * (filter parameter to define in web.xml)
+     * A boolean that signal if the CaptchaFilter should be registered to the MBean Server in the Application Server
+     * (default value is false) (filter parameter to define in web.xml)
      */
     private boolean captchaRegisterToMBeanServer = false;
 
 
     /**
-     * The name of the request parameter that contains the captcha ID
-     * (filter parameter to define in web.xml)
+     * The name of the request parameter that contains the captcha ID (filter parameter to define in web.xml)
      */
     private static String captchaQuestionParameterName = null;
 
@@ -218,22 +148,21 @@ public class ImageCaptchaFilter implements Filter {
     private ImageCaptchaService captchaService = null;
 
     /**
-     * The URL that commands a new captcha creation and its rendering as
-     * a jpg image (filter parameter to define in web.xml)
+     * The URL that commands a new captcha creation and its rendering as a jpg image (filter parameter to define in
+     * web.xml)
      */
     private static String captchaRenderingURL = null;
 
     /**
-     * The URL that commands a new captcha creation and its rendering as
-     * a jpg image (filter parameter to define in web.xml)
+     * The URL that commands a new captcha creation and its rendering as a jpg image (filter parameter to define in
+     * web.xml)
      */
     private static String captchaErrorURL = null;
 
 
     /**
-     * The name of the request parameter that contains the challenge response
-     * to match
-     * (filter parameter to define in web.xml)
+     * The name of the request parameter that contains the challenge response to match (filter parameter to define in
+     * web.xml)
      */
     private static String captchaChallengeResponseParameterName = null;
 
@@ -255,11 +184,9 @@ public class ImageCaptchaFilter implements Filter {
     }
 
     /**
-     * A hashmap that contains information about forwardError URL for a
-     * verification URL. The verificationURL is the key, the stored object
-     * is a String (the URL to forward to if there is a verification error).
-     * (this map is initialized with filter parameters values defined in
-     * web.xml)
+     * A hashmap that contains information about forwardError URL for a verification URL. The verificationURL is the
+     * key, the stored object is a String (the URL to forward to if there is a verification error). (this map is
+     * initialized with filter parameters values defined in web.xml)
      */
     protected Hashtable verificationForwards = new Hashtable();
 
@@ -289,7 +216,6 @@ public class ImageCaptchaFilter implements Filter {
                 FilterConfigUtils.getStringInitParameter(theFilterConfig,
                         CAPTCHA_ERROR_URL_PARAMETER,
                         true);
-
 
         // get verification URLs from web.xml (CSV list of URLs)
         String captchaVerificationURLs =
@@ -328,7 +254,6 @@ public class ImageCaptchaFilter implements Filter {
                 FilterConfigUtils.getStringInitParameter(theFilterConfig,
                         CAPTCHA_QUESTION_NAME_PARAMETER, true);
 
-
         // get captcha ID parameter name from web.xml
 //        this.captchaIDParameterName =
 //                FilterConfigUtils.getStringInitParameter(theFilterConfig,
@@ -346,7 +271,6 @@ public class ImageCaptchaFilter implements Filter {
                 FilterConfigUtils.getStringInitParameter(theFilterConfig,
                         CAPTCHA_SERVICE_CLASS_PARAMETER,
                         true);
-
 
         // get from web.xml the indicator signaling if the CaptchaFilter
         // should be registered to an MBean Server
@@ -380,9 +304,8 @@ public class ImageCaptchaFilter implements Filter {
     }
 
     /**
-     * @see javax.servlet.Filter#doFilter(javax.servlet.ServletRequest,
-            *      javax.servlet.ServletResponse,
-            *      javax.servlet.FilterChain)
+     * @see javax.servlet.Filter#doFilter(javax.servlet.ServletRequest, javax.servlet.ServletResponse,
+     *      javax.servlet.FilterChain)
      */
     public void doFilter(final ServletRequest theRequest,
                          final ServletResponse theResponse,
@@ -430,15 +353,13 @@ public class ImageCaptchaFilter implements Filter {
         }
     }
 
-
     ////////////////////////////////////
     // Private methods
     ////////////////////////////////////
 
 
     /**
-     * Add the localized captcha to the current request as an attribute,
-     * using the CaptchaQuestionParameterName.
+     * Add the localized captcha to the current request as an attribute, using the CaptchaQuestionParameterName.
      */
     private void addQuestionToRequest(HttpServletRequest theRequest, HttpServletResponse theResponse) {
         String captchaID = theRequest.getSession().getId();//(String) theRequest.getParameter(captchaIDParameterName);
@@ -447,15 +368,13 @@ public class ImageCaptchaFilter implements Filter {
     }
 
     /**
-     * Generate a new ImageCaptcha, store it in the internal store and
-     * render it as JPEG to the client.
-     * Captcha are localized using request locale
-     * ID used are session ID
-     * This method returns a 404 to the client instead of the image if
-     * the request isn't correct (missing parameters, etc...).
+     * Generate a new ImageCaptcha, store it in the internal store and render it as JPEG to the client. Captcha are
+     * localized using request locale ID used are session ID This method returns a 404 to the client instead of the
+     * image if the request isn't correct (missing parameters, etc...).
      *
      * @param theRequest  the request
      * @param theResponse the response
+     *
      * @throws java.io.IOException if a problem occurs during the jpeg generation process
      */
     private void generateAndRenderCaptcha(HttpServletRequest theRequest,
@@ -514,16 +433,14 @@ public class ImageCaptchaFilter implements Filter {
     }
 
     /**
-     * Verify client answer to a captcha challenge, and forward to the
-     * correponding success or error URL.
-     * This method returns a 404 to the client instead of forwarding if
-     * the request isn't correct (missing parameters, etc...).
+     * Verify client answer to a captcha challenge, and forward to the correponding success or error URL. This method
+     * returns a 404 to the client instead of forwarding if the request isn't correct (missing parameters, etc...).
      *
      * @param theRequest         the request
      * @param theResponse        the response
      * @param theVerificationURL the verification URL that was called
-     * @param theFilterChain
-     * @throws java.io.IOException      if the image tranformation fails
+     *
+     * @throws java.io.IOException            if the image tranformation fails
      * @throws javax.servlet.ServletException if a servlet exception occurs
      */
     private void verifyAnswerToACaptchaChallenge(HttpServletRequest theRequest,
@@ -568,11 +485,10 @@ public class ImageCaptchaFilter implements Filter {
     /**
      * Redirect request to the Error URL
      *
-     * @param theVerificationURL the verification URL for which there is an
-     *                           error redirect
+     * @param theVerificationURL the verification URL for which there is an error redirect
      * @param theRequest         the request
      * @param theResponse        the response
-     * @throws javax.servlet.ServletException
+     *
      * @see javax.servlet.RequestDispatcher#forward(javax.servlet.ServletRequest, javax.servlet.ServletResponse)
      */
     private void redirectError(String theVerificationURL,
@@ -584,7 +500,7 @@ public class ImageCaptchaFilter implements Filter {
             // Redirect to the error URL
             String forwardErrorURL =
                     theRequest.getContextPath()
-                    + (String) this.verificationForwards.get(theVerificationURL);
+                            + (String) this.verificationForwards.get(theVerificationURL);
             theResponse.sendRedirect(forwardErrorURL);
         } catch (IOException e) {
             throw new ServletException(e);
@@ -597,7 +513,7 @@ public class ImageCaptchaFilter implements Filter {
      * @param theFilterChain the filter chain
      * @param theRequest     the request
      * @param theResponse    the response
-     * @throws javax.servlet.ServletException
+     *
      * @see javax.servlet.RequestDispatcher#forward(javax.servlet.ServletRequest, javax.servlet.ServletResponse)
      */
     private void forwardSuccess(FilterChain theFilterChain,

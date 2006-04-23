@@ -482,8 +482,6 @@ public class TwistedRandomFontGeneratorTest extends TestCase {
 
     /**
      * Constructor for TwistedRandomFontGeneratorTest.
-     *
-     * @param arg0
      */
     public TwistedRandomFontGeneratorTest(String arg0) {
         super(arg0);

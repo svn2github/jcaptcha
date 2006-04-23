@@ -11,7 +11,8 @@
 
                 <ul>
                     <li>This module is the core of the jcaptcha framework.</li>
-                    <li>It aims to provide a captcha standardized interfaces, some typed captcha s implementations and some usefull components.</li>
+                    <li>It aims to provide a captcha standardized interfaces, some typed captcha s implementations and
+                        some usefull components.</li>
                     <li>This module defines the challenges that human can solve and computer shouldn't.</li>
 
                 </ul>

@@ -479,17 +479,15 @@ import java.awt.*;
  * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class    BasicListGimpyEngine
-        extends com.octo.captcha.engine.image.ListImageCaptchaEngine
-{
+public class BasicListGimpyEngine
+        extends com.octo.captcha.engine.image.ListImageCaptchaEngine {
 
-    protected void buildInitialFactories()
-    {
+    protected void buildInitialFactories() {
         //word generator
-        com.octo.captcha.component.wordgenerator.WordGenerator dictionnaryWords =
-                new com.octo.captcha.component.wordgenerator.DictionaryWordGenerator(
-                new com.octo.captcha.component.wordgenerator.FileDictionnary(
-                        "toddlist"));
+        com.octo.captcha.component.word.wordgenerator.WordGenerator dictionnaryWords =
+                new com.octo.captcha.component.word.wordgenerator.DictionaryWordGenerator(
+                        new com.octo.captcha.component.word.FileDictionary(
+                                "toddlist"));
         //wordtoimage components
         TextPaster randomPaster = new DoubleRandomTextPaster(new Integer(6),
                 new Integer(8), Color.white);
@@ -501,7 +499,7 @@ public class    BasicListGimpyEngine
         //word2image 1
         com.octo.captcha.component.image.wordtoimage.WordToImage word2image =
                 new com.octo.captcha.component.image.wordtoimage.ComposedWordToImage(
-                shearedFont, fileBack, randomPaster);
+                        shearedFont, fileBack, randomPaster);
         this.addFactory(
                 new com.octo.captcha.image.gimpy.GimpyFactory(dictionnaryWords,
                         word2image));

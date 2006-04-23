@@ -12,7 +12,8 @@
                 <ul>
                     <li>This module contains service interface and implementations.</li>
                     <li>A CaptchaService implementation provides typed Captcha using a typed CaptchaEngine</li>
-                    <li>An engine initialize a CaptchaStore to store Captcha between Challenge generation, and response validation, associed with an unique id.</li>
+                    <li>An engine initialize a CaptchaStore to store Captcha between Challenge generation, and response
+                        validation, associed with an unique id.</li>
 
                 </ul>
             </p>

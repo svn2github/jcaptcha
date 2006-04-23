@@ -486,8 +486,6 @@ public class DoubleRandomTextPasterTest extends TestCase {
 
     /**
      * Constructor for DoubleRandomTextPasterTest.
-     *
-     * @param name
      */
     public DoubleRandomTextPasterTest(String name) {
         super(name);

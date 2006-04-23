@@ -480,16 +480,14 @@ import java.awt.*;
  * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class BasicGimpyEngine extends DefaultImageCaptchaEngine
-{
+public class BasicGimpyEngine extends DefaultImageCaptchaEngine {
 
     static com.octo.captcha.image.ImageCaptchaFactory[] factories;
 
-    static
-    {
+    static {
         //word generator
         //WordGenerator dictionnaryWords = new DictionaryWordGenerator(new FileDictionnary("toddlist"));
-        com.octo.captcha.component.wordgenerator.WordGenerator randomWords = new com.octo.captcha.component.wordgenerator.RandomWordGenerator(
+        com.octo.captcha.component.word.wordgenerator.WordGenerator randomWords = new com.octo.captcha.component.word.wordgenerator.RandomWordGenerator(
                 "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
 
         //wordtoimage components
@@ -503,7 +501,6 @@ public class BasicGimpyEngine extends DefaultImageCaptchaEngine
         FontGenerator shearedFont = new TwistedAndShearedRandomFontGenerator(
                 new Integer(20), new Integer(30));
 
-
         //word2image 1
         com.octo.captcha.component.image.wordtoimage.WordToImage word2image = new com.octo.captcha.component.image.wordtoimage.ComposedWordToImage(
                 shearedFont, funkyBack, randomPaster);
@@ -516,8 +513,7 @@ public class BasicGimpyEngine extends DefaultImageCaptchaEngine
 
     }
 
-    public BasicGimpyEngine()
-    {
+    public BasicGimpyEngine() {
 
         super(factories);
 

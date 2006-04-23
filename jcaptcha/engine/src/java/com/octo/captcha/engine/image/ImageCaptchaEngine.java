@@ -70,16 +70,14 @@ import java.util.Locale;
  * @version 1.0
  */
 public abstract class ImageCaptchaEngine
-        implements com.octo.captcha.engine.CaptchaEngine
-{
+        implements com.octo.captcha.engine.CaptchaEngine {
 
     /**
      * This return a new captcha. It may be used directly.
      *
      * @return a new Captcha
      */
-    public final Captcha getNextCaptcha()
-    {
+    public final Captcha getNextCaptcha() {
         return getNextImageCaptcha();
     }
 
@@ -87,10 +85,10 @@ public abstract class ImageCaptchaEngine
      * This return a new captcha. It may be used directly.
      *
      * @param locale the desired locale
+     *
      * @return a new Captcha
      */
-    public final Captcha getNextCaptcha(Locale locale)
-    {
+    public final Captcha getNextCaptcha(Locale locale) {
         return getNextImageCaptcha(locale);
     }
 
@@ -104,7 +102,6 @@ public abstract class ImageCaptchaEngine
     /**
      * This method build a ImageCaptchaFactory.
      *
-     * @param locale
      * @return a CaptchaFactory
      */
     public abstract ImageCaptcha getNextImageCaptcha(Locale locale);

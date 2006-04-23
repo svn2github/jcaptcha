@@ -482,8 +482,8 @@ public class DummyFontGenerator extends AbstractFontGenerator {
 
 
     /**
-     * Method from imageFromWord method to apply font to String.
-     * Implementations must take into account the minFontSize and the MaxFontSize.
+     * Method from imageFromWord method to apply font to String. Implementations must take into account the minFontSize
+     * and the MaxFontSize.
      *
      * @return a Font
      */

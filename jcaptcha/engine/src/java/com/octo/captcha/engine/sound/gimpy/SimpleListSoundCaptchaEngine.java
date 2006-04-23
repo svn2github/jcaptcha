@@ -472,7 +472,6 @@ import com.octo.captcha.engine.sound.ListSoundCaptchaEngine;
 import com.octo.captcha.sound.gimpy.GimpySoundFactory;
 
 
-
 /**
  * <p>Description: simple gimpy sound engine </p>
  *
@@ -480,16 +479,14 @@ import com.octo.captcha.sound.gimpy.GimpySoundFactory;
  * @version 1.0
  */
 public class SimpleListSoundCaptchaEngine
-        extends ListSoundCaptchaEngine
-{
+        extends ListSoundCaptchaEngine {
 
-    protected void buildInitialFactories()
-    {
-        com.octo.captcha.component.wordgenerator.WordGenerator words = new com.octo.captcha.component.wordgenerator.DictionaryWordGenerator(
-            new com.octo.captcha.component.wordgenerator.FileDictionnary("toddlist"));
+    protected void buildInitialFactories() {
+        com.octo.captcha.component.word.wordgenerator.WordGenerator words = new com.octo.captcha.component.word.wordgenerator.DictionaryWordGenerator(
+                new com.octo.captcha.component.word.FileDictionary("toddlist"));
 
         SoundConfigurator configurator = new FreeTTSSoundConfigurator("kevin16",
-            "com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory", 1.0f, 100, 70);
+                "com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory", 1.0f, 100, 70);
         FreeTTSWordToSound wordToSound = new FreeTTSWordToSound(configurator, 4, 10);
 
         this.addFactory(new GimpySoundFactory(words, wordToSound));

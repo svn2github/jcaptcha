@@ -1,40 +1,68 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <document>
-
-    <meta name="keyword" content="captcha, java,jcaptcha"/>
+    <meta content="captcha, java,jcaptcha" name="keyword"/>
 
     <body>
-
         <section name="Presentation">
-            <p>
-                Jcaptcha is an Open Source Java framework for Captcha definition and integration.
+            <p>Jcaptcha is an Open Source Java framework for Captcha definition and
+                integration.
                 <br/>
-                 License: GNU Library or Lesser General Public License (LGPL).
+                <b>JCAPTCHA</b>
+                , for
+                <b>J</b>
+                ava
+                <b>C</b>
+                ompletely
+                <b>A</b>
+                utomated
+                <b>P</b>
+                ublic
+                <b>T</b>
+                est to tell
+                <b>C</b>
+                omputers and
+                <b>H</b>
+                umans
+                <b>A</b>
+                part
                 <br/>
-            
+                License: GNU General Public
+                License (GPL).
+                <br/>
 
+                <br/>
             </p>
         </section>
 
         <section name="Features">
             <p>
-
                 <ul>
                     <li>End User Application oriented features</li>
+
                     <ul>
                         <li>Highly customizable captcha tests</li>
-                        <li>Many ready to use configurations (see the engine sub project)</li>
+
+                        <li>Many ready to use configurations (see the engine sub
+                            project)</li>
+
                         <li>Gimpy and Fisheye tests</li>
+
                         <li>Usage statistics exposed by JMX</li>
-                        <li>Runtime modification of captcha test and/or service </li>
+
+                        <li>Runtime modification of captcha test and/or service</li>
+
                         <li>Many integration modules (struts, filter, jroller etc...)</li>
                     </ul>
 
                     <li>AI research oriented features</li>
+
                     <ul>
                         <li>High level language for Captcha Test definition</li>
+
                         <li>Many ready to use components to build new Captcha tests</li>
-                        <li>Allows automation of Neural Network learning procedures and fitness fonction definition for Genetic Algorithms</li>
+
+                        <li>Allows automation of Neural Network learning procedures and
+                            fitness fonction definition for Genetic Algorithms</li>
                     </ul>
                 </ul>
             </p>
@@ -46,162 +74,242 @@
                     <li>09/06/2005 : RC 2.0.1 is out!
                         <br/>
                         <b>Site improvements</b>
-                        <b>
-
-                        </b>
+                        <b/>
                         <ul>
                             <li>Some parts of the site are now hosted using the
-                                <a href="http://www.octo.com">OCTO Technology web access</a> on the
-                                <a href="http://luminal.gotdns.com/sushiwiki/">SushiWiki server</a>. Thanks to Eric Groise.
+                                <a
+                                        href="http://www.octo.com">OCTO Technology web access</a>
+                                on the
+                                <a href="http://luminal.gotdns.com/sushiwiki/">SushiWiki
+                                    server</a>
+                                . Thanks to Eric Groise.
                             </li>
+
                             <li>Moved from moniwiki to confluence for collaboration</li>
+
                             <li>Moved from sourceforge to jira for issue tracking</li>
+
                             <li>Thanks to
-                                <a href="http://www.atlassian.com/">Atlassian software</a>
+                                <a href="http://www.atlassian.com/">Atlassian
+                                    software</a>
                             </li>
                         </ul>
                         <b>framework improvements</b>
                         <ul>
                             <li>This is a minor bug fix release</li>
-                            <li>Moving to a more readable default engine</li>
-                            <li>Tunning some engine</li>
-                            <li>New Issue tracker system, thanks to altassian : see
-                                <a href="http://luminal.gotdns.com/jira/">jcaptcha jira</a>
-                            </li>
-                            <li>Removing log configuration from jar : see bug 1078250 @ sourceforge</li>
-                            <li>Moving tld to META-INF directory : see bug 1087577 @ sourceforge</li>
-                        </ul>
 
+                            <li>Moving to a more readable default engine</li>
+
+                            <li>Tunning some engine</li>
+
+                            <li>New Issue tracker system, thanks to altassian : see
+                                <a
+                                        href="http://luminal.gotdns.com/jira/">jcaptcha jira</a>
+                            </li>
+
+                            <li>Removing log configuration from jar : see bug 1078250 @
+                                sourceforge</li>
+
+                            <li>Moving tld to META-INF directory : see bug 1087577 @
+                                sourceforge</li>
+                        </ul>
                     </li>
+
                     <li>18/11/2004
                         <ul>
                             <li>RC-2 available including following new features:</li>
+
                             <li>JRoller integration module and documentation</li>
+
                             <li>New captcha storage service based on Ehcache</li>
-                            <li>Captcha Service Optimisation by new implementation of asynchronous Captcha buffer based on Ehcache</li>
-                            <li>Sruts tutorial + sample application based on the struts mailreader sample</li>
+
+                            <li>Captcha Service Optimisation by new implementation of
+                                asynchronous Captcha buffer based on Ehcache</li>
+
+                            <li>Sruts tutorial + sample application based on the struts
+                                mailreader sample</li>
                         </ul>
                     </li>
+
                     <li>23/10/2004
                         <ul>
                             <li>Near RC-2</li>
+
                             <li>Adding a Roller module</li>
+
                             <li>Adding a service implementation using ehcache as store</li>
-                            <li>Adding a service implementation that asynchronously builds a captcha buffer</li>
-                            <li>Adding a struts sample based on the struts mailreader sample app</li>
+
+                            <li>Adding a service implementation that asynchronously builds a
+                                captcha buffer</li>
+
+                            <li>Adding a struts sample based on the struts mailreader sample
+                                app</li>
                         </ul>
                     </li>
+
                     <li>06/08/2004
                         <ul>
-                            <li>Releasing RC-1
-                            </li>
+                            <li>Releasing RC-1</li>
+
                             <li>
-                                <b>BEWARE : this new version has a complete new architecture from beta-2! Major package renaming and refactoring!!!!</b>
+                                <b>BEWARE : this new version has a complete new architecture
+                                    from beta-2! Major package renaming and refactoring!!!!</b>
                             </li>
-                            <li>We have splited the source tree : this version is under the jcaptcha/jcaptcha source folder in CVS.
-                            </li>
+
+                            <li>We have splited the source tree : this version is under the
+                                jcaptcha/jcaptcha source folder in CVS.</li>
                         </ul>
                     </li>
+
                     <li>01/08/2004
                         <ul>
-                            <li>Adding performance tests for Engines
-                            </li>
+                            <li>Adding performance tests for Engines</li>
+
                             <li>New logo for
-                                <a href='/moniwiki/wiki.php/JcaptchaLogo'>JcaptchaLogo</a> submitted, waiting for vote!
+                                <a
+                                        href="/moniwiki/wiki.php/JcaptchaLogo">JcaptchaLogo</a>
+                                submitted, waiting for vote!
                             </li>
-                            <li>End of refactoring
-                            </li>
+
+                            <li>End of refactoring</li>
+
                             <li>Adding a default engine and service ready to use.
                                 <br/>
                                 <br/>
                             </li>
                         </ul>
                     </li>
+
                     <li>17/05/2004 moving to jdk1.3
                         <ul>
-                            <li>Code has moved : now JDK 1.3
-                            </li>
+                            <li>Code has moved : now JDK 1.3</li>
+
                             <li>will be release in the beta-5
                                 <br/>
                             </li>
                         </ul>
                     </li>
+
                     <li>20/04/04 Two new captchas :
                         <ul>
-                            <li>
-                                FishEye : a "clic on the center of deformation" challenge.
+                            <li>FishEye : a "clic on the center of deformation" challenge.
                             </li>
                         </ul>
                     </li>
                 </ul>
-                <img alt='http://jcaptcha.sourceforge.net/imagesWiki/fisheye_0.jpg' src='http://jcaptcha.sourceforge.net/imagesWiki/fisheye_0.jpg'/>
-                <img alt='http://jcaptcha.sourceforge.net/imagesWiki/fisheye_24.jpg' src='http://jcaptcha.sourceforge.net/imagesWiki/fisheye_24.jpg'/>
+                <img
+                        alt="http://jcaptcha.sourceforge.net/imagesWiki/fisheye_0.jpg"
+                        src="http://jcaptcha.sourceforge.net/imagesWiki/fisheye_0.jpg"/>
+                <img
+                        alt="http://jcaptcha.sourceforge.net/imagesWiki/fisheye_24.jpg"
+                        src="http://jcaptcha.sourceforge.net/imagesWiki/fisheye_24.jpg"/>
                 <ul>
-                    <li>initialization of sound implementation.
-                    </li>
+                    <li>initialization of sound implementation.</li>
                 </ul>
-Soon available, waiting for RC1.
+                Soon available, waiting for RC1.
                 <br/>
                 <br/>
-
                 <ul>
-                    <li>06/04/04 Major refactoring work is almost done. A  new version is about to be released.
-                    </li>
+                    <li>06/04/04 Major refactoring work is almost done. A new version is
+                        about to be released.</li>
                 </ul>
-This new release includes :
+                This new release includes :
                 <ul>
                     <li>the cleaned
-                        <a href='/moniwiki/wiki.php/CoreModule'>CoreModule</a> that provides Captchas interfaces and typed implementations.
+                        <a
+                                href="/moniwiki/wiki.php/CoreModule">CoreModule</a>
+                        that provides
+                        Captchas interfaces and typed implementations.
                     </li>
+
                     <li>the renamed
-                        <a href='/moniwiki/wiki.php/EngineModule'>EngineModule</a> : an engine provides ready to use captchas.
+                        <a
+                                href="/moniwiki/wiki.php/EngineModule">EngineModule</a>
+                        : an engine
+                        provides ready to use captchas.
                     </li>
+
                     <li>the new
-                        <a href='/moniwiki/wiki.php/ServiceModule'>ServiceModule</a> : a service provide a standardized interface to serve Captchas, and a managageable interface too.
+                        <a
+                                href="/moniwiki/wiki.php/ServiceModule">ServiceModule</a>
+                        : a
+                        service provide a standardized interface to serve Captchas, and a
+                        managageable interface too.
                     </li>
+
                     <li>the new
-                        <a href='/moniwiki/wiki.php/ModuleBase'>ModuleBase</a> and
-                    ModuleStruts providing stuff to integrate a captcha service with your application.
+                        <a href="/moniwiki/wiki.php/ModuleBase">ModuleBase</a>
+                        and ModuleStruts providing stuff to integrate a captcha service with
+                        your application.
                     </li>
                 </ul>
-Licence has been moved from Apache to LGPL.
+                Licence has been moved from Apache to LGPL.
                 <ul>
-                    <li>A tutorial to captchaized your application is on its way, with two samples :
+                    <li>A tutorial to captchaized your application is on its way, with
+                        two samples :
                         <ul>
                             <li>the captcha-ized
-                                <a href='http://www.rollerweblogger.org/page/project'>http://www.rollerweblogger.org/page/project</a> and the
-                                <a href='/moniwiki/wiki.php/J2EE'>J2EE</a> petstore.
+                                <a
+                                        href="http://www.rollerweblogger.org/page/project">
+                                    http://www.rollerweblogger.org/page/project</a>
+                                and the
+                                <a href="/moniwiki/wiki.php/J2EE">J2EE</a>
+                                petstore.
                                 <br/>
                             </li>
                         </ul>
                     </li>
                 </ul>
-                <li>12/02/04 New architecture for the j2ee module commited : all the "business" logic has been mutualized in a JMX manageable</li>
-                <a class='nonexistent' href='/moniwiki/wiki.php/ImageCaptchaService'>?</a>ImageCaptchaService class. A Web service endpoint for axis has been created in the com.octo.captcha.j2ee.rpc package. You can find its axis deployment descriptor (.wsdd) in the src/conf directory. The web service need to be further tested, but it will be documented woth a user manual similar to the
-                <a href='/moniwiki/wiki.php/ImageCaptchaFilter'>ImageCaptchaFilter</a> one for the beta2 (or beta3 ?) release. It is also planned to unit test the
-                <a class='nonexistent' href='/moniwiki/wiki.php/ImageCaptchaService'>?</a>ImageCaptchaService
-                <img src='/moniwiki/imgs/idea.png' align='middle' alt='(!)' title='(!)'/> and to use it in a new version of the
-                <a href='/moniwiki/wiki.php/ImageCaptchaFilter'>ImageCaptchaFilter</a>.
+                <li>12/02/04 New architecture for the j2ee module commited : all
+                    the "business" logic has been mutualized in a JMX manageable</li>
+                <a
+                        class="nonexistent"
+                        href="/moniwiki/wiki.php/ImageCaptchaService">?</a>
+                ImageCaptchaService
+                class. A Web service endpoint for axis has been created in the
+                com.octo.captcha.j2ee.rpc package. You can find its axis deployment
+                descriptor (.wsdd) in the src/conf directory. The web service need to be
+                further tested, but it will be documented woth a user manual similar to
+                the
+                <a
+                        href="/moniwiki/wiki.php/ImageCaptchaFilter">ImageCaptchaFilter</a>
+                one
+                for the beta2 (or beta3 ?) release. It is also planned to unit test the
+                <a class="nonexistent"
+                   href="/moniwiki/wiki.php/ImageCaptchaService">?</a>
+                ImageCaptchaService
+                <img align="middle" alt="(!)" src="/moniwiki/imgs/idea.png"
+                     title="(!)"/>
+                and to use it in a new version of the
+                <a
+                        href="/moniwiki/wiki.php/ImageCaptchaFilter">ImageCaptchaFilter</a>
+                .
                 <ul>
-                    <li>10/02/04 Two new components commited : composedictionarywordgenerator and baffletextpaster to enable parc like jcaptchas.
-                    </li>
+                    <li>10/02/04 Two new components commited :
+                        composedictionarywordgenerator and baffletextpaster to enable parc
+                        like jcaptchas.</li>
                 </ul>
-                <img alt='http://jcaptcha.sourceforge.net/imagesWiki/baffle1.jpg' src='http://jcaptcha.sourceforge.net/imagesWiki/baffle1.jpg'/>
-                <img alt='http://jcaptcha.sourceforge.net/imagesWiki/parc1.jpg' src='http://jcaptcha.sourceforge.net/imagesWiki/parc1.jpg'/>
+                <img
+                        alt="http://jcaptcha.sourceforge.net/imagesWiki/baffle1.jpg"
+                        src="http://jcaptcha.sourceforge.net/imagesWiki/baffle1.jpg"/>
+                <img
+                        alt="http://jcaptcha.sourceforge.net/imagesWiki/parc1.jpg"
+                        src="http://jcaptcha.sourceforge.net/imagesWiki/parc1.jpg"/>
                 <ul>
-                    <li>09/02/04 The Service interfaces and base implementations are commited
-                    </li>
-                    <li>07/02/04 New site is up!
-                    </li>
+                    <li>09/02/04 The Service interfaces and base implementations are
+                        commited</li>
+
+                    <li>07/02/04 New site is up!</li>
+
                     <li>02/02/04
-                        <a href='/moniwiki/wiki.php/JcapTcha'>JcapTcha</a> beta 1.0, the java CAPTCHA framework is available for
-                        download on sourceforge
+                        <a href="/moniwiki/wiki.php/JcapTcha">JcapTcha</a>
+                        beta
+                        1.0, the java CAPTCHA framework is available for download on
+                        sourceforge
                         <br/>
                     </li>
                 </ul>
-
             </p>
         </section>
-
     </body>
 </document>

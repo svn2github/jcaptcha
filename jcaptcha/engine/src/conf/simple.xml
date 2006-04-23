@@ -5,6 +5,6 @@
 *     Javaworld Article - Simple Sequence Workflow Example
   ========================================================================== -->
 <beans>
-	<bean id="factory" class="com.octo.captcha.configuration.SimpleFactory" />
+    <bean id="factory" class="com.octo.captcha.configuration.SimpleFactory"/>
 </beans>
 

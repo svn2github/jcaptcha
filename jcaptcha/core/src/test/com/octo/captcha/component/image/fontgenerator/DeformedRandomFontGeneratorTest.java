@@ -482,8 +482,6 @@ public class DeformedRandomFontGeneratorTest extends TestCase {
 
     /**
      * Constructor for DeformedRandomFontGeneratorTest.
-     *
-     * @param name
      */
     public DeformedRandomFontGeneratorTest(String name) {
         super(name);

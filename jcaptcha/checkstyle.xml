@@ -12,13 +12,7 @@
     
     <!-- General file checks -->
     <module name="FileLength"/>
-    <module name="Header">
-      <property name="headerFile" value="${checkstyle.header.file}"/>
-      <property name="ignoreLines" value="6"/>
-    </module>
-    <module name="LineLength">
-      <property name="ignorePattern" value="(@version|@see|^import)"/>
-    </module>
+
     <module name="TabCharacter"/>
     
     <!-- Imports -->
@@ -35,7 +29,7 @@
     <module name="LocalVariableName"/>
     <module name="PackageName"/>
     <module name="ParameterName">
-      <property name="format" value="^(the|is|has)[A-Z][a-zA-Z0-9]*$"/>
+      <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
     </module>
     <module name="StaticVariableName"/>
     <module name="TypeName"/>
@@ -57,12 +51,7 @@
       <property name="allowLineBreaks" value="true"/>
     </module>
     <module name="OperatorWrap"/>
-    <module name="LeftCurly">
-      <property name="option" value="nl"/>
-    </module>
-    <module name="RightCurly">
-      <property name="option" value="alone"/>
-    </module>
+
     <module name="WhitespaceAfter"/>
     <module name="WhitespaceAround"/>
     

@@ -1,4 +1,3 @@
-
 package com.octo.captcha.engine.image.gimpy;
 
 import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
@@ -21,16 +20,14 @@ import java.awt.*;
  * @deprecated
  */
 public class MultipleGimpyEngine
-        extends com.octo.captcha.engine.image.DefaultImageCaptchaEngine
-{
+        extends com.octo.captcha.engine.image.DefaultImageCaptchaEngine {
 
     static com.octo.captcha.image.ImageCaptchaFactory[] factories;
 
-    static
-    {
+    static {
         //word generator
-        com.octo.captcha.component.wordgenerator.WordGenerator dictionnaryWords = new com.octo.captcha.component.wordgenerator.DictionaryWordGenerator(
-                new com.octo.captcha.component.wordgenerator.FileDictionnary(
+        com.octo.captcha.component.word.wordgenerator.WordGenerator dictionnaryWords = new com.octo.captcha.component.word.wordgenerator.DictionaryWordGenerator(
+                new com.octo.captcha.component.word.FileDictionary(
                         "toddlist"));
 
         //wordtoimage components
@@ -48,7 +45,6 @@ public class MultipleGimpyEngine
                 new Integer(30), new Integer(45));
         FontGenerator shearedFont = new TwistedAndShearedRandomFontGenerator(
                 new Integer(30), new Integer(45));
-
 
         //word2image 1
         com.octo.captcha.component.image.wordtoimage.WordToImage word2image = new com.octo.captcha.component.image.wordtoimage.ComposedWordToImage(
@@ -97,8 +93,7 @@ public class MultipleGimpyEngine
 
     }
 
-    public MultipleGimpyEngine()
-    {
+    public MultipleGimpyEngine() {
 
         super(factories);
 

@@ -482,8 +482,6 @@ public class SimpleWordToImageTest extends TestCase {
 
     /**
      * Constructor for SimpleWordToImageTest.
-     *
-     * @param name
      */
     public SimpleWordToImageTest(String name) {
         super(name);
@@ -513,6 +511,18 @@ public class SimpleWordToImageTest extends TestCase {
 
     public void testGetMinAcceptedWordLenght() {
         int test = this.simpleWordToImage.getMinAcceptedWordLenght();
+        int expected = 1;
+        assertEquals(expected, test);
+    }
+
+      public void testGetMaxAcceptedWordLength() {
+        int test = this.simpleWordToImage.getMaxAcceptedWordLength();
+        int expected = 10;
+        assertEquals(expected, test);
+    }
+
+    public void testGetMinAcceptedWordLength() {
+        int test = this.simpleWordToImage.getMinAcceptedWordLength();
         int expected = 1;
         assertEquals(expected, test);
     }

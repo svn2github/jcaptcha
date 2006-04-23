@@ -61,8 +61,8 @@ import com.octo.captcha.component.image.textpaster.TextPaster;
 import com.octo.captcha.component.image.wordtoimage.ComposedWordToImage;
 import com.octo.captcha.component.image.wordtoimage.DeformedComposedWordToImage;
 import com.octo.captcha.component.image.wordtoimage.WordToImage;
-import com.octo.captcha.component.wordgenerator.DictionaryWordGenerator;
-import com.octo.captcha.component.wordgenerator.WordGenerator;
+import com.octo.captcha.component.word.wordgenerator.DictionaryWordGenerator;
+import com.octo.captcha.component.word.wordgenerator.WordGenerator;
 import com.octo.captcha.engine.image.ListImageCaptchaEngine;
 import com.octo.captcha.image.gimpy.GimpyFactory;
 
@@ -75,11 +75,9 @@ import java.awt.image.ImageFilter;
  * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class DeformedBaffleListGimpyEngine extends ListImageCaptchaEngine
-{
+public class DeformedBaffleListGimpyEngine extends ListImageCaptchaEngine {
 
-    protected void buildInitialFactories()
-    {
+    protected void buildInitialFactories() {
 
         //build filters
         com.jhlabs.image.EmbossFilter emboss = new com.jhlabs.image.EmbossFilter();
@@ -140,7 +138,7 @@ public class DeformedBaffleListGimpyEngine extends ListImageCaptchaEngine
         ImageDeformation none = new ImageDeformationByFilters(null);
         //word generator
         WordGenerator words = new DictionaryWordGenerator(
-                new com.octo.captcha.component.wordgenerator.FileDictionnary(
+                new com.octo.captcha.component.word.FileDictionary(
                         "toddlist"));
         //wordtoimage components
         TextPaster paster = new BaffleRandomTextPaster(new Integer(6), new Integer(
@@ -162,7 +160,7 @@ public class DeformedBaffleListGimpyEngine extends ListImageCaptchaEngine
                 waterDef,
                 embossDef);
         this.addFactory(new GimpyFactory(words, word2image));
-  //      select filters for 2
+        //      select filters for 2
         word2image = new DeformedComposedWordToImage(font, back, paster,
                 rippleDefBack,
                 cristalDef,

@@ -481,12 +481,10 @@ import java.io.IOException;
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
  */
-public class SimpleImageCaptchaToJPEG
-{
+public class SimpleImageCaptchaToJPEG {
 
     public static void main(String[] args)
-            throws ImageFormatException, IOException
-    {
+            throws ImageFormatException, IOException {
 
         com.octo.captcha.engine.image.gimpy.SimpleListImageCaptchaEngine bge =
                 new com.octo.captcha.engine.image.gimpy.SimpleListImageCaptchaEngine();

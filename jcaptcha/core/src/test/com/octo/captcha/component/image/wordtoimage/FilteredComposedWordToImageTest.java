@@ -497,8 +497,6 @@ public class FilteredComposedWordToImageTest extends TestCase {
 
     /**
      * Constructor for FilteredComposedWordToImageTest.
-     *
-     * @param name
      */
     public FilteredComposedWordToImageTest(String name) {
         super(name);
@@ -508,7 +506,7 @@ public class FilteredComposedWordToImageTest extends TestCase {
 
         BackgroundGenerator background = new GradientBackgroundGenerator(this.imageHeight, this.imageWidth, Color.black, Color.white);
         FontGenerator fontGenerator = new RandomFontGenerator(this.minFontSize, this.maxFontSize);
-        TextPaster textPaster = new SimpleTextPaster(this.minAcceptedWordLength, this.maxAcceptedWordLength, Color.blue );
+        TextPaster textPaster = new SimpleTextPaster(this.minAcceptedWordLength, this.maxAcceptedWordLength, Color.blue);
 
         ImageFilter backFilter = new ReplicateScaleFilter(background.getImageWidth(),
                 background.getImageHeight());
