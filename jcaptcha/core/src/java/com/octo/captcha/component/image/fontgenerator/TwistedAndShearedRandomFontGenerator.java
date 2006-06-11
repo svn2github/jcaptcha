@@ -17,10 +17,23 @@ import java.awt.geom.AffineTransform;
  */
 public class TwistedAndShearedRandomFontGenerator
         extends TwistedRandomFontGenerator {
+    private static final int GENERATED_FONTS_ARRAY_SIZE = 1000;
+
+
+    private Font[] generatedFonts = new Font[GENERATED_FONTS_ARRAY_SIZE];
 
     public TwistedAndShearedRandomFontGenerator(Integer minFontSize,
                                                 Integer maxFontSize) {
         super(minFontSize, maxFontSize);
+        for (int i = 0; i < GENERATED_FONTS_ARRAY_SIZE; i++) {
+            Font font = super.getFont();
+            double rx = myRandom.nextDouble() / 3;
+            double ry = myRandom.nextDouble() / 3;
+            AffineTransform at = AffineTransform.getShearInstance(rx, ry);
+            font = font.deriveFont(at);
+            generatedFonts[i] = font;
+        }
+
     }
 
     /**
@@ -30,11 +43,6 @@ public class TwistedAndShearedRandomFontGenerator
      * @return a Font
      */
     public Font getFont() {
-        Font font = super.getFont();
-        double rx = myRandom.nextDouble() / 3;
-        double ry = myRandom.nextDouble() / 3;
-        AffineTransform at = AffineTransform.getShearInstance(rx, ry);
-        font = font.deriveFont(at);
-        return font;
+        return generatedFonts[Math.abs(myRandom.nextInt(GENERATED_FONTS_ARRAY_SIZE))];
     }
 }

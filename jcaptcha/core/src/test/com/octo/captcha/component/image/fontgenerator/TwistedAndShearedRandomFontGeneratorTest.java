@@ -497,4 +497,13 @@ public class TwistedAndShearedRandomFontGeneratorTest extends TestCase {
         assertNotNull(test);
     }
 
+
+    public void testGet10000Font() {
+        for (int i = 0; i < 10000; i++) {
+            Font test = this.twistedAndShearedRandomFontGenerator.getFont();
+            assertNotNull(test);
+        }
+
+    }
+
 }
