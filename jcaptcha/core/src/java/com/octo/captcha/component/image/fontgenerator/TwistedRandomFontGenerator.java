@@ -21,18 +21,17 @@ public class TwistedRandomFontGenerator extends RandomFontGenerator {
         super(minFontSize, maxFontSize);
     }
 
+
     /**
-     * Method from imageFromWord method to apply font to String. Implementations must take into account the minFontSize
-     * and the MaxFontSize.
+     * Provides a way for children class to customize the generated font array
      *
-     * @return a Font
+     * @param font
+     * @return a customized font
      */
-    public Font getFont() {
+    protected Font applyCustomDeformationOnGeneratedFont(Font font) {
         AffineTransform at = new AffineTransform();
         float angle = myRandom.nextFloat() / 3;
         at.rotate(myRandom.nextBoolean() ? angle : -angle);
-        Font trans = super.getFont().deriveFont(at);
-        return trans;
+        return font.deriveFont(at);
     }
-
 }

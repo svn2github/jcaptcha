@@ -8,8 +8,6 @@ package com.octo.captcha.component.image.fontgenerator;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
-import java.security.SecureRandom;
-import java.util.Random;
 
 /**
  * <p>Takes a random font and apply a rotation to it. </p>
@@ -19,27 +17,29 @@ import java.util.Random;
  */
 public class DeformedRandomFontGenerator extends RandomFontGenerator {
 
-    private Random rng = new SecureRandom();
 
     public DeformedRandomFontGenerator(Integer minFontSize,
                                        Integer maxFontSize) {
         super(minFontSize, maxFontSize);
     }
 
-    public Font getFont() {
-        // obtain a font, pick a random size & font
-        Font font = super.getFont();
 
+    /**
+     * Provides a way for children class to customize the generated font array
+     *
+     * @param font
+     * @return a customized font
+     */
+    protected Font applyCustomDeformationOnGeneratedFont(Font font) {
         // rotate each letter by -0.33, +0.33 or about 20 degrees
-        float theta = (rng.nextBoolean() ? 1 : -1) * rng.nextFloat() / 3;
+        float theta = (myRandom.nextBoolean() ? 1 : -1) * myRandom.nextFloat() / 3;
 
         // private DecimalFormat debug_fmt = new DecimalFormat();
         // System.out.println("Creating " + font + " rotated angle = " + debug_fmt.format(theta * 57.2957));
 
         // rotate each letter by this angle
         AffineTransform at = new AffineTransform();
-        at.rotate(theta, rng.nextDouble()/*x*/, rng.nextDouble()/*y*/);
-        font = font.deriveFont(at);
-        return font;
+        at.rotate(theta, myRandom.nextDouble()/*x*/, myRandom.nextDouble()/*y*/);
+        return font.deriveFont(at);
     }
 }

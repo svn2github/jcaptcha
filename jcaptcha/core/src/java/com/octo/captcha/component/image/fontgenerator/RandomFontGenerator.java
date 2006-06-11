@@ -18,46 +18,61 @@ import java.util.List;
  * @version 1.0
  */
 public class RandomFontGenerator extends AbstractFontGenerator {
-    /**
-     * list of valid fonts.
-     */
-    protected static java.util.List defaultFonts;
-
-    /**
-     * list of fonts given by constructor.
-     */
-    protected java.util.List fonts = null;
 
     /**
      * These are the valid font styles.
      */
-    protected int[] STYLES = {Font.PLAIN, Font.ITALIC, Font.BOLD, Font.ITALIC | Font.BOLD};
+    private int[] STYLES = {Font.PLAIN, Font.ITALIC, Font.BOLD, Font.ITALIC | Font.BOLD};
 
 
     /**
      * Any font that this class uses must be able to generate all of the characters in this list.
      */
-    protected static String requiredCharacters = "abcdefghijklmnopqrstuvwxyz0123456789";
+    private String requiredCharacters = "abcdefghijklmnopqrstuvwxyz0123456789";
+
+    /**
+     * Prefixes of font names that are avoided by default.  The default values list fonts that are totally fine in terms of
+     * representing characters, of course, but they're too commonly available in OCR programs.
+     */
+    private static String[] defaultBadFontNamePrefixes = {
+            "Courier",
+            "Times Roman",
+    };
 
     /**
      * Prefixes of font names that should be avoided.  The default values list fonts that are totally fine in terms of
      * representing characters, of course, but they're too commonly available in OCR programs.
      */
-    protected String[] badFontNamePrefixes = {
-            "Courier",
-            "Times Roman",
-    };
+    private String[] badFontNamePrefixes;
+
+
+    private static final int GENERATED_FONTS_ARRAY_SIZE = 3000;
+
+
+    private Font[] generatedFonts = new Font[GENERATED_FONTS_ARRAY_SIZE];
+
+
+    /**
+     * list of fonts given by constructor.
+     */
+    private java.util.List fonts = null;
+
 
     protected Random myRandom = new SecureRandom();
 
     public RandomFontGenerator(Integer minFontSize, Integer maxFontSize) {
         super(minFontSize, maxFontSize);
+        fonts = initializeFonts(GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts());
+        ;
+        generatedFonts = generateFontArray();
     }
 
     public RandomFontGenerator(Integer minFontSize, Integer maxFontSize, Font[] fontsList) {
         super(minFontSize, maxFontSize);
         fonts = initializeFonts(fontsList);
+        generatedFonts = generateFontArray();
     }
+
 
     /**
      * Method from imageFromWord method to apply font to String. Implementations must take into account the minFontSize
@@ -66,35 +81,40 @@ public class RandomFontGenerator extends AbstractFontGenerator {
      * @return a Font
      */
     public Font getFont() {
+        return generatedFonts[Math.abs(myRandom.nextInt(GENERATED_FONTS_ARRAY_SIZE))];
+    }
 
-        //defaultFonts are initialized one time, cause static
-        if (defaultFonts == null) {
-            // we cache a lot of decisions about fonts -- do this as little as possible
-            synchronized (RandomFontGenerator.class) {
-                if (defaultFonts == null) {
-                    defaultFonts = initializeFonts(GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts());
-                }
+    /**
+     * @return a array of generated Fonts
+     */
+    private Font[] generateFontArray() {
+        Font[] generatedFonts = new Font[GENERATED_FONTS_ARRAY_SIZE];
+        for (int i = 0; i < GENERATED_FONTS_ARRAY_SIZE; i++) {
+            Font font = (Font) fonts.get(myRandom.nextInt(fonts.size()));
+
+            int plus = 0;
+            if (getMaxFontSize() - getMinFontSize() > 0) {
+                plus = Math.abs(myRandom.nextInt(getMaxFontSize()
+                        - getMinFontSize()));
             }
+
+            Font styled =
+                    new Font(font.getFontName(),
+                            STYLES[myRandom.nextInt(STYLES.length)],
+                            getMinFontSize() + plus);
+            generatedFonts[i] = applyCustomDeformationOnGeneratedFont(styled);
         }
+        return generatedFonts;
+    }
 
-        if (fonts == null) {
-            fonts = defaultFonts;
-        }
-
-        Font font = (Font) fonts.get(myRandom.nextInt(fonts.size()));
-
-        int plus = 0;
-        if (getMaxFontSize() - getMinFontSize() > 0) {
-            plus = Math.abs(myRandom.nextInt(getMaxFontSize()
-                    - getMinFontSize()));
-        }
-
-        Font styled =
-                new Font(font.getFontName(),
-                        STYLES[myRandom.nextInt(STYLES.length)],
-                        getMinFontSize() + plus);
-        return styled;
-
+    /**
+     * Provides a way for children class to customize the generated font array
+     *
+     * @param font
+     * @return a customized font
+     */
+    protected Font applyCustomDeformationOnGeneratedFont(Font font) {
+        return font;
     }
 
 
@@ -129,8 +149,9 @@ public class RandomFontGenerator extends AbstractFontGenerator {
             }
 
             // a font is also removed if it is prefixed by a known-bad name
-            for (int i = 0; i < badFontNamePrefixes.length; i++) {
-                if (f.getName().startsWith(badFontNamePrefixes[i])) {
+            String[] badFontsPrefixes = badFontNamePrefixes == null ? defaultBadFontNamePrefixes : badFontNamePrefixes;
+            for (int i = 0; i < badFontsPrefixes.length; i++) {
+                if (f.getName().startsWith(badFontsPrefixes[i])) {
                     iter.remove();
                     break;
                 }
@@ -143,17 +164,16 @@ public class RandomFontGenerator extends AbstractFontGenerator {
     /**
      * @return a list of characters that this class must be able to represent
      */
-    public static String getRequiredCharacters() {
+    public String getRequiredCharacters() {
         return requiredCharacters;
     }
 
     /**
      * @param requiredCharacters a list of characters that this class must be able to represent
      */
-    public static void setRequiredCharacters(String requiredCharacters) {
-        RandomFontGenerator.requiredCharacters = requiredCharacters;
-        // force reinitialization of this variable
-        RandomFontGenerator.defaultFonts = null;
+    public void setRequiredCharacters(String requiredCharacters) {
+        this.requiredCharacters = requiredCharacters;
+
     }
 
     /**
@@ -168,8 +188,6 @@ public class RandomFontGenerator extends AbstractFontGenerator {
      */
     public void setBadFontNamePrefixes(String[] badFontNamePrefixes) {
         this.badFontNamePrefixes = badFontNamePrefixes;
-        // force reinitialization of this variable
-        RandomFontGenerator.defaultFonts = null;
     }
 
 }
