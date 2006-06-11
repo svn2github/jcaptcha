@@ -463,7 +463,6 @@
  */
 package com.octo.captcha.engine.sound;
 
-import com.octo.captcha.CaptchaException;
 import com.octo.captcha.CaptchaFactory;
 import com.octo.captcha.engine.CaptchaEngineException;
 import com.octo.captcha.image.ImageCaptchaFactory;
@@ -494,7 +493,7 @@ public class DefaultSoundCaptchaEngine extends SoundCaptchaEngine {
     public DefaultSoundCaptchaEngine(final SoundCaptchaFactory[] factories) {
         this.factories = factories;
         if (factories == null || factories.length == 0) {
-            throw new CaptchaException("DefaultImageCaptchaEngine cannot be "
+            throw new CaptchaEngineException("DefaultSoundCaptchaEngine cannot be "
                     + "constructed with a null or empty factories array");
         }
     }
@@ -548,7 +547,7 @@ public class DefaultSoundCaptchaEngine extends SoundCaptchaEngine {
             if (ImageCaptchaFactory.class.isAssignableFrom(factories[i].getClass())) {
                 throw new CaptchaEngineException("This factory is not a sound captcha factory " + factories[i].getClass());
             }
-
+            tempFactories.add(factories[i]);
         }
 
         this.factories = (SoundCaptchaFactory[]) tempFactories.toArray(new SoundCaptchaFactory[factories.length]);

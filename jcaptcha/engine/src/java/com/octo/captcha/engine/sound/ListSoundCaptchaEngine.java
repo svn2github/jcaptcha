@@ -588,7 +588,7 @@ public abstract class ListSoundCaptchaEngine extends SoundCaptchaEngine {
 
     private void checkFactoriesSize() {
         if (factories.size() == 0)
-            throw new CaptchaException("This gimpy has no factories. Please initialize it "
+            throw new CaptchaException("This soundEngine has no factories. Please initialize it "
                     + "properly with the buildInitialFactory() called by "
                     + "the constructor or the addFactory() mehtod later!");
     }
