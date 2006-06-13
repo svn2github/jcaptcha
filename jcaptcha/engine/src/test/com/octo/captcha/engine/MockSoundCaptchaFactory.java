@@ -461,7 +461,10 @@
 
                        END OF TERMS AND CONDITIONS
 */
-package com.octo.captcha.sound;
+package com.octo.captcha.engine;
+
+import com.octo.captcha.sound.SoundCaptcha;
+import com.octo.captcha.sound.SoundCaptchaFactory;
 
 import java.util.Locale;
 

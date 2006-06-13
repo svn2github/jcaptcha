@@ -461,7 +461,10 @@
 
                        END OF TERMS AND CONDITIONS
 */
-package com.octo.captcha.image;
+package com.octo.captcha.engine;
+
+import com.octo.captcha.image.ImageCaptcha;
+import com.octo.captcha.image.ImageCaptchaFactory;
 
 import java.util.Locale;
 
