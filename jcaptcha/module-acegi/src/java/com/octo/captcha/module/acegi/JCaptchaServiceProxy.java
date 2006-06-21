@@ -7,7 +7,7 @@ package com.octo.captcha.module.acegi;
 
 import com.octo.captcha.service.CaptchaService;
 import com.octo.captcha.service.CaptchaServiceException;
-import net.sf.acegisecurity.captcha.CaptchaServiceProxy;
+import org.acegisecurity.captcha.CaptchaServiceProxy;
 
 /**
  * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>

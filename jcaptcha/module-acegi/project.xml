@@ -21,14 +21,14 @@
     <dependencies>
 
         <dependency>
-            <groupId>jcaptcha</groupId>
+            <groupId>${pom.groupId}</groupId>
             <artifactId>jcaptcha-core</artifactId>
             <version>${project.version}</version>
             <url>http://jcaptcha.sourceforge.net</url>
         </dependency>
 
         <dependency>
-            <groupId>jcaptcha</groupId>
+            <groupId>${pom.groupId}</groupId>
             <artifactId>jcaptcha-service</artifactId>
             <version>${project.version}</version>
             <url>http://jcaptcha.sourceforge.net</url>
@@ -47,10 +47,16 @@
 
         <!--acegi-->
         <dependency>
-            <groupId>acegisecurity</groupId>
+            <groupId>org.acegisecurity</groupId>
             <artifactId>acegi-security</artifactId>
-            <version>0.9.0</version>
+            <version>1.0.0</version>
 
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring</artifactId>
+            <version>2.0-m2</version>
+            <scope>runtime</scope>
         </dependency>
 
 
