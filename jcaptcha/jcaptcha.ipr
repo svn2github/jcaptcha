@@ -230,17 +230,17 @@
   <component name="com.yanaware.intellij.ideaspring.PluginConfigurable">
     <option name="autoscrolling" value="false" />
     <config-set name="factories">
-      <config-file name="$PROJECT_DIR$/engine/src/test/testSwapingQuartzBufferedEngine.xml" />
-      <config-file name="$PROJECT_DIR$/engine/src/test/testNoBufferedCaptchaQuartzBufferedEngine.xml" />
-      <config-file name="$PROJECT_DIR$/engine/src/test/testDatabaseCaptchaBuffer.xml" />
-      <config-file name="$PROJECT_DIR$/engine/src/test/testFillDiskQuartzBufferedEngine.xml" />
-      <config-file name="$PROJECT_DIR$/engine/src/test/testSimpleBufferedEngine.xml" />
-      <config-file name="$PROJECT_DIR$/engine/src/test/testSimpleManageableBufferedEngine.xml" />
-      <config-file name="$PROJECT_DIR$/engine/src/test/testFillDiskMockQuartzBufferedEngine.xml" />
-      <config-file name="$PROJECT_DIR$/engine/src/test/testQuartzBufferedEngine.xml" />
       <config-file name="$PROJECT_DIR$/engine/src/test/testFillingQuartzManageableBufferedEngine.xml" />
       <config-file name="$PROJECT_DIR$/engine/src/test/testQuartzManageableBufferedEngine.xml" />
+      <config-file name="$PROJECT_DIR$/engine/src/test/testSwapingQuartzBufferedEngine.xml" />
+      <config-file name="$PROJECT_DIR$/engine/src/test/testNoBufferedCaptchaQuartzBufferedEngine.xml" />
+      <config-file name="$PROJECT_DIR$/engine/src/test/testQuartzBufferedEngine.xml" />
+      <config-file name="$PROJECT_DIR$/engine/src/test/testFillDiskMockQuartzBufferedEngine.xml" />
+      <config-file name="$PROJECT_DIR$/engine/src/test/testSimpleBufferedEngine.xml" />
+      <config-file name="$PROJECT_DIR$/engine/src/test/testSimpleManageableBufferedEngine.xml" />
+      <config-file name="$PROJECT_DIR$/engine/src/test/testFillDiskQuartzBufferedEngine.xml" />
       <config-file name="$PROJECT_DIR$/engine/src/test/testHeavyLoadQuartzBufferedEngine.xml" />
+      <config-file name="$PROJECT_DIR$/engine/src/test/testDatabaseCaptchaBuffer.xml" />
     </config-set>
   </component>
   <component name="copyright">

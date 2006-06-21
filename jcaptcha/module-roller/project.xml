@@ -32,14 +32,14 @@
         </dependency>
 
         <dependency>
-            <groupId>jcaptcha</groupId>
+            <groupId>com.octo.jcaptcha</groupId>
             <artifactId>jcaptcha-core</artifactId>
             <version>${project.version}</version>
             <url>http://jcaptcha.sourceforge.net</url>
         </dependency>
 
         <dependency>
-            <groupId>jcaptcha</groupId>
+            <groupId>com.octo.jcaptcha</groupId>
             <artifactId>jcaptcha-service</artifactId>
             <version>${project.version}</version>
             <url>http://jcaptcha.sourceforge.net</url>
@@ -47,14 +47,14 @@
         </dependency>
 
         <dependency>
-            <groupId>jcaptcha</groupId>
+            <groupId>${pom.groupId}</groupId>
             <artifactId>jcaptcha-module-base</artifactId>
             <version>${project.version}</version>
             <url>http://jcaptcha.sourceforge.net</url>
 
         </dependency>
         <dependency>
-            <groupId>jcaptcha</groupId>
+            <groupId>${pom.groupId}</groupId>
             <artifactId>jcaptcha-module-struts</artifactId>
             <version>${project.version}</version>
             <url>http://jcaptcha.sourceforge.net</url>

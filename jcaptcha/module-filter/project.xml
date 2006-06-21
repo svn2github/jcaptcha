@@ -8,33 +8,27 @@
 
     <package>com.octo.captcha.module.filter</package>
 
-    <description>
-        <![CDATA[
-         <b>JCAPTCHA</b>, for <b>J</b>ava <b>C</b>ompletely <b>A</b>utomated <b>P</b>ublic <b>T</b>est to tell <b>C</b>omputers and <b>H</b>umans <b>A</b>part
+    <description><![CDATA[<b>JCAPTCHA</b>, for <b>J</b>ava <b>C</b>ompletely <b>A</b>utomated <b>P</b>ublic <b>T</b>est to tell <b>C</b>omputers and <b>H</b>umans <b>A</b>part
 <br/>The open source java framework for captcha definition and integration
 <br/>
     The captcha filter module contains a filter to configure and integrate a captcha service with your web application.<BR/>
     This jar aims to provide a filter configuration, and initialization to easily integrate a captcha service in your application.<BR/>
-    It uses the jcaptcha-core, jcaptcha-service, jcaptcha-module-base.
-    ]]>
-    </description>
+    It uses the jcaptcha-core, jcaptcha-service, jcaptcha-module-base.]]></description>
 
-    <shortDescription>
-        JCAPTCHA filter module : Servlet filter to Captcha-ize your web application.
-    </shortDescription>
+    <shortDescription>JCAPTCHA filter module : Servlet filter to Captcha-ize your web application.</shortDescription>
 
 
     <dependencies>
 
         <dependency>
-            <groupId>jcaptcha</groupId>
+            <groupId>${pom.groupId}</groupId>
             <artifactId>jcaptcha-core</artifactId>
             <version>${project.version}</version>
             <url>http://jcaptcha.sourceforge.net</url>
         </dependency>
 
         <dependency>
-            <groupId>jcaptcha</groupId>
+            <groupId>${pom.groupId}</groupId>
             <artifactId>jcaptcha-service</artifactId>
             <version>${project.version}</version>
             <url>http://jcaptcha.sourceforge.net</url>
@@ -42,7 +36,7 @@
         </dependency>
 
         <dependency>
-            <groupId>jcaptcha</groupId>
+            <groupId>${pom.groupId}</groupId>
             <artifactId>jcaptcha-module-base</artifactId>
             <version>${project.version}</version>
             <url>http://jcaptcha.sourceforge.net</url>

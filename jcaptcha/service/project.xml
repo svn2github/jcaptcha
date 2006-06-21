@@ -8,25 +8,18 @@
 
     <package>com.octo.captcha.service</package>
 
-    <description>
-        <![CDATA[
-      <b>JCAPTCHA</b>, for <b>J</b>ava <b>C</b>ompletely <b>A</b>utomated <b>P</b>ublic <b>T</b>est to tell <b>C</b>omputers and <b>H</b>umans <b>A</b>part
+    <description><![CDATA[<b>JCAPTCHA</b>, for <b>J</b>ava <b>C</b>ompletely <b>A</b>utomated <b>P</b>ublic <b>T</b>est to tell <b>C</b>omputers and <b>H</b>umans <b>A</b>part
 <br/>The open source java framework for captcha definition and integration
 <br/>
       A captcha service is able to provides questions, challenges and to validate an answer according an id.<BR/>
  jcaptcha service aims to provide interfaces and implementation of generic and typed captcha services.<br/>
- It uses the jcaptcha-engine to retrieve captchas.
-
-  ]]>
-    </description>
+ It uses the jcaptcha-engine to retrieve captchas.]]></description>
     <!-- a short description of what the project does -->
-    <shortDescription>
-        JCAPTCHA service : interface and implementation of the captcha service
-    </shortDescription>
+    <shortDescription>JCAPTCHA service : interface and implementation of the captcha service</shortDescription>
 
     <dependencies>
         <dependency>
-            <groupId>jcaptcha</groupId>
+            <groupId>${pom.groupId}</groupId>
             <artifactId>jcaptcha-core</artifactId>
             <version>${project.version}</version>
             <jar/>
@@ -36,7 +29,7 @@
         </dependency>
 
         <dependency>
-            <groupId>jcaptcha</groupId>
+            <groupId>${pom.groupId}</groupId>
             <artifactId>jcaptcha-engine</artifactId>
             <version>${project.version}</version>
             <jar/>

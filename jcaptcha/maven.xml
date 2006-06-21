@@ -67,7 +67,7 @@
              basedir="${maven.build.dir}/all-jar/tojar"/>
 
         <ant:copy file="${maven.build.dir}/all-jar/${pom.artifactId}-all-${pom.currentVersion}.jar"
-                  todir="${maven.repo.local}/jcaptcha/jars"/>
+                  todir="${maven.repo.local}/${pom.groupId}/jars"/>
     </goal>
 
 

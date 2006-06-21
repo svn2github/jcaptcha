@@ -21,7 +21,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>jcaptcha</groupId>
+            <groupId>com.octo.jcaptcha</groupId>
             <artifactId>jcaptcha-core</artifactId>
             <version>${project.version}</version>
             <jar/>
@@ -36,7 +36,7 @@
             <version>01012005</version>
         </dependency>
         <dependency>
-            <groupId>jcaptcha</groupId>
+            <groupId>com.octo.jcaptcha</groupId>
             <artifactId>jcaptcha-core</artifactId>
             <version>${project.version}</version>
         </dependency>

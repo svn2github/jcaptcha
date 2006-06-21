@@ -4,7 +4,7 @@
     <pomVersion>3</pomVersion>
     <id>jcaptcha</id>
     <name>jcaptcha</name>
-    <groupId>jcaptcha</groupId>
+    <groupId>com.octo.jcaptcha</groupId>
     <currentVersion>${project.version}</currentVersion>
 
     <organization>

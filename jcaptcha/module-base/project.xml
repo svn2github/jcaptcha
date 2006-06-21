@@ -42,7 +42,7 @@
         </dependency>
 
         <dependency>
-            <groupId>jcaptcha</groupId>
+            <groupId>${pom.groupId}</groupId>
             <artifactId>jcaptcha-service</artifactId>
             <version>${project.version}</version>
             <url>http://jcaptcha.sourceforge.net</url>
