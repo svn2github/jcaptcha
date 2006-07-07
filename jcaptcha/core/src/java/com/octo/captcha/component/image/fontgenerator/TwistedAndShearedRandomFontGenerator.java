@@ -31,6 +31,7 @@ public class TwistedAndShearedRandomFontGenerator
      * @return a customized font
      */
     protected Font applyCustomDeformationOnGeneratedFont(Font font) {
+        font = super.applyCustomDeformationOnGeneratedFont(font);
         double rx = myRandom.nextDouble() / 3;
         double ry = myRandom.nextDouble() / 3;
         AffineTransform at = AffineTransform.getShearInstance(rx, ry);
