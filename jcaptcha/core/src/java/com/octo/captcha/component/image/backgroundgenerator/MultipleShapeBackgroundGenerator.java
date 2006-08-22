@@ -102,37 +102,6 @@ public class MultipleShapeBackgroundGenerator extends
             this.rectangleWidth = rectangleWidth;
     }
 
-    /**
-     * Constructor with full parameters
-     */
-    public MultipleShapeBackgroundGenerator(Integer width, Integer height,
-                                            ColorGenerator firstEllipseColorGenerator, ColorGenerator secondEllipseColorGenerator,
-                                            Integer spaceBetweenLine, Integer spaceBetweenCircle,
-                                            Integer ellipseHeight, Integer ellipseWidth,
-                                            ColorGenerator firstRectangleColorGenerator, ColorGenerator secondRectangleColorGenerator,
-                                            Integer rectangleWidth) {
-
-        super(width, height);
-
-        if (firstEllipseColorGenerator != null)
-            this.firstEllipseColorGenerator = firstEllipseColorGenerator;
-        if (secondEllipseColorGenerator != null)
-            this.secondEllipseColorGenerator = secondEllipseColorGenerator;
-        if (spaceBetweenLine != null)
-            this.spaceBetweenLine = spaceBetweenCircle;
-        if (spaceBetweenCircle != null)
-            this.spaceBetweenCircle = spaceBetweenCircle;
-        if (ellipseHeight != null)
-            this.ellipseHeight = ellipseHeight;
-        if (ellipseWidth != null)
-            this.ellipseWidth = ellipseWidth;
-        if (firstRectangleColorGenerator != null)
-            this.firstRectangleColorGenerator = firstRectangleColorGenerator;
-        if (secondRectangleColorGenerator != null)
-            this.secondRectangleColorGenerator = secondRectangleColorGenerator;
-        if (rectangleWidth != null)
-            this.rectangleWidth = rectangleWidth;
-    }
 
     /**
      * Main method. It generates a background of the captcha with a large number of lines, ellipse, and gradient paint.
@@ -147,7 +116,8 @@ public class MultipleShapeBackgroundGenerator extends
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
 
-        for (int i = 0; i < getImageWidth(); i = i + this.getSpaceBetweenLine()) {
+        for (int variableOnWidth = 0; variableOnWidth < getImageWidth(); variableOnWidth = variableOnWidth + this.getSpaceBetweenLine())
+        {
             Color firstEllipseColor = this.firstEllipseColorGenerator
                     .getNextColor();
             Color secondEllipseColor = this.secondEllipseColorGenerator
@@ -156,10 +126,10 @@ public class MultipleShapeBackgroundGenerator extends
                     .getNextColor();
             Color secondRectangleColor = this.secondRectangleColorGenerator
                     .getNextColor();
-            for (int j = 0; j < getImageHeight(); j = j
+            for (int variableOnHeight = 0; variableOnHeight < getImageHeight(); variableOnHeight = variableOnHeight
                     + this.getSpaceBetweenCircle()) {
-                Ellipse2D e2 = new Ellipse2D.Double(i, j, this
-                        .getEllipseHeight(), this.getEllipseWidth());
+                Ellipse2D e2 = new Ellipse2D.Double(variableOnWidth, variableOnHeight, this
+                        .getEllipseWidth(), this.getEllipseHeight());
                 GradientPaint gp = new GradientPaint(0,
                         this.getEllipseHeight(), firstEllipseColor, this
                         .getEllipseWidth(), 0, secondEllipseColor, true);
@@ -171,7 +141,7 @@ public class MultipleShapeBackgroundGenerator extends
                     firstRectangleColor, this.getRectangleWidth(), 0,
                     secondRectangleColor, true);
             g2.setPaint(gp2);
-            Rectangle2D r2 = new Rectangle2D.Double(i, 0, this
+            Rectangle2D r2 = new Rectangle2D.Double(variableOnWidth, 0, this
                     .getRectangleWidth(), getImageHeight());
             g2.fill(r2);
         }
