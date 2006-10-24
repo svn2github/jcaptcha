@@ -12,7 +12,8 @@ import java.util.*;
 import java.util.List;
 
 /**
- * <p>Description: </p>
+ * <p>Description: Random font generator that return one of the available system's (or optionay specified) fonts, using a min and max
+ * font size. This list is formerly cleaned of OCR readable font and symbol font</p>
  *
  * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
  * @version 1.0
@@ -34,7 +35,7 @@ public class RandomFontGenerator extends AbstractFontGenerator {
      * Prefixes of font names that are avoided by default.  The default values list fonts that are totally fine in terms of
      * representing characters, of course, but they're too commonly available in OCR programs.
      */
-    private static String[] defaultBadFontNamePrefixes = {
+    public static String[] defaultBadFontNamePrefixes = {
             "Courier",
             "Times Roman",
     };
@@ -43,7 +44,7 @@ public class RandomFontGenerator extends AbstractFontGenerator {
      * Prefixes of font names that should be avoided.  The default values list fonts that are totally fine in terms of
      * representing characters, of course, but they're too commonly available in OCR programs.
      */
-    private String[] badFontNamePrefixes;
+    private String[] badFontNamePrefixes = defaultBadFontNamePrefixes;
 
 
     private static final int GENERATED_FONTS_ARRAY_SIZE = 3000;
@@ -63,14 +64,25 @@ public class RandomFontGenerator extends AbstractFontGenerator {
     public RandomFontGenerator(Integer minFontSize, Integer maxFontSize) {
         super(minFontSize, maxFontSize);
         fonts = initializeFonts(GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts());
-        ;
+        if (fonts.size() < 1) {
+            throw new IllegalArgumentException("fonts list cannot be null or empty, some of your font are removed from the list by this class, Courrier and TimesRoman");
+        }
         generatedFonts = generateFontArray();
+
     }
 
     public RandomFontGenerator(Integer minFontSize, Integer maxFontSize, Font[] fontsList) {
         super(minFontSize, maxFontSize);
+        if (fontsList == null || fontsList.length < 1) {
+            throw new IllegalArgumentException("fonts list cannot be null or empty");
+        }
         fonts = initializeFonts(fontsList);
+        if (fonts.size() < 1) {
+            throw new IllegalArgumentException("fonts list cannot be null or empty, some of your font are removed from the list by this class, Courrier and TimesRoman");
+        }
         generatedFonts = generateFontArray();
+
+
     }
 
 
@@ -134,28 +146,30 @@ public class RandomFontGenerator extends AbstractFontGenerator {
         // add copy of copy of list of fonts because of asList's special class and also because
         // of the graphics environment's internal point
         goodFonts.addAll(Arrays.asList(uncheckFonts));
-
         // Iterate through all fonts, remove the bad ones
         for (Iterator iter = goodFonts.iterator(); iter.hasNext();) {
             Font f = (Font) iter.next();
+
+            boolean removed = false;
 
             // a font is removed if it cannot display the characters we need.
 
             for (int i = 0; i < requiredCharacters.length(); i++) {
                 if (!f.canDisplay(requiredCharacters.charAt(i))) {
                     iter.remove();
+                    removed = true;
                     break;
                 }
             }
 
-            // a font is also removed if it is prefixed by a known-bad name
-            String[] badFontsPrefixes = badFontNamePrefixes == null ? defaultBadFontNamePrefixes : badFontNamePrefixes;
-            for (int i = 0; i < badFontsPrefixes.length; i++) {
-                if (f.getName().startsWith(badFontsPrefixes[i])) {
-                    iter.remove();
-                    break;
+            if (!removed)
+                // a font is also removed if it is prefixed by a known-bad name
+                for (int i = 0; i < badFontNamePrefixes.length; i++) {
+                    if (f.getName().startsWith(badFontNamePrefixes[i])) {
+                        iter.remove();
+                        break;
+                    }
                 }
-            }
         }
 
         return goodFonts;

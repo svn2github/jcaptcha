@@ -511,4 +511,36 @@ public class RandomFontGeneratorTest extends TestCase {
         assertTrue(test.getName().startsWith("Arial"));
     }
 
+
+    public void testGetFontWithEmptyList() {
+        Font[] fontsList = new Font[0];
+        try {
+            new RandomFontGenerator(new Integer(10), new Integer(10), fontsList);
+
+            fail("should have thrown an IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+        }
+
+        try {
+            new RandomFontGenerator(new Integer(10), new Integer(10), null);
+            fail("should have thrown an IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+        }
+    }
+
+
+    public void testGetFontWithBadFontList() {
+        Font[] fontsList = new Font[1];
+        fontsList[0] = new Font("Courier", Font.BOLD, 10);
+
+        try {
+            new RandomFontGenerator(new Integer(10), new Integer(10), fontsList);
+            fail("should have thrown an IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+
+        }
+
+
+    }
+
 }
