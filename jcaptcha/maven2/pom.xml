@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.octo.captcha</groupId>
+    <artifactId>jcaptcha-all</artifactId>
+    <version>1.0</version>
+    <packaging>jar</packaging>
+
+    <name>jcaptcha-all</name>
+    <url>http://www.jcaptcha.net/</url>
+    
+    <organization>
+        <name>JCaptcha corp.</name>
+        <url>http://www.jcaptcha.net/</url>
+    </organization>
+    
+    <inceptionYear>2003</inceptionYear>
+    
+    <licenses>
+		  <license>
+		    <name>LGPL</name>
+		    <url>http://www.gnu.org/licenses/lgpl.txt</url>
+		    <distribution>repo</distribution>
+		  </license>
+		</licenses>
+		
+	  <issueManagement>
+	    <system>Jira</system>
+	    <url>http://forge.octo.com/jcaptcha/jira</url>
+	  </issueManagement>
+	  
+	  <scm>
+	    <connection>scm:cvs:pserver:jcaptcha.cvs.sourceforge.net:/cvsroot/jcaptcha:jcaptcha</connection>
+	    <tag>HEAD</tag>
+	    <url>http://jcaptcha.cvs.sourceforge.net/jcaptcha/</url>
+	  </scm>
+	  
+		<mailingLists>
+        <mailingList>
+            <name>JCaptcha User List</name>
+            <post>jcaptcha-users@lists.sourceforge.net</post>
+            <subscribe>https://lists.sourceforge.net/lists/listinfo/jcaptcha-users</subscribe>
+            <unsubscribe>https://lists.sourceforge.net/lists/listinfo/jcaptcha-users</unsubscribe>
+            <archive>http://sourceforge.net/mailarchive/forum.php?forum=jcaptcha-users</archive>
+        </mailingList>
+        <mailingList>
+            <name>JCaptcha Developer List</name>
+            <post>jcaptcha-devs@lists.sourceforge.net</post>
+            <subscribe>https://lists.sourceforge.net/lists/listinfo/jcaptcha-devs</subscribe>
+            <unsubscribe>https://lists.sourceforge.net/lists/listinfo/jcaptcha-devs</unsubscribe>
+            <archive>http://sourceforge.net/mailarchive/forum.php?forum=jcaptcha-devs</archive>
+        </mailingList>
+    </mailingLists>
+  
+	  <developers>
+      <developer>
+          <name>Marc-Antoine Garrigue</name>
+          <id>magarrigue</id>
+          <email>magarrigue@octo.com</email>
+          <organization>OCTO Technology</organization>
+          <organizationUrl>www.octo.com</organizationUrl>
+          <roles>
+              <role>Project Leader</role>
+              <role>Developer</role>
+          </roles>
+      </developer>
+     	<developer>
+	      <id>averet</id>
+	      <name>Antoine Veret</name>
+	      <email>antoine.veret@gmail.com</email>
+	      <organization>OCTO Technology</organization>
+	      <organizationUrl>www.octo.com</organizationUrl>
+	      <roles>
+	        <role>Developer</role>
+	      </roles>
+	    </developer>
+      <developer>
+          <name>Sebastien Brunot</name>
+          <id>sbrunot</id>
+          <roles>
+              <role>Developer</role>
+          </roles>
+      </developer>
+      <developer>
+          <name>Mathieu Gandin</name>
+          <id>mgandin</id>
+          <organization>OCTO Technology</organization>
+          <organizationUrl>www.octo.com</organizationUrl>
+          <roles>
+              <role>Developer</role>
+          </roles>
+      </developer>
+      <developer>
+          <name>Benoit Doumas</name>
+          <id>mdoumas</id>
+          <roles>
+              <role>Developer</role>
+          </roles>
+      </developer>
+      
+    </developers>
+    
+    <contributors>
+        <contributor>
+            <name>Richard Hull</name>
+            <organization>orange-ftgroup</organization>
+            <roles>
+                <role>Developer</role>
+            </roles>
+        </contributor>
+    </contributors>
+    
+    <dependencies>
+        <dependency>
+            <groupId>com.sun.speech.freetts</groupId>
+            <artifactId>freetts</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.speech.freetts</groupId>
+            <artifactId>en_us</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.speech.freetts</groupId>
+            <artifactId>cmu_us_kal</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.speech.freetts</groupId>
+            <artifactId>cmu_time_awb</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.speech.freetts</groupId>
+            <artifactId>cmutimelex</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.speech.freetts</groupId>
+            <artifactId>cmulex</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.speech.freetts</groupId>
+            <artifactId>cmutimelex</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jhlabs</groupId>
+            <artifactId>imaging</artifactId>
+            <version>01012005</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>quartz</groupId>
+            <artifactId>quartz</artifactId>
+            <version>1.4.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.0.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-pool</groupId>
+            <artifactId>commons-pool</artifactId>
+            <version>1.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>1.7.3.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ehcache</groupId>
+            <!-- groupId>net.sf.ehcache</groupId -->
+            <artifactId>ehcache</artifactId>
+            <version>1.0</version>
+            <!-- version>1.2.4</version -->
+        </dependency>
+
+        <dependency>
+            <groupId>concurrent</groupId>
+            <artifactId>concurrent</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>springframework</groupId>
+            <!-- groupId>org.springframework</groupId -->
+            <artifactId>spring</artifactId>
+            <version>1.2</version>
+            <!-- version>2.0-rc3</version -->
+        </dependency>
+        
+        <dependency>
+            <groupId>xerces</groupId>
+            <artifactId>xercesImpl</artifactId>
+            <version>2.5.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>xerces</groupId>
+            <artifactId>xmlParserAPIs</artifactId>
+            <version>2.2.1</version>
+        </dependency>      
+        
+    </dependencies>
+ 
+</project>
