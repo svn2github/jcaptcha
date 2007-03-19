@@ -35,7 +35,6 @@
             <url>http://xml.apache.org/xerces2-j/</url>
         </dependency>
 
-
         <dependency>
             <id>commons-logging</id>
             <version>1.0.4</version>
@@ -49,31 +48,22 @@
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
-
         </dependency>
-
 
         <dependency>
             <groupId>servletapi</groupId>
             <artifactId>servletapi</artifactId>
             <version>2.3</version>
-            <jar/>
-            <type/>
             <url>http://java.sun.com</url>
-            <properties/>
         </dependency>
+
         <dependency>
             <groupId>jmx</groupId>
             <artifactId>jmxri</artifactId>
             <version>1.2.1</version>
-            <jar/>
-            <type/>
             <url>http://www.bluesunrise.com/maven/jmx</url>
-            <properties/>
         </dependency>
 
-
     </dependencies>
-
 
 </project>

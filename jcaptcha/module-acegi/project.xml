@@ -32,17 +32,13 @@
             <artifactId>jcaptcha-service</artifactId>
             <version>${project.version}</version>
             <url>http://jcaptcha.sourceforge.net</url>
-
         </dependency>
 
         <dependency>
             <groupId>servletapi</groupId>
             <artifactId>servletapi</artifactId>
             <version>2.3</version>
-            <jar/>
-            <type/>
             <url>http://java.sun.com</url>
-            <properties/>
         </dependency>
 
         <!--acegi-->
@@ -50,13 +46,13 @@
             <groupId>org.acegisecurity</groupId>
             <artifactId>acegi-security</artifactId>
             <version>1.0.0</version>
-
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring</artifactId>
             <version>2.0-m2</version>
-            <scope>runtime</scope>
+            <!-- scope>runtime</scope -->
         </dependency>
 
 

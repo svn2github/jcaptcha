@@ -19,52 +19,53 @@
     <shortDescription>JCAPTCHA core : tests definition and components to build them.</shortDescription>
 
     <dependencies>
+        
         <dependency>
             <groupId>freeTTS</groupId>
             <artifactId>freetts</artifactId>
-            <version>1.2</version>
+            <version>1.2.1</version>
             <url>http://freetts.sourceforge.net/docs/</url>
         </dependency>
 
         <dependency>
             <groupId>freeTTS</groupId>
             <artifactId>en_us</artifactId>
-            <version>1.2</version>
+            <version>1.2.1</version>
             <url>http://freetts.sourceforge.net/docs/</url>
         </dependency>
 
         <dependency>
             <groupId>freeTTS</groupId>
             <artifactId>cmu_us_kal</artifactId>
-            <version>1.2</version>
+            <version>1.2.1</version>
             <url>http://freetts.sourceforge.net/docs/</url>
         </dependency>
 
         <dependency>
             <groupId>freeTTS</groupId>
             <artifactId>cmu_time_awb</artifactId>
-            <version>1.2</version>
+            <version>1.2.1</version>
             <url>http://freetts.sourceforge.net/docs/</url>
         </dependency>
 
         <dependency>
             <groupId>freeTTS</groupId>
             <artifactId>cmutimelex</artifactId>
-            <version>1.2</version>
+            <version>1.2.1</version>
             <url>http://freetts.sourceforge.net/docs/</url>
         </dependency>
 
         <dependency>
             <groupId>freeTTS</groupId>
             <artifactId>cmulex</artifactId>
-            <version>1.2</version>
+            <version>1.2.1</version>
             <url>http://freetts.sourceforge.net/docs/</url>
         </dependency>
 
         <dependency>
             <groupId>freeTTS</groupId>
             <artifactId>cmutimelex</artifactId>
-            <version>1.2</version>
+            <version>1.2.1</version>
             <url>http://freetts.sourceforge.net/docs/</url>
         </dependency>
 
