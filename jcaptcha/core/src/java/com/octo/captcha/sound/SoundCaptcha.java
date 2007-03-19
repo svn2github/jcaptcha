@@ -61,7 +61,7 @@ public abstract class SoundCaptcha implements Captcha {
     }
 
     /**
-     * Accessor to the sound challenge.
+     * Accessor to the sound challenge. Create a new stream each time the method is called.
      *
      * @return an AudioInputStream
      */
