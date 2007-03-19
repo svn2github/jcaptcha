@@ -88,9 +88,28 @@
                 <role>Java Developer</role>
             </roles>
         </developer>
+        <developer>
+            <name>Antoine Véret</name>
+            <id>averet</id>
+            <organization>Octo</organization>
+            <roles>
+                <role>Java Developer</role>
+            </roles>
+        </developer>
 
     </developers>
 
+    <contributors>
+
+        <contributor>
+            <name>Richard Hull</name>
+            <organization>orange-ftgroup</organization>
+            <roles>
+                <role>Java Developer</role>
+            </roles>
+        </contributor>
+
+    </contributors>
 
     <dependencies>
         <dependency>

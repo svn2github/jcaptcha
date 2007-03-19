@@ -14,6 +14,8 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
+import java.io.ByteArrayOutputStream;
+import java.io.ByteArrayInputStream;
 
 /**
  * <p/>
@@ -21,6 +23,7 @@ import java.io.IOException;
  *
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin </a>
  * @author Benoit Doumas
+ * @author Richard Hull
  * @version 1.1
  */
 public abstract class SoundCaptcha implements Captcha {
@@ -29,11 +32,18 @@ public abstract class SoundCaptcha implements Captcha {
 
     protected String question;
 
-    protected transient AudioInputStream challenge;
+    protected byte[] challenge;
 
     protected SoundCaptcha(String thequestion, AudioInputStream thechallenge) {
         this.question = thequestion;
-        this.challenge = thechallenge;
+
+        try {
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            AudioSystem.write(thechallenge, AudioFileFormat.Type.WAVE, out);
+            this.challenge = out.toByteArray();
+        } catch (IOException ioe) {
+            throw new CaptchaException("unable to serialize input stream", ioe);
+        }
     }
 
     /**
@@ -56,8 +66,16 @@ public abstract class SoundCaptcha implements Captcha {
      * @return an AudioInputStream
      */
     public final AudioInputStream getSoundChallenge() {
-        hasChallengeBeenCalled = Boolean.TRUE;
-        return this.challenge;
+
+        try {
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(new ByteArrayInputStream(this.challenge));
+            hasChallengeBeenCalled = Boolean.TRUE;
+            return audioStream;
+        } catch (UnsupportedAudioFileException e) {
+            throw new CaptchaException("unable to deserialize input stream", e);
+        } catch (IOException e) {
+            throw new CaptchaException("unable to deserialize input stream", e);
+        }
     }
 
     /*
@@ -68,44 +86,10 @@ public abstract class SoundCaptcha implements Captcha {
      * this method is to clean the challenge.
      */
     public void disposeChallenge() {
-//        try
-//        {
-//            challenge.close();
-//        }
-//        catch (IOException e)
-//        {
-//            throw new CaptchaException(e);
-//        }
         this.challenge = null;
     }
 
     public Boolean hasGetChalengeBeenCalled() {
         return hasChallengeBeenCalled;
     }
-
-    //use Wave encoding
-    private void writeObject(java.io.ObjectOutputStream out)
-            throws IOException {
-
-        if (this.challenge != null) {
-            out.defaultWriteObject();
-            AudioSystem.write(challenge, AudioFileFormat.Type.WAVE, out);
-        }
-
-    }
-
-    ;
-
-    private void readObject(java.io.ObjectInputStream in)
-            throws IOException, ClassNotFoundException {
-        in.defaultReadObject();
-        try {
-            this.challenge = AudioSystem.getAudioInputStream(in);
-        } catch (UnsupportedAudioFileException e) {
-            throw new CaptchaException("unable to deserialize input stream", e);
-        }
-    }
-
-    ;
-
 }

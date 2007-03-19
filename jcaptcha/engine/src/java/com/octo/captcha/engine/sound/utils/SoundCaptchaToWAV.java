@@ -595,7 +595,7 @@ public class SoundCaptchaToWAV {
             }
             DecimalFormat df = new DecimalFormat();
             System.out.println("Summary for " + className + ":" +
-                    " avg sound creation = " + df.format(sumSoundCreation / iterations) + " milliseconds/image," +
+                    " avg sound creation = " + df.format(sumSoundCreation / iterations) + " milliseconds/sound," +
                     " avg file creation = " + df.format(sumFileCreation / iterations) + " milliseconds/file");
         }
     }

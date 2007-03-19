@@ -63,13 +63,6 @@
         </dependency>
 
         <dependency>
-            <groupId>freeTTS</groupId>
-            <artifactId>cmutimelex</artifactId>
-            <version>1.2.1</version>
-            <url>http://freetts.sourceforge.net/docs/</url>
-        </dependency>
-
-        <dependency>
             <groupId>jhlabs</groupId>
             <artifactId>imaging</artifactId>
             <version>01012005</version>
