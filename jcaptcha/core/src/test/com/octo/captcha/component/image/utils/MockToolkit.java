@@ -771,8 +771,6 @@ public class MockToolkit extends Toolkit {
     /**
      * Creates this toolkit's implementation of <code>Font</code> using the specified peer interface.
      *
-     * @param target the font to be implemented.
-     *
      * @return this toolkit's implementation of <code>Font</code>.
      *
      * @see java.awt.Font
@@ -1081,8 +1079,6 @@ public class MockToolkit extends Toolkit {
      *
      * @see java.awt.datatransfer.Clipboard
      * @see java.awt.datatransfer.StringSelection
-     * @see java.awt.datatransfer.DataFlavor.stringFlavor
-     * @see java.awt.datatransfer.DataFlavor.plainTextFlavor
      * @see java.io.Reader
      * @see java.awt.AWTPermission
      * @since JDK1.1

@@ -23,6 +23,7 @@ import java.util.Properties;
  *
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
+ * @author <a href="antoine.veret@gmail.com">Antoine Veret</a>
  * @version 1.0
  */
 public class ToolkitFactory {
@@ -31,13 +32,11 @@ public class ToolkitFactory {
     private static String toolkitClass;
 
     public static Toolkit getToolkit() {
-        Toolkit defaultToolkit = null;// = Toolkit.getDefaultToolkit();
-
-        Properties props = System.getProperties();
+        Toolkit defaultToolkit = null;
 
         try {
-            String tempToolkitClass = props.getProperty(TOOLKIT_IMPL);
-            if (props.containsKey(TOOLKIT_IMPL)) {
+            String tempToolkitClass = System.getProperty(TOOLKIT_IMPL);
+            if (tempToolkitClass != null) {
                 defaultToolkit = (Toolkit)
                         Class.forName(tempToolkitClass).newInstance();
                 toolkitClass = tempToolkitClass;
