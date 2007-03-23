@@ -50,7 +50,6 @@ public abstract class AbstractWordToImage implements WordToImage {
         BufferedImage background = getBackround();
         //apply text on background
         return pasteText(background, attributedWord);
-
     }
 
     AttributedString getAttributedString(String word, int wordLength) {

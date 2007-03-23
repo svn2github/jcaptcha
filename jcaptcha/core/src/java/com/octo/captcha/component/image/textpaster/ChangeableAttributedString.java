@@ -284,6 +284,24 @@ public class ChangeableAttributedString {
         }
     }
 
+    /*
+     * shift string to a non-linear layout in the output image
+     */
+    protected void shiftBoundariesToNonLinearLayout(double backgroundWidth, double backgroundHeight) {
+        double newX = backgroundWidth / 20;
+        double middleY = backgroundHeight / 2;
+        Random myRandom = new SecureRandom();
+
+        bounds[0].setRect(newX, middleY, bounds[0].getWidth(), bounds[0].getHeight());
+        for (int i = 1; i < length(); i++)
+        {
+            double characterHeight = bounds[i].getHeight();
+            double randomY = myRandom.nextInt() % (backgroundHeight / 4);
+            double currentY = middleY + ((myRandom.nextBoolean()) ? randomY : -randomY) + (characterHeight / 4);
+            bounds[i].setRect(newX + bounds[i].getX(), currentY, bounds[i].getWidth(), bounds[i].getHeight());
+        }
+    }
+
     public String toString() {
         StringBuffer buf = new StringBuffer();
         buf.append("{text=");
