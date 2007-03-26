@@ -40,7 +40,7 @@
     <url/>
     
     <repository>
-        <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/jcaptcha:jcaptcha/${pom.artifactId}</connection>
+        <connection>scm:cvs:pserver:anonymous@jcaptcha.cvs.sourceforge.net:/cvsroot/jcaptcha:jcaptcha/${pom.artifactId}</connection>
         <url>http://cvs.sourceforge.net/viewcvs.py/jcaptcha/jcaptcha/jcaptcha/${pom.artifactId}/</url>
     </repository>
     
@@ -63,6 +63,7 @@
 				<developer>
             <name>Antoine Véret</name>
             <id>averet</id>
+            <email>antoine.veret@gmail.com</email>
             <organization>Octo</organization>
             <roles>
                 <role>Project Leader</role>

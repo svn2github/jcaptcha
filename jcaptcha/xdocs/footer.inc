@@ -1,6 +1,6 @@
 <footer>
-    <a href="http://www.octo.com">
-        <img src="http://www.octo.com/fr/images/logo.gif" height="30" alt="octo technology logo"/>
+    <a href="http://www.octo.com/oss.html">
+        <img src="http://www.octo.com/images/logo1.gif" height="30" alt="octo technology logo"/>
     </a>
 
 

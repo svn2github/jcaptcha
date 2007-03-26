@@ -163,7 +163,7 @@
     <shortDescription>JCAPTCHA</shortDescription>
 
     <repository>
-        <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/jcaptcha:jcaptcha</connection>
+        <connection>scm:cvs:pserver:anonymous@jcaptcha.cvs.sourceforge.net:/cvsroot/jcaptcha:jcaptcha</connection>
         <url>http://cvs.sourceforge.net/viewcvs.py/jcaptcha/jcaptcha/</url>
 
     </repository>
@@ -184,12 +184,21 @@
 
     <developers>
         <developer>
+            <name>Antoine Véret</name>
+            <id>averet</id>
+            <email>antoine.veret@gmail.com</email>
+            <organization>Octo</organization>
+            <roles>
+                <role>Project Leader</role>
+                <role>Java Developer</role>
+            </roles>
+        </developer>
+        <developer>
             <name>Marc-Antoine Garrigue</name>
             <id>magarrigue</id>
             <email>magarrigue@octo.com</email>
             <organization>Octo</organization>
             <roles>
-                <role>Project Leader</role>
                 <role>Java Developer</role>
             </roles>
         </developer>
