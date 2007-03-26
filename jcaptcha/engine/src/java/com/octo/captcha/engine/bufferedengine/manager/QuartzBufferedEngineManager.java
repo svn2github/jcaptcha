@@ -1,3 +1,21 @@
+/*
+ * JCaptcha, the open source java framework for captcha definition and integration
+ * Copyright (c)  2007 jcaptcha.net. All Rights Reserved.
+ * See the LICENSE.txt file distributed with this package.
+ */
+
+/*
+ * jcaptcha, the open source java framework for captcha definition and integration
+ * copyright (c)  2007 jcaptcha.net. All Rights Reserved.
+ * See the LICENSE.txt file distributed with this package.
+ */
+
+/*
+ * jcaptcha, the open source java framework for captcha definition and integration
+ * copyright (c)  2007 jcaptcha.net. All Rights Reserved.
+ * See the LICENSE.txt file distributed with this package.
+ */
+
 package com.octo.captcha.engine.bufferedengine.manager;
 
 import com.octo.captcha.CaptchaException;
@@ -129,9 +147,7 @@ public class QuartzBufferedEngineManager implements BufferedEngineContainerManag
         if (!cronFeeder.getCronExpression().equalsIgnoreCase(feedCronExpr)) {
             log.info("set new cron expr for feed");
             try {
-                String name = cronFeeder.getName();
-                String groupeName = cronFeeder.getGroup();
-                schduler.unscheduleJob(name, groupeName);
+                schduler.deleteJob(jobFeeder.getName(), jobFeeder.getGroup());
                 cronFeeder.setCronExpression(feedCronExpr);
                 schduler.scheduleJob(jobFeeder, cronFeeder);
             }
@@ -153,9 +169,7 @@ public class QuartzBufferedEngineManager implements BufferedEngineContainerManag
         if (!cronSwapper.getCronExpression().equalsIgnoreCase(swapCronExpr)) {
             log.info("set new cron expr for swap");
             try {
-                String name = cronSwapper.getName();
-                String groupeName = cronSwapper.getGroup();
-                schduler.unscheduleJob(name, groupeName);
+                schduler.deleteJob(jobSwapper.getName(), jobSwapper.getGroup());
                 cronSwapper.setCronExpression(swapCronExpr);
                 schduler.scheduleJob(jobSwapper, cronSwapper);
 

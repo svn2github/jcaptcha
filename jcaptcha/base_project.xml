@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 
+<!--
+  ~ JCaptcha, the open source java framework for captcha definition and integration
+  ~ Copyright (c)  2007 jcaptcha.net. All Rights Reserved.
+  ~ See the LICENSE.txt file distributed with this package.
+  -->
+
 <project>
     <pomVersion>3</pomVersion>
     <id>jcaptcha</id>
     <name>jcaptcha</name>
-    <groupId>com.octo.jcaptcha</groupId>
+    <groupId>com.octo.captcha</groupId>
     <currentVersion>${project.version}</currentVersion>
 
     <organization>
@@ -32,12 +38,12 @@
     </shortDescription>
 
     <url/>
+    
     <repository>
-        <connection>
-            scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/jcaptcha:jcaptcha/${pom.artifactId}</connection>
+        <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/jcaptcha:jcaptcha/${pom.artifactId}</connection>
         <url>http://cvs.sourceforge.net/viewcvs.py/jcaptcha/jcaptcha/jcaptcha/${pom.artifactId}/</url>
-
     </repository>
+    
     <mailingLists>
         <mailingList>
             <name>JCaptcha User List</name>
@@ -54,13 +60,21 @@
     </mailingLists>
 
     <developers>
+				<developer>
+            <name>Antoine Véret</name>
+            <id>averet</id>
+            <organization>Octo</organization>
+            <roles>
+                <role>Project Leader</role>
+                <role>Java Developer</role>
+            </roles>
+        </developer>
         <developer>
             <name>Marc-Antoine Garrigue</name>
             <id>magarrigue</id>
             <email>marc.antoine.garrigue@gmail.com</email>
             <organization>Octo</organization>
             <roles>
-                <role>Project Leader</role>
                 <role>Java Developer</role>
             </roles>
         </developer>
@@ -88,15 +102,6 @@
                 <role>Java Developer</role>
             </roles>
         </developer>
-        <developer>
-            <name>Antoine Véret</name>
-            <id>averet</id>
-            <organization>Octo</organization>
-            <roles>
-                <role>Java Developer</role>
-            </roles>
-        </developer>
-
     </developers>
 
     <contributors>

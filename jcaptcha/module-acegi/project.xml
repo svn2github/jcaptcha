@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 
+<!--
+  ~ JCaptcha, the open source java framework for captcha definition and integration
+  ~ Copyright (c)  2007 jcaptcha.net. All Rights Reserved.
+  ~ See the LICENSE.txt file distributed with this package.
+  -->
+
 <project>
     <extend>${basedir}/../base_project.xml</extend>
 
@@ -51,8 +57,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring</artifactId>
-            <version>2.0-m2</version>
-            <!-- scope>runtime</scope -->
+            <version>2.0</version>
         </dependency>
 
 

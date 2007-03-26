@@ -1,15 +1,15 @@
 /*
- * jcaptcha, the open source java framework for captcha definition and integration
- * Copyright (c) 2005 jcaptcha.net. All Rights Reserved.
+ * JCaptcha, the open source java framework for captcha definition and integration
+ * Copyright (c)  2007 jcaptcha.net. All Rights Reserved.
  * See the LICENSE.txt file distributed with this package.
  */
+
 package com.octo.captcha.text;
 
 import com.octo.captcha.Captcha;
 
 /**
- * A text captcha is a captcha with a Text challenge... This class is abstract. User: mag Date: 23 oct. 2004 Time:
- * 15:29:39
+ * A text captcha is a captcha with a Text challenge... This class is abstract. 
  */
 public abstract class TextCaptcha implements Captcha {
 
