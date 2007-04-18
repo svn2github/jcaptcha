@@ -33,8 +33,8 @@ public class FileReaderRandomBackgroundGeneratorTest extends TestCase {
 
     public void testFindDirectory() throws Exception {
 
-        File dir = fileReaderRandomBackgroundGenerator.findDirectory("com");
-        assertValidDir(dir, "com");
+        File dir = fileReaderRandomBackgroundGenerator.findDirectory("com/octo");
+        assertValidDir(dir, "octo");
         try {
             dir = fileReaderRandomBackgroundGenerator.findDirectory("does not exists");
             fail("should never pass");
