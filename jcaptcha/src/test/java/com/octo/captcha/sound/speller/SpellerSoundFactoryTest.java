@@ -16,32 +16,14 @@
  * See the LICENSE.txt file distributed with this package.
  */
 package com.octo.captcha.sound.speller;
-import junit.framework.*;
-import com.octo.captcha.sound.speller.SpellerSoundFactory;
-import com.octo.captcha.component.word.wordgenerator.RandomWordGenerator;
-import com.octo.captcha.component.word.worddecorator.SpellerWordDecorator;
-import com.octo.captcha.component.sound.wordtosound.FreeTTSWordToSound;
-import com.octo.captcha.component.sound.soundconfigurator.FreeTTSSoundConfigurator;
+
 import com.octo.captcha.CaptchaException;
+import com.octo.captcha.component.word.worddecorator.SpellerWordDecorator;
+import com.octo.captcha.component.word.wordgenerator.RandomWordGenerator;
+import com.octo.captcha.sound.WordToSoundMock;
+import junit.framework.TestCase;
 
 public class SpellerSoundFactoryTest extends TestCase {
-    SpellerSoundFactory spellerSoundFactory;
-
-    private static String voiceName = "kevin16";
-
-      private static String voicePackage = "com.sun.speech.freetts.en.us.cmu_time_awb.AlanVoiceDirectory,com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory";
-
-      SpellerSoundFactory tested;
-
-      public SpellerSoundFactoryTest(String s) {
-          super(s);
-      }
-
-      protected void setUp() throws Exception {
-          super.setUp();
-          tested = new SpellerSoundFactory(new RandomWordGenerator("a"), new FreeTTSWordToSound(new FreeTTSSoundConfigurator(voiceName, voicePackage, 1.0f, 100, 100), 3, 6), new SpellerWordDecorator(";"));
-      }
-
 
       public void testSpellerSoundFactory() throws Exception {
           try {
@@ -58,7 +40,7 @@ public class SpellerSoundFactoryTest extends TestCase {
           }
 
           try {
-              new SpellerSoundFactory(null, new FreeTTSWordToSound(new FreeTTSSoundConfigurator(voiceName, voicePackage, 1.0f, 100, 100), 3, 6), null);
+              new SpellerSoundFactory(null, new WordToSoundMock(), null);
               fail("Test is not implemented");
           } catch (CaptchaException e) {
               assertNotNull(e.getMessage());
@@ -67,9 +49,9 @@ public class SpellerSoundFactoryTest extends TestCase {
 
 
     public void testGetSoundCaptcha() throws Exception {
+        SpellerSoundFactory tested = new SpellerSoundFactory(new RandomWordGenerator("a"), new WordToSoundMock(), new SpellerWordDecorator(";"));
         assertNotNull(tested.getSoundCaptcha());
         assertNotNull(tested.getSoundCaptcha().getChallenge());
         assertNotNull(tested.getSoundCaptcha().getQuestion());
-
     }
 }

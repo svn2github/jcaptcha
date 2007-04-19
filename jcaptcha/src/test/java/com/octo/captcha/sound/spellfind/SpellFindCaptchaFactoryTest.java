@@ -21,28 +21,11 @@ package com.octo.captcha.sound.spellfind;
 import com.octo.captcha.CaptchaException;
 import com.octo.captcha.sound.speller.SpellerSoundFactory;
 import com.octo.captcha.sound.spellfind.SpellFindCaptchaFactory;
-import com.octo.captcha.component.sound.soundconfigurator.FreeTTSSoundConfigurator;
-import com.octo.captcha.component.sound.wordtosound.FreeTTSWordToSound;
+import com.octo.captcha.sound.WordToSoundMock;
 import com.octo.captcha.component.word.wordgenerator.RandomWordGenerator;
 import junit.framework.TestCase;
 
 public class SpellFindCaptchaFactoryTest extends TestCase {
-
-    private static String voiceName = "kevin16";
-
-    private static String voicePackage = "com.sun.speech.freetts.en.us.cmu_time_awb.AlanVoiceDirectory,com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory";
-
-    SpellFindCaptchaFactory tested;
-
-    public SpellFindCaptchaFactoryTest(String s) {
-        super(s);
-    }
-
-    protected void setUp() throws Exception {
-        super.setUp();
-        tested = new SpellFindCaptchaFactory(new RandomWordGenerator("azertyuiop"), new FreeTTSWordToSound(new FreeTTSSoundConfigurator(voiceName, voicePackage, 1.0f, 100, 100), 4,10));
-    }
-
 
     public void testSpellerSoundFactory() throws Exception {
         try {
@@ -59,7 +42,7 @@ public class SpellFindCaptchaFactoryTest extends TestCase {
         }
 
         try {
-            new SpellerSoundFactory(null, new FreeTTSWordToSound(new FreeTTSSoundConfigurator(voiceName, voicePackage, 1.0f, 100, 100), 3, 6), null);
+            new SpellerSoundFactory(null, new WordToSoundMock(), null);
             fail("Test is not implemented");
         } catch (CaptchaException e) {
             assertNotNull(e.getMessage());
@@ -68,10 +51,10 @@ public class SpellFindCaptchaFactoryTest extends TestCase {
 
 
     public void testGetSoundCaptcha() throws Exception {
+        SpellFindCaptchaFactory tested = new SpellFindCaptchaFactory(new RandomWordGenerator("azertyuiop"), new WordToSoundMock()); 
         assertNotNull(tested.getSoundCaptcha());
         assertNotNull(tested.getSoundCaptcha().getChallenge());
         assertNotNull(tested.getSoundCaptcha().getQuestion());
-
     }
 
 }

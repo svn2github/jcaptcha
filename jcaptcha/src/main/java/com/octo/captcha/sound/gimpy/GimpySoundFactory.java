@@ -60,9 +60,6 @@ public class GimpySoundFactory extends SoundCaptchaFactory {
 
     /**
      * Construct a GimpySoundFactory from a word generator component and a wordtosound component
-     *
-     * @param thewordGenerator component
-     * @param theword2Sound    component
      */
     public GimpySoundFactory(WordGenerator wordGenerator, WordToSound word2Sound,
                              WordDecorator wordDecorator) {

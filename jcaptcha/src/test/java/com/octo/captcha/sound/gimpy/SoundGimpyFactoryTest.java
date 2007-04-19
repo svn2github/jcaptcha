@@ -19,34 +19,11 @@
 package com.octo.captcha.sound.gimpy;
 
 import com.octo.captcha.CaptchaException;
-import com.octo.captcha.component.sound.soundconfigurator.FreeTTSSoundConfigurator;
-import com.octo.captcha.component.sound.wordtosound.FreeTTSWordToSound;
 import com.octo.captcha.component.word.wordgenerator.RandomWordGenerator;
+import com.octo.captcha.sound.WordToSoundMock;
 import junit.framework.TestCase;
 
 public class SoundGimpyFactoryTest extends TestCase {
-
-    private static String voiceName = "kevin16";
-
-    private static String voicePackage = "com.sun.speech.freetts.en.us.cmu_time_awb.AlanVoiceDirectory,com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory";
-
-    GimpySoundFactory tested;
-
-    public SoundGimpyFactoryTest(String s) {
-        super(s);
-    }
-
-    protected void setUp() throws Exception {
-        super.setUp();
-        tested = new GimpySoundFactory(new RandomWordGenerator("a"), new FreeTTSWordToSound(new FreeTTSSoundConfigurator(voiceName, voicePackage, 1.0f, 100, 100), 3, 6));
-    }
-
-    public void testGetRandomRange() throws Exception {
-    }
-
-    public void testGetRandomLength() throws Exception {
-
-    }
 
     public void testGimpyFactory() throws Exception {
         try {
@@ -63,7 +40,7 @@ public class SoundGimpyFactoryTest extends TestCase {
         }
 
         try {
-            new GimpySoundFactory(null, new FreeTTSWordToSound(new FreeTTSSoundConfigurator(voiceName, voicePackage, 1.0f, 100, 100), 3, 6));
+            new GimpySoundFactory(null, new WordToSoundMock());
             fail("Test is not implemented");
         } catch (CaptchaException e) {
             assertNotNull(e.getMessage());
