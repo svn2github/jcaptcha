@@ -1,0 +1,33 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>   
+    		<groupId>com.octo.captcha</groupId>
+        <artifactId>jcaptcha-aggregator-pom</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    
+    <artifactId>jcaptcha</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>JCaptcha</name>
+    <packaging>jar</packaging>
+    
+    <description><![CDATA[<b>JCAPTCHA</b>, for <b>J</b>ava <b>C</b>ompletely <b>A</b>utomated <b>P</b>ublic <b>T</b>est to tell <b>C</b>omputers and <b>H</b>umans <b>A</b>part
+<br/>The open source java framework for captcha definition and integration
+<br/>
+
+ A captcha is a simple captcha container that contains a question, a challenge, and a response validation routine.<BR/>
+ A captcha can only be built by a captcha factory that provides methods to build localized captchas.<br/>
+ This jar aims to provide interfaces and implementation of generic and typed captcha and captcha factories.<BR/>
+ It uses the word generator, types sub packages (image and sound) components (word to image, word to sound)
+ to build typed captchas captchas.]]></description>           
+              
+    <dependencies>
+        <dependency>
+            <groupId>com.jhlabs</groupId>
+            <artifactId>imaging</artifactId>
+            <version>01012005</version>
+        </dependency>
+    </dependencies>
+    
+</project>

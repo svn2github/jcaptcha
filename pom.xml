@@ -1,0 +1,255 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+		
+		<groupId>com.octo.captcha</groupId>
+    <artifactId>jcaptcha-aggregator-pom</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>JCaptcha Aggregator POM</name>
+    <url>http://www.jcaptcha.net/</url>
+    
+    <modules>     
+      <module>jcaptcha</module>
+      <module>module-freetts</module>
+    </modules>
+    
+    <organization>
+        <name>JCaptcha corp.</name>
+        <url>http://www.jcaptcha.net/</url>
+    </organization>
+    
+    <inceptionYear>2003</inceptionYear>
+    
+    <licenses>
+		  <license>
+		    <name>LGPL</name>
+		    <url>http://www.gnu.org/licenses/lgpl.txt</url>
+		    <distribution>repo</distribution>
+		  </license>
+		</licenses>
+		
+	  <issueManagement>
+	    <system>Jira</system>
+	    <url>http://forge.octo.com/jcaptcha/jira</url>
+	  </issueManagement>
+	  
+	  <scm>
+	    <connection>scm:cvs:pserver:anonymous@jcaptcha.cvs.sourceforge.net:/cvsroot/jcaptcha:jcaptcha</connection>
+	    <!-- developerConnection>scm:cvs:pserver:jcaptcha.cvs.sourceforge.net:/cvsroot/jcaptcha:jcaptcha</developerConnection -->
+	    <tag>HEAD</tag>
+	    <url>http://jcaptcha.cvs.sourceforge.net/jcaptcha/</url>
+	  </scm>
+		
+	  <ciManagement>
+	    <system>continuum</system>
+	    <url>http://127.0.0.1:8080/continuum</url>
+	    <!-- notifiers>
+	      <notifier>
+	        <type>mail</type>
+	        <sendOnError>true</sendOnError>
+	        <sendOnFailure>true</sendOnFailure>
+	        <sendOnSuccess>false</sendOnSuccess>
+	        <sendOnWarning>false</sendOnWarning>
+	        <configuration><address>continuum@127.0.0.1</address></configuration>
+	      </notifier>
+	    </notifiers -->
+	  </ciManagement>
+	  
+		<mailingLists>
+        <mailingList>
+            <name>JCaptcha User List</name>
+            <post>jcaptcha-users@lists.sourceforge.net</post>
+            <subscribe>https://lists.sourceforge.net/lists/listinfo/jcaptcha-users</subscribe>
+            <unsubscribe>https://lists.sourceforge.net/lists/listinfo/jcaptcha-users</unsubscribe>
+            <archive>http://sourceforge.net/mailarchive/forum.php?forum=jcaptcha-users</archive>
+        </mailingList>
+        <mailingList>
+            <name>JCaptcha Developer List</name>
+            <post>jcaptcha-devs@lists.sourceforge.net</post>
+            <subscribe>https://lists.sourceforge.net/lists/listinfo/jcaptcha-devs</subscribe>
+            <unsubscribe>https://lists.sourceforge.net/lists/listinfo/jcaptcha-devs</unsubscribe>
+            <archive>http://sourceforge.net/mailarchive/forum.php?forum=jcaptcha-devs</archive>
+        </mailingList>
+    </mailingLists>
+  
+	  <developers>
+      <developer>
+          <name>Marc-Antoine Garrigue</name>
+          <id>magarrigue</id>
+          <email>magarrigue@octo.com</email>
+          <organization>OCTO Technology</organization>
+          <organizationUrl>www.octo.com</organizationUrl>
+          <roles>
+              <role>Project Leader</role>
+              <role>Developer</role>
+          </roles>
+      </developer>
+     	<developer>
+	      <id>averet</id>
+	      <name>Antoine Veret</name>
+	      <email>antoine.veret@gmail.com</email>
+	      <organization>OCTO Technology</organization>
+	      <organizationUrl>www.octo.com</organizationUrl>
+	      <roles>
+	        <role>Developer</role>
+	      </roles>
+	    </developer>
+      <developer>
+          <name>Sebastien Brunot</name>
+          <id>sbrunot</id>
+          <roles>
+              <role>Developer</role>
+          </roles>
+      </developer>
+      <developer>
+          <name>Mathieu Gandin</name>
+          <id>mgandin</id>
+          <organization>OCTO Technology</organization>
+          <organizationUrl>www.octo.com</organizationUrl>
+          <roles>
+              <role>Developer</role>
+          </roles>
+      </developer>
+      <developer>
+          <name>Benoit Doumas</name>
+          <id>mdoumas</id>
+          <roles>
+              <role>Developer</role>
+          </roles>
+      </developer>
+    </developers>
+    
+    <distributionManagement>
+
+				<downloadUrl>http://mojo.codehaus.org/my-project</downloadUrl>
+				
+        <!-- repository>
+          <id>FTInterne</id>
+          <url>dav:http://10.170.218.47:80/archiva/repository/FTInterne</url>
+        </repository>
+                
+        <snapshotRepository>
+          <id>FTInterne</id>
+          <url>dav:http://10.170.218.47:80/archiva/repository/FTInterne</url>
+        </snapshotRepository>
+        
+        <site>
+          <url>file:///etc/udd/apache/www/sites/${pom.artifactId}</url>
+        </site -->
+        
+    </distributionManagement>
+    
+    <reporting>
+        <plugins>
+        
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <reportSets>
+               <reportSet>
+                  <configuration>
+                     <doclet>gr.spinellis.umlgraph.doclet.UmlGraphDoc</doclet>
+                     <docletArtifact>
+                       <groupId>gr.spinellis</groupId>
+                       <artifactId>UmlGraph</artifactId>
+                       <version>4.4</version>
+                     </docletArtifact>
+                     <additionalparam>
+                            -inferrel -inferdep -quiet -hide java.* -collpackages java.util.* -qualify
+                            -postfixpackage -nodefontsize 9
+                            -nodefontpackagesize 7
+                        </additionalparam>
+                  </configuration>
+                  <reports>
+                     <report>javadoc</report>
+                  </reports>
+               </reportSet>
+            </reportSets>
+          </plugin>
+          
+          <!-- plugin> Uncomment after set up build-tools
+             <groupId>org.apache.maven.plugins</groupId>
+             <artifactId>maven-checkstyle-plugin</artifactId>
+             <configuration>
+                  <configLocation>checkstyle.xml</configLocation>
+                  <linkXref>on</linkXref>
+              </configuration>
+          </plugin -->
+        
+          <plugin>
+              <groupId>org.codehaus.mojo</groupId>
+              <artifactId>surefire-report-maven-plugin</artifactId>
+          </plugin>
+
+		      <plugin>
+		        <artifactId>maven-clover-plugin</artifactId>
+		        <configuration>
+		        </configuration>
+		      </plugin>
+		      
+          <plugin>
+              <groupId>org.codehaus.mojo</groupId>
+              <artifactId>findbugs-maven-plugin</artifactId>
+          </plugin>
+  
+          <plugin>
+              <groupId>org.codehaus.mojo</groupId>
+              <artifactId>jdepend-maven-plugin</artifactId>
+              <version>2.0-beta-1</version>
+          </plugin>
+         
+          <plugin>
+              <groupId>org.codehaus.mojo</groupId>
+              <artifactId>taglist-maven-plugin</artifactId>
+          </plugin>
+          
+          <plugin>
+              <groupId>org.codehaus.mojo</groupId>
+              <artifactId>jxr-maven-plugin</artifactId>
+          </plugin>
+          
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-pmd-plugin</artifactId>
+              <inherited>true</inherited>
+              <configuration>
+                  <configLocation>pmd.xml</configLocation>
+                  <linkXref>true</linkXref>
+                  <sourceEncoding>utf-8</sourceEncoding>
+                  <minimumTokens>50</minimumTokens>
+                  <targetJdk>1.3</targetJdk>
+              </configuration>  
+          </plugin>
+            
+        </plugins>
+    </reporting>
+    
+    <build>
+	    <plugins>
+	    
+	      <plugin>
+	        <groupId>org.apache.maven.plugins</groupId>
+	        <artifactId>maven-compiler-plugin</artifactId>
+	        <configuration>
+	          <source>1.3</source>
+	          <target>1.3</target>
+	        </configuration>
+	      </plugin>
+	      
+	    </plugins>
+	  </build>
+
+	  <dependencies>
+	  
+	      <dependency>
+	      <groupId>junit</groupId>
+	      <artifactId>junit</artifactId>
+	      <version>3.8.1</version>
+	      <scope>test</scope>
+	    </dependency>
+	  
+	  </dependencies>
+    
+</project>

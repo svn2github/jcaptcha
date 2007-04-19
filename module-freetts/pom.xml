@@ -1,0 +1,101 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>   
+  		<groupId>com.octo.captcha</groupId>
+      <artifactId>jcaptcha-aggregator-pom</artifactId>
+      <version>1.0-SNAPSHOT</version>
+  </parent>
+    
+  <artifactId>jcaptcha-module-freetts</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>Module FreeTTS</name>
+  
+  <dependencies>
+    <dependency>
+        <groupId>com.sun.speech.freetts</groupId>
+        <artifactId>freetts</artifactId>
+        <version>1.2.1</version>
+    </dependency>
+  </dependencies>
+  
+  <build>
+    <plugins>
+      
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <!-- forkMode>once</forkMode>
+          <childDelegation>true</childDelegation>
+          <useSystemClassLoader>false</useSystemClassLoader>
+          <systemProperties>
+            <property>
+              <name>freetts.voicespath</name>
+              <value>/E:/Dev/apps/jdk/1.5.0_07/jre/lib/ext</value>
+            </property>
+          </systemProperties -->
+        </configuration>
+      </plugin>
+      
+      <!-- plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>dependency-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>prepare-freetts</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+            <configuration>
+                <artifactItems>
+                
+                   <artifactItem>
+                     <groupId>com.sun.speech.freetts</groupId>
+                     <artifactId>cmu_us_kal</artifactId>
+                     <version>1.2.1</version>
+                   </artifactItem>
+                   
+                   <artifactItem>
+                     <groupId>com.sun.speech.freetts</groupId>
+                     <artifactId>cmu_time_awb</artifactId>
+                     <version>1.2.1</version>
+                   </artifactItem>
+                   
+                   <artifactItem>
+                     <groupId>com.sun.speech.freetts</groupId>
+                     <artifactId>freetts</artifactId>
+                     <version>1.2.1</version>
+                   </artifactItem>
+                   
+                   <artifactItem>
+                     <groupId>com.sun.speech.freetts</groupId>
+                     <artifactId>en_us</artifactId>
+                     <version>1.2.1</version>
+                   </artifactItem>
+                   
+                   <artifactItem>
+                     <groupId>com.sun.speech.freetts</groupId>
+                     <artifactId>cmulex</artifactId>
+                     <version>1.2.1</version>
+                   </artifactItem>
+                   
+                   <artifactItem>
+                     <groupId>com.sun.speech.freetts</groupId>
+                     <artifactId>cmutimelex</artifactId>
+                     <version>1.2.1</version>
+                   </artifactItem>
+                   
+                 </artifactItems>
+               <outputDirectory>E:/Dev/apps/jdk/1.5.0_07/jre/lib/ext</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin -->
+      
+    </plugins>
+  </build> 
+
+</project>

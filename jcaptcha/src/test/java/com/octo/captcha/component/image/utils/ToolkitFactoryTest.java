@@ -55,4 +55,8 @@ public class ToolkitFactoryTest extends TestCase {
             assertEquals(CaptchaException.class, expected.getClass());
         }
     }
+
+    public void tearDown() {
+        System.getProperties().remove(ToolkitFactory.TOOLKIT_IMPL);
+    }
 }
