@@ -1,12 +1,12 @@
 <?xml version="1.0"?><project>
   <parent>
-    <artifactId>jcaptcha-aggregator-pom</artifactId>
+    <artifactId>jcaptcha-root-aggregator</artifactId>
     <groupId>com.octo.captcha</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.octo.captcha</groupId>
-  <artifactId>load-test</artifactId>
+  <artifactId>jcaptcha-load-test</artifactId>
   <name>Load Testing</name>
   <version>1.0-SNAPSHOT</version>
   

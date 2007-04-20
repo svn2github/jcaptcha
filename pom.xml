@@ -3,17 +3,18 @@
     <modelVersion>4.0.0</modelVersion>
 		
 		<groupId>com.octo.captcha</groupId>
-    <artifactId>jcaptcha-aggregator-pom</artifactId>
+    <artifactId>jcaptcha-root-aggregator</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>Aggregator POM</name>
+    <name>Root aggregator</name>
     <url>http://www.jcaptcha.net/</url>
     
-    <modules>     
+    <modules>
       <module>jcaptcha</module>
       <module>module-freetts</module>
 	    <module>load-test</module>
+	    <module>testing</module>
 	  </modules>
     
     <organization>
