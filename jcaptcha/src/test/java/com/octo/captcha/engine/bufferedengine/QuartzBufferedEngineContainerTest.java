@@ -11,7 +11,6 @@
  */
 package com.octo.captcha.engine.bufferedengine;
 
-import com.octo.captcha.engine.DefaultEngineLoadTestHelper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
@@ -27,7 +26,7 @@ public class QuartzBufferedEngineContainerTest extends BufferedEngineContainerTe
             .getName());
 
     // loader init by default
-    protected Class loader = DefaultEngineLoadTestHelper.class;
+    //protected Class loader = DefaultEngineLoadTestHelper.class;
 
     public void testBasic() throws Exception {
         Resource ressource = new ClassPathResource("testQuartzBufferedEngine.xml");

@@ -11,10 +11,11 @@
  */
 package com.octo.captcha.engine.bufferedengine.manager;
 
-import com.octo.captcha.CaptchaException;
-import com.octo.captcha.engine.DefaultEngineLoadTestHelper;
-import com.octo.captcha.engine.bufferedengine.BufferedEngineContainer;
+import java.util.Locale;
+import java.util.Map;
+
 import junit.framework.TestCase;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
@@ -22,8 +23,8 @@ import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
-import java.util.Locale;
-import java.util.Map;
+import com.octo.captcha.CaptchaException;
+import com.octo.captcha.engine.bufferedengine.BufferedEngineContainer;
 
 /**
  * Unit test the QuartzBufferedEngineManager
@@ -35,7 +36,7 @@ public class QuartzBufferedEngineManagerTest extends TestCase {
             .getName());
 
     // loader init by default
-    protected Class loader = DefaultEngineLoadTestHelper.class;
+    //protected Class loader = DefaultEngineLoadTestHelper.class;
 
     BufferedEngineContainer container = null;
 
