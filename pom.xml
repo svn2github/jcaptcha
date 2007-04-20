@@ -1,5 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 		
 		<groupId>com.octo.captcha</groupId>
@@ -7,13 +7,14 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>JCaptcha Aggregator POM</name>
+    <name>Aggregator POM</name>
     <url>http://www.jcaptcha.net/</url>
     
     <modules>     
       <module>jcaptcha</module>
       <module>module-freetts</module>
-    </modules>
+	    <module>load-test</module>
+	  </modules>
     
     <organization>
         <name>JCaptcha corp.</name>
@@ -34,6 +35,20 @@
 	    <system>Jira</system>
 	    <url>http://forge.octo.com/jcaptcha/jira</url>
 	  </issueManagement>
+	  
+		<repositories>
+		  <repository>
+		    <id>3rd-party</id>
+		    <name>Repository for 3rd-party artifacts</name>
+		    <url>https://forge.octo.com:443/archiva/repository/3rd-party</url>
+		    <releases>
+		      <enabled>true</enabled>
+		    </releases>
+		    <snapshots>
+		      <enabled>false</enabled>
+		    </snapshots>
+		  </repository>
+		</repositories>
 	  
 	  <scm>
 	    <connection>scm:cvs:pserver:anonymous@jcaptcha.cvs.sourceforge.net:/cvsroot/jcaptcha:jcaptcha</connection>
@@ -239,11 +254,20 @@
 	      </plugin>
 	      
 	    </plugins>
+	    
+	    <extensions>
+         <extension>
+            <groupId>org.apache.maven.wagon</groupId>
+            <artifactId>wagon-webdav</artifactId>
+            <version>1.0-beta-2</version>
+         </extension>
+      </extensions>
+      
 	  </build>
 
 	  <dependencies>
 	  
-	      <dependency>
+	    <dependency>
 	      <groupId>junit</groupId>
 	      <artifactId>junit</artifactId>
 	      <version>3.8.1</version>
