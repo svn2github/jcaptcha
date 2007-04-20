@@ -13,7 +13,6 @@
     <modules>
       <module>jcaptcha</module>
       <module>module-freetts</module>
-	    <module>load-test</module>
 	    <module>testing</module>
 	  </modules>
     

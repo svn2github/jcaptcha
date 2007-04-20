@@ -13,6 +13,7 @@
   
   <modules>
     <module>integration-test</module>
+    <module>load-test</module>
   </modules>  
   
 </project>
