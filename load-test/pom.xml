@@ -1,0 +1,28 @@
+<?xml version="1.0"?><project>
+  <parent>
+    <artifactId>jcaptcha-aggregator-pom</artifactId>
+    <groupId>com.octo.captcha</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.octo.captcha</groupId>
+  <artifactId>load-test</artifactId>
+  <name>Load Testing module</name>
+  <version>1.0-SNAPSHOT</version>
+  
+  <dependencies>
+    <dependency>
+      <groupId>com.octo.captcha</groupId>
+      <artifactId>jcaptcha</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.sourceforge</groupId>
+      <artifactId>groboutils</artifactId>
+      <version>5-core</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  
+</project>
