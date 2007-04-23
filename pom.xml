@@ -13,12 +13,12 @@
     <modules>
       <module>jcaptcha</module>
       <module>module-freetts</module>
+      <module>module-acegi</module>
+    	<module>module-filter</module>
+    	<module>module-struts</module>
+    	<module>module-roller</module>
 	    <module>testing</module>
-    <module>module-acegi</module>
-    <module>module-filter</module>
-    <module>module-struts</module>
-    <module>module-roller</module>
-  </modules>
+  	</modules>
     
     <organization>
         <name>JCaptcha corp.</name>
@@ -143,18 +143,8 @@
     <distributionManagement>
 
 				<downloadUrl>http://mojo.codehaus.org/my-project</downloadUrl>
-				
-        <!-- repository>
-          <id>FTInterne</id>
-          <url>dav:http://10.170.218.47:80/archiva/repository/FTInterne</url>
-        </repository>
-                
-        <snapshotRepository>
-          <id>FTInterne</id>
-          <url>dav:http://10.170.218.47:80/archiva/repository/FTInterne</url>
-        </snapshotRepository>
         
-        <site>
+        <!-- site>
           <url>file:///etc/udd/apache/www/sites/${pom.artifactId}</url>
         </site -->
         

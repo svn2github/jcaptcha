@@ -90,6 +90,18 @@
             <version>2.3</version>
         </dependency>
 
+        <dependency>
+        		<groupId>xml-apis</groupId>
+            <artifactId>xml-apis</artifactId>
+            <version>1.0.b2</version>
+        </dependency>
+
+        <dependency>
+        		<groupId>xerces</groupId>
+            <artifactId>xercesImpl</artifactId>
+            <version>2.2.1</version>
+        </dependency>
+
     </dependencies>
 
 </project>
