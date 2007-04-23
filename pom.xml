@@ -44,7 +44,7 @@
 		  <repository>
 		    <id>3rd-party</id>
 		    <name>Repository for 3rd-party artifacts</name>
-		    <url>https://forge.octo.com:443/archiva/repository/3rd-party</url>
+		    <url>http://forge.octo.com/archiva/repository/3rd-party</url>
 		    <releases>
 		      <enabled>true</enabled>
 		    </releases>
