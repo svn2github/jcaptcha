@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="JCaptcha">
+  <body>
+    <links>
+      <item name="OCTO Technology" href="http://www.octo.com" />
+    </links>
+    <menu name="JCaptcha">
+      <item name="Introduction" href="index.html"/>
+      <item name="Doc / FAQ" href="http://forge.octo.com/jcaptcha/confluence"/>
+      <item name="Issue tracker" href="http://forge.octo.com/jcaptcha/jira"/>
+      <item name="Sourceforge site" href="http://sourceforge.net/projects/jcaptcha"/>
+      <item name="Browse source" href="http://fisheye1.cenqua.com/viewrep/jcaptcha/jcaptcha"/>   
+      <item name="Mailing lists" href="mail-lists.html"/>
+      <item name="Project Team" href="team-list.html"/>
+      <item name="Thanks" href="thanks.html"/>
+    </menu>
+    <menu ref="modules"/>
+  </body>
+</project>

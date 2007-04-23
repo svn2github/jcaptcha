@@ -7,7 +7,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>Root aggregator</name>
+    <name>JCaptcha Home</name>
     <url>http://www.jcaptcha.net/</url>
     
     <modules>
@@ -144,9 +144,9 @@
 
 				<downloadUrl>http://mojo.codehaus.org/my-project</downloadUrl>
         
-        <!-- site>
-          <url>file:///etc/udd/apache/www/sites/${pom.artifactId}</url>
-        </site -->
+        <site>
+          <url>${siteDeployURL}</url>
+        </site>
         
     </distributionManagement>
     
@@ -178,18 +178,26 @@
             </reportSets>
           </plugin>
           
-          <!-- plugin> Uncomment after set up build-tools
+          <plugin>
              <groupId>org.apache.maven.plugins</groupId>
              <artifactId>maven-checkstyle-plugin</artifactId>
              <configuration>
-                  <configLocation>checkstyle.xml</configLocation>
                   <linkXref>on</linkXref>
               </configuration>
-          </plugin -->
+          </plugin>
         
           <plugin>
               <groupId>org.codehaus.mojo</groupId>
               <artifactId>surefire-report-maven-plugin</artifactId>
+          </plugin>
+          
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-doap-plugin</artifactId>
+            <configuration>
+              <category>security</category>
+              <language>Java</language>
+            </configuration>
           </plugin>
 
 		      <plugin>
@@ -201,12 +209,6 @@
           <plugin>
               <groupId>org.codehaus.mojo</groupId>
               <artifactId>findbugs-maven-plugin</artifactId>
-          </plugin>
-  
-          <plugin>
-              <groupId>org.codehaus.mojo</groupId>
-              <artifactId>jdepend-maven-plugin</artifactId>
-              <version>2.0-beta-1</version>
           </plugin>
          
           <plugin>
