@@ -14,7 +14,8 @@
       <module>jcaptcha</module>
       <module>module-freetts</module>
 	    <module>testing</module>
-	  </modules>
+    <module>module-acegi</module>
+  </modules>
     
     <organization>
         <name>JCaptcha corp.</name>
