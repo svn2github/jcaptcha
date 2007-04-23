@@ -17,6 +17,7 @@
     <module>module-acegi</module>
     <module>module-filter</module>
     <module>module-struts</module>
+    <module>module-roller</module>
   </modules>
     
     <organization>
