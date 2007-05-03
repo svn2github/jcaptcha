@@ -4,9 +4,10 @@
     <links>
       <item name="OCTO Technology" href="http://www.octo.com" />
     </links>
-    <menu name="JCaptcha">
+    <menu name="Overview">
       <item name="Introduction" href="index.html"/>
-      <item name="Doc / FAQ" href="http://forge.octo.com/jcaptcha/confluence"/>
+      <item name="Download" href="http://sourceforge.net/project/showfiles.php?group_id=97877"/>
+      <item name="Documentation / FAQ" href="http://forge.octo.com/jcaptcha/confluence"/>
       <item name="Issue tracker" href="http://forge.octo.com/jcaptcha/jira"/>
       <item name="Sourceforge site" href="http://sourceforge.net/projects/jcaptcha"/>
       <item name="Browse source" href="http://fisheye1.cenqua.com/viewrep/jcaptcha/jcaptcha"/>   
@@ -15,5 +16,7 @@
       <item name="Thanks" href="thanks.html"/>
     </menu>
     <menu ref="modules"/>
+    <menu ref="parent"/>
+    <menu ref="reports"/>
   </body>
 </project>
