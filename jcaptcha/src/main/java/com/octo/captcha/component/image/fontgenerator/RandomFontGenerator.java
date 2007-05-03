@@ -64,11 +64,8 @@ public class RandomFontGenerator extends AbstractFontGenerator {
     public RandomFontGenerator(Integer minFontSize, Integer maxFontSize) {
         super(minFontSize, maxFontSize);
         fonts = initializeFonts(GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts());
-        if (fonts.size() < 1) {
-            throw new IllegalArgumentException("fonts list cannot be null or empty, some of your font are removed from the list by this class, Courrier and TimesRoman");
-        }
+        checkInitializedFontsSize();
         generatedFonts = generateFontArray();
-
     }
 
     public RandomFontGenerator(Integer minFontSize, Integer maxFontSize, Font[] fontsList) {
@@ -77,14 +74,23 @@ public class RandomFontGenerator extends AbstractFontGenerator {
             throw new IllegalArgumentException("fonts list cannot be null or empty");
         }
         fonts = initializeFonts(fontsList);
+        checkInitializedFontsSize();
+        generatedFonts = generateFontArray();
+    }
+
+    public RandomFontGenerator(Integer minFontSize, Integer maxFontSize, String[] badFontNamePrefixes) {
+        super(minFontSize, maxFontSize);
+        this.badFontNamePrefixes = badFontNamePrefixes;
+        fonts = initializeFonts(GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts());
+        checkInitializedFontsSize();
+        generatedFonts = generateFontArray();
+    }                                                                                                        
+
+    private void checkInitializedFontsSize() {
         if (fonts.size() < 1) {
             throw new IllegalArgumentException("fonts list cannot be null or empty, some of your font are removed from the list by this class, Courrier and TimesRoman");
         }
-        generatedFonts = generateFontArray();
-
-
     }
-
 
     /**
      * Method from imageFromWord method to apply font to String. Implementations must take into account the minFontSize
@@ -136,7 +142,7 @@ public class RandomFontGenerator extends AbstractFontGenerator {
      * @return array of fonts
      * @see #requiredCharacters
      */
-    private List initializeFonts(Font[] uncheckFonts) {
+    protected List initializeFonts(Font[] uncheckFonts) {
 
         // get a copy of the fonts
         // NB: be careful with this first array! -- the graphics environment obligingly
@@ -165,10 +171,15 @@ public class RandomFontGenerator extends AbstractFontGenerator {
             if (!removed)
                 // a font is also removed if it is prefixed by a known-bad name
                 for (int i = 0; i < badFontNamePrefixes.length; i++) {
-                    if (f.getName().startsWith(badFontNamePrefixes[i])) {
-                        iter.remove();
-                        break;
-                    }
+                    String prefix = badFontNamePrefixes[i];
+                    // verify prefix is not null
+                    if (prefix != null && !"".equals(prefix)) {
+                        // verify font name start with prefix
+                        if (f.getName().startsWith(prefix)) {
+                            iter.remove();
+                            break;
+                        }
+                    }                                          
                 }
         }
 

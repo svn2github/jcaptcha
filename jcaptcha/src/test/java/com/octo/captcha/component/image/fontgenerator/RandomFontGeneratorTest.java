@@ -74,12 +74,6 @@ public class RandomFontGeneratorTest extends TestCase {
             fail("should have thrown an IllegalArgumentException");
         } catch (IllegalArgumentException e) {
         }
-
-        try {
-            new RandomFontGenerator(new Integer(10), new Integer(10), null);
-            fail("should have thrown an IllegalArgumentException");
-        } catch (IllegalArgumentException e) {
-        }
     }
 
 
@@ -93,8 +87,33 @@ public class RandomFontGeneratorTest extends TestCase {
         } catch (IllegalArgumentException e) {
 
         }
+    }
 
+    public void testGetFontWithBadFontPrefix() {
 
+        this.randomFontGenerator.setBadFontNamePrefixes(new String[] {"Cour"});
+
+        Font arial = new Font("Arial", Font.BOLD, 10);
+
+        Font[] fontsList = new Font[2];
+        fontsList[0] = new Font("Courier", Font.BOLD, 10);
+        fontsList[1] = arial;
+
+        java.util.List checkedFontList = this.randomFontGenerator.initializeFonts(fontsList);
+        assertEquals(1, checkedFontList.size());
+        assertEquals(arial, checkedFontList.get(0));
+    }                                                                                        
+
+    public void testGetFontWithEmptyBadFontPrefix() {
+
+        this.randomFontGenerator.setBadFontNamePrefixes(new String[] {""});
+
+        Font[] fontsList = new Font[2];
+        fontsList[0] = new Font("Courier", Font.BOLD, 10);
+        fontsList[1] = new Font("Arial", Font.BOLD, 10);
+
+        java.util.List checkedFontList = this.randomFontGenerator.initializeFonts(fontsList);
+        assertEquals("All fonts should be preserved", 2, checkedFontList.size());
     }
 
 }
