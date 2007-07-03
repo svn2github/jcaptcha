@@ -1,0 +1,32 @@
+<assembly>
+  <id>release</id>
+  <formats>
+    <format>zip</format>
+  </formats>
+  <includeSiteDirectory>true</includeSiteDirectory>
+  <moduleSets>
+    <moduleSet>
+      <includes>
+        <include>org.test:child1</include>
+      </includes>
+      <sources>
+        <outputDirectory>sources/${artifactId}</outputDirectory>
+      </sources>
+    </moduleSet>
+  </moduleSets>
+  <fileSets>
+    <fileSet>
+      <includes>
+        <include>jcaptcha/README*</include>
+        <include>jcaptcha/LICENSE*</include>
+      </includes>
+    </fileSet>
+    <fileSet>
+      <directory>target</directory>
+      <outputDirectory></outputDirectory>
+      <includes>
+        <include>*.jar</include>
+      </includes>
+    </fileSet>
+  </fileSets>  
+</assembly>  
