@@ -15,19 +15,23 @@ package com.octo.captcha.engine.image;
 import com.octo.captcha.engine.CaptchaEngine;
 import com.octo.captcha.image.ImageCaptchaFactory;
 
-public class DefaultImageCaptchaEngineTest extends ImageCaptchaEngineTestAbstract  {
-
+public class ListImageCaptchaEngineTest extends ImageCaptchaEngineTestAbstract  {
+    static public ImageCaptchaFactory[] factories;
 
     CaptchaEngine buildCaptchaEngine(Object[] parameter) {
-        return new ImplDefaultImageCaptchaEngine((ImageCaptchaFactory[])parameter);
+        factories = (ImageCaptchaFactory[])parameter ;
+        return new ImplDefaultImageCaptchaEngine();
     }
 
-    private class ImplDefaultImageCaptchaEngine extends DefaultImageCaptchaEngine {
+    private class ImplDefaultImageCaptchaEngine extends ListImageCaptchaEngine {
+
         /**
          * Default constructor : takes an array of ImageCaptchaFactories.
          */
-        public ImplDefaultImageCaptchaEngine(final ImageCaptchaFactory[] factories) {
-            super(factories);
+
+
+        protected void buildInitialFactories() {
+             addFactories(ListImageCaptchaEngineTest.factories);
         }
     }
 

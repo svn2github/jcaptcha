@@ -19,7 +19,6 @@ package com.octo.captcha.engine.sound;
 
 import com.octo.captcha.CaptchaFactory;
 import com.octo.captcha.engine.CaptchaEngineException;
-import com.octo.captcha.image.ImageCaptchaFactory;
 import com.octo.captcha.sound.SoundCaptcha;
 import com.octo.captcha.sound.SoundCaptchaFactory;
 
@@ -98,7 +97,7 @@ public class DefaultSoundCaptchaEngine extends SoundCaptchaEngine {
         ArrayList tempFactories = new ArrayList();
 
         for (int i = 0; i < factories.length; i++) {
-            if (ImageCaptchaFactory.class.isAssignableFrom(factories[i].getClass())) {
+            if (!SoundCaptchaFactory.class.isAssignableFrom(factories[i].getClass())) {
                 throw new CaptchaEngineException("This factory is not a sound captcha factory " + factories[i].getClass());
             }
             tempFactories.add(factories[i]);

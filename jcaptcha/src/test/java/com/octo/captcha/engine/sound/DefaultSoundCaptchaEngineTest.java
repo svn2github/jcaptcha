@@ -10,23 +10,23 @@
  * See the LICENSE.txt file distributed with this package.
  */
 
-package com.octo.captcha.engine.image;
+package com.octo.captcha.engine.sound;
 
 import com.octo.captcha.engine.CaptchaEngine;
-import com.octo.captcha.image.ImageCaptchaFactory;
+import com.octo.captcha.sound.SoundCaptchaFactory;
 
-public class DefaultImageCaptchaEngineTest extends ImageCaptchaEngineTestAbstract  {
+public class DefaultSoundCaptchaEngineTest extends SoundCaptchaEngineTestAbstract  {
 
 
     CaptchaEngine buildCaptchaEngine(Object[] parameter) {
-        return new ImplDefaultImageCaptchaEngine((ImageCaptchaFactory[])parameter);
+        return new ImplDefaultSoundCaptchaEngine((SoundCaptchaFactory[])parameter);
     }
 
-    private class ImplDefaultImageCaptchaEngine extends DefaultImageCaptchaEngine {
+    private class ImplDefaultSoundCaptchaEngine extends DefaultSoundCaptchaEngine {
         /**
          * Default constructor : takes an array of ImageCaptchaFactories.
          */
-        public ImplDefaultImageCaptchaEngine(final ImageCaptchaFactory[] factories) {
+        public ImplDefaultSoundCaptchaEngine(final SoundCaptchaFactory[] factories) {
             super(factories);
         }
     }

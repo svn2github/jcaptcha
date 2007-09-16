@@ -25,10 +25,7 @@ import com.octo.captcha.image.ImageCaptcha;
 import com.octo.captcha.image.ImageCaptchaFactory;
 
 import java.security.SecureRandom;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Random;
+import java.util.*;
 
 /**
  * <p>This engine is based on a java.util.List of factories. It has a default constructor. Sub class must implements the
@@ -61,7 +58,7 @@ public abstract class ListImageCaptchaEngine
      */
     public boolean addFactory(
             com.octo.captcha.image.ImageCaptchaFactory factory) {
-        return this.factories.add(factory);
+        return factory != null && this.factories.add(factory);
     }
 
     /**
@@ -69,9 +66,8 @@ public abstract class ListImageCaptchaEngine
      */
     public void addFactories(
             com.octo.captcha.image.ImageCaptchaFactory[] factories) {
-        for (int i = 0; i < factories.length; i++) {
-            this.factories.add(factories[i]);
-        }
+        checkNotNullOrEmpty(factories);
+        this.factories.addAll(Arrays.asList(factories));
     }
 
     /**
@@ -85,19 +81,23 @@ public abstract class ListImageCaptchaEngine
      * @param factories new captcha factories for this engine
      */
     public void setFactories(CaptchaFactory[] factories) throws CaptchaEngineException {
-        if (factories == null || factories.length == 0) {
-            throw new CaptchaEngineException("impossible to set null or empty factories");
-        }
+        checkNotNullOrEmpty(factories);
         ArrayList tempFactories = new ArrayList();
 
         for (int i = 0; i < factories.length; i++) {
-            if (ImageCaptchaFactory.class.isAssignableFrom(factories[i].getClass())) {
+            if (!ImageCaptchaFactory.class.isAssignableFrom(factories[i].getClass())) {
                 throw new CaptchaEngineException("This factory is not an image captcha factory " + factories[i].getClass());
             }
             tempFactories.add(factories[i]);
         }
 
         this.factories = tempFactories;
+    }
+
+    private void checkNotNullOrEmpty(CaptchaFactory[] factories) {
+        if (factories == null || factories.length == 0) {
+            throw new CaptchaEngineException("impossible to set null or empty factories");
+        }
     }
 
     /**
