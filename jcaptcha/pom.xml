@@ -21,6 +21,19 @@
  It uses the word generator, types sub packages (image and sound) components (word to image, word to sound)
  to build typed captchas captchas.]]></description>
 
+    <build>
+      <plugins>
+        <plugin>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <configuration>
+            <descriptors>
+              <descriptor>src/assembly/uber-jar.xml</descriptor>
+            </descriptors>
+          </configuration>
+        </plugin>	      
+	    </plugins>	    
+	  </build>
+
     <dependencies>
 
         <dependency>
