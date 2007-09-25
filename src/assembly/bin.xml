@@ -23,5 +23,18 @@
         <include>jcaptcha-*-all.jar</include>
       </includes>
     </fileSet>
+    <fileSet>
+      <directory>src/main/resources</directory>
+      <outputDirectory>/</outputDirectory>
+      <useDefaultExcludes>true</useDefaultExcludes>
+      <includes>
+        <include>fisheyebackgrounds/*</include>
+        <include>gimpybackgrounds/*</include>
+      </includes>
+    </fileSet>    
+    <fileSet>
+      <directory>site-deploy</directory>
+      <outputDirectory>/docs/</outputDirectory>
+    </fileSet>    
   </fileSets>
 </assembly>

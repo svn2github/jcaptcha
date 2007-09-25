@@ -9,7 +9,9 @@
       <outputDirectory></outputDirectory>
       <outputFileNameMapping></outputFileNameMapping>
       <unpack>true</unpack>
-      <scope>runtime</scope>
+      <includes>
+        <include>com.jhlabs:imaging</include>
+      </includes>
     </dependencySet>
   </dependencySets>
   <fileSets>
@@ -17,5 +19,12 @@
       <directory>target/classes</directory>
       <outputDirectory></outputDirectory>
     </fileSet>
+    <fileSet>
+      <directory>${basedir}</directory>
+      <outputDirectory></outputDirectory>
+      <includes>
+        <include>LICENSE.txt</include>
+      </includes>
+    </fileSet>    
   </fileSets>
 </assembly>
