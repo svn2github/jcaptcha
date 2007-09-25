@@ -1,0 +1,27 @@
+<assembly>
+  <id>bin</id>
+  <formats>
+    <format>zip</format>
+  </formats>
+  <includeBaseDirectory>false</includeBaseDirectory>
+  <files>
+    <file>
+      <source>jcaptcha/LICENSE.txt</source>
+      <outputDirectory>/</outputDirectory>
+    </file>
+    <file>
+      <source>module-struts/src/main/resources/META-INF/jcaptcha.tld</source>
+      <outputDirectory>/</outputDirectory>
+    </file>    
+  </files>
+  <fileSets>
+    <fileSet>
+      <directory>jcaptcha/target</directory>
+      <outputDirectory>/</outputDirectory>
+      <useDefaultExcludes>true</useDefaultExcludes>
+      <includes>
+        <include>jcaptcha-*-all.jar</include>
+      </includes>
+    </fileSet>
+  </fileSets>
+</assembly>
