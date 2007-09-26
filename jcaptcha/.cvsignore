@@ -1,8 +1,0 @@
-target
-*.log
-.clover
-buffered.suml
-bufferedEngine.suml
-null.data
-null.index
-velocity.log.1
