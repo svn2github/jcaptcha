@@ -269,6 +269,7 @@
             <descriptors>
               <descriptor>src/assembly/bin.xml</descriptor>
             </descriptors>
+            <finalName>jcaptcha-${project.version}</finalName>
           </configuration>
         </plugin>	            
 	    </plugins>	    
