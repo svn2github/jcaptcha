@@ -67,10 +67,27 @@
 	    <url>http://jcaptcha.svn.sourceforge.net/viewvc/jcaptcha/</url>
 	  </scm>
 		
-	  <!-- ciManagement>
-	    <system>continuum</system>
-	    <url>http://127.0.0.1:8080/continuum</url>
-	  </ciManagement -->
+	  <ciManagement>
+	    <system>Hudson</system>
+	    <url>https://forge.octo.com/hudson/job/JCaptcha/</url>
+	  </ciManagement>
+	  
+	  <distributionManagement>
+			<downloadUrl>http://sourceforge.net/projects/jcaptcha/</downloadUrl>        
+      <site>
+        <url>${siteDeployURL}</url>
+      </site>	  
+      <repository>
+        <id>octo-release-repo</id>
+        <name>OCTO Release repository</name>
+        <url>http://forge.octo.com/archiva/repository/release</url>
+      </repository>
+      <snapshotRepository>
+        <id>octo-snapshot-repo</id>
+        <name>OCTO Snapshot repository</name>
+        <url>http://forge.octo.com/archiva/repository/snapshot</url>
+      </snapshotRepository>
+    </distributionManagement>
 	  
 		<mailingLists>
         <mailingList>
@@ -145,13 +162,6 @@
             </roles>
         </contributor>
     </contributors>
-    
-    <distributionManagement>
-				<downloadUrl>http://sourceforge.net/projects/jcaptcha/</downloadUrl>        
-        <site>
-          <url>${siteDeployURL}</url>
-        </site>        
-    </distributionManagement>
     
     <reporting>
         <plugins>
