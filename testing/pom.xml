@@ -14,7 +14,7 @@
   
   <modules>
     <module>integration-test</module>
-    <module>load-test</module>
+    <!-- module>load-test</module -->
     <module>compatibility-1.0-JDK3</module>
     <module>compatibility-SNAPSHOT-JDK4</module>
   </modules>  
