@@ -7,6 +7,7 @@
 package com.octo.captcha.image;
 
 import com.octo.captcha.Captcha;
+import com.sun.image.codec.jpeg.ImageFormatException;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageDecoder;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
@@ -57,8 +58,6 @@ public abstract class ImageCaptcha implements Captcha {
         return challenge;
     }
 
-    ;
-
 
     /**
      * Dispose the challenge, once this method is call the getChallenge method will return null.<br> It has been added
@@ -80,29 +79,47 @@ public abstract class ImageCaptcha implements Captcha {
         return hasChallengeBeenCalled;
     }
 
-    //use jpeg encoding
+    /**
+     * This method have to be implemented in order to serialize the image challenge to JPEG format
+     * @param out The target outputStream in which the captcha will be serialized
+     * @throws IOException
+     */
     private void writeObject(java.io.ObjectOutputStream out)
             throws IOException {
 
+        // Serialize captcha fields with defaut method
+        out.defaultWriteObject();
+
+        // If the challenge has not been disposed
         if (this.challenge != null) {
-            out.defaultWriteObject();
-            // a jpeg encoder
+            // use jpeg encoding
             JPEGImageEncoder jpegEncoder =
                     JPEGCodec.createJPEGEncoder(out);
             jpegEncoder.encode(this.challenge);
         }
     }
 
-    ;
-
+    /**
+     * This method have to be implemented in order to unserialize the image challenge from JPEG format
+     * @param in The source inputStream from which the captcha will be unserialized
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     private void readObject(java.io.ObjectInputStream in)
             throws IOException, ClassNotFoundException {
+
+        // UnSerialize captcha fields with default method
         in.defaultReadObject();
-        JPEGImageDecoder decoder = JPEGCodec.createJPEGDecoder(in);
-        this.challenge = decoder.decodeAsBufferedImage();
+        
+        try {
+            JPEGImageDecoder decoder = JPEGCodec.createJPEGDecoder(in);
+            this.challenge = decoder.decodeAsBufferedImage();
+        } catch (ImageFormatException e) {
+            if (!hasChallengeBeenCalled.booleanValue()) {
+                // If the getChallenge method has not been called the challenge should be available for unmarhslling.
+                // In this case, the thrown Exception is not related to the dispose status 
+                throw e;
+            }
+        }
     }
-
-    ;
-
-
 }

@@ -48,7 +48,4 @@ public class Gimpy extends ImageCaptcha implements Serializable {
         return new Boolean(response.equals(this.response));
     }
 
-    ;
-
-
 }
