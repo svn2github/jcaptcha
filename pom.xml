@@ -17,6 +17,7 @@
     	<module>module-filter</module>
     	<module>module-struts</module>
     	<module>module-roller</module>
+		<module>integration-jbosscache</module>
   	</modules>
   	
   	<profiles>
@@ -60,7 +61,13 @@
 		      <enabled>false</enabled>
 		    </snapshots>
 		  </repository>
-		</repositories>
+            <repository>
+                <id>jboss-maven2</id>
+                <layout>default</layout>
+                <name>JBoss Repository</name>
+                <url>http://repository.jboss.com/maven2</url>
+            </repository>
+        </repositories>
 	  
 	  <scm>
 	    <connection>scm:svn:https://jcaptcha.svn.sourceforge.net/svnroot/jcaptcha/trunk</connection>

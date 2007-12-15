@@ -2,9 +2,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-      <artifactId>jcaptcha-root-aggregator</artifactId>
-      <groupId>com.octo.captcha</groupId>
-      <version>1.0-SNAPSHOT</version>
+        <artifactId>jcaptcha-root-aggregator</artifactId>
+        <groupId>com.octo.captcha</groupId>
+        <version>1.0-SNAPSHOT</version>
     </parent>
     <artifactId>jcaptcha</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -22,17 +22,17 @@
  to build typed captchas captchas.]]></description>
 
     <build>
-      <plugins>
-        <plugin>
-          <artifactId>maven-assembly-plugin</artifactId>
-          <configuration>
-            <descriptors>
-              <descriptor>src/assembly/uber-jar.xml</descriptor>
-            </descriptors>
-          </configuration>
-        </plugin>	      
-	    </plugins>	    
-	  </build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptors>
+                        <descriptor>src/assembly/uber-jar.xml</descriptor>
+                    </descriptors>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
     <dependencies>
 
@@ -52,6 +52,11 @@
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
             <version>1.0.4</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.8</version>
         </dependency>
 
         <dependency>
@@ -103,16 +108,22 @@
         </dependency>
 
         <dependency>
-        		<groupId>xml-apis</groupId>
+            <groupId>xml-apis</groupId>
             <artifactId>xml-apis</artifactId>
             <version>1.0.b2</version>
         </dependency>
 
         <dependency>
-        		<groupId>xerces</groupId>
+            <groupId>xerces</groupId>
             <artifactId>xercesImpl</artifactId>
             <version>2.2.1</version>
         </dependency>
+        <dependency>
+            <groupId>xerces</groupId>
+            <artifactId>xercesImpl</artifactId>
+            <version>2.2.1</version>
+        </dependency>
+
 
     </dependencies>
 
