@@ -6,6 +6,8 @@
 
 package com.octo.captcha.service;
 
+import com.octo.captcha.engine.MockCaptchaEngine;
+
 /**
  * <p><ul><li></li></ul></p>
  *

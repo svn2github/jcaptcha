@@ -66,7 +66,7 @@ public class MapCaptchaStore implements CaptchaStore {
         store.put(id, new CaptchaAndLocale(captcha,locale));
     }
 
-    /**
+	/**
      * Retrieve the captcha for this key from the store.
      *
      * @return the captcha for this id
@@ -128,4 +128,18 @@ public class MapCaptchaStore implements CaptchaStore {
     public void empty() {
         this.store = new HashMap();
     }
+    
+    /* (non-Javadoc)
+	 * @see com.octo.captcha.service.captchastore.CaptchaStore#initAndStart()
+	 */
+	public void initAndStart() {
+		// Nothing to do with map implementations
+	}
+
+	/* (non-Javadoc)
+	 * @see com.octo.captcha.service.captchastore.CaptchaStore#shutdownAndClean()
+	 */
+	public void cleanAndShutdown() {
+		store.clear();
+	}
 }

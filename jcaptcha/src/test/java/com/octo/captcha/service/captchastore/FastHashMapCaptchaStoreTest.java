@@ -8,7 +8,7 @@ package com.octo.captcha.service.captchastore;
 
 public class FastHashMapCaptchaStoreTest extends CaptchaStoreTestAbstract {
 
-    public CaptchaStore initStore() {
+    public CaptchaStore getStore() {
         return new FastHashMapCaptchaStore();
     }
 

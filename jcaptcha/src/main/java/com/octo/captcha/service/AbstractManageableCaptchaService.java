@@ -11,10 +11,7 @@ import com.octo.captcha.engine.CaptchaEngine;
 import com.octo.captcha.service.captchastore.CaptchaStore;
 import org.apache.commons.collections.FastHashMap;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Locale;
+import java.util.*;
 
 /**
  * This class provides default implementation for the management interface. It uses an HashMap to store the timestamps
@@ -241,19 +238,17 @@ public abstract class AbstractManageableCaptchaService
     }
 
     /**
-     * Garbage collect the captcha store, means all old capthca (captcha in the store wich has been stored more than the
+     * Garbage collect the captcha store, means all old captcha (captcha in the store wich has been stored more than the
      * MinGuarantedStorageDelayInSecond
      */
-    public void garbageCollectCaptchaStore() {
+    protected void garbageCollectCaptchaStore(Iterator garbageCollectableCaptchaIds) {
         // this may cause a captcha disparition if a new captcha is asked between
         // this call and the effective removing from the store!
         long now = System.currentTimeMillis();
         long limit = now - 1000 * minGuarantedStorageDelayInSeconds;
 
-        //construct a new collection in order to avoid iterations synchronization pbs :
-        Iterator ids = getGarbageCollectableCaptchaIds(now).iterator();
-        while (ids.hasNext()) {
-            String id = ids.next().toString();
+        while (garbageCollectableCaptchaIds.hasNext()) {
+            String id = garbageCollectableCaptchaIds.next().toString();
             if (((Long) times.get(id)).longValue() < limit) {
                 //remove from times
                 times.remove(id);
@@ -263,6 +258,12 @@ public abstract class AbstractManageableCaptchaService
                 this.numberOfGarbageCollectedCaptcha++;
             }
         }
+    }
+
+    public void garbageCollectCaptchaStore() {
+        long now = System.currentTimeMillis();
+        Collection garbageCollectableCaptchaIds = getGarbageCollectableCaptchaIds(now);
+        this.garbageCollectCaptchaStore(garbageCollectableCaptchaIds.iterator());
     }
 
 
@@ -306,19 +307,20 @@ public abstract class AbstractManageableCaptchaService
     ///****
 
     protected Captcha generateAndStoreCaptcha(Locale locale, String ID) {
-        long now = System.currentTimeMillis();
-
+        
         //if the store is full try to garbage collect
         if (isCaptchaStoreFull()) {
             //see if possible
-            if (getGarbageCollectableCaptchaIds(now).size() > 0) {
+            long now = System.currentTimeMillis();
+            Collection garbageCollectableCaptchaIds = getGarbageCollectableCaptchaIds(now);
+            if (garbageCollectableCaptchaIds.size() > 0) {
                 //possible collect an rerun
-                garbageCollectCaptchaStore();
+                garbageCollectCaptchaStore(garbageCollectableCaptchaIds.iterator());
                 return this.generateAndStoreCaptcha(locale, ID);
             } else {
                 //impossible ! has to wait
                 throw new CaptchaServiceException("Store is full, try to increase CaptchaStore Size or" +
-                        "to dercrease time out, or to decrease CaptchaStoreSizeBeforeGrbageCollection");
+                        "to decrease time out, or to decrease CaptchaStoreSizeBeforeGrbageCollection");
             }
         }
 
@@ -342,11 +344,11 @@ public abstract class AbstractManageableCaptchaService
     }
 
 
-    private boolean isCaptchaStoreFull() {
+    protected boolean isCaptchaStoreFull() {
         return getCaptchaStoreMaxSize() == 0 ? false : getCaptchaStoreSize() >= getCaptchaStoreMaxSize();
     }
 
-    private boolean isCaptchaStoreQuotaReached() {
+    protected boolean isCaptchaStoreQuotaReached() {
         return getCaptchaStoreSize() >= getCaptchaStoreSizeBeforeGarbageCollection();
     }
 

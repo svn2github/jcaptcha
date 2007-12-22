@@ -6,7 +6,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.octo.captcha</groupId>
-  <artifactId>compatibility-SNAPSHOT-JDK4</artifactId>
+  <artifactId>jcaptcha-SNAPSHOT-JDK4-compatibility</artifactId>
   <name>JCaptcha SNAPSHOT compatibility with JDK4</name>
   <version>1.0-SNAPSHOT</version>
   <url>http://maven.apache.org</url>
@@ -15,8 +15,13 @@
       <groupId>com.octo.captcha</groupId>
       <artifactId>jcaptcha</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>com.octo.captcha</groupId>
+      <artifactId>jcaptcha-common-test</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <scope>test</scope>
+    </dependency>    
   </dependencies>
   <build>
     <plugins>

@@ -6,6 +6,11 @@
 
 package com.octo.captcha.service.multitype;
 
+import java.awt.image.BufferedImage;
+import java.util.Locale;
+
+import javax.sound.sampled.AudioInputStream;
+
 import com.octo.captcha.Captcha;
 import com.octo.captcha.engine.CaptchaEngine;
 import com.octo.captcha.image.ImageCaptcha;
@@ -14,10 +19,6 @@ import com.octo.captcha.service.CaptchaServiceException;
 import com.octo.captcha.service.captchastore.FastHashMapCaptchaStore;
 import com.octo.captcha.sound.SoundCaptcha;
 import com.octo.captcha.text.TextCaptcha;
-
-import javax.sound.sampled.AudioInputStream;
-import java.awt.image.BufferedImage;
-import java.util.Locale;
 
 /**
  * Generic and new default captchaService implementation. Can accept and serve any captcha type. <br> beware of class
@@ -29,15 +30,18 @@ import java.util.Locale;
 public class GenericManageableCaptchaService extends AbstractManageableCaptchaService implements MultiTypeCaptchaService {
 
     /**
-     * Constructor
+     * Constructor with FastHashMapCaptchaStore
      *
      * @param captchaEngine the used engine. Use the {@link com.octo.captcha.engine.bufferedengine.BufferedEngineContainer}
      *                      to enable buffered captcha generation
      */
-    public GenericManageableCaptchaService(CaptchaEngine captchaEngine, int minGuarantedStorageDelayInSeconds, int maxCaptchaStoreSize) {
-        super(new FastHashMapCaptchaStore(), captchaEngine, minGuarantedStorageDelayInSeconds, maxCaptchaStoreSize);
+    public GenericManageableCaptchaService(CaptchaEngine captchaEngine,
+                                           int minGuarantedStorageDelayInSeconds,
+                                           int maxCaptchaStoreSize,
+                                           int captchaStoreLoadBeforeGarbageCollection) {
+        super(new FastHashMapCaptchaStore(), captchaEngine, minGuarantedStorageDelayInSeconds,
+                maxCaptchaStoreSize, captchaStoreLoadBeforeGarbageCollection);
     }
-
 
     /**
      * Method to retrive the image challenge corresponding to the given ticket.

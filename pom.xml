@@ -11,24 +11,19 @@
     <url>http://www.jcaptcha.net/</url>
     
     <modules>
+      <module>api</module>    
+      <module>common-test</module>
       <module>jcaptcha</module>
+      <module>testing</module>      
+      <module>extension-ehcache-store</module>
+      <module>extension-jbosscache-store</module>
+      <module>extension-buffered-engine</module>
       <module>module-freetts</module>
       <module>module-acegi</module>
     	<module>module-filter</module>
     	<module>module-struts</module>
     	<module>module-roller</module>
-		<module>integration-jbosscache</module>
   	</modules>
-  	
-  	<profiles>
-    	<profile>
-    		<!-- Continuous Integration Profile -->
-      	<id>ci</id>
-		    <modules>
-			    <module>testing</module>
-		  	</modules>      	
-			</profile>
-  	</profiles>
   	    
     <organization>
         <name>JCaptcha corp.</name>
@@ -61,13 +56,7 @@
 		      <enabled>false</enabled>
 		    </snapshots>
 		  </repository>
-            <repository>
-                <id>jboss-maven2</id>
-                <layout>default</layout>
-                <name>JBoss Repository</name>
-                <url>http://repository.jboss.com/maven2</url>
-            </repository>
-        </repositories>
+    </repositories>
 	  
 	  <scm>
 	    <connection>scm:svn:https://jcaptcha.svn.sourceforge.net/svnroot/jcaptcha/trunk</connection>
@@ -252,6 +241,7 @@
                   <sourceEncoding>utf-8</sourceEncoding>
                   <minimumTokens>50</minimumTokens>
                   <targetJdk>1.3</targetJdk>
+                  <includeTests>true</includeTests>
               </configuration>  
           </plugin>
             
@@ -266,8 +256,21 @@
 	        <configuration>
 	          <source>1.3</source>
 	          <target>1.3</target>
+            <verbose>false</verbose>
+            <!--fork>true</fork>
+            <executable>${JDK4_HOME}/bin/javac</executable>
+            <compilerVersion>1.3</compilerVersion -->	          
 	        </configuration>
 	      </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <inherited>true</inherited>
+            <configuration>
+                <forkMode>once</forkMode>
+                <argLine>-Xms128m -Xmx256m -XX:MaxPermSize=256m</argLine>
+           </configuration>
+        </plugin>	      
 		    <plugin>
 	        <groupId>org.apache.maven.plugins</groupId>
 	        <artifactId>maven-clover-plugin</artifactId>
@@ -298,14 +301,5 @@
          </extension>
       </extensions>
 	  </build>
-
-	  <dependencies>
-	    <dependency>
-	      <groupId>junit</groupId>
-	      <artifactId>junit</artifactId>
-	      <version>3.8.1</version>
-	      <scope>test</scope>
-	    </dependency>	  
-	  </dependencies>
     
 </project>
