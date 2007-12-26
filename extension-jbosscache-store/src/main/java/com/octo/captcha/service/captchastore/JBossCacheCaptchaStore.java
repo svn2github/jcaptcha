@@ -7,6 +7,7 @@
 package com.octo.captcha.service.captchastore;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Locale;
 
 import org.jboss.cache.CacheException;
@@ -17,8 +18,8 @@ import com.octo.captcha.Captcha;
 import com.octo.captcha.service.CaptchaServiceException;
 
 /**
- * JBossCache implementation of the captcha store
- *
+ * JBossCache implementation of the captcha store. Needs JDK 5.0 with version 1.4.x 
+ * @see http://wiki.jboss.org/wiki/Wiki.jsp?page=JBossCache
  * @author <a href="mailto:antoine.veret@gmail.com">Antoine Véret</a>
  * @version 1.0
  */
@@ -119,7 +120,11 @@ public class JBossCacheCaptchaStore implements CaptchaStore {
 
     public Collection getKeys() {
         try {
-            return treeCache.getKeys(cacheQualifiedName);
+        	Collection keys = treeCache.getKeys(cacheQualifiedName); 
+            if (keys != null)
+            	return keys;
+            else
+            	return Collections.EMPTY_SET;
         } catch (CacheException e) {
             throw new RuntimeException(e);
         }
@@ -128,6 +133,7 @@ public class JBossCacheCaptchaStore implements CaptchaStore {
     public void empty() {
         try {
             treeCache.removeData(cacheQualifiedName);
+            treeCache.remove(cacheQualifiedName);
         } catch (CacheException e) {
             throw new RuntimeException(e);
         }

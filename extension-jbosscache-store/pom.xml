@@ -9,6 +9,20 @@
   <artifactId>jcaptcha-extension-jbosscache-store</artifactId>
   <name>Extension JBossCache Store</name>
   <version>1.0-SNAPSHOT</version>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.3</source>
+          <target>1.5</target>
+          <verbose>false</verbose>
+          <fork>false</fork>         	          
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>  
 	<repositories>
     <repository>
         <id>jboss-maven2</id>
