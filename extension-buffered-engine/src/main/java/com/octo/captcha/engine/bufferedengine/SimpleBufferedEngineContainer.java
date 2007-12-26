@@ -18,12 +18,13 @@
 
 package com.octo.captcha.engine.bufferedengine;
 
-import EDU.oswego.cs.dl.util.concurrent.ClockDaemon;
-import com.octo.captcha.engine.CaptchaEngine;
-import com.octo.captcha.engine.bufferedengine.buffer.CaptchaBuffer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.BeanFactory;
+
+import EDU.oswego.cs.dl.util.concurrent.ClockDaemon;
+
+import com.octo.captcha.engine.CaptchaEngine;
+import com.octo.captcha.engine.bufferedengine.buffer.CaptchaBuffer;
 
 /**
  * Simple implmentation of the BufferedEngineContainer with ClockDaemon
@@ -42,7 +43,7 @@ public class SimpleBufferedEngineContainer extends BufferedEngineContainer {
 
     private Long swapPeriod = new Long(1000);
 
-    protected BeanFactory factory = null;
+    //protected BeanFactory factory = null;
 
 
     public SimpleBufferedEngineContainer(CaptchaEngine engine, CaptchaBuffer memoryBuffer,
