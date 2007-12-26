@@ -34,6 +34,10 @@ public class RandomFontGeneratorTest extends TestCase {
     private RandomFontGenerator randomFontGenerator;
 
     private RandomFontGenerator randomFontGeneratorWithList;
+    
+    private int minFontSize = 8;
+    
+    private int maxFontSize = 8;
 
     /**
      * Constructor for RandomFontGeneratorTest.
@@ -44,14 +48,14 @@ public class RandomFontGeneratorTest extends TestCase {
 
     public void setUp() {
         this.randomFontGenerator =
-                new RandomFontGenerator(new Integer(10), new Integer(10));
+                new RandomFontGenerator(new Integer(minFontSize), new Integer(maxFontSize));
 
         Font[] fontsList = new Font[2];
         fontsList[0] = new Font("Courier", Font.BOLD, 10);
         fontsList[1] = new Font("Arial", Font.BOLD, 10);
 
         this.randomFontGeneratorWithList =
-                new RandomFontGenerator(new Integer(10), new Integer(10), fontsList);
+                new RandomFontGenerator(new Integer(minFontSize), new Integer(maxFontSize), fontsList);
     }
 
     public void testGetFont() {
@@ -99,7 +103,7 @@ public class RandomFontGeneratorTest extends TestCase {
         fontsList[0] = new Font("Courier", Font.BOLD, 10);
         fontsList[1] = arial;
 
-        java.util.List checkedFontList = this.randomFontGenerator.initializeFonts(fontsList);
+        java.util.List checkedFontList = this.randomFontGenerator.cleanFontList(fontsList);
         assertEquals(1, checkedFontList.size());
         assertEquals(arial, checkedFontList.get(0));
     }                                                                                        
@@ -112,8 +116,20 @@ public class RandomFontGeneratorTest extends TestCase {
         fontsList[0] = new Font("Courier", Font.BOLD, 10);
         fontsList[1] = new Font("Arial", Font.BOLD, 10);
 
-        java.util.List checkedFontList = this.randomFontGenerator.initializeFonts(fontsList);
+        java.util.List checkedFontList = this.randomFontGenerator.cleanFontList(fontsList);
         assertEquals("All fonts should be preserved", 2, checkedFontList.size());
+    }
+    
+    public void testMinFontSize() {
+    	Font helvetica = new Font("Helvetica", Font.BOLD, 2);
+    	Font styled = this.randomFontGeneratorWithList.applyStyle(helvetica);
+    	assertTrue(minFontSize <= styled.getSize());
+    }
+    
+    public void testMaxFontSize() {
+    	Font helvetica = new Font("Helvetica", Font.BOLD, 24);
+    	Font styled = this.randomFontGeneratorWithList.applyStyle(helvetica);
+    	assertTrue(maxFontSize >= styled.getSize());
     }
 
 }

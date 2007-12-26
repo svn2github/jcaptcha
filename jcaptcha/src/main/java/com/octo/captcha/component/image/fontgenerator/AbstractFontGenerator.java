@@ -45,8 +45,6 @@ public abstract class AbstractFontGenerator implements FontGenerator {
         return minFontSize;
     }
 
-    ;
-
     /**
      * @return the max font size for the generated image
      */

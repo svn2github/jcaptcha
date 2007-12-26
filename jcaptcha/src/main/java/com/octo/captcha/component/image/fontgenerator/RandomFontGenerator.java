@@ -46,26 +46,15 @@ public class RandomFontGenerator extends AbstractFontGenerator {
      */
     private String[] badFontNamePrefixes = defaultBadFontNamePrefixes;
 
-
     private static final int GENERATED_FONTS_ARRAY_SIZE = 3000;
 
-
-    private Font[] generatedFonts = new Font[GENERATED_FONTS_ARRAY_SIZE];
-
-
-    /**
-     * list of fonts given by constructor.
-     */
-    private java.util.List fonts = null;
-
+    private Font[] generatedFonts = null;
 
     protected Random myRandom = new SecureRandom();
 
     public RandomFontGenerator(Integer minFontSize, Integer maxFontSize) {
         super(minFontSize, maxFontSize);
-        fonts = initializeFonts(GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts());
-        checkInitializedFontsSize();
-        generatedFonts = generateFontArray();
+        initializeFonts(GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts());
     }
 
     public RandomFontGenerator(Integer minFontSize, Integer maxFontSize, Font[] fontsList) {
@@ -73,21 +62,23 @@ public class RandomFontGenerator extends AbstractFontGenerator {
         if (fontsList == null || fontsList.length < 1) {
             throw new IllegalArgumentException("fonts list cannot be null or empty");
         }
-        fonts = initializeFonts(fontsList);
-        checkInitializedFontsSize();
-        generatedFonts = generateFontArray();
+        initializeFonts(fontsList);
     }
 
     public RandomFontGenerator(Integer minFontSize, Integer maxFontSize, String[] badFontNamePrefixes) {
         super(minFontSize, maxFontSize);
-        this.badFontNamePrefixes = badFontNamePrefixes;
-        fonts = initializeFonts(GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts());
-        checkInitializedFontsSize();
-        generatedFonts = generateFontArray();
+        this.badFontNamePrefixes = badFontNamePrefixes;   
+        initializeFonts(GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts());
     }                                                                                                        
 
-    private void checkInitializedFontsSize() {
-        if (fonts.size() < 1) {
+	private void initializeFonts(Font[] fontList) {
+		List fonts = cleanFontList(fontList);
+        checkInitializedFontListSize(fonts);
+        generatedFonts = generateCustomStyleFontArray(fonts);
+	}
+    
+    private void checkInitializedFontListSize(List fontList) {
+        if (fontList.size() < 1) {
             throw new IllegalArgumentException("fonts list cannot be null or empty, some of your font are removed from the list by this class, Courrier and TimesRoman");
         }
     }
@@ -105,25 +96,32 @@ public class RandomFontGenerator extends AbstractFontGenerator {
     /**
      * @return a array of generated Fonts
      */
-    private Font[] generateFontArray() {
+    private Font[] generateCustomStyleFontArray(List fontList) {
         Font[] generatedFonts = new Font[GENERATED_FONTS_ARRAY_SIZE];
         for (int i = 0; i < GENERATED_FONTS_ARRAY_SIZE; i++) {
-            Font font = (Font) fonts.get(myRandom.nextInt(fonts.size()));
+            Font font = (Font) fontList.get(myRandom.nextInt(fontList.size()));
 
-            int plus = 0;
-            if (getMaxFontSize() - getMinFontSize() > 0) {
-                plus = Math.abs(myRandom.nextInt(getMaxFontSize()
-                        - getMinFontSize()));
-            }
-
-            Font styled =
-                    new Font(font.getFontName(),
-                            STYLES[myRandom.nextInt(STYLES.length)],
-                            getMinFontSize() + plus);
+            Font styled = applyStyle(font);
             generatedFonts[i] = applyCustomDeformationOnGeneratedFont(styled);
         }
         return generatedFonts;
     }
+
+	protected Font applyStyle(Font font) {
+		int fontSizeIncrement = 0;
+		if (getFontSizeDelta() > 0) {
+		    fontSizeIncrement = Math.abs(myRandom.nextInt(getFontSizeDelta()));
+		}
+
+		Font styled = font.deriveFont( 
+		                STYLES[myRandom.nextInt(STYLES.length)],
+		                getMinFontSize() + fontSizeIncrement);
+		return styled;
+	}
+
+	private int getFontSizeDelta() {
+		return getMaxFontSize() - getMinFontSize();
+	}
 
     /**
      * Provides a way for children class to customize the generated font array
@@ -142,7 +140,7 @@ public class RandomFontGenerator extends AbstractFontGenerator {
      * @return array of fonts
      * @see #requiredCharacters
      */
-    protected List initializeFonts(Font[] uncheckFonts) {
+    protected List cleanFontList(Font[] uncheckFonts) {
 
         // get a copy of the fonts
         // NB: be careful with this first array! -- the graphics environment obligingly
@@ -152,39 +150,64 @@ public class RandomFontGenerator extends AbstractFontGenerator {
         // add copy of copy of list of fonts because of asList's special class and also because
         // of the graphics environment's internal point
         goodFonts.addAll(Arrays.asList(uncheckFonts));
+
         // Iterate through all fonts, remove the bad ones
         for (Iterator iter = goodFonts.iterator(); iter.hasNext();) {
-            Font f = (Font) iter.next();
-
-            boolean removed = false;
-
-            // a font is removed if it cannot display the characters we need.
-
-            for (int i = 0; i < requiredCharacters.length(); i++) {
-                if (!f.canDisplay(requiredCharacters.charAt(i))) {
-                    iter.remove();
-                    removed = true;
-                    break;
-                }
+            
+        	Font f = (Font) iter.next();        	
+            if (!checkFontNamePrefix(iter, f)) {     		
+        		checkFontCanDisplayCharacters(iter, f);
             }
-
-            if (!removed)
-                // a font is also removed if it is prefixed by a known-bad name
-                for (int i = 0; i < badFontNamePrefixes.length; i++) {
-                    String prefix = badFontNamePrefixes[i];
-                    // verify prefix is not null
-                    if (prefix != null && !"".equals(prefix)) {
-                        // verify font name start with prefix
-                        if (f.getName().startsWith(prefix)) {
-                            iter.remove();
-                            break;
-                        }
-                    }                                          
-                }
         }
 
         return goodFonts;
     }
+
+	/**
+     * @param iter Font iterator
+     * @param f The current font
+     * @return true if the font has been removed
+     */
+	private boolean checkFontNamePrefix(Iterator iter, Font f) {
+		
+		boolean removed = false;
+		
+		// a font is also removed if it is prefixed by a known-bad name
+		for (int i = 0; i < badFontNamePrefixes.length; i++) {
+		    String prefix = badFontNamePrefixes[i];
+		    // verify prefix is not null
+		    if (prefix != null && !"".equals(prefix)) {
+		        // verify font name start with prefix
+		        if (f.getName().startsWith(prefix)) {
+		            iter.remove();
+		            removed = true;
+		            break;
+		        }
+		    }                                          
+		}
+		
+		return removed;
+	}
+
+    /**
+     * @param iter Font iterator
+     * @param f The current font
+     * @return true if the font has been removed
+     */
+	private boolean checkFontCanDisplayCharacters(Iterator iter, Font f) {
+
+		boolean removed = false;
+		// a font is removed if it cannot display the characters we need.
+
+		for (int i = 0; i < requiredCharacters.length(); i++) {
+		    if (!f.canDisplay(requiredCharacters.charAt(i))) {
+		        iter.remove();
+		        removed = true;
+		        break;
+		    }
+		}
+		return removed;
+	}
 
     /**
      * @return a list of characters that this class must be able to represent
