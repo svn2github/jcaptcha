@@ -18,9 +18,12 @@
 
 package com.octo.captcha.component.image.backgroundgenerator;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+
 import junit.framework.TestCase;
 
-import java.io.File;
+import com.octo.captcha.CaptchaException;
 
 public class FileReaderRandomBackgroundGeneratorTest extends TestCase {
     FileReaderRandomBackgroundGenerator fileReaderRandomBackgroundGenerator;
@@ -30,32 +33,50 @@ public class FileReaderRandomBackgroundGeneratorTest extends TestCase {
         fileReaderRandomBackgroundGenerator =
                 new FileReaderRandomBackgroundGenerator(new Integer(2), new Integer(2), "imagedir");
     }
+    
+    public void testFindDirectoryNotExisting() throws Exception {
 
-    public void testFindDirectory() throws Exception {
-
-/*
-        File dir = fileReaderRandomBackgroundGenerator.findDirectory("com/octo");
-        assertValidDir(dir, "octo");
         try {
-            dir = fileReaderRandomBackgroundGenerator.findDirectory("does not exists");
+            fileReaderRandomBackgroundGenerator.findDirectory("does not exists");
             fail("should never pass");
-        } catch (Exception e) {
+        } catch (CaptchaException e) {
             // should throw exception
         }
-        dir = fileReaderRandomBackgroundGenerator.findDirectory("imagedir");
+    }
+
+    public void testFindDirectoryClasspathDir() throws Exception {
+
+    	File dir = fileReaderRandomBackgroundGenerator.findDirectory("imagedir");
         assertValidDir(dir, "imagedir");
-        dir = fileReaderRandomBackgroundGenerator.findDirectory("emptyimagedir");
+        
+        dir = fileReaderRandomBackgroundGenerator.findDirectory(
+        	"com/octo/captcha/component/image/backgroundgenerator");
+        assertValidDir(dir, "backgroundgenerator");
+    }
+
+    public void testFindDirectoryClasspathEmptyDir() throws Exception {
+
+    	File dir = fileReaderRandomBackgroundGenerator.findDirectory("emptyimagedir");
         assertValidDir(dir, "emptyimagedir");
+    }
+    
+    public void testCtorEmptyImageDir() throws Exception {
+
         try {
             new FileReaderRandomBackgroundGenerator(new Integer(2), new Integer(2), "emptyimagedir");
             fail("should never pass");
-        } catch (Exception e) {
+        } catch (CaptchaException e) {
             // should throw exception
-        }
-        */
+        }        
     }
 
-
+    public void testGetBackground() throws Exception {
+    	FileReaderRandomBackgroundGenerator backgroundGenerator = 
+    		new FileReaderRandomBackgroundGenerator(new Integer(2), new Integer(2), "imagedir");
+    	BufferedImage image = backgroundGenerator.getBackground();
+    	assertNotNull(image);
+    }
+    
     /**
      * Requires that directory be a directory, be readable, and have the right name.
      */

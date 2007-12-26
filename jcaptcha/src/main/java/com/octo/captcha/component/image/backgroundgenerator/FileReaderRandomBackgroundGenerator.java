@@ -22,7 +22,7 @@ import java.util.List;
 
 /**
  * <p>File reader background generator that return a random image (JPEG ONLY) from the ones found in the directory </p>
- * <p/>
+ * <p>You can place images in the classpath directory, in this case take care to use a unique directory name (not already contained in a jar file)</p>
  * TODO : add some gif, bmp,... reader facilities.
  *
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
@@ -37,7 +37,7 @@ public class FileReaderRandomBackgroundGenerator extends
     public FileReaderRandomBackgroundGenerator(Integer width,
                                                Integer height, String rootPath) {
         super(width, height);
-        //this.images=images;
+
         if (rootPath != null)
             this.rootPath = rootPath;
 
@@ -85,16 +85,16 @@ public class FileReaderRandomBackgroundGenerator extends
         File dir = new File(rootPath);
         StringBuffer triedPath = new StringBuffer();
         appendFilePath(triedPath, dir);
-        if (!dir.canRead() || !dir.isDirectory()) {
+        if (isNotReadable(dir)) {
             //try with . parent
             dir = new File(".", rootPath);
             appendFilePath(triedPath, dir);
-            if (!dir.canRead() || !dir.isDirectory()) {
+            if (isNotReadable(dir)) {
                 //try with / parent
                 dir = new File("/", rootPath);
                 appendFilePath(triedPath, dir);
 
-                if (!dir.canRead() || !dir.isDirectory()) {
+                if (isNotReadable(dir)) {
                     //trying with ressource
                     URL url = FileReaderRandomBackgroundGenerator.class.getClassLoader().getResource(rootPath);
                     if (url != null) {
@@ -115,7 +115,7 @@ public class FileReaderRandomBackgroundGenerator extends
             }
         }
         // FIXME - avoid double-checking
-        if (!dir.canRead() || !dir.isDirectory()) {
+        if (isNotReadable(dir)) {
             // dir is still no good -- let's try directories in the system classpath
             StringTokenizer token = getClasspathFromSystemProperty();
             while (token.hasMoreElements()) {
@@ -131,7 +131,7 @@ public class FileReaderRandomBackgroundGenerator extends
         }
 
 
-        if (!dir.canRead() || !dir.isDirectory()) {
+        if (isNotReadable(dir)) {
             throw new CaptchaException("All tried paths :'" + triedPath.toString() + "' is not" +
                     " a directory or cannot be read");
         }
@@ -142,10 +142,13 @@ public class FileReaderRandomBackgroundGenerator extends
         return dir;
     }
 
-    private StringTokenizer getClasspathFromSystemProperty() {
-        String classpath;
+	private boolean isNotReadable(File dir) {
+		return !dir.canRead() || !dir.isDirectory();
+	}
 
-        classpath = System.getProperty("java.class.path");
+    private StringTokenizer getClasspathFromSystemProperty() {
+
+        String classpath = System.getProperty("java.class.path");
         StringTokenizer token = new StringTokenizer(classpath, File.pathSeparator);
         return token;
     }
@@ -176,23 +179,16 @@ public class FileReaderRandomBackgroundGenerator extends
     }
 
     private static BufferedImage getImage(File o) {
-        BufferedImage out = null;
+        
         try {
-
-            //            ImageInfo info = new ImageInfo();
-            //            Image image = ToolkitFactory.getToolkit().createImage(o.toString());
-            //            info.setInput(new FileInputStream(o));
-            //            out = new BufferedImage(info.getWidth(), info.getHeight(),BufferedImage.TYPE_INT_RGB );
-            //            out.getGraphics().drawImage(image,out.getWidth(),out.getHeight(),null);
-            //            out.getGraphics().dispose();
-            //
             FileInputStream fis = new FileInputStream(o);
             JPEGImageDecoder decoder = JPEGCodec.createJPEGDecoder(fis);
-            out = decoder.decodeAsBufferedImage();
+            BufferedImage out = decoder.decodeAsBufferedImage();
             fis.close();
 
             // Return the format name
             return out;
+            
         } catch (IOException e) {
             throw new CaptchaException("Unknown error during file reading ", e);
         } catch (ImageFormatException e) {
