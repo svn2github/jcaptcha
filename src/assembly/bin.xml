@@ -19,7 +19,7 @@
       <outputDirectory>/</outputDirectory>
     </file>
     <file>
-      <source>module-struts/src/main/resources/META-INF/jcaptcha.tld</source>
+      <source>integration-struts/src/main/resources/META-INF/jcaptcha.tld</source>
       <outputDirectory>/</outputDirectory>
     </file>    
   </files>
@@ -49,15 +49,27 @@
   <moduleSets>
     <moduleSet>
       <includes>
-        <include>com.octo.captcha:jcaptcha-module-acegi</include>
-        <include>com.octo.captcha:jcaptcha-module-filter</include>
-        <include>com.octo.captcha:jcaptcha-module-freetts</include>
-        <include>com.octo.captcha:jcaptcha-module-roller</include>
-        <include>com.octo.captcha:jcaptcha-module-struts</include>
+        <include>com.octo.captcha:jcaptcha-extension-buffered-engine</include>
+        <include>com.octo.captcha:jcaptcha-extension-ehcache-store</include>
+        <include>com.octo.captcha:jcaptcha-extension-jbosscache-store</include>
+        <include>com.octo.captcha:jcaptcha-extension-sound-freetts</include>
       </includes>
       <binaries>
         <includeDependencies>false</includeDependencies>
-        <outputDirectory>modules/</outputDirectory>
+        <outputDirectory>extensions/</outputDirectory>
+        <unpack>false</unpack>
+      </binaries>
+    </moduleSet>
+    <moduleSet>
+      <includes>
+        <include>com.octo.captcha:jcaptcha-integration-acegi</include>
+        <include>com.octo.captcha:jcaptcha-integration-filter</include>
+        <include>com.octo.captcha:jcaptcha-integration-roller</include>
+        <include>com.octo.captcha:jcaptcha-integration-struts</include>
+      </includes>
+      <binaries>
+        <includeDependencies>false</includeDependencies>
+        <outputDirectory>integrations/</outputDirectory>
         <unpack>false</unpack>
       </binaries>
     </moduleSet>

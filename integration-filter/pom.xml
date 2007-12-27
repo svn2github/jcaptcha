@@ -6,8 +6,8 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.octo.captcha</groupId>
-  <artifactId>jcaptcha-module-filter</artifactId>
-  <name>Module Filter</name>
+  <artifactId>jcaptcha-integration-filter</artifactId>
+  <name>Integration Filter</name>
   <version>1.0-SNAPSHOT</version>
   <dependencies>
     <dependency>

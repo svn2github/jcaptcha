@@ -18,11 +18,11 @@
       <module>extension-ehcache-store</module>
       <module>extension-jbosscache-store</module>
       <module>extension-buffered-engine</module>
-      <module>module-freetts</module>
-      <module>module-acegi</module>
-    	<module>module-filter</module>
-    	<module>module-struts</module>
-    	<module>module-roller</module>
+      <module>extension-sound-freetts</module>
+      <module>integration-acegi</module>
+    	<module>integration-filter</module>
+    	<module>integration-struts</module>
+    	<module>integration-roller</module>
   	</modules>
   	    
     <organization>

@@ -6,8 +6,8 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.octo.captcha</groupId>
-  <artifactId>jcaptcha-module-acegi</artifactId>
-  <name>Module Acegi</name>
+  <artifactId>jcaptcha-integration-acegi</artifactId>
+  <name>Integration Acegi</name>
   <version>1.0-SNAPSHOT</version>
   <dependencies>
     <dependency>

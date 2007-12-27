@@ -7,10 +7,9 @@
       <version>1.0-SNAPSHOT</version>
   </parent>
     
-  <artifactId>jcaptcha-module-freetts</artifactId>
-  <packaging>jar</packaging>
+  <artifactId>jcaptcha-extension-sound-freetts</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <name>Module FreeTTS</name>
+  <name>Extension Sound FreeTTS</name>
   
   <dependencies>
 
