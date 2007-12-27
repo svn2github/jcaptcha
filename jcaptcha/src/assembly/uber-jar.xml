@@ -17,8 +17,6 @@
       <includes>
         <include>com.octo.captcha:jcaptcha-api</include>
         <include>com.jhlabs:imaging</include>
-        <include>commons-collections:commons-collections</include>
-        <include>commons-logging:commons-logging</include>
       </includes>
     </dependencySet>
   </dependencySets>
