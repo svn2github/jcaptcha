@@ -18,16 +18,32 @@
 
 package com.octo.captcha.engine.bufferedengine.buffer;
 
-import com.octo.captcha.Captcha;
-import com.octo.captcha.CaptchaException;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.RandomAccessFile;
+import java.io.Serializable;
+import java.io.StreamCorruptedException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Locale;
+import java.util.NoSuchElementException;
+
 import org.apache.commons.collections.MapIterator;
 import org.apache.commons.collections.buffer.UnboundedFifoBuffer;
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import java.io.*;
-import java.util.*;
+import com.octo.captcha.Captcha;
+import com.octo.captcha.CaptchaException;
 
 /**
  * Simple implmentation of a disk captcha buffer
@@ -185,7 +201,6 @@ public class DiskCaptchaBuffer implements CaptchaBuffer {
             final ObjectOutputStream objstr = new ObjectOutputStream(outstr);
             objstr.writeObject(element);
             objstr.close();
-            final byte[] buffer = outstr.toByteArray();
 
             //check if there is space
             store(element, locale);
@@ -434,11 +449,6 @@ public class DiskCaptchaBuffer implements CaptchaBuffer {
          * the size of this element.
          */
         private int blockSize;
-
-        /**
-         * The expiry time in milliseconds
-         */
-        private long expiryTime;
 
     }
 

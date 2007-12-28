@@ -18,9 +18,6 @@ import java.util.Locale;
 
 /**
  * @author Benoit
- *         <p/>
- *         TODO To change the template for this generated type comment go to Window - Preferences - Java - Code Style -
- *         Code Templates
  */
 public abstract class BufferedEngineContainerTestAbstract extends TestCase {
 

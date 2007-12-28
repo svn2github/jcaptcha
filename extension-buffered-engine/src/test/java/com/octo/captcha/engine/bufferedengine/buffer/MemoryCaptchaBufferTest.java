@@ -11,6 +11,10 @@
  */
 package com.octo.captcha.engine.bufferedengine.buffer;
 
+import java.util.NoSuchElementException;
+
+import org.apache.commons.collections.buffer.UnboundedFifoBuffer;
+
 
 public class MemoryCaptchaBufferTest extends CaptchaBufferTestAbstract {
 
@@ -21,4 +25,12 @@ public class MemoryCaptchaBufferTest extends CaptchaBufferTestAbstract {
         return new MemoryCaptchaBuffer();
     }
 
+    public void testRemoveEmptyBuffer() {
+    	UnboundedFifoBuffer fifoBuffer = new UnboundedFifoBuffer();
+    	try {
+			fifoBuffer.remove();
+			fail("should throw an Exception");
+		} catch (NoSuchElementException e) {
+		}
+    }
 }
