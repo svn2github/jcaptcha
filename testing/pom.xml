@@ -13,7 +13,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.octo.captcha</groupId>
   <artifactId>jcaptcha-testing</artifactId>
-  <name>Testing aggregator</name>
+  <name>Testing</name>
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   
