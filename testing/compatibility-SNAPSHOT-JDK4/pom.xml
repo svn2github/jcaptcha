@@ -1,6 +1,12 @@
-<?xml version="1.0"?><project>
+<?xml version="1.0"?>
+<!--
+  ~ JCaptcha, the open source java framework for captcha definition and integration
+  ~ Copyright (c)  2007 jcaptcha.net. All Rights Reserved.
+  ~ See the LICENSE.txt file distributed with this package.
+  -->
+<project>
   <parent>
-    <artifactId>jcaptcha-testing-aggregator</artifactId>
+    <artifactId>jcaptcha-testing</artifactId>
     <groupId>com.octo.captcha</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent>

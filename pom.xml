@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ JCaptcha, the open source java framework for captcha definition and integration
+  ~ Copyright (c)  2007 jcaptcha.net. All Rights Reserved.
+  ~ See the LICENSE.txt file distributed with this package.
+  -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 		
 		<groupId>com.octo.captcha</groupId>
-    <artifactId>jcaptcha-root-aggregator</artifactId>
+    <artifactId>jcaptcha-home</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
@@ -74,14 +79,14 @@
         <url>${siteDeployURL}</url>
       </site>	  
       <repository>
-        <id>octo-release-repo</id>
-        <name>OCTO Release repository</name>
-        <url>http://forge.octo.com/archiva/repository/release</url>
+        <id>archiva.forge.octo.com</id>
+        <name>OCTO Forge Release repository</name>
+        <url>dav:http://forge.octo.com/archiva/repository/forge-releases</url>
       </repository>
       <snapshotRepository>
-        <id>octo-snapshot-repo</id>
-        <name>OCTO Snapshot repository</name>
-        <url>http://forge.octo.com/archiva/repository/snapshot</url>
+        <id>archiva.forge.octo.com</id>
+        <name>OCTO Forge Snapshot repository</name>
+        <url>dav:http://forge.octo.com/archiva/repository/forge-snapshots</url>
       </snapshotRepository>
     </distributionManagement>
 	  
