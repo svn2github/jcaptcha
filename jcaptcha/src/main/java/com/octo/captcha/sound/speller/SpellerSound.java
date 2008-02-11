@@ -18,7 +18,7 @@ import javax.sound.sampled.AudioInputStream;
  */
 public class SpellerSound extends SoundCaptcha {
 
-    private String response;
+	private String response;
 
     public SpellerSound(String thequestion,
                         AudioInputStream thechallenge, String theresponse) {
@@ -35,7 +35,7 @@ public class SpellerSound extends SoundCaptcha {
     }
 
     public Boolean validateResponse(String theresponse) {
-        return new Boolean(this.response.equalsIgnoreCase(theresponse));
+        return Boolean.valueOf(this.response.equalsIgnoreCase(theresponse));
     }
 
 }

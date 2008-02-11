@@ -6,16 +6,16 @@
 
 package com.octo.captcha.sound;
 
-import com.octo.captcha.component.sound.wordtosound.WordToSound;
-import com.octo.captcha.CaptchaException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Locale;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
-import javax.sound.sampled.AudioFileFormat;
-import java.util.Locale;
-import java.io.InputStream;
-import java.io.IOException;
+
+import com.octo.captcha.CaptchaException;
+import com.octo.captcha.component.sound.wordtosound.WordToSound;
 
 /**
  * Allow to test Sound captcha support without a real implementation

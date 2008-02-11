@@ -64,8 +64,8 @@ public class RunableAbstractManageableCaptchaServiceTest extends RunableAbstract
             assertEquals("Sould still be the mockEngine...",
                     MockCaptchaEngine.class.getName(),
                     getMService().getCaptchaEngineClass());
-
         }
+        
         try {
             getMService().setCaptchaEngineClass("java.lang.String");
             fail("shoul have thown an exception");
@@ -73,8 +73,8 @@ public class RunableAbstractManageableCaptchaServiceTest extends RunableAbstract
             assertEquals("Sould still be the mockEngine...",
                     MockCaptchaEngine.class.getName(),
                     getMService().getCaptchaEngineClass());
-
         }
+        
         assertEquals("Sould still be the mockEngine...", MockCaptchaEngine.class.getName(),
                 getMService().getCaptchaEngineClass());
 
@@ -87,9 +87,7 @@ public class RunableAbstractManageableCaptchaServiceTest extends RunableAbstract
             assertEquals("Sould be the mockEngine...",
                     MockCaptchaEngine.class.getName(),
                     getMService().getCaptchaEngineClass());
-
         }
-
     }
 
     public void testEmptyCaptchaStore() throws Exception {
@@ -263,6 +261,7 @@ public class RunableAbstractManageableCaptchaServiceTest extends RunableAbstract
                 service.validateResponseForID("unknown", "false");
                 fail("should have thrown an exception");
             } catch (CaptchaServiceException e) {
+            	assertNotNull(e.getMessage());
             }
             assertEquals("should not have been incremented", CAPTCHA_STORE_LOAD_BEFORE_GARBAGE_COLLECTION,
                     getMService().getNumberOfUncorrectResponses());
@@ -296,6 +295,7 @@ public class RunableAbstractManageableCaptchaServiceTest extends RunableAbstract
                 service.validateResponseForID("unknown", "false");
                 fail("should have thrown an exception");
             } catch (CaptchaServiceException e) {
+            	assertNotNull(e.getMessage());
             }
             assertEquals("should not have been incremented", CAPTCHA_STORE_LOAD_BEFORE_GARBAGE_COLLECTION,
                     getMService().getNumberOfCorrectResponses());

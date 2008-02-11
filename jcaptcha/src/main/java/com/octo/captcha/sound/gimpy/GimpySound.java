@@ -19,7 +19,7 @@ import javax.sound.sampled.AudioInputStream;
  */
 public class GimpySound extends SoundCaptcha {
 
-    private String response;
+	private String response;
 
     public GimpySound(String thequestion,
                       AudioInputStream thechallenge, String theresponse) {
@@ -36,7 +36,7 @@ public class GimpySound extends SoundCaptcha {
     }
 
     public Boolean validateResponse(String theresponse) {
-        return new Boolean(this.response.equalsIgnoreCase(theresponse));
+        return Boolean.valueOf(this.response.equalsIgnoreCase(theresponse));
     }
 
 }

@@ -47,7 +47,6 @@ public class FilteredBaffleListGimpyEngine
         com.jhlabs.image.RippleFilter ripple = new com.jhlabs.image.RippleFilter();
         com.jhlabs.image.TwirlFilter twirl = new com.jhlabs.image.TwirlFilter();
         com.jhlabs.image.WaterFilter water = new com.jhlabs.image.WaterFilter();
-        com.jhlabs.image.MarbleFilter marble = new com.jhlabs.image.MarbleFilter();
         com.jhlabs.image.WeaveFilter weaves = new com.jhlabs.image.WeaveFilter();
         com.jhlabs.image.CrystalizeFilter crystal = new com.jhlabs.image.CrystalizeFilter();
 

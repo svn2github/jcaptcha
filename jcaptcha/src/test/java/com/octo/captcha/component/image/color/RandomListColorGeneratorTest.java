@@ -29,14 +29,6 @@ import java.awt.*;
 public class RandomListColorGeneratorTest extends TestCase {
     private RandomListColorGenerator colorGenerator = null;
 
-    protected void setUp() throws Exception {
-        super.setUp();
-    }
-
-    protected void tearDown() throws Exception {
-        super.tearDown();
-    }
-
     public void testNominalCase() {
         Color[] colorList = new Color[2];
 
@@ -66,7 +58,7 @@ public class RandomListColorGeneratorTest extends TestCase {
             colorGenerator = new RandomListColorGenerator(colorList);
             fail();
         } catch (CaptchaException e) {
-            // Expected case
+        	assertNotNull(e.getMessage());
         }
     }
 

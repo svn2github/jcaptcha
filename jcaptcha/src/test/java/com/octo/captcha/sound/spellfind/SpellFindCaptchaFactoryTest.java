@@ -18,12 +18,12 @@
 
 package com.octo.captcha.sound.spellfind;
 
-import com.octo.captcha.CaptchaException;
-import com.octo.captcha.sound.speller.SpellerSoundFactory;
-import com.octo.captcha.sound.spellfind.SpellFindCaptchaFactory;
-import com.octo.captcha.sound.WordToSoundMock;
-import com.octo.captcha.component.word.wordgenerator.RandomWordGenerator;
 import junit.framework.TestCase;
+
+import com.octo.captcha.CaptchaException;
+import com.octo.captcha.component.word.wordgenerator.RandomWordGenerator;
+import com.octo.captcha.sound.WordToSoundMock;
+import com.octo.captcha.sound.speller.SpellerSoundFactory;
 
 public class SpellFindCaptchaFactoryTest extends TestCase {
 

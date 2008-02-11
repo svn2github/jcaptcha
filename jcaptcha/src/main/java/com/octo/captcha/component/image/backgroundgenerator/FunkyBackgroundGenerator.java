@@ -70,8 +70,6 @@ public class FunkyBackgroundGenerator extends AbstractBackgroundGenerator {
         float height = getImageHeight();
         float width = getImageWidth();
 
-        float diag = (float) Math.sqrt(height * height + width * width);
-
         for (int j = 0; j < getImageHeight(); j++) {
             for (int i = 0; i < getImageWidth(); i++) {
                 float leftUpRatio = (1 - i / width) * (1 - j / height);

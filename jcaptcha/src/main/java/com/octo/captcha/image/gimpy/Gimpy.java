@@ -21,7 +21,7 @@ import java.io.Serializable;
  */
 public class Gimpy extends ImageCaptcha implements Serializable {
 
-    private String response;
+	private String response;
 
     Gimpy(String question, BufferedImage challenge, String response) {
         super(question, challenge);
@@ -45,7 +45,7 @@ public class Gimpy extends ImageCaptcha implements Serializable {
      * @return true if the given response equals the internal response, false otherwise.
      */
     private final Boolean validateResponse(final String response) {
-        return new Boolean(response.equals(this.response));
+        return Boolean.valueOf(response.equals(this.response));
     }
 
 }

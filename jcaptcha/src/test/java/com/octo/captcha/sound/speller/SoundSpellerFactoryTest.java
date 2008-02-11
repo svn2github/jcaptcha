@@ -18,17 +18,13 @@
 
 package com.octo.captcha.sound.speller;
 
-import com.octo.captcha.CaptchaException;
-import com.octo.captcha.sound.WordToSoundMock;
-import com.octo.captcha.component.word.worddecorator.SpellerWordDecorator;
-import com.octo.captcha.component.word.wordgenerator.RandomWordGenerator;
 import junit.framework.TestCase;
 
-public class SoundSpellerFactoryTest extends TestCase {
+import com.octo.captcha.CaptchaException;
+import com.octo.captcha.component.word.wordgenerator.RandomWordGenerator;
+import com.octo.captcha.sound.WordToSoundMock;
 
-    public SoundSpellerFactoryTest(String s) {
-        super(s);
-    }
+public class SoundSpellerFactoryTest extends TestCase {
 
     public void testSpellerSoundFactory() throws Exception {
         try {

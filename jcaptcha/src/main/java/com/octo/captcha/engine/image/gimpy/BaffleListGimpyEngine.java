@@ -18,6 +18,8 @@
 
 package com.octo.captcha.engine.image.gimpy;
 
+import java.awt.Color;
+
 import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
 import com.octo.captcha.component.image.backgroundgenerator.UniColorBackgroundGenerator;
 import com.octo.captcha.component.image.fontgenerator.FontGenerator;
@@ -25,8 +27,6 @@ import com.octo.captcha.component.image.fontgenerator.RandomFontGenerator;
 import com.octo.captcha.component.image.textpaster.BaffleRandomTextPaster;
 import com.octo.captcha.component.image.textpaster.TextPaster;
 import com.octo.captcha.engine.image.ListImageCaptchaEngine;
-
-import java.awt.*;
 
 /**
  * <p>Description: </p>

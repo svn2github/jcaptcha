@@ -15,7 +15,8 @@ import com.octo.captcha.text.TextCaptcha;
  * @version 1.0
  */
 public class MathCaptcha extends TextCaptcha {
-    private String response;
+
+	private String response;
 
     MathCaptcha(String question, String challenge, String response) {
         super(question, challenge);
@@ -39,9 +40,6 @@ public class MathCaptcha extends TextCaptcha {
      * @return true if the given response equals the internal response, false otherwise.
      */
     private final Boolean validateResponse(final String response) {
-        return new Boolean(response.equals(this.response));
+        return Boolean.valueOf(response.equals(this.response));
     }
-
-    ;
-
 }

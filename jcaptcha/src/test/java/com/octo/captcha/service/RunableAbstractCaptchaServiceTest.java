@@ -33,6 +33,7 @@ public class RunableAbstractCaptchaServiceTest extends TestCase {
         } catch (Exception e) {
             assertTrue("IllegalArgumentException attended", e instanceof IllegalArgumentException);
         }
+
         try {
             new MockedCaptchaService(new MapCaptchaStore(), null);
             fail("should have thrown an exception");
@@ -72,7 +73,7 @@ public class RunableAbstractCaptchaServiceTest extends TestCase {
                 service.validateResponseForID(id, "true");
                 fail("The tiket is invalid, should throw an exception");
             } catch (CaptchaServiceException e) {
-                //ok
+            	assertNotNull(e.getMessage());
             }
             //Should be ok after new question
             service.getQuestionForID(id);

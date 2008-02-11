@@ -33,13 +33,6 @@ public class DummyWordGeneratorTest extends TestCase {
     private DummyWordGenerator dummyWordGenerator;
     private String expectedString = "JCAPTCHA";
 
-    /**
-     * Constructor for DummyWordGeneratorTest.
-     */
-    public DummyWordGeneratorTest(String name) {
-        super(name);
-    }
-
     public void setUp() {
         this.dummyWordGenerator = new DummyWordGenerator(this.expectedString);
     }
@@ -47,25 +40,20 @@ public class DummyWordGeneratorTest extends TestCase {
     public void testGetDefaultWord() {
         this.dummyWordGenerator = new DummyWordGenerator(null);
         String expected = this.expectedString;
-        Integer expectedLength = new Integer(8);
         String word = this.dummyWordGenerator.getWord(new Integer(8));
         assertEquals(expected, word);
     }
 
     public void testGetWordInteger() {
         String expected = this.expectedString;
-        Integer expectedLength = new Integer(10);
         String word = this.dummyWordGenerator.getWord(new Integer(10));
         assertEquals(expected + expected.substring(0, 2), word);
-        //assertEquals(expectedLength.intValue(),word.length());
     }
 
     public void testGetWordIntegerLocale() {
         String expected = this.expectedString;
-        Integer expectedLength = new Integer(10);
         String word = this.dummyWordGenerator.getWord(new Integer(10), Locale.US);
         assertEquals(expected + expected.substring(0, 2), word);
-        //assertEquals(expectedLength.intValue(),word.length());
     }
 
 }

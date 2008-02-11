@@ -6,18 +6,18 @@
 
 package com.octo.captcha.sound.gimpy;
 
-import com.octo.captcha.CaptchaException;
-import com.octo.captcha.CaptchaQuestionHelper;
-import com.octo.captcha.component.sound.wordtosound.WordToSound;
-import com.octo.captcha.component.word.worddecorator.WordDecorator;
-import com.octo.captcha.component.word.wordgenerator.WordGenerator;
-import com.octo.captcha.sound.SoundCaptcha;
-import com.octo.captcha.sound.SoundCaptchaFactory;
-
-import javax.sound.sampled.AudioInputStream;
 import java.security.SecureRandom;
 import java.util.Locale;
 import java.util.Random;
+
+import javax.sound.sampled.AudioInputStream;
+
+import com.octo.captcha.CaptchaException;
+import com.octo.captcha.CaptchaQuestionHelper;
+import com.octo.captcha.component.sound.wordtosound.WordToSound;
+import com.octo.captcha.component.word.wordgenerator.WordGenerator;
+import com.octo.captcha.sound.SoundCaptcha;
+import com.octo.captcha.sound.SoundCaptchaFactory;
 
 /**
  * @author Gandin Mathieu
@@ -29,8 +29,6 @@ public class GimpySoundFactory extends SoundCaptchaFactory {
     private WordGenerator wordGenerator;
 
     private WordToSound word2Sound;
-
-    private WordDecorator wordDecorator;
 
     private Random myRandom = new SecureRandom();
 
@@ -56,28 +54,6 @@ public class GimpySoundFactory extends SoundCaptchaFactory {
         }
         this.wordGenerator = thewordGenerator;
         this.word2Sound = theword2Sound;
-    }
-
-    /**
-     * Construct a GimpySoundFactory from a word generator component and a wordtosound component
-     */
-    public GimpySoundFactory(WordGenerator wordGenerator, WordToSound word2Sound,
-                             WordDecorator wordDecorator) {
-        if (wordGenerator == null) {
-            throw new CaptchaException("Invalid configuration for a "
-                    + "SpellingSoundFactory : WordGenerator can't be null");
-        }
-        if (word2Sound == null) {
-            throw new CaptchaException("Invalid configuration for a "
-                    + "SpellingSoundFactory : Word2Sound can't be null");
-        }
-        if (wordDecorator == null) {
-            throw new CaptchaException("Invalid configuration for a "
-                    + "SpellingSoundFactory : wordAbstractor can't be null");
-        }
-        this.wordGenerator = wordGenerator;
-        this.word2Sound = word2Sound;
-        this.wordDecorator = wordDecorator;
     }
 
     public WordToSound getWordToSound() {

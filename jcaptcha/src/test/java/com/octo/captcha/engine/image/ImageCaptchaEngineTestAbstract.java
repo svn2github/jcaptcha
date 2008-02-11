@@ -29,14 +29,14 @@ public abstract class ImageCaptchaEngineTestAbstract extends TestCase {
             buildCaptchaEngine(null);
             fail("Cannot build with null factories");
         } catch (CaptchaEngineException e) {
-
+        	assertNotNull(e.getMessage());
         }
 
         try {
             buildCaptchaEngine(new ImageCaptchaFactory[]{});
             fail("Cannot build with null factories");
         } catch (CaptchaEngineException e) {
-
+        	assertNotNull(e.getMessage());
         }
 
     }
@@ -49,18 +49,16 @@ public abstract class ImageCaptchaEngineTestAbstract extends TestCase {
             defaultImageCaptchaEngine.setFactories(null);
             fail("cannot set null factories");
         } catch (CaptchaEngineException e) {
-
+        	assertNotNull(e.getMessage());
         }
 
         try {
             defaultImageCaptchaEngine.setFactories(new ImageCaptchaFactory[]{});
             fail("cannot set null factories");
         } catch (CaptchaEngineException e) {
-
+        	assertNotNull(e.getMessage());
         }
-
     }
-
 
     public void testWrongTypeSetFactories() throws Exception {
         this.defaultImageCaptchaEngine = (ImageCaptchaEngine) buildCaptchaEngine(factories);
@@ -69,9 +67,8 @@ public abstract class ImageCaptchaEngineTestAbstract extends TestCase {
             defaultImageCaptchaEngine.setFactories(new SoundCaptchaFactory[]{new MockSoundCaptchaFactory()});
             fail("cannot set wrong type factories");
         } catch (CaptchaEngineException e) {
-
+        	assertNotNull(e.getMessage());
         }
-
     }
 
 
@@ -79,16 +76,9 @@ public abstract class ImageCaptchaEngineTestAbstract extends TestCase {
         this.defaultImageCaptchaEngine = (ImageCaptchaEngine) buildCaptchaEngine(new MockImageCaptchaFactory[]{MOCK_IMAGE_CAPTCHA_FACTORY_1});
         assertEquals(factories[0], defaultImageCaptchaEngine.getFactories()[0]);
 
-
         defaultImageCaptchaEngine.setFactories(otherFactories);
         assertEquals(otherFactories[0], defaultImageCaptchaEngine.getFactories()[0]);
-
-
     }
 
-
     abstract CaptchaEngine buildCaptchaEngine(Object[] parameter);
-   
-
-
 }

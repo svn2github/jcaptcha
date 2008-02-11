@@ -82,7 +82,6 @@ public class LineTextDecorator implements TextDecorator {
         for (int j = 0; j < attributedWord.getIterator().getEndIndex(); j++) {
             g2.setColor(linesColorGenerator.getNextColor());
             Rectangle2D bounds = newAttrString.getBounds(j).getFrame();
-            double circleMaxSize = (double) bounds.getWidth() / 2;
             for (int i = 0; i < numberOfLinesPerGlyph.intValue(); i++) {
                 // double circleSize = circleMaxSize * (1 + myRandom.nextDouble()) / 2;
                 double circlex = bounds.getMinX() + bounds.getWidth() * 0.7 * myRandom.nextDouble();

@@ -6,10 +6,9 @@
 
 package com.octo.captcha.component.image.utils;
 
-import com.octo.captcha.CaptchaException;
+import java.awt.Toolkit;
 
-import java.awt.*;
-import java.util.Properties;
+import com.octo.captcha.CaptchaException;
 
 /**
  * <p>Description: This Factory is used in order to switch from the java.awt.Toolkit component to other implementation
@@ -29,7 +28,6 @@ import java.util.Properties;
 public class ToolkitFactory {
 
     public static String TOOLKIT_IMPL = "toolkit.implementation";
-    private static String toolkitClass;
 
     public static Toolkit getToolkit() {
         Toolkit defaultToolkit = null;
@@ -39,7 +37,6 @@ public class ToolkitFactory {
             if (tempToolkitClass != null) {
                 defaultToolkit = (Toolkit)
                         Class.forName(tempToolkitClass).newInstance();
-                toolkitClass = tempToolkitClass;
             } else {
                 defaultToolkit = getDefaultToolkit();
             }
@@ -57,7 +54,6 @@ public class ToolkitFactory {
     private static Toolkit getDefaultToolkit() {
         Toolkit defaultToolkit;
         defaultToolkit = Toolkit.getDefaultToolkit();
-        toolkitClass = defaultToolkit.getClass().getName();
         return defaultToolkit;
     }
 

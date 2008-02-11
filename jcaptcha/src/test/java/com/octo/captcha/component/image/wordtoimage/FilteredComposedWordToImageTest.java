@@ -18,6 +18,12 @@
 
 package com.octo.captcha.component.image.wordtoimage;
 
+import java.awt.Color;
+import java.awt.image.ImageFilter;
+import java.awt.image.ReplicateScaleFilter;
+
+import junit.framework.TestCase;
+
 import com.octo.captcha.CaptchaException;
 import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
 import com.octo.captcha.component.image.backgroundgenerator.GradientBackgroundGenerator;
@@ -25,12 +31,6 @@ import com.octo.captcha.component.image.fontgenerator.FontGenerator;
 import com.octo.captcha.component.image.fontgenerator.RandomFontGenerator;
 import com.octo.captcha.component.image.textpaster.SimpleTextPaster;
 import com.octo.captcha.component.image.textpaster.TextPaster;
-import junit.framework.TestCase;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.awt.image.ImageFilter;
-import java.awt.image.ReplicateScaleFilter;
 
 /**
  * <p>Description: </p>
@@ -49,13 +49,6 @@ public class FilteredComposedWordToImageTest extends TestCase {
     private Integer minFontSize = new Integer(10);
     private Integer maxFontSize = new Integer(10);
 
-    /**
-     * Constructor for FilteredComposedWordToImageTest.
-     */
-    public FilteredComposedWordToImageTest(String name) {
-        super(name);
-    }
-
     public void setUp() {
 
         BackgroundGenerator background = new GradientBackgroundGenerator(this.imageHeight, this.imageWidth, Color.black, Color.white);
@@ -71,14 +64,11 @@ public class FilteredComposedWordToImageTest extends TestCase {
         ImageFilter finalFilter = new ReplicateScaleFilter(background.getImageWidth(),
                 background.getImageHeight());
 
-        ImageFilter[] backFilters = {backFilter
-        };
+        ImageFilter[] backFilters = {backFilter};
 
-        ImageFilter[] textFilters = {textFilter
-        };
+        ImageFilter[] textFilters = {textFilter};
 
-        ImageFilter[] finalFilters = {finalFilter
-        };
+        ImageFilter[] finalFilters = {finalFilter};
 
         this.filteredComposedWordToImage = new FilteredComposedWordToImage(fontGenerator,
                 background,
@@ -95,7 +85,8 @@ public class FilteredComposedWordToImageTest extends TestCase {
 
     public void testGetImageNull() {
         try {
-            BufferedImage test = this.filteredComposedWordToImage.getImage(null);
+            this.filteredComposedWordToImage.getImage(null);
+            fail();
         } catch (CaptchaException e) {
             assertNotNull(e);
         }

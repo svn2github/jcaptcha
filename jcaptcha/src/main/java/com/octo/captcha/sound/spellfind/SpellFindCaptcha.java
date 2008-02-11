@@ -35,7 +35,7 @@ public class SpellFindCaptcha extends SoundCaptcha {
       }
 
       public Boolean validateResponse(String theresponse) {
-          return new Boolean(this.response.equalsIgnoreCase(theresponse));
+          return Boolean.valueOf(this.response.equalsIgnoreCase(theresponse));
       }
 
 }

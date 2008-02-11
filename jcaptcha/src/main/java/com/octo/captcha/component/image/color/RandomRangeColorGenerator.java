@@ -171,13 +171,6 @@ public class RandomRangeColorGenerator implements ColorGenerator {
     }
 
     /**
-     * @param random The random to set.
-     */
-    private void setRandom(Random random) {
-        this.random = random;
-    }
-
-    /**
      * @param redComponentRange The redComponentRange to set.
      */
     private void setRedComponentRange(int[] redComponentRange) {

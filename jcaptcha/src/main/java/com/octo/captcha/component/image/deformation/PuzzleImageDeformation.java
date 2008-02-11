@@ -39,11 +39,6 @@ public class PuzzleImageDeformation implements ImageDeformation {
      */
     private double maxAngleRotation = 0.3;
 
-    /**
-     * Rows and colums are managed randomly
-     */
-    private boolean manageRowAndColRandomly = false;
-
     private Random random = new SecureRandom();
 
     /**
@@ -55,15 +50,12 @@ public class PuzzleImageDeformation implements ImageDeformation {
      * @param rowNum                  Number of rows to divide the image, max number if rows and colums are managed
      *                                randomly
      * @param maxAngleRotation        Maximal angle of rotation for each square.
-     * @param manageRowAndColRandomly Rows and colums are managed randomly
      */
-    public PuzzleImageDeformation(int colNum, int rowNum, double maxAngleRotation,
-                                  boolean manageRowAndColRandomly) {
+    public PuzzleImageDeformation(int colNum, int rowNum, double maxAngleRotation) {
         super();
         this.colNum = colNum;
         this.rowNum = rowNum;
         this.maxAngleRotation = maxAngleRotation;
-        this.manageRowAndColRandomly = manageRowAndColRandomly;
     }
 
     /*

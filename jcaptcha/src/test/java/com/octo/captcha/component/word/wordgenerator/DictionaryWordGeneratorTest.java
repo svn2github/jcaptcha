@@ -37,13 +37,6 @@ public class DictionaryWordGeneratorTest extends TestCase {
     private static int[] lengths = {1, 4, 6, 9, 3};
     private static Integer UNKNOWN_LENGTH = new Integer(100);
 
-    /**
-     * Constructor for DictionaryWordGeneratorTest.
-     */
-    public DictionaryWordGeneratorTest(String name) {
-        super(name);
-    }
-
     public void setUp() {
         this.dictionaryWordGenerator = new DictionaryWordGenerator(new ArrayDictionary(wordlist));
     }
@@ -58,7 +51,7 @@ public class DictionaryWordGeneratorTest extends TestCase {
 
         }
         try {
-            String test = this.dictionaryWordGenerator.getWord(UNKNOWN_LENGTH);
+            this.dictionaryWordGenerator.getWord(UNKNOWN_LENGTH);
             fail("Should throw a CaptchaException");
         } catch (CaptchaException e) {
             assertNotNull(e.getMessage());
@@ -74,7 +67,7 @@ public class DictionaryWordGeneratorTest extends TestCase {
             assertEquals(length.intValue(), test.length());
         }
         try {
-            String test = this.dictionaryWordGenerator.getWord(UNKNOWN_LENGTH);
+            this.dictionaryWordGenerator.getWord(UNKNOWN_LENGTH);
             fail("Should throw a CaptchaException");
         } catch (CaptchaException e) {
             assertNotNull(e.getMessage());

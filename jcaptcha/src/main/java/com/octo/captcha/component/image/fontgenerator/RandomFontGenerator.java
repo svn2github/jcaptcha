@@ -6,10 +6,14 @@
 
 package com.octo.captcha.component.image.fontgenerator;
 
-import java.awt.*;
+import java.awt.Font;
+import java.awt.GraphicsEnvironment;
 import java.security.SecureRandom;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 /**
  * <p>Description: Random font generator that return one of the available system's (or optionay specified) fonts, using a min and max

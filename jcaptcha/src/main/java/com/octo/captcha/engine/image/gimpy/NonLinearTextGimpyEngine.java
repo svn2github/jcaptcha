@@ -18,25 +18,18 @@
 
 package com.octo.captcha.engine.image.gimpy;
 
-import com.octo.captcha.engine.image.ListImageCaptchaEngine;
-import com.octo.captcha.component.image.textpaster.TextPaster;
-import com.octo.captcha.component.image.textpaster.RandomTextPaster;
-import com.octo.captcha.component.image.textpaster.NonLinearTextPaster;
-import com.octo.captcha.component.image.backgroundgenerator.*;
-import com.octo.captcha.component.image.fontgenerator.FontGenerator;
-import com.octo.captcha.component.image.fontgenerator.TwistedAndShearedRandomFontGenerator;
-import com.octo.captcha.component.image.fontgenerator.RandomFontGenerator;
-import com.octo.captcha.component.image.fontgenerator.DeformedRandomFontGenerator;
-import com.octo.captcha.component.image.wordtoimage.WordToImage;
-import com.octo.captcha.component.image.wordtoimage.DeformedComposedWordToImage;
-import com.octo.captcha.component.image.wordtoimage.ComposedWordToImage;
-import com.octo.captcha.component.image.deformation.ImageDeformationByFilters;
-import com.octo.captcha.component.image.deformation.ImageDeformation;
-import com.octo.captcha.component.image.color.RandomRangeColorGenerator;
-import com.octo.captcha.component.image.color.RandomListColorGenerator;
+import java.awt.Color;
 
-import java.awt.*;
-import java.awt.image.ImageFilter;
+import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
+import com.octo.captcha.component.image.backgroundgenerator.GradientBackgroundGenerator;
+import com.octo.captcha.component.image.color.RandomListColorGenerator;
+import com.octo.captcha.component.image.fontgenerator.DeformedRandomFontGenerator;
+import com.octo.captcha.component.image.fontgenerator.FontGenerator;
+import com.octo.captcha.component.image.textpaster.NonLinearTextPaster;
+import com.octo.captcha.component.image.textpaster.TextPaster;
+import com.octo.captcha.component.image.wordtoimage.ComposedWordToImage;
+import com.octo.captcha.component.image.wordtoimage.WordToImage;
+import com.octo.captcha.engine.image.ListImageCaptchaEngine;
 
 /**
  * Use the non-linear text paster

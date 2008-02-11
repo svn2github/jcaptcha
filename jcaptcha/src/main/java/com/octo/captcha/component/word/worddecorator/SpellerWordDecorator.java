@@ -32,15 +32,16 @@ public class SpellerWordDecorator implements WordDecorator {
      * @see com.octo.captcha.component.word.worddecorator.WordDecorator#decorateWord(java.lang.String)
      */
     public String decorateWord(String original) {
-        String chars = "";
+        StringBuffer chars = new StringBuffer();
         //transform the word by separating each character
         for (int i = 0; i < original.length(); i++) {
-            chars += " " + original.charAt(i);
+            chars.append(" ");
+            chars.append(original.charAt(i));
             if (i < original.length() - 1) {
-                chars += separtor;
+                chars.append(separtor);
             }
         }
-        return chars;
+        return chars.toString();
     }
 
 }

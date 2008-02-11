@@ -43,13 +43,6 @@ public class ComposeDictionaryWordGeneratorTest extends TestCase {
     protected int emptylength = 10;
 
     /**
-     * Constructor for ComposeDictionaryWordGeneratorTest.
-     */
-    public ComposeDictionaryWordGeneratorTest(String name) {
-        super(name);
-    }
-
-    /**
      * This method is the setup for each testcase.
      */
     protected void setUp() throws Exception {
@@ -92,7 +85,7 @@ public class ComposeDictionaryWordGeneratorTest extends TestCase {
         this.composeDictionaryWordGenerator =
                 new ComposeDictionaryWordGenerator(new ArrayDictionary(this.emptywordList));
         try {
-            String test = this.composeDictionaryWordGenerator.getWord(new Integer(this.emptylength), Locale.FRENCH);
+            this.composeDictionaryWordGenerator.getWord(new Integer(this.emptylength), Locale.FRENCH);
             fail("Shouldn't use empty dictionnary");
         } catch (CaptchaException e) {
             assertNotNull(e);

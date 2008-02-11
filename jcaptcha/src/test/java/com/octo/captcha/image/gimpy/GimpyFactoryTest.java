@@ -27,16 +27,9 @@ public class GimpyFactoryTest extends TestCase {
 
     GimpyFactory tested;
 
-    public GimpyFactoryTest(String s) {
-        super(s);
-    }
-
     protected void setUp() throws Exception {
         super.setUp();
         tested = new GimpyFactory(new RandomWordGenerator("a"), new SimpleWordToImage());
-    }
-
-    public void testGetRandomRange() throws Exception {
     }
 
     public void testGetRandomLength() throws Exception {
@@ -55,7 +48,6 @@ public class GimpyFactoryTest extends TestCase {
 
             } while (j != i);
         }
-        ;
     }
 
     public void testGimpyFactory() throws Exception {

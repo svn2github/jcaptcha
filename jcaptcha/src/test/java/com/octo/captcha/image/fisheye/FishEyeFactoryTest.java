@@ -38,12 +38,15 @@ public class FishEyeFactoryTest extends TestCase {
         for (int i = 0; i < 10; i++) {
             assertTrue("sould be not null", fishEyeFactory.getImageCaptcha().getChallenge() != null);
         }
+        
         try {
             this.fishEyeFactory = new FishEyeFactory(new UniColorBackgroundGenerator(new Integer(10), new Integer(10),
                     Color.black), new ImageDeformationByFilters(null), new Integer(100), new Integer(100));
             fail("should not be able to construct");
         } catch (Exception e) {
+        	assertNotNull(e.getMessage());
         }
+        
         this.fishEyeFactory = new FishEyeFactory(new UniColorBackgroundGenerator(new Integer(10), new Integer(10),
                 Color.black), new ImageDeformationByFilters(null), new Integer(1), new Integer(10));
         for (int i = 0; i < 10; i++) {

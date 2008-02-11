@@ -29,14 +29,6 @@ import java.awt.*;
 public class RandomRangeColorGeneratorTest extends TestCase {
     private RandomRangeColorGenerator colorGenerator = null;
 
-    protected void setUp() throws Exception {
-        super.setUp();
-    }
-
-    protected void tearDown() throws Exception {
-        super.tearDown();
-    }
-
     public void testNominalCase() {
         int[] redRange = new int[]{36, 42};
         int[] greenRange = new int[]{57, 62};
@@ -82,7 +74,7 @@ public class RandomRangeColorGeneratorTest extends TestCase {
             colorGenerator = new RandomRangeColorGenerator(redRange, greenRange, blueRange);
             fail();
         } catch (CaptchaException e) {
-            // Expected case
+        	assertNotNull(e.getMessage());
         }
     }
 
@@ -95,7 +87,7 @@ public class RandomRangeColorGeneratorTest extends TestCase {
             colorGenerator = new RandomRangeColorGenerator(redRange, greenRange, blueRange);
             fail();
         } catch (CaptchaException e) {
-            // Expected case
+        	assertNotNull(e.getMessage());
         }
     }
 

@@ -41,7 +41,6 @@ public class DeformedRandomFontGeneratorTest extends TestCase {
 
     public void testGetFont() {
         Font test = this.deformedRandomFontGenerator.getFont();
-        int expected = this.minFontSize.intValue();
         assertNotNull(test);
     }
 }

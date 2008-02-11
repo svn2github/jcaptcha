@@ -77,6 +77,7 @@ public class RandomFontGeneratorTest extends TestCase {
 
             fail("should have thrown an IllegalArgumentException");
         } catch (IllegalArgumentException e) {
+        	assertNotNull(e.getMessage());
         }
     }
 
@@ -89,7 +90,7 @@ public class RandomFontGeneratorTest extends TestCase {
             new RandomFontGenerator(new Integer(10), new Integer(10), fontsList);
             fail("should have thrown an IllegalArgumentException");
         } catch (IllegalArgumentException e) {
-
+        	assertNotNull(e.getMessage());
         }
     }
 

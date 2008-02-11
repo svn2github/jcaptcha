@@ -40,7 +40,7 @@ public class FileReaderRandomBackgroundGeneratorTest extends TestCase {
             fileReaderRandomBackgroundGenerator.findDirectory("does not exists");
             fail("should never pass");
         } catch (CaptchaException e) {
-            // should throw exception
+            assertNotNull(e.getMessage());
         }
     }
 
@@ -66,7 +66,7 @@ public class FileReaderRandomBackgroundGeneratorTest extends TestCase {
             new FileReaderRandomBackgroundGenerator(new Integer(2), new Integer(2), "emptyimagedir");
             fail("should never pass");
         } catch (CaptchaException e) {
-            // should throw exception
+        	assertNotNull(e.getMessage());
         }        
     }
 

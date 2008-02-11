@@ -6,19 +6,22 @@
 
 package com.octo.captcha.component.image.backgroundgenerator;
 
-import com.octo.captcha.CaptchaException;
-import com.sun.image.codec.jpeg.ImageFormatException;
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGImageDecoder;
-
-import java.awt.*;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.StringTokenizer;
+
+import com.octo.captcha.CaptchaException;
+import com.sun.image.codec.jpeg.ImageFormatException;
+import com.sun.image.codec.jpeg.JPEGCodec;
+import com.sun.image.codec.jpeg.JPEGImageDecoder;
 
 /**
  * <p>File reader background generator that return a random image (JPEG ONLY) from the ones found in the directory </p>
@@ -74,7 +77,7 @@ public class FileReaderRandomBackgroundGenerator extends
     /**
      *
      */
-    protected static Map cachedDirectories = new HashMap();
+    protected static final Map cachedDirectories = new HashMap();
 
     protected File findDirectory(String rootPath) {
         if (cachedDirectories.containsKey(rootPath)) {

@@ -6,11 +6,14 @@
 
 package com.octo.captcha.service;
 
+import java.util.Locale;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.octo.captcha.Captcha;
 import com.octo.captcha.engine.CaptchaEngine;
 import com.octo.captcha.service.captchastore.CaptchaStore;
-
-import java.util.Locale;
 
 /**
  * This is a base class for CaptchaService implementations. It implements the lyfe cycle stuff. It uses  : a
@@ -23,7 +26,8 @@ import java.util.Locale;
 public abstract class AbstractCaptchaService implements CaptchaService {
 
     protected CaptchaStore store;
-    protected com.octo.captcha.engine.CaptchaEngine engine;
+    protected CaptchaEngine engine;
+    protected Log logger;
 
 
     protected AbstractCaptchaService(CaptchaStore captchaStore,
@@ -32,6 +36,10 @@ public abstract class AbstractCaptchaService implements CaptchaService {
             throw new IllegalArgumentException("Store or gimpy can't be null");
         this.engine = captchaEngine;
         this.store = captchaStore;
+        
+        logger = LogFactory.getLog(this.getClass());
+        
+        logger.info("Init " + this.store.getClass().getName());
         this.store.initAndStart();
     }
 
@@ -73,9 +81,8 @@ public abstract class AbstractCaptchaService implements CaptchaService {
                 if (captcha.hasGetChalengeBeenCalled().booleanValue()) {
                     //get a new one and store it
                     captcha = generateAndStoreCaptcha(locale, ID);
-                } else {
-                    //else nothing
-                }
+                } 
+                //else nothing
             }
         }
         challenge = getChallengeClone(captcha);

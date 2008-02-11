@@ -141,7 +141,6 @@ public class LineRandomTextPaster extends RandomTextPaster {
 
         for (int j = 0; j < attributedWord.getIterator().getEndIndex(); j++) {
             Rectangle2D bounds = newAttrString.getBounds(j).getFrame();
-            double circleMaxSize = (double) bounds.getWidth() / 2;
             for (int i = 0; i < numberOfLinesPerGlyph.intValue(); i++) {
                 double circlex = bounds.getMinX() + bounds.getWidth() * 0.7 * myRandom.nextDouble();
                 double circley = bounds.getMinY() - bounds.getHeight() * 0.5

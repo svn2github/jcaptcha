@@ -16,6 +16,7 @@ import com.octo.captcha.engine.CaptchaEngine;
 import com.octo.captcha.image.ImageCaptcha;
 import com.octo.captcha.service.AbstractManageableCaptchaService;
 import com.octo.captcha.service.CaptchaServiceException;
+import com.octo.captcha.service.captchastore.CaptchaStore;
 import com.octo.captcha.service.captchastore.FastHashMapCaptchaStore;
 import com.octo.captcha.sound.SoundCaptcha;
 import com.octo.captcha.text.TextCaptcha;
@@ -39,10 +40,19 @@ public class GenericManageableCaptchaService extends AbstractManageableCaptchaSe
                                            int minGuarantedStorageDelayInSeconds,
                                            int maxCaptchaStoreSize,
                                            int captchaStoreLoadBeforeGarbageCollection) {
-        super(new FastHashMapCaptchaStore(), captchaEngine, minGuarantedStorageDelayInSeconds,
+        this(new FastHashMapCaptchaStore(), captchaEngine, minGuarantedStorageDelayInSeconds,
                 maxCaptchaStoreSize, captchaStoreLoadBeforeGarbageCollection);
     }
 
+    public GenericManageableCaptchaService(	CaptchaStore captchaStore, 
+    										CaptchaEngine captchaEngine,
+								            int minGuarantedStorageDelayInSeconds,
+								            int maxCaptchaStoreSize,
+								            int captchaStoreLoadBeforeGarbageCollection) {
+    	super(captchaStore, captchaEngine, minGuarantedStorageDelayInSeconds,
+    			maxCaptchaStoreSize, captchaStoreLoadBeforeGarbageCollection);
+    }
+    
     /**
      * Method to retrive the image challenge corresponding to the given ticket.
      *
@@ -147,7 +157,7 @@ public class GenericManageableCaptchaService extends AbstractManageableCaptchaSe
             AudioInputStream clone = new AudioInputStream(challenge, challenge.getFormat(), challenge.getFrameLength());
             return clone;
         } else if (TextCaptcha.class.isAssignableFrom(captchaClass)) {
-            return new String(String.valueOf(captcha.getChallenge()));
+            return String.valueOf(captcha.getChallenge());
         } else {
             throw new CaptchaServiceException("Unknown captcha type," +
                     " can't clone challenge captchaClass:'" + captcha.getClass() + "'");
