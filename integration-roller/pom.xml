@@ -15,6 +15,10 @@
   <artifactId>jcaptcha-integration-roller</artifactId>
   <name>Integration Roller</name>
   <version>1.0-SNAPSHOT</version>
+  <issueManagement>
+    <system>Jira</system>
+    <url>http://forge.octo.com/jcaptcha/jira/browse/JAROL</url>
+  </issueManagement>  
   <dependencies>
     <dependency>
       <groupId>com.octo.captcha</groupId>

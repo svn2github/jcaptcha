@@ -39,6 +39,11 @@
         </plugins>
     </build>
 
+  <issueManagement>
+    <system>Jira</system>
+    <url>http://forge.octo.com/jcaptcha/jira/browse/FWK</url>
+  </issueManagement>  
+
     <dependencies>
     
         <dependency>
