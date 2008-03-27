@@ -13,7 +13,7 @@
     
       <section name="JCaptcha overview">
 
-            <b>JCAPTCHA</b>, for <b>J</b>ava <b>C</b>ompletely <b>A</b>utomated <b>P</b>ublic <b>T</b>est to tell <b>C</b>omputers and <b>H</b>umans <b>A</b>part
+            JCAPTCHA, for Java Completely Automated Public Test to tell Computers and Humans Apart
             <br/>The open source java framework for captcha definition and integration
             
       </section>            
@@ -22,133 +22,25 @@
             
                 <table>
                     <tr>
-                        <th>Engine name</th>
-                        <th>Sample 1</th>
-                        <th>Sample 2</th>
-                        <th>Sample 3</th>
+                        <th>DefaultGimpyEngineCaptcha</th>
+                        <th>BaffleListGimpyEngineCaptcha</th>
+                        <th>SimpleListImageCaptchaEngineCaptcha</th>
+                        <th>SimpleListSoundCaptchaEngine</th>
                     </tr>
                     <tr>
-                        <td>SimpleListSoundCaptchaEngine</td>
                         <td>
-                            <embed src="samples/SimpleListSoundCaptchaEngineCaptcha_0.wav" autostart="false"/>
-                        </td>
-                        <td>
-                            <embed src="samples/SimpleListSoundCaptchaEngineCaptcha_1.wav" autostart="false"/>
-                        </td>
-                        <td>
-                            <embed src="samples/SimpleListSoundCaptchaEngineCaptcha_2.wav" autostart="false"/>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>SpellerSoundCaptchaEngine : numbers</td>
-                        <td>
-                            <embed src="samples/SpellerSoundCaptchaEngineCaptcha_0.wav" autostart="false"/>
-                        </td>
-                        <td>
-                            <embed src="samples/SpellerSoundCaptchaEngineCaptcha_1.wav" autostart="false"/>
-                        </td>
-                        <td>
-                            <embed src="samples/SpellerSoundCaptchaEngineCaptcha_2.wav" autostart="false"/>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>SpellerSoundCaptchaEngine : letters</td>
-                        <td>
-                            <embed src="samples/challenge1.wav" autostart="false"/>
-                        </td>
-                        <td>
-                            <embed src="samples/challenge2.wav" autostart="false"/>
-                        </td>
-                        <td>
-                            <embed src="samples/challenge3.wav" autostart="false"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>DefaultGimpyEngineCaptcha</td>
-                        <td>
-                            <img src="samples/DefaultGimpyEngineCaptcha_0.jpg"/>
-                        </td>
-                        <td>
-                            <img src="samples/DefaultGimpyEngineCaptcha_1.jpg"/>
-                        </td>
-                        <td>
-                            <img src="samples/DefaultGimpyEngineCaptcha_2.jpg"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>BaffleListGimpyEngineCaptcha</td>
-                        <td>
-                            <img src="samples/BaffleListGimpyEngineCaptcha_0.jpg"/>
-                        </td>
-                        <td>
-                            <img src="samples/BaffleListGimpyEngineCaptcha_1.jpg"/>
+                          <img src="samples/DefaultGimpyEngineCaptcha_0.jpg"/>
                         </td>
                         <td>
                             <img src="samples/BaffleListGimpyEngineCaptcha_2.jpg"/>
                         </td>
-                    </tr>
-                    <tr>
-                        <td>BasicListGimpyEngineCaptcha</td>
-                        <td>
-                            <img src="samples/BasicListGimpyEngineCaptcha_0.jpg"/>
-                        </td>
-                        <td>
-                            <img src="samples/BasicListGimpyEngineCaptcha_1.jpg"/>
-                        </td>
-                        <td>
-                            <img src="samples/BasicListGimpyEngineCaptcha_2.jpg"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>DeformedBaffleListGimpyEngineCaptcha</td>
-                        <td>
-                            <img src="samples/DeformedBaffleListGimpyEngineCaptcha_0.jpg"/>
-                        </td>
-                        <td>
-                            <img src="samples/DeformedBaffleListGimpyEngineCaptcha_1.jpg"/>
-                        </td>
-                        <td>
-                            <img src="samples/DeformedBaffleListGimpyEngineCaptcha_2.jpg"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>DoubleRandomListGimpyEngineCaptcha</td>
-                        <td>
-                            <img src="samples/DoubleRandomListGimpyEngineCaptcha_0.jpg"/>
-                        </td>
-                        <td>
-                            <img src="samples/DoubleRandomListGimpyEngineCaptcha_1.jpg"/>
-                        </td>
-                        <td>
-                            <img src="samples/DoubleRandomListGimpyEngineCaptcha_2.jpg"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>SimpleListImageCaptchaEngineCaptcha</td>
                         <td>
                             <img src="samples/SimpleListImageCaptchaEngineCaptcha_0.jpg"/>
                         </td>
                         <td>
-                            <img src="samples/SimpleListImageCaptchaEngineCaptcha_1.jpg"/>
+                            <a href="samples/SimpleListSoundCaptchaEngineCaptcha_0.wav">SimpleListSoundCaptchaEngineCaptcha.wav</a>
                         </td>
-                        <td>
-                            <img src="samples/SimpleListImageCaptchaEngineCaptcha_2.jpg"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>SimpleFishEyeEngineCaptcha</td>
-                        <td>
-                            <img src="samples/SimpleFishEyeEngineCaptcha_0.jpg"/>
-                        </td>
-                        <td>
-                            <img src="samples/SimpleFishEyeEngineCaptcha_1.jpg"/>
-                        </td>
-                        <td>
-                            <img src="samples/SimpleFishEyeEngineCaptcha_2.jpg"/>
-                        </td>
-                    </tr>
+                    </tr>                    
                 </table>              
                 
         </section>

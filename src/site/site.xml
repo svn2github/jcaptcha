@@ -8,12 +8,19 @@
 <project name="JCaptcha">
   <bannerLeft>
     <name>JCaptcha</name>
-    <src>http://jcaptcha.sourceforge.net/jcaptcha-logo.jpg</src>
+    <src>images/jcaptcha-logo.jpg</src>
     <href>http://www.jcaptcha.net</href>
   </bannerLeft>
   <!-- bannerRight>
     <src>images/maven-small.gif</src>
   </bannerRight -->
+  <publishDate format="dd MMM yyyy" position="left"/>
+  <version position="left"/>
+  <skin>
+    <groupId>com.octo.captcha</groupId>
+    <artifactId>jcaptcha-site-skin</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </skin>  
   <body>
     <head>
       <script type="text/javascript">
@@ -21,7 +28,7 @@
         document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
       </script>
       <script type="text/javascript">
-        var pageTracker = _gat._getTracker("UA-3856069-1");
+        var pageTracker = _gat._getTracker("UA-3856069-2");
         pageTracker._initData();
         pageTracker._trackPageview();
       </script>      
@@ -29,10 +36,10 @@
     <links>
       <item name="OCTO Technology" href="http://www.octo.com" />
     </links>
-    <menu name="Overview">
+    <menu name="Overview" >
       <item name="Introduction" href="index.html"/>
       <item name="Download" href="http://sourceforge.net/project/showfiles.php?group_id=97877"/>
-      <item name="Documentation / FAQ" href="http://forge.octo.com/jcaptcha/confluence"/>
+      <item name="Wiki Documentation" href="http://forge.octo.com/jcaptcha/confluence"/>
       <item name="Issue tracker" href="http://forge.octo.com/jcaptcha/jira"/>
       <item name="Sourceforge site" href="http://sourceforge.net/projects/jcaptcha"/>
       <item name="Browse source" href="http://fisheye3.cenqua.com/browse/jcaptcha"/>   
