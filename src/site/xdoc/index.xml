@@ -13,8 +13,10 @@
     
       <section name="JCaptcha overview">
 
-            JCAPTCHA, for Java Completely Automated Public Test to tell Computers and Humans Apart
-            <br/>The open source java framework for captcha definition and integration
+            <b>JCAPTCHA</b>, for <b>J</b>ava <b>C</b>ompletely <b>A</b>utomated <b>P</b>ublic <b>T</b>est to tell <b>C</b>omputers and <b>H</b>umans <b>A</b>part
+            <br/>
+            <br/>
+            The open source java framework for captcha definition and integration
             
       </section>            
             
@@ -23,16 +25,12 @@
                 <table>
                     <tr>
                         <th>DefaultGimpyEngineCaptcha</th>
-                        <th>BaffleListGimpyEngineCaptcha</th>
                         <th>SimpleListImageCaptchaEngineCaptcha</th>
                         <th>SimpleListSoundCaptchaEngine</th>
                     </tr>
                     <tr>
                         <td>
-                          <img src="samples/DefaultGimpyEngineCaptcha_0.jpg"/>
-                        </td>
-                        <td>
-                            <img src="samples/BaffleListGimpyEngineCaptcha_2.jpg"/>
+                          <img src="samples/DefaultGimpyEngineCaptcha_2.jpg"/>
                         </td>
                         <td>
                             <img src="samples/SimpleListImageCaptchaEngineCaptcha_0.jpg"/>

@@ -15,6 +15,7 @@
 JCaptcha Extension Buffered Engine
 
   This extension provide a BufferedCaptchaEngine allowing to save the time required to generate the web page. 
+  
   Captcha are stored in buffers in order to speed up the web page rendering.
   
   <<{{{http://forge.octo.com/jcaptcha/confluence/display/general/Captcha+Buffering+System}Get Started with the Wiki documentation}}>>

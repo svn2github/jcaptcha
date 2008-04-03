@@ -6,12 +6,14 @@
 ~~  
 
     ------
-    API
+    Integration Roller
     ------
     Antoine Véret
     ------
     March 27, 2008 
 
-JCaptcha API
+JCaptcha Integration Roller
 
-  This module contains Interface and Exception defining the JCaptcha <<{{{./apidocs/index.html}Application Programming Interface}}>>
+  Provide integration with a Roller Weblogger (With version 0.9.9.5, not updated with newest version of Roller)
+  
+  <<{{{http://forge.octo.com/jcaptcha/confluence/display/general/JRoller+installation}Get Started with the Wiki documentation}}>> 

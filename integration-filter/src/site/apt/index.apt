@@ -6,12 +6,14 @@
 ~~  
 
     ------
-    API
+    Integration Filter
     ------
     Antoine Véret
     ------
     March 27, 2008 
 
-JCaptcha API
+JCaptcha Integration Filter
 
-  This module contains Interface and Exception defining the JCaptcha <<{{{./apidocs/index.html}Application Programming Interface}}>>
+  Provide a J2EE Filter designed to add image captchas to the entry forms of existing MVC web applications.
+  
+  <<{{{./apidocs/com/octo/captcha/module/filter/image/ImageCaptchaFilter.html}Get Started with the JavaDoc}}>> 

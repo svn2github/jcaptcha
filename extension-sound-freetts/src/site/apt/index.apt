@@ -6,12 +6,14 @@
 ~~  
 
     ------
-    API
+    Extension Audio FreeTTS
     ------
     Antoine Véret
     ------
     March 27, 2008 
 
-JCaptcha API
+JCaptcha Extension Audio FreeTTS
 
-  This module contains Interface and Exception defining the JCaptcha <<{{{./apidocs/index.html}Application Programming Interface}}>>
+  This extension provide a {{{http://freetts.sourceforge.net}FreeTTS}} audio implementation. 
+  
+  <<{{{http://forge.octo.com/jcaptcha/confluence/display/general/Implements+JCaptcha+Sound}Get Started with the Wiki documentation}}>> 

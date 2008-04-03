@@ -6,12 +6,14 @@
 ~~  
 
     ------
-    API
+    Integration Struts
     ------
     Antoine Véret
     ------
     March 27, 2008 
 
-JCaptcha API
+JCaptcha Integration Struts
 
-  This module contains Interface and Exception defining the JCaptcha <<{{{./apidocs/index.html}Application Programming Interface}}>>
+  Provide integration for a Struts 1.2.X application
+  
+  <<{{{http://forge.octo.com/jcaptcha/confluence/display/general/Struts+integration}Get Started with the Wiki documentation}}>> 
