@@ -6,14 +6,17 @@
   -->
 
 <document>
-
+    <properties>
+      <title>Overview</title>
+    </properties>
+    
     <meta name="keyword" content="captcha,java,jcaptcha"/>
 
     <body>
     
       <section name="JCaptcha overview">
 
-            <b>JCAPTCHA</b>, for <b>J</b>ava <b>C</b>ompletely <b>A</b>utomated <b>P</b>ublic <b>T</b>est to tell <b>C</b>omputers and <b>H</b>umans <b>A</b>part
+            JCAPTCHA stands for Java Completely Automated Public Test to tell Computers and Humans Apart
             <br/>
             <br/>
             The open source java framework for captcha definition and integration
@@ -26,6 +29,7 @@
                     <tr>
                         <th>DefaultGimpyEngineCaptcha</th>
                         <th>SimpleListImageCaptchaEngineCaptcha</th>
+                        <th>DoubleRandomListGimpyEngineCaptcha</th>                        
                         <th>SimpleListSoundCaptchaEngine</th>
                     </tr>
                     <tr>
@@ -36,10 +40,22 @@
                             <img src="samples/SimpleListImageCaptchaEngineCaptcha_0.jpg"/>
                         </td>
                         <td>
+                            <img src="samples/DoubleRandomListGimpyEngineCaptcha_1.jpg"/>
+                        </td>                        
+                        <td>
                             <a href="samples/SimpleListSoundCaptchaEngineCaptcha_0.wav">SimpleListSoundCaptchaEngineCaptcha.wav</a>
                         </td>
                     </tr>                    
                 </table>              
+                
+                <a href="http://forge.octo.com/jcaptcha/confluence/display/general/Samples+tests">See more samples</a> 
+                
+                <br />
+                <br />
+                <br />
+                <h2>
+                  <a href="http://forge.octo.com/jcaptcha/confluence/display/general/How+to">Get started</a>
+                </h2> 
                 
         </section>
 
