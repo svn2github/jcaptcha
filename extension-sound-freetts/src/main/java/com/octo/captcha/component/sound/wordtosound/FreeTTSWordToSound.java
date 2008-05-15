@@ -6,21 +6,22 @@
 
 package com.octo.captcha.component.sound.wordtosound;
 
-import com.octo.captcha.CaptchaException;
-import com.octo.captcha.component.sound.soundconfigurator.SoundConfigurator;
-import com.sun.speech.freetts.Voice;
-import com.sun.speech.freetts.VoiceManager;
-import com.sun.speech.freetts.audio.AudioPlayer;
-import com.sun.speech.freetts.util.Utilities;
-
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.SequenceInputStream;
 import java.util.Locale;
 import java.util.Vector;
+
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+
+import com.octo.captcha.CaptchaException;
+import com.octo.captcha.component.sound.soundconfigurator.SoundConfigurator;
+import com.sun.speech.freetts.Voice;
+import com.sun.speech.freetts.VoiceManager;
+import com.sun.speech.freetts.audio.AudioPlayer;
+import com.sun.speech.freetts.util.Utilities;
 
 /**
  * WordToSound implementation with FreeTTS an openSource Text To Speech implementation.
@@ -42,8 +43,6 @@ public class FreeTTSWordToSound extends AbstractWordToSound implements WordToSou
      * default Voice, allocated at instanciation
      */
     private Voice defaultVoice = null;
-
-    private Locale locale = null;
 
     private VoiceManager voiceManager = null;
 
@@ -71,9 +70,6 @@ public class FreeTTSWordToSound extends AbstractWordToSound implements WordToSou
         }
 
         configureVoice(this.defaultVoice);
-
-        // Allocates the resources for the voice.
-        this.defaultVoice.allocate();
     }
 
     /**
@@ -81,7 +77,8 @@ public class FreeTTSWordToSound extends AbstractWordToSound implements WordToSou
      */
     public AudioInputStream getSound(String word) throws CaptchaException {
         //return a sound generated with the default voice.
-        voice = defaultVoice;
+        voice = defaultVoice;      
+        
         return addEffects(stringToSound(word));
     }
 
@@ -161,9 +158,14 @@ public class FreeTTSWordToSound extends AbstractWordToSound implements WordToSou
 
         this.voice.setAudioPlayer(audioPlayer);
 
+        // Allocates the resources for the voice.
+        this.voice.allocate();
+        
         // Synthesize speech.
         this.voice.speak(sentence);
 
+        this.voice.deallocate();
+        
         AudioInputStream ais = audioPlayer.getAudioInputStream();
         return ais;
     }
@@ -355,16 +357,6 @@ public class FreeTTSWordToSound extends AbstractWordToSound implements WordToSou
         public boolean write(byte[] bytes, int offset, int size) {
             System.arraycopy(bytes, offset, outputData, curIndex, size);
             curIndex += size;
-            return true;
-        }
-
-        /**
-         * Waits for resume. If this audio player is paused waits for the player to be resumed. Returns if resumed,
-         * cancelled or shutdown.
-         *
-         * @return true if the output has been resumed, false if the output has been cancelled or shutdown.
-         */
-        private synchronized boolean waitResume() {
             return true;
         }
 
