@@ -17,7 +17,10 @@ import com.octo.captcha.engine.image.ImageCaptchaEngine;
 
 import java.util.Map;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Iterator;
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
@@ -26,6 +29,15 @@ import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ByteArrayResource;
 import org.apache.commons.lang.StringEscapeUtils;
+import org.jdom.input.SAXBuilder;
+import org.jdom.xpath.XPath;
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.JDOMException;
+import org.jdom.Attribute;
+
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.DocumentBuilder;
 
 
 /**
@@ -66,9 +78,42 @@ public class JcaptchaImageMacro extends BaseMacro  {
                 "<beans>"+
                 config+
                 "</beans>";
-        if(!engineRegistry.containsKey(configHash)){
+
+         Resource resource = new ByteArrayResource(config.getBytes());
+
+        //validate that only some api are used.
+
+         try {
+             SAXBuilder sxb = new SAXBuilder();
+             Document document = sxb.build(resource.getInputStream());
+             Element root = document.getRootElement();
+             XPath xpa = XPath.newInstance("//@class");
+             List classesNodes = xpa.selectNodes(root);
+             Iterator iter = classesNodes.iterator() ;
+             while(iter.hasNext()){
+                 String classValue = ((Attribute) iter.next()).getValue().toLowerCase().trim();
+                 if(!(
+                         classValue.startsWith("com.octo.captcha")
+                         ||
+                        classValue.startsWith("java.awt")
+                         ||
+                        classValue.startsWith("java.lang")
+                          ||
+                        classValue.startsWith("com.jhlabs.image")
+                 )){
+                     throw new MacroException("The class "+classValue+" is not allowed by this plugin");
+                 }
+             }
+             
+             
+         } catch (JDOMException e) {
+             throw new MacroException(e);
+         } catch (IOException e) {
+              throw new MacroException(e);
+         }
+         if(!engineRegistry.containsKey(configHash)){
             try {
-                Resource resource = new ByteArrayResource(config.getBytes());
+
                 XmlBeanFactory bf = new XmlBeanFactory(resource);
                 Object factory= bf.getBean("imageCaptchaFactory");
                 //GenericCaptchaEngine engine = new GenericCaptchaEngine(new ImageCaptchaFactory[]{factory});

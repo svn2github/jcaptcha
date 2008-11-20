@@ -57,17 +57,17 @@
     
 
     <dependencies>
-
-      
-
-      <!-- Confluence dependencies -->
+     <!-- Confluence dependencies -->
 
     <dependency>
       <groupId>com.octo.captcha</groupId>
       <artifactId>jcaptcha</artifactId>
       <version>1.0-SNAPSHOT</version>
-        <scope>provided</scope>
+      <scope>provided</scope>
     </dependency>
+
+ 
+
 
  </dependencies>
 
