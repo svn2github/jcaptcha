@@ -20,7 +20,7 @@
       <module>common-test</module>
       <module>jcaptcha</module>
       <module>testing</module>      
-	  <module>site-confluence-plugin</module>    
+	  <!-- module>site-confluence-plugin</module -->    
       <module>extension-ehcache-store</module>
       <module>extension-jbosscache-store</module>
       <module>extension-buffered-engine</module>
@@ -309,13 +309,13 @@
           </configuration>
         </plugin>	            
 	    </plugins>	    
-	    <extensions>
+	    <!--extensions>
          <extension>
             <groupId>org.apache.maven.wagon</groupId>
             <artifactId>wagon-webdav</artifactId>
             <version>1.0-beta-2</version>
          </extension>
-      </extensions>
+      </extensions-->
 	  </build>
     
 </project>
