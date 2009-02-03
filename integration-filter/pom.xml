@@ -8,18 +8,18 @@
   <parent>
     <artifactId>jcaptcha-home</artifactId>
     <groupId>com.octo.captcha</groupId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.octo.captcha</groupId>
   <artifactId>jcaptcha-integration-filter</artifactId>
   <name>Integration Filter</name>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
   <dependencies>
     <dependency>
       <groupId>com.octo.captcha</groupId>
       <artifactId>jcaptcha</artifactId>
-      <version>1.0-SNAPSHOT</version>
+      <version>1.0</version>
     </dependency>
   </dependencies>
 </project>

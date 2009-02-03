@@ -11,7 +11,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -101,7 +103,7 @@ public class FileReaderRandomBackgroundGenerator extends
                     //trying with ressource
                     URL url = FileReaderRandomBackgroundGenerator.class.getClassLoader().getResource(rootPath);
                     if (url != null) {
-                        dir = new File(url.getFile());
+                        dir = new File(getFilePath(url));
                         appendFilePath(triedPath, dir);
 
                     } else {
@@ -109,7 +111,7 @@ public class FileReaderRandomBackgroundGenerator extends
                         url = ClassLoader.getSystemClassLoader().getResource(rootPath);
 
                         if (url != null) {
-                            dir = new File(url.getFile());
+                            dir = new File(getFilePath(url));
                             appendFilePath(triedPath, dir);
 
                         }
@@ -144,6 +146,16 @@ public class FileReaderRandomBackgroundGenerator extends
 
         return dir;
     }
+
+	private String getFilePath(URL url) {
+		String file = null;
+		try {
+			file = URLDecoder.decode(url.getFile(), "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// Do Nothing			
+		}
+		return file;
+	}
 
 	private boolean isNotReadable(File dir) {
 		return !dir.canRead() || !dir.isDirectory();

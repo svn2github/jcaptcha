@@ -19,7 +19,7 @@
   <skin>
     <groupId>com.octo.captcha</groupId>
     <artifactId>jcaptcha-site-skin</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
   </skin>  
   <body>
     <head>

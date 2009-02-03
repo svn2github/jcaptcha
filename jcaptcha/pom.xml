@@ -9,10 +9,10 @@
     <parent>
         <artifactId>jcaptcha-home</artifactId>
         <groupId>com.octo.captcha</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0</version>
     </parent>
     <artifactId>jcaptcha</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <name>JCaptcha</name>
     <packaging>jar</packaging>
 
@@ -49,13 +49,13 @@
         <dependency>
           <groupId>com.octo.captcha</groupId>
           <artifactId>jcaptcha-api</artifactId>
-          <version>1.0-SNAPSHOT</version>
+          <version>1.0</version>
         </dependency>    
     
         <dependency>
           <groupId>com.octo.captcha</groupId>
           <artifactId>jcaptcha-common-test</artifactId>
-          <version>1.0-SNAPSHOT</version>
+          <version>1.0</version>
           <scope>test</scope>
         </dependency>    
 
