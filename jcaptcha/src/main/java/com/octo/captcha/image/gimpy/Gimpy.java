@@ -22,10 +22,17 @@ import java.io.Serializable;
 public class Gimpy extends ImageCaptcha implements Serializable {
 
 	private String response;
+    private boolean caseSensitive=true;
 
-    Gimpy(String question, BufferedImage challenge, String response) {
+
+    Gimpy(String question, BufferedImage challenge, String response, boolean caseSensitive) {
         super(question, challenge);
         this.response = response;
+        this.caseSensitive=caseSensitive;
+    }
+
+    Gimpy(String question, BufferedImage challenge, String response) {
+        this(question, challenge, response, true);
     }
 
     /**
@@ -45,7 +52,7 @@ public class Gimpy extends ImageCaptcha implements Serializable {
      * @return true if the given response equals the internal response, false otherwise.
      */
     private final Boolean validateResponse(final String response) {
-        return Boolean.valueOf(response.equals(this.response));
+        return caseSensitive? response.equals(this.response) : response.equalsIgnoreCase(this.response);
     }
 
 }

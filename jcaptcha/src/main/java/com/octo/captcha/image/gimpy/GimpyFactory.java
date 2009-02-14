@@ -26,10 +26,15 @@ public class GimpyFactory extends com.octo.captcha.image.ImageCaptchaFactory {
     private Random myRandom = new SecureRandom();
     private WordToImage wordToImage;
     private WordGenerator wordGenerator;
+    private boolean caseSensitive=true;
 
     public static final String BUNDLE_QUESTION_KEY = Gimpy.class.getName();
 
-    public GimpyFactory(WordGenerator generator, WordToImage word2image) {
+    public GimpyFactory(WordGenerator generator, WordToImage word2image){
+        this(generator, word2image,true);
+    }
+
+    public GimpyFactory(WordGenerator generator, WordToImage word2image, boolean caseSensitive) {
         if (word2image == null) {
             throw new CaptchaException("Invalid configuration" +
                     " for a GimpyFactory : WordToImage can't be null");
@@ -40,6 +45,7 @@ public class GimpyFactory extends com.octo.captcha.image.ImageCaptchaFactory {
         }
         wordToImage = word2image;
         wordGenerator = generator;
+        this.caseSensitive=caseSensitive;
 
     }
 
@@ -80,7 +86,7 @@ public class GimpyFactory extends com.octo.captcha.image.ImageCaptchaFactory {
         }
 
         ImageCaptcha captcha = new Gimpy(CaptchaQuestionHelper.getQuestion(locale, BUNDLE_QUESTION_KEY),
-                image, word);
+                image, word, caseSensitive);
         return captcha;
     }
 

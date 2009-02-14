@@ -112,7 +112,7 @@ public class HotmailEngine2008 extends ListImageCaptchaEngine {
         );
          this.addFactory(
                 new com.octo.captcha.image.gimpy.GimpyFactory(dictionnaryWords,
-                        word2image));
+                        word2image, false));
 
     }
 }
