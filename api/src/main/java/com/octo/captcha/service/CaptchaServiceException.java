@@ -9,8 +9,8 @@ package com.octo.captcha.service;
 /**
  * <p>To be thrown when a service user is doing an illegal operation (typically wrang operation flow errors).</p>
  *
- * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
- * @version 1.0
+ * @author Marc-Antoine Garrigue
+ * @version $Id$
  */
 public class CaptchaServiceException extends RuntimeException {
 

@@ -23,8 +23,8 @@ import junit.framework.TestCase;
 import java.awt.*;
 
 /**
- * @author Benoit TODO To change the template for this generated type comment go to Window - Preferences - Java - Code
- *         Style - Code Templates
+ * @author Benoit
+ *         
  */
 public class RandomListColorGeneratorTest extends TestCase {
     private RandomListColorGenerator colorGenerator = null;

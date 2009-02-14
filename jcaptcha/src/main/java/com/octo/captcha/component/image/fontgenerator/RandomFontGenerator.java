@@ -30,6 +30,7 @@ public class RandomFontGenerator extends AbstractFontGenerator {
     private int[] STYLES = {Font.PLAIN, Font.ITALIC, Font.BOLD, Font.ITALIC | Font.BOLD};
 
 
+
     /**
      * Any font that this class uses must be able to generate all of the characters in this list.
      */
@@ -52,6 +53,8 @@ public class RandomFontGenerator extends AbstractFontGenerator {
 
     private static final int GENERATED_FONTS_ARRAY_SIZE = 3000;
 
+    private boolean mixStyles = true;
+
     private Font[] generatedFonts = null;
 
     protected Random myRandom = new SecureRandom();
@@ -69,13 +72,25 @@ public class RandomFontGenerator extends AbstractFontGenerator {
         initializeFonts(fontsList);
     }
 
+    public RandomFontGenerator(Integer minFontSize, Integer maxFontSize, Font[] fontsList, boolean mixStyles) {
+        super(minFontSize, maxFontSize);
+        if (fontsList == null || fontsList.length < 1) {
+            throw new IllegalArgumentException("fonts list cannot be null or empty");
+        }
+        this.mixStyles = mixStyles;
+        initializeFonts(fontsList);
+    }
+
     public RandomFontGenerator(Integer minFontSize, Integer maxFontSize, String[] badFontNamePrefixes) {
         super(minFontSize, maxFontSize);
         this.badFontNamePrefixes = badFontNamePrefixes;   
         initializeFonts(GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts());
-    }                                                                                                        
+    }
 
-	private void initializeFonts(Font[] fontList) {
+
+
+
+    private void initializeFonts(Font[] fontList) {
 		List fonts = cleanFontList(fontList);
         checkInitializedFontListSize(fonts);
         generatedFonts = generateCustomStyleFontArray(fonts);
@@ -104,7 +119,6 @@ public class RandomFontGenerator extends AbstractFontGenerator {
         Font[] generatedFonts = new Font[GENERATED_FONTS_ARRAY_SIZE];
         for (int i = 0; i < GENERATED_FONTS_ARRAY_SIZE; i++) {
             Font font = (Font) fontList.get(myRandom.nextInt(fontList.size()));
-
             Font styled = applyStyle(font);
             generatedFonts[i] = applyCustomDeformationOnGeneratedFont(styled);
         }
@@ -117,8 +131,10 @@ public class RandomFontGenerator extends AbstractFontGenerator {
 		    fontSizeIncrement = Math.abs(myRandom.nextInt(getFontSizeDelta()));
 		}
 
-		Font styled = font.deriveFont( 
-		                STYLES[myRandom.nextInt(STYLES.length)],
+		Font styled = font.deriveFont(
+		                mixStyles?
+                                STYLES[myRandom.nextInt(STYLES.length)]:
+                                font.getStyle(),
 		                getMinFontSize() + fontSizeIncrement);
 		return styled;
 	}

@@ -6,7 +6,7 @@
 
 package com.octo.captcha.component.image.textpaster.textdecorator;
 
-import com.octo.captcha.component.image.textpaster.ChangeableAttributedString;
+import com.octo.captcha.component.image.textpaster.MutableAttributedString;
 
 import java.awt.*;
 import java.text.AttributedString;
@@ -14,9 +14,10 @@ import java.text.AttributedString;
 /**
  * <p><ul><li></li></ul></p>
  *
- * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
+ * @author MAG
  * @version 1.0
+ * @deprecated
  */
 public interface TextDecorator {
-    void decorateAttributedString(Graphics2D g2, AttributedString attributedWord, ChangeableAttributedString newAttrString);
+    void decorateAttributedString(Graphics2D g2,  MutableAttributedString mutableAttributedString);
 }

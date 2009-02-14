@@ -19,18 +19,6 @@ import java.text.AttributedString;
  */
 public interface TextPaster {
 
-     /**
-     * @deprecated misspelled, use {@link #getMaxAcceptedWordLength()} instead
-     * @return the max word lenght accepted by this word2image service
-     */
-    int getMaxAcceptedWordLenght();
-
-    /**
-     * @deprecated misspelled, use {@link #getMinAcceptedWordLength()} instead
-     * @return the min word lenght accepted by this word2image service
-     */
-    int getMinAcceptedWordLenght();
-
 
     /**
      * @return the max word length accepted by this word2image service

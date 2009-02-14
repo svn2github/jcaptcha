@@ -54,7 +54,7 @@ public class SimpleFishEyeEngine extends ListImageCaptchaEngine {
         ripple.setEdgeAction(com.jhlabs.image.TransformFilter.CLAMP);
 
         water.setAmplitude(10);
-        water.setAntialias(true);
+ //       water.setAntialias(true);
         water.setWavelength(20);
 
         twirl.setAngle(4);
@@ -62,13 +62,13 @@ public class SimpleFishEyeEngine extends ListImageCaptchaEngine {
         sphere.setRefractionIndex(2);
 
         ImageDeformation rippleDef = new ImageDeformationByFilters(
-                new ImageFilter[]{ripple});
+                new ImageFilter[]{});
         ImageDeformation sphereDef = new ImageDeformationByFilters(
-                new ImageFilter[]{sphere});
+                new ImageFilter[]{});
         ImageDeformation waterDef = new ImageDeformationByFilters(
-                new ImageFilter[]{water});
+                new ImageFilter[]{});
         ImageDeformation twirlDef = new ImageDeformationByFilters(
-                new ImageFilter[]{twirl});
+                new ImageFilter[]{});
 
         //add background from files
         BackgroundGenerator generator = new FileReaderRandomBackgroundGenerator(

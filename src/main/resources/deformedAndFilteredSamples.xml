@@ -195,7 +195,9 @@
         </constructor-arg>
     </bean>
 
-    <bean id="filter3" class="com.octo.captcha.component.image.textpaster.BaffleRandomTextPaster">
+
+    <bean id="filter3" class="com.octo.captcha.component.image.textpaster.DecoratedRandomTextPaster">
+
         <constructor-arg type="java.lang.Integer" index="0">
             <value>6</value>
         </constructor-arg>
@@ -206,15 +208,25 @@
             <ref bean="colorGenRandomBlue"/>
         </constructor-arg>
         <constructor-arg index="3">
-            <value>true</value>
+           <ref bean="colorGenRandomBlue"/>
         </constructor-arg>
-        <constructor-arg index="4">
+        <constructor-arg index="4" type="com.octo.captcha.component.image.textpaster.textdecorator.TextDecorator">
+            <list>
+                <ref bean="baffleTextDecorator"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean  id="baffleTextDecorator" class="com.octo.captcha.component.image.textpaster.textdecorator.BaffleTextDecorator">
+            <constructor-arg index="0">
             <value>2</value>
         </constructor-arg>
-        <constructor-arg type="com.octo.captcha.component.image.color.ColorGenerator" index="5">
+        <constructor-arg type="com.octo.captcha.component.image.color.ColorGenerator" index="1">
             <ref bean="colorGenRandomBlue2"/>
         </constructor-arg>
     </bean>
+
+   
 
     <bean id="wordtoimage" class="com.octo.captcha.component.image.wordtoimage.ComposedWordToImage">
         <constructor-arg>

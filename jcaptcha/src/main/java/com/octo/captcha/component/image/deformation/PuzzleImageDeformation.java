@@ -89,12 +89,12 @@ public class PuzzleImageDeformation implements ImageDeformation {
                 gSmall.drawImage(image, 0, 0, xd, yd, xd * i, yd * j, xd * i + xd, yd * j + yd,
                         null);
 
-                ImageFilter filter = new RotateFilter(maxAngleRotation * random.nextDouble()
+                RotateFilter filter = new RotateFilter((float)maxAngleRotation * random.nextFloat()
                         * (random.nextBoolean() ? -1 : 1));
-
-                filtered = new FilteredImageSource(smallPart.getSource(), filter);
-                Image temp = ToolkitFactory.getToolkit().createImage(filtered);
-                smallPart.getGraphics().drawImage(temp, 0, 0, new Color(0, 0, 0, 0), null);
+              //  TODO
+                //filtered = new FilteredImageSource(smallPart.getSource(), filter);
+               // Image temp = ToolkitFactory.getToolkit().createImage(filtered);
+              //  smallPart.getGraphics().drawImage(temp, 0, 0, new Color(0, 0, 0, 0), null);
 
                 smallPart.getGraphics().dispose();
 

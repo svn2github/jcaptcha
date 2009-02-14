@@ -13,8 +13,8 @@ import java.util.Locale;
  * captcha factory has the reponsability to build the challenge of a captcha and to pass it to the captcha constructor.
  * Defines two methods to build and retrieve a captcha. A no paramterer method and a localized method.
  *
- * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
- * @version 1.0
+ * @author Marc-Antoine Garrigue
+ * @version $Id$
  */
 public interface CaptchaFactory {
 

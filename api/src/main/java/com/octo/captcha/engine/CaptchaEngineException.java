@@ -20,8 +20,8 @@ package com.octo.captcha.engine;
 /**
  * Captcha Engine Exception
  *
- * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
- * @version 1.0
+ * @author Marc-Antoine Garrigue
+ * @version $Id$
  */
 public class CaptchaEngineException extends RuntimeException {
     private Throwable cause;

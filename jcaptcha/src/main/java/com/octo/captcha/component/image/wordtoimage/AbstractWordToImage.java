@@ -27,6 +27,15 @@ import java.text.AttributedString;
  */
 public abstract class AbstractWordToImage implements WordToImage {
 
+    private boolean manageFontByCharacter = true;
+
+    protected AbstractWordToImage() {
+    }
+
+    protected AbstractWordToImage(boolean manageFontByCharacter) {
+        this.manageFontByCharacter = manageFontByCharacter;
+    }
+
     /**
      * Creates an image of the provided String This method is a skeleton for creation algorithm. it proceeds as folows :
      * <ul> <li>Checks the word length</li> <li>Creates an java.text.AttributedString from the word</li> <li>Apply font
@@ -47,7 +56,7 @@ public abstract class AbstractWordToImage implements WordToImage {
         AttributedString attributedWord = getAttributedString(word, wordLength);
 
         //create backgound
-        BufferedImage background = getBackround();
+        BufferedImage background = getBackground();
         //apply text on background
         return pasteText(background, attributedWord);
     }
@@ -55,11 +64,12 @@ public abstract class AbstractWordToImage implements WordToImage {
     AttributedString getAttributedString(String word, int wordLength) {
         AttributedString attributedWord = new AttributedString(word);
         //apply font to string
-
+        Font font = getFont();
         for (int i = 0; i < wordLength; i++) {
-            Font font = getFont();//get the new font for next character
             //apply font to next character
             attributedWord.addAttribute(TextAttribute.FONT, font, i, i + 1);
+            //get the new font for next character
+            if(manageFontByCharacter)font=getFont();
         }
         return attributedWord;
     }
@@ -92,7 +102,7 @@ public abstract class AbstractWordToImage implements WordToImage {
      *
      * @return the background image
      */
-    abstract BufferedImage getBackround();
+    abstract BufferedImage getBackground();
 
     /**
      * Pastes the attributed string on the backround image and return the final image. Implementation must take into

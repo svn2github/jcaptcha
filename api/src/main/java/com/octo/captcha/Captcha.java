@@ -24,8 +24,8 @@ import java.io.Serializable;
  * must not expose the answer</li> <li>It must dispose the challenge when the getChallenge method is called(The
  * challenge must be showed only once ) </li> </ul> ;
  *
- * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
- * @version 1.0
+ * @author Marc-Antoine Garrigue
+ * @version $Id$
  */
 public interface Captcha extends Serializable {
 

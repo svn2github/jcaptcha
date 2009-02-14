@@ -6,7 +6,6 @@ import com.octo.captcha.service.CaptchaServiceException;
 import com.octo.captcha.service.image.DefaultManageableImageCaptchaService;
 import com.octo.captcha.service.image.ImageCaptchaService;
 import com.octo.captcha.engine.GenericCaptchaEngine;
-import com.octo.captcha.image.gimpy.GimpyFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,12 +32,11 @@ public class JcaptchaImageServlet extends javax.servlet.http.HttpServlet {
     }
 
     protected void doGet(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
-        String hashString = httpServletRequest.getParameter("config");
+        String hashString = httpServletRequest.getParameter("configHash");
         Integer hash;
         try {
             hash =new Integer(hashString);
         } catch (NumberFormatException e) {
-            httpServletResponse.getOutputStream().write(("invalid config number : "+e.getMessage()).getBytes());
             return;
         }
         byte[] captchaChallengeAsJpeg = null;
@@ -48,7 +46,7 @@ public class JcaptchaImageServlet extends javax.servlet.http.HttpServlet {
          
              // call the ImageCaptchaService getChallenge method
                  BufferedImage challenge =
-                         ((GimpyFactory)JcaptchaImageMacro.engineRegistry.get(hash)).getImageCaptcha().getImageChallenge();
+                         (BufferedImage) ((GenericCaptchaEngine)JcaptchaImageMacro.engineRegistry.get(hash)).getNextCaptcha().getChallenge();
 
                  // a jpeg encoder
                  JPEGImageEncoder jpegEncoder =

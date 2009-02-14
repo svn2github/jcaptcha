@@ -13,6 +13,7 @@ import java.awt.*;
 import java.awt.font.FontRenderContext;
 import java.awt.font.LineMetrics;
 import java.awt.font.TextAttribute;
+import java.awt.font.GlyphVector;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
@@ -25,8 +26,11 @@ import java.util.Random;
  * This class is the decomposition of a single AttributedString into its component glyphs. It wouldn't be necessary if
  * Java2D correctly handled spacing issues with fonts changed AffineTransformation -- there is a possibility that it
  * will not be necessary with java 1.5
+  * @deprecated 
  */
-public class ChangeableAttributedString {
+public class MutableAttributedString {
+
+    AttributedString originalAttributedString;
 
     /**
      * each character is stored as its own AttributedString
@@ -42,6 +46,12 @@ public class ChangeableAttributedString {
      * we need the line metrics primarily to get the maximum ascent for all characters.
      */
     LineMetrics[] metrics;
+
+    /**
+     * Glyphs boundaries
+     */
+    GlyphVector[] glyphVectors;
+
 
     /**
      * Comment for <code>myRandom</code>
@@ -61,8 +71,9 @@ public class ChangeableAttributedString {
      * @param g2      graphics
      * @param aString attributed String
      */
-    protected ChangeableAttributedString(Graphics2D g2, AttributedString aString, int kerning) {
+    protected MutableAttributedString(final Graphics2D g2, AttributedString aString, int kerning) {
         this.kerning = kerning;
+        this.originalAttributedString=aString;
         AttributedCharacterIterator iter = aString.getIterator();
         int n = iter.getEndIndex();
         aStrings = new AttributedString[n];
@@ -82,7 +93,7 @@ public class ChangeableAttributedString {
 
             metrics[i] = g2.getFont().getLineMetrics((new Character(iter.current())).toString(),
                     frc);
-        }
+      }
 
     }
 
@@ -164,11 +175,7 @@ public class ChangeableAttributedString {
                     maxX = background.getWidth() - getTotalWidth();
                     if (maxX < 0) {
                         // that didn't work either. let's try gradual steps of negative kerning.
-                        maxX = reduceHorizontalSpacing(background.getWidth(), 0.05 /*
-                                                                                                                    * max
-                                                                                                                    * reduction
-                                                                                                                    * pct
-                                                                                                                    */);
+                        maxX = reduceHorizontalSpacing(background.getWidth(), 0.05 );
                     }
                 }
 
@@ -272,6 +279,20 @@ public class ChangeableAttributedString {
             maxX = (imageWidth - getTotalWidth());
         }
         return maxX;
+    }
+
+
+     /**
+     * Gradually reduce spacing between letters until the overlap at least equals specified overlapPixs.
+     *
+     * @param overlapPixs
+     * @return if positive, the highest X value that can be safely used for placement of box; if negative, there is no
+     *         safe way to display the text without clipping the ends.
+     */
+    public void overlap(double overlapPixs) {
+        for (int i = 1; i < length(); i++) {
+                bounds[i].setRect( bounds[i-1].getX()+bounds[i-1].getWidth()-overlapPixs, bounds[i].getY(), bounds[i].getWidth(), bounds[i].getHeight());
+            }
     }
 
     /**

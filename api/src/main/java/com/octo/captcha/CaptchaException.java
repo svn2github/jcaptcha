@@ -10,7 +10,7 @@ package com.octo.captcha;
  * Runtime exception for the captcha implementations.
  *
  * @author gandin
- * @version 1.0
+ * @version $Id$
  */
 public class CaptchaException extends RuntimeException {
 

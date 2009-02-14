@@ -67,7 +67,7 @@ public class ComposedWordToImageTest extends TestCase {
     }
 
     public void testGetBackround() {
-        BufferedImage test = this.composedWordToImage.getBackround();
+        BufferedImage test = this.composedWordToImage.getBackground();
         assertNotNull(test);
     }
 

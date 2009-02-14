@@ -93,7 +93,7 @@ public class SimpleWordToImage extends AbstractWordToImage {
      *
      * @return the background image
      */
-    public BufferedImage getBackround() {
+    public BufferedImage getBackground() {
         BufferedImage background = new BufferedImage(getImageWidth(),
                 getImageHeight(), BufferedImage.TYPE_INT_RGB);
         return background;

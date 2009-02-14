@@ -61,11 +61,9 @@ public class ImageCaptchaToJPEG {
         ImageCaptchaEngine pixCapchaEngine = null;
         if (className.equals("all")) {
             ImageCaptchaEngine[] engines = {
-                    new BasicListGimpyEngine(),
                     new BaffleListGimpyEngine(),
                     new DefaultGimpyEngine(),
                     new DeformedBaffleListGimpyEngine(),
-                    new DoubleRandomListGimpyEngine(),
                     new SimpleListImageCaptchaEngine(),
                     new SimpleFishEyeEngine()
             };

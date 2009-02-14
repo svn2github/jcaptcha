@@ -19,6 +19,7 @@ import java.text.AttributedString;
  *
  * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
  * @version 1.0
+  * @deprecated 
  */
 public class DecoratedRandomTextPaster extends AbstractTextPaster {
 
@@ -73,24 +74,26 @@ public class DecoratedRandomTextPaster extends AbstractTextPaster {
         // attributedString.addAttribute(TextAttribute.WIDTH, TextAttribute.WIDTH_EXTENDED);
 
         // convert string into a series of glyphs we can work with
-        ChangeableAttributedString newAttrString = new ChangeableAttributedString(g2,
+        MutableAttributedString mas = new MutableAttributedString(g2,
                 attributedWord, kerning);
 
         // space out the glyphs with a little kerning
-        newAttrString.useMinimumSpacing(kerning);
-        // shift string to a random spot in the output imge
-        newAttrString.moveToRandomSpot(background);
-        // now draw each glyph at the appropriate spot on th eimage.
+               mas.useMinimumSpacing(kerning);
+               // shift string to a random spot in the output imge
+               mas.moveToRandomSpot(background);
+
+
+        // now draw each glyph at the appropriate spot on the image.
         if (isManageColorPerGlyph()) {
-            newAttrString.drawString(g2, getColorGenerator());
+            mas.drawString(g2, getColorGenerator());
         } else {
-            newAttrString.drawString(g2);
+            mas.drawString(g2);
         }
 
         //and now decorate
         if (decorators != null) {
             for (int i = 0; i < decorators.length; i++) {
-                decorators[i].decorateAttributedString(g2, attributedWord, newAttrString);
+                decorators[i].decorateAttributedString(g2,  mas);
 
             }
         }

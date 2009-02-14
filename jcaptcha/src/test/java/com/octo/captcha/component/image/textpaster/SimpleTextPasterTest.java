@@ -30,6 +30,7 @@ import java.text.AttributedString;
  *
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
+  * @deprecated 
  */
 public class SimpleTextPasterTest extends TestCase {
 

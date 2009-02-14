@@ -14,6 +14,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.security.SecureRandom;
 import java.util.Random;
+import java.text.AttributedString;
 
 /**
  * <p/>
@@ -164,6 +165,15 @@ public abstract class AbstractTextPaster implements TextPaster {
         return pie;
     }
 
+
+    void customizeGraphicsRenderingHints(Graphics2D g2){
+         g2.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS,
+                RenderingHints.VALUE_FRACTIONALMETRICS_ON);
+        g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
+                RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+    }
+
     /**
      * @return true if this component manage color per glyph
      */
@@ -177,4 +187,6 @@ public abstract class AbstractTextPaster implements TextPaster {
     public void setColorGenerator(ColorGenerator colorGenerator) {
         this.colorGenerator = colorGenerator;
     }
+
+   
 }

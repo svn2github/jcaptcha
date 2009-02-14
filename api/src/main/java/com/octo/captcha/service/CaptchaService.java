@@ -30,8 +30,8 @@ import java.util.Locale;
  * the ID is invalid else return a boolean, and free the ID (remove the captcha). <br/> All method may throw a
  * CaptchaException if an error occurs during Captcha Generation. </p>
  *
- * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
- * @version 1.0
+ * @author Marc-Antoine Garrigue
+ * @version $Id$
  */
 public interface CaptchaService {
 

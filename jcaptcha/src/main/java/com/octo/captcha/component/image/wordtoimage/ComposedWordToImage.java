@@ -43,12 +43,19 @@ public class ComposedWordToImage extends AbstractWordToImage {
         this.textPaster = textPaster;
     }
 
+    public ComposedWordToImage(boolean manageFontByCharacter, FontGenerator fontGenerator, BackgroundGenerator background, TextPaster textPaster) {
+        super(manageFontByCharacter);
+        this.fontGenerator = fontGenerator;
+        this.background = background;
+        this.textPaster = textPaster;
+    }
+
     /**
      * @deprecated
      * @return the max word length accepted by this word2image service
      */
     public int getMaxAcceptedWordLenght() {
-        return textPaster.getMaxAcceptedWordLenght();
+        return textPaster.getMaxAcceptedWordLength();
     }
 
     /**
@@ -56,7 +63,7 @@ public class ComposedWordToImage extends AbstractWordToImage {
      * @return the min word length accepted by this word2image service
      */
     public int getMinAcceptedWordLenght() {
-        return textPaster.getMinAcceptedWordLenght();
+        return textPaster.getMinAcceptedWordLength();
     }
 
 
@@ -112,7 +119,7 @@ public class ComposedWordToImage extends AbstractWordToImage {
      *
      * @return the background image
      */
-    BufferedImage getBackround() {
+    BufferedImage getBackground() {
         return background.getBackground();
     }
 

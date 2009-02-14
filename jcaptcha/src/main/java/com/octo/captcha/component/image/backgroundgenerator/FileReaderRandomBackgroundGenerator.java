@@ -6,7 +6,10 @@
 
 package com.octo.captcha.component.image.backgroundgenerator;
 
-import java.awt.Graphics2D;
+import com.octo.captcha.CaptchaException;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,21 +17,13 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLDecoder;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.StringTokenizer;
 
-import com.octo.captcha.CaptchaException;
-import com.sun.image.codec.jpeg.ImageFormatException;
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGImageDecoder;
+import java.util.*;
+import java.util.List;
 
 /**
- * <p>File reader background generator that return a random image (JPEG ONLY) from the ones found in the directory </p>
+ * <p>File reader background generator that return a random image from the ones found in the directory </p>
  * <p>You can place images in the classpath directory, in this case take care to use a unique directory name (not already contained in a jar file)</p>
- * TODO : add some gif, bmp,... reader facilities.
  *
  * @author <a href="mailto:mag@octo.com">Marc-Antoine Garrigue</a>
  * @version 1.0
@@ -52,8 +47,7 @@ public class FileReaderRandomBackgroundGenerator extends
 
         //get all jpeg
         if (files != null) {
-            for (int i = 0; i < files.length; i++) {
-                File file = files[i];
+            for (File file : files) {
                 BufferedImage out = null;
                 if (file.isFile()) {
                     out = getImage(file);
@@ -157,6 +151,8 @@ public class FileReaderRandomBackgroundGenerator extends
 		return file;
 	}
 
+    
+
 	private boolean isNotReadable(File dir) {
 		return !dir.canRead() || !dir.isDirectory();
 	}
@@ -164,8 +160,7 @@ public class FileReaderRandomBackgroundGenerator extends
     private StringTokenizer getClasspathFromSystemProperty() {
 
         String classpath = System.getProperty("java.class.path");
-        StringTokenizer token = new StringTokenizer(classpath, File.pathSeparator);
-        return token;
+        return new StringTokenizer(classpath, File.pathSeparator);
     }
 
 
@@ -197,8 +192,7 @@ public class FileReaderRandomBackgroundGenerator extends
         
         try {
             FileInputStream fis = new FileInputStream(o);
-            JPEGImageDecoder decoder = JPEGCodec.createJPEGDecoder(fis);
-            BufferedImage out = decoder.decodeAsBufferedImage();
+            BufferedImage out =ImageIO.read(fis);
             fis.close();
 
             // Return the format name
@@ -206,9 +200,7 @@ public class FileReaderRandomBackgroundGenerator extends
             
         } catch (IOException e) {
             throw new CaptchaException("Unknown error during file reading ", e);
-        } catch (ImageFormatException e) {
-            return null;
-        }
+        } 
     }
 
     /**

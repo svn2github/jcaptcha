@@ -53,7 +53,7 @@ public class SimpleWordToImageTest extends TestCase {
     }
 
     public void testGetBackround() {
-        BufferedImage test = this.simpleWordToImage.getBackround();
+        BufferedImage test = this.simpleWordToImage.getBackground();
         assertNotNull(test);
     }
 

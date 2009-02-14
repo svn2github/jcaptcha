@@ -15,6 +15,8 @@ import com.octo.captcha.component.image.textpaster.TextPaster;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.text.AttributedString;
+import java.util.*;
+import java.util.List;
 
 /**
  * <p>This implementation uses deformation components to distord the image. </br>It takes three array of deformations :
@@ -31,9 +33,11 @@ import java.text.AttributedString;
  */
 public class DeformedComposedWordToImage extends ComposedWordToImage {
 
-    private ImageDeformation[] backgroundDeformation;
-    private ImageDeformation[] textDeformation;
-    private ImageDeformation[] finalDeformation;
+    private List<ImageDeformation> backgroundDeformations = new ArrayList<ImageDeformation>();
+    private List<ImageDeformation> textDeformations = new ArrayList<ImageDeformation>();
+    private List<ImageDeformation> finalDeformations = new ArrayList<ImageDeformation>();
+
+
 
     /**
      * Composed word to image that applys filters
@@ -52,9 +56,9 @@ public class DeformedComposedWordToImage extends ComposedWordToImage {
                                        ImageDeformation textDeformation,
                                        ImageDeformation finalDeformation) {
         super(fontGenerator, background, textPaster);
-        this.backgroundDeformation = new ImageDeformation[]{backgroundDeformation};
-        this.textDeformation = new ImageDeformation[]{textDeformation};
-        this.finalDeformation = new ImageDeformation[]{finalDeformation};
+        if(backgroundDeformation !=null)this.backgroundDeformations.add(backgroundDeformation);
+        if(textDeformation !=null) this.textDeformations.add(textDeformation);
+        if(finalDeformation !=null)this.finalDeformations.add(finalDeformation);
     }
 
     /**
@@ -63,20 +67,27 @@ public class DeformedComposedWordToImage extends ComposedWordToImage {
      * @param fontGenerator         a AbstractFontGenerator to implement the getFont() method
      * @param background            a AbstractBackgroundGenerator to implement the getBackround() method
      * @param textPaster            a AbstractTextParser to implement the pasteText() method
-     * @param backgroundDeformation to be apply on the background image
-     * @param textDeformation       to be apply on the text image
-     * @param finalDeformation      to be apply on the final image
+     * @param backgroundDeformations to be apply on the background image
+     * @param textDeformations      to be apply on the text image
+     * @param finalDeformations      to be apply on the final image
      */
     public DeformedComposedWordToImage(FontGenerator fontGenerator,
                                        BackgroundGenerator background,
                                        TextPaster textPaster,
-                                       ImageDeformation[] backgroundDeformation,
-                                       ImageDeformation[] textDeformation,
-                                       ImageDeformation[] finalDeformation) {
+                                       List<ImageDeformation> backgroundDeformations,
+                                        List<ImageDeformation> textDeformations,
+                                       List<ImageDeformation> finalDeformations) {
         super(fontGenerator, background, textPaster);
-        this.backgroundDeformation = backgroundDeformation;
-        this.textDeformation = textDeformation;
-        this.finalDeformation = finalDeformation;
+        this.backgroundDeformations = backgroundDeformations;
+        this.textDeformations = textDeformations;
+        this.finalDeformations = finalDeformations;
+    }
+
+    public DeformedComposedWordToImage(boolean manageFontByCharacter, FontGenerator fontGenerator, BackgroundGenerator background, TextPaster textPaster, List<ImageDeformation> backgroundDeformations, List<ImageDeformation> textDeformations, List<ImageDeformation> finalDeformations) {
+        super(manageFontByCharacter, fontGenerator, background, textPaster);
+        this.backgroundDeformations = backgroundDeformations;
+        this.textDeformations = textDeformations;
+        this.finalDeformations = finalDeformations;
     }
 
     /**
@@ -94,7 +105,7 @@ public class DeformedComposedWordToImage extends ComposedWordToImage {
      *          if word is invalid or if image generation fails.
      */
     public BufferedImage getImage(String word) throws CaptchaException {
-        BufferedImage background = getBackround();
+        BufferedImage background = getBackground();
         AttributedString aword = getAttributedString(word, checkWordLength(word));
         //copy background
         BufferedImage out = new BufferedImage(background.getWidth(), background.getHeight(),
@@ -104,9 +115,10 @@ public class DeformedComposedWordToImage extends ComposedWordToImage {
         g2.drawImage(background, 0, 0, out.getWidth(), out.getHeight(), null);
         g2.dispose();
         //apply filters to backround
-        for (int i = 0; i < backgroundDeformation.length; i++) {
-            out = backgroundDeformation[i].deformImage(out);
+        for (ImageDeformation deformation:backgroundDeformations) {
+            out = deformation.deformImage(out);
         }
+
 
         //paste text on a transparent background
         BufferedImage transparent = new BufferedImage(out.getWidth(), out.getHeight(),
@@ -116,8 +128,8 @@ public class DeformedComposedWordToImage extends ComposedWordToImage {
         transparent = pasteText(transparent, aword);
 
         //and apply deformation
-        for (int i = 0; i < textDeformation.length; i++) {
-            transparent = textDeformation[i].deformImage(transparent);
+      for (ImageDeformation deformation:textDeformations) {
+            transparent = deformation.deformImage(transparent);
         }
 
 
@@ -126,9 +138,11 @@ public class DeformedComposedWordToImage extends ComposedWordToImage {
         g3.drawImage(transparent, 0, 0, null);
         g3.dispose();
         //apply final deformation
-        for (int i = 0; i < finalDeformation.length; i++) {
-            out = finalDeformation[i].deformImage(out);
+        for (ImageDeformation deformation:finalDeformations) {
+            out = deformation.deformImage(out);
         }
+       
         return out;
+
     }
 }

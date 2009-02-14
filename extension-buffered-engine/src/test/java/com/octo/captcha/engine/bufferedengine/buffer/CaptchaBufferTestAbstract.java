@@ -19,7 +19,8 @@ import junit.framework.TestCase;
 
 import com.octo.captcha.Captcha;
 import com.octo.captcha.engine.CaptchaEngine;
-import com.octo.captcha.engine.image.gimpy.BasicGimpyEngine;
+
+import com.octo.captcha.engine.image.gimpy.DefaultGimpyEngine;
 
 /**
  * Abstract class to test Buffers
@@ -41,7 +42,7 @@ public abstract class CaptchaBufferTestAbstract extends TestCase {
     protected void setUp() throws Exception {
         super.setUp();
 
-        engine = new BasicGimpyEngine();
+        engine = new DefaultGimpyEngine();
     }
 
     /*

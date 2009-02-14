@@ -19,6 +19,7 @@ import java.text.AttributedString;
  *
  * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue </a>
  * @version 1.0
+  * @deprecated 
  */
 public class SimpleTextPaster extends AbstractTextPaster {
 
@@ -57,7 +58,7 @@ public class SimpleTextPaster extends AbstractTextPaster {
         //pie.dispose();
 
         // convert string into a series of glyphs we can work with
-        ChangeableAttributedString newAttrString = new ChangeableAttributedString(g2,
+        MutableAttributedString newAttrString = new MutableAttributedString(g2,
                 attributedWord, 2);
 
         // space out the glyphs with a little kerning

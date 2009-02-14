@@ -40,6 +40,10 @@ import java.util.Properties;
  */
 public class MockToolkit extends Toolkit {
 
+    protected DesktopPeer createDesktopPeer(Desktop target) throws HeadlessException {
+        return null;
+    }
+
     /**
      * Creates this toolkit's implementation of <code>Button</code> using the specified peer interface.
      *
@@ -658,6 +662,14 @@ public class MockToolkit extends Toolkit {
         return null;
     }
 
+    public boolean isModalityTypeSupported(Dialog.ModalityType modalityType) {
+        return false;
+    }
+
+    public boolean isModalExclusionTypeSupported(Dialog.ModalExclusionType modalExclusionType) {
+        return false;
+    }
+
     /**
      * Returns a map of visual attributes for the abstract level description of the given input method highlight, or
      * null if no mapping is found. The style field of the input method highlight is ignored. The map returned is
@@ -672,5 +684,10 @@ public class MockToolkit extends Toolkit {
     public Map mapInputMethodHighlight(InputMethodHighlight highlight) {
         return null;
     }
+
+
+
+
+
 
 }

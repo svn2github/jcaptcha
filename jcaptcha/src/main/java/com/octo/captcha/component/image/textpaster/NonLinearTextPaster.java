@@ -12,8 +12,8 @@
 
 package com.octo.captcha.component.image.textpaster;
 
-import com.octo.captcha.component.image.color.ColorGenerator;
 import com.octo.captcha.CaptchaException;
+import com.octo.captcha.component.image.color.ColorGenerator;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -24,6 +24,7 @@ import java.text.AttributedString;
  *
  * @date 19 mars 2007
  * @author <a href="mailto:antoine.veret@gmail.com">Antoine Véret</a>
+ * @deprecated  
  */
 public class NonLinearTextPaster extends AbstractTextPaster {
 
@@ -58,7 +59,7 @@ public class NonLinearTextPaster extends AbstractTextPaster {
         Graphics2D g2 = pasteBackgroundAndSetTextColor(out, background);
 
         // convert string into a series of glyphs we can work with
-        ChangeableAttributedString newAttrString = new ChangeableAttributedString(g2,
+        MutableAttributedString newAttrString = new MutableAttributedString(g2,
                 attributedWord, 2);
 
         // space out the glyphs with a little kerning

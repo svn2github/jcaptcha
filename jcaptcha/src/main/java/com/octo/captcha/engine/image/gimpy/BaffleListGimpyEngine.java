@@ -24,9 +24,13 @@ import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
 import com.octo.captcha.component.image.backgroundgenerator.UniColorBackgroundGenerator;
 import com.octo.captcha.component.image.fontgenerator.FontGenerator;
 import com.octo.captcha.component.image.fontgenerator.RandomFontGenerator;
-import com.octo.captcha.component.image.textpaster.BaffleRandomTextPaster;
 import com.octo.captcha.component.image.textpaster.TextPaster;
+import com.octo.captcha.component.image.textpaster.DecoratedRandomTextPaster;
+import com.octo.captcha.component.image.textpaster.textdecorator.BaffleTextDecorator;
+import com.octo.captcha.component.image.textpaster.textdecorator.TextDecorator;
+import com.octo.captcha.component.image.color.SingleColorGenerator;
 import com.octo.captcha.engine.image.ListImageCaptchaEngine;
+import com.sun.jndi.ldap.Ber;
 
 /**
  * <p>Description: </p>
@@ -42,9 +46,10 @@ public class BaffleListGimpyEngine extends ListImageCaptchaEngine {
                 new com.octo.captcha.component.word.FileDictionary(
                         "toddlist"));
         //wordtoimage components
-        TextPaster randomPaster = new BaffleRandomTextPaster(new Integer(8), new Integer(
-                15), Color.black,
-                new Integer(3), Color.white);
+        TextPaster randomPaster = new DecoratedRandomTextPaster(
+                new Integer(8), new Integer(15),
+                new SingleColorGenerator(Color.BLACK),
+                new TextDecorator[]{new BaffleTextDecorator(2,Color.black)});
         BackgroundGenerator back = new UniColorBackgroundGenerator(
                 new Integer(200), new Integer(100), Color.white);
         //BackgroundGenerator back = new FunkyBackgroundGenerator(new Integer(200), new Integer(100));

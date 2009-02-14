@@ -1,13 +1,32 @@
-<img style="border-width: 1px;" src="#if(${req})$req.getContextPath()#end/plugins/servlet/jcaptchaimage?config=$configHash&1"/>
-<img style="border-width: 1px;" src="#if(${req})$req.getContextPath()#end/plugins/servlet/jcaptchaimage?config=$configHash&2"/>
-<img style="border-width: 1px;" src="#if(${req})$req.getContextPath()#end/plugins/servlet/jcaptchaimage?config=$configHash&3"/>
+<style type="text/css">
+th.jcaptchaTh {
+background-color:#F0F0F0;
+border:1px solid #CCCCCC;
+padding:3px 4px;
+text-align:center;
+vertical-align:top;
+}
+td.jcaptchaTd, table.jcaptchaTable{
+color:#000000;
+font-family:Verdana,arial,sans-serif;
+font-size:11px;
+font-weight:normal;
+line-height:16px;
+}
+td.jcaptchaTd {
+border:1px solid #CCCCCC;
+padding:3px 4px;
+vertical-align:top;
+}
 
-<br/>
-<div class="code panel" style="border-width: 1px;">
-<div class="codeContent panelContent">
-<pre class="code-xml">
-$config
+table.jcaptchaTable {
+border-collapse:collapse;
+margin:5px;
+}
+</style>
+
+<img src="#if(${req})$req.getContextPath()#end/plugins/servlet/jcaptchaimage?config=$configHash"/><br/>
+<br>
+<pre>
+$body
 </pre>
-</div>
-</div>
-

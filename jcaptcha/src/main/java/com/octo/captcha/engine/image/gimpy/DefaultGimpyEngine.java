@@ -23,6 +23,7 @@ import com.octo.captcha.component.image.backgroundgenerator.UniColorBackgroundGe
 import com.octo.captcha.component.image.color.SingleColorGenerator;
 import com.octo.captcha.component.image.deformation.ImageDeformation;
 import com.octo.captcha.component.image.deformation.ImageDeformationByFilters;
+import com.octo.captcha.component.image.deformation.ImageDeformationByBufferedImageOp;
 import com.octo.captcha.component.image.fontgenerator.FontGenerator;
 import com.octo.captcha.component.image.fontgenerator.RandomFontGenerator;
 import com.octo.captcha.component.image.textpaster.TextPaster;
@@ -34,6 +35,7 @@ import com.octo.captcha.engine.image.ListImageCaptchaEngine;
 
 import java.awt.*;
 import java.awt.image.ImageFilter;
+import java.util.ArrayList;
 
 /**
  * <p/>
@@ -45,55 +47,7 @@ import java.awt.image.ImageFilter;
  * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-public class DefaultGimpyEngine extends ListImageCaptchaEngine {
+public class DefaultGimpyEngine extends GmailEngine {
 
-    /**
-     * this method should be implemented as folow : <ul> <li>First construct all the factories you want to initialize
-     * the gimpy with</li> <li>then call the this.addFactoriy method for each factory</li> </ul>
-     */
-    protected void buildInitialFactories() {
-
-        //build filters
-        com.jhlabs.image.WaterFilter water = new com.jhlabs.image.WaterFilter();
-
-        water.setAmplitude(3d);
-        water.setAntialias(true);
-        water.setPhase(20d);
-        water.setWavelength(70d);
-
-
-        ImageDeformation backDef = new ImageDeformationByFilters(
-                new ImageFilter[]{});
-        ImageDeformation textDef = new ImageDeformationByFilters(
-                new ImageFilter[]{});
-        ImageDeformation postDef = new ImageDeformationByFilters(
-                new ImageFilter[]{water});
-
-        //word generator
-        com.octo.captcha.component.word.wordgenerator.WordGenerator dictionnaryWords = new com.octo.captcha.component.word.wordgenerator.ComposeDictionaryWordGenerator(
-                new com.octo.captcha.component.word.FileDictionary(
-                        "toddlist"));
-        //wordtoimage components
-        TextPaster randomPaster = new DecoratedRandomTextPaster(new Integer(6), new Integer(
-                7), new SingleColorGenerator(Color.black)
-                , new TextDecorator[]{new BaffleTextDecorator(new Integer(1), Color.white)});
-        BackgroundGenerator back = new UniColorBackgroundGenerator(
-                new Integer(200), new Integer(100), Color.white);
-
-        FontGenerator shearedFont = new RandomFontGenerator(new Integer(30),
-                new Integer(35));
-        //word2image 1
-        com.octo.captcha.component.image.wordtoimage.WordToImage word2image;
-        word2image = new DeformedComposedWordToImage(shearedFont, back, randomPaster,
-                backDef,
-                textDef,
-                postDef
-        );
-
-
-        this.addFactory(
-                new com.octo.captcha.image.gimpy.GimpyFactory(dictionnaryWords,
-                        word2image));
-
-    }
+    
 }

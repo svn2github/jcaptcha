@@ -8,10 +8,9 @@ package com.octo.captcha.module.web.image;
 
 import com.octo.captcha.service.CaptchaServiceException;
 import com.octo.captcha.service.image.ImageCaptchaService;
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
 import org.apache.commons.logging.Log;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -58,11 +57,7 @@ public class ImageToJpegHelper {
             BufferedImage challenge =
                     service.getImageChallengeForID(id, locale);
             // the output stream to render the captcha image as jpeg into
-
-            // a jpeg encoder
-            JPEGImageEncoder jpegEncoder =
-                    JPEGCodec.createJPEGEncoder(jpegOutputStream);
-            jpegEncoder.encode(challenge);
+           ImageIO.write(challenge, "png",jpegOutputStream);
         } catch (IllegalArgumentException e) {
             //    log a security warning and return a 404...
             if (log != null && log.isWarnEnabled()) {

@@ -8,7 +8,7 @@ package com.octo.captcha.component.image.textpaster.textdecorator;
 
 import com.octo.captcha.component.image.color.ColorGenerator;
 import com.octo.captcha.component.image.color.SingleColorGenerator;
-import com.octo.captcha.component.image.textpaster.ChangeableAttributedString;
+import com.octo.captcha.component.image.textpaster.MutableAttributedString;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -25,6 +25,7 @@ import java.util.Random;
  *
  * @author <a href="mailto:mag@jcaptcha.net">Marc-Antoine Garrigue </a>
  * @version 1.0
+ * @deprecated
  * @see {http://www.parc.xerox.com/research/istl/projects/captcha/default.html}
  */
 public class LineTextDecorator implements TextDecorator {
@@ -75,13 +76,13 @@ public class LineTextDecorator implements TextDecorator {
         this.alphaCompositeType = alphaCompositeType != null ? alphaCompositeType.intValue() : this.alphaCompositeType;
     }
 
-    public void decorateAttributedString(Graphics2D g2, AttributedString attributedWord, ChangeableAttributedString newAttrString) {
+    public void decorateAttributedString(Graphics2D g2,  MutableAttributedString mutableAttributedString) {
         Color oldColor = g2.getColor();
         Composite oldComp = g2.getComposite();
         g2.setComposite(AlphaComposite.getInstance(alphaCompositeType));
-        for (int j = 0; j < attributedWord.getIterator().getEndIndex(); j++) {
+        for (int j = 0; j < mutableAttributedString.length(); j++) {
             g2.setColor(linesColorGenerator.getNextColor());
-            Rectangle2D bounds = newAttrString.getBounds(j).getFrame();
+            Rectangle2D bounds = mutableAttributedString.getBounds(j).getFrame();
             for (int i = 0; i < numberOfLinesPerGlyph.intValue(); i++) {
                 // double circleSize = circleMaxSize * (1 + myRandom.nextDouble()) / 2;
                 double circlex = bounds.getMinX() + bounds.getWidth() * 0.7 * myRandom.nextDouble();

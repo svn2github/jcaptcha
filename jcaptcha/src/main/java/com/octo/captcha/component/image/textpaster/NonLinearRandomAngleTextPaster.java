@@ -23,6 +23,9 @@ import java.util.Map;
  *
  * @author Martijn van Groningen
  * @since Nov 11, 2007
+ *
+ *
+  * @deprecated 
  */
 public class NonLinearRandomAngleTextPaster extends AbstractTextPaster {
 

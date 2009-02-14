@@ -8,7 +8,7 @@
 		
 		<groupId>com.octo.captcha</groupId>
     <artifactId>jcaptcha-home</artifactId>
-    <version>1.0</version>
+    <version>2.0-beta-1</version>
     <packaging>pom</packaging>
 
     <name>JCaptcha Home</name>
@@ -19,16 +19,16 @@
       <module>api</module>    
       <module>common-test</module>
       <module>jcaptcha</module>
-      <module>testing</module>      
-	  <!-- module>site-confluence-plugin</module -->    
-      <module>extension-ehcache-store</module>
+      <module>testing</module>
+      <module>site-confluence-plugin</module>
+      <!--module>extension-ehcache-store</module-->
       <module>extension-jbosscache-store</module>
       <module>extension-buffered-engine</module>
       <module>extension-sound-freetts</module>
-      <module>integration-acegi</module>
-		<module>integration-filter</module>
-		<module>integration-struts</module>
-		<module>integration-roller</module>    
+      <!--module>integration-acegi</module>
+    	<module>integration-filter</module>
+    	<module>integration-struts</module>
+    	<module>integration-roller</module!-->    
   </modules>
   	    
     <organization>
@@ -62,7 +62,35 @@
 		      <enabled>false</enabled>
 		    </snapshots>
 		  </repository>
+
+             <repository>
+            <id>atlassian-m2-repository</id>
+            <name>Atlassian Maven 2 Repository</name>
+            <url>http://repository.atlassian.com/maven2</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>atlassian-m2-contrib</id>
+            <name>Atlassian Maven 2 Contributor Repository</name>
+            <url>http://svn.atlassian.com/svn/public/contrib/repository/maven2</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
     </repositories>
+
+     <pluginRepositories>
+        <pluginRepository>
+            <id>atlassian-m2-contrib</id>
+            <name>Atlassian Maven 2 Contributor Repository</name>
+            <url>http://svn.atlassian.com/svn/public/contrib/repository/maven2</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
 	  
 	  <scm>
 	    <connection>scm:svn:https://jcaptcha.svn.sourceforge.net/svnroot/jcaptcha/trunk</connection>
@@ -247,7 +275,7 @@
                   <linkXref>true</linkXref>
                   <sourceEncoding>utf-8</sourceEncoding>
                   <minimumTokens>50</minimumTokens>
-                  <targetJdk>1.3</targetJdk>
+                  <targetJdk>1.5</targetJdk>
                   <includeTests>true</includeTests>
               </configuration>  
           </plugin>
@@ -270,12 +298,13 @@
 	        <groupId>org.apache.maven.plugins</groupId>
 	        <artifactId>maven-compiler-plugin</artifactId>
 	        <configuration>
-	          <source>1.3</source>
-	          <target>1.3</target>
+			  <fork>true</fork>
+	          <source>5</source>
+	          <target>5</target>
             <verbose>false</verbose>
             <fork>true</fork>
-            <executable>${JDK4_HOME}/bin/javac</executable>
-            <compilerVersion>1.3</compilerVersion>	          
+            <executable>${JDK6_HOME}/bin/javac</executable>
+            <compilerVersion>1.5</compilerVersion>	          
 	        </configuration>
 	      </plugin>
         <plugin>
@@ -286,6 +315,7 @@
                 <forkMode>once</forkMode>
                 <argLine>-Xms128m -Xmx256m -XX:MaxPermSize=256m</argLine>
            </configuration>
+		   
         </plugin>	      
 		    <plugin>
 	        <groupId>org.apache.maven.plugins</groupId>

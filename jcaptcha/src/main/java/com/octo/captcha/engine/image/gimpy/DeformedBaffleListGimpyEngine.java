@@ -24,11 +24,14 @@ import com.octo.captcha.component.image.deformation.ImageDeformation;
 import com.octo.captcha.component.image.deformation.ImageDeformationByFilters;
 import com.octo.captcha.component.image.fontgenerator.FontGenerator;
 import com.octo.captcha.component.image.fontgenerator.TwistedAndShearedRandomFontGenerator;
-import com.octo.captcha.component.image.textpaster.BaffleRandomTextPaster;
 import com.octo.captcha.component.image.textpaster.TextPaster;
+import com.octo.captcha.component.image.textpaster.DecoratedRandomTextPaster;
+import com.octo.captcha.component.image.textpaster.textdecorator.TextDecorator;
+import com.octo.captcha.component.image.textpaster.textdecorator.BaffleTextDecorator;
 import com.octo.captcha.component.image.wordtoimage.ComposedWordToImage;
 import com.octo.captcha.component.image.wordtoimage.DeformedComposedWordToImage;
 import com.octo.captcha.component.image.wordtoimage.WordToImage;
+import com.octo.captcha.component.image.color.SingleColorGenerator;
 import com.octo.captcha.component.word.wordgenerator.DictionaryWordGenerator;
 import com.octo.captcha.component.word.wordgenerator.WordGenerator;
 import com.octo.captcha.engine.image.ListImageCaptchaEngine;
@@ -56,7 +59,7 @@ public class DeformedBaffleListGimpyEngine extends ListImageCaptchaEngine {
         com.jhlabs.image.WaterFilter water = new com.jhlabs.image.WaterFilter();
 
         com.jhlabs.image.WeaveFilter weaves = new com.jhlabs.image.WeaveFilter();
-        com.jhlabs.image.CrystalizeFilter crystal = new com.jhlabs.image.CrystalizeFilter();
+
 
         //emboss.setBumpHeight(1.5d);
 
@@ -75,7 +78,7 @@ public class DeformedBaffleListGimpyEngine extends ListImageCaptchaEngine {
         rippleBack.setEdgeAction(com.jhlabs.image.TransformFilter.CLAMP);
 
         water.setAmplitude(1);
-        water.setAntialias(true);
+
         water.setWavelength(20);
 
         twirl.setAngle(3 / 360);
@@ -84,24 +87,19 @@ public class DeformedBaffleListGimpyEngine extends ListImageCaptchaEngine {
 
         weaves.setUseImageColors(true);
 
-        crystal.setScale(0.5f);
-        crystal.setGridType(com.jhlabs.image.CrystalizeFilter.RANDOM);
-        crystal.setFadeEdges(false);
-        crystal.setEdgeThickness(0.2f);
-        crystal.setRandomness(0.1f);
+
 
         ImageDeformation rippleDef = new ImageDeformationByFilters(
-                new ImageFilter[]{ripple});
+                new ImageFilter[]{});
         ImageDeformation waterDef = new ImageDeformationByFilters(
-                new ImageFilter[]{water});
+                new ImageFilter[]{});
         ImageDeformation embossDef = new ImageDeformationByFilters(
-                new ImageFilter[]{emboss});
+                new ImageFilter[]{});
         ImageDeformation rippleDefBack = new ImageDeformationByFilters(
-                new ImageFilter[]{rippleBack});
-        ImageDeformation cristalDef = new ImageDeformationByFilters(
-                new ImageFilter[]{crystal});
+                new ImageFilter[]{});
+
         ImageDeformation weavesDef = new ImageDeformationByFilters(
-                new ImageFilter[]{weaves});
+                new ImageFilter[]{});
 
         ImageDeformation none = new ImageDeformationByFilters(null);
         //word generator
@@ -109,10 +107,10 @@ public class DeformedBaffleListGimpyEngine extends ListImageCaptchaEngine {
                 new com.octo.captcha.component.word.FileDictionary(
                         "toddlist"));
         //wordtoimage components
-        TextPaster paster = new BaffleRandomTextPaster(new Integer(6), new Integer(
-                8), Color.black, new Integer(3),
-                Color.white);
-        BackgroundGenerator back = new UniColorBackgroundGenerator(
+              TextPaster paster = new DecoratedRandomTextPaster(new Integer(6), new Integer(
+                      7), new SingleColorGenerator(Color.black)
+                      , new TextDecorator[]{new BaffleTextDecorator(new Integer(1), Color.white)});
+              BackgroundGenerator back = new UniColorBackgroundGenerator(
                 new Integer(200), new Integer(100), Color.white);
         //BackgroundGenerator back = new FunkyBackgroundGenerator(new Integer(200), new Integer(100));
         FontGenerator font = new TwistedAndShearedRandomFontGenerator(
@@ -130,8 +128,7 @@ public class DeformedBaffleListGimpyEngine extends ListImageCaptchaEngine {
         this.addFactory(new GimpyFactory(words, word2image));
         //      select filters for 2
         word2image = new DeformedComposedWordToImage(font, back, paster,
-                rippleDefBack,
-                cristalDef,
+                rippleDefBack,null,
                 rippleDef);
         this.addFactory(new GimpyFactory(words, word2image));
         //select filters for 3
