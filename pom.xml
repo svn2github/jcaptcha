@@ -3,7 +3,8 @@
   ~ JCaptcha, the open source java framework for captcha definition and integration
   ~ Copyright (c)  2007 jcaptcha.net. All Rights Reserved.
   ~ See the LICENSE.txt file distributed with this package.
-  --><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  -->
+  <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 		
 		<groupId>com.octo.captcha</groupId>
@@ -20,7 +21,7 @@
       <module>common-test</module>
       <module>jcaptcha</module>
       <module>testing</module>
-      <module>site-confluence-plugin</module>
+      <!-- module>site-confluence-plugin</module -->
       <!--module>extension-ehcache-store</module-->
       <module>extension-jbosscache-store</module>
       <module>extension-buffered-engine</module>
@@ -41,8 +42,8 @@
     
     <licenses>
 		  <license>
-		    <name>LGPL</name>
-		    <url>http://www.gnu.org/licenses/lgpl.txt</url>
+		    <name>LGPL v2.1</name>
+		    <url>http://www.gnu.org/licenses/lgpl-2.1.txt</url>
 		  </license>
 		</licenses>
 		
@@ -63,8 +64,7 @@
 		      <enabled>false</enabled>
 		    </snapshots>
 		  </repository>
-
-             <repository>
+      <repository>
             <id>atlassian-m2-repository</id>
             <name>Atlassian Maven 2 Repository</name>
             <url>http://repository.atlassian.com/maven2</url>
@@ -108,11 +108,6 @@
       <site>
         <url>${siteDeployURL}</url>
       </site>	  
-      <repository>
-        <id>archiva.forge.octo.com</id>
-        <name>OCTO Forge Release repository</name>
-        <url>dav:http://forge.octo.com/archiva/repository/forge-releases</url>
-      </repository>
       <snapshotRepository>
         <id>archiva.forge.octo.com</id>
         <name>OCTO Forge Snapshot repository</name>
@@ -127,13 +122,6 @@
             <subscribe>https://lists.sourceforge.net/lists/listinfo/jcaptcha-users</subscribe>
             <unsubscribe>https://lists.sourceforge.net/lists/listinfo/jcaptcha-users</unsubscribe>
             <archive>http://sourceforge.net/mailarchive/forum.php?forum=jcaptcha-users</archive>
-        </mailingList>
-        <mailingList>
-            <name>JCaptcha Developer List</name>
-            <post>jcaptcha-devs@lists.sourceforge.net</post>
-            <subscribe>https://lists.sourceforge.net/lists/listinfo/jcaptcha-devs</subscribe>
-            <unsubscribe>https://lists.sourceforge.net/lists/listinfo/jcaptcha-devs</unsubscribe>
-            <archive>http://sourceforge.net/mailarchive/forum.php?forum=jcaptcha-devs</archive>
         </mailingList>
     </mailingLists>
   
@@ -313,7 +301,7 @@
             <verbose>false</verbose>
             <fork>true</fork>
             <executable>${JDK6_HOME}/bin/javac</executable>
-            <compilerVersion>1.5</compilerVersion>	          
+            <compilerVersion>1.6</compilerVersion>	          
 	        </configuration>
 	      </plugin>
         <plugin>
@@ -323,8 +311,7 @@
             <configuration>
                 <forkMode>once</forkMode>
                 <argLine>-Xms128m -Xmx256m -XX:MaxPermSize=256m</argLine>
-           </configuration>
-		   
+           </configuration>		   
         </plugin>	      
 		    <plugin>
 	        <groupId>org.apache.maven.plugins</groupId>
@@ -348,13 +335,6 @@
           </configuration>
         </plugin>	            
 	    </plugins>	    
-	    <!--extensions>
-         <extension>
-            <groupId>org.apache.maven.wagon</groupId>
-            <artifactId>wagon-webdav</artifactId>
-            <version>1.0-beta-2</version>
-         </extension>
-      </extensions-->
 	  </build>
     
 </project>
