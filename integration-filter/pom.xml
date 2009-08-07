@@ -14,12 +14,12 @@
   <groupId>com.octo.captcha</groupId>
   <artifactId>jcaptcha-integration-filter</artifactId>
   <name>Integration Filter</name>
-  <version>1.0</version>
+  <version>2.0-alpha-1</version>
   <dependencies>
     <dependency>
       <groupId>com.octo.captcha</groupId>
       <artifactId>jcaptcha</artifactId>
-      <version>1.0</version>
+      <version>2.0-alpha-1</version>
     </dependency>
   </dependencies>
 </project>

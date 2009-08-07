@@ -1,0 +1,75 @@
+<!--
+  ~ JCaptcha, the open source java framework for captcha definition and integration
+  ~ Copyright (c)  2007 jcaptcha.net. All Rights Reserved.
+  ~ See the LICENSE.txt file distributed with this package.
+  -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>jcaptcha-samples</artifactId>
+    <groupId>com.octo.captcha</groupId>
+    <version>2.0-alpha-1-SNAPSHOT</version>
+  </parent>  
+  <artifactId>jcaptcha-integration-simple-servlet-sound-sample</artifactId>
+  <packaging>war</packaging>
+  <version>2.0-alpha-1-SNAPSHOT</version>
+  <name>Simple Sound Servlet Webapp Sample</name>
+  <dependencies>
+  
+    <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>servlet-api</artifactId>
+        <version>2.5</version>
+    </dependency>
+  
+    <dependency>
+      <groupId>com.octo.captcha</groupId>
+      <artifactId>jcaptcha</artifactId>
+      <version>2.0-alpha-1-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.octo.captcha</groupId>
+      <artifactId>jcaptcha-extension-sound-freetts</artifactId>
+      <version>2.0-alpha-1-SNAPSHOT</version>
+    </dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-jcl</artifactId>
+			<version>1.5.6</version>
+		</dependency>
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.0.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.2</version>
+        </dependency>
+  </dependencies>
+  <build>
+    <finalName>jcaptcha-integration-simple-servlet-sound-sample</finalName>
+
+      <plugins>
+      <plugin>
+              <groupId>org.mortbay.jetty</groupId>
+              <artifactId>maven-jetty-plugin</artifactId>    
+            </plugin>
+           <plugin>
+	        <groupId>org.apache.maven.plugins</groupId>
+	        <artifactId>maven-compiler-plugin</artifactId>
+	        <configuration>		
+	          <source>5</source>
+	          <target>5</target>	           
+	        </configuration>
+	      </plugin>
+        </plugins>
+
+  </build>
+
+</project>

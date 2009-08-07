@@ -6,18 +6,20 @@
 
 package com.octo.captcha.module.web.image;
 
-import com.octo.captcha.service.CaptchaServiceException;
-import com.octo.captcha.service.image.ImageCaptchaService;
-import org.apache.commons.logging.Log;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.Locale;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.util.Locale;
+
+import org.slf4j.Logger;
+
+import com.octo.captcha.service.CaptchaServiceException;
+import com.octo.captcha.service.image.ImageCaptchaService;
 
 /**
  * Helper class
@@ -44,7 +46,7 @@ public class ImageToJpegHelper {
      */
     public static void flushNewCaptchaToResponse(HttpServletRequest theRequest,
                                                  HttpServletResponse theResponse,
-                                                 Log log,
+                                                 Logger log,
                                                  ImageCaptchaService service,
                                                  String id,
                                                  Locale locale)

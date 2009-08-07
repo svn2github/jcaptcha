@@ -14,7 +14,7 @@
   <groupId>com.octo.captcha</groupId>
   <artifactId>jcaptcha-extension-buffered-engine</artifactId>
   <name>Extension Buffered Engine</name>
-  <version>1.0</version>
+  <version>2.0-alpha-1-SNAPSHOT</version>
   <dependencies>
     <dependency>
       <groupId>com.octo.captcha</groupId>
@@ -55,18 +55,20 @@
          <version>1.3</version>
          <scope>test</scope>
      </dependency>
-              <dependency>
+  		<dependency>
+  			<groupId>org.slf4j</groupId>
+  			<artifactId>slf4j-jcl</artifactId>
+  			<version>1.5.6</version>
+  		</dependency>     
+        <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
             <version>1.0.4</version>
-            <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>commons-collections</groupId>
             <artifactId>commons-collections</artifactId>
             <version>3.2</version>
-            <scope>test</scope>
         </dependency>
      <dependency>
          <groupId>hsqldb</groupId>

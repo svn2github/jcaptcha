@@ -20,17 +20,17 @@
       <module>api</module>    
       <module>common-test</module>
       <module>jcaptcha</module>
-      <module>testing</module>
-      <!-- module>site-confluence-plugin</module -->
-      <!--module>extension-ehcache-store</module-->
+      <module>testing</module>      
       <module>extension-jbosscache-store</module>
       <module>extension-buffered-engine</module>
       <module>extension-sound-freetts</module>
       <module>integration-simple-servlet</module>
+      <module>samples</module> 
+      <!-- module>site-confluence-plugin</module -->
       <!--module>integration-acegi</module>
     	<module>integration-filter</module>
     	<module>integration-struts</module>
-    	<module>integration-roller</module!-->    
+    	<module>integration-roller</module!-->         
   </modules>
   	    
     <organization>
@@ -295,7 +295,6 @@
 	        <groupId>org.apache.maven.plugins</groupId>
 	        <artifactId>maven-compiler-plugin</artifactId>
 	        <configuration>
-			  <fork>true</fork>
 	          <source>5</source>
 	          <target>5</target>
             <verbose>false</verbose>

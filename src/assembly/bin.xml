@@ -44,13 +44,20 @@
     <fileSet>
       <directory>site-deploy</directory>
       <outputDirectory>/docs/</outputDirectory>
-    </fileSet>    
+    </fileSet>
+    <fileSet>
+      <directory>samples</directory>
+      <outputDirectory>/samples/</outputDirectory>
+      <!-- useDefaultExcludes>true</useDefaultExcludes -->
+      <excludes>
+        <exclude>.svn</exclude>
+      </excludes>
+    </fileSet>        
   </fileSets>
   <moduleSets>
     <moduleSet>
       <includes>
         <include>com.octo.captcha:jcaptcha-extension-buffered-engine</include>
-        <include>com.octo.captcha:jcaptcha-extension-ehcache-store</include>
         <include>com.octo.captcha:jcaptcha-extension-jbosscache-store</include>
         <include>com.octo.captcha:jcaptcha-extension-sound-freetts</include>
       </includes>
@@ -62,10 +69,11 @@
     </moduleSet>
     <moduleSet>
       <includes>
-        <include>com.octo.captcha:jcaptcha-integration-acegi</include>
+        <include>com.octo.captcha:jcaptcha-integration-simple-servlet</include>
+        <!-- include>com.octo.captcha:jcaptcha-integration-acegi</include>
         <include>com.octo.captcha:jcaptcha-integration-filter</include>
         <include>com.octo.captcha:jcaptcha-integration-roller</include>
-        <include>com.octo.captcha:jcaptcha-integration-struts</include>
+        <include>com.octo.captcha:jcaptcha-integration-struts</include -->
       </includes>
       <binaries>
         <includeDependencies>false</includeDependencies>

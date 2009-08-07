@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
   ~ JCaptcha, the open source java framework for captcha definition and integration
   ~ Copyright (c)  2007 jcaptcha.net. All Rights Reserved.
@@ -12,7 +12,14 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.octo.captcha</groupId>
-  <artifactId>jcaptcha-api</artifactId>
-  <name>API</name>
+  <artifactId>jcaptcha-samples</artifactId>
+  <name>Samples</name>
   <version>2.0-alpha-1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  
+  <modules>
+    <module>simple-servlet-image-sample</module>
+    <module>simple-servlet-sound-sample</module>
+  </modules>
+  
 </project>

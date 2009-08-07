@@ -1,3 +1,9 @@
+/*
+ * JCaptcha, the open source java framework for captcha definition and integration
+ * Copyright (c)  2007 jcaptcha.net. All Rights Reserved.
+ * See the LICENSE.txt file distributed with this package.
+ */
+
 package com.octo.captcha.module.servlet.image;
 
 import com.octo.captcha.service.image.DefaultManageableImageCaptchaService;

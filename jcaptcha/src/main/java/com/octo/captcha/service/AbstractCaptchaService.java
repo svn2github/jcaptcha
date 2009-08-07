@@ -8,8 +8,8 @@ package com.octo.captcha.service;
 
 import java.util.Locale;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.octo.captcha.Captcha;
 import com.octo.captcha.engine.CaptchaEngine;
@@ -27,7 +27,7 @@ public abstract class AbstractCaptchaService implements CaptchaService {
 
     protected CaptchaStore store;
     protected CaptchaEngine engine;
-    protected Log logger;
+    protected Logger logger;
 
 
     protected AbstractCaptchaService(CaptchaStore captchaStore,
@@ -37,7 +37,7 @@ public abstract class AbstractCaptchaService implements CaptchaService {
         this.engine = captchaEngine;
         this.store = captchaStore;
         
-        logger = LogFactory.getLog(this.getClass());
+        logger = LoggerFactory.getLogger(this.getClass());
         
         logger.info("Init " + this.store.getClass().getName());
         this.store.initAndStart();

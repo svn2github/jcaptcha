@@ -6,9 +6,9 @@
 
 package com.octo.captcha.module.web.sound;
 
-import com.octo.captcha.service.CaptchaServiceException;
-import com.octo.captcha.service.sound.SoundCaptchaService;
-import org.apache.commons.logging.Log;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.Locale;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -16,9 +16,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.util.Locale;
+
+import org.slf4j.Logger;
+
+import com.octo.captcha.service.CaptchaServiceException;
+import com.octo.captcha.service.sound.SoundCaptchaService;
 
 /**
  * Helper class
@@ -41,7 +43,7 @@ public class SoundToWavHelper {
      * @throws java.io.IOException if a problem occurs during the jpeg generation process
      */
     public static void flushNewCaptchaToResponse(HttpServletRequest theRequest,
-                                                 HttpServletResponse theResponse, Log log, SoundCaptchaService service, String id,
+                                                 HttpServletResponse theResponse, Logger log, SoundCaptchaService service, String id,
                                                  Locale locale) throws IOException {
 
         // call the ImageCaptchaService method to retrieve a captcha
