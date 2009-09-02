@@ -42,6 +42,8 @@
       <item name="Wiki Documentation" href="http://forge.octo.com/jcaptcha/confluence"/>
       <item name="Issue tracker" href="http://forge.octo.com/jcaptcha/jira"/>
       <item name="Sourceforge site" href="http://sourceforge.net/projects/jcaptcha"/>
+      <item name="1.0 API Docs" href="apidocs/1.0"/>
+      <item name="2.x API Docs" href="apidocs/2.0-alpha1"/>
       <item name="Browse source" href="http://fisheye3.cenqua.com/browse/jcaptcha"/>   
       <item name="Mailing lists" href="mail-lists.html"/>
       <item name="Project Team" href="team-list.html"/>

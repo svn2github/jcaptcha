@@ -27,20 +27,20 @@
             
                 <table>
                     <tr>
-                        <th>DefaultGimpyEngineCaptcha</th>
-                        <th>SimpleListImageCaptchaEngineCaptcha</th>
-                        <th>DoubleRandomListGimpyEngineCaptcha</th>                        
+                        <th>SimpleImageCaptchaServlet</th>
+                        <th>SimpleImageCaptchaServlet</th>
+                        <th>SimpleListImageCaptchaEngineCaptcha</th>                        
                         <th>SimpleListSoundCaptchaEngine</th>
                     </tr>
                     <tr>
                         <td>
-                          <img src="samples/DefaultGimpyEngineCaptcha_2.jpg"/>
+                          <img src="http://forge.octo.com/jcaptcha/confluence/download/attachments/35520514/jcaptcha3.jpg"/>
+                        </td>
+                        <td>
+                            <img src="http://forge.octo.com/jcaptcha/confluence/download/attachments/35520514/jcaptcha2.jpg"/>
                         </td>
                         <td>
                             <img src="samples/SimpleListImageCaptchaEngineCaptcha_0.jpg"/>
-                        </td>
-                        <td>
-                            <img src="samples/DoubleRandomListGimpyEngineCaptcha_1.jpg"/>
                         </td>                        
                         <td>
                             <a href="samples/SimpleListSoundCaptchaEngineCaptcha_0.wav">SimpleListSoundCaptchaEngineCaptcha.wav</a>
@@ -53,9 +53,13 @@
                 <br />
                 <br />
                 <br />
+                <h1>
+                  <a href="http://forge.octo.com/jcaptcha/confluence/display/general/Simple+Servlet+Integration+documentation">Get started</a>
+                </h1> 
+                <br />
                 <h2>
-                  <a href="http://forge.octo.com/jcaptcha/confluence/display/general/Developer+Documentation">Get started</a>
-                </h2> 
+                  <a href="http://forge.octo.com/jcaptcha/confluence/display/general/Developer+Documentation">Reference Documentation</a>
+                </h2>                 
                 
         </section>
 

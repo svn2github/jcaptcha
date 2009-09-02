@@ -1,0 +1,2 @@
+javadoc -d apidoc -use -source 1.5 -windowtitle "JCaptcha 1.0 apidoc" -bottom "Copyright 2003-2009 JCaptcha. All Rights Reserved." `find api/ jcaptcha extension-buffered-en
+ne/ extension-jbosscache-store/ extension-sound-freetts/ -name *.java | grep -v test`

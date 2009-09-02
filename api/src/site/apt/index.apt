@@ -14,4 +14,4 @@
 
 JCaptcha API
 
-  This module contains Interface and Exception defining the JCaptcha <<{{{./apidocs/index.html}Application Programming Interface}}>>
+  This module contains Interface and Exception defining the JCaptcha <<{{{http://jcaptcha.sourceforge.net/apidocs/2.0-alpha1/}Application Programming Interface}}>>
