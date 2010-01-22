@@ -27,10 +27,6 @@
       <module>integration-simple-servlet</module>
       <module>samples</module> 
       <!-- module>site-confluence-plugin</module -->
-      <!--module>integration-acegi</module>
-    	<module>integration-filter</module>
-    	<module>integration-struts</module>
-    	<module>integration-roller</module!-->         
   </modules>
   	    
     <organization>
@@ -64,34 +60,15 @@
 		      <enabled>false</enabled>
 		    </snapshots>
 		  </repository>
-      <repository>
+      <!-- repository>
             <id>atlassian-m2-repository</id>
             <name>Atlassian Maven 2 Repository</name>
             <url>http://repository.atlassian.com/maven2</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
-        </repository>
-        <repository>
-            <id>atlassian-m2-contrib</id>
-            <name>Atlassian Maven 2 Contributor Repository</name>
-            <url>http://svn.atlassian.com/svn/public/contrib/repository/maven2</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
+        </repository -->
     </repositories>
-
-     <pluginRepositories>
-        <pluginRepository>
-            <id>atlassian-m2-contrib</id>
-            <name>Atlassian Maven 2 Contributor Repository</name>
-            <url>http://svn.atlassian.com/svn/public/contrib/repository/maven2</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
 	  
 	  <scm>
 	    <connection>scm:svn:https://jcaptcha.svn.sourceforge.net/svnroot/jcaptcha/trunk</connection>
@@ -113,6 +90,11 @@
         <name>OCTO Forge Snapshot repository</name>
         <url>dav:http://forge.octo.com/archiva/repository/forge-snapshots</url>
       </snapshotRepository>
+      <repository>
+        <id>jcaptcha.sf.net</id>
+        <name>Sourceforge JCaptcha maven-repo</name>
+        <url>scp://shell.sourceforge.net/home/groups/j/jc/jcaptcha/maven-repo</url>
+      </repository>      
     </distributionManagement>
 	  
 		<mailingLists>
@@ -185,18 +167,12 @@
     <reporting>
         <plugins>
         
-         <plugin>
+         <!-- plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-javadoc-plugin</artifactId>
             <reportSets>
                <reportSet>
-                  <configuration>
-                     <doclet>gr.spinellis.umlgraph.doclet.UmlGraphDoc</doclet>
-                     <docletArtifact>
-                       <groupId>gr.spinellis</groupId>
-                       <artifactId>UmlGraph</artifactId>
-                       <version>4.6</version>
-                     </docletArtifact>
+                  <configuration>                     
                      <additionalparam>
                             -inferrel -inferdep -quiet -hide java.* -collpackages java.util.* -qualify
                             -postfixpackage -nodefontsize 9
@@ -208,7 +184,7 @@
                   </reports>
                </reportSet>
             </reportSets>
-          </plugin>
+          </plugin -->
           
           <plugin>
              <groupId>org.apache.maven.plugins</groupId>
@@ -223,15 +199,6 @@
               <artifactId>surefire-report-maven-plugin</artifactId>
           </plugin>
           
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-doap-plugin</artifactId>
-            <configuration>
-              <category>security</category>
-              <language>Java</language>
-            </configuration>
-          </plugin>
-
 		      <plugin>
 		      	<groupId>org.apache.maven.plugins</groupId>
 		        <artifactId>maven-clover-plugin</artifactId>

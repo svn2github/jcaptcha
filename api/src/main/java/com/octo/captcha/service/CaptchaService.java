@@ -37,7 +37,7 @@ public interface CaptchaService {
 
 
     /**
-     * Method to retrive the challenge corresponding to the given ticket.
+     * Method to retrieve the challenge corresponding to the given ticket.
      *
      * @param ID ticket
      *
@@ -48,10 +48,10 @@ public interface CaptchaService {
     Object getChallengeForID(String ID) throws CaptchaServiceException;
 
     /**
-     * Method to retrive the challenge corresponding to the given ticket.
+     * Method to retrieve the challenge corresponding to the given ticket.
      *
      * @param ID     ticket
-     * @param locale the desired localized capthca
+     * @param locale the desired localized captcha
      *
      * @return the localized challenge
      *
@@ -60,7 +60,7 @@ public interface CaptchaService {
     Object getChallengeForID(String ID, Locale locale) throws CaptchaServiceException;
 
     /**
-     * Method to retrive the question corresponding to the given ticket.
+     * Method to retrieve the question corresponding to the given ticket.
      *
      * @param ID ticket
      *
@@ -71,10 +71,10 @@ public interface CaptchaService {
     String getQuestionForID(String ID) throws CaptchaServiceException;
 
     /**
-     * Method to retrive the question corresponding to the given ticket.
+     * Method to retrieve the question corresponding to the given ticket.
      *
      * @param ID     ticket
-     * @param locale the desired localized capthca
+     * @param locale the desired localized captcha
      *
      * @return the localized question
      *
