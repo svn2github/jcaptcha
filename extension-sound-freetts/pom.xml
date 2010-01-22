@@ -9,11 +9,11 @@
   <parent>   
   		<groupId>com.octo.captcha</groupId>
       <artifactId>jcaptcha-home</artifactId>
-      <version>2.0-alpha-1-SNAPSHOT</version>
+      <version>2.0-alpha-1</version>
   </parent>
     
   <artifactId>jcaptcha-extension-sound-freetts</artifactId>
-  <version>2.0-alpha-1-SNAPSHOT</version>
+  <version>2.0-alpha-1</version>
   <name>Extension Sound FreeTTS</name>
   
   <dependencies>
@@ -21,14 +21,14 @@
     <dependency>
       <groupId>com.octo.captcha</groupId>
       <artifactId>jcaptcha-common-test</artifactId>
-      <version>2.0-alpha-1-SNAPSHOT</version>
+      <version>2.0-alpha-1</version>
       <scope>test</scope>
     </dependency>
 
     <dependency>
         <groupId>com.octo.captcha</groupId>
         <artifactId>jcaptcha</artifactId>
-        <version>2.0-alpha-1-SNAPSHOT</version>
+        <version>2.0-alpha-1</version>
     </dependency>
     
      <dependency>

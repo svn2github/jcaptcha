@@ -9,7 +9,7 @@
 		
 		<groupId>com.octo.captcha</groupId>
     <artifactId>jcaptcha-home</artifactId>
-    <version>2.0-alpha-1-SNAPSHOT</version>
+    <version>2.0-alpha-1</version>
     <packaging>pom</packaging>
 
     <name>JCaptcha Home</name>
@@ -74,26 +74,16 @@
 	    <connection>scm:svn:https://jcaptcha.svn.sourceforge.net/svnroot/jcaptcha/trunk</connection>
 	    <url>http://jcaptcha.svn.sourceforge.net/viewvc/jcaptcha/</url>
 	  </scm>
-		
-	  <ciManagement>
-	    <system>Hudson</system>
-	    <url>https://forge.octo.com/hudson/job/JCaptcha/</url>
-	  </ciManagement>
 	  
 	  <distributionManagement>
 			<downloadUrl>http://sourceforge.net/projects/jcaptcha/</downloadUrl>        
       <site>
         <url>${siteDeployURL}</url>
-      </site>	  
-      <snapshotRepository>
-        <id>archiva.forge.octo.com</id>
-        <name>OCTO Forge Snapshot repository</name>
-        <url>dav:http://forge.octo.com/archiva/repository/forge-snapshots</url>
-      </snapshotRepository>
+      </site>
       <repository>
-        <id>jcaptcha.sf.net</id>
-        <name>Sourceforge JCaptcha maven-repo</name>
-        <url>scp://shell.sourceforge.net/home/groups/j/jc/jcaptcha/maven-repo</url>
+        <id>oss.sonatype.org</id>
+        <name>Sonatype OSS Nexus Maven Repository</name>
+        <url>http://oss.sonatype.org/service/local/staging/deploy/maven2</url>
       </repository>      
     </distributionManagement>
 	  
