@@ -8,23 +8,23 @@
   <parent>
     <artifactId>jcaptcha-home</artifactId>
     <groupId>com.octo.captcha</groupId>
-    <version>2.0-alpha-1</version>
+    <version>2.0-alpha-2-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.octo.captcha</groupId>
   <artifactId>jcaptcha-extension-buffered-engine</artifactId>
   <name>Extension Buffered Engine</name>
-  <version>2.0-alpha-1</version>
+  <version>2.0-alpha-2-SNAPSHOT</version>
   <dependencies>
     <dependency>
       <groupId>com.octo.captcha</groupId>
       <artifactId>jcaptcha</artifactId>
-      <version>2.0-alpha-1</version>
+      <version>2.0-alpha-2-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>com.octo.captcha</groupId>
       <artifactId>jcaptcha-common-test</artifactId>
-      <version>2.0-alpha-1</version>
+      <version>2.0-alpha-2-SNAPSHOT</version>
       <scope>test</scope>
     </dependency>
     <dependency>
