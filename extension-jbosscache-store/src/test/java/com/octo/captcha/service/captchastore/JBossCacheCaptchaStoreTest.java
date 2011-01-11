@@ -8,7 +8,7 @@ package com.octo.captcha.service.captchastore;
 
 
 /**
- * @author <a href="mailto:antoine.veret@gmail.com">Antoine Véret</a>
+ * @author <a href="mailto:antoine.veret@gmail.com">Antoine VÃ©ret</a>
  * @version 1.0
  */
 public class JBossCacheCaptchaStoreTest extends CaptchaStoreTestAbstract {

@@ -21,17 +21,17 @@ import com.octo.captcha.Captcha;
 import com.octo.captcha.service.CaptchaServiceException;
 
 /**
- * JBossCache 2.0.0 implementation of the captcha store. Needs JDK 5.0
- * @see http://wiki.jboss.org/wiki/Wiki.jsp?page=JBossCache
- * @author <a href="mailto:antoine.veret@gmail.com">Antoine Véret</a>
- * @version 1.0
+ * JBossCache 3.2 implementation of the captcha store. Needs JDK 5.0
+ * @see http://community.jboss.org/wiki/JBossCacheOfficialDocumentation
+ * @author <a href="mailto:antoine.veret@gmail.com">Antoine VÃ©ret</a>
+ * @version 2.0
  */
 public class JBossCacheCaptchaStore implements CaptchaStore {
 
 	public static final String JCAPTCHA_JBOSSCACHE_CONFIG = "jcaptcha.jbosscache.config";
     private static final String DEFAULT_CACHE_NAME = "/captcha";
-    private Fqn cacheQualifiedName;
-    private Cache cache;
+    private Fqn<String> cacheQualifiedName;
+    private Cache<String, CaptchaAndLocale> cache;
 
     public JBossCacheCaptchaStore() {
         this(DEFAULT_CACHE_NAME);
@@ -44,7 +44,7 @@ public class JBossCacheCaptchaStore implements CaptchaStore {
     public boolean hasCaptcha(String s) {
 
     	try {
-            Object result = cache.get(cacheQualifiedName, s);
+    		CaptchaAndLocale result = cache.get(cacheQualifiedName, s);
             if (result != null) {
                 return true;
             }
@@ -76,7 +76,7 @@ public class JBossCacheCaptchaStore implements CaptchaStore {
 
     public boolean removeCaptcha(String s) {
         try {
-            Object captcha = cache.remove(cacheQualifiedName, s);
+        	CaptchaAndLocale captcha = cache.remove(cacheQualifiedName, s);
             if (captcha != null)
                 return true;
             else
@@ -89,10 +89,9 @@ public class JBossCacheCaptchaStore implements CaptchaStore {
     public Captcha getCaptcha(String s) throws CaptchaServiceException {
 
         try {
-            Object result = cache.get(cacheQualifiedName, s);
+        	CaptchaAndLocale result = cache.get(cacheQualifiedName, s);
             if (result != null) {
-                CaptchaAndLocale captchaAndLocale = (CaptchaAndLocale) result;
-                return captchaAndLocale.getCaptcha();
+                return result.getCaptcha();
             }
             else
                 return null;
@@ -105,10 +104,9 @@ public class JBossCacheCaptchaStore implements CaptchaStore {
     public Locale getLocale(String s) throws CaptchaServiceException {
 
         try {
-            Object result = cache.get(cacheQualifiedName, s);
+        	CaptchaAndLocale result = cache.get(cacheQualifiedName, s);
             if (result != null) {
-                CaptchaAndLocale captchaAndLocale = (CaptchaAndLocale) result;
-                return captchaAndLocale.getLocale();
+                return result.getLocale();
             }
             else
                 return null;
@@ -121,9 +119,9 @@ public class JBossCacheCaptchaStore implements CaptchaStore {
     public int getSize() {
 
     	try {
-    		Node root = cache.getRoot();
+    		Node<String, CaptchaAndLocale> root = cache.getRoot();
     		if (root != null) {
-    			Node captchas = root.getChild(cacheQualifiedName);
+    			Node<String, CaptchaAndLocale> captchas = root.getChild(cacheQualifiedName);
     			if (captchas != null)
     				return captchas.dataSize();
     		}
@@ -133,19 +131,19 @@ public class JBossCacheCaptchaStore implements CaptchaStore {
         }	
     }
 
-    public Collection getKeys() {
+    public Collection<String> getKeys() {
 
     	try {
-    		Node root = cache.getRoot();
+    		Node<String, CaptchaAndLocale> root = cache.getRoot();
     		if (root != null) {
-    			Node captchas = root.getChild(cacheQualifiedName);
+    			Node<String, CaptchaAndLocale> captchas = root.getChild(cacheQualifiedName);
     			if (captchas != null) {
-    				Collection keys = captchas.getKeys(); 
+    				Collection<String> keys = captchas.getKeys(); 
     		        if (keys != null)
     		        	return keys;
     			}
     		}
-    		return Collections.EMPTY_SET;
+    		return Collections.emptySet();
     	} catch (CacheException e) {
             throw new CaptchaServiceException(e);
         }
@@ -153,9 +151,9 @@ public class JBossCacheCaptchaStore implements CaptchaStore {
 
     public void empty() {
         try {
-        	Node root = cache.getRoot();
+        	Node<String, CaptchaAndLocale> root = cache.getRoot();
     		if (root != null) {
-    			Node captchas = root.getChild(cacheQualifiedName);
+    			Node<String, CaptchaAndLocale> captchas = root.getChild(cacheQualifiedName);
     			if (captchas != null) {
     				captchas.clearData();
     			}
@@ -175,7 +173,7 @@ public class JBossCacheCaptchaStore implements CaptchaStore {
         if (configFileName == null)
             throw new RuntimeException("The system property " + JCAPTCHA_JBOSSCACHE_CONFIG + " have to be set");
 		
-		CacheFactory factory = DefaultCacheFactory.getInstance();
+		CacheFactory<String, CaptchaAndLocale> factory = new DefaultCacheFactory<String, CaptchaAndLocale>();
 	    cache = factory.createCache(configFileName);								
 	}
 
