@@ -13,7 +13,7 @@
     <packaging>pom</packaging>
 
     <name>JCaptcha Home</name>
-    <url>http://www.jcaptcha.net/</url>
+    <url></url>
     <properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -34,7 +34,7 @@
   	    
     <organization>
         <name>JCaptcha corp.</name>
-        <url>http://www.jcaptcha.net/</url>
+        <url>http://jcaptcha.sourceforge.net/</url>
     </organization>
     
     <inceptionYear>2003</inceptionYear>
@@ -46,21 +46,9 @@
 		  </license>
 		</licenses>
 		
-	  <issueManagement>
-	    <system>Jira</system>
-	    <url>http://forge.octo.com/jcaptcha/jira</url>
-	  </issueManagement>
+
 	  
-		<repositories>
-      <!-- repository>
-            <id>atlassian-m2-repository</id>
-            <name>Atlassian Maven 2 Repository</name>
-            <url>http://repository.atlassian.com/maven2</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository -->
-    </repositories>
+
 	  
 	  <scm>
 	    <connection>scm:svn:https://jcaptcha.svn.sourceforge.net/svnroot/jcaptcha/trunk</connection>
