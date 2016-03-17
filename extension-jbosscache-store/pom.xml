@@ -49,7 +49,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
     <dependency>
         <groupId>org.jboss.cache</groupId>
         <artifactId>jbosscache-core</artifactId>
-        <version>3.2.6.GA</version>
+        <version>3.2.7.GA</version>
     </dependency>
   </dependencies>
 </project>
