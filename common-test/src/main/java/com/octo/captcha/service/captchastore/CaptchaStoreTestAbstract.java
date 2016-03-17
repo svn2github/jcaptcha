@@ -20,6 +20,7 @@ import java.util.Locale;
  * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
+@SuppressWarnings("deprecation")
 public abstract class CaptchaStoreTestAbstract extends TestCase {
 
     protected CaptchaStore store;
@@ -40,7 +41,8 @@ public abstract class CaptchaStoreTestAbstract extends TestCase {
     public abstract CaptchaStore getStore();
 
 
-    public void testHasCaptcha() throws Exception {
+
+	public void testHasCaptcha() throws Exception {
         assertFalse("should not have", store.hasCaptcha("1"));
         store.storeCaptcha("2", captcha);
         store.storeCaptcha("1 ", captcha);
