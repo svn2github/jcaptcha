@@ -9,7 +9,7 @@
   <parent>   
   		<groupId>com.octo.captcha</groupId>
       <artifactId>jcaptcha-home</artifactId>
-      <version>2.0-alpha-2-SNAPSHOT</version>
+      <version>2.0.0-SNAPSHOT</version>
   </parent>
     
   <artifactId>jcaptcha-extension-sound-freetts</artifactId>
@@ -20,14 +20,14 @@
     <dependency>
       <groupId>com.octo.captcha</groupId>
       <artifactId>jcaptcha-common-test</artifactId>
-      <version>2.0-alpha-2-SNAPSHOT</version>
+      <version>2.0.0-SNAPSHOT</version>
       <scope>test</scope>
     </dependency>
 
     <dependency>
         <groupId>com.octo.captcha</groupId>
         <artifactId>jcaptcha</artifactId>
-        <version>2.0-alpha-2-SNAPSHOT</version>
+        <version>2.0.0-SNAPSHOT</version>
     </dependency>
     
      <dependency>
