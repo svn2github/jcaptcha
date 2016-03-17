@@ -413,15 +413,7 @@ public abstract class AbstractFreeTTSWordToSound implements WordToSound {
             return true;
         }
 
-        /**
-         * Waits for resume. If this audio player is paused waits for the player to be resumed. Returns if resumed,
-         * cancelled or shutdown.
-         *
-         * @return true if the output has been resumed, false if the output has been cancelled or shutdown.
-         */
-        private synchronized boolean waitResume() {
-            return true;
-        }
+
 
         /**
          * Returns the name of this audioplayer
@@ -432,16 +424,6 @@ public abstract class AbstractFreeTTSWordToSound implements WordToSound {
             return "AudioInputStreamAudioPlayer";
         }
 
-        /**
-         * Outputs a debug message if debugging is turned on
-         *
-         * @param msg the message to output
-         */
-        private void debugPrint(String msg) {
-            if (debug) {
-                System.out.println(toString() + ": " + msg);
-            }
-        }
 
         /**
          * Shows metrics for this audio player
