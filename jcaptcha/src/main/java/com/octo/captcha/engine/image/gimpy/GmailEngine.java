@@ -39,7 +39,12 @@ import com.octo.captcha.component.image.textpaster.glyphsvisitor.OverlapGlyphsUs
 import com.octo.captcha.component.image.textpaster.glyphsvisitor.TranslateAllToRandomPointVisitor;
 import com.octo.captcha.component.image.textpaster.glyphsvisitor.TranslateGlyphsVerticalRandomVisitor;
 import com.octo.captcha.component.image.wordtoimage.DeformedComposedWordToImage;
+import com.octo.captcha.component.image.wordtoimage.WordToImage;
+import com.octo.captcha.component.word.FileDictionary;
+import com.octo.captcha.component.word.wordgenerator.ComposeDictionaryWordGenerator;
+import com.octo.captcha.component.word.wordgenerator.WordGenerator;
 import com.octo.captcha.engine.image.ListImageCaptchaEngine;
+import com.octo.captcha.image.gimpy.GimpyFactory;
 
 /**
  * <p/>
@@ -60,10 +65,7 @@ public class GmailEngine extends ListImageCaptchaEngine {
     protected void buildInitialFactories() {
 
         //word generator
-        com.octo.captcha.component.word.wordgenerator.WordGenerator dictionnaryWords = //new ConstantWordGenerator("gefefi");
-                new com.octo.captcha.component.word.wordgenerator.ComposeDictionaryWordGenerator(
-                        new com.octo.captcha.component.word.FileDictionary(
-                                "toddlist"));
+		WordGenerator dictionnaryWords = new ComposeDictionaryWordGenerator(new FileDictionary("toddlist"));
         //wordtoimage components
         TextPaster randomPaster = new GlyphsPaster(7, 7,
                 new RandomListColorGenerator(
@@ -75,9 +77,6 @@ public class GmailEngine extends ListImageCaptchaEngine {
                 new TranslateGlyphsVerticalRandomVisitor(1),
                 new OverlapGlyphsUsingShapeVisitor(3),
                 new TranslateAllToRandomPointVisitor()
-                //,
-
-               //
                 });
 
         BackgroundGenerator back = new UniColorBackgroundGenerator(
@@ -86,10 +85,8 @@ public class GmailEngine extends ListImageCaptchaEngine {
         FontGenerator shearedFont = new RandomFontGenerator(50,
                 50,
                 new Font[]{
-                        new Font("nyala",Font.BOLD, 50)
-                        ,
-                        new Font("Bell MT",  Font.PLAIN, 50)
-                        ,
+                        new Font("nyala",Font.BOLD, 50),
+                        new Font("Bell MT",  Font.PLAIN, 50),
                         new Font("Credit valley",  Font.BOLD, 50)
                 }
         ,false);
@@ -127,9 +124,7 @@ public class GmailEngine extends ListImageCaptchaEngine {
         textDef.add(new ImageDeformationByBufferedImageOp(pinch2));
         textDef.add(new ImageDeformationByBufferedImageOp(pinch3));
 
-        //word2image 1
-        com.octo.captcha.component.image.wordtoimage.WordToImage word2image;
-        word2image = new DeformedComposedWordToImage(false,shearedFont, back, randomPaster,
+        WordToImage word2image = new DeformedComposedWordToImage(false,shearedFont, back, randomPaster,
                 new ArrayList<ImageDeformation>(),
                 new ArrayList<ImageDeformation>(),
                 textDef
@@ -138,9 +133,7 @@ public class GmailEngine extends ListImageCaptchaEngine {
         );
 
 
-        this.addFactory(
-                new com.octo.captcha.image.gimpy.GimpyFactory(dictionnaryWords,
-                        word2image, false));
+		this.addFactory(new GimpyFactory(dictionnaryWords, word2image, false));
 
     }
 }
