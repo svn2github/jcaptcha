@@ -5,6 +5,8 @@
  */
 package com.octo.captcha.sound;
 
+import java.io.IOException;
+
 import javax.sound.sampled.AudioInputStream;
 
 import junit.framework.TestCase;
@@ -59,11 +61,34 @@ public class SoundCaptchaTest extends TestCase {
      * This test is for verifying if the audio captcha are different stream but have the same content.
      */
     public void testGetAudioChallenge() throws Exception {
-        Object challengeObject = soundCaptcha.getChallenge();
-        assertEquals(AudioInputStream.class, challengeObject.getClass());
-        AudioInputStream challengeAudioStream = (AudioInputStream) challengeObject;
-        AudioInputStream soundChallengeAudioStream = soundCaptcha.getSoundChallenge();
-        assertEquals(soundChallengeAudioStream.getFormat().toString(), challengeAudioStream.getFormat().toString());
-        assertEquals(soundChallengeAudioStream.getFrameLength(), challengeAudioStream.getFrameLength());
+    	AudioInputStream challengeAudioStream = null;
+    	AudioInputStream soundChallengeAudioStream = null;
+    	try {
+	        Object challengeObject = soundCaptcha.getChallenge();
+	        assertEquals(AudioInputStream.class, challengeObject.getClass());
+	        challengeAudioStream = (AudioInputStream) challengeObject;
+	        soundChallengeAudioStream = soundCaptcha.getSoundChallenge();
+	        assertEquals(soundChallengeAudioStream.getFormat().toString(), challengeAudioStream.getFormat().toString());
+	        assertEquals(soundChallengeAudioStream.getFrameLength(), challengeAudioStream.getFrameLength());
+    	}
+    	finally {
+    		
+    		if (challengeAudioStream != null) {
+    			try {
+    				challengeAudioStream.close();
+    			}
+    			catch (IOException ioe) {
+    				//
+    			}
+    		}
+    		if (soundChallengeAudioStream != null) {
+    			try {
+    				soundChallengeAudioStream.close();
+    			}
+    			catch (IOException ioe) {
+    				//
+    			}
+    		}
+    	}
     }
 }
