@@ -22,7 +22,7 @@ import java.io.IOException;
 
 /**
  * @author mag
- * @Date 14 févr. 2009
+ * @Date 14 feb. 2009
  */
 public class SimpleImageCaptchaServlet extends HttpServlet implements Servlet
  {
