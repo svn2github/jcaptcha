@@ -681,7 +681,7 @@ public class MockToolkit extends Toolkit {
      *
      * @since 1.3
      */
-    public Map mapInputMethodHighlight(InputMethodHighlight highlight) {
+    public Map<java.awt.font.TextAttribute,?> mapInputMethodHighlight(InputMethodHighlight highlight) {
         return null;
     }
 
