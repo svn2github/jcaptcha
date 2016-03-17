@@ -7,7 +7,7 @@
   <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 		
-		<groupId>com.octo.captcha</groupId>
+	<groupId>com.octo.captcha</groupId>
     <artifactId>jcaptcha-home</artifactId>
     <version>2.0-alpha-2-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -29,7 +29,6 @@
       <module>extension-sound-freetts</module>
       <module>integration-simple-servlet</module>
       <module>samples</module> 
-      <!-- module>site-confluence-plugin</module -->
   </modules>
   	    
     <organization>
@@ -199,10 +198,7 @@
               <configuration>
                   <configLocation>pmd.xml</configLocation>
                   <linkXref>true</linkXref>
-                  <sourceEncoding>utf-8</sourceEncoding>
                   <minimumTokens>50</minimumTokens>
-                  <targetJdk>1.5</targetJdk>
-                  <includeTests>true</includeTests>
               </configuration>  
           </plugin>
             <plugin>
@@ -240,11 +236,7 @@
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
-            <inherited>true</inherited>
-            <configuration>
-                <forkMode>once</forkMode>
-                <argLine>-Xms128m -Xmx256m -XX:MaxPermSize=256m</argLine>
-           </configuration>		   
+            <inherited>true</inherited> 
         </plugin>	      
 		    <plugin>
 	        <groupId>org.apache.maven.plugins</groupId>
