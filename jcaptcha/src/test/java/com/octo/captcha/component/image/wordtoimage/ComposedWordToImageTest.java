@@ -30,8 +30,7 @@ import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
 import com.octo.captcha.component.image.backgroundgenerator.GradientBackgroundGenerator;
 import com.octo.captcha.component.image.fontgenerator.FontGenerator;
 import com.octo.captcha.component.image.fontgenerator.RandomFontGenerator;
-import com.octo.captcha.component.image.textpaster.SimpleTextPaster;
-import com.octo.captcha.component.image.textpaster.TextPaster;
+import com.octo.captcha.component.image.textpaster.GlyphsPaster;
 
 /**
  * <p>Description: </p>
@@ -59,7 +58,7 @@ public class ComposedWordToImageTest extends TestCase {
     public void setUp() {
         BackgroundGenerator background = new GradientBackgroundGenerator(this.imageWidth, this.imageHeight, Color.black, Color.white);
         FontGenerator fontGenerator = new RandomFontGenerator(this.minFontSize, this.maxFontSize);
-        TextPaster textPaster = new SimpleTextPaster(this.minAcceptedWordLength, this.maxAcceptedWordLength, Color.blue);
+        GlyphsPaster textPaster = new GlyphsPaster(this.minAcceptedWordLength, this.maxAcceptedWordLength, Color.blue);
         this.composedWordToImage = new ComposedWordToImage(fontGenerator, background, textPaster);
     }
 

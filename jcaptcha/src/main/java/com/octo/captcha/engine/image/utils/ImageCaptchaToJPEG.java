@@ -24,10 +24,7 @@ import java.text.DecimalFormat;
 
 import com.octo.captcha.engine.image.ImageCaptchaEngine;
 import com.octo.captcha.engine.image.fisheye.SimpleFishEyeEngine;
-import com.octo.captcha.engine.image.gimpy.BaffleListGimpyEngine;
 import com.octo.captcha.engine.image.gimpy.DefaultGimpyEngine;
-import com.octo.captcha.engine.image.gimpy.DeformedBaffleListGimpyEngine;
-import com.octo.captcha.engine.image.gimpy.SimpleListImageCaptchaEngine;
 import com.octo.captcha.image.ImageCaptcha;
 
 /**
@@ -64,10 +61,7 @@ public class ImageCaptchaToJPEG {
         ImageCaptchaEngine pixCapchaEngine = null;
         if (className.equals("all")) {
             ImageCaptchaEngine[] engines = {
-                    new BaffleListGimpyEngine(),
                     new DefaultGimpyEngine(),
-                    new DeformedBaffleListGimpyEngine(),
-                    new SimpleListImageCaptchaEngine(),
                     new SimpleFishEyeEngine()
             };
             for (int i = 0; i < engines.length; i++) {
