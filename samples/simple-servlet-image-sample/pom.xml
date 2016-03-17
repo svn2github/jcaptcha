@@ -13,7 +13,6 @@
   </parent>
   <artifactId>jcaptcha-integration-simple-servlet-image-sample</artifactId>
   <packaging>war</packaging>
-  <version>2.0-alpha-2-SNAPSHOT</version>
   <name>Simple Image Servlet Webapp Sample</name>
   <dependencies>
     <dependency>

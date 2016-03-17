@@ -4,27 +4,24 @@
   ~ Copyright (c)  2007 jcaptcha.net. All Rights Reserved.
   ~ See the LICENSE.txt file distributed with this package.
   -->
-<project>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
     <artifactId>jcaptcha-home</artifactId>
     <groupId>com.octo.captcha</groupId>
     <version>2.0-alpha-2-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.octo.captcha</groupId>
   <artifactId>jcaptcha-extension-jbosscache-store</artifactId>
   <name>Extension JBossCache Store</name>
-  <version>2.0-alpha-2-SNAPSHOT</version>
   <build>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
-          <source>1.5</source>
-          <target>1.5</target>
-          <verbose>false</verbose>
-          <fork>false</fork>         	          
+          <source>1.7</source>
+          <target>1.7</target>	          
         </configuration>
       </plugin>
     </plugins>
