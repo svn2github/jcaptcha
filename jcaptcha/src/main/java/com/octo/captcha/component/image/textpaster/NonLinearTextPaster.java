@@ -12,12 +12,13 @@
 
 package com.octo.captcha.component.image.textpaster;
 
-import com.octo.captcha.CaptchaException;
-import com.octo.captcha.component.image.color.ColorGenerator;
-
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.text.AttributedString;
+
+import com.octo.captcha.CaptchaException;
+import com.octo.captcha.component.image.color.ColorGenerator;
 
 /**
  * Pastes characters in differents height lines in the background

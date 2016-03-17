@@ -6,9 +6,9 @@
 
 package com.octo.captcha.sound.speller;
 
-import com.octo.captcha.sound.SoundCaptcha;
-
 import javax.sound.sampled.AudioInputStream;
+
+import com.octo.captcha.sound.SoundCaptcha;
 
 /**
  * <p>SoundCaptcha with spelling</p>

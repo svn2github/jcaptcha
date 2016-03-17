@@ -1,12 +1,12 @@
 package com.octo.captcha.component.image.textpaster;
 
-import java.awt.font.GlyphVector;
+import java.awt.Shape;
 import java.awt.font.GlyphMetrics;
+import java.awt.font.GlyphVector;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
-import java.awt.geom.AffineTransform;
-import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**

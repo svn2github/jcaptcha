@@ -11,10 +11,10 @@
  */
 package com.octo.captcha.engine;
 
+import java.util.Locale;
+
 import com.octo.captcha.image.ImageCaptcha;
 import com.octo.captcha.image.ImageCaptchaFactory;
-
-import java.util.Locale;
 
 /**
  * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>

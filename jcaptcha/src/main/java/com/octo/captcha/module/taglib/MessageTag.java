@@ -6,10 +6,10 @@
 
 package com.octo.captcha.module.taglib;
 
+import java.io.IOException;
+
 import com.octo.captcha.module.config.CaptchaModuleConfig;
 import com.octo.captcha.service.CaptchaService;
-
-import java.io.IOException;
 
 /**
  * <p><ul><li></li></ul></p>

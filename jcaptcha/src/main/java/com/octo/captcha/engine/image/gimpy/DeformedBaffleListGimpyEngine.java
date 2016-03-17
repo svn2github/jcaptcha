@@ -18,27 +18,27 @@
 
 package com.octo.captcha.engine.image.gimpy;
 
+import java.awt.Color;
+import java.awt.image.ImageFilter;
+
 import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
 import com.octo.captcha.component.image.backgroundgenerator.UniColorBackgroundGenerator;
+import com.octo.captcha.component.image.color.SingleColorGenerator;
 import com.octo.captcha.component.image.deformation.ImageDeformation;
 import com.octo.captcha.component.image.deformation.ImageDeformationByFilters;
 import com.octo.captcha.component.image.fontgenerator.FontGenerator;
 import com.octo.captcha.component.image.fontgenerator.TwistedAndShearedRandomFontGenerator;
-import com.octo.captcha.component.image.textpaster.TextPaster;
 import com.octo.captcha.component.image.textpaster.DecoratedRandomTextPaster;
-import com.octo.captcha.component.image.textpaster.textdecorator.TextDecorator;
+import com.octo.captcha.component.image.textpaster.TextPaster;
 import com.octo.captcha.component.image.textpaster.textdecorator.BaffleTextDecorator;
+import com.octo.captcha.component.image.textpaster.textdecorator.TextDecorator;
 import com.octo.captcha.component.image.wordtoimage.ComposedWordToImage;
 import com.octo.captcha.component.image.wordtoimage.DeformedComposedWordToImage;
 import com.octo.captcha.component.image.wordtoimage.WordToImage;
-import com.octo.captcha.component.image.color.SingleColorGenerator;
 import com.octo.captcha.component.word.wordgenerator.DictionaryWordGenerator;
 import com.octo.captcha.component.word.wordgenerator.WordGenerator;
 import com.octo.captcha.engine.image.ListImageCaptchaEngine;
 import com.octo.captcha.image.gimpy.GimpyFactory;
-
-import java.awt.*;
-import java.awt.image.ImageFilter;
 
 /**
  * <p><ul><li></li></ul></p>

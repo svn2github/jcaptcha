@@ -6,14 +6,14 @@
 
 package com.octo.captcha.image;
 
-import com.octo.captcha.Captcha;
-
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.imageio.stream.MemoryCacheImageInputStream;
 import javax.imageio.stream.MemoryCacheImageOutputStream;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
+
+import com.octo.captcha.Captcha;
 
 /**
  * <p>String question about a BufferedImage challenge. Abstract.</p>

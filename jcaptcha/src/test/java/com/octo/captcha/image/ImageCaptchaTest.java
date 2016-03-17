@@ -17,17 +17,22 @@
  */
 package com.octo.captcha.image;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.lang.reflect.Field;
+
+import junit.framework.TestCase;
+
 import com.octo.captcha.Captcha;
 import com.octo.captcha.component.image.wordtoimage.SimpleWordToImage;
 import com.octo.captcha.component.image.wordtoimage.WordToImage;
 import com.octo.captcha.component.word.wordgenerator.DummyWordGenerator;
 import com.octo.captcha.component.word.wordgenerator.WordGenerator;
 import com.octo.captcha.image.gimpy.GimpyFactory;
-import junit.framework.TestCase;
-
-import java.awt.image.BufferedImage;
-import java.io.*;
-import java.lang.reflect.Field;
 
 /**
  * <p>Description: </p>

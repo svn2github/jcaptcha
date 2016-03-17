@@ -18,6 +18,13 @@
 
 package com.octo.captcha.engine.image.gimpy;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.jhlabs.image.PinchFilter;
+import com.jhlabs.math.ImageFunction2D;
 import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
 import com.octo.captcha.component.image.backgroundgenerator.UniColorBackgroundGenerator;
 import com.octo.captcha.component.image.color.RandomListColorGenerator;
@@ -25,16 +32,14 @@ import com.octo.captcha.component.image.deformation.ImageDeformation;
 import com.octo.captcha.component.image.deformation.ImageDeformationByBufferedImageOp;
 import com.octo.captcha.component.image.fontgenerator.FontGenerator;
 import com.octo.captcha.component.image.fontgenerator.RandomFontGenerator;
-import com.octo.captcha.component.image.textpaster.*;
-import com.octo.captcha.component.image.textpaster.glyphsvisitor.*;
+import com.octo.captcha.component.image.textpaster.GlyphsPaster;
+import com.octo.captcha.component.image.textpaster.TextPaster;
+import com.octo.captcha.component.image.textpaster.glyphsvisitor.GlyphsVisitors;
+import com.octo.captcha.component.image.textpaster.glyphsvisitor.OverlapGlyphsUsingShapeVisitor;
+import com.octo.captcha.component.image.textpaster.glyphsvisitor.TranslateAllToRandomPointVisitor;
+import com.octo.captcha.component.image.textpaster.glyphsvisitor.TranslateGlyphsVerticalRandomVisitor;
 import com.octo.captcha.component.image.wordtoimage.DeformedComposedWordToImage;
 import com.octo.captcha.engine.image.ListImageCaptchaEngine;
-import com.jhlabs.image.PinchFilter;
-import com.jhlabs.math.ImageFunction2D;
-
-import java.awt.*;
-import java.util.*;
-import java.util.List;
 
 /**
  * <p/>

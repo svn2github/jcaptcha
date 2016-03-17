@@ -6,15 +6,14 @@
 
 package com.octo.captcha.component.image.deformation;
 
-import com.jhlabs.image.RotateFilter;
-import com.octo.captcha.component.image.utils.ToolkitFactory;
-
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.FilteredImageSource;
-import java.awt.image.ImageFilter;
 import java.security.SecureRandom;
 import java.util.Random;
+
+import com.jhlabs.image.RotateFilter;
 
 /**
  * Deformation where the image is divided in little squares, moved individualty in a random position. Each move is

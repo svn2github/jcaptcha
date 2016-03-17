@@ -6,14 +6,14 @@
 
 package com.octo.captcha.component.image.wordtoimage;
 
+import java.awt.Font;
+import java.awt.image.BufferedImage;
+import java.text.AttributedString;
+
 import com.octo.captcha.CaptchaException;
 import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
 import com.octo.captcha.component.image.fontgenerator.FontGenerator;
 import com.octo.captcha.component.image.textpaster.TextPaster;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.text.AttributedString;
 
 /**
  * <p>Base class for composed WordToImage</p> It extends the AbstractWord to image and uses three others Components :

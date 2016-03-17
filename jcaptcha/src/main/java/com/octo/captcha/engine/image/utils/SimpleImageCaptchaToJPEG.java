@@ -18,16 +18,14 @@
 
 package com.octo.captcha.engine.image.utils;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
 import com.octo.captcha.engine.image.ImageCaptchaEngine;
 import com.octo.captcha.engine.image.gimpy.DefaultGimpyEngine;
 import com.octo.captcha.image.ImageCaptcha;
 import com.octo.captcha.image.ImageCaptchaFactory;
-
-
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
 /**
  * <p>Description: </p>

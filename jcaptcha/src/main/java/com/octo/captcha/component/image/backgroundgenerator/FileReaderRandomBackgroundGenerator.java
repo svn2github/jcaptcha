@@ -6,10 +6,7 @@
 
 package com.octo.captcha.component.image.backgroundgenerator;
 
-import com.octo.captcha.CaptchaException;
-
-import javax.imageio.ImageIO;
-import java.awt.*;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,9 +14,15 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLDecoder;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.StringTokenizer;
+
+import javax.imageio.ImageIO;
+
+import com.octo.captcha.CaptchaException;
 
 /**
  * <p>File reader background generator that return a random image from the ones found in the directory </p>

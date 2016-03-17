@@ -19,9 +19,9 @@
 
 package com.octo.captcha.component.word.wordgenerator;
 
-import junit.framework.TestCase;
-
 import java.util.Locale;
+
+import junit.framework.TestCase;
 
 /**
  * <p>Description: </p>

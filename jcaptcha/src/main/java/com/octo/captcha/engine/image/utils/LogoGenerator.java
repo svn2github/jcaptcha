@@ -18,6 +18,10 @@
 
 package com.octo.captcha.engine.image.utils;
 
+import java.awt.Color;
+import java.io.File;
+import java.io.IOException;
+
 import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
 import com.octo.captcha.component.image.backgroundgenerator.FileReaderRandomBackgroundGenerator;
 import com.octo.captcha.component.image.fontgenerator.FontGenerator;
@@ -31,10 +35,6 @@ import com.octo.captcha.component.word.wordgenerator.WordGenerator;
 import com.octo.captcha.image.ImageCaptcha;
 import com.octo.captcha.image.ImageCaptchaFactory;
 import com.octo.captcha.image.gimpy.GimpyFactory;
-
-import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 
 /**
  * <p>Description: Generate a sample logo for the master webSite. Main method takes one arg : the file path of the

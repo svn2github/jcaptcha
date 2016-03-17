@@ -6,11 +6,11 @@
 
 package com.octo.captcha.service.captchastore;
 
-import com.octo.captcha.Captcha;
-import com.octo.captcha.service.CaptchaServiceException;
-
 import java.util.Collection;
 import java.util.Locale;
+
+import com.octo.captcha.Captcha;
+import com.octo.captcha.service.CaptchaServiceException;
 
 /**
  * Provides a way to temporally store captchas with a unique key

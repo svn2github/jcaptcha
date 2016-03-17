@@ -6,12 +6,11 @@
 
 package com.octo.captcha.engine;
 
+import java.util.Locale;
+
 import com.octo.captcha.Captcha;
 import com.octo.captcha.CaptchaFactory;
 import com.octo.captcha.MockCaptcha;
-import com.octo.captcha.engine.CaptchaEngineException;
-
-import java.util.Locale;
 
 /**
  * <p><ul><li></li></ul></p>

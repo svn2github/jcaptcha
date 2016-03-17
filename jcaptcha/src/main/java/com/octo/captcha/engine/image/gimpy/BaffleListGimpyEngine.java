@@ -22,15 +22,14 @@ import java.awt.Color;
 
 import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
 import com.octo.captcha.component.image.backgroundgenerator.UniColorBackgroundGenerator;
+import com.octo.captcha.component.image.color.SingleColorGenerator;
 import com.octo.captcha.component.image.fontgenerator.FontGenerator;
 import com.octo.captcha.component.image.fontgenerator.RandomFontGenerator;
-import com.octo.captcha.component.image.textpaster.TextPaster;
 import com.octo.captcha.component.image.textpaster.DecoratedRandomTextPaster;
+import com.octo.captcha.component.image.textpaster.TextPaster;
 import com.octo.captcha.component.image.textpaster.textdecorator.BaffleTextDecorator;
 import com.octo.captcha.component.image.textpaster.textdecorator.TextDecorator;
-import com.octo.captcha.component.image.color.SingleColorGenerator;
 import com.octo.captcha.engine.image.ListImageCaptchaEngine;
-import com.sun.jndi.ldap.Ber;
 
 /**
  * <p>Description: </p>

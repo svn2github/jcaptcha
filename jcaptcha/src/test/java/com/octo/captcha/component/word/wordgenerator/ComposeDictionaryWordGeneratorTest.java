@@ -18,11 +18,12 @@
 
 package com.octo.captcha.component.word.wordgenerator;
 
-import com.octo.captcha.CaptchaException;
-import com.octo.captcha.component.word.ArrayDictionary;
+import java.util.Locale;
+
 import junit.framework.TestCase;
 
-import java.util.Locale;
+import com.octo.captcha.CaptchaException;
+import com.octo.captcha.component.word.ArrayDictionary;
 
 /**
  * <p>Description: </p>

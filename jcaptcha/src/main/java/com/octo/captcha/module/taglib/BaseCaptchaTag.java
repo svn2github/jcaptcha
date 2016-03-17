@@ -6,11 +6,11 @@
 
 package com.octo.captcha.module.taglib;
 
-import com.octo.captcha.service.CaptchaService;
-
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.Tag;
+
+import com.octo.captcha.service.CaptchaService;
 
 /**
  * Defines the service for the module.

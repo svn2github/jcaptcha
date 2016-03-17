@@ -6,12 +6,12 @@
 
 package com.octo.captcha.service;
 
+import java.util.Locale;
+
 import com.octo.captcha.Captcha;
 import com.octo.captcha.engine.MockCaptchaEngine;
 import com.octo.captcha.service.captchastore.CaptchaStore;
 import com.octo.captcha.service.captchastore.MapCaptchaStore;
-
-import java.util.Locale;
 
 public class RunableAbstractManageableCaptchaServiceTest extends RunableAbstractCaptchaServiceTest {
     public static int MIN_GUARANTED_STORAGE_DELAY_IN_SECONDS = 3;

@@ -17,18 +17,30 @@
  */
 package com.octo.captcha.engine.bufferedengine.buffer;
 
-import com.octo.captcha.Captcha;
-import org.apache.commons.collections.buffer.UnboundedFifoBuffer;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import javax.sql.DataSource;
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Locale;
+import java.util.NoSuchElementException;
+import java.util.Set;
+
+import javax.sql.DataSource;
+
+import org.apache.commons.collections.buffer.UnboundedFifoBuffer;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import com.octo.captcha.Captcha;
 
 /**
  * A database Captcha Buffer.

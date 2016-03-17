@@ -6,11 +6,13 @@
 
 package com.octo.captcha.component.image.wordtoimage;
 
-import com.octo.captcha.CaptchaException;
-
-import java.awt.*;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferedImage;
 import java.text.AttributedString;
+
+import com.octo.captcha.CaptchaException;
 
 /**
  * <p>Simple image to word implementation. For eductation only, do not use it in production</p>

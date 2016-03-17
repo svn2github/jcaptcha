@@ -6,6 +6,13 @@
 
 package com.octo.captcha.sound.spellfind;
 
+import java.security.SecureRandom;
+import java.util.Locale;
+import java.util.Random;
+import java.util.ResourceBundle;
+
+import javax.sound.sampled.AudioInputStream;
+
 import com.octo.captcha.CaptchaException;
 import com.octo.captcha.CaptchaQuestionHelper;
 import com.octo.captcha.component.sound.wordtosound.WordToSound;
@@ -13,12 +20,6 @@ import com.octo.captcha.component.word.wordgenerator.WordGenerator;
 import com.octo.captcha.sound.SoundCaptcha;
 import com.octo.captcha.sound.SoundCaptchaFactory;
 import com.octo.captcha.sound.speller.SpellerSound;
-
-import javax.sound.sampled.AudioInputStream;
-import java.security.SecureRandom;
-import java.util.Locale;
-import java.util.Random;
-import java.util.ResourceBundle;
 
 /**
  * <p><ul><li></li></ul></p>

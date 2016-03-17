@@ -17,18 +17,23 @@
  */
 package com.octo.captcha.engine.bufferedengine;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Locale;
+import java.util.NoSuchElementException;
+
+import org.apache.commons.collections.MapIterator;
+import org.apache.commons.collections.map.HashedMap;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.octo.captcha.Captcha;
 import com.octo.captcha.CaptchaException;
 import com.octo.captcha.CaptchaFactory;
 import com.octo.captcha.engine.CaptchaEngine;
 import com.octo.captcha.engine.CaptchaEngineException;
 import com.octo.captcha.engine.bufferedengine.buffer.CaptchaBuffer;
-import org.apache.commons.collections.MapIterator;
-import org.apache.commons.collections.map.HashedMap;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import java.util.*;
 
 /**
  * Abstact class that encapsulate a CaptchaEngine to allow buffering. A BufferedEngineContainer has mainly one function

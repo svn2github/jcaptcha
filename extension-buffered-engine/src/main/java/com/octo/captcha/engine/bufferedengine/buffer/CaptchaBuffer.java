@@ -17,11 +17,11 @@
  */
 package com.octo.captcha.engine.bufferedengine.buffer;
 
-import com.octo.captcha.Captcha;
-
 import java.util.Collection;
 import java.util.Locale;
 import java.util.NoSuchElementException;
+
+import com.octo.captcha.Captcha;
 
 /**
  * CaptchaBuffer is the interface to describe buffers of captchas.

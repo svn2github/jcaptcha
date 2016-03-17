@@ -2,8 +2,8 @@ package com.octo.captcha.component.image.deformation;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.BufferedImageOp;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author mag

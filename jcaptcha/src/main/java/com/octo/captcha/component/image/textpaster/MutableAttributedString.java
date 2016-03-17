@@ -6,14 +6,12 @@
 
 package com.octo.captcha.component.image.textpaster;
 
-import com.octo.captcha.CaptchaException;
-import com.octo.captcha.component.image.color.ColorGenerator;
-
-import java.awt.*;
+import java.awt.Font;
+import java.awt.Graphics2D;
 import java.awt.font.FontRenderContext;
+import java.awt.font.GlyphVector;
 import java.awt.font.LineMetrics;
 import java.awt.font.TextAttribute;
-import java.awt.font.GlyphVector;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
@@ -21,6 +19,9 @@ import java.security.SecureRandom;
 import java.text.AttributedCharacterIterator;
 import java.text.AttributedString;
 import java.util.Random;
+
+import com.octo.captcha.CaptchaException;
+import com.octo.captcha.component.image.color.ColorGenerator;
 
 /**
  * This class is the decomposition of a single AttributedString into its component glyphs. It wouldn't be necessary if

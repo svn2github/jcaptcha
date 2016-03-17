@@ -6,10 +6,9 @@
 
 package com.octo.captcha.component.image.textpaster.textdecorator;
 
-import com.octo.captcha.component.image.textpaster.MutableAttributedString;
+import java.awt.Graphics2D;
 
-import java.awt.*;
-import java.text.AttributedString;
+import com.octo.captcha.component.image.textpaster.MutableAttributedString;
 
 /**
  * <p><ul><li></li></ul></p>

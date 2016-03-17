@@ -6,13 +6,14 @@
 
 package com.octo.captcha.component.image.textpaster;
 
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
+import java.text.AttributedString;
+
 import com.octo.captcha.CaptchaException;
 import com.octo.captcha.component.image.color.ColorGenerator;
 import com.octo.captcha.component.image.textpaster.textdecorator.TextDecorator;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.text.AttributedString;
 
 /**
  * <p><ul><li></li></ul></p>

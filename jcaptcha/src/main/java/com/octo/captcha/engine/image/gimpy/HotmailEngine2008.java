@@ -18,8 +18,11 @@
 
 package com.octo.captcha.engine.image.gimpy;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.util.ArrayList;
+
 import com.jhlabs.image.SwimFilter;
-import com.jhlabs.image.PinchFilter;
 import com.jhlabs.math.ImageFunction2D;
 import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
 import com.octo.captcha.component.image.backgroundgenerator.UniColorBackgroundGenerator;
@@ -30,13 +33,12 @@ import com.octo.captcha.component.image.fontgenerator.FontGenerator;
 import com.octo.captcha.component.image.fontgenerator.RandomFontGenerator;
 import com.octo.captcha.component.image.textpaster.GlyphsPaster;
 import com.octo.captcha.component.image.textpaster.TextPaster;
-import com.octo.captcha.component.image.textpaster.glyphsvisitor.*;
+import com.octo.captcha.component.image.textpaster.glyphsvisitor.GlyphsVisitors;
+import com.octo.captcha.component.image.textpaster.glyphsvisitor.OverlapGlyphsUsingShapeVisitor;
+import com.octo.captcha.component.image.textpaster.glyphsvisitor.TranslateAllToRandomPointVisitor;
 import com.octo.captcha.component.image.wordtoimage.DeformedComposedWordToImage;
 import com.octo.captcha.component.word.wordgenerator.RandomWordGenerator;
 import com.octo.captcha.engine.image.ListImageCaptchaEngine;
-
-import java.awt.*;
-import java.util.ArrayList;
 
 /**
  * <p/>

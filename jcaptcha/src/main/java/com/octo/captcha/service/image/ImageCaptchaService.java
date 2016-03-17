@@ -6,11 +6,11 @@
 
 package com.octo.captcha.service.image;
 
-import com.octo.captcha.service.CaptchaService;
-import com.octo.captcha.service.CaptchaServiceException;
-
 import java.awt.image.BufferedImage;
 import java.util.Locale;
+
+import com.octo.captcha.service.CaptchaService;
+import com.octo.captcha.service.CaptchaServiceException;
 
 /**
  * <p/>

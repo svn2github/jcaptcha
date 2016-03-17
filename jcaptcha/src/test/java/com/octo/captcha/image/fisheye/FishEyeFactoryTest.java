@@ -18,11 +18,13 @@
 
 package com.octo.captcha.image.fisheye;
 
-import com.octo.captcha.component.image.backgroundgenerator.UniColorBackgroundGenerator;
-import com.octo.captcha.component.image.deformation.ImageDeformationByFilters;
+import java.awt.Color;
+import java.awt.Point;
+
 import junit.framework.TestCase;
 
-import java.awt.*;
+import com.octo.captcha.component.image.backgroundgenerator.UniColorBackgroundGenerator;
+import com.octo.captcha.component.image.deformation.ImageDeformationByFilters;
 
 public class FishEyeFactoryTest extends TestCase {
     FishEyeFactory fishEyeFactory;

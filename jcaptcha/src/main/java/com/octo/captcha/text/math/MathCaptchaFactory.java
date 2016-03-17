@@ -6,13 +6,13 @@
 
 package com.octo.captcha.text.math;
 
-import com.octo.captcha.CaptchaQuestionHelper;
-import com.octo.captcha.text.TextCaptcha;
-import com.octo.captcha.text.TextCaptchaFactory;
-
 import java.security.SecureRandom;
 import java.util.Locale;
 import java.util.Random;
+
+import com.octo.captcha.CaptchaQuestionHelper;
+import com.octo.captcha.text.TextCaptcha;
+import com.octo.captcha.text.TextCaptchaFactory;
 
 /**
  * The simpliest text captcha<br/> <b>Do not use this in production!!!</b>

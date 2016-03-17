@@ -6,13 +6,14 @@
 
 package com.octo.captcha.engine.image;
 
+import junit.framework.TestCase;
+
 import com.octo.captcha.engine.CaptchaEngine;
 import com.octo.captcha.engine.CaptchaEngineException;
 import com.octo.captcha.engine.MockImageCaptchaFactory;
 import com.octo.captcha.engine.MockSoundCaptchaFactory;
 import com.octo.captcha.image.ImageCaptchaFactory;
 import com.octo.captcha.sound.SoundCaptchaFactory;
-import junit.framework.TestCase;
 
 public abstract class ImageCaptchaEngineTestAbstract extends TestCase {
 

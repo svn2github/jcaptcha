@@ -6,7 +6,7 @@
 
 package com.octo.captcha.component.image.fontgenerator;
 
-import java.awt.*;
+import java.awt.Font;
 import java.awt.geom.AffineTransform;
 
 /**

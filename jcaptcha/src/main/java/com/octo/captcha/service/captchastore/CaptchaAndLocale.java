@@ -6,10 +6,10 @@
 
 package com.octo.captcha.service.captchastore;
 
-import com.octo.captcha.Captcha;
-
-import java.util.Locale;
 import java.io.Serializable;
+import java.util.Locale;
+
+import com.octo.captcha.Captcha;
 
 /**
  * Composite object used as a container to store a captcha and the locale used to generate it.

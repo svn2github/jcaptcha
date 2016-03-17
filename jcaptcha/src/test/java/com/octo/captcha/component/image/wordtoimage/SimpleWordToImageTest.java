@@ -19,10 +19,11 @@
 
 package com.octo.captcha.component.image.wordtoimage;
 
-import junit.framework.TestCase;
-
-import java.awt.*;
+import java.awt.Font;
+import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferedImage;
+
+import junit.framework.TestCase;
 
 /**
  * <p>Description: </p>

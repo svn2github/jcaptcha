@@ -18,10 +18,11 @@
 
 package com.octo.captcha.sound.gimpy;
 
+import junit.framework.TestCase;
+
 import com.octo.captcha.CaptchaException;
 import com.octo.captcha.component.word.wordgenerator.RandomWordGenerator;
 import com.octo.captcha.sound.WordToSoundMock;
-import junit.framework.TestCase;
 
 public class SoundGimpyFactoryTest extends TestCase {
 

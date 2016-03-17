@@ -6,13 +6,13 @@
 
 package com.octo.captcha.service.captchastore;
 
-import com.octo.captcha.Captcha;
-import com.octo.captcha.MockCaptcha;
+import java.util.Collection;
+import java.util.Locale;
 
 import junit.framework.TestCase;
 
-import java.util.Collection;
-import java.util.Locale;
+import com.octo.captcha.Captcha;
+import com.octo.captcha.MockCaptcha;
 
 /**
  * <p><ul><li></li></ul></p>

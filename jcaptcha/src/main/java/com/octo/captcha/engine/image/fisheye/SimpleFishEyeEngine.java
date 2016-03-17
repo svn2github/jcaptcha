@@ -18,14 +18,14 @@
 
 package com.octo.captcha.engine.image.fisheye;
 
+import java.awt.image.ImageFilter;
+
 import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
 import com.octo.captcha.component.image.backgroundgenerator.FileReaderRandomBackgroundGenerator;
 import com.octo.captcha.component.image.deformation.ImageDeformation;
 import com.octo.captcha.component.image.deformation.ImageDeformationByFilters;
 import com.octo.captcha.engine.image.ListImageCaptchaEngine;
 import com.octo.captcha.image.fisheye.FishEyeFactory;
-
-import java.awt.image.ImageFilter;
 
 /**
  * Produce fishEye from files. FishEye are done from sphere

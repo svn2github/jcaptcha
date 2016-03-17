@@ -18,9 +18,9 @@
 
 package com.octo.captcha.component.image.utils;
 
-import junit.framework.TestCase;
+import java.awt.Toolkit;
 
-import java.awt.*;
+import junit.framework.TestCase;
 
 import com.octo.captcha.CaptchaException;
 

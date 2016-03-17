@@ -11,11 +11,11 @@
  */
 package com.octo.captcha.engine.bufferedengine;
 
-import com.octo.captcha.engine.MockCaptchaEngine;
-import com.octo.captcha.engine.bufferedengine.buffer.MemoryCaptchaBuffer;
-
 import java.util.HashMap;
 import java.util.Locale;
+
+import com.octo.captcha.engine.MockCaptchaEngine;
+import com.octo.captcha.engine.bufferedengine.buffer.MemoryCaptchaBuffer;
 
 /**
  * <p><ul><li></li></ul></p>

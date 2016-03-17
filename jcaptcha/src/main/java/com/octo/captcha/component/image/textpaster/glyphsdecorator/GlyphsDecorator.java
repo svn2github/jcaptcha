@@ -1,9 +1,9 @@
 package com.octo.captcha.component.image.textpaster.glyphsdecorator;
 
-import com.octo.captcha.component.image.textpaster.Glyphs;
-
-import java.awt.*;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+
+import com.octo.captcha.component.image.textpaster.Glyphs;
 
 /**
  * @author mag

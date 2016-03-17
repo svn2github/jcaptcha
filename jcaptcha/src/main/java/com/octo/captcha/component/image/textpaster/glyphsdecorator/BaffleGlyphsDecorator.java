@@ -6,18 +6,19 @@
 
 package com.octo.captcha.component.image.textpaster.glyphsdecorator;
 
-import com.octo.captcha.component.image.color.ColorGenerator;
-import com.octo.captcha.component.image.color.SingleColorGenerator;
-import com.octo.captcha.component.image.textpaster.MutableAttributedString;
-import com.octo.captcha.component.image.textpaster.Glyphs;
-import com.octo.captcha.component.image.textpaster.textdecorator.TextDecorator;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Composite;
+import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 import java.security.SecureRandom;
 import java.util.Random;
+
+import com.octo.captcha.component.image.color.ColorGenerator;
+import com.octo.captcha.component.image.color.SingleColorGenerator;
+import com.octo.captcha.component.image.textpaster.Glyphs;
 
 /**
  * <p/>

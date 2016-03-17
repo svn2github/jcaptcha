@@ -6,9 +6,8 @@
 
 package com.octo.captcha.module.servlet.image;
 
-import com.octo.captcha.service.image.DefaultManageableImageCaptchaService;
-import com.octo.captcha.service.image.ImageCaptchaService;
-import com.octo.captcha.service.CaptchaServiceException;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.servlet.Servlet;
@@ -17,8 +16,10 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
+
+import com.octo.captcha.service.CaptchaServiceException;
+import com.octo.captcha.service.image.DefaultManageableImageCaptchaService;
+import com.octo.captcha.service.image.ImageCaptchaService;
 
 /**
  * @author mag

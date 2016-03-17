@@ -24,10 +24,11 @@
  */
 package com.octo.captcha.engine.bufferedengine;
 
-import com.octo.captcha.engine.CaptchaEngine;
-import com.octo.captcha.engine.bufferedengine.buffer.CaptchaBuffer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import com.octo.captcha.engine.CaptchaEngine;
+import com.octo.captcha.engine.bufferedengine.buffer.CaptchaBuffer;
 
 /**
  * Quartz implmentation of the BufferedEngineContainer

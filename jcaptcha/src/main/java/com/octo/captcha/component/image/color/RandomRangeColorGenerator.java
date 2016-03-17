@@ -6,11 +6,11 @@
 
 package com.octo.captcha.component.image.color;
 
-import com.octo.captcha.CaptchaException;
-
-import java.awt.*;
+import java.awt.Color;
 import java.security.SecureRandom;
 import java.util.Random;
+
+import com.octo.captcha.CaptchaException;
 
 /**
  * A RandomRangeColorGenerator returns a random color whose components (red, green, blue and alpha) have been picked

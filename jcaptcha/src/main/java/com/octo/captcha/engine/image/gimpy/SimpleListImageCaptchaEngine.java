@@ -18,14 +18,14 @@
 
 package com.octo.captcha.engine.image.gimpy;
 
+import java.awt.Color;
+
 import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
 import com.octo.captcha.component.image.backgroundgenerator.FunkyBackgroundGenerator;
 import com.octo.captcha.component.image.fontgenerator.FontGenerator;
 import com.octo.captcha.component.image.fontgenerator.TwistedAndShearedRandomFontGenerator;
 import com.octo.captcha.component.image.textpaster.RandomTextPaster;
 import com.octo.captcha.component.image.textpaster.TextPaster;
-
-import java.awt.*;
 
 /**
  * <p>Description: </p>

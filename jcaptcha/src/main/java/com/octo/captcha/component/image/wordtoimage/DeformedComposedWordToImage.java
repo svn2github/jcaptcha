@@ -6,17 +6,17 @@
 
 package com.octo.captcha.component.image.wordtoimage;
 
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.text.AttributedString;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.octo.captcha.CaptchaException;
 import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
 import com.octo.captcha.component.image.deformation.ImageDeformation;
 import com.octo.captcha.component.image.fontgenerator.FontGenerator;
 import com.octo.captcha.component.image.textpaster.TextPaster;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.text.AttributedString;
-import java.util.*;
-import java.util.List;
 
 /**
  * <p>This implementation uses deformation components to distord the image. </br>It takes three array of deformations :

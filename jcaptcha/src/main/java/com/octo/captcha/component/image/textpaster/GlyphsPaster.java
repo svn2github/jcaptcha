@@ -1,17 +1,19 @@
 package com.octo.captcha.component.image.textpaster;
 
-import com.octo.captcha.CaptchaException;
-import com.octo.captcha.component.image.color.ColorGenerator;
-import com.octo.captcha.component.image.textpaster.glyphsvisitor.GlyphsVisitors;
-import com.octo.captcha.component.image.textpaster.glyphsdecorator.GlyphsDecorator;
-
-import java.awt.image.BufferedImage;
-import java.awt.*;
-import java.awt.geom.Rectangle2D;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics2D;
 import java.awt.font.FontRenderContext;
 import java.awt.font.TextAttribute;
-import java.text.AttributedString;
+import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 import java.text.AttributedCharacterIterator;
+import java.text.AttributedString;
+
+import com.octo.captcha.CaptchaException;
+import com.octo.captcha.component.image.color.ColorGenerator;
+import com.octo.captcha.component.image.textpaster.glyphsdecorator.GlyphsDecorator;
+import com.octo.captcha.component.image.textpaster.glyphsvisitor.GlyphsVisitors;
 
 /**
  * Use Glyphs to draw, much more powerfull and efficient than using AttributedString

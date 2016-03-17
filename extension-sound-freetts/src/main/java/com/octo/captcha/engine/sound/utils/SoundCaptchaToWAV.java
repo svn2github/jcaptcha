@@ -17,14 +17,14 @@
  */
 package com.octo.captcha.engine.sound.utils;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.DecimalFormat;
+
 import com.octo.captcha.engine.sound.SoundCaptchaEngine;
 import com.octo.captcha.engine.sound.gimpy.SimpleListSoundCaptchaEngine;
 import com.octo.captcha.engine.sound.speller.SpellerSoundCaptchaEngine;
 import com.octo.captcha.sound.SoundCaptcha;
-
-import java.io.File;
-import java.io.IOException;
-import java.text.DecimalFormat;
 
 /**
  * This utility class lets you create WAV files with a particular

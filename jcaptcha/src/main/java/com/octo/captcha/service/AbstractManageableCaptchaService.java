@@ -6,12 +6,16 @@
 
 package com.octo.captcha.service;
 
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Locale;
+
+import org.apache.commons.collections.FastHashMap;
+
 import com.octo.captcha.Captcha;
 import com.octo.captcha.engine.CaptchaEngine;
 import com.octo.captcha.service.captchastore.CaptchaStore;
-import org.apache.commons.collections.FastHashMap;
-
-import java.util.*;
 
 /**
  * This class provides default implementation for the management interface. It uses an HashMap to store the timestamps

@@ -6,10 +6,11 @@
 
 package com.octo.captcha.component.sound.wordtosound;
 
-import com.octo.captcha.CaptchaException;
+import java.util.Locale;
 
 import javax.sound.sampled.AudioInputStream;
-import java.util.Locale;
+
+import com.octo.captcha.CaptchaException;
 
 /**
  * <p/>

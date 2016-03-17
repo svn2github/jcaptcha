@@ -5,10 +5,10 @@
  */
 package com.octo.captcha.component.image.textpaster;
 
-import com.octo.captcha.CaptchaException;
-import com.octo.captcha.component.image.color.ColorGenerator;
-
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.font.TextAttribute;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
@@ -16,6 +16,9 @@ import java.text.AttributedCharacterIterator;
 import java.text.AttributedString;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.octo.captcha.CaptchaException;
+import com.octo.captcha.component.image.color.ColorGenerator;
 
 /**
  * A <code>TextPaster</code> that pasts the characters on the background image, turned around a random angle from the

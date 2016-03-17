@@ -17,13 +17,13 @@
  */
 package com.octo.captcha.engine;
 
-import com.octo.captcha.Captcha;
-import com.octo.captcha.CaptchaException;
-import com.octo.captcha.CaptchaFactory;
-
 import java.security.SecureRandom;
 import java.util.Locale;
 import java.util.Random;
+
+import com.octo.captcha.Captcha;
+import com.octo.captcha.CaptchaException;
+import com.octo.captcha.CaptchaFactory;
 
 /**
  * Generic captcha engine, use it as default.

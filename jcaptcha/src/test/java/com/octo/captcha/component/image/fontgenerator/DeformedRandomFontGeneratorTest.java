@@ -12,9 +12,9 @@
 
 package com.octo.captcha.component.image.fontgenerator;
 
-import junit.framework.TestCase;
+import java.awt.Font;
 
-import java.awt.*;
+import junit.framework.TestCase;
 
 /**
  * <p>Description: </p>

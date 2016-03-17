@@ -11,6 +11,14 @@
  */
 package com.octo.captcha.engine.sound;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Locale;
+
+import javax.sound.sampled.AudioInputStream;
+
 import com.octo.captcha.component.sound.soundconfigurator.FreeTTSSoundConfigurator;
 import com.octo.captcha.component.sound.soundconfigurator.SoundConfigurator;
 import com.octo.captcha.component.sound.wordtosound.FreeTTSWordToSound;
@@ -25,13 +33,6 @@ import com.octo.captcha.engine.sound.utils.SoundToFile;
 import com.octo.captcha.sound.SoundCaptcha;
 import com.octo.captcha.sound.SoundCaptchaFactory;
 import com.octo.captcha.sound.speller.SpellerSoundFactory;
-
-import javax.sound.sampled.AudioInputStream;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Locale;
 
 /**
  * Test sample for a sound captcha

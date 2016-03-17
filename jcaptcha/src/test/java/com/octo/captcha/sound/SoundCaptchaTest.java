@@ -5,13 +5,14 @@
  */
 package com.octo.captcha.sound;
 
+import javax.sound.sampled.AudioInputStream;
+
+import junit.framework.TestCase;
+
 import com.octo.captcha.component.word.ArrayDictionary;
 import com.octo.captcha.component.word.wordgenerator.DictionaryWordGenerator;
 import com.octo.captcha.component.word.wordgenerator.WordGenerator;
 import com.octo.captcha.sound.gimpy.GimpySoundFactory;
-import junit.framework.TestCase;
-
-import javax.sound.sampled.AudioInputStream;
 
 /**
  * <p/>

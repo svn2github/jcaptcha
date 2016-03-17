@@ -18,6 +18,7 @@
 package com.octo.captcha.component.sound.wordtosound;
 
 import junit.framework.TestCase;
+
 import com.octo.captcha.component.sound.soundconfigurator.FreeTTSSoundConfigurator;
 
 /**
