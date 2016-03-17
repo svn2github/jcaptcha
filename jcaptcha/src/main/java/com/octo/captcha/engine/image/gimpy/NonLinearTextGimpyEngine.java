@@ -34,7 +34,7 @@ import com.octo.captcha.engine.image.ListImageCaptchaEngine;
 /**
  * Use the non-linear text paster
  * @date 19 mars 2007
- * @author <a href="mailto:antoine.veret@gmail.com">Antoine Véret</a>
+ * @author <a href="mailto:antoine.veret@gmail.com">Antoine VÃ©ret</a>
  */
 public class NonLinearTextGimpyEngine extends ListImageCaptchaEngine {
 

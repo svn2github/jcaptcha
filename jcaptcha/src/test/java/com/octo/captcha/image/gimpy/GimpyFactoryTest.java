@@ -35,7 +35,6 @@ public class GimpyFactoryTest extends TestCase {
     public void testGetRandomLength() throws Exception {
         //be carefull values tide to SimpleWordToImage.
         for (int i = 1; i < 11; i++) {
-            //System.out.println(" a trouver : "+i);
             int j;
             do {
 
@@ -43,8 +42,6 @@ public class GimpyFactoryTest extends TestCase {
                 if (j < 1 || j > 10) {
                     fail("Out of authorized range!");
                 }
-
-                //System.out.println("trouvé : "+j);
 
             } while (j != i);
         }

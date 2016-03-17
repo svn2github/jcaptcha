@@ -18,7 +18,7 @@ import javax.sound.sampled.AudioInputStream;
  * Description: </p>
  *
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin </a>
- * @author Antoine Véret
+ * @author Antoine VÃ©ret
  * @version 1.0
  */
 public class SoundCaptchaTest extends TestCase {

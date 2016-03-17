@@ -33,7 +33,7 @@ import java.lang.reflect.Field;
  * <p>Description: </p>
  *
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
- * @author <a href="mailto:antoine.veret@gmail.com">Antoine Véret</a>
+ * @author <a href="mailto:antoine.veret@gmail.com">Antoine VÃ©ret</a>
  * @version 1.1
  */
 public class ImageCaptchaTest extends TestCase {
