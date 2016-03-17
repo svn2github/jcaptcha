@@ -104,21 +104,8 @@ public abstract class AbstractTextPaster implements TextPaster {
         this.manageColorPerGlyph = manageColorPerGlyph != null ? manageColorPerGlyph.booleanValue() : this.manageColorPerGlyph;
     }
 
-    /**
-     * @return the max word length accepted by this word2image service
-     * @deprecated misspelled, use {@link #getMaxAcceptedWordLength()} instead
-     */
-    public int getMaxAcceptedWordLenght() {
-        return max;
-    }
 
-    /**
-     * @return the min word length accepted by this word2image service
-     * @deprecated misspelled, use {@link #getMinAcceptedWordLength()} instead
-     */
-    public int getMinAcceptedWordLenght() {
-        return min;
-    }
+
 
     /**
      * @return the max word length accepted by this word2image service

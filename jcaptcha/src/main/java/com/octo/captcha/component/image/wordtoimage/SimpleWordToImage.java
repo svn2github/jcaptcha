@@ -38,22 +38,6 @@ public class SimpleWordToImage extends AbstractWordToImage {
         return 1;
     }
 
-    /**
-     * @return the max word lenght accepted by this word2image service
-     * @deprecated misspelled, use {@link #getMaxAcceptedWordLength()} instead
-     */
-    public int getMaxAcceptedWordLenght() {
-        return 10;
-    }
-
-    /**
-     * @return the min word lenght accepted by this word2image service
-     * @deprecated misspelled, use {@link #getMinAcceptedWordLength()} instead
-     */
-    public int getMinAcceptedWordLenght() {
-        return 1;
-    }
-
 
     /**
      * @return the generated image height

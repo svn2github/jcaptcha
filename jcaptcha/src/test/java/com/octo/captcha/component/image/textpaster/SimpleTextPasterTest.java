@@ -63,15 +63,6 @@ public class SimpleTextPasterTest extends TestCase {
         assertEquals(testBufferedImage.getWidth(), test.getWidth());
     }
 
-    public void testGetMaxAcceptedWordLenght() {
-        assertEquals(this.maxAcceptedWordLength.intValue(),
-                this.simpleTextPaster.getMaxAcceptedWordLenght());
-    }
-
-    public void testGetMinAcceptedWordLenght() {
-        assertEquals(this.minAcceptedWordLength.intValue(),
-                this.simpleTextPaster.getMinAcceptedWordLenght());
-    }
 
      public void testGetMaxAcceptedWordLength() {
         assertEquals(this.maxAcceptedWordLength.intValue(),

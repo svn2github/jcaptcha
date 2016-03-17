@@ -45,13 +45,7 @@ public abstract class AbstractWordToSound implements WordToSound {
         return minAcceptedWordLength;
     }
 
-    public int getMaxAcceptedWordLenght() {
-        return maxAcceptedWordLength;
-    }
 
-    public int getMinAcceptedWordLenght() {
-        return minAcceptedWordLength;
-    }
 
     /**
      * Add effect to the sound

@@ -51,24 +51,6 @@ public class ComposedWordToImage extends AbstractWordToImage {
     }
 
     /**
-     * @deprecated
-     * @return the max word length accepted by this word2image service
-     */
-    public int getMaxAcceptedWordLenght() {
-        return textPaster.getMaxAcceptedWordLength();
-    }
-
-    /**
-     * @deprecated
-     * @return the min word length accepted by this word2image service
-     */
-    public int getMinAcceptedWordLenght() {
-        return textPaster.getMinAcceptedWordLength();
-    }
-
-
-
-    /**
      * @return the max word length accepted by this word2image service
      */
     public int getMaxAcceptedWordLength() {

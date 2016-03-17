@@ -32,17 +32,12 @@ public class WordToSoundMock implements WordToSound {
         audioInputStream = AudioSystem.getAudioInputStream(inputStream);
     }
 
-    public int getMaxAcceptedWordLenght() {
-        return 0;
-    }
+
 
     public int getMaxAcceptedWordLength() {
         return 6;
     }
 
-    public int getMinAcceptedWordLenght() {
-        return 0;
-    }
 
     public int getMinAcceptedWordLength() {
         return 2;
