@@ -41,10 +41,6 @@ public class ToolkitFactoryTest extends TestCase {
         assertTrue(ToolkitFactory.getToolkit() instanceof Toolkit);
     }
 
-    public void testGetCustomToolkit() {
-        System.setProperty(ToolkitFactory.TOOLKIT_IMPL, MockToolkit.class.getName());
-        assertTrue(ToolkitFactory.getToolkit() instanceof MockToolkit);
-    }
 
     public void testGetBadClassToolkit() {
         System.setProperty(ToolkitFactory.TOOLKIT_IMPL, "toto");
