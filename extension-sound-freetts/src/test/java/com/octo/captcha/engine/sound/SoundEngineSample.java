@@ -20,7 +20,6 @@ import java.util.Locale;
 import javax.sound.sampled.AudioInputStream;
 
 import com.octo.captcha.component.sound.soundconfigurator.FreeTTSSoundConfigurator;
-import com.octo.captcha.component.sound.soundconfigurator.SoundConfigurator;
 import com.octo.captcha.component.sound.wordtosound.FreeTTSWordToSound;
 import com.octo.captcha.component.sound.wordtosound.WordToSound;
 import com.octo.captcha.component.word.DefaultSizeSortedWordList;
@@ -59,15 +58,14 @@ public class SoundEngineSample {
         SoundEngineSample.words = new DictionaryWordGenerator(
                 (new SoundEngineSample()).new ArrayDictionary(wordlist));
 
-        SoundConfigurator configurator = new FreeTTSSoundConfigurator("kevin16",
-                "com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory", 1.0f, 100, 70);
         SoundEngineSample.wordToSound = new FreeTTSWordToSound(new FreeTTSSoundConfigurator(
                 voiceName, voicePackage, 1.0f, 100, 100), 3, 6);
         SpellerWordDecorator decorator = new SpellerWordDecorator(", ");
         SoundEngineSample.factory = new SpellerSoundFactory(words, wordToSound, decorator);
         //SoundEngineSample.factory = new GimpySoundFactory(words, wordToSound);
-        for (int i = 1; i <= 10; i++)
+        for (int i = 1; i <= 10; i++) {
             test();
+        }
 
     }
 
@@ -104,12 +102,11 @@ public class SoundEngineSample {
     }
 
     private class ArrayDictionary implements DictionaryReader {
-        private String[] list;
+
 
         private DefaultSizeSortedWordList wordList;
 
         public ArrayDictionary(String[] list) {
-            this.list = list;
             wordList = new DefaultSizeSortedWordList(Locale.getDefault());
             for (int i = 0; i < list.length; i++) {
                 wordList.addWord(list[i]);

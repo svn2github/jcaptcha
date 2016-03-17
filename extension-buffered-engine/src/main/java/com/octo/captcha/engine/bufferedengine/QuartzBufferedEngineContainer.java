@@ -24,9 +24,6 @@
  */
 package com.octo.captcha.engine.bufferedengine;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.octo.captcha.engine.CaptchaEngine;
 import com.octo.captcha.engine.bufferedengine.buffer.CaptchaBuffer;
 
@@ -37,7 +34,6 @@ import com.octo.captcha.engine.bufferedengine.buffer.CaptchaBuffer;
  */
 public class QuartzBufferedEngineContainer extends BufferedEngineContainer {
 
-    private static final Log log = LogFactory.getLog(QuartzBufferedEngineContainer.class.getName());
 
     public QuartzBufferedEngineContainer(CaptchaEngine engine, CaptchaBuffer memoryBuffer,
                                          CaptchaBuffer diskBuffer, ContainerConfiguration containerConfiguration) {
