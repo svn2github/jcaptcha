@@ -91,12 +91,12 @@ public class RandomFontGenerator extends AbstractFontGenerator {
 
 
     private void initializeFonts(Font[] fontList) {
-		List fonts = cleanFontList(fontList);
+		List<Font> fonts = cleanFontList(fontList);
         checkInitializedFontListSize(fonts);
         generatedFonts = generateCustomStyleFontArray(fonts);
 	}
     
-    private void checkInitializedFontListSize(List fontList) {
+    private void checkInitializedFontListSize(List<Font> fontList) {
         if (fontList.size() < 1) {
             throw new IllegalArgumentException("fonts list cannot be null or empty, some of your font are removed from the list by this class, Courrier and TimesRoman");
         }
@@ -115,7 +115,7 @@ public class RandomFontGenerator extends AbstractFontGenerator {
     /**
      * @return a array of generated Fonts
      */
-    private Font[] generateCustomStyleFontArray(List fontList) {
+    private Font[] generateCustomStyleFontArray(List<Font> fontList) {
         Font[] generatedFonts = new Font[GENERATED_FONTS_ARRAY_SIZE];
         for (int i = 0; i < GENERATED_FONTS_ARRAY_SIZE; i++) {
             Font font = (Font) fontList.get(myRandom.nextInt(fontList.size()));
@@ -160,19 +160,19 @@ public class RandomFontGenerator extends AbstractFontGenerator {
      * @return array of fonts
      * @see #requiredCharacters
      */
-    protected List cleanFontList(Font[] uncheckFonts) {
+    protected List<Font> cleanFontList(Font[] uncheckFonts) {
 
         // get a copy of the fonts
         // NB: be careful with this first array! -- the graphics environment obligingly
         // provides a pointer into its internal font array.
 
-        List goodFonts = new ArrayList(uncheckFonts.length);
+        List<Font> goodFonts = new ArrayList<Font>(uncheckFonts.length);
         // add copy of copy of list of fonts because of asList's special class and also because
         // of the graphics environment's internal point
         goodFonts.addAll(Arrays.asList(uncheckFonts));
 
         // Iterate through all fonts, remove the bad ones
-        for (Iterator iter = goodFonts.iterator(); iter.hasNext();) {
+        for (Iterator<Font> iter = goodFonts.iterator(); iter.hasNext();) {
             
         	Font f = (Font) iter.next();        	
             if (!checkFontNamePrefix(iter, f)) {     		
@@ -188,7 +188,7 @@ public class RandomFontGenerator extends AbstractFontGenerator {
      * @param f The current font
      * @return true if the font has been removed
      */
-	private boolean checkFontNamePrefix(Iterator iter, Font f) {
+	private boolean checkFontNamePrefix(Iterator<Font> iter, Font f) {
 		
 		boolean removed = false;
 		
@@ -214,7 +214,7 @@ public class RandomFontGenerator extends AbstractFontGenerator {
      * @param f The current font
      * @return true if the font has been removed
      */
-	private boolean checkFontCanDisplayCharacters(Iterator iter, Font f) {
+	private boolean checkFontCanDisplayCharacters(Iterator<Font> iter, Font f) {
 
 		boolean removed = false;
 		// a font is removed if it cannot display the characters we need.
