@@ -369,16 +369,6 @@ public class FreeTTSWordToSound extends AbstractWordToSound implements WordToSou
             return "AudioInputStreamAudioPlayer";
         }
 
-        /**
-         * Outputs a debug message if debugging is turned on
-         *
-         * @param msg the message to output
-         */
-        private void debugPrint(String msg) {
-            if (debug) {
-                System.out.println(toString() + ": " + msg);
-            }
-        }
 
         /**
          * Shows metrics for this audio player
