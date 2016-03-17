@@ -58,6 +58,9 @@ import com.octo.captcha.image.gimpy.GimpyFactory;
  */
 public class GmailEngine extends ListImageCaptchaEngine {
 
+	public GmailEngine() {
+		super();
+	}
     /**
      * this method should be implemented as folow : <ul> <li>First construct all the factories you want to initialize
      * the gimpy with</li> <li>then call the this.addFactoriy method for each factory</li> </ul>

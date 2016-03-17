@@ -30,6 +30,10 @@ package com.octo.captcha.engine.image.gimpy;
  * @version 1.0
  */
 public class DefaultGimpyEngine extends GmailEngine {
+	
+	public DefaultGimpyEngine() {
+		super();
+	}
 
     
 }
