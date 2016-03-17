@@ -82,9 +82,6 @@ public abstract class BufferedEngineContainer implements CaptchaEngine {
             throw new CaptchaEngineException("impossible to build a BufferedEngineContainer with a null volatileBuffer");
         }
         this.persistentBuffer = persistentBuffer;
-        if (persistentBuffer == null) {
-            throw new CaptchaEngineException("impossible to build a BufferedEngineContainer with a null persistentBuffer");
-        }
         this.config = containerConfiguration;
         if (config == null) {
             throw new CaptchaEngineException("impossible to build a BufferedEngineContainer with a null configuration");

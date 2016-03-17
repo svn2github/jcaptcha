@@ -450,7 +450,6 @@ public class DatabaseCaptchaBuffer implements CaptchaBuffer {
     public void clear() {
         Connection con = null;
         PreparedStatement ps = null;
-        ResultSet rs = null;
 
         try {
             con = datasource.getConnection();
@@ -460,12 +459,6 @@ public class DatabaseCaptchaBuffer implements CaptchaBuffer {
 
         } catch (SQLException e) {
             log.error(DB_ERROR, e);
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (SQLException ex) {
-                }
-            }
         } finally {
             if (ps != null) {
                 try {

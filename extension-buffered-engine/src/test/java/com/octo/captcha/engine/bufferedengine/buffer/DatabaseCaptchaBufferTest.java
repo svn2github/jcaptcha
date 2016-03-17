@@ -41,34 +41,31 @@ public class DatabaseCaptchaBufferTest extends CaptchaBufferTestAbstract {
         //drop and recreate the table
         Connection con = null;
         Statement ps = null;
-        ResultSet rs = null;
+        Statement ps2 = null;
         try {
             con = datasource.getConnection();
             ps = con.createStatement();
             try {
-
                 ps.execute(CREATE);
-
             } catch (SQLException e) {
             }
 
 
-            ps = con.createStatement();
-            ps.execute(EMPTY);
+            ps2 = con.createStatement();
+            ps2.execute(EMPTY);
 
         } catch (SQLException e) {
-
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (SQLException ex) {
-                }
-                throw new RuntimeException(e);
-            }
+                throw new RuntimeException(e);            
         } finally {
             if (ps != null) {
                 try {
                     ps.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (ps2 != null) {
+                try {
+                    ps2.close();
                 } catch (SQLException e) {
                 }
             }
