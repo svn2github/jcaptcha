@@ -73,18 +73,13 @@ public class GmailEngine extends ListImageCaptchaEngine {
                                 new Color(23, 67, 172)})
                 ,new GlyphsVisitors[]{
                 new TranslateGlyphsVerticalRandomVisitor(1),
-               // new RotateGlyphsRandomVisitor(Math.PI/32),
                 new OverlapGlyphsUsingShapeVisitor(3),
                 new TranslateAllToRandomPointVisitor()
                 //,
 
                //
                 });
-        /*
-         new TextVisitor[]{
-                new OverlapGlyphsTextVisitor(6)
-        }, null
-         */
+
         BackgroundGenerator back = new UniColorBackgroundGenerator(
                 200, 70, Color.white);
 
