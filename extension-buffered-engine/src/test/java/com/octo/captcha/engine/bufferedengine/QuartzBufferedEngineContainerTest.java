@@ -23,7 +23,7 @@ import org.springframework.core.io.Resource;
 public class QuartzBufferedEngineContainerTest extends BufferedEngineContainerTestAbstract {
 
 
-    private static final int WAIT_TIME = 2000;
+    private static final int WAIT_TIME = 10000;
 
 	public void testBasic() throws Exception {
         Resource ressource = new ClassPathResource("testQuartzBufferedEngine.xml");
