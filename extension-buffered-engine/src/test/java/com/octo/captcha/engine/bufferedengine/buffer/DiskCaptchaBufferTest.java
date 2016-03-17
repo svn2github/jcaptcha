@@ -11,12 +11,13 @@
  */
 package com.octo.captcha.engine.bufferedengine.buffer;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 
 public class DiskCaptchaBufferTest extends CaptchaBufferTestAbstract {
 
-    protected String dirName = System.getProperty("java.io.tmpdir") + "captchaBuffer";
+    protected String dirName = new File(System.getProperty("java.io.tmpdir"), "captchaBuffer").getAbsolutePath();
 
     /**
      * @see com.octo.captcha.engine.bufferedengine.buffer.CaptchaBufferTestAbstract#getBuffer()
