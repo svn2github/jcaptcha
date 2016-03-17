@@ -44,7 +44,7 @@ public class QuartzBufferedEngineContainerTest extends BufferedEngineContainerTe
         Object scheduler = bf.getBean("quartz");
         assertNotNull(container);
         assertNotNull(scheduler);
-        Thread.sleep(WAIT_TIME);
+        Thread.sleep(100000);
         for (int i = 0; i < 100; i++) {
             assertNotNull(container.getNextCaptcha());
         }
