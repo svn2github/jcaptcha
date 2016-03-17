@@ -230,7 +230,6 @@ public class Glyphs {
     public String toString() {
         final String R = "\n";
         final String RS = "\n\t";
-        final String RSS = "\n\t\t";
 
         StringBuffer buf = new StringBuffer();
         buf.append("{Glyphs=");
