@@ -34,8 +34,12 @@ import com.octo.captcha.CaptchaException;
 public class FileReaderRandomBackgroundGenerator extends
         AbstractBackgroundGenerator {
 
-    private List images = new ArrayList();
+    private List<BufferedImage> images = new ArrayList<BufferedImage>();
     private String rootPath = ".";
+    /**
+    *
+    */
+    protected static final Map<String, File> cachedDirectories = new HashMap<String, File>();
 
     public FileReaderRandomBackgroundGenerator(Integer width,
                                                Integer height, String rootPath) {
@@ -63,7 +67,7 @@ public class FileReaderRandomBackgroundGenerator extends
 
             if (images.size() != 0) {
                 for (int i = 0; i < images.size(); i++) {
-                    BufferedImage bufferedImage = (BufferedImage) images.get(i);
+                    BufferedImage bufferedImage =  images.get(i);
                     images.set(i, tile(bufferedImage));
                 }
             } else {
@@ -73,14 +77,11 @@ public class FileReaderRandomBackgroundGenerator extends
         }
     }
 
-    /**
-     *
-     */
-    protected static final Map cachedDirectories = new HashMap();
+
 
     protected File findDirectory(String rootPath) {
         if (cachedDirectories.containsKey(rootPath)) {
-            return (File) cachedDirectories.get(rootPath);
+            return cachedDirectories.get(rootPath);
         }
 
         //try direct path
