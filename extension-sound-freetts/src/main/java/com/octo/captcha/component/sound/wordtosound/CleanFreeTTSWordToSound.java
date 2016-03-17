@@ -17,9 +17,6 @@ import com.octo.captcha.component.sound.soundconfigurator.SoundConfigurator;
  * @version 1.0
  */
 public class CleanFreeTTSWordToSound extends AbstractFreeTTSWordToSound {
-    public CleanFreeTTSWordToSound() {
-        super();
-    }
 
     /**
      * @see AbstractFreeTTSWordToSound#AbstractFreeTTSWordToSound(com.octo.captcha.component.sound.soundconfigurator.SoundConfigurator, int, int)

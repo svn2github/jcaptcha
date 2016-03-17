@@ -56,19 +56,7 @@ public abstract class AbstractFreeTTSWordToSound implements WordToSound {
 
     private boolean isInitiated = false;
 
-    /**
-     * Constructor
-     *
-     * @deprecated
-     */
-    public AbstractFreeTTSWordToSound() {
-        configurator = new FreeTTSSoundConfigurator(AbstractFreeTTSWordToSound.defaultVoiceName,
-                AbstractFreeTTSWordToSound.defaultVoicePackage, 1.0f, 100, 100);
 
-        minAcceptedWordLength = 4;
-        maxAcceptedWordLength = 6;
-        init();
-    }
 
     /**
      * Constructor for a FreeTTS implmentation of WordToSound. This constructor imply that WordToSound only use one
@@ -134,21 +122,7 @@ public abstract class AbstractFreeTTSWordToSound implements WordToSound {
         return minAcceptedWordLength;
     }
 
-    /**
-     * @return the max word lenght accepted by this word2image service
-     * @deprecated misspelled, use {@link #getMaxAcceptedWordLength()} instead
-     */
-    public int getMaxAcceptedWordLenght() {
-        return maxAcceptedWordLength;
-    }
 
-    /**
-     * @return the min word lenght accepted by this word2image service
-     * @deprecated misspelled, use {@link #getMinAcceptedWordLength()} instead
-     */
-    public int getMinAcceptedWordLenght() {
-        return minAcceptedWordLength;
-    }
 
     protected abstract AudioInputStream addEffects(AudioInputStream sound);
 

@@ -20,7 +20,7 @@ import com.octo.captcha.MockCaptcha;
  * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
  * @version 1.0
  */
-@SuppressWarnings("deprecation")
+
 public abstract class CaptchaStoreTestAbstract extends TestCase {
 
     protected CaptchaStore store;
@@ -44,11 +44,11 @@ public abstract class CaptchaStoreTestAbstract extends TestCase {
 
 	public void testHasCaptcha() throws Exception {
         assertFalse("should not have", store.hasCaptcha("1"));
-        store.storeCaptcha("2", captcha);
-        store.storeCaptcha("1 ", captcha);
-        store.storeCaptcha(" 1", captcha);
+        store.storeCaptcha("2", captcha, Locale.ENGLISH);
+        store.storeCaptcha("1 ", captcha, Locale.ENGLISH);
+        store.storeCaptcha(" 1", captcha, Locale.ENGLISH);
         assertFalse("should not have", store.hasCaptcha("1"));
-        store.storeCaptcha("1", captcha);
+        store.storeCaptcha("1", captcha, Locale.ENGLISH);
         assertTrue("should", store.hasCaptcha("1"));
 
     }
@@ -57,7 +57,7 @@ public abstract class CaptchaStoreTestAbstract extends TestCase {
 
 
         for (int i = 0; i < SIZE; i++) {
-            store.storeCaptcha(String.valueOf(i), captcha);
+            store.storeCaptcha(String.valueOf(i), captcha, Locale.ENGLISH);
         }
         for (int i = 0; i < SIZE; i++) {
             assertNotNull(store.getCaptcha(String.valueOf(i)));
@@ -83,7 +83,7 @@ public abstract class CaptchaStoreTestAbstract extends TestCase {
     public void testRemoveCaptcha() throws Exception {
 
         for (int i = 0; i < SIZE; i++) {
-            store.storeCaptcha(String.valueOf(i), captcha);
+            store.storeCaptcha(String.valueOf(i), captcha, Locale.ENGLISH);
 
         }
         assertEquals("should have a size of " + SIZE, store.getSize(), SIZE);
@@ -102,7 +102,7 @@ public abstract class CaptchaStoreTestAbstract extends TestCase {
 
     public void testGetSize() throws Exception {
         for (int i = 0; i < SIZE; i++) {
-            store.storeCaptcha(String.valueOf(i), captcha);
+            store.storeCaptcha(String.valueOf(i), captcha, Locale.ENGLISH);
             assertEquals("Size should be : " + i, i + 1, store.getSize());
         }
         assertEquals("should have a size of " + SIZE, store.getSize(), SIZE);
@@ -117,7 +117,7 @@ public abstract class CaptchaStoreTestAbstract extends TestCase {
     public void testGetKeys() throws Exception {
 
         for (int i = 0; i < SIZE; i++) {
-            store.storeCaptcha(String.valueOf(i), captcha);
+            store.storeCaptcha(String.valueOf(i), captcha, Locale.ENGLISH);
 
         }
         Collection keys = store.getKeys();
@@ -135,7 +135,7 @@ public abstract class CaptchaStoreTestAbstract extends TestCase {
 
     public void testGetCaptcha() throws Exception {
         for (int i = 0; i < SIZE; i++) {
-            store.storeCaptcha(String.valueOf(i), captcha);
+            store.storeCaptcha(String.valueOf(i), captcha, Locale.ENGLISH);
 
         }
 
@@ -149,7 +149,7 @@ public abstract class CaptchaStoreTestAbstract extends TestCase {
 
     public void testEmpty() throws Exception {
         for (int i = 0; i < SIZE; i++) {
-            store.storeCaptcha(String.valueOf(i), captcha);
+            store.storeCaptcha(String.valueOf(i), captcha, Locale.ENGLISH);
         }
         store.empty();
         assertEquals("Size should be 0", 0, store.getSize());

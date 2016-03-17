@@ -56,19 +56,6 @@ public class JBossCacheCaptchaStore implements CaptchaStore {
         }        
     }
 
-    /**
-     * @deprecated
-     */
-    @Override
-    @Deprecated
-    public void storeCaptcha(String s, Captcha captcha) throws CaptchaServiceException {
-
-        try {
-            cache.put(cacheQualifiedName, s, new CaptchaAndLocale(captcha));
-        } catch (CacheException e) {
-            throw new CaptchaServiceException(e);
-        }
-    }
 
     @Override
     public void storeCaptcha(String s, Captcha captcha, Locale locale) throws CaptchaServiceException {

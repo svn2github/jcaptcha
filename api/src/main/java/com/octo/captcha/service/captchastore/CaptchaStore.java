@@ -23,19 +23,6 @@ public interface CaptchaStore {
      */
     boolean hasCaptcha(String id);
 
-    /**
-     * Store the captcha with the provided id as key. The key is assumed to be unique, so if the same key is used twice
-     * to store a captcha, the store will return an exception
-     *
-     * @param id      the key
-     * @param captcha the captcha
-     *
-     * @throws com.octo.captcha.service.CaptchaServiceException
-     *          if the captcha already exists, or if an error occurs during storing routine.
-     *
-     * @deprecated in order to implement the by locale generation, use the {@link #storeCaptcha(String, com.octo.captcha.Captcha, java.util.Locale)}
-     */
-    void storeCaptcha(String id, Captcha captcha) throws CaptchaServiceException;
 
     /**
      * Store the captcha with the provided id as key. The key is assumed to be unique, so if the same key is used twice
