@@ -27,7 +27,8 @@ import com.octo.captcha.service.image.ImageCaptchaService;
  */
 public class SimpleImageCaptchaServlet extends HttpServlet implements Servlet
  {
-    public static ImageCaptchaService service= new DefaultManageableImageCaptchaService();
+    private static final long serialVersionUID = 296035630547992751L;
+	public static ImageCaptchaService service= new DefaultManageableImageCaptchaService();
 
 
 

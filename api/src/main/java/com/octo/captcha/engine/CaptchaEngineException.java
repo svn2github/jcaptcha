@@ -24,7 +24,8 @@ package com.octo.captcha.engine;
  * @version $Id$
  */
 public class CaptchaEngineException extends RuntimeException {
-    private Throwable cause;
+    private static final long serialVersionUID = -643615405253913151L;
+	private Throwable cause;
 
     /**
      * Constructs a new exception with <code>null</code> as its detail message. The cause is not initialized.

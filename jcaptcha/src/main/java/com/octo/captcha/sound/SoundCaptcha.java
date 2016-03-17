@@ -29,7 +29,9 @@ import com.octo.captcha.CaptchaException;
  */
 public abstract class SoundCaptcha implements Captcha {
 
-    protected Boolean hasChallengeBeenCalled = Boolean.FALSE;
+    private static final long serialVersionUID = -6245504970689644705L;
+
+	protected Boolean hasChallengeBeenCalled = Boolean.FALSE;
 
     protected String question;
 

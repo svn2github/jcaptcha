@@ -18,6 +18,7 @@ import com.octo.captcha.sound.SoundCaptcha;
  */
 public class SpellerSound extends SoundCaptcha {
 
+	private static final long serialVersionUID = -5737646061842676910L;
 	private String response;
 
     public SpellerSound(String thequestion,

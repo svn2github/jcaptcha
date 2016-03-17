@@ -28,7 +28,9 @@ public class MockSoundCaptchaFactory extends SoundCaptchaFactory {
      */
     public SoundCaptcha getSoundCaptcha() {
         return new SoundCaptcha(null, null) {
-            public Boolean validateResponse(Object response) {
+            private static final long serialVersionUID = 6412472463777426196L;
+
+			public Boolean validateResponse(Object response) {
                 return Boolean.FALSE;
             }
         };

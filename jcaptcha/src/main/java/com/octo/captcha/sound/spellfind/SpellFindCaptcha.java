@@ -18,7 +18,8 @@ import com.octo.captcha.sound.SoundCaptcha;
  */
 public class SpellFindCaptcha extends SoundCaptcha {
 
-     private String response;
+     private static final long serialVersionUID = -2169133373094895032L;
+	private String response;
 
       public SpellFindCaptcha(String thequestion,
                           AudioInputStream thechallenge, String theresponse) {

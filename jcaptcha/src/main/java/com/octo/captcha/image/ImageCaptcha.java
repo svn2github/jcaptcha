@@ -23,7 +23,9 @@ import com.octo.captcha.Captcha;
  */
 public abstract class ImageCaptcha implements Captcha {
 
-    private Boolean hasChallengeBeenCalled = Boolean.FALSE;
+    private static final long serialVersionUID = -6937424675277130403L;
+
+	private Boolean hasChallengeBeenCalled = Boolean.FALSE;
 
     protected String question;
 

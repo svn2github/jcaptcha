@@ -28,7 +28,9 @@ public class MockImageCaptchaFactory extends ImageCaptchaFactory {
      */
     public ImageCaptcha getImageCaptcha() {
         return new ImageCaptcha(null, null) {
-            public Boolean validateResponse(Object response) {
+            private static final long serialVersionUID = 6380875541752768415L;
+
+			public Boolean validateResponse(Object response) {
                 return Boolean.FALSE;
             }
         };

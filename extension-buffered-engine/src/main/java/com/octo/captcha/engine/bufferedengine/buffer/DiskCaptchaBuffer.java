@@ -435,7 +435,9 @@ public class DiskCaptchaBuffer implements CaptchaBuffer {
      * A reference to an on-disk elements.
      */
     private static class DiskElement implements Serializable {
-        /**
+        private static final long serialVersionUID = 3316323681563120107L;
+
+		/**
          * the file pointer
          */
         private long position;

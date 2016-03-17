@@ -21,7 +21,9 @@ import com.octo.captcha.module.servlet.image.SimpleImageCaptchaServlet;
  */
 public class SubmitActionServlet extends HttpServlet{
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private static final long serialVersionUID = 7342121576411594220L;
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
       String userCaptchaResponse = request.getParameter("jcaptcha");
       boolean captchaPassed = SimpleImageCaptchaServlet.validateResponse(request, userCaptchaResponse);

@@ -22,7 +22,8 @@ import com.octo.captcha.image.ImageCaptcha;
  */
 public class FishEye extends ImageCaptcha {
 
-    private Point deformationCenter;
+    private static final long serialVersionUID = -1286853810955665517L;
+	private Point deformationCenter;
     private Integer tolerance;
 
     /**

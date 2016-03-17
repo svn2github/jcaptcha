@@ -16,6 +16,7 @@ import com.octo.captcha.text.TextCaptcha;
  */
 public class MathCaptcha extends TextCaptcha {
 
+	private static final long serialVersionUID = 2373042651055254921L;
 	private String response;
 
     MathCaptcha(String question, String challenge, String response) {

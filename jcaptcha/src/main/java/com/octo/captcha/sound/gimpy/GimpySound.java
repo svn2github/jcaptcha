@@ -19,6 +19,7 @@ import com.octo.captcha.sound.SoundCaptcha;
  */
 public class GimpySound extends SoundCaptcha {
 
+	private static final long serialVersionUID = -8226524347291947916L;
 	private String response;
 
     public GimpySound(String thequestion,

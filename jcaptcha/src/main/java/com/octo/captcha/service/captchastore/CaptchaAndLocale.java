@@ -18,7 +18,8 @@ import com.octo.captcha.Captcha;
  * @version $Id$
  */
 public class CaptchaAndLocale implements Serializable {
-    private Captcha captcha;
+    private static final long serialVersionUID = -5083602059300496537L;
+	private Captcha captcha;
     private Locale locale;
 
     public CaptchaAndLocale(Captcha captcha) {

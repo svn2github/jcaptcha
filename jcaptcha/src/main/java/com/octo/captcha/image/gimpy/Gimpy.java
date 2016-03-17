@@ -21,6 +21,7 @@ import com.octo.captcha.image.ImageCaptcha;
  */
 public class Gimpy extends ImageCaptcha implements Serializable {
 
+	private static final long serialVersionUID = -2759457825272520517L;
 	private String response;
     private boolean caseSensitive=true;
 
