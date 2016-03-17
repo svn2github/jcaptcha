@@ -40,6 +40,7 @@ import com.octo.captcha.component.image.textpaster.TextPaster;
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
  */
+@SuppressWarnings("deprecation")
 public class DeformedComposedWordToImageTest extends TestCase {
 
     private DeformedComposedWordToImage deformedComposedWordToImage;

@@ -56,6 +56,11 @@ public class JBossCacheCaptchaStore implements CaptchaStore {
         }        
     }
 
+    /**
+     * @deprecated
+     */
+    @Override
+    @Deprecated
     public void storeCaptcha(String s, Captcha captcha) throws CaptchaServiceException {
 
         try {
@@ -65,6 +70,7 @@ public class JBossCacheCaptchaStore implements CaptchaStore {
         }
     }
 
+    @Override
     public void storeCaptcha(String s, Captcha captcha, Locale locale) throws CaptchaServiceException {
 
         try {
