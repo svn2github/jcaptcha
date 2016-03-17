@@ -20,7 +20,7 @@ public class MockCaptchaStore implements CaptchaStore {
 		return null;
 	}
 
-	public Collection getKeys() {
+	public Collection<String> getKeys() {
 		return null;
 	}
 

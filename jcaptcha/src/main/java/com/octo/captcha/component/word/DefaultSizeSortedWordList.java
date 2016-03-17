@@ -8,6 +8,7 @@ package com.octo.captcha.component.word;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 import java.util.TreeMap;
@@ -20,7 +21,7 @@ import java.util.TreeMap;
  */
 public class DefaultSizeSortedWordList implements SizeSortedWordList {
 
-    private TreeMap sortedWords = new TreeMap();
+    private TreeMap<Integer, List<String>> sortedWords = new TreeMap<Integer, List<String>>();
 
     private Locale locale;
 
@@ -33,7 +34,7 @@ public class DefaultSizeSortedWordList implements SizeSortedWordList {
         this.locale = locale;
     }
 
-    ;
+
 
     /**
      * Return a locale for this list
@@ -50,17 +51,14 @@ public class DefaultSizeSortedWordList implements SizeSortedWordList {
     public void addWord(String word) {
         Integer length = new Integer(word.length());
         if (sortedWords.containsKey(length)) {
-            ArrayList thisLengthWords = (ArrayList) sortedWords.get(length);
+            List<String> thisLengthWords = sortedWords.get(length);
             thisLengthWords.add(word);
             sortedWords.put(length, thisLengthWords);
         } else {
-            ArrayList thisLengthWords = new ArrayList();
+            List<String> thisLengthWords = new ArrayList<String>();
             thisLengthWords.add(word);
             sortedWords.put(length, thisLengthWords);
         }
-        //words.add(word);
-        //lengths.add(new Integer(word.length()));
-
     }
 
     /**
@@ -69,7 +67,7 @@ public class DefaultSizeSortedWordList implements SizeSortedWordList {
      * @return the min length of contained word in this wordlist
      */
     public Integer getMinWord() {
-        return (Integer) sortedWords.firstKey();
+        return sortedWords.firstKey();
     }
 
     /**
@@ -78,7 +76,7 @@ public class DefaultSizeSortedWordList implements SizeSortedWordList {
      * @return the max length of contained word in this wordlist
      */
     public Integer getMaxWord() {
-        return (Integer) sortedWords.lastKey();
+        return sortedWords.lastKey();
     }
 
     /**
@@ -88,11 +86,11 @@ public class DefaultSizeSortedWordList implements SizeSortedWordList {
      */
     public String getNextWord(Integer length) {
         if (sortedWords.containsKey(length)) {
-            ArrayList thisLengthwords = (ArrayList) sortedWords.get(length);
+            List<String> thisLengthwords = sortedWords.get(length);
             int pickAWord = myRandom.nextInt(thisLengthwords.size());
-            return (String) thisLengthwords.get(pickAWord);
-        } else {
-            return null;
-        }
+            return  thisLengthwords.get(pickAWord);
+        } 
+        return null;
+        
     }
 }

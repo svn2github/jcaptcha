@@ -210,7 +210,7 @@ public abstract class BufferedEngineContainer implements CaptchaEngine {
                         + locale.toString());
             }
 
-            Collection temp = this.persistentBuffer.removeCaptcha(swap, locale);
+            Collection<Captcha> temp = this.persistentBuffer.removeCaptcha(swap, locale);
 
             this.volatileBuffer.putAllCaptcha(temp, locale);
             if (log.isDebugEnabled()) {
@@ -258,7 +258,7 @@ public abstract class BufferedEngineContainer implements CaptchaEngine {
             int toBuild = ratioCount;
             while (toBuild > 0 && !shutdownCalled) {
                 int batch = toBuild > config.getFeedBatchSize().intValue() ? config.getFeedBatchSize().intValue() : toBuild;
-                ArrayList captchas = new ArrayList(batch);
+                ArrayList<Captcha> captchas = new ArrayList<Captcha>(batch);
                 //build captchas, batch sized
                 int builded = 0;
                 for (int i = 0; i < batch; i++) {

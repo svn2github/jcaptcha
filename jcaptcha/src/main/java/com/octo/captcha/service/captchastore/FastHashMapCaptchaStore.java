@@ -15,7 +15,9 @@ import org.apache.commons.collections.FastHashMap;
  * @version 1.0
  */
 public class FastHashMapCaptchaStore extends MapCaptchaStore {
-    public FastHashMapCaptchaStore() {
+    @SuppressWarnings("unchecked")
+	public FastHashMapCaptchaStore() {
+    	super();
         this.store = new FastHashMap();
     }
 }

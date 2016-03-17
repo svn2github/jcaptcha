@@ -117,7 +117,7 @@ public class DatabaseCaptchaBuffer implements CaptchaBuffer {
      * @throws NoSuchElementException if there is no captcha throw NoSuchElementException
      */
     public Captcha removeCaptcha(Locale locale) throws NoSuchElementException {
-        Collection col = removeCaptcha(1, locale);
+        Collection<Captcha> col = removeCaptcha(1, locale);
         if (col != null && col.size() > 0) {
             return (Captcha) col.iterator().next();
         } else {
@@ -132,7 +132,7 @@ public class DatabaseCaptchaBuffer implements CaptchaBuffer {
      *
      * @return a collection of captchas
      */
-    public Collection removeCaptcha(int number) {
+    public Collection<Captcha> removeCaptcha(int number) {
         return removeCaptcha(number, Locale.getDefault());
     }
 
@@ -144,13 +144,13 @@ public class DatabaseCaptchaBuffer implements CaptchaBuffer {
      *
      * @return a collection of captchas
      */
-    public Collection removeCaptcha(int number, Locale locale) {
+    public Collection<Captcha> removeCaptcha(int number, Locale locale) {
         Connection con = null;
         PreparedStatement ps = null;
         PreparedStatement psdel = null;
         ResultSet rs = null;
-        Collection collection = new UnboundedFifoBuffer();
-        Collection temp = new UnboundedFifoBuffer();
+        Collection<Captcha> collection = new UnboundedFifoBuffer();
+        Collection<Captcha> temp = new UnboundedFifoBuffer();
         if (number < 1) {
             return collection;
         }
@@ -180,7 +180,9 @@ public class DatabaseCaptchaBuffer implements CaptchaBuffer {
                     InputStream in = rs.getBinaryStream(captchaColumn);
                     ObjectInputStream objstr = new ObjectInputStream(in);
                     Object captcha = objstr.readObject();
-                    temp.add(captcha);
+                    if (captcha instanceof Captcha) {
+                    	temp.add((Captcha) captcha);
+                    }
                     //and delete
                     long time = rs.getLong(timeMillisColumn);
                     long hash = rs.getLong(hashCodeColumn);
@@ -255,7 +257,7 @@ public class DatabaseCaptchaBuffer implements CaptchaBuffer {
      */
     public void putCaptcha(Captcha captcha, Locale locale) {
         if (captcha != null) {
-            Set set = new HashSet();
+            Set<Captcha> set = new HashSet<Captcha>();
             set.add(captcha);
             putAllCaptcha(set, locale);
         }
@@ -266,7 +268,7 @@ public class DatabaseCaptchaBuffer implements CaptchaBuffer {
      *
      * @param captchas The captchas to add
      */
-    public void putAllCaptcha(Collection captchas) {
+    public void putAllCaptcha(Collection<Captcha> captchas) {
         putAllCaptcha(captchas, Locale.getDefault());
     }
 
@@ -276,13 +278,13 @@ public class DatabaseCaptchaBuffer implements CaptchaBuffer {
      * @param captchas The captchas to add
      * @param locale   The locale of the captchas
      */
-    public void putAllCaptcha(Collection captchas, Locale locale) {
+    public void putAllCaptcha(Collection<Captcha> captchas, Locale locale) {
         Connection con = null;
         PreparedStatement ps = null;
 
 
         if (captchas != null && captchas.size() > 0) {
-            Iterator captIt = captchas.iterator();
+            Iterator<Captcha> captIt = captchas.iterator();
             if (log.isDebugEnabled()) {
                 log.debug("try to insert " + captchas.size() + " captchas");
             }
@@ -492,11 +494,11 @@ public class DatabaseCaptchaBuffer implements CaptchaBuffer {
     /**
      * Get all the locales used
      */
-    public Collection getLocales() {
+    public Collection<String> getLocales() {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Set set = new HashSet();
+        Set<String> set = new HashSet<String>();
 
         try {
             con = datasource.getConnection();

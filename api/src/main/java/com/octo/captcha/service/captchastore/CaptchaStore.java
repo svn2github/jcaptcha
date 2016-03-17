@@ -78,7 +78,7 @@ public interface CaptchaStore {
     /**
      * Return all the contained keys
      */
-    Collection getKeys();
+    Collection<String> getKeys();
 
     /**
      * Empty the store

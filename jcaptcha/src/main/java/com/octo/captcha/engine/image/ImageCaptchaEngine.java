@@ -27,7 +27,7 @@ import com.octo.captcha.image.ImageCaptchaFactory;
 public abstract class ImageCaptchaEngine
         implements com.octo.captcha.engine.CaptchaEngine {
 
-	protected List factories = new ArrayList();
+	protected List<ImageCaptchaFactory> factories = new ArrayList<ImageCaptchaFactory>();
 	protected Random myRandom = new SecureRandom();
 
     /**
@@ -35,9 +35,8 @@ public abstract class ImageCaptchaEngine
      *
      * @return a CaptchaFactory
      */
-    public com.octo.captcha.image.ImageCaptchaFactory getImageCaptchaFactory() {
-        return (com.octo.captcha.image.ImageCaptchaFactory) factories.get(
-                myRandom.nextInt(factories.size()));
+    public ImageCaptchaFactory getImageCaptchaFactory() {
+        return factories.get(myRandom.nextInt(factories.size()));
     }
     
     /**
@@ -86,13 +85,13 @@ public abstract class ImageCaptchaEngine
      */
     public void setFactories(CaptchaFactory[] factories) throws CaptchaEngineException {
         checkNotNullOrEmpty(factories);
-        ArrayList tempFactories = new ArrayList();
+        ArrayList<ImageCaptchaFactory> tempFactories = new ArrayList<ImageCaptchaFactory>();
 
         for (int i = 0; i < factories.length; i++) {
             if (!ImageCaptchaFactory.class.isAssignableFrom(factories[i].getClass())) {
                 throw new CaptchaEngineException("This factory is not an image captcha factory " + factories[i].getClass());
             }
-            tempFactories.add(factories[i]);
+            tempFactories.add((ImageCaptchaFactory) factories[i]);
         }
 
         this.factories = tempFactories;

@@ -28,7 +28,7 @@ public class DictionaryWordGenerator implements WordGenerator {
 
     private DictionaryReader factory;
 
-    private HashMap localizedwords = new HashMap();
+    private HashMap<Locale, SizeSortedWordList> localizedwords = new HashMap<Locale, SizeSortedWordList>();
 
     public DictionaryWordGenerator(DictionaryReader reader) {
         this.factory = reader;
