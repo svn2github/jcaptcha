@@ -120,7 +120,7 @@ public abstract class CaptchaStoreTestAbstract extends TestCase {
             store.storeCaptcha(String.valueOf(i), captcha, Locale.ENGLISH);
 
         }
-        Collection keys = store.getKeys();
+        Collection<String> keys = store.getKeys();
 
 
         for (int i = 0; i < SIZE; i++) {
