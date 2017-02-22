@@ -6,10 +6,10 @@
 
 package com.octo.captcha.image.gimpy;
 
-import com.octo.captcha.image.ImageCaptcha;
-
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
+
+import com.octo.captcha.image.ImageCaptcha;
 
 /**
  * <p>A Gimpy is an ImageCaptcha. It is also the most common captcha.</p> <ul> <li>Challenge type : image</li>
@@ -21,6 +21,7 @@ import java.io.Serializable;
  */
 public class Gimpy extends ImageCaptcha implements Serializable {
 
+	private static final long serialVersionUID = -2759457825272520517L;
 	private String response;
     private boolean caseSensitive=true;
 

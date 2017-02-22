@@ -18,9 +18,9 @@
 
 package com.octo.captcha.engine;
 
-import com.octo.captcha.CaptchaFactory;
-
 import java.util.Locale;
+
+import com.octo.captcha.CaptchaFactory;
 
 /**
  * <p>CaptchaEngine is the main interface from an application point of view : it uses CapchaFactories in order to return

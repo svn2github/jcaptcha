@@ -25,6 +25,7 @@ import java.util.Random;
 
 import com.octo.captcha.Captcha;
 import com.octo.captcha.CaptchaFactory;
+import com.octo.captcha.engine.CaptchaEngine;
 import com.octo.captcha.engine.CaptchaEngineException;
 import com.octo.captcha.sound.SoundCaptcha;
 import com.octo.captcha.sound.SoundCaptchaFactory;
@@ -35,10 +36,9 @@ import com.octo.captcha.sound.SoundCaptchaFactory;
  * @author Benoit Doumas
  * @version 1.0
  */
-public abstract class SoundCaptchaEngine
-        implements com.octo.captcha.engine.CaptchaEngine {
+public abstract class SoundCaptchaEngine implements CaptchaEngine {
 
-    protected List factories = new ArrayList();
+    protected List<SoundCaptchaFactory> factories = new ArrayList<SoundCaptchaFactory>();
 
     protected Random myRandom = new SecureRandom();
 
@@ -75,13 +75,13 @@ public abstract class SoundCaptchaEngine
      */
     public void setFactories(CaptchaFactory[] factories) throws CaptchaEngineException {
         checkNotNullOrEmpty(factories);
-        ArrayList tempFactories = new ArrayList();
+        ArrayList<SoundCaptchaFactory> tempFactories = new ArrayList<SoundCaptchaFactory>();
 
         for (int i = 0; i < factories.length; i++) {
             if (!SoundCaptchaFactory.class.isAssignableFrom(factories[i].getClass())) {
                 throw new CaptchaEngineException("This factory is not an sound captcha factory " + factories[i].getClass());
             }
-            tempFactories.add(factories[i]);
+            tempFactories.add((SoundCaptchaFactory)factories[i]);
         }
 
         this.factories = tempFactories;
@@ -99,8 +99,7 @@ public abstract class SoundCaptchaEngine
      * @return a CaptchaFactory
      */
     public SoundCaptchaFactory getSoundCaptchaFactory() {
-        return (SoundCaptchaFactory) factories.get(myRandom
-                .nextInt(factories.size()));
+        return  factories.get(myRandom.nextInt(factories.size()));
     }
 
     /**

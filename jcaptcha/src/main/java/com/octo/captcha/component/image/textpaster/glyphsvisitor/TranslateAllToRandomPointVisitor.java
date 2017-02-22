@@ -1,10 +1,10 @@
 package com.octo.captcha.component.image.textpaster.glyphsvisitor;
 
-import com.octo.captcha.component.image.textpaster.Glyphs;
-
 import java.awt.geom.Rectangle2D;
-import java.util.Random;
 import java.security.SecureRandom;
+import java.util.Random;
+
+import com.octo.captcha.component.image.textpaster.Glyphs;
 
 /**
  *

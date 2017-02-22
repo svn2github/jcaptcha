@@ -6,10 +6,7 @@
 
 package com.octo.captcha.component.image.backgroundgenerator;
 
-import com.octo.captcha.CaptchaException;
-
-import javax.imageio.ImageIO;
-import java.awt.*;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,9 +14,15 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLDecoder;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.StringTokenizer;
+
+import javax.imageio.ImageIO;
+
+import com.octo.captcha.CaptchaException;
 
 /**
  * <p>File reader background generator that return a random image from the ones found in the directory </p>
@@ -31,8 +34,12 @@ import java.util.List;
 public class FileReaderRandomBackgroundGenerator extends
         AbstractBackgroundGenerator {
 
-    private List images = new ArrayList();
+    private List<BufferedImage> images = new ArrayList<BufferedImage>();
     private String rootPath = ".";
+    /**
+    *
+    */
+    protected static final Map<String, File> cachedDirectories = new HashMap<String, File>();
 
     public FileReaderRandomBackgroundGenerator(Integer width,
                                                Integer height, String rootPath) {
@@ -60,7 +67,7 @@ public class FileReaderRandomBackgroundGenerator extends
 
             if (images.size() != 0) {
                 for (int i = 0; i < images.size(); i++) {
-                    BufferedImage bufferedImage = (BufferedImage) images.get(i);
+                    BufferedImage bufferedImage =  images.get(i);
                     images.set(i, tile(bufferedImage));
                 }
             } else {
@@ -70,14 +77,11 @@ public class FileReaderRandomBackgroundGenerator extends
         }
     }
 
-    /**
-     *
-     */
-    protected static final Map cachedDirectories = new HashMap();
+
 
     protected File findDirectory(String rootPath) {
         if (cachedDirectories.containsKey(rootPath)) {
-            return (File) cachedDirectories.get(rootPath);
+            return cachedDirectories.get(rootPath);
         }
 
         //try direct path

@@ -19,7 +19,6 @@ import junit.framework.TestCase;
 
 import com.octo.captcha.Captcha;
 import com.octo.captcha.engine.CaptchaEngine;
-
 import com.octo.captcha.engine.image.gimpy.DefaultGimpyEngine;
 
 /**

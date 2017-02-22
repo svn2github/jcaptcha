@@ -6,10 +6,10 @@
 
 package com.octo.captcha.service.text;
 
+import java.util.Locale;
+
 import com.octo.captcha.service.CaptchaService;
 import com.octo.captcha.service.CaptchaServiceException;
-
-import java.util.Locale;
 
 /**
  * <p><ul><li></li></ul></p>

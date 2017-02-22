@@ -18,7 +18,7 @@
 
 package com.octo.captcha.component.image.fontgenerator;
 
-import java.awt.*;
+import java.awt.Font;
 
 /**
  * <p>Description: </p>

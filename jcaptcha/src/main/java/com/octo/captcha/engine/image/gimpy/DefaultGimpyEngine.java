@@ -18,24 +18,6 @@
 
 package com.octo.captcha.engine.image.gimpy;
 
-import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
-import com.octo.captcha.component.image.backgroundgenerator.UniColorBackgroundGenerator;
-import com.octo.captcha.component.image.color.SingleColorGenerator;
-import com.octo.captcha.component.image.deformation.ImageDeformation;
-import com.octo.captcha.component.image.deformation.ImageDeformationByFilters;
-import com.octo.captcha.component.image.deformation.ImageDeformationByBufferedImageOp;
-import com.octo.captcha.component.image.fontgenerator.FontGenerator;
-import com.octo.captcha.component.image.fontgenerator.RandomFontGenerator;
-import com.octo.captcha.component.image.textpaster.TextPaster;
-import com.octo.captcha.component.image.textpaster.DecoratedRandomTextPaster;
-import com.octo.captcha.component.image.textpaster.textdecorator.BaffleTextDecorator;
-import com.octo.captcha.component.image.textpaster.textdecorator.TextDecorator;
-import com.octo.captcha.component.image.wordtoimage.DeformedComposedWordToImage;
-import com.octo.captcha.engine.image.ListImageCaptchaEngine;
-
-import java.awt.*;
-import java.awt.image.ImageFilter;
-import java.util.ArrayList;
 
 /**
  * <p/>
@@ -48,6 +30,10 @@ import java.util.ArrayList;
  * @version 1.0
  */
 public class DefaultGimpyEngine extends GmailEngine {
+	
+	public DefaultGimpyEngine() {
+		super();
+	}
 
     
 }

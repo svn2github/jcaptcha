@@ -6,14 +6,14 @@
 
 package com.octo.captcha.component.image.wordtoimage;
 
+import java.awt.Font;
+import java.awt.image.BufferedImage;
+import java.text.AttributedString;
+
 import com.octo.captcha.CaptchaException;
 import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
 import com.octo.captcha.component.image.fontgenerator.FontGenerator;
 import com.octo.captcha.component.image.textpaster.TextPaster;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.text.AttributedString;
 
 /**
  * <p>Base class for composed WordToImage</p> It extends the AbstractWord to image and uses three others Components :
@@ -49,24 +49,6 @@ public class ComposedWordToImage extends AbstractWordToImage {
         this.background = background;
         this.textPaster = textPaster;
     }
-
-    /**
-     * @deprecated
-     * @return the max word length accepted by this word2image service
-     */
-    public int getMaxAcceptedWordLenght() {
-        return textPaster.getMaxAcceptedWordLength();
-    }
-
-    /**
-     * @deprecated
-     * @return the min word length accepted by this word2image service
-     */
-    public int getMinAcceptedWordLenght() {
-        return textPaster.getMinAcceptedWordLength();
-    }
-
-
 
     /**
      * @return the max word length accepted by this word2image service

@@ -201,7 +201,7 @@ public class QuartzBufferedEngineManager implements BufferedEngineContainerManag
      */
     public void pause() {
         try {
-            schduler.pause();
+            schduler.standby();
         }
         catch (SchedulerException e) {
             throw new CaptchaException(e);

@@ -6,18 +6,19 @@
 
 package com.octo.captcha.image.fisheye;
 
+import java.awt.Color;
+import java.awt.Point;
+import java.awt.image.BufferedImage;
+import java.security.SecureRandom;
+import java.util.Locale;
+import java.util.Random;
+
 import com.octo.captcha.CaptchaException;
 import com.octo.captcha.CaptchaQuestionHelper;
 import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
 import com.octo.captcha.component.image.deformation.ImageDeformation;
 import com.octo.captcha.image.ImageCaptcha;
 import com.octo.captcha.image.ImageCaptchaFactory;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.security.SecureRandom;
-import java.util.Locale;
-import java.util.Random;
 
 /**
  * This factory use a Backgroud generator to retrieve a picture, Selects a random square center for the deformation, and

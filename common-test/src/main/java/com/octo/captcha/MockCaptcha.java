@@ -20,7 +20,8 @@ import java.util.Locale;
  * @version 1.0
  */
 public class MockCaptcha implements Captcha {
-    private boolean isDisposed = false;
+    private static final long serialVersionUID = -3629245709880575722L;
+	private boolean isDisposed = false;
     private boolean asBeenCalled = false;
     private Locale locale = null;
 

@@ -1,8 +1,8 @@
 package com.octo.captcha.component.word.wordgenerator;
 
-import com.octo.captcha.CaptchaException;
-
 import java.util.Locale;
+
+import com.octo.captcha.CaptchaException;
 
 /**
  * @author mag

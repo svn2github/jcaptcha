@@ -6,15 +6,14 @@
 
 package com.octo.captcha.component.image.deformation;
 
-import com.jhlabs.image.RotateFilter;
-import com.octo.captcha.component.image.utils.ToolkitFactory;
-
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.awt.image.FilteredImageSource;
-import java.awt.image.ImageFilter;
-import java.security.SecureRandom;
-import java.util.Random;
+//import java.awt.image.FilteredImageSource;
+//import java.security.SecureRandom;
+//import java.util.Random;
+//
+//import com.jhlabs.image.RotateFilter;
 
 /**
  * Deformation where the image is divided in little squares, moved individualty in a random position. Each move is
@@ -37,9 +36,9 @@ public class PuzzleImageDeformation implements ImageDeformation {
     /**
      * Maximal angle of rotation for each square.
      */
-    private double maxAngleRotation = 0.3;
+//    private double maxAngleRotation = 0.3;
 
-    private Random random = new SecureRandom();
+//    private Random random = new SecureRandom();
 
     /**
      * Conststruct a PuzzleImageDeformation, with the numbers of colums and rows. If manageRowAndColRandomly is set to
@@ -55,7 +54,7 @@ public class PuzzleImageDeformation implements ImageDeformation {
         super();
         this.colNum = colNum;
         this.rowNum = rowNum;
-        this.maxAngleRotation = maxAngleRotation;
+//        this.maxAngleRotation = maxAngleRotation;
     }
 
     /*
@@ -82,16 +81,16 @@ public class PuzzleImageDeformation implements ImageDeformation {
 
         BufferedImage smallPart = new BufferedImage(xd, yd, image.getType());
         Graphics2D gSmall = smallPart.createGraphics();
-        FilteredImageSource filtered;
+//        FilteredImageSource filtered;
 
         for (int i = 0; i < colNum; i++) {
             for (int j = 0; j < rowNum; j++) {
                 gSmall.drawImage(image, 0, 0, xd, yd, xd * i, yd * j, xd * i + xd, yd * j + yd,
                         null);
 
-                RotateFilter filter = new RotateFilter((float)maxAngleRotation * random.nextFloat()
-                        * (random.nextBoolean() ? -1 : 1));
-              //  TODO
+                //  TODO
+//                RotateFilter filter = new RotateFilter((float)maxAngleRotation * random.nextFloat()
+//                        * (random.nextBoolean() ? -1 : 1));
                 //filtered = new FilteredImageSource(smallPart.getSource(), filter);
                // Image temp = ToolkitFactory.getToolkit().createImage(filtered);
               //  smallPart.getGraphics().drawImage(temp, 0, 0, new Color(0, 0, 0, 0), null);

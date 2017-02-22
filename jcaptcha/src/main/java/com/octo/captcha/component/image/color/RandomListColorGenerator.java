@@ -11,11 +11,11 @@
  */
 package com.octo.captcha.component.image.color;
 
-import com.octo.captcha.CaptchaException;
-
-import java.awt.*;
+import java.awt.Color;
 import java.security.SecureRandom;
 import java.util.Random;
+
+import com.octo.captcha.CaptchaException;
 
 /**
  * A RandomListColor returns a random color have been picked from a user defined colors list.

@@ -11,12 +11,12 @@
  */
 package com.octo.captcha.engine.bufferedengine;
 
+import java.util.Locale;
+
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-
-import java.util.Locale;
 
 /**
  * @author NIDWMAG

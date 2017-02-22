@@ -6,9 +6,9 @@
 
 package com.octo.captcha.component.image.color;
 
-import com.octo.captcha.CaptchaException;
+import java.awt.Color;
 
-import java.awt.*;
+import com.octo.captcha.CaptchaException;
 
 /**
  * Simple color generator that always return the same color

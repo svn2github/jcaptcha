@@ -6,14 +6,14 @@
 
 package com.octo.captcha.image;
 
-import com.octo.captcha.Captcha;
-
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.imageio.stream.MemoryCacheImageInputStream;
 import javax.imageio.stream.MemoryCacheImageOutputStream;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
+
+import com.octo.captcha.Captcha;
 
 /**
  * <p>String question about a BufferedImage challenge. Abstract.</p>
@@ -23,7 +23,9 @@ import java.io.IOException;
  */
 public abstract class ImageCaptcha implements Captcha {
 
-    private Boolean hasChallengeBeenCalled = Boolean.FALSE;
+    private static final long serialVersionUID = -6937424675277130403L;
+
+	private Boolean hasChallengeBeenCalled = Boolean.FALSE;
 
     protected String question;
 

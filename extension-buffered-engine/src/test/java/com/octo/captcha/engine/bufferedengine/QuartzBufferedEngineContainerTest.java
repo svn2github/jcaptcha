@@ -11,8 +11,7 @@
  */
 package com.octo.captcha.engine.bufferedengine;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
@@ -22,18 +21,17 @@ import org.springframework.core.io.Resource;
  * @author Doumas Benoit
  */
 public class QuartzBufferedEngineContainerTest extends BufferedEngineContainerTestAbstract {
-    private static final Log log = LogFactory.getLog(QuartzBufferedEngineContainerTest.class
-            .getName());
 
-    // loader init by default
-    //protected Class loader = DefaultEngineLoadTestHelper.class;
 
-    public void testBasic() throws Exception {
+    private static final int WAIT_TIME = 10000;
+
+	public void testBasic() throws Exception {
         Resource ressource = new ClassPathResource("testQuartzBufferedEngine.xml");
         ConfigurableBeanFactory bf = new XmlBeanFactory(ressource);
         BufferedEngineContainer container = (BufferedEngineContainer) bf.getBean("container");
         Object scheduler = bf.getBean("quartz");
-        Thread.sleep(10000);
+        assertNotNull(scheduler);
+        Thread.sleep(WAIT_TIME);
         for (int i = 0; i < 100; i++) {
             assertNotNull(container.getNextCaptcha());
         }
@@ -44,7 +42,12 @@ public class QuartzBufferedEngineContainerTest extends BufferedEngineContainerTe
         ConfigurableBeanFactory bf = new XmlBeanFactory(ressource);
         BufferedEngineContainer container = (BufferedEngineContainer) bf.getBean("container");
         Object scheduler = bf.getBean("quartz");
+        assertNotNull(container);
+        assertNotNull(scheduler);
         Thread.sleep(100000);
+        for (int i = 0; i < 100; i++) {
+            assertNotNull(container.getNextCaptcha());
+        }
     }
 
     /**
@@ -55,7 +58,9 @@ public class QuartzBufferedEngineContainerTest extends BufferedEngineContainerTe
         ConfigurableBeanFactory bf = new XmlBeanFactory(ressource);
         BufferedEngineContainer container = (BufferedEngineContainer) bf.getBean("container");
         Object scheduler = bf.getBean("quartz");
-        Thread.sleep(10000);
+        assertNotNull(scheduler);
+        assertNotNull(container);
+        Thread.sleep(WAIT_TIME);
         for (int i = 0; i < 100; i++) {
             assertNotNull(container.getNextCaptcha());
         }
@@ -69,6 +74,7 @@ public class QuartzBufferedEngineContainerTest extends BufferedEngineContainerTe
         ConfigurableBeanFactory bf = new XmlBeanFactory(ressource);
         BufferedEngineContainer container = (BufferedEngineContainer) bf.getBean("container");
         Object scheduler = bf.getBean("quartz");
+        assertNotNull(scheduler);
         return container;
     }
 

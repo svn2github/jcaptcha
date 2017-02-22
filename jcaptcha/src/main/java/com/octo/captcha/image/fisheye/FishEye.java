@@ -6,11 +6,11 @@
 
 package com.octo.captcha.image.fisheye;
 
-import com.octo.captcha.image.ImageCaptcha;
-
-import java.awt.*;
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.StringTokenizer;
+
+import com.octo.captcha.image.ImageCaptcha;
 
 /**
  * FishEye is an ImageCaptcha <ul> <li>Challenge type : image</li> <li>Response type : a point position, in pixels from
@@ -22,7 +22,8 @@ import java.util.StringTokenizer;
  */
 public class FishEye extends ImageCaptcha {
 
-    private Point deformationCenter;
+    private static final long serialVersionUID = -1286853810955665517L;
+	private Point deformationCenter;
     private Integer tolerance;
 
     /**

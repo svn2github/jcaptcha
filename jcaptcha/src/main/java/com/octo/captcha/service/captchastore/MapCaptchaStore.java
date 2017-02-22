@@ -6,13 +6,13 @@
 
 package com.octo.captcha.service.captchastore;
 
-import com.octo.captcha.Captcha;
-import com.octo.captcha.service.CaptchaServiceException;
-
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+
+import com.octo.captcha.Captcha;
+import com.octo.captcha.service.CaptchaServiceException;
 
 
 /**
@@ -20,10 +20,10 @@ import java.util.Map;
  */
 public class MapCaptchaStore implements CaptchaStore {
 
-    Map store;
+    Map<String, CaptchaAndLocale> store = new HashMap<String, CaptchaAndLocale>();
 
     public MapCaptchaStore() {
-        this.store = new HashMap();
+        super();
     }
 
     /**
@@ -45,10 +45,6 @@ public class MapCaptchaStore implements CaptchaStore {
      * @throws CaptchaServiceException if the captcha already exists, or if an error occurs during storing routine.
      */
     public void storeCaptcha(String id, Captcha captcha) throws CaptchaServiceException {
-//        if (store.get(id) != null) {
-//            throw new CaptchaServiceException("a captcha with this id already exist. This error must " +
-//                    "not occurs, this is an implementation pb!");
-//        }
         store.put(id, new CaptchaAndLocale(captcha));
     }
 
@@ -75,8 +71,11 @@ public class MapCaptchaStore implements CaptchaStore {
      *                                 routine.
      */
     public Captcha getCaptcha(String id) throws CaptchaServiceException {
-        Object captchaAndLocale = store.get(id);
-        return captchaAndLocale!=null?((CaptchaAndLocale) captchaAndLocale).getCaptcha():null;
+    	CaptchaAndLocale captchaAndLocale = store.get(id);
+        if (captchaAndLocale != null) {
+        	return captchaAndLocale.getCaptcha();
+        }
+        return null;
     }
 
     /**
@@ -87,8 +86,11 @@ public class MapCaptchaStore implements CaptchaStore {
      *          if an error occurs during retrieving routine.
      */
     public Locale getLocale(String id) throws CaptchaServiceException {
-        Object captchaAndLocale = store.get(id);
-        return captchaAndLocale!=null?((CaptchaAndLocale) captchaAndLocale).getLocale():null;
+    	CaptchaAndLocale captchaAndLocale = store.get(id);
+        if (captchaAndLocale != null) {
+        	return captchaAndLocale.getLocale();
+        }
+        return null;
     }
 
     /**
@@ -118,7 +120,7 @@ public class MapCaptchaStore implements CaptchaStore {
     /**
      * Return all the contained keys
      */
-    public Collection getKeys() {
+    public Collection<String> getKeys() {
         return store.keySet();
     }
 
@@ -126,7 +128,7 @@ public class MapCaptchaStore implements CaptchaStore {
      * Empty the store
      */
     public void empty() {
-        this.store = new HashMap();
+        this.store.clear();
     }
     
     /* (non-Javadoc)

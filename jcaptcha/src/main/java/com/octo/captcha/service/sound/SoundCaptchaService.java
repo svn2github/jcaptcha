@@ -6,11 +6,12 @@
 
 package com.octo.captcha.service.sound;
 
-import com.octo.captcha.service.CaptchaService;
-import com.octo.captcha.service.CaptchaServiceException;
+import java.util.Locale;
 
 import javax.sound.sampled.AudioInputStream;
-import java.util.Locale;
+
+import com.octo.captcha.service.CaptchaService;
+import com.octo.captcha.service.CaptchaServiceException;
 
 /**
  * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>

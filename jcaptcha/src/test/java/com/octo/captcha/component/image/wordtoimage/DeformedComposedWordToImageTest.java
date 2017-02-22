@@ -31,8 +31,7 @@ import com.octo.captcha.component.image.deformation.ImageDeformation;
 import com.octo.captcha.component.image.deformation.ImageDeformationByFilters;
 import com.octo.captcha.component.image.fontgenerator.FontGenerator;
 import com.octo.captcha.component.image.fontgenerator.RandomFontGenerator;
-import com.octo.captcha.component.image.textpaster.SimpleTextPaster;
-import com.octo.captcha.component.image.textpaster.TextPaster;
+import com.octo.captcha.component.image.textpaster.GlyphsPaster;
 
 /**
  * <p>Description: </p>
@@ -40,6 +39,7 @@ import com.octo.captcha.component.image.textpaster.TextPaster;
  * @author <a href="mailto:mga@octo.com">Mathieu Gandin</a>
  * @version 1.0
  */
+
 public class DeformedComposedWordToImageTest extends TestCase {
 
     private DeformedComposedWordToImage deformedComposedWordToImage;
@@ -55,7 +55,7 @@ public class DeformedComposedWordToImageTest extends TestCase {
 
         BackgroundGenerator background = new GradientBackgroundGenerator(this.imageHeight, this.imageWidth, Color.black, Color.white);
         FontGenerator fontGenerator = new RandomFontGenerator(this.minFontSize, this.maxFontSize);
-        TextPaster textPaster = new SimpleTextPaster(this.minAcceptedWordLength, this.maxAcceptedWordLength, Color.blue);
+        GlyphsPaster textPaster = new GlyphsPaster(this.minAcceptedWordLength, this.maxAcceptedWordLength, Color.blue);
 
         ImageFilter backFilter = new ReplicateScaleFilter(background.getImageWidth(),
                 background.getImageHeight());

@@ -6,15 +6,16 @@
 
 package com.octo.captcha.component.image.textpaster;
 
-import com.octo.captcha.CaptchaException;
-import com.octo.captcha.component.image.color.ColorGenerator;
-import com.octo.captcha.component.image.color.SingleColorGenerator;
-
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.security.SecureRandom;
 import java.util.Random;
-import java.text.AttributedString;
+
+import com.octo.captcha.CaptchaException;
+import com.octo.captcha.component.image.color.ColorGenerator;
+import com.octo.captcha.component.image.color.SingleColorGenerator;
 
 /**
  * <p/>
@@ -104,21 +105,8 @@ public abstract class AbstractTextPaster implements TextPaster {
         this.manageColorPerGlyph = manageColorPerGlyph != null ? manageColorPerGlyph.booleanValue() : this.manageColorPerGlyph;
     }
 
-    /**
-     * @return the max word length accepted by this word2image service
-     * @deprecated misspelled, use {@link #getMaxAcceptedWordLength()} instead
-     */
-    public int getMaxAcceptedWordLenght() {
-        return max;
-    }
 
-    /**
-     * @return the min word length accepted by this word2image service
-     * @deprecated misspelled, use {@link #getMinAcceptedWordLength()} instead
-     */
-    public int getMinAcceptedWordLenght() {
-        return min;
-    }
+
 
     /**
      * @return the max word length accepted by this word2image service

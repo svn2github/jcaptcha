@@ -19,9 +19,10 @@
 
 package com.octo.captcha.component.image.fontgenerator;
 
-import junit.framework.TestCase;
+import java.awt.Font;
+import java.util.List;
 
-import java.awt.*;
+import junit.framework.TestCase;
 
 /**
  * <p>Description: </p>
@@ -104,7 +105,7 @@ public class RandomFontGeneratorTest extends TestCase {
         fontsList[0] = new Font("Courier", Font.BOLD, 10);
         fontsList[1] = arial;
 
-        java.util.List checkedFontList = this.randomFontGenerator.cleanFontList(fontsList);
+        List<Font> checkedFontList = this.randomFontGenerator.cleanFontList(fontsList);
         assertEquals(1, checkedFontList.size());
         assertEquals(arial, checkedFontList.get(0));
     }                                                                                        
@@ -117,7 +118,7 @@ public class RandomFontGeneratorTest extends TestCase {
         fontsList[0] = new Font("Courier", Font.BOLD, 10);
         fontsList[1] = new Font("Arial", Font.BOLD, 10);
 
-        java.util.List checkedFontList = this.randomFontGenerator.cleanFontList(fontsList);
+        List<Font> checkedFontList = this.randomFontGenerator.cleanFontList(fontsList);
         assertEquals("All fonts should be preserved", 2, checkedFontList.size());
     }
     

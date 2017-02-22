@@ -6,10 +6,10 @@
 
 package com.octo.captcha.image;
 
+import java.util.Locale;
+
 import com.octo.captcha.Captcha;
 import com.octo.captcha.CaptchaFactory;
-
-import java.util.Locale;
 
 /**
  * <p>Implements a ImageCaptcha Factory</p>.

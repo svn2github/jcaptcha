@@ -6,7 +6,7 @@
 
 package com.octo.captcha.component.image.fontgenerator;
 
-import java.awt.*;
+import java.awt.Font;
 
 /**
  * <p>Used by ComposedWordToImage to retrieve a Font to apply to the word that will be distorded</p>

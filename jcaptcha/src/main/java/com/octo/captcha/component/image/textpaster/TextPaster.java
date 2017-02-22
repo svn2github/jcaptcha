@@ -6,10 +6,10 @@
 
 package com.octo.captcha.component.image.textpaster;
 
-import com.octo.captcha.CaptchaException;
-
 import java.awt.image.BufferedImage;
 import java.text.AttributedString;
+
+import com.octo.captcha.CaptchaException;
 
 /**
  * <p>Used by ComposedWordToImage to paste the word to be distorded on the image background</p>

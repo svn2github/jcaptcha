@@ -6,12 +6,12 @@
 
 package com.octo.captcha.component.image.deformation;
 
-import com.octo.captcha.component.image.utils.ToolkitFactory;
-
-import java.awt.*;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.awt.image.FilteredImageSource;
 import java.awt.image.ImageFilter;
+
+import com.octo.captcha.component.image.utils.ToolkitFactory;
 
 /**
  * Use an array of java.awt.image.ImageFilter to deform an image

@@ -6,9 +6,9 @@
 
 package com.octo.captcha.sound.gimpy;
 
-import com.octo.captcha.sound.SoundCaptcha;
-
 import javax.sound.sampled.AudioInputStream;
+
+import com.octo.captcha.sound.SoundCaptcha;
 
 /**
  * <p>Description: </p>
@@ -19,6 +19,7 @@ import javax.sound.sampled.AudioInputStream;
  */
 public class GimpySound extends SoundCaptcha {
 
+	private static final long serialVersionUID = -8226524347291947916L;
 	private String response;
 
     public GimpySound(String thequestion,

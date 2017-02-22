@@ -6,13 +6,14 @@
 
 package com.octo.captcha.service.sound;
 
+import java.util.Locale;
+
+import javax.sound.sampled.AudioInputStream;
+
 import com.octo.captcha.Captcha;
 import com.octo.captcha.service.AbstractManageableCaptchaService;
 import com.octo.captcha.service.CaptchaServiceException;
 import com.octo.captcha.service.captchastore.CaptchaStore;
-
-import javax.sound.sampled.AudioInputStream;
-import java.util.Locale;
 
 /**
  * Base implementation of the SoundCaptchaService.

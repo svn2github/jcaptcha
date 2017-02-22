@@ -11,10 +11,10 @@
  */
 package com.octo.captcha.engine.bufferedengine;
 
-import junit.framework.TestCase;
-
 import java.util.HashMap;
 import java.util.Locale;
+
+import junit.framework.TestCase;
 
 /**
  * Unit test the ContainerConfiguration

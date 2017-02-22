@@ -21,7 +21,6 @@ import com.octo.captcha.component.sound.soundconfigurator.SoundConfigurator;
 import com.sun.speech.freetts.Voice;
 import com.sun.speech.freetts.VoiceManager;
 import com.sun.speech.freetts.audio.AudioPlayer;
-import com.sun.speech.freetts.util.Utilities;
 
 /**
  * WordToSound implementation with FreeTTS an openSource Text To Speech implementation.
@@ -175,7 +174,6 @@ public class FreeTTSWordToSound extends AbstractWordToSound implements WordToSou
      * since it doesn't really play. But it is the only way to get a stream easily
      */
     private class InputStreamAudioPlayer implements AudioPlayer {
-        private boolean debug = false;
 
         private AudioFormat currentFormat = null;
 
@@ -194,7 +192,6 @@ public class FreeTTSWordToSound extends AbstractWordToSound implements WordToSou
          *
          */
         public InputStreamAudioPlayer() {
-            debug = Utilities.getBoolean("com.sun.speech.freetts.audio.AudioPlayer.debug");
             outputList = new Vector();
         }
 
@@ -369,16 +366,6 @@ public class FreeTTSWordToSound extends AbstractWordToSound implements WordToSou
             return "AudioInputStreamAudioPlayer";
         }
 
-        /**
-         * Outputs a debug message if debugging is turned on
-         *
-         * @param msg the message to output
-         */
-        private void debugPrint(String msg) {
-            if (debug) {
-                System.out.println(toString() + ": " + msg);
-            }
-        }
 
         /**
          * Shows metrics for this audio player

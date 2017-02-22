@@ -6,9 +6,9 @@
 
 package com.octo.captcha.module.config;
 
-import com.octo.captcha.module.CaptchaModuleException;
-
 import java.util.ResourceBundle;
+
+import com.octo.captcha.module.CaptchaModuleException;
 
 /**
  * Configuration base class for modules.

@@ -6,12 +6,17 @@
 
 package com.octo.captcha.service;
 
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Locale;
+import java.util.Map;
+
+import org.apache.commons.collections.FastHashMap;
+
 import com.octo.captcha.Captcha;
 import com.octo.captcha.engine.CaptchaEngine;
 import com.octo.captcha.service.captchastore.CaptchaStore;
-import org.apache.commons.collections.FastHashMap;
-
-import java.util.*;
 
 /**
  * This class provides default implementation for the management interface. It uses an HashMap to store the timestamps
@@ -35,12 +40,13 @@ public abstract class AbstractManageableCaptchaService
     private int numberOfUncorrectResponse = 0;
     private int numberOfGarbageCollectedCaptcha = 0;
 
-    private FastHashMap times;
+    private Map<String, Long> times;
 
     private long oldestCaptcha = 0;//OPTIMIZATION STUFF!
 
 
-    protected AbstractManageableCaptchaService(CaptchaStore captchaStore, com.octo.captcha.engine.CaptchaEngine captchaEngine,
+    @SuppressWarnings("unchecked")
+	protected AbstractManageableCaptchaService(CaptchaStore captchaStore, com.octo.captcha.engine.CaptchaEngine captchaEngine,
                                                int minGuarantedStorageDelayInSeconds, int maxCaptchaStoreSize) {
         super(captchaStore, captchaEngine);
 
@@ -241,7 +247,7 @@ public abstract class AbstractManageableCaptchaService
      * Garbage collect the captcha store, means all old captcha (captcha in the store wich has been stored more than the
      * MinGuarantedStorageDelayInSecond
      */
-    protected void garbageCollectCaptchaStore(Iterator garbageCollectableCaptchaIds) {
+    protected void garbageCollectCaptchaStore(Iterator<String> garbageCollectableCaptchaIds) {
         // this may cause a captcha disparition if a new captcha is asked between
         // this call and the effective removing from the store!
         long now = System.currentTimeMillis();
@@ -262,7 +268,7 @@ public abstract class AbstractManageableCaptchaService
 
     public void garbageCollectCaptchaStore() {
         long now = System.currentTimeMillis();
-        Collection garbageCollectableCaptchaIds = getGarbageCollectableCaptchaIds(now);
+        Collection<String> garbageCollectableCaptchaIds = getGarbageCollectableCaptchaIds(now);
         this.garbageCollectCaptchaStore(garbageCollectableCaptchaIds.iterator());
     }
 
@@ -270,7 +276,8 @@ public abstract class AbstractManageableCaptchaService
     /**
      * Empty the Store
      */
-    public void emptyCaptchaStore() {
+    @SuppressWarnings("unchecked")
+	public void emptyCaptchaStore() {
         //empty the store
         this.store.empty();
         //And the timestamps
@@ -278,21 +285,21 @@ public abstract class AbstractManageableCaptchaService
     }
 
 
-    private Collection getGarbageCollectableCaptchaIds(long now) {
+    private Collection<String> getGarbageCollectableCaptchaIds(long now) {
 
         //construct a new collection in order to avoid iterations synchronization pbs :
         // this may cause a captcha disparition if a new captcha is asked between
         // this call and the effective removing from the store!
-        HashSet garbageCollectableCaptchas = new HashSet();
+        HashSet<String> garbageCollectableCaptchas = new HashSet<String>();
 
         //the time limit under which captchas are collectable
         long limit = now - 1000 * getMinGuarantedStorageDelayInSeconds();
         if (limit > oldestCaptcha) {
             // iterate to find out if the captcha is perimed
-            Iterator ids = new HashSet(times.keySet()).iterator();
+			Iterator<String> ids = new HashSet<String>(times.keySet()).iterator();
             while (ids.hasNext()) {
-                String id = (String) ids.next();
-                long captchaDate = ((Long) times.get(id)).longValue();
+                String id =  ids.next();
+                long captchaDate = times.get(id);
                 oldestCaptcha = Math.min(captchaDate, oldestCaptcha == 0 ? captchaDate : oldestCaptcha);
                 if (captchaDate < limit) {
                     garbageCollectableCaptchas.add(id);
@@ -312,8 +319,8 @@ public abstract class AbstractManageableCaptchaService
         if (isCaptchaStoreFull()) {
             //see if possible
             long now = System.currentTimeMillis();
-            Collection garbageCollectableCaptchaIds = getGarbageCollectableCaptchaIds(now);
-            if (garbageCollectableCaptchaIds.size() > 0) {
+            Collection<String> garbageCollectableCaptchaIds = getGarbageCollectableCaptchaIds(now);
+            if (!garbageCollectableCaptchaIds.isEmpty()) {
                 //possible collect an rerun
                 garbageCollectCaptchaStore(garbageCollectableCaptchaIds.iterator());
                 return this.generateAndStoreCaptcha(locale, ID);

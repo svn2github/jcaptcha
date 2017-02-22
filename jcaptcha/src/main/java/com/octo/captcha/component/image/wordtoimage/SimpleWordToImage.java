@@ -6,11 +6,13 @@
 
 package com.octo.captcha.component.image.wordtoimage;
 
-import com.octo.captcha.CaptchaException;
-
-import java.awt.*;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferedImage;
 import java.text.AttributedString;
+
+import com.octo.captcha.CaptchaException;
 
 /**
  * <p>Simple image to word implementation. For eductation only, do not use it in production</p>
@@ -35,22 +37,6 @@ public class SimpleWordToImage extends AbstractWordToImage {
      * @return the min word length accepted by this word2image service
      */
     public int getMinAcceptedWordLength() {
-        return 1;
-    }
-
-    /**
-     * @return the max word lenght accepted by this word2image service
-     * @deprecated misspelled, use {@link #getMaxAcceptedWordLength()} instead
-     */
-    public int getMaxAcceptedWordLenght() {
-        return 10;
-    }
-
-    /**
-     * @return the min word lenght accepted by this word2image service
-     * @deprecated misspelled, use {@link #getMinAcceptedWordLength()} instead
-     */
-    public int getMinAcceptedWordLenght() {
         return 1;
     }
 

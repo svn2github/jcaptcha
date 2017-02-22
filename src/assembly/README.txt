@@ -7,7 +7,6 @@ The binary distribution of JCaptcha contains the following artefacts :
 
  - docs : Java apidocs
  - backgrounds (fisheye and gimpy) : in order to generate corresponding captcha
- - modules : optionnal jars to include in your classpath
+ - modules : optional jars to include in your classpath
  - jcaptcha-all.jar : contains core classes including JHLabs imaging api
- - jcaptcha.tld : for Struts integration
  - LICENSE.txt

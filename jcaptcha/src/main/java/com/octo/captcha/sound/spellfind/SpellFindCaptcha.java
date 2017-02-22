@@ -6,9 +6,9 @@
 
 package com.octo.captcha.sound.spellfind;
 
-import com.octo.captcha.sound.SoundCaptcha;
-
 import javax.sound.sampled.AudioInputStream;
+
+import com.octo.captcha.sound.SoundCaptcha;
 
 /**
  * <p><ul><li></li></ul></p>
@@ -18,7 +18,8 @@ import javax.sound.sampled.AudioInputStream;
  */
 public class SpellFindCaptcha extends SoundCaptcha {
 
-     private String response;
+     private static final long serialVersionUID = -2169133373094895032L;
+	private String response;
 
       public SpellFindCaptcha(String thequestion,
                           AudioInputStream thechallenge, String theresponse) {

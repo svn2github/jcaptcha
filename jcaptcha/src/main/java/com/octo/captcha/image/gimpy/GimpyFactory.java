@@ -6,16 +6,16 @@
 
 package com.octo.captcha.image.gimpy;
 
+import java.awt.image.BufferedImage;
+import java.security.SecureRandom;
+import java.util.Locale;
+import java.util.Random;
+
 import com.octo.captcha.CaptchaException;
 import com.octo.captcha.CaptchaQuestionHelper;
 import com.octo.captcha.component.image.wordtoimage.WordToImage;
 import com.octo.captcha.component.word.wordgenerator.WordGenerator;
 import com.octo.captcha.image.ImageCaptcha;
-
-import java.awt.image.BufferedImage;
-import java.security.SecureRandom;
-import java.util.Locale;
-import java.util.Random;
 
 /**
  * Factories for Gimpies. Built on top of WordGenerator and WordToImage. It uses thoses interfaces to build an

@@ -20,7 +20,7 @@ import com.octo.captcha.component.sound.wordtosound.WordToSound;
 /**
  * Allow to test Sound captcha support without a real implementation
  *
- * @author <a href="mailto:antoine.veret@gmail.com">Antoine Véret</a>
+ * @author <a href="mailto:antoine.veret@gmail.com">Antoine VÃ©ret</a>
  * @date 19 avr. 2007
  */
 public class WordToSoundMock implements WordToSound {
@@ -32,17 +32,12 @@ public class WordToSoundMock implements WordToSound {
         audioInputStream = AudioSystem.getAudioInputStream(inputStream);
     }
 
-    public int getMaxAcceptedWordLenght() {
-        return 0;
-    }
+
 
     public int getMaxAcceptedWordLength() {
         return 6;
     }
 
-    public int getMinAcceptedWordLenght() {
-        return 0;
-    }
 
     public int getMinAcceptedWordLength() {
         return 2;

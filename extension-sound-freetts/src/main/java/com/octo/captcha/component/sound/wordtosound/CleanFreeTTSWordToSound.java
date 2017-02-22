@@ -6,9 +6,9 @@
 
 package com.octo.captcha.component.sound.wordtosound;
 
-import com.octo.captcha.component.sound.soundconfigurator.SoundConfigurator;
-
 import javax.sound.sampled.AudioInputStream;
+
+import com.octo.captcha.component.sound.soundconfigurator.SoundConfigurator;
 
 /**
  * Clean use of FreeTTS, without effect.
@@ -17,9 +17,6 @@ import javax.sound.sampled.AudioInputStream;
  * @version 1.0
  */
 public class CleanFreeTTSWordToSound extends AbstractFreeTTSWordToSound {
-    public CleanFreeTTSWordToSound() {
-        super();
-    }
 
     /**
      * @see AbstractFreeTTSWordToSound#AbstractFreeTTSWordToSound(com.octo.captcha.component.sound.soundconfigurator.SoundConfigurator, int, int)

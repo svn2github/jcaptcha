@@ -6,9 +6,9 @@
 
 package com.octo.captcha.sound.speller;
 
-import com.octo.captcha.sound.SoundCaptcha;
-
 import javax.sound.sampled.AudioInputStream;
+
+import com.octo.captcha.sound.SoundCaptcha;
 
 /**
  * <p>SoundCaptcha with spelling</p>
@@ -18,6 +18,7 @@ import javax.sound.sampled.AudioInputStream;
  */
 public class SpellerSound extends SoundCaptcha {
 
+	private static final long serialVersionUID = -5737646061842676910L;
 	private String response;
 
     public SpellerSound(String thequestion,

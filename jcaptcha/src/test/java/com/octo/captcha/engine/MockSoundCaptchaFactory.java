@@ -11,10 +11,10 @@
  */
 package com.octo.captcha.engine;
 
+import java.util.Locale;
+
 import com.octo.captcha.sound.SoundCaptcha;
 import com.octo.captcha.sound.SoundCaptchaFactory;
-
-import java.util.Locale;
 
 /**
  * @author <a href="mailto:marc.antoine.garrigue@gmail.com">Marc-Antoine Garrigue</a>
@@ -28,7 +28,9 @@ public class MockSoundCaptchaFactory extends SoundCaptchaFactory {
      */
     public SoundCaptcha getSoundCaptcha() {
         return new SoundCaptcha(null, null) {
-            public Boolean validateResponse(Object response) {
+            private static final long serialVersionUID = 6412472463777426196L;
+
+			public Boolean validateResponse(Object response) {
                 return Boolean.FALSE;
             }
         };

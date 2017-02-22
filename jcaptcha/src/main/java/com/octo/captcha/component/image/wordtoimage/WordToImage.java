@@ -6,9 +6,9 @@
 
 package com.octo.captcha.component.image.wordtoimage;
 
-import com.octo.captcha.CaptchaException;
-
 import java.awt.image.BufferedImage;
+
+import com.octo.captcha.CaptchaException;
 
 /**
  * <p>Provides methods to tranform a word to an image</p>.

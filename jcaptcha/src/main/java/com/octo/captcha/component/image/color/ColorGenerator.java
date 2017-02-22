@@ -6,7 +6,7 @@
 
 package com.octo.captcha.component.image.color;
 
-import java.awt.*;
+import java.awt.Color;
 
 /**
  * ColorGenerator is an interface used by TextPaster to generate color for rendering each character with specific

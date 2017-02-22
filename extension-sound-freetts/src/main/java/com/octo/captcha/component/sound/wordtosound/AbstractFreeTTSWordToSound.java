@@ -6,22 +6,21 @@
 
 package com.octo.captcha.component.sound.wordtosound;
 
-import com.octo.captcha.CaptchaException;
-import com.octo.captcha.component.sound.soundconfigurator.FreeTTSSoundConfigurator;
-import com.octo.captcha.component.sound.soundconfigurator.SoundConfigurator;
-import com.sun.speech.freetts.Voice;
-import com.sun.speech.freetts.VoiceManager;
-import com.sun.speech.freetts.audio.AudioPlayer;
-import com.sun.speech.freetts.util.Utilities;
-
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.SequenceInputStream;
 import java.util.Locale;
 import java.util.Vector;
+
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+
+import com.octo.captcha.CaptchaException;
+import com.octo.captcha.component.sound.soundconfigurator.SoundConfigurator;
+import com.sun.speech.freetts.Voice;
+import com.sun.speech.freetts.VoiceManager;
+import com.sun.speech.freetts.audio.AudioPlayer;
 
 /**
  * WordToSound implementation with FreeTTS an openSource Text To Speech implementation.
@@ -49,25 +48,12 @@ public abstract class AbstractFreeTTSWordToSound implements WordToSound {
      */
     private Voice defaultVoice = null;
 
-    private Locale locale = null;
 
     private VoiceManager voiceManager = null;
 
     private boolean isInitiated = false;
 
-    /**
-     * Constructor
-     *
-     * @deprecated
-     */
-    public AbstractFreeTTSWordToSound() {
-        configurator = new FreeTTSSoundConfigurator(AbstractFreeTTSWordToSound.defaultVoiceName,
-                AbstractFreeTTSWordToSound.defaultVoicePackage, 1.0f, 100, 100);
 
-        minAcceptedWordLength = 4;
-        maxAcceptedWordLength = 6;
-        init();
-    }
 
     /**
      * Constructor for a FreeTTS implmentation of WordToSound. This constructor imply that WordToSound only use one
@@ -133,21 +119,7 @@ public abstract class AbstractFreeTTSWordToSound implements WordToSound {
         return minAcceptedWordLength;
     }
 
-    /**
-     * @return the max word lenght accepted by this word2image service
-     * @deprecated misspelled, use {@link #getMaxAcceptedWordLength()} instead
-     */
-    public int getMaxAcceptedWordLenght() {
-        return maxAcceptedWordLength;
-    }
 
-    /**
-     * @return the min word lenght accepted by this word2image service
-     * @deprecated misspelled, use {@link #getMinAcceptedWordLength()} instead
-     */
-    public int getMinAcceptedWordLenght() {
-        return minAcceptedWordLength;
-    }
 
     protected abstract AudioInputStream addEffects(AudioInputStream sound);
 
@@ -227,7 +199,6 @@ public abstract class AbstractFreeTTSWordToSound implements WordToSound {
      * since it doesn't really play. But it is the only way to get a stream easily
      */
     private class InputStreamAudioPlayer implements AudioPlayer {
-        private boolean debug = false;
 
         private AudioFormat currentFormat = null;
 
@@ -246,7 +217,6 @@ public abstract class AbstractFreeTTSWordToSound implements WordToSound {
          *
          */
         public InputStreamAudioPlayer() {
-            debug = Utilities.getBoolean("com.sun.speech.freetts.audio.AudioPlayer.debug");
             outputList = new Vector();
         }
 
@@ -412,15 +382,7 @@ public abstract class AbstractFreeTTSWordToSound implements WordToSound {
             return true;
         }
 
-        /**
-         * Waits for resume. If this audio player is paused waits for the player to be resumed. Returns if resumed,
-         * cancelled or shutdown.
-         *
-         * @return true if the output has been resumed, false if the output has been cancelled or shutdown.
-         */
-        private synchronized boolean waitResume() {
-            return true;
-        }
+
 
         /**
          * Returns the name of this audioplayer
@@ -431,16 +393,6 @@ public abstract class AbstractFreeTTSWordToSound implements WordToSound {
             return "AudioInputStreamAudioPlayer";
         }
 
-        /**
-         * Outputs a debug message if debugging is turned on
-         *
-         * @param msg the message to output
-         */
-        private void debugPrint(String msg) {
-            if (debug) {
-                System.out.println(toString() + ": " + msg);
-            }
-        }
 
         /**
          * Shows metrics for this audio player

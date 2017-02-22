@@ -16,8 +16,6 @@ import java.util.Map;
 
 import junit.framework.TestCase;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
@@ -32,8 +30,6 @@ import com.octo.captcha.engine.bufferedengine.BufferedEngineContainer;
  * @author Benoit Doumas
  */
 public class QuartzBufferedEngineManagerTest extends TestCase {
-    private static final Log log = LogFactory.getLog(QuartzBufferedEngineManagerTest.class
-            .getName());
 
     // loader init by default
     //protected Class loader = DefaultEngineLoadTestHelper.class;

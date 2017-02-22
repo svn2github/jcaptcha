@@ -145,7 +145,7 @@ public class GenericManageableCaptchaService extends AbstractManageableCaptchaSe
      * @return a Challenge Clone
      */
     protected Object getChallengeClone(Captcha captcha) {
-        Class captchaClass = captcha.getClass();
+        Class<?> captchaClass = captcha.getClass();
         if (ImageCaptcha.class.isAssignableFrom(captchaClass)) {
             BufferedImage challenge = (BufferedImage) captcha.getChallenge();
             BufferedImage clone = new BufferedImage(challenge.getWidth(), challenge.getHeight(), challenge.getType());

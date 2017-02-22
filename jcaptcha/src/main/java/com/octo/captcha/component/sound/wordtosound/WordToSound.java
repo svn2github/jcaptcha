@@ -6,10 +6,11 @@
 
 package com.octo.captcha.component.sound.wordtosound;
 
-import com.octo.captcha.CaptchaException;
+import java.util.Locale;
 
 import javax.sound.sampled.AudioInputStream;
-import java.util.Locale;
+
+import com.octo.captcha.CaptchaException;
 
 /**
  * <p/>
@@ -20,17 +21,7 @@ import java.util.Locale;
  * @version 1.1
  */
 public interface WordToSound {
-    /**
-      * @deprecated misspelled, use {@link #getMaxAcceptedWordLength()} instead
-      * @return the max word lenght accepted by this word2image service
-      */
-     int getMaxAcceptedWordLenght();
 
-     /**
-      * @deprecated misspelled, use {@link #getMinAcceptedWordLength()} instead
-      * @return the min word lenght accepted by this word2image service
-      */
-     int getMinAcceptedWordLenght();
 
 
      /**

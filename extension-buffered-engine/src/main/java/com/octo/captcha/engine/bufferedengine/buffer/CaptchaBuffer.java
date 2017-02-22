@@ -17,11 +17,11 @@
  */
 package com.octo.captcha.engine.bufferedengine.buffer;
 
-import com.octo.captcha.Captcha;
-
 import java.util.Collection;
 import java.util.Locale;
 import java.util.NoSuchElementException;
+
+import com.octo.captcha.Captcha;
 
 /**
  * CaptchaBuffer is the interface to describe buffers of captchas.
@@ -56,7 +56,7 @@ public interface CaptchaBuffer {
      *
      * @return a collection of captchas
      */
-    public Collection removeCaptcha(int number);
+    public Collection<Captcha> removeCaptcha(int number);
 
     /**
      * Remove a precise number of captcha with a locale
@@ -66,7 +66,7 @@ public interface CaptchaBuffer {
      *
      * @return a collection of captchas
      */
-    public Collection removeCaptcha(int number, Locale locale);
+    public Collection<Captcha> removeCaptcha(int number, Locale locale);
 
     /**
      * Put a captcha with default laocale
@@ -86,7 +86,7 @@ public interface CaptchaBuffer {
      *
      * @param captchas The captchas to add
      */
-    public void putAllCaptcha(Collection captchas);
+    public void putAllCaptcha(Collection<Captcha> captchas);
 
     /**
      * Put a collection of captchas with his locale
@@ -94,7 +94,7 @@ public interface CaptchaBuffer {
      * @param captchas The captchas to add
      * @param locale   The locale of the captchas
      */
-    public void putAllCaptcha(Collection captchas, Locale locale);
+    public void putAllCaptcha(Collection<Captcha> captchas, Locale locale);
 
     /**
      * Get the size of the buffer for all locales
@@ -125,5 +125,5 @@ public interface CaptchaBuffer {
     /**
      * Get all the locales used
      */
-    public Collection getLocales();
+    public Collection<String> getLocales();
 }

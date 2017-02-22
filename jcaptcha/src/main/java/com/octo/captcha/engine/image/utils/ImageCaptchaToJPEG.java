@@ -18,14 +18,14 @@
 
 package com.octo.captcha.engine.image.utils;
 
-import com.octo.captcha.engine.image.ImageCaptchaEngine;
-import com.octo.captcha.engine.image.fisheye.SimpleFishEyeEngine;
-import com.octo.captcha.engine.image.gimpy.*;
-import com.octo.captcha.image.ImageCaptcha;
-
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
+
+import com.octo.captcha.engine.image.ImageCaptchaEngine;
+import com.octo.captcha.engine.image.fisheye.SimpleFishEyeEngine;
+import com.octo.captcha.engine.image.gimpy.DefaultGimpyEngine;
+import com.octo.captcha.image.ImageCaptcha;
 
 /**
  * This utility class lets you create JPEG files with a particular
@@ -61,10 +61,7 @@ public class ImageCaptchaToJPEG {
         ImageCaptchaEngine pixCapchaEngine = null;
         if (className.equals("all")) {
             ImageCaptchaEngine[] engines = {
-                    new BaffleListGimpyEngine(),
                     new DefaultGimpyEngine(),
-                    new DeformedBaffleListGimpyEngine(),
-                    new SimpleListImageCaptchaEngine(),
                     new SimpleFishEyeEngine()
             };
             for (int i = 0; i < engines.length; i++) {

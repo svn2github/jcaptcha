@@ -6,7 +6,9 @@
 
 package com.octo.captcha.component.image.backgroundgenerator;
 
-import java.awt.*;
+import java.awt.AlphaComposite;
+import java.awt.BasicStroke;
+import java.awt.Graphics2D;
 import java.awt.geom.Arc2D;
 import java.awt.image.BufferedImage;
 
@@ -44,13 +46,11 @@ public class EllipseBackgroundGenerator extends AbstractBackgroundGenerator {
         g2d.translate(getImageWidth() * -1.0, 0.0);
         double delta = 5.0;
         double xt;
-        double ts = 0.0;
         for (xt = 0.0; xt < (2.0 * getImageWidth()); xt += delta) {
             Arc2D arc = new Arc2D.Double(0, 0,
                     getImageWidth(), getImageHeight(), 0.0, 360.0, Arc2D.OPEN);
             g2d.draw(arc);
             g2d.translate(delta, 0.0);
-            ts += delta;
         }
         return bimgTP;
     }

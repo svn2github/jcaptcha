@@ -17,10 +17,11 @@
  */
 package com.octo.captcha.component.image.color;
 
-import com.octo.captcha.CaptchaException;
+import java.awt.Color;
+
 import junit.framework.TestCase;
 
-import java.awt.*;
+import com.octo.captcha.CaptchaException;
 
 /**
  * @author Benoit

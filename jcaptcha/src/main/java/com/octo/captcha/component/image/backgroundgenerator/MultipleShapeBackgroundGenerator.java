@@ -6,13 +6,16 @@
 
 package com.octo.captcha.component.image.backgroundgenerator;
 
-import com.octo.captcha.component.image.color.ColorGenerator;
-import com.octo.captcha.component.image.color.SingleColorGenerator;
-
-import java.awt.*;
+import java.awt.Color;
+import java.awt.GradientPaint;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+
+import com.octo.captcha.component.image.color.ColorGenerator;
+import com.octo.captcha.component.image.color.SingleColorGenerator;
 
 /**
  * <p/>

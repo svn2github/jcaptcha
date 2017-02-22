@@ -17,18 +17,23 @@
  */
 package com.octo.captcha.engine.bufferedengine;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Locale;
+import java.util.NoSuchElementException;
+
+import org.apache.commons.collections.MapIterator;
+import org.apache.commons.collections.map.HashedMap;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.octo.captcha.Captcha;
 import com.octo.captcha.CaptchaException;
 import com.octo.captcha.CaptchaFactory;
 import com.octo.captcha.engine.CaptchaEngine;
 import com.octo.captcha.engine.CaptchaEngineException;
 import com.octo.captcha.engine.bufferedengine.buffer.CaptchaBuffer;
-import org.apache.commons.collections.MapIterator;
-import org.apache.commons.collections.map.HashedMap;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import java.util.*;
 
 /**
  * Abstact class that encapsulate a CaptchaEngine to allow buffering. A BufferedEngineContainer has mainly one function
@@ -82,9 +87,6 @@ public abstract class BufferedEngineContainer implements CaptchaEngine {
             throw new CaptchaEngineException("impossible to build a BufferedEngineContainer with a null volatileBuffer");
         }
         this.persistentBuffer = persistentBuffer;
-        if (persistentBuffer == null) {
-            throw new CaptchaEngineException("impossible to build a BufferedEngineContainer with a null persistentBuffer");
-        }
         this.config = containerConfiguration;
         if (config == null) {
             throw new CaptchaEngineException("impossible to build a BufferedEngineContainer with a null configuration");
@@ -208,7 +210,7 @@ public abstract class BufferedEngineContainer implements CaptchaEngine {
                         + locale.toString());
             }
 
-            Collection temp = this.persistentBuffer.removeCaptcha(swap, locale);
+            Collection<Captcha> temp = this.persistentBuffer.removeCaptcha(swap, locale);
 
             this.volatileBuffer.putAllCaptcha(temp, locale);
             if (log.isDebugEnabled()) {
@@ -256,7 +258,7 @@ public abstract class BufferedEngineContainer implements CaptchaEngine {
             int toBuild = ratioCount;
             while (toBuild > 0 && !shutdownCalled) {
                 int batch = toBuild > config.getFeedBatchSize().intValue() ? config.getFeedBatchSize().intValue() : toBuild;
-                ArrayList captchas = new ArrayList(batch);
+                ArrayList<Captcha> captchas = new ArrayList<Captcha>(batch);
                 //build captchas, batch sized
                 int builded = 0;
                 for (int i = 0; i < batch; i++) {

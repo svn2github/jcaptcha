@@ -11,10 +11,11 @@
  */
 package com.octo.captcha.engine.bufferedengine;
 
-import com.octo.captcha.Captcha;
+import java.util.Locale;
+
 import junit.framework.TestCase;
 
-import java.util.Locale;
+import com.octo.captcha.Captcha;
 
 /**
  * @author Benoit

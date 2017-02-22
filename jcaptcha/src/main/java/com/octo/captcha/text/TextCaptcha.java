@@ -13,7 +13,8 @@ import com.octo.captcha.Captcha;
  */
 public abstract class TextCaptcha implements Captcha {
 
-    private Boolean hasChallengeBeenCalled = Boolean.FALSE;
+    private static final long serialVersionUID = 1345728722321750781L;
+	private Boolean hasChallengeBeenCalled = Boolean.FALSE;
     protected String question;
     protected String challenge;
 

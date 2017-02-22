@@ -1,12 +1,12 @@
 package com.octo.captcha.component.image.textpaster;
 
-import java.awt.font.GlyphVector;
+import java.awt.Shape;
 import java.awt.font.GlyphMetrics;
+import java.awt.font.GlyphVector;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
-import java.awt.geom.AffineTransform;
-import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -230,7 +230,6 @@ public class Glyphs {
     public String toString() {
         final String R = "\n";
         final String RS = "\n\t";
-        final String RSS = "\n\t\t";
 
         StringBuffer buf = new StringBuffer();
         buf.append("{Glyphs=");

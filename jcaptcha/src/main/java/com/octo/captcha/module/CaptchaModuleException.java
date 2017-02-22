@@ -14,7 +14,8 @@ package com.octo.captcha.module;
  */
 public class CaptchaModuleException extends RuntimeException {
 
-    private Throwable cause;
+    private static final long serialVersionUID = 4917296845073722095L;
+	private Throwable cause;
 
     /**
      * Constructs a new runtime exception with <code>null</code> as its detail message.

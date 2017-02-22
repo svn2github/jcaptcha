@@ -6,11 +6,11 @@
 
 package com.octo.captcha.component.word.wordgenerator;
 
+import java.util.Locale;
+
 import com.octo.captcha.CaptchaException;
 import com.octo.captcha.component.word.DictionaryReader;
 import com.octo.captcha.component.word.SizeSortedWordList;
-
-import java.util.Locale;
 
 /**
  * <p>This Word Generator use a Dictionnary to compose new Words from existing words.</p> It avoid dictionnary

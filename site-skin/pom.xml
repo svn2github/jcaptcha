@@ -8,8 +8,8 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
       <artifactId>jcaptcha-home</artifactId>
-      <groupId>com.octo.captcha</groupId>
-      <version>2.0-alpha-2-SNAPSHOT</version>
+      <groupId>com.github.albfernandez</groupId>
+      <version>2.0.0-SNAPSHOT</version>
   </parent>  
   <artifactId>jcaptcha-site-skin</artifactId>
   <name>Site Skin</name>

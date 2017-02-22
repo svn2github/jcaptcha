@@ -6,6 +6,12 @@
 
 package com.octo.captcha.sound.speller;
 
+import java.security.SecureRandom;
+import java.util.Locale;
+import java.util.Random;
+
+import javax.sound.sampled.AudioInputStream;
+
 import com.octo.captcha.CaptchaException;
 import com.octo.captcha.CaptchaQuestionHelper;
 import com.octo.captcha.component.sound.wordtosound.WordToSound;
@@ -14,11 +20,6 @@ import com.octo.captcha.component.word.worddecorator.WordDecorator;
 import com.octo.captcha.component.word.wordgenerator.WordGenerator;
 import com.octo.captcha.sound.SoundCaptcha;
 import com.octo.captcha.sound.SoundCaptchaFactory;
-
-import javax.sound.sampled.AudioInputStream;
-import java.security.SecureRandom;
-import java.util.Locale;
-import java.util.Random;
 
 /**
  * Factory for SpellerSound

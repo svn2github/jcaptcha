@@ -6,13 +6,13 @@
 
 package com.octo.captcha.component.word.wordgenerator;
 
+import java.util.HashMap;
+import java.util.Locale;
+
 import com.octo.captcha.CaptchaException;
 import com.octo.captcha.component.word.DefaultSizeSortedWordList;
 import com.octo.captcha.component.word.DictionaryReader;
 import com.octo.captcha.component.word.SizeSortedWordList;
-
-import java.util.HashMap;
-import java.util.Locale;
 
 /**
  * <p>WordGenerator based on a dictionary. Uses a Dictionary reader to retrieve words and an WordList to store the words
@@ -28,7 +28,7 @@ public class DictionaryWordGenerator implements WordGenerator {
 
     private DictionaryReader factory;
 
-    private HashMap localizedwords = new HashMap();
+    private HashMap<Locale, SizeSortedWordList> localizedwords = new HashMap<Locale, SizeSortedWordList>();
 
     public DictionaryWordGenerator(DictionaryReader reader) {
         this.factory = reader;

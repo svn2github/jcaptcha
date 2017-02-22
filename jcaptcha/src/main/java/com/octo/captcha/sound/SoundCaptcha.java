@@ -6,16 +6,17 @@
 
 package com.octo.captcha.sound;
 
-import com.octo.captcha.Captcha;
-import com.octo.captcha.CaptchaException;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
-import java.io.IOException;
-import java.io.ByteArrayOutputStream;
-import java.io.ByteArrayInputStream;
+
+import com.octo.captcha.Captcha;
+import com.octo.captcha.CaptchaException;
 
 /**
  * <p/>
@@ -28,7 +29,9 @@ import java.io.ByteArrayInputStream;
  */
 public abstract class SoundCaptcha implements Captcha {
 
-    protected Boolean hasChallengeBeenCalled = Boolean.FALSE;
+    private static final long serialVersionUID = -6245504970689644705L;
+
+	protected Boolean hasChallengeBeenCalled = Boolean.FALSE;
 
     protected String question;
 

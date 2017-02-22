@@ -6,21 +6,24 @@
 
 package com.octo.captcha.module.servlet.image.sample;
 
-import com.octo.captcha.module.servlet.image.SimpleImageCaptchaServlet;
+import java.io.IOException;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.ServletException;
-import java.io.IOException;
+
+import com.octo.captcha.module.servlet.image.SimpleImageCaptchaServlet;
 
 /**
  * @author mag
- * @Date 14 févr. 2009
+ * @Date 14 feb 2009
  */
 public class SubmitActionServlet extends HttpServlet{
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private static final long serialVersionUID = 7342121576411594220L;
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
       String userCaptchaResponse = request.getParameter("jcaptcha");
       boolean captchaPassed = SimpleImageCaptchaServlet.validateResponse(request, userCaptchaResponse);

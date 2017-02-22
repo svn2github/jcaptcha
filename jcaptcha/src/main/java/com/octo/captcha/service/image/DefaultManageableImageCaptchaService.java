@@ -7,10 +7,10 @@
 package com.octo.captcha.service.image;
 
 
-import com.octo.captcha.engine.image.gimpy.DefaultGimpyEngine;
 import com.octo.captcha.engine.CaptchaEngine;
-import com.octo.captcha.service.captchastore.FastHashMapCaptchaStore;
+import com.octo.captcha.engine.image.gimpy.DefaultGimpyEngine;
 import com.octo.captcha.service.captchastore.CaptchaStore;
+import com.octo.captcha.service.captchastore.FastHashMapCaptchaStore;
 
 /**
  * <p>Default service implementation : use a {@link FastHashMapCaptchaStore} as captcha store, and a DefaultGimpyEngine </p> It is initialized
