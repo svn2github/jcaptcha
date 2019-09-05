@@ -17,7 +17,7 @@
  */
 package com.octo.captcha.engine.bufferedengine.manager;
 
-import org.apache.commons.collections.map.HashedMap;
+import org.apache.commons.collections4.map.HashedMap;
 
 /**
  * Interface that adds manageability options to the BufferedEngineContainer

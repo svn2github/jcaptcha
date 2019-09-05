@@ -12,8 +12,7 @@ import java.util.Iterator;
 import java.util.Locale;
 import java.util.NoSuchElementException;
 
-import org.apache.commons.collections.buffer.UnboundedFifoBuffer;
-import org.apache.commons.collections.map.HashedMap;
+import org.apache.commons.collections4.map.HashedMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -37,7 +36,7 @@ public class MemoryCaptchaBuffer implements CaptchaBuffer {
 
         if (buffers.containsKey(locale)) {
         	logDebug("Get captcha from MemoryBuffer with locale : " + locale);
-        	Captcha captcha = (Captcha) ((UnboundedFifoBuffer) buffers.get(locale)).remove();            
+        	Captcha captcha = (Captcha) ((java.util.concurrent.LinkedBlockingQueue) buffers.get(locale)).remove();            
             return captcha;
         } else {
             logDebug("Locale not present : " + locale);
@@ -51,7 +50,7 @@ public class MemoryCaptchaBuffer implements CaptchaBuffer {
     public synchronized Collection removeCaptcha(int number, Locale locale) {
         ArrayList list = new ArrayList(number);
 
-        UnboundedFifoBuffer buffer = (UnboundedFifoBuffer) buffers.get(locale);
+        java.util.concurrent.LinkedBlockingQueue buffer = (java.util.concurrent.LinkedBlockingQueue) buffers.get(locale);
         if (buffer == null) {
             logDebug("Locale not found in Memory buffer map : " + locale.toString());
             return list;
@@ -92,10 +91,10 @@ public class MemoryCaptchaBuffer implements CaptchaBuffer {
     public synchronized void putCaptcha(Captcha captcha, Locale locale) {
 
         if (!buffers.containsKey(locale)) {
-            buffers.put(locale, new UnboundedFifoBuffer());
+            buffers.put(locale, new java.util.concurrent.LinkedBlockingQueue());
         }
 
-        ((UnboundedFifoBuffer) buffers.get(locale)).add(captcha);
+        ((java.util.concurrent.LinkedBlockingQueue) buffers.get(locale)).add(captcha);
     }
 
     /**
@@ -104,13 +103,13 @@ public class MemoryCaptchaBuffer implements CaptchaBuffer {
     public synchronized void putAllCaptcha(Collection captchas, Locale locale) {
     	
         if (!buffers.containsKey(locale)) {
-            buffers.put(locale, new UnboundedFifoBuffer());
+            buffers.put(locale, new java.util.concurrent.LinkedBlockingQueue());
         }
 
-        ((UnboundedFifoBuffer) buffers.get(locale)).addAll(captchas);
+        ((java.util.concurrent.LinkedBlockingQueue) buffers.get(locale)).addAll(captchas);
 
         logDebug("put into mem  : " + captchas.size() + " for locale :" + locale.toString()
-                    + " with size : " + ((UnboundedFifoBuffer) buffers.get(locale)).size());
+                    + " with size : " + ((java.util.concurrent.LinkedBlockingQueue) buffers.get(locale)).size());
     }
 
     /**
@@ -121,7 +120,7 @@ public class MemoryCaptchaBuffer implements CaptchaBuffer {
 
         Iterator it = buffers.keySet().iterator();
         while (it.hasNext()) {
-            total += ((UnboundedFifoBuffer) buffers.get(it.next())).size();
+            total += ((java.util.concurrent.LinkedBlockingQueue) buffers.get(it.next())).size();
         }
 
         return total;
@@ -132,9 +131,9 @@ public class MemoryCaptchaBuffer implements CaptchaBuffer {
      */
     public int size(Locale locale) {
         if (!buffers.containsKey(locale)) {
-            buffers.put(locale, new UnboundedFifoBuffer());
+            buffers.put(locale, new java.util.concurrent.LinkedBlockingQueue());
         }
-        return ((UnboundedFifoBuffer) buffers.get(locale)).size();
+        return ((java.util.concurrent.LinkedBlockingQueue) buffers.get(locale)).size();
     }
 
     /**

@@ -23,8 +23,8 @@ import com.octo.captcha.CaptchaFactory;
 import com.octo.captcha.engine.CaptchaEngine;
 import com.octo.captcha.engine.CaptchaEngineException;
 import com.octo.captcha.engine.bufferedengine.buffer.CaptchaBuffer;
-import org.apache.commons.collections.MapIterator;
-import org.apache.commons.collections.map.HashedMap;
+import org.apache.commons.collections4.MapIterator;
+import org.apache.commons.collections4.map.HashedMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 

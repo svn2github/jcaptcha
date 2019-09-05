@@ -19,7 +19,7 @@
 package com.octo.captcha.engine.bufferedengine;
 
 import com.octo.captcha.engine.CaptchaEngineException;
-import org.apache.commons.collections.map.HashedMap;
+import org.apache.commons.collections4.map.HashedMap;
 
 import java.util.Locale;
 import java.util.Map;

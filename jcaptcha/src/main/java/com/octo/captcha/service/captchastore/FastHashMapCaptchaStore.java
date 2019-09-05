@@ -6,7 +6,6 @@
 
 package com.octo.captcha.service.captchastore;
 
-import org.apache.commons.collections.FastHashMap;
 
 /**
  * <p><ul><li></li></ul></p>
@@ -16,6 +15,6 @@ import org.apache.commons.collections.FastHashMap;
  */
 public class FastHashMapCaptchaStore extends MapCaptchaStore {
     public FastHashMapCaptchaStore() {
-        this.store = new FastHashMap();
+        this.store = new java.util.concurrent.ConcurrentHashMap();
     }
 }
