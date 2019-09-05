@@ -9,7 +9,7 @@ package com.octo.captcha.service;
 import com.octo.captcha.Captcha;
 import com.octo.captcha.engine.CaptchaEngine;
 import com.octo.captcha.service.captchastore.CaptchaStore;
-import org.apache.commons.collections.FastHashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 import java.util.*;
 
@@ -35,7 +35,7 @@ public abstract class AbstractManageableCaptchaService
     private int numberOfUncorrectResponse = 0;
     private int numberOfGarbageCollectedCaptcha = 0;
 
-    private FastHashMap times;
+    private ConcurrentHashMap times;
 
     private long oldestCaptcha = 0;//OPTIMIZATION STUFF!
 
@@ -47,7 +47,7 @@ public abstract class AbstractManageableCaptchaService
         this.setCaptchaStoreMaxSize(maxCaptchaStoreSize);
         this.setMinGuarantedStorageDelayInSeconds(minGuarantedStorageDelayInSeconds);
         this.setCaptchaStoreSizeBeforeGarbageCollection((int) Math.round(0.8 * maxCaptchaStoreSize));
-        times = new FastHashMap();
+        times = new java.util.concurrent.ConcurrentHashMap();
     }
 
     protected AbstractManageableCaptchaService(CaptchaStore captchaStore, com.octo.captcha.engine.CaptchaEngine captchaEngine,
@@ -274,7 +274,7 @@ public abstract class AbstractManageableCaptchaService
         //empty the store
         this.store.empty();
         //And the timestamps
-        this.times = new FastHashMap();
+        this.times = new java.util.concurrent.ConcurrentHashMap();
     }
 
 

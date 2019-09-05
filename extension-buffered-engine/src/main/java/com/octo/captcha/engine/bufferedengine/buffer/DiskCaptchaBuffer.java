@@ -36,9 +36,8 @@ import java.util.LinkedList;
 import java.util.Locale;
 import java.util.NoSuchElementException;
 
-import org.apache.commons.collections.MapIterator;
-import org.apache.commons.collections.buffer.UnboundedFifoBuffer;
-import org.apache.commons.collections.map.HashedMap;
+import org.apache.commons.collections4.MapIterator;
+import org.apache.commons.collections4.map.HashedMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -142,7 +141,7 @@ public class DiskCaptchaBuffer implements CaptchaBuffer {
         int index = 0;
         boolean diskEmpty = false;
 
-        Collection collection = new UnboundedFifoBuffer();
+        Collection collection = new java.util.concurrent.LinkedBlockingQueue();
 
         //if no locale
         if (!diskElements.containsKey(locale)) {

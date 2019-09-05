@@ -18,7 +18,6 @@
 package com.octo.captcha.engine.bufferedengine.buffer;
 
 import com.octo.captcha.Captcha;
-import org.apache.commons.collections.buffer.UnboundedFifoBuffer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -137,8 +136,8 @@ public class DatabaseCaptchaBuffer implements CaptchaBuffer {
         PreparedStatement ps = null;
         PreparedStatement psdel = null;
         ResultSet rs = null;
-        Collection collection = new UnboundedFifoBuffer();
-        Collection temp = new UnboundedFifoBuffer();
+        Collection collection = new java.util.concurrent.LinkedBlockingQueue();
+        Collection temp = new java.util.concurrent.LinkedBlockingQueue();
         if (number < 1) {
             return collection;
         }

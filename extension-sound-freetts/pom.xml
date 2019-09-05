@@ -39,9 +39,9 @@
      </dependency>    
   
     <dependency>
-        <groupId>com.sun.speech.freetts</groupId>
+        <groupId>net.sf.sociaal</groupId>
         <artifactId>freetts</artifactId>
-        <version>1.2.1</version>
+        <version>1.2.2</version>
         <scope>provided</scope>
     </dependency>
     

@@ -13,7 +13,7 @@ package com.octo.captcha.engine.bufferedengine.buffer;
 
 import java.util.NoSuchElementException;
 
-import org.apache.commons.collections.buffer.UnboundedFifoBuffer;
+import org.apache.commons.collections4.buffer.UnboundedFifoBuffer;
 
 
 public class MemoryCaptchaBufferTest extends CaptchaBufferTestAbstract {
